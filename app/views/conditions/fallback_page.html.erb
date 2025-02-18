@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ページが見つかりません</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background-color: white;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .error-message {
+      font-size: 24px;
+      font-weight: bold;
+      color: #f44336;
+    }
+
+    .description {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-message">
+      <span>詳細ページはありません。</span>
+    </div>
+    <div class="description">
+      <p>申し訳ありませんが、この大学の詳細ページはまだ作成されていません。</p>
+    </div>
+    <a href="javascript:window.history.back();" class="back-button">検索結果に戻る</a>
+  </div>
+</body>
+</html>

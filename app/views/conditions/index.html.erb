@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>州を選択してください</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .state-selection-container {
+      text-align: center;
+      margin: 20px;
+      padding: 30px;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+    }
+
+    .state-selection-title {
+      font-size: 2.5rem;
+      color: #00796b;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .state-selection-subtitle {
+      font-size: 1.2rem;
+      color: #004d40;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .back-button button {
+      padding: 10px 20px;
+      background-color: #00796b;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button button:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div class="state-selection-container">
+    <h1 class="state-selection-title">州が選択されていません。</h1>
+    <p class="state-selection-subtitle">特に指定がない場合は "指定しない" を選択してください。</p>
+  </div>
+
+  <div class="back-button">
+    <!-- ボタンで前のページに戻る -->
+    <button onclick="history.back()">戻る</button>
+  </div>
+</body>
+</html>
+

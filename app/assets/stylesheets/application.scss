@@ -1,0 +1,557 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+  @import "bootstrap";
+  @import "about";
+
+
+  body {
+    font-family: "Avenir Next";
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .header {
+    background-color: rgb(240, 177, 61);
+    height: 90px;
+  }
+
+  .header a{
+    color:#fff;
+  }
+
+  .footer-list a{
+    color:black;
+  }
+
+  .footer-logo{
+    color:black;
+  }
+
+  .header-logo {
+    float: left;
+    font-size: 36px;
+    padding: 20px 40px;
+  }
+
+  .header-list li {
+    float: left;
+    padding: 33px 20px;
+  }
+
+  .header-list a{
+      font-weight: normal;   /* 通常時の太さを標準に設定。なくても大丈夫 */
+  }
+
+  .header-list a:hover {
+      font-weight: bold;     /* カーソルを合わせた時に太字にする */
+  }
+
+  .footer-list a{
+    color: black;   /* 通常時の太さを標準に設定。なくても大丈夫 */
+  }
+
+  .footer-list a:hover {
+    color: rgb(97, 97, 97);     /* カーソルを合わせた時に色を変更する */
+  }
+
+
+  .tooltip-trigger:hover {
+      background-color: rgb(139, 138, 138);
+  }
+
+  .tooltip-trigger1:hover {
+    background-color: rgb(139, 138, 138);
+  }
+
+  .main {
+    padding:30px 80px;
+    height:1700px;
+  }
+
+  .conditions1 h{
+    font-size:25px;
+  }
+
+  .conditions2 h{
+    font-size:25px;
+  }
+
+
+  .conditions3 h{
+    font-size:25px;
+  }
+
+  .conditions4 h{
+    font-size:25px;
+  }
+
+  .conditions5 h{
+    font-size:25px;
+  }
+
+  .conditions6 h{
+    font-size:25px;
+  }
+
+  .conditions7 h{
+    font-size:25px
+  }
+
+  .copy-container h1{
+    font-size:70px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .copy-container h2{
+    font-size:30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .flag {
+    width: 30px;  /* 国旗のサイズを調整 */
+    height: auto;
+    margin-left: 4px; /* "州" と国旗の間のスペースを調整 */
+    position: relative;
+    top: -4px; /* 国旗を少し上に移動 */
+}
+
+  .copy-container h1{
+    display: flex;           /* 子要素をフレックスボックスで配置 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center;     /* 縦方向の中央揃え */
+    height: 60px;            /* ヘッダーの高さ */
+  }
+
+  .copy-container h2{
+    display: flex;           /* 子要素をフレックスボックスで配置 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center;     /* 縦方向の中央揃え */
+    height: 60px;            /* ヘッダーの高さ */
+  }
+  
+  .footer {
+    background-color: rgb(240, 177, 61);
+    height: 170px;
+    padding:40px;
+  }
+
+  .footer-logo{
+    font-size:32px;
+    float:left;
+  }
+
+  .footer-list{
+    float:right;
+  }
+  
+  .footer-list li{
+    padding-bottom:20px;
+  }
+
+  .dropdown-menu{
+    /*表示するスクロールバーの高さを調整。今回は月がスクロールなしで入る高さにした*/
+    max-height: 330px;
+    /*スクロールバーを表示する*/
+    overflow: scroll;
+    /*デフォルトで水平方向のスクロールバーが入ってくるので非表示にする*/
+    overflow-x: hidden;
+    margin-top:0px;
+  }
+
+  .contents{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列構成 */
+  gap: 20px; /* ボックス間のスペース */
+  }
+
+  .contents1{
+  display: grid;
+  padding-top: 20px;
+  grid-template-columns:1fr;
+  }
+
+  .box{
+  background-color: #ccf286; /* ボックスの背景色 */
+  border-radius: 5px;       /* 角丸 */
+  padding: 15px;            /* 内側の余白 */
+  color: #000000;              /* テキストの色 */
+  text-align: left;         /* テキストの揃え */
+  display: flex;            /* フレックスボックスで中身を配置 */
+  flex-direction: column;   /* 垂直方向に中身を並べる */
+  justify-content: center;  /* 中央寄せ */
+  overflow: visible;         /* ボックス外に文字がはみ出さない */
+  height: 300px;             /* 必要に応じて高さを調整 */
+  }
+
+  .box1{
+  background-color: #ccf286; /* ボックスの背景色 */
+  border-radius: 5px;       /* 角丸 */
+  padding: 15px;            /* 内側の余白 */
+  color: #000000;              /* テキストの色 */
+  text-align: left;         /* テキストの揃え */
+  display: grid;            /* フレックスボックスで中身を配置 */
+  flex-direction: column;   /* 垂直方向に中身を並べる */
+  justify-content: center;  /* 中央寄せ */
+  overflow: hidden;         /* ボックス外に文字がはみ出さない */
+  height: 500px;             /* 必要に応じて高さを調整 */
+  margin-bottom: 30px;
+  }
+
+  label {
+    text-align: left; /* 左詰め */
+    word-wrap: break-word; /* 長い単語を折り返し */
+    white-space: normal; /* テキストの改行を許可 */
+    display: block; /* 全体をブロック化 */
+  }
+
+  .options {
+    display: grid; /* Gridレイアウトで複数列を作成 */
+    grid-template-columns: repeat(3, 1fr); /* 2列構成 */
+    gap: 10px; /* 選択肢間のスペース */
+  }
+
+  
+  .btn2{
+    background-color: #ff9ba5;
+    width: 300px;
+    border: none;
+  }
+
+  .search-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn2:hover{
+    background-color:#ffcd87 ;
+  }
+
+  .dropdown-menu {
+  *position: absolute; /* ドロップダウンを画面上の固定位置に */
+    top: 100px; /* 適宜調整 */
+    left: 50px; /* 適宜調整 */
+    z-index: 1050;
+  }
+
+  /* ツールチップのコンテナ */
+  .tooltip-container1 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 240px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  /* ツールチップのコンテナ */
+  .tooltip-container2 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 230px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  /* ツールチップのコンテナ */
+  .tooltip-container3 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 210px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  /* ツールチップのコンテナ */
+  .tooltip-container4 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 180px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  /* ツールチップのコンテナ */
+  .tooltip-container5 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 1px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  .tooltip-trigger {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(255, 255, 255); /* 背景色と対照的な色に設定 */
+    font-size: 11px; /* フォントサイズを調整 */
+    width: 19px; /* 円の直径 */
+    height: 19px; /* 円の直径 */
+    border-radius: 50%; /* 完全な円にする */
+    background-color: rgb(190, 190, 194); /* 円の背景色 */
+    text-align: center; /* 文字を中央揃え */
+    line-height: 30px; /* 文字を縦方向に中央揃え */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ツールチップの内容 */
+  .tooltip-content {
+    position: absolute;
+    background-color: #f3ffb9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 250px;
+    top: 20px;  /* ?マークから少し下に表示 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* 初期状態では非表示 */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /* アニメーション効果 */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container1:hover .tooltip-content {
+    display: block;
+    opacity: 1; /* フェードイン */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container2:hover .tooltip-content {
+    display: block;
+    opacity: 1; /* フェードイン */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container3:hover .tooltip-content {
+    display: block;
+    opacity: 1; /* フェードイン */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container4:hover .tooltip-content {
+    display: block;
+    opacity: 1; /* フェードイン */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container5:hover .tooltip-content {
+    display: block;
+    opacity: 1; /* フェードイン */
+  }
+
+  /* box内の位置調整 */
+  .box {
+    position: relative; /* ツールチップの位置基準 */
+    padding-right: 30px; /* ツールチップを表示するために右側に余白を追加 */
+  }
+
+  .box1 {
+    position: relative; /* ツールチップの位置基準 */
+    padding: 20px; /* 余白を追加 */
+    border: 1px solid #ccc; /* 見やすいように枠線を追加 */
+  }
+
+
+  .tooltip-container5 {
+    position: absolute;
+    top: 20px; /* box1の上から10pxの位置 */
+    right: 605px; /* box1の右から10pxの位置 */
+  }
+
+  .tooltip-trigger1 {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(255, 255, 255); /* 背景色と対照的な色に設定 */
+    font-size: 11px; /* フォントサイズを調整 */
+    width: 19px; /* 円の直径 */
+    height: 19px; /* 円の直径 */
+    border-radius: 50%; /* 完全な円にする */
+    background-color: rgb(190, 190, 194); /* 円の背景色 */
+    text-align: center; /* 文字を中央揃え */
+    line-height: 30px; /* 文字を縦方向に中央揃え */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    margin-left: 10px;
+    transition:backgrond-color 0.3s ease;
+  }
+
+
+
+  .line-header1 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header1 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header2 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header2 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header3 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header3 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header4 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header4 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header5 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header5 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header6 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  .line-header6 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .line-header7 {
+    position: absolute;
+    top: 30px; /* 上から30pxの位置 */
+    left: 0;
+    right: 0;
+    height: 30px; /* 線の高さ */
+    display: flex;
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    border-bottom: 2px solid #ffffff; /* 線を引く */
+  }
+
+  /*以下formの縦方向調整*/
+  .line-header7 h {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .form-group1 {
+    margin-top: 6%; /* 必要に応じて調整 */
+  }
+  .form-group2 {
+    margin-top: 60px; /* 必要に応じて調整 */
+  }
+  .form-group3 {
+    margin-top: 60px; /* 必要に応じて調整 */
+  }
+  .form-group4 {
+    margin-top: 60px; /* 必要に応じて調整 */
+  }
+  .form-group5 {
+    margin-top: 60px; /* 必要に応じて調整 */
+  }
+
+  .options{
+    margin-top: 65px; /* 必要に応じて調整 */
+  }
+
+
+  .university-link {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  
+  .university-link:hover {
+    color: #007BFF; /* 青色 */
+    text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5); /* ホバー時の影 */
+  }
+  
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+<% if @results.present? %>
+  <p style="width: 300px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 20px; margin-top: 20px; margin-left: 20px;
+  font-weight: bold; font-size: 22px; background-color: rgb(240, 177, 61);">
+    条件に一致する大学: <%= @results.count %> 校
+  </p>
+  <p style="margin-left: 20px;">*大学名をクリックすると詳細をご覧いただけます。</p>
+  ★本サイトの大学情報は、U.S. News & World Reportの最新データに基づいています。詳細については<a href="https://www.usnews.com/best-colleges" target="_blank">こちら</a>をご覧ください。
+  <div style="max-width: 1500px; margin: 0 auto; padding: 20px;">
+    <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 1px solid #ddd;">
+      <thead>
+        <tr style="border-bottom: 2px solid #ccc;">
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">大学名</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">私立/州立</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">学生数</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">授業料</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">平均GPA</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">Division</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">州</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% university_links = {
+            'ohio northern university' => ohio_northern_university_path,
+            'ohio state university' => ohio_state_university_path,
+            'florida state university' => florida_state_university_path,
+            'alabama state university' => alabama_state_university_path
+            #新たな大学の詳細ページを追加する場合は、1.ここに追加し、2.ルートを追加、3.controllerにアクションを追加
+        } %>
+
+        <% @results.each_with_index do |result, index| %>
+          <tr style="background-color: <%= index.even? ? '#f9f9f9' : '#ffffff' %>; border-bottom: 1px solid #ddd;">
+            <td style="padding: 8px;">
+              <% if university_links[result.college.downcase.strip] %>
+                <a href="<%= university_links[result.college.downcase.strip] %>" class="university-link">
+                  <%= result.college %>
+                </a>
+              <% else %>
+                <a href="/fallback_page" class="university-link" style="color: black;">
+                  <%= result.college %>
+                </a>
+              <% end %>
+            </td>
+            <td style="padding: 30px;"><%= result.privateorpublic %></td>
+            <td style="padding: 30px;"><%= number_with_delimiter(result.students) %> 人</td>
+            <td style="padding: 30px;"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
+            <td style="padding: 30px;">
+              <%= result.GPA.nil? || result.GPA == "N/A" ? "N/A" : result.GPA %>
+            </td>
+            <td style="padding: 30px;"><%= result.Division %></td>
+            <td style="padding: 30px;"><%= result.state %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; margin-top: 50px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); max-width: 600px; margin-left: auto; margin-right: auto;">
+    <div style="width: 50px; height: 50px; margin-bottom: 15px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 100%; height: 100%; color: #FF6347;">
+        <path fill-rule="evenodd" d="M12 2a10 10 0 100 20 10 10 0 000-20zm-.75 6a.75.75 0 011.5 0v4a.75.75 0 01-1.5 0V8zm.75 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <h2 style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">該当する大学が見つかりませんでした</h2>
+    <p style="font-size: 14px; color: #666; margin-bottom: 20px;">条件を変更して、もう一度お試しください。</p>
+    <a href="javascript:history.back()" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+      条件を変更する
+    </a>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+

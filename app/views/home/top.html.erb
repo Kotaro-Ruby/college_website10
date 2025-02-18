@@ -1,0 +1,465 @@
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<div class ="header">
+    <div class ="header-logo">
+        <a href="top" style="text-decoration:none;">College Finder</a>
+    </div>
+
+    <div class ="header-list">
+        <ul>
+            <li>
+                <a href="about" style="text-decoration:none;">College Finder について</a>
+            </li>
+
+            <li>
+                <a href="knowledge" style="text-decoration:none;">アメリカの大学を知る</a>
+            </li>
+
+            <li>
+                <a href="degreeseeking" style="text-decoration:none;">卒業を目指す留学</a>
+            </li>
+        </ul>
+    </div>        
+</div>
+
+    
+<div class ="main">
+    <div class="copy-container">
+    <h1>Let's find your best college!</h1>
+    <h2>~アメリカの大学を見てみよう！~</h2>
+    </div>
+    
+    <div class="contents">
+        <div class="conditions1">
+            <div class="box">
+                <div class="line-header1">
+                <h>州</h1>
+                </div>      
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    選択してください
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">指定しない</a></li>
+                        <li><a class="dropdown-item" href="#">アラバマ州(AL)</a></li>
+                        <li><a class="dropdown-item" href="#">アラスカ州(AK)</a></li>
+                        <li><a class="dropdown-item" href="#">アリゾナ州(AZ)</a></li>
+                        <li><a class="dropdown-item" href="#">アーカンソー州(AR)</a></li>
+                        <li><a class="dropdown-item" href="#">カリフォルニア州(CA)</a></li>
+                        <li><a class="dropdown-item" href="#">コロラド州(CO)</a></li>
+                        <li><a class="dropdown-item" href="#">コネチカット州(CT)</a></li>
+                        <li><a class="dropdown-item" href="#">デラウェア州(DE)</a></li>
+                        <li><a class="dropdown-item" href="#">コロンビア特別区(DC)</a></li>
+                        <li><a class="dropdown-item" href="#">フロリダ州(FL)</a></li>
+                        <li><a class="dropdown-item" href="#">ジョージア州(GA)</a></li>
+                        <li><a class="dropdown-item" href="#">ハワイ州(HI)</a></li>
+                        <li><a class="dropdown-item" href="#">アイダホ州(ID)</a></li>
+                        <li><a class="dropdown-item" href="#">イリノイ州(IL)</a></li>
+                        <li><a class="dropdown-item" href="#">インディアナ州(IN)</a></li>
+                        <li><a class="dropdown-item" href="#">アイオワ州(IA)</a></li>
+                        <li><a class="dropdown-item" href="#">カンザス州(KS)</a></li>
+                        <li><a class="dropdown-item" href="#">ケンタッキー州(KY)</a></li>
+                        <li><a class="dropdown-item" href="#">ルイジアナ州(LA)</a></li>
+                        <li><a class="dropdown-item" href="#">メイン州(ME)</a></li>
+                        <li><a class="dropdown-item" href="#">メリーランド州(MD)</a></li>
+                        <li><a class="dropdown-item" href="#">マサチューセッツ州(MA)</a></li>
+                        <li><a class="dropdown-item" href="#">ミシガン州(MI)</a></li>
+                        <li><a class="dropdown-item" href="#">ミネソタ州(MN)</a></li>
+                        <li><a class="dropdown-item" href="#">ミシシッピ州(MS)</a></li>
+                        <li><a class="dropdown-item" href="#">ミズーリ州(MO)</a></li>
+                        <li><a class="dropdown-item" href="#">モンタナ州(MT)</a></li>
+                        <li><a class="dropdown-item" href="#">ネブラスカ州(NE)</a></li>
+                        <li><a class="dropdown-item" href="#">ネバダ州(NV)</a></li>
+                        <li><a class="dropdown-item" href="#">ニューハンプシャー州(NH)</a></li>
+                        <li><a class="dropdown-item" href="#">ニュージャージー州(NJ)</a></li>
+                        <li><a class="dropdown-item" href="#">ニューメキシコ州(NM)</a></li>
+                        <li><a class="dropdown-item" href="#">ニューヨーク州(NY)</a></li>
+                        <li><a class="dropdown-item" href="#">ノースカロライナ州(NC)</a></li>
+                        <li><a class="dropdown-item" href="#">ノースダコタ州(ND)</a></li>
+                        <li><a class="dropdown-item" href="#">オハイオ州(OH)</a></li>
+                        <li><a class="dropdown-item" href="#">オクラホマ州(OK)</a></li>
+                        <li><a class="dropdown-item" href="#">オレゴン州(OR)</a></li>
+                        <li><a class="dropdown-item" href="#">ペンシルベニア州(PA)</a></li>
+                        <li><a class="dropdown-item" href="#">ロードアイランド州(RI)</a></li>
+                        <li><a class="dropdown-item" href="#">サウスカロライナ州(SC)</a></li>
+                        <li><a class="dropdown-item" href="#">サウスダコタ州(SD)</a></li>
+                        <li><a class="dropdown-item" href="#">テネシー州(TN)</a></li>
+                        <li><a class="dropdown-item" href="#">テキサス州(TX)</a></li>
+                        <li><a class="dropdown-item" href="#">ユタ州(UT)</a></li>
+                        <li><a class="dropdown-item" href="#">バーモント州(VT)</a></li>
+                        <li><a class="dropdown-item" href="#">バージニア州(VA)</a></li>
+                        <li><a class="dropdown-item" href="#">ワシントン州(WA)</a></li>
+                        <li><a class="dropdown-item" href="#">ウェストバージニア州(WV)</a></li>
+                        <li><a class="dropdown-item" href="#">ウィスコンシン州(WI)</a></li>
+                        <li><a class="dropdown-item" href="#">ワイオミング州(WY)</a></li>
+                    </ul>    
+                </div>                   
+            </div>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ドロップダウンアイテムがクリックされたときの処理
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();  // リンクのデフォルトの動作を無効にする
+                const selectedText = this.textContent;  // クリックされたアイテムのテキストを取得
+                document.getElementById('dropdownMenuButton').innerText = selectedText;  // ボタンにテキストを設定
+            });
+            });
+            // スクロール時にドロップダウンを閉じる
+            let dropdownButton = document.getElementById('dropdownMenuButton');
+            let dropdownMenu = document.querySelector('.dropdown-menu');
+
+            window.addEventListener('scroll', function () {
+                if (dropdownMenu.classList.contains('show')) {
+                    // ドロップダウンが開いている場合は閉じる
+                    dropdownButton.click(); // Bootstrapのトグルボタンをトリガー
+                }
+            });
+        });
+        </script>
+
+        <div class="conditions2">
+            <div class="box">
+                    <div class="tooltip-container1">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        州立大学は、州民以外の学生に対して通常の2~3倍の学費を設定していることに注意が必要です。また、私立大学の方が多くの奨学金を受け取れる傾向にあります。
+                        </div>
+                    </div> 
+                    <div class="line-header2">
+                        <h>私立/州立</h>
+                    </div>
+                <form>
+                    <div class="form-group1">
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio1">
+                        指定しない
+                        </label>
+                        </div>
+                        
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                        私立
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                        州立
+                        </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions3">
+            <div class="box">
+                    <div class="tooltip-container2">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        2023年度の年間の平均学費は、私立大学$35,800、州立大学$26,290です。ほとんどのアメリカの大学は毎年3%~10%の値上げを行うため、卒業までの期間を考慮し予算に余裕をもって大学を選ぶ必要があります。このほか、寮費、食費、教材費等も必要です。
+                        </div>
+                    </div> 
+                    <div class="line-header3">
+                    <h>年間授業料</h>
+                    </div>
+                <form>
+                    <div class="form-group2">
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio1">
+                            指定しない
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                            ~$9999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                        <label class="form-check-label" for="radio3">
+                            $10,000~$19,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio4">
+                            $20,000~$29,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option5">
+                        <label class="form-check-label" for="radio5">
+                            $30,000~$39,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option6">
+                        <label class="form-check-label" for="radio6">
+                            $40,000~$49,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option7">
+                        <label class="form-check-label" for="radio7">
+                            $50,000~$59,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option8">
+                        <label class="form-check-label" for="radio8">
+                            $60,000~
+                        </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions4">
+            <div class="box">
+                <div class="line-header4">
+                <h>学生数</h>    
+                </div>
+                <form>
+                    <div class="form-group3">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck33.1">
+                        <label class="form-check-label" for="groupCheck33.1">
+                            小規模(~2999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            中規模(3000人~9999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            大規模(10,000人~29,999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            超大規模(30,000人~)
+                        </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions5">
+            <div class="box">
+                    <div class="tooltip-container3">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        GPAとはGrade Point Averageの略で、通常4.0を最高点とし成績平均値を算出します。日本のような学力試験のないアメリカでは、入学審査の項目として最終学歴のGPAが非常に重視されます。ハーバード大学といった名門校では満点近くのGPAが求められます。
+                        </div>
+                    </div>   
+                    <div class="line-header5">
+                    <h>入学者平均GPA</h>
+                    </div>
+                <form>
+                    <div class="form-group4">
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio1">
+                            指定しない
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                            0~2.49
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                        <label class="form-check-label" for="radio3">
+                            2.50~2.99
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio4">
+                            3.00~3.49
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio4">
+                            3.50~3.74
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option5">
+                        <label class="form-check-label" for="radio5">
+                            3.75~
+                        </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions6">
+            <div class="box">
+                    <div class="tooltip-container4">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        NCAAは全米大学体育協会と呼ばれ、全米の大学が所属しています。各大学はDivisionⅠ~Ⅲに分けられ、Ⅰが最もレベルが高く、スポーツ奨学金も充実しています。
+                        </div>
+                    </div> 
+                    <div class="line-header6">
+                    <h>NCAA Division(部活)</h>  
+                    </div>
+                <form>
+                    <div class="form-group5">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck33.1">
+                        <label class="form-check-label" for="groupCheck33.1">
+                            Division Ⅰ
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            Division Ⅱ
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            Division Ⅲ
+                        </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="contents1">
+        <div class="conditions7">
+            <div class="box1">
+                <div class="tooltip-container5">
+                    <span class="tooltip-trigger1">？</span>
+                    <div class="tooltip-content">
+                        アメリカの大学では、2つ以上の分野を専攻することができます。また、副専攻として学ぶこともできます。文理の壁がほとんどないため、全く異なる分野を同時に学ぶことができます。
+                    </div>
+                </div>
+                <div class="line-header7">
+                <h>専攻</h>
+                </div>
+                <div class="options">
+                    <label><input type="checkbox"> 生物学</label>
+                    <label><input type="checkbox"> 教育学</label>
+                    <label><input type="checkbox"> 政治学</label>
+                    <label><input type="checkbox"> 数学</label>
+                    <label><input type="checkbox"> 物理学</label>
+                    <label><input type="checkbox"> 経済学</label>
+                    <label><input type="checkbox"> 音楽</label>
+                    <label><input type="checkbox"> 農学</label>
+                    <label><input type="checkbox"> 経営学</label>
+                    <label><input type="checkbox"> 心理学</label>
+                    <label><input type="checkbox"> 社会学</label>
+                    <label><input type="checkbox"> 環境学</label>
+                    <label><input type="checkbox"> 建築学</label>
+                    <label><input type="checkbox"> 化学</label>
+                    <label><input type="checkbox"> 倫理学</label>
+                    <label><input type="checkbox"> 歴史学</label>
+                    <label><input type="checkbox"> グラフィックデザイン</label>
+                    <label><input type="checkbox"> 工学(エンジニアリング)</label>
+                    <label><input type="checkbox"> 政治学</label>
+                    <label><input type="checkbox"> 刑事司法</label>
+                    <label><input type="checkbox"> コミュニケーション学</label>
+                    <label><input type="checkbox"> 演劇</label>
+                    <label><input type="checkbox"> 地理学</label>
+                    <label><input type="checkbox"> 統計学</label>
+                    <label><input type="checkbox"> 公衆衛生学</label>
+                    <label><input type="checkbox"> 哲学</label>
+                    <label><input type="checkbox"> 国際関係学</label>
+                    <label><input type="checkbox"> 法医学</label>
+                    <label><input type="checkbox"> 宗教学</label>
+                    <label><input type="checkbox"> スペイン語</label>
+                    <label><input type="checkbox"> 看護学</label>
+                    <label><input type="checkbox"> 言語学</label>
+                    <label><input type="checkbox"> TESOL</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-button-container">
+        <button class="btn2 btn-primary" id="search-button">検索</button>
+    </div>
+
+
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            const formData = {
+                state: document.getElementById('dropdownMenuButton').innerText.trim(),
+                privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+                tuition: document.querySelector('.form-group2 input:checked')?.nextElementSibling?.innerText.trim(),
+                students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                gpa: document.querySelector('.form-group4 input:checked')?.nextElementSibling?.innerText.trim(),
+                Division: Array.from(document.querySelectorAll('.form-group5 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                
+                // majorの取得方法を修正
+                major: Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
+                    .map(cb => cb.parentElement.textContent.trim()) // 親要素のテキストを取得
+                    .filter(text => text !== "") // 空のテキストを除外
+            };
+
+            // majorが選択されていない場合の処理
+            if (formData.major.length === 0) {
+                formData.major = "未選択"; // もし選択されていなければ、"未選択" を送信
+            }
+
+            // クエリ文字列を作成
+            const queryString = new URLSearchParams(formData).toString();
+
+            // クエリ文字列を使ってリダイレクト
+            window.location.href = `/results?${queryString}`;
+        });
+    </script>
+
+</div> 
+
+
+<div class ="footer">
+    <div class ="footer-logo">College Finder</div>
+    <div class ="footer-list">
+        <ul>
+            <li>
+                <a href="info" style="text-decoration:none;">運営情報</a>
+            </li>
+
+            <li>
+                <a href="recruit" style="text-decoration:none;">採用情報</a>
+            </li>
+
+            <li>
+                <a href="contact" style="text-decoration:none;">お問い合わせ</a>
+            </li>
+        </ul>    
+    </div>
+</div>
+
