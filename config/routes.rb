@@ -17,6 +17,12 @@ Rails.application.routes.draw do
 
   get '/results', to: 'conditions#results'
 
+  get "canada" => "home#canada"
+
+  get "australia" => "home#australia"
+
+  get "newzealand" => "home#newzealand"
+
 
 
   #get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'

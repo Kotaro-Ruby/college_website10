@@ -1,0 +1,324 @@
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<div class ="header">
+<div class="header-logo">
+    <a href="canada" class="logo-text" style="text-decoration:none;">
+        College Finder <span class="logo-subtext1">Canada vers.</span>
+    </a>
+</div>
+
+
+    <div class ="header-list">
+        <ul>
+            <li>
+                <a href="about" style="text-decoration:none;">College Finder について</a>
+            </li>
+
+
+            <li>
+                <a href="top" style="text-decoration:none;">アメリカ版</a>
+            </li>
+
+            <li>
+                <a href="australia" style="text-decoration:none;">オーストラリア版</a>
+            </li>
+
+            <li>
+                <a href="newzealand" style="text-decoration:none;">ニュージーランド版</a>
+            </li>
+
+        </ul>
+    </div>        
+</div>
+
+    
+<div class ="main">
+    <div class="copy-container">
+    <h1>Let's find your best college!</h1>
+    <h2>~カナダの大学を見てみよう！~</h2>
+    </div>
+    
+    <div class="contents">
+        <div class="conditions1">
+            <div class="box">
+                <div class="line-header1">
+                <h>州</h1>
+                </div>      
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    選択してください
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">指定しない</a></li>
+                        <li><a class="dropdown-item" href="#">アルバータ州(AB)</a></li>
+                        <li><a class="dropdown-item" href="#">ブリティッシュ・コロンビア州(BC)</a></li>
+                        <li><a class="dropdown-item" href="#">マニトバ州(MB)</a></li>
+                        <li><a class="dropdown-item" href="#">ニュー・ブランズウィック州(NB)</a></li>
+                        <li><a class="dropdown-item" href="#">ニューファンドランド&ラブラドール州(NF)</a></li>
+                        <li><a class="dropdown-item" href="#">ノバ・スコシア州(NS)</a></li>
+                        <li><a class="dropdown-item" href="#">オンタリオ州(ON)</a></li>
+                        <li><a class="dropdown-item" href="#">プリンス・エドワード島州(PE)</a></li>
+                        <li><a class="dropdown-item" href="#">ケベック州(QC)</a></li>
+                        <li><a class="dropdown-item" href="#">サスカチュワン州(SK)</a></li>
+                        <li><a class="dropdown-item" href="#">ノースウエスト準州(NT)</a></li>
+                        <li><a class="dropdown-item" href="#">ユーコン準州(YT)</a></li>
+                        <li><a class="dropdown-item" href="#">ヌナブト準州(NU)</a></li>
+                    </ul>    
+                </div>                   
+            </div>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ドロップダウンアイテムがクリックされたときの処理
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();  // リンクのデフォルトの動作を無効にする
+                const selectedText = this.textContent;  // クリックされたアイテムのテキストを取得
+                document.getElementById('dropdownMenuButton').innerText = selectedText;  // ボタンにテキストを設定
+            });
+            });
+            // スクロール時にドロップダウンを閉じる
+            let dropdownButton = document.getElementById('dropdownMenuButton');
+            let dropdownMenu = document.querySelector('.dropdown-menu');
+
+            window.addEventListener('scroll', function () {
+                if (dropdownMenu.classList.contains('show')) {
+                    // ドロップダウンが開いている場合は閉じる
+                    dropdownButton.click(); // Bootstrapのトグルボタンをトリガー
+                }
+            });
+        });
+        </script>
+
+        <div class="conditions2">
+            <div class="box">
+                    <div class="tooltip-container1">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        カナダにはおよそ90校の大学があり、そのほとんどが州立です。
+                        </div>
+                    </div> 
+                    <div class="line-header2">
+                        <h>州立/私立</h>
+                    </div>
+                <form>
+                    <div class="form-group1">
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio1">
+                        指定しない
+                        </label>
+                        </div>
+                        
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                        州立
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                        私立
+                        </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions3">
+            <div class="box">
+                    <div class="tooltip-container2">
+                        <span class="tooltip-trigger">？</span>
+                        <div class="tooltip-content">
+                        2023年度の年間の平均学費は、州立大学$36000(州民以外)です。州外の学生は通常よりも高い学費を支払う必要があるため比較的高額です。※表示はカナダドル
+                        </div>
+                    </div> 
+                    <div class="line-header3">
+                    <h>年間授業料</h>
+                    </div>
+                <form>
+                    <div class="form-group2">
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                        <label class="form-check-label" for="radio1">
+                            指定しない
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio2">
+                            ~$9999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                        <label class="form-check-label" for="radio3">
+                            $10,000~$19,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio4">
+                            $20,000~$29,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option5">
+                        <label class="form-check-label" for="radio5">
+                            $30,000~$39,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option6">
+                        <label class="form-check-label" for="radio6">
+                            $40,000~$49,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option7">
+                        <label class="form-check-label" for="radio7">
+                            $50,000~$59,999
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option8">
+                        <label class="form-check-label" for="radio8">
+                            $60,000~
+                        </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions4">
+            <div class="box">
+                <div class="line-header4">
+                <h>学生数</h>    
+                </div>
+                <form>
+                    <div class="form-group3">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck33.1">
+                        <label class="form-check-label" for="groupCheck33.1">
+                            小規模(~2999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            中規模(3000人~9999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            大規模(10,000人~29,999人)
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="groupCheck35">
+                        <label class="form-check-label" for="groupCheck35">
+                            超大規模(30,000人~)
+                        </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="contents1">
+        <div class="conditions7">
+            <div class="box1">
+                <div class="tooltip-container5">
+                    <span class="tooltip-trigger1">？</span>
+                    <div class="tooltip-content">
+                        カナダの大学では、2つ以上の分野を専攻することができます。また、副専攻として学ぶこともできます。
+                    </div>
+                </div>
+                <div class="line-header7">
+                <h>専攻</h>
+                </div>
+                <div class="options">
+                    <label><input type="checkbox"> 生物学</label>
+                    <label><input type="checkbox"> 教育学</label>
+                    <label><input type="checkbox"> 政治学</label>
+                    <label><input type="checkbox"> 数学</label>
+                    <label><input type="checkbox"> 物理学</label>
+                    <label><input type="checkbox"> 経済学</label>
+                    <label><input type="checkbox"> 音楽</label>
+                    <label><input type="checkbox"> 農学</label>
+                    <label><input type="checkbox"> 経営学</label>
+                    <label><input type="checkbox"> 心理学</label>
+                    <label><input type="checkbox"> 社会学</label>
+                    <label><input type="checkbox"> 環境学</label>
+                    <label><input type="checkbox"> 建築学</label>
+                    <label><input type="checkbox"> 化学</label>
+                    <label><input type="checkbox"> 倫理学</label>
+                    <label><input type="checkbox"> 歴史学</label>
+                    <label><input type="checkbox"> グラフィックデザイン</label>
+                    <label><input type="checkbox"> 工学(エンジニアリング)</label>
+                    <label><input type="checkbox"> 政治学</label>
+                    <label><input type="checkbox"> 刑事司法</label>
+                    <label><input type="checkbox"> コミュニケーション学</label>
+                    <label><input type="checkbox"> 演劇</label>
+                    <label><input type="checkbox"> 地理学</label>
+                    <label><input type="checkbox"> 統計学</label>
+                    <label><input type="checkbox"> 公衆衛生学</label>
+                    <label><input type="checkbox"> 哲学</label>
+                    <label><input type="checkbox"> 国際関係学</label>
+                    <label><input type="checkbox"> 法医学</label>
+                    <label><input type="checkbox"> 宗教学</label>
+                    <label><input type="checkbox"> スペイン語</label>
+                    <label><input type="checkbox"> 看護学</label>
+                    <label><input type="checkbox"> 言語学</label>
+                    <label><input type="checkbox"> TESOL</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-button-container">
+        <button class="btn2 btn-primary" id="search-button">検索</button>
+    </div>
+
+
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            const formData = {
+                state: document.getElementById('dropdownMenuButton').innerText.trim(),
+                privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+                tuition: document.querySelector('.form-group2 input:checked')?.nextElementSibling?.innerText.trim(),
+                students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                gpa: document.querySelector('.form-group4 input:checked')?.nextElementSibling?.innerText.trim(),
+                Division: Array.from(document.querySelectorAll('.form-group5 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                
+                // majorの取得方法を修正
+                major: Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
+                    .map(cb => cb.parentElement.textContent.trim()) // 親要素のテキストを取得
+                    .filter(text => text !== "") // 空のテキストを除外
+            };
+
+            // majorが選択されていない場合の処理
+            if (formData.major.length === 0) {
+                formData.major = "未選択"; // もし選択されていなければ、"未選択" を送信
+            }
+
+            // クエリ文字列を作成
+            const queryString = new URLSearchParams(formData).toString();
+
+            // クエリ文字列を使ってリダイレクト
+            window.location.href = `/results?${queryString}`;
+        });
+    </script>
+
+</div> 
+</div>

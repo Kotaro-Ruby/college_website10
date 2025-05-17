@@ -22,8 +22,11 @@ gem "bootstrap", "~> 5.3.3"
 
 gem 'pg'
 gem 'ransack'
+gem 'listen'
 
 gem 'roo'
+
+
 
 
 

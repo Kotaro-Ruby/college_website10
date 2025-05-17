@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_16_172618) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_14_233108) do
   create_table "conditions", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", null: false
@@ -22,5 +22,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_16_172618) do
     t.string "privateorpublic"
     t.string "college"
     t.string "Division"
+    t.float "acceptance_rate"
+    t.string "city"
+    t.string "address"
+    t.string "zip"
+    t.string "urbanicity"
+    t.string "website"
+    t.string "school_type"
+    t.float "graduation_rate"
   end
 end

@@ -4,7 +4,7 @@
     条件に一致する大学: <%= @results.count %> 校
   </p>
   <p style="margin-left: 20px;">*大学名をクリックすると詳細をご覧いただけます。</p>
-  ★本サイトの大学情報は、U.S. News & World Reportの最新データに基づいています。詳細については<a href="https://www.usnews.com/best-colleges" target="_blank">こちら</a>をご覧ください。
+  ★本サイトの大学情報は、アメリカ教育省 College Scorecardのデータに基づいています。詳細については<a href="https://collegescorecard.ed.gov/" target="_blank">こちら</a>をご覧ください。
   <div style="max-width: 1500px; margin: 0 auto; padding: 20px;">
     <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 1px solid #ddd;">
       <thead>
@@ -16,6 +16,8 @@
           <th style="padding: 15px; border-bottom: 2px solid #ddd;">平均GPA</th>
           <th style="padding: 15px; border-bottom: 2px solid #ddd;">Division</th>
           <th style="padding: 15px; border-bottom: 2px solid #ddd;">州</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">卒業率</th>
+          <th style="padding: 15px; border-bottom: 2px solid #ddd;">立地</th>
         </tr>
       </thead>
       <tbody>
@@ -27,30 +29,33 @@
             #新たな大学の詳細ページを追加する場合は、1.ここに追加し、2.ルートを追加、3.controllerにアクションを追加
         } %>
 
-        <% @results.each_with_index do |result, index| %>
-          <tr style="background-color: <%= index.even? ? '#f9f9f9' : '#ffffff' %>; border-bottom: 1px solid #ddd;">
-            <td style="padding: 8px;">
-              <% if university_links[result.college.downcase.strip] %>
-                <a href="<%= university_links[result.college.downcase.strip] %>" class="university-link">
-                  <%= result.college %>
-                </a>
-              <% else %>
-                <a href="/fallback_page" class="university-link" style="color: black;">
-                  <%= result.college %>
-                </a>
-              <% end %>
-            </td>
-            <td style="padding: 30px;"><%= result.privateorpublic %></td>
-            <td style="padding: 30px;"><%= number_with_delimiter(result.students) %> 人</td>
-            <td style="padding: 30px;"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
-            <td style="padding: 30px;">
-              <%= result.GPA.nil? || result.GPA == "N/A" ? "N/A" : result.GPA %>
-            </td>
-            <td style="padding: 30px;"><%= result.Division %></td>
-            <td style="padding: 30px;"><%= result.state %></td>
-          </tr>
+  <% @results.each_with_index do |result, index| %>
+    <tr style="background-color: <%= index.even? ? '#f9f9f9' : '#ffffff' %>; border-bottom: 1px solid #ddd;">
+      <td style="padding: 8px;">
+        <% if university_links[result.college.downcase.strip] %>
+          <a href="<%= university_links[result.college.downcase.strip] %>" class="university-link">
+            <%= result.college %>
+          </a>
+        <% else %>
+          <a href="/fallback_page" class="university-link" style="color: black;">
+            <%= result.college %>
+          </a>
         <% end %>
-      </tbody>
+      </td>
+      <td style="padding: 30px;"><%= result.privateorpublic %></td>
+      <td style="padding: 30px;"><%= number_with_delimiter(result.students) %> 人</td>
+      <td style="padding: 30px;"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
+      <td style="padding: 30px;">
+        <%= result.GPA.nil? || result.GPA == "N/A" ? "N/A" : result.GPA %>
+      </td>
+      <td style="padding: 30px;"><%= result.Division %></td>
+      <td style="padding: 30px;"><%= result.state %></td>
+      <td style="padding: 30px;"><%= result.graduation_rate.present? ? "#{number_with_precision(result.graduation_rate * 100, precision: 1)}%" : "N/A" %></td>
+      <td style="padding: 30px;"><%= result.urbanicity || "N/A" %></td>
+    </tr>
+  <% end %>
+</tbody>
+
     </table>
   </div>
   <% else %>

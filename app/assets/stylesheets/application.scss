@@ -12,13 +12,22 @@
   @import "bootstrap";
   @import "about";
 
-
+ /*以下全体設定*/
   body {
+    background-color: #f2f2f2;  /* 薄いグレー */
     font-family: "Avenir Next";
   }
 
-  li {
-    list-style: none;
+  .main {
+    padding:30px 80px;
+    height:1700px;
+  }
+
+  /*以下header設定*/
+  .header-logo {
+    float: left;
+    font-size: 36px;
+    padding: 20px 40px;
   }
 
   .header {
@@ -30,23 +39,10 @@
     color:#fff;
   }
 
-  .footer-list a{
-    color:black;
-  }
-
-  .footer-logo{
-    color:black;
-  }
-
-  .header-logo {
-    float: left;
-    font-size: 36px;
-    padding: 20px 40px;
-  }
-
   .header-list li {
     float: left;
     padding: 33px 20px;
+    list-style: none;
   }
 
   .header-list a{
@@ -57,157 +53,122 @@
       font-weight: bold;     /* カーソルを合わせた時に太字にする */
   }
 
-  .footer-list a{
-    color: black;   /* 通常時の太さを標準に設定。なくても大丈夫 */
+
+/*以下copy-container設定*/
+  .copy-container {
+    padding: 45px 30px;
+    text-align: center;
   }
 
-  .footer-list a:hover {
-    color: rgb(97, 97, 97);     /* カーソルを合わせた時に色を変更する */
-  }
-
-
-  .tooltip-trigger:hover {
-      background-color: rgb(139, 138, 138);
-  }
-
-  .tooltip-trigger1:hover {
-    background-color: rgb(139, 138, 138);
-  }
-
-  .main {
-    padding:30px 80px;
-    height:1700px;
-  }
-
-  .conditions1 h{
-    font-size:25px;
-  }
-
-  .conditions2 h{
-    font-size:25px;
-  }
-
-
-  .conditions3 h{
-    font-size:25px;
-  }
-
-  .conditions4 h{
-    font-size:25px;
-  }
-
-  .conditions5 h{
-    font-size:25px;
-  }
-
-  .conditions6 h{
-    font-size:25px;
-  }
-
-  .conditions7 h{
-    font-size:25px
-  }
-
-  .copy-container h1{
-    font-size:70px;
+  .copy-container h1 {
+    font-size: 70px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
   }
 
-  .copy-container h2{
-    font-size:30px;
+  .copy-container h2 {
+    font-size: 30px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
   }
 
-  .flag {
-    width: 30px;  /* 国旗のサイズを調整 */
-    height: auto;
-    margin-left: 4px; /* "州" と国旗の間のスペースを調整 */
-    position: relative;
-    top: -4px; /* 国旗を少し上に移動 */
+/*以下condition設定*/
+/* 共通スタイル */
+.box, .box1 {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 15px;
+  color: #000000;
+  text-align: left;
+  justify-content: center;
 }
 
-  .copy-container h1{
-    display: flex;           /* 子要素をフレックスボックスで配置 */
-    justify-content: center; /* 横方向の中央揃え */
-    align-items: center;     /* 縦方向の中央揃え */
-    height: 60px;            /* ヘッダーの高さ */
-  }
+/* .box の個別スタイル */
+.box {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  height: 300px;
+  position: relative;       /* ツールチップの位置基準 */
+  padding-right: 30px;      /* ツールチップ用の右余白 */
+}
 
-  .copy-container h2{
-    display: flex;           /* 子要素をフレックスボックスで配置 */
-    justify-content: center; /* 横方向の中央揃え */
-    align-items: center;     /* 縦方向の中央揃え */
-    height: 60px;            /* ヘッダーの高さ */
-  }
-  
-  .footer {
-    background-color: rgb(240, 177, 61);
-    height: 170px;
-    padding:40px;
-  }
-
-  .footer-logo{
-    font-size:32px;
-    float:left;
-  }
-
-  .footer-list{
-    float:right;
-  }
-  
-  .footer-list li{
-    padding-bottom:20px;
-  }
-
-  .dropdown-menu{
-    /*表示するスクロールバーの高さを調整。今回は月がスクロールなしで入る高さにした*/
-    max-height: 330px;
-    /*スクロールバーを表示する*/
-    overflow: scroll;
-    /*デフォルトで水平方向のスクロールバーが入ってくるので非表示にする*/
-    overflow-x: hidden;
-    margin-top:0px;
-  }
-
-  .contents{
+/* .box1 の個別スタイル */
+.box1 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2列構成 */
-  gap: 20px; /* ボックス間のスペース */
-  }
-
-  .contents1{
-  display: grid;
-  padding-top: 20px;
-  grid-template-columns:1fr;
-  }
-
-  .box{
-  background-color: #ccf286; /* ボックスの背景色 */
-  border-radius: 5px;       /* 角丸 */
-  padding: 15px;            /* 内側の余白 */
-  color: #000000;              /* テキストの色 */
-  text-align: left;         /* テキストの揃え */
-  display: flex;            /* フレックスボックスで中身を配置 */
-  flex-direction: column;   /* 垂直方向に中身を並べる */
-  justify-content: center;  /* 中央寄せ */
-  overflow: visible;         /* ボックス外に文字がはみ出さない */
-  height: 300px;             /* 必要に応じて高さを調整 */
-  }
-
-  .box1{
-  background-color: #ccf286; /* ボックスの背景色 */
-  border-radius: 5px;       /* 角丸 */
-  padding: 15px;            /* 内側の余白 */
-  color: #000000;              /* テキストの色 */
-  text-align: left;         /* テキストの揃え */
-  display: grid;            /* フレックスボックスで中身を配置 */
-  flex-direction: column;   /* 垂直方向に中身を並べる */
-  justify-content: center;  /* 中央寄せ */
-  overflow: hidden;         /* ボックス外に文字がはみ出さない */
-  height: 500px;             /* 必要に応じて高さを調整 */
+  overflow: hidden;
+  height: 500px;
   margin-bottom: 30px;
-  }
+  position: relative;       /* ツールチップの位置基準 */
+  padding: 20px;            /* 余白を追加 */
+  border: 1px solid #ccc;   /* 枠線 */
+}
 
+
+
+
+
+
+
+/*条件名*/
+.conditions1 h1,
+.conditions2 h1,
+.conditions3 h1,
+.conditions4 h1,
+.conditions5 h1,
+.conditions6 h1,
+.conditions7 h1,
+.conditions8 h1,
+.conditions9 h1 {
+  font-size: 20px;
+}
+
+/*tooltip*/
+.tooltip-trigger:hover,
+.tooltip-trigger1:hover {
+  background-color: rgb(139, 138, 138);
+}
+
+.dropdown-menu {
+  /*表示するスクロールバーの高さを調整。今回は月がスクロールなしで入る高さにした*/
+  max-height: 330px;
+
+  /*スクロールバーを表示する*/
+  overflow: scroll;
+
+  /*デフォルトで水平方向のスクロールバーが入ってくるので非表示にする*/
+  overflow-x: hidden;
+
+  margin-top: 0px;
+
+  /* ドロップダウンを画面上の固定位置に */
+  *position: absolute;
+  top: 100px; /* 適宜調整 */
+  left: 50px; /* 適宜調整 */
+  z-index: 1050;
+}
+
+
+.contents{
+display: grid;
+grid-template-columns: repeat(4, 1fr); /* 2列構成 */
+gap: 20px; /* ボックス間のスペース */
+}
+
+.contents1{
+display: grid;
+padding-top: 20px;
+grid-template-columns:1fr;
+}
+
+/*以下意義不明*/
   label {
     text-align: left; /* 左詰め */
     word-wrap: break-word; /* 長い単語を折り返し */
@@ -215,73 +176,55 @@
     display: block; /* 全体をブロック化 */
   }
 
+  /*専攻選択肢*/
   .options {
     display: grid; /* Gridレイアウトで複数列を作成 */
-    grid-template-columns: repeat(3, 1fr); /* 2列構成 */
+    grid-template-columns: repeat(3, 1fr); /* 3列構成 */
     gap: 10px; /* 選択肢間のスペース */
+    margin-top: 65px; /* 必要に応じて調整 */
   }
 
-  
-  .btn2{
-    background-color: #ff9ba5;
-    width: 300px;
-    border: none;
-  }
-
-  .search-button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .btn2:hover{
-    background-color:#ffcd87 ;
-  }
-
-  .dropdown-menu {
-  *position: absolute; /* ドロップダウンを画面上の固定位置に */
-    top: 100px; /* 適宜調整 */
-    left: 50px; /* 適宜調整 */
-    z-index: 1050;
-  }
 
   /* ツールチップのコンテナ */
   .tooltip-container1 {
     position: absolute; /* 親要素に対して絶対配置 */
     top: 20px; /* 上から少し距離をとる */
-    right: 240px; /* 右から少し距離をとる */
+    right: 60px; /* 右から少し距離をとる */
     display: inline-block;
   }
 
-  /* ツールチップのコンテナ */
   .tooltip-container2 {
     position: absolute; /* 親要素に対して絶対配置 */
     top: 20px; /* 上から少し距離をとる */
-    right: 230px; /* 右から少し距離をとる */
+    right: 60px; /* 右から少し距離をとる */
     display: inline-block;
   }
 
-  /* ツールチップのコンテナ */
   .tooltip-container3 {
     position: absolute; /* 親要素に対して絶対配置 */
     top: 20px; /* 上から少し距離をとる */
-    right: 210px; /* 右から少し距離をとる */
+    right: 40px; /* 右から少し距離をとる */
     display: inline-block;
   }
 
-  /* ツールチップのコンテナ */
   .tooltip-container4 {
     position: absolute; /* 親要素に対して絶対配置 */
     top: 20px; /* 上から少し距離をとる */
-    right: 180px; /* 右から少し距離をとる */
+    right: 20px; /* 右から少し距離をとる */
     display: inline-block;
   }
 
-  /* ツールチップのコンテナ */
   .tooltip-container5 {
     position: absolute; /* 親要素に対して絶対配置 */
     top: 20px; /* 上から少し距離をとる */
-    right: 1px; /* 右から少し距離をとる */
+    right: 75px; /* 右から少し距離をとる */
+    display: inline-block;
+  }
+
+  .tooltip-container6 {
+    position: absolute; /* 親要素に対して絶対配置 */
+    top: 20px; /* 上から少し距離をとる */
+    right: 550px; /* 右から少し距離をとる */
     display: inline-block;
   }
 
@@ -299,72 +242,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  /* ツールチップの内容 */
-  .tooltip-content {
-    position: absolute;
-    background-color: #f3ffb9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 250px;
-    top: 20px;  /* ?マークから少し下に表示 */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    display: none; /* 初期状態では非表示 */
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out; /* アニメーション効果 */
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container1:hover .tooltip-content {
-    display: block;
-    opacity: 1; /* フェードイン */
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container2:hover .tooltip-content {
-    display: block;
-    opacity: 1; /* フェードイン */
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container3:hover .tooltip-content {
-    display: block;
-    opacity: 1; /* フェードイン */
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container4:hover .tooltip-content {
-    display: block;
-    opacity: 1; /* フェードイン */
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container5:hover .tooltip-content {
-    display: block;
-    opacity: 1; /* フェードイン */
-  }
-
-  /* box内の位置調整 */
-  .box {
-    position: relative; /* ツールチップの位置基準 */
-    padding-right: 30px; /* ツールチップを表示するために右側に余白を追加 */
-  }
-
-  .box1 {
-    position: relative; /* ツールチップの位置基準 */
-    padding: 20px; /* 余白を追加 */
-    border: 1px solid #ccc; /* 見やすいように枠線を追加 */
-  }
-
-
-  .tooltip-container5 {
-    position: absolute;
-    top: 20px; /* box1の上から10pxの位置 */
-    right: 605px; /* box1の右から10pxの位置 */
   }
 
   .tooltip-trigger1 {
@@ -386,168 +263,164 @@
     transition:backgrond-color 0.3s ease;
   }
 
-
-
-  .line-header1 {
+/* ツールチップの内容 */
+  .tooltip-content {
     position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
+    background-color: #fff4e1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 250px;
+    top: 20px;  /* ?マークから少し下に表示 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    visibility: hidden;   /* 初期状態では非表示 */
+    opacity: 0;           /* 初期状態は透明 */
+    transition: opacity 0.5s ease, visibility 0.6s ease, border-radius 0.6s ease; /* アニメーション効果 */
+    border-radius: 10px;  /* 角を丸くする */
+  }
+
+  /* ホバー時にポップアップを表示 */
+  .tooltip-container1:hover .tooltip-content,
+  .tooltip-container2:hover .tooltip-content,
+  .tooltip-container3:hover .tooltip-content,
+  .tooltip-container4:hover .tooltip-content,
+  .tooltip-container5:hover .tooltip-content,
+  .tooltip-container6:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* line-header 共通のコンテナスタイル */
+[class^="line-header"] {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #cbcbcb;
+}
+
+/* line-header クラス内の hタグに限定したスタイル */
+[class^="line-header"] > h {
+  margin: 0;
+  font-size: 25px;
+  font-weight: bold;
+}
+.form-group2,
+.form-group3,
+.form-group4,
+.form-group5 {
+  margin-top: 60px; /* 共通の余白 */
+}
+
+.form-group1 {
+  margin-top: 6%;
+}
+
+
+  /* 検索ボタン*/
+  .simple-search-button {
+    background-color: #b9b9b9;
+    color: #333;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.0rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    width:300px;
+  }
+
+  .simple-search-button:hover {
+    background-color: #eaeaea;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-button-container{
     display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header1 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header2 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header2 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header3 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header3 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header4 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header4 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header5 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header5 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header6 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  .line-header6 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .line-header7 {
-    position: absolute;
-    top: 30px; /* 上から30pxの位置 */
-    left: 0;
-    right: 0;
-    height: 30px; /* 線の高さ */
-    display: flex;
-    align-items: center; /* 縦方向中央揃え */
-    justify-content: center; /* 横方向中央揃え */
-    border-bottom: 2px solid #ffffff; /* 線を引く */
-  }
-
-  /*以下formの縦方向調整*/
-  .line-header7 h {
-    margin: 0;
-    font-size: 25px;
-    font-weight: bold;
-  }
-  .form-group1 {
-    margin-top: 6%; /* 必要に応じて調整 */
-  }
-  .form-group2 {
-    margin-top: 60px; /* 必要に応じて調整 */
-  }
-  .form-group3 {
-    margin-top: 60px; /* 必要に応じて調整 */
-  }
-  .form-group4 {
-    margin-top: 60px; /* 必要に応じて調整 */
-  }
-  .form-group5 {
-    margin-top: 60px; /* 必要に応じて調整 */
-  }
-
-  .options{
-    margin-top: 65px; /* 必要に応じて調整 */
-  }
-
-
-  .university-link {
-    font-weight: bold;
-    color: black;
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-  }
-  
-  .university-link:hover {
-    color: #007BFF; /* 青色 */
-    text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5); /* ホバー時の影 */
+    justify-content: center;
+    align-items: center;
   }
   
 
+
+/*以下footer設定*/
+.footer-logo{
+  color:rgb(255, 255, 255);
+  font-size:32px;
+  float:left;
+}
+
+.footer-list a{
+  color: rgb(255, 255, 255);   /* 通常時の太さを標準に設定。なくても大丈夫 */
+}
+
+.footer-list a:hover {
+  color: rgb(255, 255, 255);     /* カーソルを合わせた時に色を変更する */
+  font-weight: bold;     /* カーソルを合わせた時に太字にする */
+}
+
+.footer {
+  background-color: rgb(240, 177, 61);
+  height: 170px;
+  padding:40px;
+}
+
+.footer-list{
+  float:right;
+}
+
+.footer-list li{
+  padding-bottom:20px;
+  list-style: none;
+}
+
+/*検索結果*/
+.university-link {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.university-link:hover {
+  color: #007BFF; /* 青色 */
+  text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5); /* ホバー時の影 */
+}
+
+  /*カナダ版header設定*/
+  .logo-subtext1 {
+    font-size: 30px;  // 少し小さくする
+    color: red;  // 赤色にする
+    font-weight: bold;  // 太字にして強調
+    padding: 3px 5px;  // 文字の周りに少し余白を加える
+    background-color: rgba(255, 255, 255, 0.5);  // 背景を少し透明に
+    border-radius: 5px;  // 丸みを帯びた角
+}
+/*オーストラリア版header設定*/
+.logo-subtext2 {
+  font-size: 30px;  // 少し小さくする
+  color: blue;  
+  font-weight: bold;  // 太字にして強調
+  padding: 3px 5px;  // 文字の周りに少し余白を加える
+  background-color: rgba(255, 255, 255, 0.5);  // 背景を少し透明に
+  border-radius: 5px;  // 丸みを帯びた角
+}
+/*ニュージーランド版header設定*/
+.logo-subtext3 {
+  font-size: 30px;  // 少し小さくする
+  color: rgb(0, 0, 96);  // 赤色にする
+  font-weight: bold;  // 太字にして強調
+  padding: 3px 5px;  // 文字の周りに少し余白を加える
+  background-color: rgba(255, 255, 255, 0.5);  // 背景を少し透明に
+  border-radius: 5px;  // 丸みを帯びた角
+}
 
 
 
