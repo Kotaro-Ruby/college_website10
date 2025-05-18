@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "home#top"
+
   get "conditions/index"
   get "test1/test1"
   get "top" => "home#top"
