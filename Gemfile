@@ -25,6 +25,7 @@ gem 'ransack'
 gem 'listen'
 
 gem 'roo'
+gem 'csv'
 
 
 
