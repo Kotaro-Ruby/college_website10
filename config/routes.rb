@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get "newzealand" => "home#newzealand"
 
+  get '/import_conditions', to: 'import#conditions'
 
 
   #get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'
