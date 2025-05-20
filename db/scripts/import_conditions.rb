@@ -1,8 +1,7 @@
 require 'roo'
 
 # Excelファイルのパスを設定
-file_path = Rails.root.join("public", "college_data_revised5_18_25_5th.xlsx")
-
+file_path = "C:/Users/kotar/Downloads/data_import.demo.xlsx"
 
 # Excelファイルを読み込む
 spreadsheet = Roo::Spreadsheet.open(file_path)
