@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: College_Finder   # あなたの Render サービス名に合わせて書き換えてください
+    env: ruby
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: |
+      bundle install
+      yarn install
+      bundle exec rake assets:precompile
+    startCommand: |
+      bundle exec puma -C config/puma.rb
+    releaseCommand: |
+      bundle exec rails db:migrate
+      # 必要に応じて以下を追加
+      # bundle exec rails db:seed
