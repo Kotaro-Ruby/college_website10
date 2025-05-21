@@ -13,5 +13,4 @@ services:
       bundle exec puma -C config/puma.rb
     releaseCommand: |
       bundle exec rails db:migrate
-      # 必要に応じて以下を追加
-      # bundle exec rails db:seed
+      bundle exec rails db:seed
