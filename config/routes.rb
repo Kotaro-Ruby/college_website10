@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   # どのルートにもマッチしない場合、fallback_page アクションを呼び出す
   get '*unmatched_route', to: 'conditions#fallback_page'
   
-
+  get 'debug/db_status', to: 'debug#db_status'
  
   
 
