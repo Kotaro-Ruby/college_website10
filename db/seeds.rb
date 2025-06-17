@@ -8,9 +8,3 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts "=== Starting Condition seed process ==="
-puts "Current environment: #{Rails.env}"
-
-# ここに既存のシードコード
-
-puts "=== Seed complete. Condition count: #{Condition.count} ==="

@@ -112,7 +112,20 @@ end
 
   @results = scope
   Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
+  end
 
+  def show
+    @college = Condition.find_by(slug: params[:id]) || Condition.find_by(id: params[:id])
+  Rails.logger.debug("College found: #{@college.inspect}")
+    if @college
+      render :show
+    else
+      redirect_to :fallback_page
+    end
+  end
+
+  def fallback_page
+    render plain: "申し訳ありませんが、この大学の詳細ページはまだ作成されていません。", status: :not_found
   end
 
   private
@@ -254,18 +267,7 @@ end
   end
 
 
-  def fallback_page
-    render plain: "申し訳ありませんが、この大学の詳細ページはまだ作成されていません。", status: :not_found
-  end
+
+
 
 end
-
-
-
-
-
-
-  
-  
-
-

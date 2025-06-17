@@ -112,6 +112,9 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
+      railties (>= 6.1)
     drb (2.2.1)
     ed25519 (1.3.0)
     erubi (1.13.1)
@@ -131,6 +134,10 @@ GEM
     google-protobuf (4.29.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
+    httparty (0.23.1)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -174,6 +181,8 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.4)
     msgpack (1.7.5)
+    multi_xml (0.7.2)
+      bigdecimal (~> 3.1)
     net-imap (0.5.2)
       date
       net-protocol
@@ -297,6 +306,9 @@ GEM
       rubocop-performance
       rubocop-rails
     ruby-progressbar (1.13.0)
+    rubyXL (3.4.33)
+      nokogiri (>= 1.10.8)
+      rubyzip (>= 1.3.0)
     rubyzip (2.3.2)
     sass-embedded (1.83.0-x64-mingw-ucrt)
       google-protobuf (~> 4.28)
@@ -377,6 +389,8 @@ DEPENDENCIES
   csv
   dartsass-rails
   debug
+  dotenv-rails
+  httparty
   importmap-rails
   jbuilder
   kamal
@@ -388,6 +402,7 @@ DEPENDENCIES
   ransack
   roo
   rubocop-rails-omakase
+  rubyXL
   selenium-webdriver
   solid_cable
   solid_cache

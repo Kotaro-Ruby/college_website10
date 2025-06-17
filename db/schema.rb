@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_14_233108) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_21_052833) do
   create_table "conditions", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", null: false
@@ -30,5 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_233108) do
     t.string "website"
     t.string "school_type"
     t.float "graduation_rate"
+    t.string "slug"
+    t.index ["slug"], name: "index_conditions_on_slug", unique: true
   end
 end

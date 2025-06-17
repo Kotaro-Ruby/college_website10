@@ -32,15 +32,11 @@
   <% @results.each_with_index do |result, index| %>
     <tr style="background-color: <%= index.even? ? '#f9f9f9' : '#ffffff' %>; border-bottom: 1px solid #ddd;">
       <td style="padding: 8px;">
-        <% if university_links[result.college.downcase.strip] %>
-          <a href="<%= university_links[result.college.downcase.strip] %>" class="university-link">
+        
+          <a href="<%= conditions_path(result) %>" class="university-link">
             <%= result.college %>
           </a>
-        <% else %>
-          <a href="/fallback_page" class="university-link" style="color: black;">
-            <%= result.college %>
-          </a>
-        <% end %>
+        
       </td>
       <td style="padding: 30px;"><%= result.privateorpublic %></td>
       <td style="padding: 30px;"><%= number_with_delimiter(result.students) %> 人</td>

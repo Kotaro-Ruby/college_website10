@@ -26,7 +26,9 @@ gem 'listen'
 
 gem 'roo'
 gem 'csv'
-
+gem 'httparty'
+gem 'rubyXL'
+gem 'dotenv-rails', groups: [:development, :test]
 
 
 
