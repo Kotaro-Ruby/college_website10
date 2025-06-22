@@ -7,8 +7,11 @@ require 'uri'
 API_KEY = 'R8tByl5fHaRhfqN0fXmUwHWbVbVrUnG3d4Kmktlf'
 BASE_URL = 'https://api.data.gov/ed/collegescorecard/v1/schools'
 
-INPUT_XLSX_PATH = 'C:/Users/kotar/Downloads/college_data_revised5_18_25_6th.xlsx'
-OUTPUT_CSV_PATH = 'C:/Users/kotar/Downloads/college_data_enriched.csv'
+# データ処理用スクリプト - 本番環境では実行されません
+return unless Rails.env.development?
+
+INPUT_XLSX_PATH = Rails.root.join('data', 'college_data_revised5_18_25_6th.xlsx')
+OUTPUT_CSV_PATH = Rails.root.join('data', 'college_data_enriched.csv')
 
 PROGRAM_FIELDS = %w[
   agriculture architecture area_ethnic_cultural_gender biological
