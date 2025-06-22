@@ -20,7 +20,7 @@ gem "jbuilder"
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
-gem 'pg'
+# gem 'pg'
 gem 'ransack'
 gem 'listen'
 
