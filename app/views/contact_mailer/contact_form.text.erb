@@ -1,0 +1,25 @@
+College Finder お問い合わせ
+=====================================
+
+お問い合わせを受信しました。
+
+お名前: <%= @name %>
+メールアドレス: <%= @email %>
+
+お問い合わせの種類: 
+<%= case @category
+    when 'site-bug' then 'サイトの不具合報告'
+    when 'data-error' then 'データの間違い'
+    when 'feature-request' then '新機能のご要望'
+    when 'general-question' then '一般的なご質問'
+    when 'other' then 'その他'
+    else @category
+    end %>
+
+お問い合わせ内容:
+-------------------------------------
+<%= @message %>
+-------------------------------------
+
+このメールは College Finder のお問い合わせフォームから自動送信されました。
+返信する際は、上記のメールアドレス（<%= @email %>）宛にお送りください。

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "recruit" => "home#recruit"
 
   get "contact" => "home#contact"
+  post "contact" => "home#send_contact"
 
   get "terms" => "home#terms"
 

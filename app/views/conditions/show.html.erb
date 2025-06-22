@@ -167,7 +167,15 @@
       <h1><%= @college.college %></h1>
       <div class="university-info">
         <p><strong>住所:</strong> <%= @college.address %>, <%= @college.city %>, <%= @college.state %>, <%= @college.zip %></p>
-        <p><strong>公式ホームページ:</strong> <a href="<%= @college.website %>" target="_blank" style="color: #3498db; text-decoration: none;"><%= @college.website %></a></p>
+        <p><strong>公式ホームページ:</strong> 
+          <% if @college.website.present? %>
+            <% url = @college.website.gsub(/\/$/, '') %>
+            <% href_url = url.match?(/^https?:\/\//) ? url : "https://#{url}" %>
+            <a href="<%= href_url %>" target="_blank" style="color: #3498db; text-decoration: none;"><%= url %></a>
+          <% else %>
+            N/A
+          <% end %>
+        </p>
       </div>
       <div class="social-links">
         <a href="https://www.instagram.com/" target="_blank" style="color: #E4405F;"><i class="fab fa-instagram"></i></a>

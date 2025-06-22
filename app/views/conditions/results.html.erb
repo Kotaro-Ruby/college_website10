@@ -429,6 +429,8 @@
               <option value="tuition-desc">授業料 (高い順)</option>
               <option value="graduation-asc">卒業率 (低い順)</option>
               <option value="graduation-desc">卒業率 (高い順)</option>
+              <option value="gpa-asc">GPA (低い順)</option>
+              <option value="gpa-desc">GPA (高い順)</option>
             </select>
           </div>
         </div>
@@ -450,6 +452,9 @@
               <th class="sortable" data-sort="students">学生数</th>
               <th class="sortable" data-sort="tuition">授業料</th>
               <th class="sortable" data-sort="graduation">卒業率</th>
+              <th>立地</th>
+              <th class="sortable" data-sort="gpa">GPA</th>
+              <th>NCAA</th>
             </tr>
           </thead>
           <tbody>
@@ -457,7 +462,8 @@
               <tr data-name="<%= result.college %>" 
                   data-students="<%= result.students || 0 %>"
                   data-tuition="<%= result.tuition || 0 %>"
-                  data-graduation="<%= result.graduation_rate || 0 %>">
+                  data-graduation="<%= result.graduation_rate || 0 %>"
+                  data-gpa="<%= result.GPA && result.GPA != 'N/A' ? result.GPA : 0 %>">
                 <td>
                   <a href="<%= conditions_path(result) %>" class="university-link">
                     <%= result.college %>
@@ -476,6 +482,9 @@
                 <td data-label="学生数"><%= number_with_delimiter(result.students) %> 人</td>
                 <td data-label="授業料"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
                 <td data-label="卒業率"><%= result.graduation_rate.present? ? "#{number_with_precision(result.graduation_rate * 100, precision: 1)}%" : "N/A" %></td>
+                <td data-label="立地"><%= result.urbanicity || "N/A" %></td>
+                <td data-label="GPA"><%= result.GPA || "N/A" %></td>
+                <td data-label="NCAA"><%= result.Division || "N/A" %></td>
               </tr>
             <% end %>
           </tbody>
@@ -514,7 +523,7 @@
           let bValue = b.getAttribute(`data-${column}`);
           
           // 数値として比較
-          if (column === 'students' || column === 'tuition' || column === 'graduation') {
+          if (column === 'students' || column === 'tuition' || column === 'graduation' || column === 'gpa') {
             aValue = parseFloat(aValue) || 0;
             bValue = parseFloat(bValue) || 0;
           }

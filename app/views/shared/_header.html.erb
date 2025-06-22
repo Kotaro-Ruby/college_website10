@@ -2,6 +2,13 @@
   <div class="header-container">
     <div class="header-left">
       <a href="/" class="logo">College Finder</a>
+      <% if request.path.include?('/canada') %>
+        <span class="country-badge">Canada ver.</span>
+      <% elsif request.path.include?('/australia') %>
+        <span class="country-badge">Australia ver.</span>
+      <% elsif request.path.include?('/newzealand') %>
+        <span class="country-badge">New Zealand ver.</span>
+      <% end %>
     </div>
     <nav class="header-nav">
       <ul class="nav-list">
@@ -45,6 +52,17 @@
   .header-left {
     display: flex;
     align-items: center;
+    gap: 15px;
+  }
+
+  .country-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
   }
 
   .logo {
@@ -120,6 +138,11 @@
 
     .logo {
       font-size: 24px;
+    }
+
+    .country-badge {
+      font-size: 12px;
+      padding: 3px 8px;
     }
 
     .header-nav {
