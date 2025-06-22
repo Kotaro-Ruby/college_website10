@@ -4,45 +4,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-<div class ="header">
-    <div class ="header-logo">
-        <a href="top" style="text-decoration:none;">College Finder</a>
-    </div>
-
-    <div class ="header-list">
-        <ul>
-            <li>
-                <a href="about" style="text-decoration:none;">College Finder について</a>
-            </li>
-
-            <li>
-                <a href="knowledge" style="text-decoration:none;">アメリカの大学を知る</a>
-            </li>
-
-            <li>
-                <a href="canada" style="text-decoration:none;">カナダ版</a>
-            </li>
-
-            <li>
-                <a href="australia" style="text-decoration:none;">オーストラリア版</a>
-            </li>
-
-            <li>
-                <a href="newzealand" style="text-decoration:none;">ニュージーランド版</a>
-            </li>
-
-            <li>
-                <a href="degreeseeking" style="text-decoration:none;">卒業を目指す留学</a>
-            </li>
-        </ul>
-    </div>        
-</div>
 
     
 <div class ="main">
     <div class="copy-container">
     <h1>Let's find your best college!</h1>
     <h2>~アメリカの大学を見てみよう！~</h2>
+    
+    <!-- 大学名検索機能 -->
+    <div class="college-name-search">
+        <div class="search-header">
+            <h3><i class="fa fa-search me-2"></i>大学名で直接検索</h3>
+        </div>
+        <div class="search-input-container">
+            <input type="text" id="college-name-input" placeholder="例：Harvard University, Stanford University..." class="college-search-input">
+            <button id="name-search-button" class="name-search-btn">
+                <i class="fa fa-search"></i> 検索
+            </button>
+        </div>
+        <div class="search-separator">
+            <span>または</span>
+        </div>
+    </div>
     </div>
 
     <div class="contents">
@@ -379,48 +362,48 @@
                         </div>
                     </div> 
                     <div class="line-header7">
-                        <h1><i class="fa fa-graduation-cap me-2"></i>卒業率※開発中の機能です</h1>
+                        <h1><i class="fa fa-graduation-cap me-2"></i>卒業率</h1>
                     </div>
                 <form>
-                    <div class="form-group1">
+                    <div class="form-group6">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
-                        <label class="form-check-label" for="radio1">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio1" value="option1" checked>
+                        <label class="form-check-label" for="gradRadio1">
                         指定しない
                         </label>
                         </div>
                             
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio2" value="option2">
+                        <label class="form-check-label" for="gradRadio2">
                         50%~
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio3" value="option3">
+                        <label class="form-check-label" for="gradRadio3">
                         60%~
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio4" value="option4">
+                        <label class="form-check-label" for="gradRadio4">
                         70%~
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio5" value="option5">
+                        <label class="form-check-label" for="gradRadio5">
                         80%~
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio6" value="option6">
+                        <label class="form-check-label" for="gradRadio6">
                         90%~
                         </label>
                         </div>
@@ -433,34 +416,34 @@
         <div class="conditions8">
             <div class="box">
                 <div class="line-header8">
-                <h1><i class="fa fa-map-marker-alt me-2"></i>大学の立地※開発中の機能です</h1>    
+                <h1><i class="fa fa-map-marker-alt me-2"></i>大学の立地</h1>    
                 </div>
                 <form>
-                    <div class="form-group3">
+                    <div class="form-group7">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="groupCheck33.1">
-                        <label class="form-check-label" for="groupCheck33.1">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck1">
+                        <label class="form-check-label" for="urbanCheck1">
                             都市部
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="groupCheck35">
-                        <label class="form-check-label" for="groupCheck35">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck2">
+                        <label class="form-check-label" for="urbanCheck2">
                             郊外
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="groupCheck35">
-                        <label class="form-check-label" for="groupCheck35">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck3">
+                        <label class="form-check-label" for="urbanCheck3">
                             町
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="groupCheck35">
-                        <label class="form-check-label" for="groupCheck35">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck4">
+                        <label class="form-check-label" for="urbanCheck4">
                             田舎
                         </label>
                         </div>
@@ -527,9 +510,143 @@
         <button class="cool-search-button" id="search-button">🔍 検索</button>
     </div>
 
+    <!-- Loading overlay -->
+    <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="text-align: center; color: white;">
+            <div class="loading-spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+            <div style="font-size: 18px; font-weight: bold;">検索中...</div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
     <script>
+        // 大学名入力フィールドと条件検索フィールドの干渉を防ぐ
+        const collegeNameInput = document.getElementById('college-name-input');
+        const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input');
+        const nameSearchButton = document.getElementById('name-search-button');
+        const conditionSearchButton = document.getElementById('search-button');
+
+        // 大学名入力時に条件検索をリセット・無効化
+        collegeNameInput.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                // 条件検索フィールドを無効化
+                conditionInputs.forEach(input => {
+                    input.disabled = true;
+                    input.style.opacity = '0.5';
+                });
+                conditionSearchButton.disabled = true;
+                conditionSearchButton.style.opacity = '0.5';
+                
+                // ドロップダウンボタンも無効化
+                const dropdownButton = document.getElementById('dropdownMenuButton');
+                dropdownButton.disabled = true;
+                dropdownButton.style.opacity = '0.5';
+            } else {
+                // 大学名が空の場合、条件検索を有効化
+                conditionInputs.forEach(input => {
+                    input.disabled = false;
+                    input.style.opacity = '1';
+                });
+                conditionSearchButton.disabled = false;
+                conditionSearchButton.style.opacity = '1';
+                
+                const dropdownButton = document.getElementById('dropdownMenuButton');
+                dropdownButton.disabled = false;
+                dropdownButton.style.opacity = '1';
+            }
+        });
+
+        // 条件検索フィールドに入力時に大学名検索を無効化
+        conditionInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const hasConditionInput = Array.from(conditionInputs).some(inp => {
+                    if (inp.type === 'radio' || inp.type === 'checkbox') {
+                        return inp.checked && inp.value !== 'option1'; // デフォルト値以外が選択されている
+                    }
+                    return inp.value && inp.value.trim() !== '';
+                });
+
+                if (hasConditionInput) {
+                    collegeNameInput.disabled = true;
+                    collegeNameInput.style.opacity = '0.5';
+                    nameSearchButton.disabled = true;
+                    nameSearchButton.style.opacity = '0.5';
+                } else {
+                    collegeNameInput.disabled = false;
+                    collegeNameInput.style.opacity = '1';
+                    nameSearchButton.disabled = false;
+                    nameSearchButton.style.opacity = '1';
+                }
+            });
+        });
+
+        // ドロップダウン選択時の処理
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedText = this.textContent.trim();
+                if (selectedText !== '指定しない' && selectedText !== '選択してください') {
+                    collegeNameInput.disabled = true;
+                    collegeNameInput.style.opacity = '0.5';
+                    nameSearchButton.disabled = true;
+                    nameSearchButton.style.opacity = '0.5';
+                } else {
+                    // 他の条件もチェック
+                    const hasOtherConditions = Array.from(conditionInputs).some(inp => {
+                        if (inp.type === 'radio' || inp.type === 'checkbox') {
+                            return inp.checked && inp.value !== 'option1';
+                        }
+                        return inp.value && inp.value.trim() !== '';
+                    });
+
+                    if (!hasOtherConditions) {
+                        collegeNameInput.disabled = false;
+                        collegeNameInput.style.opacity = '1';
+                        nameSearchButton.disabled = false;
+                        nameSearchButton.style.opacity = '1';
+                    }
+                }
+            });
+        });
+
+        // 大学名検索機能
+        document.getElementById('name-search-button').addEventListener('click', function () {
+            const collegeName = document.getElementById('college-name-input').value.trim();
+            if (collegeName) {
+                // 大学名検索用のクエリパラメータを作成
+                const queryString = new URLSearchParams({
+                    college_name: collegeName
+                }).toString();
+                
+                // 検索結果ページにリダイレクト
+                window.location.href = `/results?${queryString}`;
+            } else {
+                alert('大学名を入力してください');
+            }
+        });
+
+        // Enterキーでも検索できるようにする
+        document.getElementById('college-name-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                document.getElementById('name-search-button').click();
+            }
+        });
+
         document.getElementById('search-button').addEventListener('click', function () {
+            // Show loading overlay
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'flex';
+            
+            // Disable search button to prevent multiple clicks
+            const searchButton = document.getElementById('search-button');
+            searchButton.disabled = true;
+            searchButton.style.opacity = '0.6';
+
             const formData = {
                 state: document.getElementById('dropdownMenuButton').innerText.trim(),
                 privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
@@ -537,6 +654,8 @@
                 students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
                 gpa: document.querySelector('.form-group4 input:checked')?.nextElementSibling?.innerText.trim(),
                 Division: Array.from(document.querySelectorAll('.form-group5 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                graduation_rate: document.querySelector('.form-group6 input:checked')?.nextElementSibling?.innerText.trim(),
+                urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
                 
                 // majorの取得方法を修正
                 major: Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
@@ -573,6 +692,10 @@
 
             <li>
                 <a href="contact" style="text-decoration:none;">お問い合わせ</a>
+            </li>
+
+            <li>
+                <a href="terms" style="text-decoration:none;">利用規約</a>
             </li>
         </ul>    
     </div>

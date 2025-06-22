@@ -1,0 +1,202 @@
+<header class="main-header">
+  <div class="header-container">
+    <div class="header-left">
+      <a href="/" class="logo">College Finder</a>
+    </div>
+    <nav class="header-nav">
+      <ul class="nav-list">
+        <li><a href="/about" class="nav-link">College Finderについて</a></li>
+        <li><a href="/knowledge" class="nav-link">アメリカの大学を知る</a></li>
+        <li><a href="/canada" class="nav-link">カナダ版</a></li>
+        <li><a href="/australia" class="nav-link">オーストラリア版</a></li>
+        <li><a href="/newzealand" class="nav-link">ニュージーランド版</a></li>
+        <li><a href="/degreeseeking" class="nav-link">卒業生目指す留学</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .main-header {
+    background-color: #f5b342;
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 32px;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .header-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+  }
+
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 3px;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 1024px) {
+    .header-container {
+      padding: 0 15px;
+    }
+
+    .nav-list {
+      gap: 20px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      height: 60px;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+
+    .header-nav {
+      position: fixed;
+      top: 60px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 60px);
+      background-color: #f5b342;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .header-nav.active {
+      left: 0;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      padding: 20px;
+      gap: 0;
+    }
+
+    .nav-list li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-link {
+      display: block;
+      padding: 15px 0;
+      font-size: 16px;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-6px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-6px, -6px);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const headerNav = document.querySelector('.header-nav');
+
+    if (mobileMenuToggle && headerNav) {
+      mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.classList.toggle('active');
+        headerNav.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!mobileMenuToggle.contains(event.target) && !headerNav.contains(event.target)) {
+          mobileMenuToggle.classList.remove('active');
+          headerNav.classList.remove('active');
+        }
+      });
+
+      // Close menu when clicking on a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenuToggle.classList.remove('active');
+          headerNav.classList.remove('active');
+        });
+      });
+    }
+  });
+</script>

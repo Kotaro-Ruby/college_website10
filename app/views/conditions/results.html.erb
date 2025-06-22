@@ -1,79 +1,586 @@
-<% if @results.present? %>
-  <p style="width: 300px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 20px; margin-top: 20px; margin-left: 20px;
-  font-weight: bold; font-size: 22px; background-color: rgb(240, 177, 61);">
-    条件に一致する大学: <%= @results.count %> 校
-  </p>
-  <p style="margin-left: 20px;">*大学名をクリックすると詳細をご覧いただけます。</p>
-  ★本サイトの大学情報は、アメリカ教育省 College Scorecardのデータに基づいています。詳細については<a href="https://collegescorecard.ed.gov/" target="_blank">こちら</a>をご覧ください。
-  <div style="max-width: 1500px; margin: 0 auto; padding: 20px;">
-    <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; border: 1px solid #ddd;">
-      <thead>
-        <tr style="border-bottom: 2px solid #ccc;">
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">大学名</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">私立/州立</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">学生数</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">授業料</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">平均GPA</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">Division</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">州</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">卒業率</th>
-          <th style="padding: 15px; border-bottom: 2px solid #ddd;">立地</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% university_links = {
-            'ohio northern university' => ohio_northern_university_path,
-            'ohio state university' => ohio_state_university_path,
-            'florida state university' => florida_state_university_path,
-            'alabama state university' => alabama_state_university_path
-            #新たな大学の詳細ページを追加する場合は、1.ここに追加し、2.ルートを追加、3.controllerにアクションを追加
-        } %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検索結果 - College Finder</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <% @results.each_with_index do |result, index| %>
-    <tr style="background-color: <%= index.even? ? '#f9f9f9' : '#ffffff' %>; border-bottom: 1px solid #ddd;">
-      <td style="padding: 8px;">
-        
-          <a href="<%= conditions_path(result) %>" class="university-link">
-            <%= result.college %>
-          </a>
-        
-      </td>
-      <td style="padding: 30px;"><%= result.privateorpublic %></td>
-      <td style="padding: 30px;"><%= number_with_delimiter(result.students) %> 人</td>
-      <td style="padding: 30px;"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
-      <td style="padding: 30px;">
-        <%= result.GPA.nil? || result.GPA == "N/A" ? "N/A" : result.GPA %>
-      </td>
-      <td style="padding: 30px;"><%= result.Division %></td>
-      <td style="padding: 30px;"><%= result.state %></td>
-      <td style="padding: 30px;"><%= result.graduation_rate.present? ? "#{number_with_precision(result.graduation_rate * 100, precision: 1)}%" : "N/A" %></td>
-      <td style="padding: 30px;"><%= result.urbanicity || "N/A" %></td>
-    </tr>
-  <% end %>
-</tbody>
+    body {
+      font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+      padding-top: 70px;
+    }
 
-    </table>
+    .results-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0px 20px 40px 20px;
+    }
+
+    .results-header {
+      background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(240, 177, 61, 0.3);
+      border: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .results-count {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .results-info {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .sort-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .sort-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .sort-select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .sort-select:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .data-source {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border-left: 4px solid rgb(240, 177, 61);
+      box-shadow: 0 4px 15px rgba(240, 177, 61, 0.15);
+    }
+
+    .data-source a {
+      color: rgb(240, 177, 61);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .data-source a:hover {
+      text-decoration: underline;
+      color: rgb(220, 157, 41);
+    }
+
+    .results-table {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(240, 177, 61, 0.15);
+      border: 2px solid rgba(240, 177, 61, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+      color: white;
+    }
+
+    th {
+      padding: 18px 15px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    th.sortable:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    th.sortable::after {
+      content: '⇅';
+      position: absolute;
+      right: 8px;
+      opacity: 0.5;
+      font-size: 12px;
+    }
+
+    th.sort-asc::after {
+      content: '↑';
+      opacity: 1;
+    }
+
+    th.sort-desc::after {
+      content: '↓';
+      opacity: 1;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #f7fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+      padding: 20px 15px;
+      font-size: 15px;
+    }
+
+    .university-link {
+      color: rgb(240, 177, 61);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .university-link:hover {
+      color: rgb(220, 157, 41);
+      text-decoration: underline;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tag-private {
+      background: linear-gradient(135deg, rgb(255, 195, 85) 0%, rgb(240, 177, 61) 100%);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .tag-public {
+      background: linear-gradient(135deg, rgb(220, 157, 41) 0%, rgb(200, 137, 21) 100%);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .tag-profit {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .no-results {
+      background: white;
+      border-radius: 15px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .no-results-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      color: #9ca3af;
+    }
+
+    .no-results h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #4b5563;
+    }
+
+    .no-results p {
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(240, 177, 61, 0.4);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .results-container {
+        padding: 20px 10px;
+      }
+
+      .results-header {
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .results-count {
+        font-size: 22px;
+      }
+
+      .results-info {
+        font-size: 14px;
+      }
+
+      .sort-container {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .sort-select {
+        flex: 1;
+        max-width: 200px;
+      }
+
+      /* Mobile Card Layout */
+      .results-table {
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        margin-bottom: 15px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: 15px;
+        position: relative;
+        border: none;
+      }
+
+      tbody tr:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      td {
+        padding: 8px 0;
+        text-align: left;
+        position: relative;
+        padding-left: 35%;
+        border: none;
+      }
+
+      td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 30%;
+        font-weight: 600;
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      td:first-child {
+        padding-left: 0;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      td:first-child:before {
+        display: none;
+      }
+
+      .university-link {
+        font-size: 16px;
+      }
+
+      .tag {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+
+      .data-source {
+        font-size: 13px;
+        padding: 12px 15px;
+      }
+
+      .no-results {
+        padding: 40px 20px;
+      }
+
+      .no-results h2 {
+        font-size: 20px;
+      }
+
+      .back-button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* Tablet Styles */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .results-container {
+        padding: 30px 20px;
+      }
+
+      th {
+        padding: 12px 10px;
+        font-size: 12px;
+      }
+
+      td {
+        padding: 15px 10px;
+        font-size: 14px;
+      }
+
+      .results-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        min-width: 900px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="results-container">
+    <% if @results.present? %>
+      <div class="results-header">
+        <div class="header-content">
+          <div>
+            <div class="results-count">
+              条件に一致する大学: <%= @results.count %> 校
+            </div>
+            <div class="results-info">
+              *大学名をクリックすると詳細をご覧いただけます
+            </div>
+          </div>
+          <div class="sort-container">
+            <span class="sort-label">並べ替え:</span>
+            <select class="sort-select" id="sortSelect">
+              <option value="">選択してください</option>
+              <option value="name-asc">大学名 (A-Z)</option>
+              <option value="name-desc">大学名 (Z-A)</option>
+              <option value="students-asc">学生数 (少ない順)</option>
+              <option value="students-desc">学生数 (多い順)</option>
+              <option value="tuition-asc">授業料 (安い順)</option>
+              <option value="tuition-desc">授業料 (高い順)</option>
+              <option value="gpa-asc">GPA (低い順)</option>
+              <option value="gpa-desc">GPA (高い順)</option>
+              <option value="graduation-asc">卒業率 (低い順)</option>
+              <option value="graduation-desc">卒業率 (高い順)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-source">
+        <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+        本サイトの大学情報は、アメリカ教育省 College Scorecardのデータに基づいています。
+        詳細については<a href="https://collegescorecard.ed.gov/" target="_blank">こちら</a>をご覧ください。
+      </div>
+
+      <div class="results-table">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th class="sortable" data-sort="name">大学名</th>
+              <th>区分</th>
+              <th class="sortable" data-sort="students">学生数</th>
+              <th class="sortable" data-sort="tuition">授業料</th>
+              <th class="sortable" data-sort="gpa">平均GPA</th>
+              <th>Division</th>
+              <th>州</th>
+              <th class="sortable" data-sort="graduation">卒業率</th>
+              <th>立地</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @results.each_with_index do |result, index| %>
+              <tr data-name="<%= result.college %>" 
+                  data-students="<%= result.students || 0 %>"
+                  data-tuition="<%= result.tuition || 0 %>"
+                  data-gpa="<%= result.GPA || 0 %>"
+                  data-graduation="<%= result.graduation_rate || 0 %>">
+                <td>
+                  <a href="<%= conditions_path(result) %>" class="university-link">
+                    <%= result.college %>
+                  </a>
+                </td>
+                <td data-label="区分">
+                  <% if result.privateorpublic == "私立" %>
+                    <span class="tag tag-private">私立</span>
+                  <% elsif result.privateorpublic == "州立" %>
+                    <span class="tag tag-public">州立</span>
+                  <% else %>
+                    <span class="tag tag-profit">営利</span>
+                  <% end %>
+                </td>
+                <td data-label="学生数"><%= number_with_delimiter(result.students) %> 人</td>
+                <td data-label="授業料"><%= number_to_currency(result.tuition, unit: "$", precision: 0) %></td>
+                <td data-label="平均GPA">
+                  <%= result.GPA.nil? || result.GPA == "N/A" || result.GPA == 0.0 ? "N/A" : number_with_precision(result.GPA, precision: 2) %>
+                </td>
+                <td data-label="Division"><%= result.Division || "N/A" %></td>
+                <td data-label="州"><%= result.state ? result.state.gsub(/\s*\(.*?\)/, '') : "N/A" %></td>
+                <td data-label="卒業率"><%= result.graduation_rate.present? ? "#{number_with_precision(result.graduation_rate * 100, precision: 1)}%" : "N/A" %></td>
+                <td data-label="立地"><%= result.urbanicity || "N/A" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="no-results">
+        <div class="no-results-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h2>該当する大学が見つかりませんでした</h2>
+        <p>条件を変更して、もう一度お試しください。</p>
+        <a href="javascript:history.back()" class="back-button">
+          条件を変更する
+        </a>
+      </div>
+    <% end %>
   </div>
-  <% else %>
-  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; margin-top: 50px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); max-width: 600px; margin-left: auto; margin-right: auto;">
-    <div style="width: 50px; height: 50px; margin-bottom: 15px;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 100%; height: 100%; color: #FF6347;">
-        <path fill-rule="evenodd" d="M12 2a10 10 0 100 20 10 10 0 000-20zm-.75 6a.75.75 0 011.5 0v4a.75.75 0 01-1.5 0V8zm.75 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-      </svg>
-    </div>
-    <h2 style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">該当する大学が見つかりませんでした</h2>
-    <p style="font-size: 14px; color: #666; margin-bottom: 20px;">条件を変更して、もう一度お試しください。</p>
-    <a href="javascript:history.back()" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-      条件を変更する
-    </a>
-  </div>
-<% end %>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const table = document.getElementById('resultsTable');
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const headers = table.querySelectorAll('th.sortable');
+      const sortSelect = document.getElementById('sortSelect');
+      
+      let currentSort = { column: null, direction: null };
 
+      // ソート関数
+      function sortTable(column, direction) {
+        const sortedRows = rows.sort((a, b) => {
+          let aValue = a.getAttribute(`data-${column}`);
+          let bValue = b.getAttribute(`data-${column}`);
+          
+          // 数値として比較
+          if (column === 'students' || column === 'tuition' || column === 'gpa' || column === 'graduation') {
+            aValue = parseFloat(aValue) || 0;
+            bValue = parseFloat(bValue) || 0;
+          }
+          
+          // 文字列として比較
+          if (typeof aValue === 'string') {
+            aValue = aValue.toLowerCase();
+            bValue = bValue.toLowerCase();
+          }
+          
+          if (direction === 'asc') {
+            return aValue > bValue ? 1 : -1;
+          } else {
+            return aValue < bValue ? 1 : -1;
+          }
+        });
+        
+        // テーブルを再構築
+        tbody.innerHTML = '';
+        sortedRows.forEach(row => tbody.appendChild(row));
+        
+        // ヘッダーのクラスを更新（デスクトップのみ）
+        if (window.innerWidth > 768) {
+          headers.forEach(header => {
+            header.classList.remove('sort-asc', 'sort-desc');
+            if (header.getAttribute('data-sort') === column) {
+              header.classList.add(`sort-${direction}`);
+            }
+          });
+        }
+        
+        currentSort = { column, direction };
+      }
 
+      // ヘッダークリックイベント
+      headers.forEach(header => {
+        header.addEventListener('click', function() {
+          const column = this.getAttribute('data-sort');
+          let direction = 'asc';
+          
+          if (currentSort.column === column && currentSort.direction === 'asc') {
+            direction = 'desc';
+          }
+          
+          sortTable(column, direction);
+          
+          // ドロップダウンも更新
+          sortSelect.value = `${column}-${direction}`;
+        });
+      });
 
-
-
-
-
-
+      // ドロップダウン変更イベント
+      sortSelect.addEventListener('change', function() {
+        const value = this.value;
+        if (value) {
+          const [column, direction] = value.split('-');
+          sortTable(column, direction);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

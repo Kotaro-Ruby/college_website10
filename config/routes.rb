@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get "contact" => "home#contact"
 
+  get "terms" => "home#terms"
+
   get '/results', to: 'conditions#results'
 
   get "canada" => "home#canada"

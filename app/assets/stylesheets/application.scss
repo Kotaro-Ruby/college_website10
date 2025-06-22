@@ -13,17 +13,29 @@
   @import "about";
 
  /*以下全体設定*/
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
   body {
     background-color: #f2f2f2;  /* 薄いグレー */
     font-family: "Avenir Next";
+    margin: 0;
   }
 
   .main {
     padding:30px 80px;
-    height:1700px;
+    min-height: calc(100vh - 70px - 210px); /* ヘッダー高さ - フッター高さを引く */
   }
 
-  /*以下header設定*/
+  /*以下header設定 - 古いヘッダースタイル（shared/_headerに移行）*/
+  /*
   .header-logo {
     float: left;
     font-size: 36px;
@@ -46,12 +58,13 @@
   }
 
   .header-list a{
-      font-weight: normal;   /* 通常時の太さを標準に設定。なくても大丈夫 */
+      font-weight: normal;
   }
 
   .header-list a:hover {
-      font-weight: bold;     /* カーソルを合わせた時に太字にする */
+      font-weight: bold;
   }
+  */
 
 
 /*以下copy-container設定*/
@@ -76,6 +89,114 @@
     justify-content: center;
     align-items: center;
     height: 80px;
+  }
+
+  /* 大学名検索機能のスタイル */
+  .college-name-search {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .search-header h3 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .search-input-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .college-search-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .college-search-input:focus {
+    outline: none;
+    border-color: white;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  .name-search-btn {
+    background: linear-gradient(135deg, rgb(220, 157, 41) 0%, rgb(200, 137, 21) 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 157, 41, 0.4);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .name-search-btn:hover {
+    background: linear-gradient(135deg, rgb(200, 137, 21) 0%, rgb(180, 117, 1) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 157, 41, 0.6);
+  }
+
+  .name-search-btn:disabled {
+    background: linear-gradient(135deg, #bbb 0%, #999 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .name-search-btn:disabled:hover {
+    background: linear-gradient(135deg, #bbb 0%, #999 100%);
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .search-separator {
+    text-align: center;
+    position: relative;
+    margin: 25px 0 15px 0;
+  }
+
+  .search-separator span {
+    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+    padding: 8px 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
+  }
+
+  .search-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+    z-index: 0;
   }
 
 /*以下condition設定*/
@@ -368,12 +489,21 @@ grid-template-columns:1fr;
 
 .footer {
   background-color: rgb(240, 177, 61);
-  height: 170px;
+  height: 210px;
   padding:40px;
+  margin: 0;
+  position: relative;
+  bottom: 0;
 }
 
 .footer-list{
-  float:right;
+  float: right;
+  margin-top: -20px;
+}
+
+.footer-list ul {
+  margin: 0;
+  padding: 0;
 }
 
 .footer-list li{

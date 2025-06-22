@@ -3,6 +3,33 @@ class ConditionsController < ApplicationController
   def results
     scope = Condition.all
 
+    # 大学名検索の処理
+    if params[:college_name].present?
+      college_name = params[:college_name].strip.downcase
+      
+      # 複数の検索パターンを試す
+      search_patterns = [
+        college_name,                           # 完全一致
+        college_name.gsub(/[^a-z0-9\s]/, ''),   # 特殊文字を削除
+        college_name.gsub(/\s+/, ''),           # スペースを削除
+        college_name.split.join('%')            # 単語間に%を挿入
+      ]
+      
+      # 各パターンでOR検索
+      conditions = search_patterns.map do |pattern|
+        "LOWER(REPLACE(college, ' ', '')) LIKE ?"
+      end.join(' OR ')
+      
+      search_values = search_patterns.map { |pattern| "%#{pattern.gsub(/\s+/, '')}%" }
+      
+      scope = scope.where(conditions, *search_values)
+      @results = scope
+      Rails.logger.debug("College name search: #{college_name}")
+      Rails.logger.debug("Search patterns: #{search_patterns}")
+      Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
+      return
+    end
+
     # State の処理
     if params[:state].blank? || params[:state] == '選択してください'
       if request.xhr?  # Ajaxリクエストの場合
@@ -91,19 +118,21 @@ class ConditionsController < ApplicationController
   end
 
   # Urbanicity の処理
-  if params[:urbanicity].present? && params[:urbanicity] != '指定しない'
-    scope = scope.where(urbanicity: params[:urbanicity])
+  if params[:urbanicity].present?
+    urbanicities = params[:urbanicity].split(',').map(&:strip)
+    if urbanicities.any?
+      scope = scope.where(urbanicity: urbanicities)
+      Rails.logger.debug("Filtering by urbanicities: #{urbanicities.inspect}")
+    end
   end
 
 # Graduation Rate の処理
-if params[:graduation_rate].present?
-  grad_range = parse_graduation_rate_range(params[:graduation_rate])
-
-  if grad_range
-    # 小数(0.0 ~ 1.0)としてフィルタリング
-    scope = scope.where('graduation_rate BETWEEN ? AND ?', grad_range[0], grad_range[1])
-  else
-    Rails.logger.debug("Invalid graduation rate range: #{params[:graduation_rate]}")
+if params[:graduation_rate].present? && params[:graduation_rate] != '指定しない'
+  # パラメータから数値を抽出 (例: "50%~" → 50)
+  if params[:graduation_rate].match?(/(\d+)%~/)
+    min_rate = params[:graduation_rate].match(/(\d+)%~/)[1].to_f / 100.0
+    scope = scope.where('graduation_rate >= ?', min_rate)
+    Rails.logger.debug("Filtering by graduation rate >= #{min_rate}")
   end
 end
 

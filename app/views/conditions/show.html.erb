@@ -194,14 +194,14 @@
     </div>
 
     <div class="details-section">
-    <div class="detail-card"><h2>州</h2><p><%= @college.state.gsub(/\s*\(.*?\)/, '') %></p></div>
+    <div class="detail-card"><h2>州</h2><p><%= @college.state ? @college.state.gsub(/\s*\(.*?\)/, '') : "N/A" %></p></div>
         <div class="detail-card"><h2>私立/州立</h2><p><%= @college.privateorpublic %></p></div>
       <div class="detail-card"><h2>学生数</h2><p><%= @college.students %></p></div>
-      <div class="detail-card"><h2>合格率</h2><p><%= (@college.acceptance_rate * 100).round %>%</p></div>
-      <div class="detail-card"><h2>授業料</h2><p>$<%= number_with_delimiter(@college.tuition) %></p></div>
-      <div class="detail-card"><h2>平均GPA</h2><p><%= @college.GPA %></p></div>
-      <div class="detail-card"><h2>NCAA Division</h2><p><%= @college.Division %></p></div>
-      <div class="detail-card"><h2>卒業率</h2><p><%= (@college.graduation_rate * 100).round %>%</p></div>
+      <div class="detail-card"><h2>合格率</h2><p><%= @college.acceptance_rate ? "#{(@college.acceptance_rate * 100).round}%" : "N/A" %></p></div>
+      <div class="detail-card"><h2>授業料</h2><p><%= @college.tuition ? "$#{number_with_delimiter(@college.tuition)}" : "N/A" %></p></div>
+      <div class="detail-card"><h2>平均GPA</h2><p><%= @college.GPA || "N/A" %></p></div>
+      <div class="detail-card"><h2>NCAA Division</h2><p><%= @college.Division || "N/A" %></p></div>
+      <div class="detail-card"><h2>卒業率</h2><p><%= @college.graduation_rate ? "#{(@college.graduation_rate * 100).round}%" : "N/A" %></p></div>
     </div>
 
     <div class="ranking-activities-box">
