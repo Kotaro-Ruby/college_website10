@@ -23,47 +23,54 @@ class ConditionsController < ApplicationController
       search_values = search_patterns.map { |pattern| "%#{pattern.gsub(/\s+/, '')}%" }
       
       scope = scope.where(conditions, *search_values)
-      @results = scope
       Rails.logger.debug("College name search: #{college_name}")
       Rails.logger.debug("Search patterns: #{search_patterns}")
-      Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
-      return
+      Rails.logger.debug("Generated SQL Query: #{scope.to_sql}")
+      
+      # 大学名検索でも最後のページネーション処理を通すため、returnを削除
     end
 
-    # State の処理
-    if params[:state].blank? || params[:state] == '選択してください'
-      if request.xhr?  # Ajaxリクエストの場合
-        render json: { error: '州を選択してください' }, status: :unprocessable_entity and return
-      else
-        flash.now[:error] = '州を選択してください'
-        render :index and return
+    # State の処理（大学名検索の場合はスキップ）
+    unless params[:college_name].present?
+      if params[:state].blank? || params[:state] == '選択してください'
+        if request.xhr?  # Ajaxリクエストの場合
+          render json: { error: '州を選択してください' }, status: :unprocessable_entity and return
+        else
+          flash.now[:error] = '州を選択してください'
+          render :index and return
+        end
+      elsif params[:state] != '指定しない'
+        state = params[:state]
+        scope = scope.where('state = ?', state)
       end
-    elsif params[:state] != '指定しない'
-      state = params[:state]
-      scope = scope.where('state = ?', state)
     end
 
-    #privateorpublicの処理
+    # privateorpublicの処理（大学名検索の場合はスキップ）
+    unless params[:college_name].present?
       if params[:privateorpublic].present? && params[:privateorpublic] !='指定しない'
         privateorpublic = params[:privateorpublic]
         scope = scope.where('privateorpublic = ?', privateorpublic)
       end
+    end
 
-    # Tuition の処理
+    # Tuition の処理（大学名検索の場合はスキップ）
+    unless params[:college_name].present?
       if params[:tuition].present?
         tuition_range = parse_tuition_range(params[:tuition])
         if tuition_range
           Rails.logger.debug("Tuition range is valid: #{tuition_range.inspect}")
     # tuition_range[1] が無限大の場合、100000（または適切な最大金額）に設定する
-      max_tuition = tuition_range[1] == Float::INFINITY ? 999_999 : tuition_range[1]
+          max_tuition = tuition_range[1] == Float::INFINITY ? 999_999 : tuition_range[1]
     # 範囲が有効な場合のみ、範囲を適用
-      scope = scope.where('tuition BETWEEN ? AND ?', tuition_range[0], max_tuition)
-    else
-      Rails.logger.debug("Invalid tuition range: #{params[:tuition]}")
+          scope = scope.where('tuition BETWEEN ? AND ?', tuition_range[0], max_tuition)
+        else
+          Rails.logger.debug("Invalid tuition range: #{params[:tuition]}")
         end
       end
+    end
 
-    # Students の処理
+    # Students の処理（大学名検索の場合はスキップ）
+    unless params[:college_name].present?
       if params[:students].present?
         students_ranges = parse_students_range(params[:students])  # 複数の範囲を処理
 
@@ -75,66 +82,66 @@ class ConditionsController < ApplicationController
         end
       end
 
-  # GPAの処理
-  if params[:gpa].present?
-    gpa_range = parse_gpa_range(params[:gpa])
-    if gpa_range
-      Rails.logger.debug("GPA range is valid: #{gpa_range.inspect}")
-      # 範囲内のデータとnil（N/A）を検索に含める
-      scope = scope.where('GPA BETWEEN ? AND ?', gpa_range[0], gpa_range[1]).or(scope.where(GPA: nil))
-      Rails.logger.debug("Query for GPA: #{scope.to_sql}")
-    else
-      Rails.logger.debug("Invalid GPA range: #{params[:gpa]}")
-      flash[:error] = "Invalid GPA range selected. Please select a valid range (e.g., 0.0~5.0)."
+      # GPAの処理
+      if params[:gpa].present?
+        gpa_range = parse_gpa_range(params[:gpa])
+        if gpa_range
+          Rails.logger.debug("GPA range is valid: #{gpa_range.inspect}")
+          # 範囲内のデータとnil（N/A）を検索に含める
+          scope = scope.where('GPA BETWEEN ? AND ?', gpa_range[0], gpa_range[1]).or(scope.where(GPA: nil))
+          Rails.logger.debug("Query for GPA: #{scope.to_sql}")
+        else
+          Rails.logger.debug("Invalid GPA range: #{params[:gpa]}")
+          flash[:error] = "Invalid GPA range selected. Please select a valid range (e.g., 0.0~5.0)."
+        end
+      else
+        # GPAが指定されていない場合、N/A（nil）も含める
+        scope = scope.or(scope.where(GPA: nil))
+        Rails.logger.debug("Query for GPA N/A: #{scope.to_sql}")
+      end
+
+      # Division の処理
+      if params[:Division].present?
+        divisions = params[:Division].split(',') # 選択肢がカンマ区切りで渡されることを想定
+        if divisions.include?('すべて')
+          # 「すべて」が含まれている場合、Division の条件を無視
+          Rails.logger.debug("All Divisions selected, no filtering applied.")
+        else
+          # OR 条件で抽出する
+          scope = scope.where('Division IN (?)', divisions)
+          Rails.logger.debug("Filtering by Divisions: #{divisions.inspect}")
+        end
+      end
+
+      # Major の処理
+      if params[:major].present? && params[:major] != '未選択'
+        # カンマで分割して配列に変換
+        majors = params[:major].split(',').map(&:strip)
+        scope = scope.where('major IN (?)', majors)
+        Rails.logger.debug("Filtering by majors: #{majors.inspect}")
+      else
+        Rails.logger.debug("No major selected, no filtering applied.")
+      end
+
+      # Urbanicity の処理
+      if params[:urbanicity].present?
+        urbanicities = params[:urbanicity].split(',').map(&:strip)
+        if urbanicities.any?
+          scope = scope.where(urbanicity: urbanicities)
+          Rails.logger.debug("Filtering by urbanicities: #{urbanicities.inspect}")
+        end
+      end
+
+      # Graduation Rate の処理
+      if params[:graduation_rate].present? && params[:graduation_rate] != '指定しない'
+        # パラメータから数値を抽出 (例: "50%~" → 50)
+        if params[:graduation_rate].match?(/(\d+)%~/)
+          min_rate = params[:graduation_rate].match(/(\d+)%~/)[1].to_f / 100.0
+          scope = scope.where('graduation_rate >= ?', min_rate)
+          Rails.logger.debug("Filtering by graduation rate >= #{min_rate}")
+        end
+      end
     end
-  else
-    # GPAが指定されていない場合、N/A（nil）も含める
-    scope = scope.or(scope.where(GPA: nil))
-    Rails.logger.debug("Query for GPA N/A: #{scope.to_sql}")
-  end
-
-      
-  # Division の処理
-  if params[:Division].present?
-    divisions = params[:Division].split(',') # 選択肢がカンマ区切りで渡されることを想定
-    if divisions.include?('すべて')
-      # 「すべて」が含まれている場合、Division の条件を無視
-      Rails.logger.debug("All Divisions selected, no filtering applied.")
-    else
-      # OR 条件で抽出する
-      scope = scope.where('Division IN (?)', divisions)
-      Rails.logger.debug("Filtering by Divisions: #{divisions.inspect}")
-    end
-  end
-
-  # Major の処理
-  if params[:major].present? && params[:major] != '未選択'
-    # カンマで分割して配列に変換
-    majors = params[:major].split(',').map(&:strip)
-    scope = scope.where('major IN (?)', majors)
-    Rails.logger.debug("Filtering by majors: #{majors.inspect}")
-  else
-    Rails.logger.debug("No major selected, no filtering applied.")
-  end
-
-  # Urbanicity の処理
-  if params[:urbanicity].present?
-    urbanicities = params[:urbanicity].split(',').map(&:strip)
-    if urbanicities.any?
-      scope = scope.where(urbanicity: urbanicities)
-      Rails.logger.debug("Filtering by urbanicities: #{urbanicities.inspect}")
-    end
-  end
-
-# Graduation Rate の処理
-if params[:graduation_rate].present? && params[:graduation_rate] != '指定しない'
-  # パラメータから数値を抽出 (例: "50%~" → 50)
-  if params[:graduation_rate].match?(/(\d+)%~/)
-    min_rate = params[:graduation_rate].match(/(\d+)%~/)[1].to_f / 100.0
-    scope = scope.where('graduation_rate >= ?', min_rate)
-    Rails.logger.debug("Filtering by graduation rate >= #{min_rate}")
-  end
-end
 
 
 
