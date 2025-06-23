@@ -511,20 +511,6 @@
         <button class="cool-search-button" id="search-button"><i class="fa fa-search"></i> 検索</button>
     </div>
 
-    <!-- Loading overlay -->
-    <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center;">
-        <div style="text-align: center; color: white;">
-            <div class="loading-spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
-            <div style="font-size: 18px; font-weight: bold;">検索中...</div>
-        </div>
-    </div>
-
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 
     <script>
         // 大学名入力フィールドと条件検索フィールドの干渉を防ぐ
@@ -639,14 +625,6 @@
         });
 
         document.getElementById('search-button').addEventListener('click', function () {
-            // Show loading overlay
-            const loadingOverlay = document.getElementById('loading-overlay');
-            loadingOverlay.style.display = 'flex';
-            
-            // Disable search button to prevent multiple clicks
-            const searchButton = document.getElementById('search-button');
-            searchButton.disabled = true;
-            searchButton.style.opacity = '0.6';
 
             const formData = {
                 state: document.getElementById('dropdownMenuButton').innerText.trim(),
