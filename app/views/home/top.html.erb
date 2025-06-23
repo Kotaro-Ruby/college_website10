@@ -1,6 +1,4 @@
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
@@ -35,86 +33,221 @@
                 <div class="line-header1">
                 <h1><i class="fa fa-globe-americas me-2"></i>州</h1>
                 </div>      
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    選択してください
+                <div class="custom-dropdown">
+                    <button class="custom-dropdown-btn" id="dropdownMenuButton" type="button">
+                        選択してください
+                        <span class="dropdown-arrow">▼</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#">指定しない</a></li>
-                        <li><a class="dropdown-item" href="#">アラバマ州(AL)</a></li>
-                        <li><a class="dropdown-item" href="#">アラスカ州(AK)</a></li>
-                        <li><a class="dropdown-item" href="#">アリゾナ州(AZ)</a></li>
-                        <li><a class="dropdown-item" href="#">アーカンソー州(AR)</a></li>
-                        <li><a class="dropdown-item" href="#">カリフォルニア州(CA)</a></li>
-                        <li><a class="dropdown-item" href="#">コロラド州(CO)</a></li>
-                        <li><a class="dropdown-item" href="#">コネチカット州(CT)</a></li>
-                        <li><a class="dropdown-item" href="#">デラウェア州(DE)</a></li>
-                        <li><a class="dropdown-item" href="#">コロンビア特別区(DC)</a></li>
-                        <li><a class="dropdown-item" href="#">フロリダ州(FL)</a></li>
-                        <li><a class="dropdown-item" href="#">ジョージア州(GA)</a></li>
-                        <li><a class="dropdown-item" href="#">ハワイ州(HI)</a></li>
-                        <li><a class="dropdown-item" href="#">アイダホ州(ID)</a></li>
-                        <li><a class="dropdown-item" href="#">イリノイ州(IL)</a></li>
-                        <li><a class="dropdown-item" href="#">インディアナ州(IN)</a></li>
-                        <li><a class="dropdown-item" href="#">アイオワ州(IA)</a></li>
-                        <li><a class="dropdown-item" href="#">カンザス州(KS)</a></li>
-                        <li><a class="dropdown-item" href="#">ケンタッキー州(KY)</a></li>
-                        <li><a class="dropdown-item" href="#">ルイジアナ州(LA)</a></li>
-                        <li><a class="dropdown-item" href="#">メイン州(ME)</a></li>
-                        <li><a class="dropdown-item" href="#">メリーランド州(MD)</a></li>
-                        <li><a class="dropdown-item" href="#">マサチューセッツ州(MA)</a></li>
-                        <li><a class="dropdown-item" href="#">ミシガン州(MI)</a></li>
-                        <li><a class="dropdown-item" href="#">ミネソタ州(MN)</a></li>
-                        <li><a class="dropdown-item" href="#">ミシシッピ州(MS)</a></li>
-                        <li><a class="dropdown-item" href="#">ミズーリ州(MO)</a></li>
-                        <li><a class="dropdown-item" href="#">モンタナ州(MT)</a></li>
-                        <li><a class="dropdown-item" href="#">ネブラスカ州(NE)</a></li>
-                        <li><a class="dropdown-item" href="#">ネバダ州(NV)</a></li>
-                        <li><a class="dropdown-item" href="#">ニューハンプシャー州(NH)</a></li>
-                        <li><a class="dropdown-item" href="#">ニュージャージー州(NJ)</a></li>
-                        <li><a class="dropdown-item" href="#">ニューメキシコ州(NM)</a></li>
-                        <li><a class="dropdown-item" href="#">ニューヨーク州(NY)</a></li>
-                        <li><a class="dropdown-item" href="#">ノースカロライナ州(NC)</a></li>
-                        <li><a class="dropdown-item" href="#">ノースダコタ州(ND)</a></li>
-                        <li><a class="dropdown-item" href="#">オハイオ州(OH)</a></li>
-                        <li><a class="dropdown-item" href="#">オクラホマ州(OK)</a></li>
-                        <li><a class="dropdown-item" href="#">オレゴン州(OR)</a></li>
-                        <li><a class="dropdown-item" href="#">ペンシルベニア州(PA)</a></li>
-                        <li><a class="dropdown-item" href="#">ロードアイランド州(RI)</a></li>
-                        <li><a class="dropdown-item" href="#">サウスカロライナ州(SC)</a></li>
-                        <li><a class="dropdown-item" href="#">サウスダコタ州(SD)</a></li>
-                        <li><a class="dropdown-item" href="#">テネシー州(TN)</a></li>
-                        <li><a class="dropdown-item" href="#">テキサス州(TX)</a></li>
-                        <li><a class="dropdown-item" href="#">ユタ州(UT)</a></li>
-                        <li><a class="dropdown-item" href="#">バーモント州(VT)</a></li>
-                        <li><a class="dropdown-item" href="#">バージニア州(VA)</a></li>
-                        <li><a class="dropdown-item" href="#">ワシントン州(WA)</a></li>
-                        <li><a class="dropdown-item" href="#">ウェストバージニア州(WV)</a></li>
-                        <li><a class="dropdown-item" href="#">ウィスコンシン州(WI)</a></li>
-                        <li><a class="dropdown-item" href="#">ワイオミング州(WY)</a></li>
-                    </ul>    
+                    <div class="custom-dropdown-menu" id="dropdownMenu">
+                        <div class="dropdown-item" data-value="指定しない">指定しない</div>
+                        <div class="dropdown-item" data-value="アラバマ州(AL)">アラバマ州(AL)</div>
+                        <div class="dropdown-item" data-value="アラスカ州(AK)">アラスカ州(AK)</div>
+                        <div class="dropdown-item" data-value="アリゾナ州(AZ)">アリゾナ州(AZ)</div>
+                        <div class="dropdown-item" data-value="アーカンソー州(AR)">アーカンソー州(AR)</div>
+                        <div class="dropdown-item" data-value="カリフォルニア州(CA)">カリフォルニア州(CA)</div>
+                        <div class="dropdown-item" data-value="コロラド州(CO)">コロラド州(CO)</div>
+                        <div class="dropdown-item" data-value="コネチカット州(CT)">コネチカット州(CT)</div>
+                        <div class="dropdown-item" data-value="デラウェア州(DE)">デラウェア州(DE)</div>
+                        <div class="dropdown-item" data-value="コロンビア特別区(DC)">コロンビア特別区(DC)</div>
+                        <div class="dropdown-item" data-value="フロリダ州(FL)">フロリダ州(FL)</div>
+                        <div class="dropdown-item" data-value="ジョージア州(GA)">ジョージア州(GA)</div>
+                        <div class="dropdown-item" data-value="ハワイ州(HI)">ハワイ州(HI)</div>
+                        <div class="dropdown-item" data-value="アイダホ州(ID)">アイダホ州(ID)</div>
+                        <div class="dropdown-item" data-value="イリノイ州(IL)">イリノイ州(IL)</div>
+                        <div class="dropdown-item" data-value="インディアナ州(IN)">インディアナ州(IN)</div>
+                        <div class="dropdown-item" data-value="アイオワ州(IA)">アイオワ州(IA)</div>
+                        <div class="dropdown-item" data-value="カンザス州(KS)">カンザス州(KS)</div>
+                        <div class="dropdown-item" data-value="ケンタッキー州(KY)">ケンタッキー州(KY)</div>
+                        <div class="dropdown-item" data-value="ルイジアナ州(LA)">ルイジアナ州(LA)</div>
+                        <div class="dropdown-item" data-value="メイン州(ME)">メイン州(ME)</div>
+                        <div class="dropdown-item" data-value="メリーランド州(MD)">メリーランド州(MD)</div>
+                        <div class="dropdown-item" data-value="マサチューセッツ州(MA)">マサチューセッツ州(MA)</div>
+                        <div class="dropdown-item" data-value="ミシガン州(MI)">ミシガン州(MI)</div>
+                        <div class="dropdown-item" data-value="ミネソタ州(MN)">ミネソタ州(MN)</div>
+                        <div class="dropdown-item" data-value="ミシシッピ州(MS)">ミシシッピ州(MS)</div>
+                        <div class="dropdown-item" data-value="ミズーリ州(MO)">ミズーリ州(MO)</div>
+                        <div class="dropdown-item" data-value="モンタナ州(MT)">モンタナ州(MT)</div>
+                        <div class="dropdown-item" data-value="ネブラスカ州(NE)">ネブラスカ州(NE)</div>
+                        <div class="dropdown-item" data-value="ネバダ州(NV)">ネバダ州(NV)</div>
+                        <div class="dropdown-item" data-value="ニューハンプシャー州(NH)">ニューハンプシャー州(NH)</div>
+                        <div class="dropdown-item" data-value="ニュージャージー州(NJ)">ニュージャージー州(NJ)</div>
+                        <div class="dropdown-item" data-value="ニューメキシコ州(NM)">ニューメキシコ州(NM)</div>
+                        <div class="dropdown-item" data-value="ニューヨーク州(NY)">ニューヨーク州(NY)</div>
+                        <div class="dropdown-item" data-value="ノースカロライナ州(NC)">ノースカロライナ州(NC)</div>
+                        <div class="dropdown-item" data-value="ノースダコタ州(ND)">ノースダコタ州(ND)</div>
+                        <div class="dropdown-item" data-value="オハイオ州(OH)">オハイオ州(OH)</div>
+                        <div class="dropdown-item" data-value="オクラホマ州(OK)">オクラホマ州(OK)</div>
+                        <div class="dropdown-item" data-value="オレゴン州(OR)">オレゴン州(OR)</div>
+                        <div class="dropdown-item" data-value="ペンシルベニア州(PA)">ペンシルベニア州(PA)</div>
+                        <div class="dropdown-item" data-value="ロードアイランド州(RI)">ロードアイランド州(RI)</div>
+                        <div class="dropdown-item" data-value="サウスカロライナ州(SC)">サウスカロライナ州(SC)</div>
+                        <div class="dropdown-item" data-value="サウスダコタ州(SD)">サウスダコタ州(SD)</div>
+                        <div class="dropdown-item" data-value="テネシー州(TN)">テネシー州(TN)</div>
+                        <div class="dropdown-item" data-value="テキサス州(TX)">テキサス州(TX)</div>
+                        <div class="dropdown-item" data-value="ユタ州(UT)">ユタ州(UT)</div>
+                        <div class="dropdown-item" data-value="バーモント州(VT)">バーモント州(VT)</div>
+                        <div class="dropdown-item" data-value="バージニア州(VA)">バージニア州(VA)</div>
+                        <div class="dropdown-item" data-value="ワシントン州(WA)">ワシントン州(WA)</div>
+                        <div class="dropdown-item" data-value="ウェストバージニア州(WV)">ウェストバージニア州(WV)</div>
+                        <div class="dropdown-item" data-value="ウィスコンシン州(WI)">ウィスコンシン州(WI)</div>
+                        <div class="dropdown-item" data-value="ワイオミング州(WY)">ワイオミング州(WY)</div>
+                    </div>    
                 </div>                   
             </div>
         </div>
+        <style>
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .custom-dropdown-btn {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            color: #495057;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .custom-dropdown-btn:hover {
+            border-color: #adb5bd;
+            background: #e9ecef;
+        }
+
+        .custom-dropdown-btn:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+
+        .custom-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-dropdown-menu.dropup {
+            top: auto;
+            bottom: 100%;
+            border-top: 2px solid #dee2e6;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-dropdown.active .custom-dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f8f9fa;
+            color: #495057;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        </style>
+
         <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ドロップダウンアイテムがクリックされたときの処理
-            document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();  // リンクのデフォルトの動作を無効にする
-                const selectedText = this.textContent;  // クリックされたアイテムのテキストを取得
-                document.getElementById('dropdownMenuButton').innerText = selectedText;  // ボタンにテキストを設定
-            });
-            });
-            // スクロール時にドロップダウンを閉じる
-            let dropdownButton = document.getElementById('dropdownMenuButton');
-            let dropdownMenu = document.querySelector('.dropdown-menu');
+            const dropdownBtn = document.getElementById('dropdownMenuButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const dropdownContainer = document.querySelector('.custom-dropdown');
 
-            window.addEventListener('scroll', function () {
-                if (dropdownMenu.classList.contains('show')) {
-                    // ドロップダウンが開いている場合は閉じる
-                    dropdownButton.click(); // Bootstrapのトグルボタンをトリガー
+            // ドロップダウンの位置を調整する関数
+            function adjustDropdownPosition() {
+                const rect = dropdownContainer.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const dropdownHeight = 300; // max-height値
+                
+                // 下方向に十分なスペースがあるかチェック
+                const spaceBelow = windowHeight - rect.bottom;
+                const spaceAbove = rect.top;
+                
+                if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+                    // 下にスペースがなく、上にスペースがある場合は上方向に表示
+                    dropdownMenu.classList.add('dropup');
+                } else {
+                    // 通常は下方向に表示
+                    dropdownMenu.classList.remove('dropup');
                 }
+            }
+
+            // ドロップダウンボタンクリック処理
+            dropdownBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                if (dropdownContainer.classList.contains('active')) {
+                    dropdownContainer.classList.remove('active');
+                } else {
+                    adjustDropdownPosition();
+                    dropdownContainer.classList.add('active');
+                }
+            });
+
+            // ドロップダウンアイテムクリック処理
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedText = this.textContent.trim();
+                    const btnText = dropdownBtn.querySelector('span') ? 
+                        dropdownBtn.firstChild.textContent.trim() : dropdownBtn.textContent.trim();
+                    
+                    // ボタンテキストを更新（矢印は保持）
+                    dropdownBtn.innerHTML = selectedText + ' <span class="dropdown-arrow">▼</span>';
+                    
+                    // ドロップダウンを閉じる
+                    dropdownContainer.classList.remove('active');
+                });
+            });
+
+            // 外部クリックで閉じる
+            document.addEventListener('click', function(e) {
+                if (!dropdownContainer.contains(e.target)) {
+                    dropdownContainer.classList.remove('active');
+                }
+            });
+
+            // スクロール時にドロップダウンを閉じる
+            window.addEventListener('scroll', function () {
+                dropdownContainer.classList.remove('active');
             });
         });
         </script>

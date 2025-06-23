@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_23_082422) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_23_120744) do
+  create_table "active_storage_tables", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conditions", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", null: false

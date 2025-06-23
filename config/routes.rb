@@ -28,6 +28,12 @@ Rails.application.routes.draw do
   # User registration routes
   get "register" => "users#new"
   post "register" => "users#create"
+  
+  # ユーザープロフィール関連
+  get '/profile', to: 'users#show'
+  get '/profile/edit', to: 'users#edit'
+  patch '/profile', to: 'users#update'
+  delete '/profile', to: 'users#destroy'
 
   get '/results', to: 'conditions#results'
 

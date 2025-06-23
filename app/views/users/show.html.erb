@@ -1,0 +1,314 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <span class="avatar-icon">👤</span>
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-username"><%= @user.username %></h1>
+      <p class="profile-email">ID: <%= @user.id %></p>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="profile-section">
+      <h2>アカウント情報</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>ユーザー名</label>
+          <span><%= @user.username %></span>
+        </div>
+        <div class="info-item">
+          <label>ユーザーID</label>
+          <span><%= @user.id %></span>
+        </div>
+        <div class="info-item">
+          <label>登録日</label>
+          <span><%= @user.created_at.strftime("%Y年%m月%d日") %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <a href="/profile/edit" class="btn btn-primary">
+        <i class="fas fa-edit"></i>
+        プロフィールを編集
+      </a>
+      <button type="button" class="btn btn-danger" onclick="showDeleteModal()">
+        <i class="fas fa-trash-alt"></i>
+        アカウントを削除
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 削除確認モーダル -->
+<div id="deleteModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>アカウント削除の確認</h3>
+    </div>
+    <div class="modal-body">
+      <p>本当にアカウントを削除しますか？</p>
+      <p class="warning-text">この操作は取り消すことができません。すべてのデータが失われます。</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" onclick="hideDeleteModal()">キャンセル</button>
+      <%= form_with url: profile_path, method: :delete, local: true, class: "delete-form" do |f| %>
+        <%= f.submit "削除する", class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.profile-image-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-username {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-email {
+  color: #718096;
+  font-size: 16px;
+  margin: 0;
+}
+
+.profile-content {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-section {
+  padding: 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 24px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.info-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  font-family: 'Inter', sans-serif;
+}
+
+.info-item span {
+  font-size: 16px;
+  color: #2d3748;
+  padding: 12px 16px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.profile-actions {
+  padding: 32px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  background: #f5b342;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #e09c2a;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: #e53e3e;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c53030;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e0;
+}
+
+/* モーダル */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  padding: 24px 24px 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.modal-body {
+  padding: 16px 24px;
+}
+
+.modal-body p {
+  margin: 0 0 12px 0;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.warning-text {
+  color: #e53e3e !important;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.modal-footer {
+  padding: 0 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.delete-form {
+  margin: 0;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+  
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  .profile-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    justify-content: center;
+  }
+}
+</style>
+
+<script>
+function showDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+}
+
+// モーダル外クリックで閉じる
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    hideDeleteModal();
+  }
+});
+</script>
