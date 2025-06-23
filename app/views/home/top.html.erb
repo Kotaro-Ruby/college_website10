@@ -38,6 +38,7 @@
                         選択してください
                         <span class="dropdown-arrow">▼</span>
                     </button>
+                    <input type="hidden" id="selectedState" value="選択してください">
                     <div class="custom-dropdown-menu" id="dropdownMenu">
                         <div class="dropdown-item" data-value="指定しない">指定しない</div>
                         <div class="dropdown-item" data-value="アラバマ州(AL)">アラバマ州(AL)</div>
@@ -227,14 +228,43 @@
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     const selectedText = this.textContent.trim();
-                    const btnText = dropdownBtn.querySelector('span') ? 
-                        dropdownBtn.firstChild.textContent.trim() : dropdownBtn.textContent.trim();
+                    const selectedValue = this.getAttribute('data-value');
                     
                     // ボタンテキストを更新（矢印は保持）
                     dropdownBtn.innerHTML = selectedText + ' <span class="dropdown-arrow">▼</span>';
                     
+                    // 隠し要素に選択された値を保存
+                    document.getElementById('selectedState').value = selectedValue;
+                    
                     // ドロップダウンを閉じる
                     dropdownContainer.classList.remove('active');
+                    
+                    // 相互排他処理: 州が選択された場合は大学名検索を無効化
+                    const collegeNameInput = document.getElementById('college-name-input');
+                    const nameSearchButton = document.getElementById('name-search-button');
+                    
+                    if (selectedText !== '指定しない' && selectedText !== '選択してください') {
+                        collegeNameInput.disabled = true;
+                        collegeNameInput.style.opacity = '0.5';
+                        nameSearchButton.disabled = true;
+                        nameSearchButton.style.opacity = '0.5';
+                    } else {
+                        // 他の条件入力がない場合は大学名検索を有効化
+                        const conditionInputs = document.querySelectorAll('.conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input');
+                        const hasOtherConditions = Array.from(conditionInputs).some(inp => {
+                            if (inp.type === 'radio' || inp.type === 'checkbox') {
+                                return inp.checked && inp.value !== 'option1';
+                            }
+                            return inp.value && inp.value.trim() !== '';
+                        });
+                        
+                        if (!hasOtherConditions) {
+                            collegeNameInput.disabled = false;
+                            collegeNameInput.style.opacity = '1';
+                            nameSearchButton.disabled = false;
+                            nameSearchButton.style.opacity = '1';
+                        }
+                    }
                 });
             });
 
@@ -706,33 +736,6 @@
             });
         });
 
-        // ドロップダウン選択時の処理
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const selectedText = this.textContent.trim();
-                if (selectedText !== '指定しない' && selectedText !== '選択してください') {
-                    collegeNameInput.disabled = true;
-                    collegeNameInput.style.opacity = '0.5';
-                    nameSearchButton.disabled = true;
-                    nameSearchButton.style.opacity = '0.5';
-                } else {
-                    // 他の条件もチェック
-                    const hasOtherConditions = Array.from(conditionInputs).some(inp => {
-                        if (inp.type === 'radio' || inp.type === 'checkbox') {
-                            return inp.checked && inp.value !== 'option1';
-                        }
-                        return inp.value && inp.value.trim() !== '';
-                    });
-
-                    if (!hasOtherConditions) {
-                        collegeNameInput.disabled = false;
-                        collegeNameInput.style.opacity = '1';
-                        nameSearchButton.disabled = false;
-                        nameSearchButton.style.opacity = '1';
-                    }
-                }
-            });
-        });
 
         // 大学名検索機能
         document.getElementById('name-search-button').addEventListener('click', function () {
@@ -759,8 +762,11 @@
 
         document.getElementById('search-button').addEventListener('click', function () {
 
+            // 隠し要素から選択された州の値を取得
+            const selectedStateValue = document.getElementById('selectedState').value;
+
             const formData = {
-                state: document.getElementById('dropdownMenuButton').innerText.trim(),
+                state: selectedStateValue,
                 privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
                 // 無効化されたフィールドは除外
                 tuition: '指定しない', // 現在データなしのため
