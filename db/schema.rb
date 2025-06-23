@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_23_120744) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_23_162431) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,7 +36,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_120744) do
     t.string "school_type"
     t.float "graduation_rate"
     t.string "slug"
+    t.text "comment"
     t.index ["slug"], name: "index_conditions_on_slug", unique: true
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "condition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condition_id"], name: "index_favorites_on_condition_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,5 +54,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_120744) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "comparison_list"
   end
+
+  add_foreign_key "favorites", "conditions"
+  add_foreign_key "favorites", "users"
 end

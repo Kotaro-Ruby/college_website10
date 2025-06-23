@@ -38,6 +38,13 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     redirect_to root_path, notice: 'アカウントが削除されました。'
   end
+  
+  def check_username
+    username = params[:username]
+    available = !User.exists?(username: username)
+    
+    render json: { available: available }
+  end
 
   private
   

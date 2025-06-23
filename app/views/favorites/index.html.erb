@@ -1,0 +1,392 @@
+<div class="favorites-container">
+  <div class="favorites-header">
+    <h1 class="page-title">
+      <i class="fas fa-heart"></i>
+      お気に入りの大学
+    </h1>
+    <p class="page-subtitle">あなたがお気に入りに追加した大学の一覧です</p>
+  </div>
+
+  <% if @favorites.any? %>
+    <div class="favorites-grid">
+      <% @favorites.each do |college| %>
+        <div class="favorite-card">
+          <div class="card-header">
+            <h3 class="college-name">
+              <a href="<%= conditions_path(college) %>" class="college-link">
+                <%= college.college %>
+              </a>
+            </h3>
+            <button class="remove-favorite-btn" data-condition-id="<%= college.id %>">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          
+          <div class="college-details">
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span><%= college.city %>, <%= college.state.gsub(/\s*\(.*?\)/, '') if college.state %></span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-users"></i>
+              <span><%= number_with_delimiter(college.students) %> 人</span>
+            </div>
+            <% if college.acceptance_rate %>
+              <div class="detail-item">
+                <i class="fas fa-percentage"></i>
+                <span>合格率 <%= (college.acceptance_rate * 100).round %>%</span>
+              </div>
+            <% end %>
+          </div>
+          
+          <% if college.comment.present? %>
+            <div class="college-comment">
+              <%= truncate(college.comment, length: 120) %>
+            </div>
+          <% end %>
+          
+          <div class="card-actions">
+            <a href="<%= conditions_path(college) %>" class="view-details-btn">
+              詳細を見る
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-heart-broken"></i>
+      </div>
+      <h2>お気に入りの大学がありません</h2>
+      <p>気になる大学を見つけたら、詳細ページでお気に入りに追加してみましょう。</p>
+      <a href="/" class="search-btn">
+        <i class="fas fa-search"></i>
+        大学を探す
+      </a>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .favorites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .favorites-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .page-title i {
+    color: #ff6b6b;
+    margin-right: 12px;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+  }
+
+  .favorite-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .favorite-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .college-name {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    flex: 1;
+    margin-right: 12px;
+  }
+
+  .college-link {
+    color: #fb923c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .college-link:hover {
+    color: #f97316;
+  }
+
+  .remove-favorite-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .remove-favorite-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+  }
+
+  .college-details {
+    margin-bottom: 16px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  .detail-item i {
+    color: #fb923c;
+    width: 16px;
+  }
+
+  .college-comment {
+    background: #fef7ed;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #9a3412;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    border-left: 3px solid #fdba74;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .view-details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #fdba74, #fb923c);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .view-details-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .empty-icon {
+    font-size: 4rem;
+    color: #d1d5db;
+    margin-bottom: 24px;
+  }
+
+  .empty-state h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 12px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .empty-state p {
+    color: #6b7280;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .search-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #fdba74, #fb923c);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.4);
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 768px) {
+    .favorites-container {
+      padding: 20px 15px;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .favorites-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .favorite-card {
+      padding: 20px;
+    }
+
+    .empty-state {
+      padding: 60px 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // お気に入り削除ボタンのイベントリスナー
+    document.querySelectorAll('.remove-favorite-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const conditionId = this.getAttribute('data-condition-id');
+        const card = this.closest('.favorite-card');
+        
+        if (confirm('この大学をお気に入りから削除しますか？')) {
+          // ボタンを無効化
+          this.disabled = true;
+          
+          fetch('/favorites', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+              condition_id: conditionId
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              // カードをフェードアウトして削除
+              card.style.transition = 'all 0.3s ease';
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(-20px)';
+              
+              setTimeout(() => {
+                card.remove();
+                
+                // お気に入りが0件になった場合、ページをリロード
+                if (document.querySelectorAll('.favorite-card').length === 0) {
+                  location.reload();
+                }
+              }, 300);
+              
+              // showNotification(data.message, 'success');
+            } else {
+              showNotification(data.message, 'error');
+              this.disabled = false;
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            showNotification('エラーが発生しました', 'error');
+            this.disabled = false;
+          });
+        }
+      });
+    });
+    
+    // 通知メッセージ表示
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 10000;
+        font-family: 'Inter', sans-serif;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // フェードイン
+      setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateY(0)';
+      }, 100);
+      
+      // 3秒後に削除
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+  });
+</script>

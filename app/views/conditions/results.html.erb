@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>検索結果 - College Finder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -452,6 +453,89 @@
         margin: 0 5px;
       }
 
+      /* アクションボタン */
+      .action-column {
+        width: 100px;
+        text-align: center;
+      }
+
+      .action-buttons {
+        text-align: center !important;
+        padding: 8px !important;
+        vertical-align: middle !important;
+      }
+
+      .button-group {
+        display: flex !important;
+        gap: 6px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-height: 32px !important;
+        width: 100% !important;
+      }
+
+      .action-btn {
+        width: 32px !important;
+        height: 32px !important;
+        border: none !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        font-size: 14px !important;
+        position: relative !important;
+        min-width: 32px !important;
+        flex-shrink: 0 !important;
+      }
+
+      .favorite-btn-small {
+        background: #ff6b6b !important;
+        color: white !important;
+        border: 2px solid #ff6b6b !important;
+      }
+
+      .favorite-btn-small:hover {
+        background: rgba(255, 107, 107, 0.2);
+        border-color: rgba(255, 107, 107, 0.5);
+        transform: scale(1.1);
+      }
+
+      .favorite-btn-small.favorited {
+        background: #ff6b6b;
+        color: white;
+        border-color: #ff6b6b;
+      }
+
+      .favorite-btn-small.favorited:hover {
+        background: #ff5252;
+        border-color: #ff5252;
+      }
+
+      .compare-btn-small {
+        background: #4a9eff !important;
+        color: white !important;
+        border: 2px solid #4a9eff !important;
+      }
+
+      .compare-btn-small:hover {
+        background: rgba(74, 158, 255, 0.2);
+        border-color: rgba(74, 158, 255, 0.5);
+        transform: scale(1.1);
+      }
+
+      .compare-btn-small.added {
+        background: #4a9eff;
+        color: white;
+        border-color: #4a9eff;
+      }
+
+      .compare-btn-small.added:hover {
+        background: #3b82f6;
+        border-color: #3b82f6;
+      }
+
       /* Mobile Card Layout */
       .results-table {
         border-radius: 0;
@@ -521,6 +605,22 @@
         padding: 3px 8px;
       }
 
+      /* モバイル用アクションボタン */
+      .action-buttons {
+        padding-left: 0 !important;
+        padding-top: 12px !important;
+      }
+      
+      .action-buttons:before {
+        display: none !important;
+      }
+      
+      .button-group {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      }
+
       .data-source {
         font-size: 13px;
         padding: 12px 15px;
@@ -564,6 +664,134 @@
       table {
         min-width: 900px;
       }
+    }
+
+    /* Login Modal Styles */
+    .login-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-modal {
+      background: white;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .login-modal-header {
+      background: linear-gradient(135deg, #f0b13d 0%, #ff8c42 100%);
+      color: white;
+      padding: 20px 24px;
+      position: relative;
+      text-align: center;
+    }
+
+    .login-modal-close {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+
+    .login-modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .login-modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .login-modal-body {
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .login-modal-icon {
+      width: 64px;
+      height: 64px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+    }
+
+    .login-modal-message {
+      font-size: 16px;
+      color: #333;
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+
+    .login-modal-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .login-modal-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      min-width: 120px;
+    }
+
+    .login-modal-btn-primary {
+      background: linear-gradient(135deg, #f0b13d 0%, #ff8c42 100%);
+      color: white;
+    }
+
+    .login-modal-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(240, 177, 61, 0.4);
+    }
+
+    .login-modal-btn-secondary {
+      background: white;
+      color: #f0b13d;
+      border: 2px solid #f0b13d;
+    }
+
+    .login-modal-btn-secondary:hover {
+      background: #f0b13d;
+      color: white;
     }
   </style>
 </head>
@@ -626,6 +854,7 @@
               <th>立地</th>
               <th class="sortable" data-sort="gpa">GPA</th>
               <th>NCAA</th>
+              <th class="action-column">アクション</th>
             </tr>
           </thead>
           <tbody>
@@ -658,6 +887,66 @@
                 <td data-label="立地"><%= result.urbanicity || "N/A" %></td>
                 <td data-label="GPA"><%= result.GPA || "N/A" %></td>
                 <td data-label="NCAA"><%= result.Division || "N/A" %></td>
+                <td class="action-buttons" data-label="アクション" onclick="event.stopPropagation();" style="text-align: center; padding: 8px;">
+                  <div class="button-group" style="display: flex; gap: 6px; justify-content: center; align-items: center;">
+                    <% if logged_in? %>
+                      <% if current_user.favorite?(result) %>
+                        <button class="action-btn favorite-btn-small favorited" 
+                                data-condition-id="<%= result.id %>" 
+                                title="お気に入り済み"
+                                onclick="handleFavoriteClick(this, event)"
+                                style="width: 32px; height: 32px; border-radius: 50%; background: #ff6b6b; color: white; border: 2px solid #ff6b6b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                          <i class="fas fa-heart"></i>
+                        </button>
+                      <% else %>
+                        <button class="action-btn favorite-btn-small" 
+                                data-condition-id="<%= result.id %>" 
+                                title="お気に入りに追加"
+                                onclick="handleFavoriteClick(this, event)"
+                                style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 107, 107, 0.1); color: rgba(255, 107, 107, 0.6); border: 2px solid rgba(255, 107, 107, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                          <i class="fas fa-heart"></i>
+                        </button>
+                      <% end %>
+                    <% else %>
+                      <button class="action-btn favorite-btn-small" 
+                              data-condition-id="<%= result.id %>" 
+                              title="お気に入りに追加（ログインが必要）"
+                              onclick="handleFavoriteClick(this, event)"
+                              style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 107, 107, 0.1); color: rgba(255, 107, 107, 0.6); border: 2px solid rgba(255, 107, 107, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                        <i class="fas fa-heart"></i>
+                      </button>
+                    <% end %>
+                    
+                    <% if logged_in? %>
+                      <% comparison_list = current_user.comparison_list || [] %>
+                      <% if comparison_list.include?(result.id) %>
+                        <button class="action-btn compare-btn-small added" 
+                                data-condition-id="<%= result.id %>" 
+                                title="比較リストに追加済み"
+                                onclick="handleCompareClick(this, event)"
+                                style="width: 32px; height: 32px; border-radius: 50%; background: #4a9eff; color: white; border: 2px solid #4a9eff; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                          <i class="fas fa-balance-scale"></i>
+                        </button>
+                      <% else %>
+                        <button class="action-btn compare-btn-small" 
+                                data-condition-id="<%= result.id %>" 
+                                title="比較リストに追加"
+                                onclick="handleCompareClick(this, event)"
+                                style="width: 32px; height: 32px; border-radius: 50%; background: rgba(74, 158, 255, 0.1); color: rgba(74, 158, 255, 0.6); border: 2px solid rgba(74, 158, 255, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                          <i class="fas fa-balance-scale"></i>
+                        </button>
+                      <% end %>
+                    <% else %>
+                      <button class="action-btn compare-btn-small" 
+                              data-condition-id="<%= result.id %>" 
+                              title="比較リストに追加（ログインが必要）"
+                              onclick="handleCompareClick(this, event)"
+                              style="width: 32px; height: 32px; border-radius: 50%; background: rgba(74, 158, 255, 0.1); color: rgba(74, 158, 255, 0.6); border: 2px solid rgba(74, 158, 255, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                        <i class="fas fa-balance-scale"></i>
+                      </button>
+                    <% end %>
+                  </div>
+                </td>
               </tr>
             <% end %>
           </tbody>
@@ -720,7 +1009,174 @@
     <% end %>
   </div>
 
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal-overlay">
+    <div class="login-modal">
+      <div class="login-modal-header">
+        <h3 class="login-modal-title">ログインが必要です</h3>
+        <button class="login-modal-close" onclick="closeLoginModal()">&times;</button>
+      </div>
+      <div class="login-modal-body">
+        <div class="login-modal-icon">
+          <i id="modalIcon" class="fas fa-heart"></i>
+        </div>
+        <p id="modalMessage" class="login-modal-message">
+          お気に入り機能を利用するには、ログインまたは新規登録が必要です。
+        </p>
+        <div class="login-modal-buttons">
+          <a href="/login" class="login-modal-btn login-modal-btn-primary">
+            <i class="fas fa-sign-in-alt"></i>
+            ログイン
+          </a>
+          <a href="/register" class="login-modal-btn login-modal-btn-secondary">
+            <i class="fas fa-user-plus"></i>
+            新規登録
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Modal functions
+    function showLoginModal(type = 'favorite') {
+      const modal = document.getElementById('loginModal');
+      const icon = document.getElementById('modalIcon');
+      const message = document.getElementById('modalMessage');
+      
+      if (type === 'compare') {
+        icon.className = 'fas fa-balance-scale';
+        message.textContent = '比較機能を利用するには、ログインまたは新規登録が必要です。';
+      } else {
+        icon.className = 'fas fa-heart';
+        message.textContent = 'お気に入り機能を利用するには、ログインまたは新規登録が必要です。';
+      }
+      
+      modal.style.display = 'flex';
+    }
+    
+    function closeLoginModal() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+    
+    // Close modal when clicking overlay
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLoginModal();
+      }
+    });
+
+    // インライン関数定義
+    function handleFavoriteClick(button, event) {
+      event.stopPropagation();
+      console.log('Favorite button clicked!');
+      
+      const conditionId = button.getAttribute('data-condition-id');
+      const isLoggedIn = <%= logged_in? ? 'true' : 'false' %>;
+      console.log('Condition ID:', conditionId, 'Logged in:', isLoggedIn);
+      
+      if (!isLoggedIn) {
+        showLoginModal('favorite');
+        return;
+      }
+      
+      const isFavorited = button.classList.contains('favorited');
+      const url = '/favorites';
+      const method = isFavorited ? 'DELETE' : 'POST';
+      
+      button.disabled = true;
+      
+      fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+          condition_id: conditionId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          if (data.favorited) {
+            button.classList.add('favorited');
+            button.title = 'お気に入り済み';
+            button.style.background = '#ff6b6b';
+            button.style.color = 'white';
+            button.style.borderColor = '#ff6b6b';
+          } else {
+            button.classList.remove('favorited');
+            button.title = 'お気に入りに追加';
+            button.style.background = 'rgba(255, 107, 107, 0.1)';
+            button.style.color = 'rgba(255, 107, 107, 0.6)';
+            button.style.borderColor = 'rgba(255, 107, 107, 0.2)';
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        button.disabled = false;
+      });
+    }
+    
+    function handleCompareClick(button, event) {
+      event.stopPropagation();
+      console.log('Compare button clicked!');
+      
+      const conditionId = button.getAttribute('data-condition-id');
+      const isLoggedIn = <%= logged_in? ? 'true' : 'false' %>;
+      const isAdded = button.classList.contains('added');
+      console.log('Condition ID:', conditionId, 'Logged in:', isLoggedIn, 'Is added:', isAdded);
+      
+      if (!isLoggedIn) {
+        showLoginModal('compare');
+        return;
+      }
+      
+      const url = '/compare';
+      const method = isAdded ? 'DELETE' : 'POST';
+      
+      button.disabled = true;
+      
+      fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+          condition_id: conditionId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          if (method === 'POST') {
+            button.classList.add('added');
+            button.title = '比較リストに追加済み';
+            button.style.background = '#4a9eff';
+            button.style.color = 'white';
+            button.style.borderColor = '#4a9eff';
+          } else {
+            button.classList.remove('added');
+            button.title = '比較リストに追加';
+            button.style.background = 'rgba(74, 158, 255, 0.1)';
+            button.style.color = 'rgba(74, 158, 255, 0.6)';
+            button.style.borderColor = 'rgba(74, 158, 255, 0.2)';
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        button.disabled = false;
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const table = document.getElementById('resultsTable');
       const tbody = table.querySelector('tbody');
@@ -807,6 +1263,109 @@
           const [column, direction] = value.split('-');
           sortTable(column, direction);
         }
+      });
+
+      // お気に入りボタンのイベントリスナー
+      console.log('Setting up favorite buttons...');
+      const favoriteButtons = document.querySelectorAll('.favorite-btn-small');
+      console.log('Found favorite buttons:', favoriteButtons.length);
+      
+      favoriteButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          console.log('Favorite button clicked!');
+          e.stopPropagation();
+          const conditionId = this.getAttribute('data-condition-id');
+          const isLoggedIn = <%= logged_in? ? 'true' : 'false' %>;
+          console.log('Condition ID:', conditionId, 'Logged in:', isLoggedIn);
+          
+          if (!isLoggedIn) {
+            showLoginModal('favorite');
+            return;
+          }
+          
+          const isFavorited = this.classList.contains('favorited');
+          const url = '/favorites';
+          const method = isFavorited ? 'DELETE' : 'POST';
+          
+          this.disabled = true;
+          
+          fetch(url, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+              condition_id: conditionId
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              if (data.favorited) {
+                this.classList.add('favorited');
+                this.title = 'お気に入り済み';
+              } else {
+                this.classList.remove('favorited');
+                this.title = 'お気に入りに追加';
+              }
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          })
+          .finally(() => {
+            this.disabled = false;
+          });
+        });
+      });
+
+      // 比較ボタンのイベントリスナー
+      console.log('Setting up compare buttons...');
+      const compareButtons = document.querySelectorAll('.compare-btn-small');
+      console.log('Found compare buttons:', compareButtons.length);
+      
+      compareButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          console.log('Compare button clicked!');
+          e.stopPropagation();
+          const conditionId = this.getAttribute('data-condition-id');
+          const isAdded = this.classList.contains('added');
+          console.log('Condition ID:', conditionId, 'Is added:', isAdded);
+          const url = '/compare';
+          const method = isAdded ? 'DELETE' : 'POST';
+          
+          this.disabled = true;
+          
+          fetch(url, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+              condition_id: conditionId
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              if (method === 'POST') {
+                this.classList.add('added');
+                this.title = '比較リストに追加済み';
+              } else {
+                this.classList.remove('added');
+                this.title = '比較リストに追加';
+              }
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          })
+          .finally(() => {
+            this.disabled = false;
+          });
+        });
       });
     });
   </script>

@@ -465,11 +465,15 @@
     }
 
     .logo-text {
-      font-size: 22px;
+      font-size: 20px;
+    }
+
+    .logo-version {
+      display: none;
     }
 
     .logo-icon {
-      font-size: 28px;
+      font-size: 26px;
     }
 
     .header-nav {
@@ -483,6 +487,7 @@
       overflow-y: auto;
       justify-content: flex-start;
       padding: 20px 0;
+      z-index: 999;
     }
 
     .header-nav.active {
@@ -554,13 +559,69 @@
       padding: 4px 8px;
     }
 
+    .user-name {
+      display: none;
+    }
+
     .auth-buttons {
-      gap: 8px;
+      gap: 6px;
     }
 
     .login-btn, .register-btn {
-      font-size: 13px;
-      padding: 6px 12px;
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-container {
+      height: 65px;
+      padding: 0 12px;
+      gap: 10px;
+    }
+
+    .logo {
+      gap: 10px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+    }
+
+    .logo-icon {
+      font-size: 24px;
+    }
+
+    .header-nav {
+      top: 65px;
+      height: calc(100vh - 65px);
+    }
+
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+    }
+
+    .avatar-icon {
+      font-size: 12px;
+    }
+
+    .auth-buttons {
+      gap: 4px;
+    }
+
+    .login-btn, .register-btn {
+      font-size: 11px;
+      padding: 5px 8px;
+    }
+
+    .register-btn {
+      border-radius: 15px;
+    }
+
+    .mobile-menu-toggle span {
+      width: 20px;
+      height: 2px;
     }
   }
 </style>

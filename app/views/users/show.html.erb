@@ -29,6 +29,14 @@
     </div>
 
     <div class="profile-actions">
+      <a href="/favorites" class="btn btn-favorites">
+        <i class="fas fa-heart"></i>
+        お気に入りの大学
+      </a>
+      <a href="/compare" class="btn btn-compare">
+        <i class="fas fa-balance-scale"></i>
+        大学比較リスト
+      </a>
       <a href="/profile/edit" class="btn btn-primary">
         <i class="fas fa-edit"></i>
         プロフィールを編集
@@ -162,9 +170,9 @@
 
 .profile-actions {
   padding: 32px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  flex-wrap: wrap;
 }
 
 .btn {
@@ -189,6 +197,26 @@
 
 .btn-primary:hover {
   background: #e09c2a;
+  transform: translateY(-1px);
+}
+
+.btn-favorites {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+}
+
+.btn-favorites:hover {
+  background: linear-gradient(135deg, #ff5252, #e53e3e);
+  transform: translateY(-1px);
+}
+
+.btn-compare {
+  background: linear-gradient(135deg, #4a9eff, #3b82f6);
+  color: white;
+}
+
+.btn-compare:hover {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   transform: translateY(-1px);
 }
 
@@ -287,7 +315,7 @@
   }
   
   .profile-actions {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
   
   .btn {

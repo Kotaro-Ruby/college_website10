@@ -28,12 +28,24 @@ Rails.application.routes.draw do
   # User registration routes
   get "register" => "users#new"
   post "register" => "users#create"
+  post "check_username" => "users#check_username"
   
   # ユーザープロフィール関連
   get '/profile', to: 'users#show'
   get '/profile/edit', to: 'users#edit'
   patch '/profile', to: 'users#update'
   delete '/profile', to: 'users#destroy'
+  
+  # お気に入り関連
+  get '/favorites', to: 'favorites#index'
+  post '/favorites', to: 'favorites#create'
+  delete '/favorites', to: 'favorites#destroy'
+  
+  # 比較機能関連
+  get '/compare', to: 'comparisons#index'
+  post '/compare', to: 'comparisons#create'
+  delete '/compare', to: 'comparisons#destroy'
+  delete '/compare/clear', to: 'comparisons#clear'
 
   get '/results', to: 'conditions#results'
 
