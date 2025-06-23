@@ -660,6 +660,227 @@ grid-template-columns:1fr;
   border-radius: 5px;  // 丸みを帯びた角
 }
 
+/* レスポンシブデザイン - モバイル対応 */
+@media (max-width: 768px) {
+  /* メインコンテナ */
+  .main {
+    padding: 15px 20px;
+  }
+
+  /* コピーコンテナ */
+  .copy-container {
+    padding: 20px 15px;
+  }
+
+  .copy-container h1 {
+    font-size: 36px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .copy-container h2 {
+    font-size: 20px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  /* 大学名検索 */
+  .college-name-search {
+    margin: 20px auto;
+    padding: 20px 15px;
+  }
+
+  .search-header h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .search-input-container {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .college-search-input,
+  .name-search-btn {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  /* グリッドレイアウト */
+  .contents {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* ボックス */
+  .box {
+    height: auto;
+    min-height: 280px;
+    padding: 15px;
+    padding-right: 25px;
+  }
+
+  .box1 {
+    height: auto;
+    min-height: 450px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  /* フォーム要素 */
+  .form-group1,
+  .form-group2,
+  .form-group3,
+  .form-group4,
+  .form-group5,
+  .form-group6,
+  .form-group7 {
+    margin-top: 50px;
+  }
+
+  /* ツールチップ */
+  .tooltip-container1,
+  .tooltip-container2,
+  .tooltip-container3,
+  .tooltip-container4,
+  .tooltip-container5,
+  .tooltip-container6 {
+    right: 20px;
+  }
+
+  .tooltip-content {
+    width: 200px;
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+
+  /* ラインヘッダー */
+  [class^="line-header"] h1,
+  .line-header7-major h1 {
+    font-size: 18px;
+  }
+
+  /* 専攻選択肢 */
+  .options {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 50px;
+  }
+
+  /* ドロップダウン */
+  .dropdown-menu {
+    max-height: 250px;
+  }
+
+  /* 検索ボタン */
+  .cool-search-button {
+    padding: 10px 40px;
+    font-size: 14px;
+    min-width: 160px;
+  }
+
+  .search-button-container {
+    margin: 40px 0;
+  }
+
+  /* フッター */
+  .footer {
+    height: auto;
+    padding: 30px 20px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+    float: none;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .footer-list {
+    float: none;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .footer-list li {
+    padding-bottom: 15px;
+  }
+}
+
+/* タブレット対応 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main {
+    padding: 20px 40px;
+  }
+
+  .copy-container h1 {
+    font-size: 50px;
+  }
+
+  .copy-container h2 {
+    font-size: 24px;
+  }
+
+  .contents {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .college-name-search {
+    max-width: 700px;
+  }
+}
+
+/* 小さなモバイル対応 */
+@media (max-width: 480px) {
+  .copy-container h1 {
+    font-size: 28px;
+  }
+
+  .copy-container h2 {
+    font-size: 16px;
+  }
+
+  .college-name-search {
+    margin: 15px auto;
+    padding: 15px 10px;
+  }
+
+  .search-header h3 {
+    font-size: 16px;
+  }
+
+  .college-search-input,
+  .name-search-btn {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .box,
+  .box1 {
+    padding: 12px;
+  }
+
+  [class^="line-header"] h1,
+  .line-header7-major h1 {
+    font-size: 16px;
+  }
+
+  .tooltip-content {
+    width: 180px;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .cool-search-button {
+    padding: 8px 30px;
+    font-size: 13px;
+    min-width: 140px;
+  }
+}
+
 
 
 
