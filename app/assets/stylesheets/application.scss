@@ -881,6 +881,29 @@ grid-template-columns:1fr;
   }
 }
 
+/* 無効化されたフィールドのスタイル */
+.disabled-label {
+  opacity: 0.5;
+  color: #999 !important;
+  cursor: not-allowed;
+}
+
+input[disabled] + .disabled-label {
+  color: #999 !important;
+}
+
+.box:has(input[disabled]) {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.box:has(input[disabled]) .line-header3 h1,
+.box:has(input[disabled]) .line-header5 h1,
+.box:has(input[disabled]) .line-header6 h1 {
+  color: #6c757d;
+  opacity: 0.7;
+}
+
 
 
 
