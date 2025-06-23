@@ -139,7 +139,12 @@ end
 
 
 
-  @results = scope
+  # ページネーションの追加
+  page = params[:page] || 1
+  per_page = params[:per_page] || 20
+  
+  @results = scope.page(page).per(per_page)
+  @total_count = scope.count
   Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
   end
 

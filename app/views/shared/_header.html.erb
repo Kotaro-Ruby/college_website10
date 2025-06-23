@@ -1,3 +1,7 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <header class="main-header">
   <div class="header-container">
     <div class="header-left">
@@ -15,10 +19,10 @@
       <ul class="nav-list">
         <li><a href="/about" class="nav-link">College Finderについて</a></li>
         <li><a href="/knowledge" class="nav-link">アメリカの大学を知る</a></li>
-        <li><a href="/canada" class="nav-link">カナダ版</a></li>
-        <li><a href="/australia" class="nav-link">オーストラリア版</a></li>
-        <li><a href="/newzealand" class="nav-link">ニュージーランド版</a></li>
-        <li><a href="/degreeseeking" class="nav-link">卒業生目指す留学</a></li>
+        <li><span class="nav-link disabled" onclick="showDevelopmentModal('カナダ版')">カナダ版</span></li>
+        <li><span class="nav-link disabled" onclick="showDevelopmentModal('オーストラリア版')">オーストラリア版</span></li>
+        <li><span class="nav-link disabled" onclick="showDevelopmentModal('ニュージーランド版')">ニュージーランド版</span></li>
+        <li><a href="/degreeseeking" class="nav-link">卒業を目指す留学</a></li>
         <li><a href="/contact" class="nav-link">お問い合わせ</a></li>
       </ul>
     </nav>
@@ -43,7 +47,7 @@
   .header-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 0 0 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,14 +57,40 @@
   .header-left {
     display: flex;
     align-items: center;
+    margin-left: -40px;
   }
 
   .logo {
-    font-size: 32px;
+    font-size: 34px;
     color: white;
     text-decoration: none;
-    font-weight: 300;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    letter-spacing: -1px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 360px;
+    display: block;
+    text-transform: capitalize;
+  }
+
+  .logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, white 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover::after {
+    transform: scaleX(1);
   }
 
   .header-nav {
@@ -88,6 +118,21 @@
 
   .nav-link:hover {
     opacity: 0.8;
+  }
+
+  .nav-link.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-link.disabled:hover {
+    opacity: 0.8;
+  }
+
+  .nav-link.disabled small {
+    font-size: 11px;
+    opacity: 0.7;
   }
 
   .mobile-menu-toggle {
@@ -124,10 +169,13 @@
   @media (max-width: 768px) {
     .header-container {
       height: 60px;
+      padding: 0 0 0 10px;
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 26px;
+      font-weight: 800;
+      max-width: 280px;
     }
 
 
@@ -160,6 +208,16 @@
       display: block;
       padding: 15px 0;
       font-size: 16px;
+    }
+
+    .nav-link.disabled {
+      color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-link.disabled:hover {
+      opacity: 0.8;
     }
 
     .mobile-menu-toggle {
@@ -209,4 +267,65 @@
       });
     }
   });
+
+  // 開発中ポップアップ機能
+  function showDevelopmentModal(countryName) {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    `;
+    
+    modalContent.innerHTML = `
+      <div style="font-size: 3rem; margin-bottom: 20px;">🚧</div>
+      <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 1.5rem;">${countryName}は開発中です</h3>
+      <p style="margin: 0 0 25px 0; color: #666; line-height: 1.6;">
+        現在${countryName}の機能を開発中です。<br>
+        しばらくお待ちください。
+      </p>
+      <button onclick="this.closest('.modal-overlay').remove()" style="
+        background: #f5b342;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#e09c2a'" onmouseout="this.style.background='#f5b342'">
+        了解しました
+      </button>
+    `;
+    
+    modal.className = 'modal-overlay';
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // モーダル外をクリックしても閉じる
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    });
+  }
 </script>

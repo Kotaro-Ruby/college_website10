@@ -1,35 +1,396 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>採用情報</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f8f9fa;
-            margin: 0;
-            font-family: "Arial", sans-serif;
-        }
-        .message {
-            font-size: 24px;
-            font-weight: bold;
-            color: #dc3545;
-            padding: 20px 40px;
-            border: 2px solid #dc3545;
-            background-color: #fff3f3;
-            border-radius: 8px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="message">
-        現在、新規採用は行っておりません。
+<div class="main">
+  <div class="recruit-container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>採用情報</h1>
+      <p>College Finderチームで一緒に働きませんか</p>
     </div>
-</body>
-</html>
 
+    <!-- Current Status -->
+    <div class="status-section">
+      <div class="status-card">
+        <div class="status-icon">
+          <i class="fas fa-pause-circle"></i>
+        </div>
+        <h2>現在の採用状況</h2>
+        <p class="status-message">現在、新規採用は行っておりません。</p>
+        <p class="status-detail">
+          ただし、将来的な採用に向けて優秀な人材の情報を収集しています。
+          ご興味のある方は、下記の連絡先までお気軽にお問い合わせください。
+        </p>
+      </div>
+    </div>
+
+    <!-- About Our Mission -->
+    <div class="mission-section">
+      <h2>私たちのミッション</h2>
+      <div class="mission-content">
+        <div class="mission-item">
+          <div class="mission-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>教育へのアクセス向上</h3>
+          <p>海外進学を検討するすべての学生に、適切な大学情報を提供し、進学の機会を拡大します。</p>
+        </div>
+        <div class="mission-item">
+          <div class="mission-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>情報の透明性</h3>
+          <p>公的データに基づく正確で信頼性の高い大学情報を、わかりやすい形で提供します。</p>
+        </div>
+        <div class="mission-item">
+          <div class="mission-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>学生中心のサービス</h3>
+          <p>営利を目的とせず、純粋に学生の最適な大学選択をサポートすることを最優先にしています。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We Look For -->
+    <div class="qualities-section">
+      <h2>求める人材像</h2>
+      <div class="qualities-grid">
+        <div class="quality-card">
+          <h3>🎯 教育への情熱</h3>
+          <p>教育分野への関心が高く、学生の成功を心から支援したいという想いを持つ方</p>
+        </div>
+        <div class="quality-card">
+          <h3>💻 技術スキル</h3>
+          <p>Web開発、データ分析、UX/UIデザインなどの技術的なスキルと学習意欲</p>
+        </div>
+        <div class="quality-card">
+          <h3>🌏 国際的視野</h3>
+          <p>多文化環境での経験や、国際教育への理解と関心</p>
+        </div>
+        <div class="quality-card">
+          <h3>🤝 チームワーク</h3>
+          <p>協働を重視し、多様なバックグラウンドを持つメンバーと効果的に連携できる方</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Potential Positions -->
+    <div class="positions-section">
+      <h2>将来の募集予定職種</h2>
+      <div class="positions-list">
+        <div class="position-item">
+          <h3>フロントエンド開発者</h3>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">CSS/SCSS</span>
+          </div>
+          <p>ユーザーフレンドリーなインターフェースの設計・開発</p>
+        </div>
+        <div class="position-item">
+          <h3>バックエンド開発者</h3>
+          <div class="tech-stack">
+            <span class="tech-tag">Ruby on Rails</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">AWS</span>
+          </div>
+          <p>スケーラブルなサーバーサイドアプリケーションの構築</p>
+        </div>
+        <div class="position-item">
+          <h3>データアナリスト</h3>
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">R</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">Tableau</span>
+          </div>
+          <p>大学データの分析・可視化・インサイト抽出</p>
+        </div>
+        <div class="position-item">
+          <h3>UX/UIデザイナー</h3>
+          <div class="tech-stack">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Adobe XD</span>
+            <span class="tech-tag">Sketch</span>
+            <span class="tech-tag">Prototyping</span>
+          </div>
+          <p>直感的で使いやすいユーザーエクスペリエンスの設計</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+      <h2>お問い合わせ</h2>
+      <p>
+        採用に関するご質問や、将来的な機会についてのお問い合わせは、
+        <a href="/contact" class="contact-link">お問い合わせページ</a>よりご連絡ください。
+      </p>
+      <p class="contact-note">
+        ※ 現在募集は行っておりませんが、ご連絡いただいた方には
+        採用開始時に優先的にご案内いたします。
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+    .recruit-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+      color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(240, 177, 61, 0.2);
+    }
+
+    .page-header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .status-section {
+      margin-bottom: 60px;
+    }
+
+    .status-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      border: 2px solid rgba(240, 177, 61, 0.2);
+    }
+
+    .status-icon {
+      font-size: 48px;
+      color: rgb(240, 177, 61);
+      margin-bottom: 20px;
+    }
+
+    .status-card h2 {
+      font-size: 24px;
+      color: #2d3748;
+      margin-bottom: 20px;
+    }
+
+    .status-message {
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(220, 157, 41);
+      margin-bottom: 15px;
+    }
+
+    .status-detail {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .mission-section, .qualities-section, .positions-section {
+      margin-bottom: 60px;
+    }
+
+    .mission-section h2, .qualities-section h2, .positions-section h2 {
+      font-size: 32px;
+      color: #2d3748;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .mission-section h2::after, .qualities-section h2::after, .positions-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, rgb(240, 177, 61), rgb(255, 195, 85));
+      border-radius: 2px;
+    }
+
+    .mission-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .mission-item {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .mission-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .mission-icon {
+      font-size: 36px;
+      color: rgb(240, 177, 61);
+      margin-bottom: 20px;
+    }
+
+    .mission-item h3 {
+      font-size: 20px;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+
+    .mission-item p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .qualities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .quality-card {
+      background: rgba(240, 177, 61, 0.1);
+      border: 2px solid rgba(240, 177, 61, 0.2);
+      border-radius: 12px;
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .quality-card:hover {
+      border-color: rgba(240, 177, 61, 0.4);
+      background: rgba(240, 177, 61, 0.15);
+    }
+
+    .quality-card h3 {
+      font-size: 18px;
+      color: rgb(220, 157, 41);
+      margin-bottom: 12px;
+    }
+
+    .quality-card p {
+      color: #4a5568;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .positions-list {
+      display: grid;
+      gap: 25px;
+    }
+
+    .position-item {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid rgb(240, 177, 61);
+    }
+
+    .position-item h3 {
+      font-size: 22px;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+
+    .tech-stack {
+      margin-bottom: 15px;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      background: rgba(240, 177, 61, 0.1);
+      color: rgb(220, 157, 41);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-right: 8px;
+      margin-bottom: 5px;
+    }
+
+    .position-item p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .contact-section {
+      background: rgba(240, 177, 61, 0.1);
+      border: 2px solid rgba(240, 177, 61, 0.3);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      color: rgb(220, 157, 41);
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .contact-section p {
+      color: #4a5568;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .contact-link {
+      color: rgb(240, 177, 61);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: rgb(220, 157, 41);
+      text-decoration: underline;
+    }
+
+    .contact-note {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .recruit-container {
+        padding: 20px 10px;
+      }
+
+      .page-header h1 {
+        font-size: 32px;
+      }
+
+      .mission-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .qualities-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .status-card, .contact-section {
+        padding: 25px 20px;
+      }
+    }
+</style>
