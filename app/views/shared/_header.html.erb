@@ -24,6 +24,12 @@
         <li><span class="nav-link disabled" onclick="showDevelopmentModal('ニュージーランド版')">ニュージーランド版</span></li>
         <li><a href="/degreeseeking" class="nav-link">卒業を目指す留学</a></li>
         <li><a href="/contact" class="nav-link">お問い合わせ</a></li>
+        <% if logged_in? %>
+          <li><span class="user-info">ようこそ、<%= current_user.username %>さん</span></li>
+          <li><%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link logout-link" %></li>
+        <% else %>
+          <li><a href="/login" class="nav-link login-link">ログイン</a></li>
+        <% end %>
       </ul>
     </nav>
     <div class="mobile-menu-toggle">

@@ -20,6 +20,11 @@ Rails.application.routes.draw do
 
   get "terms" => "home#terms"
 
+  # Authentication routes
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  delete "logout" => "sessions#destroy"
+
   get '/results', to: 'conditions#results'
 
   get "canada" => "home#canada"
