@@ -4,10 +4,31 @@
     <div class="page-header">
       <h1>ログイン</h1>
       <p>College Finderにログインしてください</p>
+      
+      <!-- Login Benefits -->
+      <div class="login-benefits">
+        <p>💖 ログインすると各大学のお気に入り登録ができるようになります</p>
+      </div>
+      
+      <!-- Registration Link in Header -->
+      <div class="header-register-link">
+        <p>ユーザー登録されていない方は<%= link_to "こちら", register_path, class: "header-register-link-btn" %>から新規登録してください</p>
+      </div>
     </div>
 
     <!-- Login Form -->
     <div class="login-content">
+      <% if flash[:alert] %>
+        <div class="error-popup-overlay" id="errorPopup">
+          <div class="error-popup">
+            <div class="error-icon">⚠️</div>
+            <h3>ログインエラー</h3>
+            <p><%= flash[:alert] %></p>
+            <button onclick="closeErrorPopup()" class="error-popup-button">了解しました</button>
+          </div>
+        </div>
+      <% end %>
+
       <%= form_with url: login_path, method: :post, local: true, class: "login-form" do |form| %>
         <div class="form-group">
           <%= form.label :username, "ユーザー名", class: "form-label" %>
@@ -24,6 +45,7 @@
         </div>
       <% end %>
     </div>
+
 
     <!-- Back to Home -->
     <div class="back-to-home">
@@ -58,6 +80,131 @@
   .page-header p {
     font-size: 16px;
     opacity: 0.9;
+    margin-bottom: 15px;
+  }
+
+  .login-benefits {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .login-benefits p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 1;
+    color: white;
+    text-align: center;
+  }
+
+  .header-register-link {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-register-link p {
+    margin: 0;
+    font-size: 14px;
+    color: #2d3748;
+    font-weight: 500;
+  }
+
+  .header-register-link-btn {
+    color: rgb(240, 177, 61);
+    text-decoration: underline;
+    font-weight: 600;
+    text-decoration-color: rgb(240, 177, 61);
+  }
+
+  .header-register-link-btn:hover {
+    color: rgb(220, 157, 41);
+    text-decoration-color: rgb(220, 157, 41);
+  }
+
+  /* Error Popup Styles */
+  .error-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .error-popup {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+  }
+
+  .error-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .error-popup h3 {
+    margin: 0 0 15px 0;
+    color: #e74c3c;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .error-popup p {
+    margin: 0 0 25px 0;
+    color: #666;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .error-popup-button {
+    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
+  }
+
+  .error-popup-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(240, 177, 61, 0.4);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { 
+      opacity: 0;
+      transform: translateY(-50px) scale(0.9);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   .login-content {
@@ -142,6 +289,7 @@
     text-decoration: none;
   }
 
+
   /* Mobile Styles */
   @media (max-width: 768px) {
     .login-container {
@@ -155,5 +303,36 @@
     .login-content {
       padding: 25px 20px;
     }
+  }
+</style>
+
+<script>
+  function closeErrorPopup() {
+    const popup = document.getElementById('errorPopup');
+    if (popup) {
+      popup.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => {
+        popup.remove();
+      }, 300);
+    }
+  }
+
+  // モーダル外をクリックしても閉じる
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('errorPopup');
+    if (popup) {
+      popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+          closeErrorPopup();
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 </style>

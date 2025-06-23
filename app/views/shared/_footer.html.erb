@@ -1,0 +1,337 @@
+<footer class="main-footer">
+  <div class="footer-container">
+    <!-- Footer Logo -->
+    <div class="footer-left">
+      <div class="footer-logo">
+        <span class="footer-logo-icon">🎓</span>
+        <span class="footer-logo-text">College Finder</span>
+      </div>
+      <p class="footer-description">アメリカの大学を見つけるための最適なプラットフォーム</p>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-center">
+      <div class="footer-links-section">
+        <h4 class="footer-section-title">サービス</h4>
+        <ul class="footer-links">
+          <li><a href="/about" class="footer-link">College Finderについて</a></li>
+          <li><a href="/knowledge" class="footer-link">アメリカの大学を知る</a></li>
+          <li><a href="/degreeseeking" class="footer-link">卒業を目指す留学</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links-section">
+        <h4 class="footer-section-title">サポート</h4>
+        <ul class="footer-links">
+          <li><a href="/info" class="footer-link">運営情報</a></li>
+          <li><a href="/recruit" class="footer-link">採用情報</a></li>
+          <li><a href="/terms" class="footer-link">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Right -->
+    <div class="footer-right">
+      <% unless logged_in? %>
+        <div class="footer-cta">
+          <h4 class="footer-cta-title">今すぐ始めよう</h4>
+          <p class="footer-cta-description">大学のお気に入り登録機能を利用するには</p>
+          <div class="footer-auth-buttons">
+            <a href="/register" class="footer-register-btn">新規登録</a>
+            <a href="/login" class="footer-login-btn">ログイン</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p class="footer-copyright">© 2024 College Finder. All rights reserved.</p>
+      <div class="footer-social">
+        <span class="footer-social-text">Follow us:</span>
+        <a href="#" class="footer-social-link">Twitter</a>
+        <a href="#" class="footer-social-link">Facebook</a>
+        <a href="#" class="footer-social-link">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .main-footer {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: white;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 30px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* Footer Left */
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .footer-logo-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .footer-logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Footer Center */
+  .footer-center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    justify-self: end;
+  }
+
+  .footer-links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-section-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: #f5b342;
+  }
+
+  .footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-link:hover {
+    color: #f5b342;
+    transform: translateX(4px);
+  }
+
+  /* Footer Right */
+  .footer-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .footer-cta {
+    background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(245, 179, 66, 0.3);
+    max-width: 280px;
+  }
+
+  .footer-cta-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    color: white;
+  }
+
+  .footer-cta-description {
+    font-size: 13px;
+    margin: 0 0 20px 0;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+  }
+
+  .footer-auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-register-btn {
+    background: white;
+    color: #f5b342;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-register-btn:hover {
+    background: #fafafa;
+    transform: translateY(-1px);
+  }
+
+  .footer-login-btn {
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-login-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Footer Bottom */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+  }
+
+  .footer-bottom-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copyright {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-social-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-social-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .footer-social-link:hover {
+    color: #f5b342;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .footer-right {
+      grid-column: 1 / -1;
+      justify-content: center;
+    }
+
+    .footer-cta {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 40px 20px 30px;
+    }
+
+    .footer-center {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .footer-bottom-container {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .footer-social {
+      justify-content: center;
+    }
+
+    .footer-logo-text {
+      font-size: 24px;
+    }
+
+    .footer-logo-icon {
+      font-size: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-container {
+      padding: 30px 15px 20px;
+    }
+
+    .footer-bottom-container {
+      padding: 0 15px;
+    }
+
+    .footer-auth-buttons {
+      flex-direction: column;
+    }
+  }
+</style>
