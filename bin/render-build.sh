@@ -3,7 +3,7 @@
 set -o errexit
 
 # Build commands for Render deployment
-echo "=== Render Build Script Starting ==="
+echo "=== Render Build Script Starting (v2) ==="
 
 # Install dependencies
 bundle install
