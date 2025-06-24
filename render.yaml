@@ -13,4 +13,4 @@ services:
       bundle exec puma -C config/puma.rb
     releaseCommand: |
       bundle exec rails db:migrate
-      bundle exec rails db:seed
+      bundle exec rails render:setup_data
