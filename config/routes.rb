@@ -71,6 +71,10 @@ Rails.application.routes.draw do
   
   
   get 'debug/db_status', to: 'debug#db_status'
+  
+  # 一時的なセットアップ用ルート（セットアップ完了後は削除）
+  get '/admin/setup', to: 'admin#setup_data'
+  get '/admin/status', to: 'admin#status'
 
   get 'result/:id', to: 'conditions#show', as: :conditions
   get '*unmatched_route', to: 'conditions#fallback_page'
