@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   
   
   get 'debug/db_status', to: 'debug#db_status'
+  get 'debug/manual_import', to: 'debug#manual_import'
   
   # 一時的なセットアップ用ルート（セットアップ完了後は削除）
   get '/admin/setup', to: 'admin#setup_data'
