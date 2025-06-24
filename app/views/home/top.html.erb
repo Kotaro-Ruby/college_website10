@@ -250,7 +250,7 @@
                         nameSearchButton.style.opacity = '0.5';
                     } else {
                         // 他の条件入力がない場合は大学名検索を有効化
-                        const conditionInputs = document.querySelectorAll('.conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input');
+                        const conditionInputs = document.querySelectorAll('.conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"]');
                         const hasOtherConditions = Array.from(conditionInputs).some(inp => {
                             if (inp.type === 'radio' || inp.type === 'checkbox') {
                                 return inp.checked && inp.value !== 'option1';
@@ -309,9 +309,15 @@
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                        <label class="form-check-label" for="radio2">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                        <label class="form-check-label" for="radio3">
                         州立
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio4">
+                        2年制 (コミカレ・専門学校等)
                         </label>
                         </div>
                     </div>
@@ -324,59 +330,59 @@
                     <div class="tooltip-container2">
                         <span class="tooltip-trigger">？</span>
                         <div class="tooltip-content">
-                        現在、授業料データを準備中です。近日中に利用可能になります。
+                        州立大学は州外生向け料金、私立大学はNet Price（実質費用）を表示しています。
                         </div>
                     </div> 
                     <div class="line-header3">
-                    <h1><i class="fa fa-dollar-sign me-2"></i>年間授業料（準備中）</h1>
+                    <h1><i class="fa fa-dollar-sign me-2"></i>年間授業料</h1>
                     </div>
                 <form>
                     <div class="form-group2">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked disabled>
-                        <label class="form-check-label disabled-label" for="radio1">
-                            指定しない（データ準備中）
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio1" value="option1" checked>
+                        <label class="form-check-label" for="tuitionRadio1">
+                            指定しない
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2" disabled>
-                        <label class="form-check-label disabled-label" for="radio2">
-                            ~$9999
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio2" value="option2">
+                        <label class="form-check-label" for="tuitionRadio2">
+                            ~$9,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3" disabled>
-                        <label class="form-check-label disabled-label" for="radio3">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio3" value="option3">
+                        <label class="form-check-label" for="tuitionRadio3">
                             $10,000~$19,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4" disabled>
-                        <label class="form-check-label disabled-label" for="radio4">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio4" value="option4">
+                        <label class="form-check-label" for="tuitionRadio4">
                             $20,000~$29,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio5" value="option5" disabled>
-                        <label class="form-check-label disabled-label" for="radio5">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio5" value="option5">
+                        <label class="form-check-label" for="tuitionRadio5">
                             $30,000~$39,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio6" value="option6" disabled>
-                        <label class="form-check-label disabled-label" for="radio6">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio6" value="option6">
+                        <label class="form-check-label" for="tuitionRadio6">
                             $40,000~$49,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio7" value="option7" disabled>
-                        <label class="form-check-label disabled-label" for="radio7">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio7" value="option7">
+                        <label class="form-check-label" for="tuitionRadio7">
                             $50,000~$59,999
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio8" value="option8" disabled>
-                        <label class="form-check-label disabled-label" for="radio8">
+                        <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio8" value="option8">
+                        <label class="form-check-label" for="tuitionRadio8">
                             $60,000~
                         </label>
                         </div>
@@ -629,42 +635,38 @@
                     </div>
                 </div>
                 <div class="line-header7-major">
-                <h1><i class="fa fa-flask me-2"></i><strong>専攻※現在開発中の機能です</strong></h1>
+                <h1><i class="fa fa-flask me-2"></i><strong>専攻</strong></h1>
                 </div>
                 <div class="options">
-                    <label><input type="checkbox" disabled> 生物学</label>
-                    <label><input type="checkbox" disabled> 教育学</label>
-                    <label><input type="checkbox" disabled> 政治学</label>
-                    <label><input type="checkbox" disabled> 数学</label>
-                    <label><input type="checkbox" disabled> 物理学</label>
-                    <label><input type="checkbox" disabled> 経済学</label>
-                    <label><input type="checkbox" disabled> 音楽</label>
-                    <label><input type="checkbox" disabled> 農学</label>
-                    <label><input type="checkbox" disabled> 経営学</label>
-                    <label><input type="checkbox" disabled> 心理学</label>
-                    <label><input type="checkbox" disabled> 社会学</label>
-                    <label><input type="checkbox" disabled> 環境学</label>
-                    <label><input type="checkbox" disabled> 建築学</label>
-                    <label><input type="checkbox" disabled> 化学</label>
-                    <label><input type="checkbox" disabled> 倫理学</label>
-                    <label><input type="checkbox" disabled> 歴史学</label>
-                    <label><input type="checkbox" disabled> グラフィックデザイン</label>
-                    <label><input type="checkbox" disabled> 工学(エンジニアリング)</label>
-                    <label><input type="checkbox" disabled> 政治学</label>
-                    <label><input type="checkbox" disabled> 刑事司法</label>
-                    <label><input type="checkbox" disabled> コミュニケーション学</label>
-                    <label><input type="checkbox" disabled> 演劇</label>
-                    <label><input type="checkbox" disabled> 地理学</label>
-                    <label><input type="checkbox" disabled> 統計学</label>
-                    <label><input type="checkbox" disabled> 公衆衛生学</label>
-                    <label><input type="checkbox" disabled> 哲学</label>
-                    <label><input type="checkbox" disabled> 国際関係学</label>
-                    <label><input type="checkbox" disabled> 法医学</label>
-                    <label><input type="checkbox" disabled> 宗教学</label>
-                    <label><input type="checkbox" disabled> スペイン語</label>
-                    <label><input type="checkbox" disabled> 看護学</label>
-                    <label><input type="checkbox" disabled> 言語学</label>
-                    <label><input type="checkbox" disabled> TESOL</label>
+                    <label><input type="checkbox" name="major" value="biology"> 生物学</label>
+                    <label><input type="checkbox" name="major" value="education"> 教育学</label>
+                    <label><input type="checkbox" name="major" value="political"> 政治学</label>
+                    <label><input type="checkbox" name="major" value="mathematics"> 数学</label>
+                    <label><input type="checkbox" name="major" value="physics"> 物理学</label>
+                    <label><input type="checkbox" name="major" value="economics"> 経済学</label>
+                    <label><input type="checkbox" name="major" value="music"> 音楽</label>
+                    <label><input type="checkbox" name="major" value="agriculture"> 農学</label>
+                    <label><input type="checkbox" name="major" value="business"> 経営学</label>
+                    <label><input type="checkbox" name="major" value="psychology"> 心理学</label>
+                    <label><input type="checkbox" name="major" value="social"> 社会学</label>
+                    <label><input type="checkbox" name="major" value="environmental"> 環境学</label>
+                    <label><input type="checkbox" name="major" value="architecture"> 建築学</label>
+                    <label><input type="checkbox" name="major" value="chemistry"> 化学</label>
+                    <label><input type="checkbox" name="major" value="ethics"> 倫理学</label>
+                    <label><input type="checkbox" name="major" value="history"> 歴史学</label>
+                    <label><input type="checkbox" name="major" value="graphic_design"> グラフィックデザイン</label>
+                    <label><input type="checkbox" name="major" value="engineering"> 工学(エンジニアリング)</label>
+                    <label><input type="checkbox" name="major" value="criminal_justice"> 刑事司法</label>
+                    <label><input type="checkbox" name="major" value="communication"> コミュニケーション学</label>
+                    <label><input type="checkbox" name="major" value="theater"> 演劇</label>
+                    <label><input type="checkbox" name="major" value="geography"> 地理学</label>
+                    <label><input type="checkbox" name="major" value="statistics"> 統計学</label>
+                    <label><input type="checkbox" name="major" value="public_health"> 公衆衛生学</label>
+                    <label><input type="checkbox" name="major" value="philosophy"> 哲学</label>
+                    <label><input type="checkbox" name="major" value="international"> 国際関係学</label>
+                    <label><input type="checkbox" name="major" value="forensics"> 法医学</label>
+                    <label><input type="checkbox" name="major" value="religion"> 宗教学</label>
+                    <label><input type="checkbox" name="major" value="spanish"> スペイン語</label>
                 </div>
             </div>
         </div>
@@ -678,7 +680,7 @@
     <script>
         // 大学名入力フィールドと条件検索フィールドの干渉を防ぐ
         const collegeNameInput = document.getElementById('college-name-input');
-        const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input');
+        const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"], input[name="major"]');
         const nameSearchButton = document.getElementById('name-search-button');
         const conditionSearchButton = document.getElementById('search-button');
 
@@ -736,6 +738,30 @@
             });
         });
 
+        // 授業料ラジオボタンのイベントリスナーを追加
+        document.querySelectorAll('input[name="tuitionRadios"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const hasConditionInput = Array.from(conditionInputs).some(inp => {
+                    if (inp.type === 'radio' || inp.type === 'checkbox') {
+                        return inp.checked && inp.value !== 'option1';
+                    }
+                    return inp.value && inp.value.trim() !== '';
+                });
+
+                if (hasConditionInput) {
+                    collegeNameInput.disabled = true;
+                    collegeNameInput.style.opacity = '0.5';
+                    nameSearchButton.disabled = true;
+                    nameSearchButton.style.opacity = '0.5';
+                } else {
+                    collegeNameInput.disabled = false;
+                    collegeNameInput.style.opacity = '1';
+                    nameSearchButton.disabled = false;
+                    nameSearchButton.style.opacity = '1';
+                }
+            });
+        });
+
 
         // 大学名検索機能
         document.getElementById('name-search-button').addEventListener('click', function () {
@@ -760,6 +786,30 @@
             }
         });
 
+        // 専攻チェックボックスのイベントリスナーを追加
+        document.querySelectorAll('input[name="major"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const hasConditionInput = Array.from(conditionInputs).some(inp => {
+                    if (inp.type === 'radio' || inp.type === 'checkbox') {
+                        return inp.checked && inp.value !== 'option1';
+                    }
+                    return inp.value && inp.value.trim() !== '';
+                });
+
+                if (hasConditionInput) {
+                    collegeNameInput.disabled = true;
+                    collegeNameInput.style.opacity = '0.5';
+                    nameSearchButton.disabled = true;
+                    nameSearchButton.style.opacity = '0.5';
+                } else {
+                    collegeNameInput.disabled = false;
+                    collegeNameInput.style.opacity = '1';
+                    nameSearchButton.disabled = false;
+                    nameSearchButton.style.opacity = '1';
+                }
+            });
+        });
+
         document.getElementById('search-button').addEventListener('click', function () {
 
             // 隠し要素から選択された州の値を取得
@@ -768,8 +818,7 @@
             const formData = {
                 state: selectedStateValue,
                 privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-                // 無効化されたフィールドは除外
-                tuition: '指定しない', // 現在データなしのため
+                tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.nextElementSibling?.innerText.trim(),
                 students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
                 gpa: '指定しない', // 現在データなしのため
                 Division: [], // 現在データなしのため
@@ -777,9 +826,9 @@
                 urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
                 
                 // majorの取得方法を修正
-                major: Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
-                    .map(cb => cb.parentElement.textContent.trim()) // 親要素のテキストを取得
-                    .filter(text => text !== "") // 空のテキストを除外
+                major: Array.from(document.querySelectorAll('input[name="major"]:checked'))
+                    .map(cb => cb.value) // value属性を取得
+                    .filter(value => value !== "") // 空の値を除外
             };
 
             // majorが選択されていない場合の処理

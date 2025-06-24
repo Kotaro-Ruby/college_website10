@@ -49,20 +49,26 @@ class ConditionsController < ApplicationController
     unless params[:college_name].present?
       if params[:privateorpublic].present? && params[:privateorpublic] !='指定しない'
         privateorpublic = params[:privateorpublic]
-        scope = scope.where('privateorpublic = ?', privateorpublic)
+        
+        # 2年制（コミュニティカレッジ）の場合はschool_typeで検索
+        if privateorpublic == '2年制 (コミュニティカレッジ)'
+          scope = scope.where('school_type = ?', '2年制')
+        else
+          scope = scope.where('privateorpublic = ?', privateorpublic)
+        end
       end
     end
 
     # Tuition の処理（大学名検索の場合はスキップ）
     unless params[:college_name].present?
-      if params[:tuition].present?
+      if params[:tuition].present? && params[:tuition] != '指定しない'
         tuition_range = parse_tuition_range(params[:tuition])
         if tuition_range
           Rails.logger.debug("Tuition range is valid: #{tuition_range.inspect}")
-    # tuition_range[1] が無限大の場合、100000（または適切な最大金額）に設定する
+          # tuition_range[1] が無限大の場合、999999に設定する
           max_tuition = tuition_range[1] == Float::INFINITY ? 999_999 : tuition_range[1]
-    # 範囲が有効な場合のみ、範囲を適用
-          scope = scope.where('tuition BETWEEN ? AND ?', tuition_range[0], max_tuition)
+          # 範囲内のデータとnil/0（N/A）を検索に含める
+          scope = scope.where('(tuition BETWEEN ? AND ?) OR tuition IS NULL OR tuition = 0', tuition_range[0], max_tuition)
         else
           Rails.logger.debug("Invalid tuition range: #{params[:tuition]}")
         end
@@ -115,10 +121,81 @@ class ConditionsController < ApplicationController
 
       # Major の処理
       if params[:major].present? && params[:major] != '未選択'
-        # カンマで分割して配列に変換
-        majors = params[:major].split(',').map(&:strip)
-        scope = scope.where('major IN (?)', majors)
-        Rails.logger.debug("Filtering by majors: #{majors.inspect}")
+        # 専攻フィルタリング：選択された専攻分野で検索
+        majors = params[:major].is_a?(Array) ? params[:major] : params[:major].split(',').map(&:strip)
+        major_conditions = []
+        
+        majors.each do |major|
+          case major
+          when 'biology'
+            major_conditions << 'pcip_biology > 0'
+          when 'education'
+            major_conditions << 'pcip_education > 0'
+          when 'political'
+            major_conditions << 'pcip_social_sciences > 0'  # 政治学は社会科学に含まれる
+          when 'mathematics'
+            major_conditions << 'pcip_mathematics > 0'
+          when 'physics'
+            major_conditions << 'pcip_physical_sciences > 0'
+          when 'economics'
+            major_conditions << 'pcip_social_sciences > 0'  # 経済学は社会科学に含まれる
+          when 'music'
+            major_conditions << 'pcip_visual_arts > 0'  # 音楽は芸術分野に含まれる
+          when 'agriculture'
+            major_conditions << 'pcip_agriculture > 0'
+          when 'business'
+            major_conditions << 'pcip_business > 0'
+          when 'psychology'
+            major_conditions << 'pcip_psychology > 0'
+          when 'social'
+            major_conditions << 'pcip_sociology > 0'
+          when 'environmental'
+            major_conditions << 'pcip_natural_resources > 0'
+          when 'architecture'
+            major_conditions << 'pcip_visual_arts > 0'  # 建築学は視覚芸術に含まれる
+          when 'chemistry'
+            major_conditions << 'pcip_physical_sciences > 0'
+          when 'ethics'
+            major_conditions << 'pcip_philosophy > 0'
+          when 'history'
+            major_conditions << 'pcip_history > 0'
+          when 'graphic_design'
+            major_conditions << 'pcip_visual_arts > 0'
+          when 'engineering'
+            major_conditions << 'pcip_engineering > 0'
+          when 'criminal_justice'
+            major_conditions << 'pcip_law > 0'
+          when 'communication'
+            major_conditions << 'pcip_communication > 0'
+          when 'theater'
+            major_conditions << 'pcip_visual_arts > 0'  # 演劇は芸術分野に含まれる
+          when 'geography'
+            major_conditions << 'pcip_social_sciences > 0'  # 地理学は社会科学に含まれる
+          when 'statistics'
+            major_conditions << 'pcip_mathematics > 0'
+          when 'public_health'
+            major_conditions << 'pcip_health_professions > 0'
+          when 'philosophy'
+            major_conditions << 'pcip_philosophy > 0'
+          when 'international'
+            major_conditions << 'pcip_social_sciences > 0'  # 国際関係学は社会科学に含まれる
+          when 'forensics'
+            major_conditions << 'pcip_law > 0'
+          when 'religion'
+            major_conditions << 'pcip_philosophy > 0'  # 宗教学は哲学分野に含まれる
+          when 'spanish'
+            major_conditions << 'pcip_foreign_languages > 0'
+          when 'computer'
+            major_conditions << 'pcip_computer_science > 0'
+          when 'health'
+            major_conditions << 'pcip_health_professions > 0'
+          end
+        end
+        
+        if major_conditions.any?
+          scope = scope.where(major_conditions.join(' OR '))
+          Rails.logger.debug("Filtering by majors: #{majors.inspect}")
+        end
       else
         Rails.logger.debug("No major selected, no filtering applied.")
       end

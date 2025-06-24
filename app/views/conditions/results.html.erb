@@ -336,6 +336,12 @@
       color: #991b1b;
     }
 
+    .tag-community {
+      background: #10b981;
+      color: #064e3b;
+      font-weight: 500;
+    }
+
     .no-results {
       background: white;
       border-radius: 15px;
@@ -877,6 +883,8 @@
                     <span class="tag tag-private">私立</span>
                   <% elsif result.privateorpublic == "州立" %>
                     <span class="tag tag-public">州立</span>
+                  <% elsif result.school_type == '2年制' %>
+                    <span class="tag tag-community">2年制</span>
                   <% else %>
                     <span class="tag tag-profit">営利</span>
                   <% end %>
@@ -1207,6 +1215,20 @@
           if (column === 'students' || column === 'tuition' || column === 'graduation' || column === 'gpa') {
             aValue = parseFloat(aValue) || 0;
             bValue = parseFloat(bValue) || 0;
+            
+            // 授業料ソートの場合、0値（N/A）の処理
+            if (column === 'tuition') {
+              // 昇順の場合、0値（N/A）を最後に
+              if (direction === 'asc') {
+                if (aValue === 0 && bValue > 0) return 1;
+                if (bValue === 0 && aValue > 0) return -1;
+              }
+              // 降順の場合、0値（N/A）を最後に
+              else {
+                if (aValue === 0 && bValue > 0) return 1;
+                if (bValue === 0 && aValue > 0) return -1;
+              }
+            }
           }
           
           // 文字列として比較

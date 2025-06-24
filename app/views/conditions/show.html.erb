@@ -260,19 +260,18 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .info-sections {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+    .major-info-section {
       margin-bottom: 60px;
     }
 
-    .info-card {
+    .major-info-card {
       background: white;
       padding: 40px;
       border-radius: 24px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       border: 1px solid rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: none;
     }
 
     .info-card h3 {
@@ -298,20 +297,6 @@
       font-size: 1.1rem;
     }
 
-    .ranking-list {
-      list-style: none;
-    }
-
-    .ranking-item {
-      padding: 12px 0;
-      border-bottom: 1px solid #e2e8f0;
-      color: #4a5568;
-      line-height: 1.6;
-    }
-
-    .ranking-item:last-child {
-      border-bottom: none;
-    }
 
     .major-content {
       background: linear-gradient(135deg, #fefbf7 0%, #fef3e2 100%);
@@ -917,32 +902,212 @@
             </div>
           </div>
 
-          <!-- Info Sections -->
-          <div class="info-sections">
-            <div class="info-card">
-              <h3>
-                <div class="info-card-icon">
-                  <i class="fas fa-medal"></i>
+          <!-- Major Information Section -->
+          <div class="major-info-section">
+            <div class="major-info-card">
+              <h2 style="font-family: 'Poppins', sans-serif; font-size: 1.8rem; color: #2d3748; margin-bottom: 32px; display: flex; align-items: center; gap: 16px;">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #fdba74, #fb923c); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;">
+                  <i class="fas fa-graduation-cap"></i>
                 </div>
-                ランキング情報
-              </h3>
-              <ul class="ranking-list">
-                <li class="ranking-item">U.S. News & World Report掲載校</li>
-                <li class="ranking-item">地域の優秀な大学として評価</li>
-                <li class="ranking-item">学術的な評価が高い大学</li>
-                <li class="ranking-item">キャリアサポートが充実</li>
-              </ul>
-            </div>
-            
-            <div class="info-card">
-              <h3>
-                <div class="info-card-icon">
-                  <i class="fas fa-book-open"></i>
-                </div>
-                専攻分野
-              </h3>
-              <div class="major-content">
-                <%= @college.major || "多様な専攻分野を提供しており、学生一人ひとりの興味や将来の目標に合わせて選択できる幅広いプログラムが用意されています。" %>
+                専攻分野情報
+              </h2>
+              
+              <div class="major-content" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                <% 
+                  majors = []
+                  # 農業・農学
+                  if @college.pcip_agriculture && @college.pcip_agriculture > 0
+                    majors << "農業・農学 (#{(@college.pcip_agriculture * 100).round(1)}%)"
+                  end
+                  # 天然資源・環境科学
+                  if @college.pcip_natural_resources && @college.pcip_natural_resources > 0
+                    majors << "天然資源・環境科学 (#{(@college.pcip_natural_resources * 100).round(1)}%)"
+                  end
+                  # コミュニケーション学
+                  if @college.pcip_communication && @college.pcip_communication > 0
+                    majors << "コミュニケーション学 (#{(@college.pcip_communication * 100).round(1)}%)"
+                  end
+                  # コンピューターサイエンス
+                  if @college.pcip_computer_science && @college.pcip_computer_science > 0
+                    majors << "コンピューターサイエンス (#{(@college.pcip_computer_science * 100).round(1)}%)"
+                  end
+                  # 教育学
+                  if @college.pcip_education && @college.pcip_education > 0
+                    majors << "教育学 (#{(@college.pcip_education * 100).round(1)}%)"
+                  end
+                  # 工学
+                  if @college.pcip_engineering && @college.pcip_engineering > 0
+                    majors << "工学 (#{(@college.pcip_engineering * 100).round(1)}%)"
+                  end
+                  # 外国語・文学
+                  if @college.pcip_foreign_languages && @college.pcip_foreign_languages > 0
+                    majors << "外国語・文学 (#{(@college.pcip_foreign_languages * 100).round(1)}%)"
+                  end
+                  # 英語・文学
+                  if @college.pcip_english && @college.pcip_english > 0
+                    majors << "英語・文学 (#{(@college.pcip_english * 100).round(1)}%)"
+                  end
+                  # 生物学
+                  if @college.pcip_biology && @college.pcip_biology > 0
+                    majors << "生物学 (#{(@college.pcip_biology * 100).round(1)}%)"
+                  end
+                  # 数学・統計学
+                  if @college.pcip_mathematics && @college.pcip_mathematics > 0
+                    majors << "数学・統計学 (#{(@college.pcip_mathematics * 100).round(1)}%)"
+                  end
+                  # 心理学
+                  if @college.pcip_psychology && @college.pcip_psychology > 0
+                    majors << "心理学 (#{(@college.pcip_psychology * 100).round(1)}%)"
+                  end
+                  # 社会学
+                  if @college.pcip_sociology && @college.pcip_sociology > 0
+                    majors << "社会学 (#{(@college.pcip_sociology * 100).round(1)}%)"
+                  end
+                  # 社会科学
+                  if @college.pcip_social_sciences && @college.pcip_social_sciences > 0
+                    majors << "社会科学 (#{(@college.pcip_social_sciences * 100).round(1)}%)"
+                  end
+                  # 視覚・舞台芸術
+                  if @college.pcip_visual_arts && @college.pcip_visual_arts > 0
+                    majors << "視覚・舞台芸術 (#{(@college.pcip_visual_arts * 100).round(1)}%)"
+                  end
+                  # 経営学
+                  if @college.pcip_business && @college.pcip_business > 0
+                    majors << "経営学 (#{(@college.pcip_business * 100).round(1)}%)"
+                  end
+                  # 健康・医療
+                  if @college.pcip_health_professions && @college.pcip_health_professions > 0
+                    majors << "健康・医療 (#{(@college.pcip_health_professions * 100).round(1)}%)"
+                  end
+                  # 歴史学
+                  if @college.pcip_history && @college.pcip_history > 0
+                    majors << "歴史学 (#{(@college.pcip_history * 100).round(1)}%)"
+                  end
+                  # 哲学・宗教学
+                  if @college.pcip_philosophy && @college.pcip_philosophy > 0
+                    majors << "哲学・宗教学 (#{(@college.pcip_philosophy * 100).round(1)}%)"
+                  end
+                  # 物理科学
+                  if @college.pcip_physical_sciences && @college.pcip_physical_sciences > 0
+                    majors << "物理科学 (#{(@college.pcip_physical_sciences * 100).round(1)}%)"
+                  end
+                  # 法学・刑事司法
+                  if @college.pcip_law && @college.pcip_law > 0
+                    majors << "法学・刑事司法 (#{(@college.pcip_law * 100).round(1)}%)"
+                  end
+                %>
+                
+                <% if majors.any? %>
+                  <!-- 専攻統計サマリー -->
+                  <div style="background: linear-gradient(135deg, rgba(253, 186, 116, 0.1), rgba(251, 146, 60, 0.05)); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(253, 186, 116, 0.2);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                      <i class="fas fa-chart-pie" style="color: #fb923c; font-size: 1.2rem;"></i>
+                      <h4 style="margin: 0; color: #2d3748; font-weight: 600;">専攻分野の概要</h4>
+                    </div>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">
+                      この大学では<strong><%= majors.length %>つの主要専攻分野</strong>で学位を授与しており、
+                      最も人気の分野は<strong><%= majors.first.split('(')[0].strip %></strong>です。
+                      学生の多様な学術的興味と将来のキャリア目標に対応した包括的な教育プログラムを提供しています。
+                    </p>
+                  </div>
+
+                  <!-- 人気専攻分野ランキング -->
+                  <div style="margin-bottom: 24px;">
+                    <h4 style="color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                      <i class="fas fa-trophy" style="color: #f59e0b;"></i>
+                      人気専攻分野ランキング（上位<%= [majors.length, 5].min %>位）
+                    </h4>
+                    <% majors.sort_by { |m| -m.match(/\((\d+\.?\d*)%\)/)[1].to_f }.first(5).each_with_index do |major, index| %>
+                      <% percentage = major.match(/\((\d+\.?\d*)%\)/)[1].to_f %>
+                      <% major_name = major.split('(')[0].strip %>
+                      <div style="display: flex; align-items: center; margin-bottom: 12px; padding: 12px 16px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border-left: 4px solid <%= percentage >= 15 ? '#10b981' : percentage >= 10 ? '#f59e0b' : percentage >= 5 ? '#6366f1' : '#6b7280' %>;">
+                        <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: <%= percentage >= 15 ? '#dcfdf7' : percentage >= 10 ? '#fef3c7' : percentage >= 5 ? '#e0e7ff' : '#f3f4f6' %>; margin-right: 16px; font-weight: bold; color: <%= percentage >= 15 ? '#047857' : percentage >= 10 ? '#d97706' : percentage >= 5 ? '#4338ca' : '#4b5563' %>; font-size: 0.9rem;">
+                          <%= index + 1 %>
+                        </div>
+                        <div style="flex: 1;">
+                          <div style="font-weight: 600; color: #2d3748; margin-bottom: 2px;"><%= major_name %></div>
+                          <div style="font-size: 0.85rem; color: #6b7280;">学位授与者の<strong><%= percentage %>%</strong>がこの分野を専攻</div>
+                        </div>
+                        <div style="width: 60px; background: #f1f5f9; border-radius: 8px; height: 8px; margin-left: 16px;">
+                          <div style="width: <%= [percentage * 2, 100].min %>%; background: <%= percentage >= 15 ? '#10b981' : percentage >= 10 ? '#f59e0b' : percentage >= 5 ? '#6366f1' : '#6b7280' %>; height: 100%; border-radius: 8px;"></div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+
+
+                  <!-- 専攻プログラム詳細リスト -->
+                  <div style="margin-bottom: 24px;">
+                    <h4 style="color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                      <i class="fas fa-list-ul" style="color: #8b5cf6;"></i>
+                      提供される専攻プログラム例
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                      <% 
+                        # 専攻分野ごとの具体的なプログラム例
+                        major_programs = {
+                          '経営学' => ['経営管理学', 'マーケティング', '会計学', '金融学', '国際ビジネス', '起業学', '人事管理', 'サプライチェーン管理'],
+                          '工学' => ['機械工学', '電気工学', '土木工学', '化学工学', 'コンピュータ工学', '航空宇宙工学', '環境工学', '材料工学'],
+                          'コンピューターサイエンス' => ['ソフトウェア工学', 'データサイエンス', '人工知能', 'サイバーセキュリティ', 'ゲーム開発', 'ウェブ開発', 'モバイルアプリ開発', '機械学習'],
+                          '健康・医療' => ['看護学', '理学療法', '作業療法', '公衆衛生学', '医療技術', '栄養学', '薬学', '歯科衛生学'],
+                          '教育学' => ['初等教育', '中等教育', '特別支援教育', '幼児教育', '体育教育', '音楽教育', '美術教育', '教育心理学'],
+                          '生物学' => ['分子生物学', '生態学', '海洋生物学', '遺伝学', '生化学', '微生物学', '神経科学', '植物学'],
+                          '心理学' => ['臨床心理学', '認知心理学', '発達心理学', '社会心理学', '実験心理学', 'カウンセリング心理学', '産業心理学', '神経心理学'],
+                          '社会科学' => ['政治学', '経済学', '国際関係学', '人類学', '地理学', '社会学', '犯罪学', '公共政策学'],
+                          '視覚・舞台芸術' => ['美術', '音楽', '演劇', 'ダンス', 'グラフィックデザイン', '映画制作', '写真', '建築学'],
+                          '歴史学' => ['アメリカ史', 'ヨーロッパ史', '世界史', '考古学', '美術史', '軍事史', '文化史', '宗教史'],
+                          '英語・文学' => ['英文学', 'アメリカ文学', '創作', 'ジャーナリズム', '言語学', '修辞学', '比較文学', '編集・出版'],
+                          '数学・統計学' => ['純粋数学', '応用数学', '統計学', 'アクチュアリー数学', '数学教育', '計算数学', '金融数学', '生物統計学'],
+                          '哲学・宗教学' => ['哲学', '宗教学', '神学', '倫理学', 'ロジック', '東洋哲学', '西洋哲学', '宗教間対話'],
+                          '法学・刑事司法' => ['法学', '刑事司法', '犯罪学', '法執行', '法医学', '矯正学', '裁判所管理', '法律事務'],
+                          '農業・農学' => ['農業科学', '動物科学', '植物学', '農業経済学', '獣医学', '食品科学', '農業工学', '持続可能農業'],
+                          '社会学' => ['社会理論', '社会問題', '都市社会学', '家族社会学', '労働社会学', '文化社会学', '社会調査法', '社会福祉学']
+                        }
+
+                        displayed_majors = majors.sort_by { |m| -m.match(/\((\d+\.?\d*)%\)/)[1].to_f }.first(8)
+                        displayed_majors.each do |major|
+                          major_name = major.split('(')[0].strip
+                          programs = major_programs[major_name] || []
+                          next if programs.empty?
+                      %>
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
+                          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                            <div style="width: 8px; height: 8px; border-radius: 50%; background: #8b5cf6;"></div>
+                            <h5 style="margin: 0; color: #2d3748; font-weight: 600;"><%= major_name %></h5>
+                          </div>
+                          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 6px;">
+                            <% programs.each do |program| %>
+                              <span style="font-size: 0.85rem; color: #6b7280; background: #f8fafc; padding: 4px 8px; border-radius: 4px; text-align: center;"><%= program %></span>
+                            <% end %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <!-- 注釈情報 -->
+                  <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #94a3b8;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                      <i class="fas fa-info-circle" style="color: #64748b;"></i>
+                      <strong style="color: #475569;">データについて</strong>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #64748b; line-height: 1.5;">
+                      • 上記の割合は、この大学で学位を取得した学生のうち、各専攻分野を修了した学生の比率を示しています<br>
+                      • 専攻プログラム例は各分野で一般的に提供される内容であり、大学により提供プログラムは異なります<br>
+                      • データは米国教育省College Scorecardより取得した最新の公式データです<br>
+                      • 専攻分野名は日本語で表示していますが、実際の授業は英語で行われます
+                    </div>
+                  </div>
+                <% else %>
+                  <div style="text-align: center; padding: 40px 20px; background: linear-gradient(135deg, rgba(253, 186, 116, 0.05), rgba(251, 146, 60, 0.03)); border-radius: 12px; border: 2px dashed rgba(253, 186, 116, 0.3);">
+                    <i class="fas fa-university" style="font-size: 3rem; color: #fdba74; margin-bottom: 16px;"></i>
+                    <h4 style="color: #2d3748; margin-bottom: 12px;">専攻分野データ準備中</h4>
+                    <p style="color: #6b7280; margin: 0; line-height: 1.6;">
+                      この大学では多様な専攻分野を提供しており、学生一人ひとりの興味や将来の目標に合わせて選択できる<br>
+                      幅広いプログラムが用意されています。詳細な専攻分野データは近日中に追加予定です。
+                    </p>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
