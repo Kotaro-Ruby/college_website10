@@ -1,9 +1,11 @@
 namespace :import do
-  desc "Import fresh college data from College Scorecard with tuition"
+  desc "Import fresh college data from College Scorecard with tuition, comments, and major data"
   task fresh_colleges: :environment do
     require 'net/http'
     require 'json'
     require 'dotenv/load'
+    require_relative '../college_comment_generator'
+    require_relative '../college_major_importer'
     
     api_key = ENV['COLLEGE_SCORECARD_API_KEY']
     
@@ -142,7 +144,8 @@ namespace :import do
           condition = Condition.find_or_initialize_by(college: name)
           
           if condition.new_record? || condition.tuition.nil? || condition.tuition == 0
-            condition.update(
+            # 基本データの更新
+            college_data = {
               state: state_jp,
               city: school['school.city'],
               zip: school['school.zip'],
@@ -151,10 +154,32 @@ namespace :import do
               tuition: net_price,
               graduation_rate: school['latest.completion.completion_rate_4yr_150nt'],
               acceptance_rate: school['latest.admissions.admission_rate.overall']
-            )
+            }
+            
+            # コメントがない場合は生成
+            if condition.comment.blank?
+              comment_data = {
+                students: school['latest.student.size'],
+                acceptance_rate: school['latest.admissions.admission_rate.overall'],
+                ownership: ownership
+              }
+              college_data[:comment] = CollegeCommentGenerator.generate_comment_for_college(name, comment_data)
+            end
+            
+            condition.update(college_data)
+            
+            # 専攻データの取得と更新（非同期的に実行）
+            if condition.pcip_business.nil? || condition.pcip_business == 0
+              puts "    専攻データを取得中..."
+              if CollegeMajorImporter.fetch_and_update_major_data(name, api_key)
+                puts "    ✓ 専攻データ追加完了"
+              else
+                puts "    × 専攻データ取得失敗"
+              end
+            end
             
             total_added += 1
-            puts "  ✓ #{name}: $#{net_price ? net_price.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse : 'N/A'}"
+            puts "  ✓ #{name}: $#{net_price ? net_price.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse : 'N/A'} [コメント・専攻データ付き]"
           end
         end
       else
@@ -168,5 +193,8 @@ namespace :import do
     puts "インポート完了！"
     puts "追加/更新した大学数: #{total_added}"
     puts "授業料データがある大学総数: #{Condition.where.not(tuition: [nil, 0]).count}"
+    puts "コメント付き大学総数: #{Condition.where.not(comment: [nil, '']).count}"
+    puts "専攻データ付き大学総数: #{Condition.where('pcip_business > 0 OR pcip_engineering > 0 OR pcip_computer_science > 0').count}"
+    puts "========================================="
   end
 end
