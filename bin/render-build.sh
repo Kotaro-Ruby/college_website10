@@ -24,11 +24,8 @@ echo "Colleges with comments: $COLLEGES_WITH_COMMENTS"
 echo "Total colleges: $TOTAL_COLLEGES"
 
 if [ "$TOTAL_COLLEGES" -lt "100" ]; then
-    echo "=== Importing base college data from Excel ==="
-    bundle exec rails import:base_colleges
-    
-    echo "=== Loading seed data (comments and majors) ==="
-    bundle exec rails db:seed
+    echo "=== Loading complete data setup ==="
+    bundle exec rails render:setup_data
     
     echo "=== All data loaded successfully ==="
 elif [ "$COLLEGES_WITH_COMMENTS" -lt "100" ]; then

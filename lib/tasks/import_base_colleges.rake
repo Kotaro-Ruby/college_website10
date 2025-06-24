@@ -14,7 +14,7 @@ namespace :import do
     
     begin
       puts "Opening Excel file: #{file_path}"
-      xlsx = Roo::Spreadsheet.open(file_path)
+      xlsx = Roo::Spreadsheet.open(file_path.to_s)
       sheet = xlsx.sheet(0)
       
       # Get headers from the first row
