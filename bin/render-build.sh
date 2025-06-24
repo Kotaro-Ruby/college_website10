@@ -23,13 +23,21 @@ TOTAL_COLLEGES=$(bundle exec rails runner "puts Condition.count" 2>/dev/null || 
 echo "Colleges with comments: $COLLEGES_WITH_COMMENTS"
 echo "Total colleges: $TOTAL_COLLEGES"
 
-if [ "$COLLEGES_WITH_COMMENTS" -lt "100" ] && [ "$TOTAL_COLLEGES" -gt "100" ]; then
+if [ "$TOTAL_COLLEGES" -lt "100" ]; then
+    echo "=== Importing base college data from Excel ==="
+    bundle exec rails import:base_colleges
+    
     echo "=== Loading seed data (comments and majors) ==="
+    bundle exec rails db:seed
+    
+    echo "=== All data loaded successfully ==="
+elif [ "$COLLEGES_WITH_COMMENTS" -lt "100" ]; then
+    echo "=== Loading seed data only (comments and majors) ==="
     bundle exec rails db:seed
     
     echo "=== Seed data loaded successfully ==="
 else
-    echo "=== Data already exists, skipping seed ==="
+    echo "=== Data already exists, skipping setup ==="
 fi
 
 echo "=== Render Build Script Completed ==="
