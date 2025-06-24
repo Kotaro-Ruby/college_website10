@@ -9,7 +9,7 @@ class ContactMailer < ApplicationMailer
     
     mail(
       to: 'kotaro.swifty@gmail.com',
-      subject: "[College Finder] お問い合わせ: #{@category}",
+      subject: "[College Spark] お問い合わせ: #{@category}",
       reply_to: email
     )
   end

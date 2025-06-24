@@ -45,7 +45,7 @@ class HomeController < ApplicationController
           Rails.logger.info "カテゴリー: #{category}"
           Rails.logger.info "メッセージ: #{message}"
           Rails.logger.info "宛先: kotaro.swifty@gmail.com"
-          Rails.logger.info "件名: [College Finder] お問い合わせ: #{category}"
+          Rails.logger.info "件名: [College Spark] お問い合わせ: #{category}"
           Rails.logger.info "=" * 50
         else
           Rails.logger.info "お問い合わせメール送信成功: #{name} (#{email})"

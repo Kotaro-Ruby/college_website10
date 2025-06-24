@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: College_Finder   # あなたの Render サービス名に合わせて書き換えてください
+    name: College_Spark   # College Spark サービス名
     env: ruby
     plan: free
     region: oregon

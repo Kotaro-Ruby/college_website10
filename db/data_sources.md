@@ -1,4 +1,4 @@
-# College Finder データソース情報
+# College Spark データソース情報
 
 ## 現在使用中のデータソース
 1. **College Scorecard** (https://collegescorecard.ed.gov/)
