@@ -672,12 +672,68 @@
         </div>
     </div>
 
+    <!-- データ状況確認・セットアップボタン -->
+    <% if Rails.env.production? %>
+    <div id="data-status-container" style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+        <div id="data-status-info">
+            <p style="margin: 0; color: #6c757d; font-size: 14px;">
+                <i class="fa fa-database"></i> データベース状況確認中...
+            </p>
+        </div>
+        <button id="setup-data-btn" class="btn btn-warning" style="display: none; margin-top: 10px;">
+            <i class="fa fa-cog"></i> データセットアップ実行
+        </button>
+    </div>
+    <% end %>
+
     <div class="search-button-container">
         <button class="cool-search-button" id="search-button"><i class="fa fa-search"></i> 検索</button>
     </div>
 
 
     <script>
+        // データベース状況確認（本番環境のみ）
+        <% if Rails.env.production? %>
+        document.addEventListener('DOMContentLoaded', function() {
+            // データベース状況を確認
+            fetch('/admin/status?secret=setup123')
+                .then(response => response.text())
+                .then(data => {
+                    const statusInfo = document.getElementById('data-status-info');
+                    const setupBtn = document.getElementById('setup-data-btn');
+                    
+                    if (data.includes('総大学数: 0') || data.includes('総大学数: 1') || data.includes('総大学数: 2')) {
+                        statusInfo.innerHTML = '<p style="margin: 0; color: #dc3545; font-size: 14px;"><i class="fa fa-exclamation-triangle"></i> 大学データが不足しています（検索できません）</p>';
+                        setupBtn.style.display = 'inline-block';
+                    } else {
+                        statusInfo.innerHTML = '<p style="margin: 0; color: #28a745; font-size: 14px;"><i class="fa fa-check-circle"></i> データベース正常</p>';
+                    }
+                })
+                .catch(error => {
+                    console.log('データ状況確認エラー:', error);
+                    document.getElementById('data-status-info').innerHTML = '<p style="margin: 0; color: #ffc107; font-size: 14px;"><i class="fa fa-exclamation-triangle"></i> データ状況確認中...</p>';
+                });
+            
+            // セットアップボタンのクリックイベント
+            document.getElementById('setup-data-btn').addEventListener('click', function() {
+                this.disabled = true;
+                this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> セットアップ中...';
+                
+                fetch('/admin/setup?secret=setup123')
+                    .then(response => response.text())
+                    .then(data => {
+                        alert('データセットアップが完了しました！ページを再読み込みしてください。');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        alert('セットアップエラーが発生しました: ' + error);
+                        this.disabled = false;
+                        this.innerHTML = '<i class="fa fa-cog"></i> データセットアップ実行';
+                    });
+            });
+        });
+        <% end %>
+
         // 大学名入力フィールドと条件検索フィールドの干渉を防ぐ
         const collegeNameInput = document.getElementById('college-name-input');
         const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"], input[name="major"]');
