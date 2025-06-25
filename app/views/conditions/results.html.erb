@@ -858,6 +858,7 @@
               <th class="sortable" data-sort="tuition">授業料</th>
               <th class="sortable" data-sort="graduation">卒業率</th>
               <th>立地</th>
+              <th>留学生率</th>
               <th class="sortable" data-sort="gpa">GPA</th>
               <th>NCAA</th>
               <th class="action-column">アクション</th>
@@ -877,12 +878,78 @@
                     <%= result.college %>
                   </span>
                 </td>
-                <td data-label="州"><%= result.state ? result.state.gsub(/\s*\(.*?\)/, '') : "N/A" %></td>
+                <td data-label="州"><%=
+                  if result.state
+                    case result.state.gsub(/\s*\(.*?\)/, '')
+                    when 'AL' then 'アラバマ州'
+                    when 'AK' then 'アラスカ州'
+                    when 'AZ' then 'アリゾナ州'
+                    when 'AR' then 'アーカンソー州'
+                    when 'CA' then 'カリフォルニア州'
+                    when 'CO' then 'コロラド州'
+                    when 'CT' then 'コネチカット州'
+                    when 'DE' then 'デラウェア州'
+                    when 'FL' then 'フロリダ州'
+                    when 'GA' then 'ジョージア州'
+                    when 'HI' then 'ハワイ州'
+                    when 'ID' then 'アイダホ州'
+                    when 'IL' then 'イリノイ州'
+                    when 'IN' then 'インディアナ州'
+                    when 'IA' then 'アイオワ州'
+                    when 'KS' then 'カンザス州'
+                    when 'KY' then 'ケンタッキー州'
+                    when 'LA' then 'ルイジアナ州'
+                    when 'ME' then 'メイン州'
+                    when 'MD' then 'メリーランド州'
+                    when 'MA' then 'マサチューセッツ州'
+                    when 'MI' then 'ミシガン州'
+                    when 'MN' then 'ミネソタ州'
+                    when 'MS' then 'ミシシッピ州'
+                    when 'MO' then 'ミズーリ州'
+                    when 'MT' then 'モンタナ州'
+                    when 'NE' then 'ネブラスカ州'
+                    when 'NV' then 'ネバダ州'
+                    when 'NH' then 'ニューハンプシャー州'
+                    when 'NJ' then 'ニュージャージー州'
+                    when 'NM' then 'ニューメキシコ州'
+                    when 'NY' then 'ニューヨーク州'
+                    when 'NC' then 'ノースカロライナ州'
+                    when 'ND' then 'ノースダコタ州'
+                    when 'OH' then 'オハイオ州'
+                    when 'OK' then 'オクラホマ州'
+                    when 'OR' then 'オレゴン州'
+                    when 'PA' then 'ペンシルベニア州'
+                    when 'RI' then 'ロードアイランド州'
+                    when 'SC' then 'サウスカロライナ州'
+                    when 'SD' then 'サウスダコタ州'
+                    when 'TN' then 'テネシー州'
+                    when 'TX' then 'テキサス州'
+                    when 'UT' then 'ユタ州'
+                    when 'VT' then 'バーモント州'
+                    when 'VA' then 'バージニア州'
+                    when 'WA' then 'ワシントン州'
+                    when 'WV' then 'ウェストバージニア州'
+                    when 'WI' then 'ウィスコンシン州'
+                    when 'WY' then 'ワイオミング州'
+                    when 'DC' then 'ワシントンD.C.'
+                    when 'PR' then 'プエルトリコ'
+                    when 'VI' then 'バージン諸島'
+                    when 'GU' then 'グアム'
+                    when 'AS' then 'アメリカ領サモア'
+                    when 'MP' then '北マリアナ諸島'
+                    else result.state.gsub(/\s*\(.*?\)/, '')
+                    end
+                  else
+                    "N/A"
+                  end
+                %></td>
                 <td data-label="区分">
-                  <% if result.privateorpublic == "私立" %>
+                  <% if result.privateorpublic == "私立" || result.privateorpublic == "Private" %>
                     <span class="tag tag-private">私立</span>
-                  <% elsif result.privateorpublic == "州立" %>
+                  <% elsif result.privateorpublic == "州立" || result.privateorpublic == "Public" %>
                     <span class="tag tag-public">州立</span>
+                  <% elsif result.privateorpublic == "営利" %>
+                    <span class="tag tag-profit">営利</span>
                   <% elsif result.school_type == '2年制' %>
                     <span class="tag tag-community">2年制</span>
                   <% else %>
@@ -890,9 +957,53 @@
                   <% end %>
                 </td>
                 <td data-label="学生数"><%= number_with_delimiter(result.students) %> 人</td>
-                <td data-label="授業料"><%= result.tuition.present? ? number_to_currency(result.tuition, unit: "$", precision: 0) : "N/A" %></td>
+                <td data-label="授業料"><%=
+                  if result.privateorpublic == "州立" || result.privateorpublic == "Public"
+                    # 州立大学の場合は州外学生向け授業料を表示
+                    if result.tuition_out_state.present?
+                      number_to_currency(result.tuition_out_state, unit: "$", precision: 0)
+                    elsif result.tuition.present?
+                      number_to_currency(result.tuition, unit: "$", precision: 0)
+                    else
+                      "N/A"
+                    end
+                  else
+                    # 私立大学の場合は通常の授業料を表示
+                    result.tuition.present? ? number_to_currency(result.tuition, unit: "$", precision: 0) : "N/A"
+                  end
+                %></td>
                 <td data-label="卒業率"><%= result.graduation_rate.present? ? "#{number_with_precision(result.graduation_rate * 100, precision: 1)}%" : "N/A" %></td>
-                <td data-label="立地"><%= result.urbanicity || "N/A" %></td>
+                <td data-label="立地"><%=
+                    case result.urbanicity&.to_i
+                    when 11
+                      "大都市"
+                    when 12
+                      "中都市"
+                    when 13
+                      "小都市"
+                    when 21
+                      "大郊外"
+                    when 22
+                      "中郊外"
+                    when 23
+                      "小郊外"
+                    when 31
+                      "近隣町"
+                    when 32
+                      "遠方町"
+                    when 33
+                      "僻地町"
+                    when 41
+                      "近隣地方"
+                    when 42
+                      "遠方地方"
+                    when 43
+                      "僻地"
+                    else
+                      "N/A"
+                    end
+                  %></td>
+                <td data-label="留学生率"><%= result.percent_non_resident_alien.present? ? "#{number_with_precision(result.percent_non_resident_alien * 100, precision: 1)}%" : "N/A" %></td>
                 <td data-label="GPA"><%= result.GPA || "N/A" %></td>
                 <td data-label="NCAA"><%= result.Division || "N/A" %></td>
                 <td class="action-buttons" data-label="アクション" onclick="event.stopPropagation();" style="text-align: center; padding: 8px;">

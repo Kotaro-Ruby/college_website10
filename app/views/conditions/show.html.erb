@@ -6,6 +6,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <title><%= @college.college %> - 詳細</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <style>
     * {
       margin: 0;
@@ -682,6 +684,351 @@
       color: #fb923c;
     }
 
+    /* Demographics Charts Styling */
+    .demographics-charts,
+    .test-scores-charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .chart-container {
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .chart-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .chart-header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .chart-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #2d3748;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0;
+    }
+
+    .chart-title i {
+      color: #fb923c;
+      font-size: 1.3rem;
+    }
+
+    .info-icon {
+      margin-left: 8px;
+      cursor: help;
+      color: #6b7280;
+      transition: color 0.3s ease;
+    }
+
+    .info-icon:hover {
+      color: #fb923c;
+    }
+
+    .chart-description {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: rgba(251, 146, 60, 0.05);
+      border-radius: 8px;
+      border-left: 4px solid #fb923c;
+    }
+
+    .chart-description p {
+      margin: 0;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+
+    .score-details {
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(59, 130, 246, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .score-explanation h4 {
+      margin: 0 0 16px 0;
+      color: #2d3748;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .score-explanation h4::before {
+      content: '📊';
+      font-size: 18px;
+    }
+
+    .score-explanation ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    .score-explanation li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+
+    .score-explanation li strong {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    /* Campus Info & Special Designations */
+    .campus-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .subsection-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .subsection-title i {
+      color: #fb923c;
+      font-size: 1.1rem;
+    }
+
+    /* Special Designations Badges */
+    .badges-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .designation-badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      cursor: help;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .designation-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .hbcu-badge {
+      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    }
+
+    .hsi-badge {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+    }
+
+    .tribal-badge {
+      background: linear-gradient(135deg, #10B981, #059669);
+    }
+
+    .women-badge {
+      background: linear-gradient(135deg, #EC4899, #DB2777);
+    }
+
+    .men-badge {
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+    }
+
+    .religious-badge {
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+    }
+
+    .no-special-designation {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #f9fafb;
+      border: 2px solid #e5e7eb;
+    }
+
+    .badge-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 8px;
+      padding: 6px 12px;
+      background: rgba(45, 55, 72, 0.95);
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .badge-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(45, 55, 72, 0.95);
+    }
+
+    .designation-badge:hover .badge-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Campus Location */
+    .location-details {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .location-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(251, 146, 60, 0.03);
+      border-radius: 12px;
+      border-left: 4px solid #fb923c;
+      flex: 1;
+    }
+
+    .location-item i {
+      color: #fb923c;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      min-width: 20px;
+    }
+
+    .location-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .location-content strong {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #2d3748;
+      font-size: 14px;
+    }
+
+    .location-content span {
+      color: #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .campus-info-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .badges-container {
+        justify-content: center;
+      }
+
+      .designation-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .location-details {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .location-item {
+        padding: 12px;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chart-wrapper canvas {
+      max-height: 300px !important;
+    }
+
+    .no-data-message {
+      text-align: center;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, rgba(253, 186, 116, 0.05), rgba(251, 146, 60, 0.03));
+      border-radius: 20px;
+      border: 2px dashed rgba(253, 186, 116, 0.3);
+    }
+
+    .no-data-message i {
+      font-size: 3.5rem;
+      color: #fdba74;
+      margin-bottom: 20px;
+    }
+
+    .no-data-message h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: #2d3748;
+      margin-bottom: 12px;
+    }
+
+    .no-data-message p {
+      color: #6b7280;
+      font-size: 1.1rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+
     /* レスポンシブデザイン */
     @media (max-width: 768px) {
       .hero-section {
@@ -719,6 +1066,23 @@
         width: 44px;
         height: 44px;
         font-size: 1.1rem;
+      }
+
+      .demographics-charts {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .chart-container {
+        padding: 24px;
+      }
+
+      .chart-wrapper {
+        height: 250px;
+      }
+
+      .chart-wrapper canvas {
+        max-height: 250px !important;
       }
     }
 
@@ -770,6 +1134,43 @@
       .login-modal-btn {
         width: 100%;
       }
+
+      .demographics-charts {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .chart-container {
+        padding: 20px;
+      }
+
+      .chart-wrapper {
+        height: 220px;
+      }
+
+      .chart-wrapper canvas {
+        max-height: 220px !important;
+      }
+
+      .chart-title {
+        font-size: 1.2rem;
+      }
+
+      .no-data-message {
+        padding: 40px 20px;
+      }
+
+      .no-data-message i {
+        font-size: 2.5rem;
+      }
+
+      .no-data-message h3 {
+        font-size: 1.3rem;
+      }
+
+      .no-data-message p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -788,10 +1189,7 @@
             アメリカの大学
           <% end %>
         </p>
-        <div class="hero-location">
-          <i class="fas fa-map-marker-alt"></i>
-          <%= @college.address %>, <%= @college.city %>, <%= @college.state %>, <%= @college.zip %>
-        </div>
+        <%# Address display hidden per user request %>
 
         <!-- お気に入りボタン・比較ボタン -->
         <div class="action-buttons">
@@ -836,6 +1234,131 @@
       <div class="main-content">
         <div class="content-padding">
           
+          <!-- Special Designations & Campus Info -->
+          <div class="section">
+            <h2 class="section-title">大学の特色・キャンパス情報</h2>
+            
+            <div class="campus-info-grid">
+              <%# Special Designations section removed per user request %>
+
+              <!-- Campus Location Details -->
+              <div class="campus-location">
+                <h3 class="subsection-title">
+                  <i class="fas fa-map-marker-alt"></i>
+                  キャンパス立地
+                </h3>
+                <div class="location-details">
+                  <div class="location-item">
+                    <i class="fas fa-city"></i>
+                    <div class="location-content">
+                      <strong>所在地</strong>
+                      <span><%= @college.city %>, <%=
+                        if @college.state
+                          case @college.state.gsub(/\s*\(.*?\)/, '')
+                          when 'AL' then 'アラバマ州'
+                          when 'AK' then 'アラスカ州'
+                          when 'AZ' then 'アリゾナ州'
+                          when 'AR' then 'アーカンソー州'
+                          when 'CA' then 'カリフォルニア州'
+                          when 'CO' then 'コロラド州'
+                          when 'CT' then 'コネチカット州'
+                          when 'DE' then 'デラウェア州'
+                          when 'FL' then 'フロリダ州'
+                          when 'GA' then 'ジョージア州'
+                          when 'HI' then 'ハワイ州'
+                          when 'ID' then 'アイダホ州'
+                          when 'IL' then 'イリノイ州'
+                          when 'IN' then 'インディアナ州'
+                          when 'IA' then 'アイオワ州'
+                          when 'KS' then 'カンザス州'
+                          when 'KY' then 'ケンタッキー州'
+                          when 'LA' then 'ルイジアナ州'
+                          when 'ME' then 'メイン州'
+                          when 'MD' then 'メリーランド州'
+                          when 'MA' then 'マサチューセッツ州'
+                          when 'MI' then 'ミシガン州'
+                          when 'MN' then 'ミネソタ州'
+                          when 'MS' then 'ミシシッピ州'
+                          when 'MO' then 'ミズーリ州'
+                          when 'MT' then 'モンタナ州'
+                          when 'NE' then 'ネブラスカ州'
+                          when 'NV' then 'ネバダ州'
+                          when 'NH' then 'ニューハンプシャー州'
+                          when 'NJ' then 'ニュージャージー州'
+                          when 'NM' then 'ニューメキシコ州'
+                          when 'NY' then 'ニューヨーク州'
+                          when 'NC' then 'ノースカロライナ州'
+                          when 'ND' then 'ノースダコタ州'
+                          when 'OH' then 'オハイオ州'
+                          when 'OK' then 'オクラホマ州'
+                          when 'OR' then 'オレゴン州'
+                          when 'PA' then 'ペンシルベニア州'
+                          when 'RI' then 'ロードアイランド州'
+                          when 'SC' then 'サウスカロライナ州'
+                          when 'SD' then 'サウスダコタ州'
+                          when 'TN' then 'テネシー州'
+                          when 'TX' then 'テキサス州'
+                          when 'UT' then 'ユタ州'
+                          when 'VT' then 'バーモント州'
+                          when 'VA' then 'バージニア州'
+                          when 'WA' then 'ワシントン州'
+                          when 'WV' then 'ウェストバージニア州'
+                          when 'WI' then 'ウィスコンシン州'
+                          when 'WY' then 'ワイオミング州'
+                          when 'DC' then 'ワシントンD.C.'
+                          when 'PR' then 'プエルトリコ'
+                          else @college.state
+                          end
+                        else
+                          'N/A'
+                        end
+                      %></span>
+                    </div>
+                  </div>
+                  
+                  <div class="location-item">
+                    <i class="fas fa-map"></i>
+                    <div class="location-content">
+                      <strong>環境</strong>
+                      <span><%=
+                        case @college.urbanicity&.to_i
+                        when 11
+                          "大都市（人口25万人以上の中心部）"
+                        when 12
+                          "中都市（人口10-25万人の中心部）"
+                        when 13
+                          "小都市（人口2.5-10万人の中心部）"
+                        when 21
+                          "大都市郊外（人口25万人以上の郊外）"
+                        when 22
+                          "中都市郊外（人口10-25万人の郊外）"
+                        when 23
+                          "小都市郊外（人口2.5-10万人の郊外）"
+                        when 31
+                          "近隣町（都市部から近い町）"
+                        when 32
+                          "遠方町（都市部から遠い町）"
+                        when 33
+                          "僻地町（都市部から非常に遠い町）"
+                        when 41
+                          "近隣地方（都市部から近い農村地域）"
+                        when 42
+                          "遠方地方（都市部から遠い農村地域）"
+                        when 43
+                          "僻地（都市部から非常に遠い農村地域）"
+                        else
+                          "詳細情報なし"
+                        end
+                      %></span>
+                    </div>
+                  </div>
+                  
+                  <%# Postal code removed per user request %>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- University Comment Section -->
           <% if @college.comment.present? %>
           <div class="section">
@@ -882,12 +1405,86 @@
               <div class="detail-card">
                 <div class="detail-icon"><i class="fas fa-map-marked-alt"></i></div>
                 <div class="detail-title">州</div>
-                <div class="detail-value"><%= @college.state ? @college.state.gsub(/\s*\(.*?\)/, '') : "N/A" %></div>
+                <div class="detail-value"><%=
+                  if @college.state
+                    case @college.state.gsub(/\s*\(.*?\)/, '')
+                    when 'AL' then 'アラバマ州'
+                    when 'AK' then 'アラスカ州'
+                    when 'AZ' then 'アリゾナ州'
+                    when 'AR' then 'アーカンソー州'
+                    when 'CA' then 'カリフォルニア州'
+                    when 'CO' then 'コロラド州'
+                    when 'CT' then 'コネチカット州'
+                    when 'DE' then 'デラウェア州'
+                    when 'FL' then 'フロリダ州'
+                    when 'GA' then 'ジョージア州'
+                    when 'HI' then 'ハワイ州'
+                    when 'ID' then 'アイダホ州'
+                    when 'IL' then 'イリノイ州'
+                    when 'IN' then 'インディアナ州'
+                    when 'IA' then 'アイオワ州'
+                    when 'KS' then 'カンザス州'
+                    when 'KY' then 'ケンタッキー州'
+                    when 'LA' then 'ルイジアナ州'
+                    when 'ME' then 'メイン州'
+                    when 'MD' then 'メリーランド州'
+                    when 'MA' then 'マサチューセッツ州'
+                    when 'MI' then 'ミシガン州'
+                    when 'MN' then 'ミネソタ州'
+                    when 'MS' then 'ミシシッピ州'
+                    when 'MO' then 'ミズーリ州'
+                    when 'MT' then 'モンタナ州'
+                    when 'NE' then 'ネブラスカ州'
+                    when 'NV' then 'ネバダ州'
+                    when 'NH' then 'ニューハンプシャー州'
+                    when 'NJ' then 'ニュージャージー州'
+                    when 'NM' then 'ニューメキシコ州'
+                    when 'NY' then 'ニューヨーク州'
+                    when 'NC' then 'ノースカロライナ州'
+                    when 'ND' then 'ノースダコタ州'
+                    when 'OH' then 'オハイオ州'
+                    when 'OK' then 'オクラホマ州'
+                    when 'OR' then 'オレゴン州'
+                    when 'PA' then 'ペンシルベニア州'
+                    when 'RI' then 'ロードアイランド州'
+                    when 'SC' then 'サウスカロライナ州'
+                    when 'SD' then 'サウスダコタ州'
+                    when 'TN' then 'テネシー州'
+                    when 'TX' then 'テキサス州'
+                    when 'UT' then 'ユタ州'
+                    when 'VT' then 'バーモント州'
+                    when 'VA' then 'バージニア州'
+                    when 'WA' then 'ワシントン州'
+                    when 'WV' then 'ウェストバージニア州'
+                    when 'WI' then 'ウィスコンシン州'
+                    when 'WY' then 'ワイオミング州'
+                    when 'DC' then 'ワシントンD.C.'
+                    when 'PR' then 'プエルトリコ'
+                    when 'VI' then 'バージン諸島'
+                    when 'GU' then 'グアム'
+                    when 'AS' then 'アメリカ領サモア'
+                    when 'MP' then '北マリアナ諸島'
+                    else @college.state.gsub(/\s*\(.*?\)/, '')
+                    end
+                  else
+                    "N/A"
+                  end
+                %></div>
               </div>
               <div class="detail-card">
                 <div class="detail-icon"><i class="fas fa-university"></i></div>
                 <div class="detail-title">設立形態</div>
-                <div class="detail-value"><%= @college.privateorpublic || "N/A" %></div>
+                <div class="detail-value">
+                  <% if @college.privateorpublic == "私立" || @college.privateorpublic == "Private" %>
+                    私立
+                  <% elsif @college.privateorpublic == "州立" || @college.privateorpublic == "Public" %>
+                    州立
+                  <% elsif @college.privateorpublic == "営利" %>
+                    営利
+                  <% else %>
+                    <%= @college.privateorpublic || "N/A" %>
+                  <% end %>
+                </div>
               </div>
               <div class="detail-card">
                 <div class="detail-icon"><i class="fas fa-chart-line"></i></div>
@@ -900,6 +1497,327 @@
                 <div class="detail-value"><%= @college.Division || "N/A" %></div>
               </div>
             </div>
+          </div>
+
+          <!-- Demographics Section -->
+          <div class="section">
+            <h2 class="section-title">学生の人口統計</h2>
+            
+            <% 
+              # Check if any demographic data is available
+              has_ethnicity_data = @college.percent_white.present? || @college.percent_black.present? || 
+                                   @college.percent_hispanic.present? || @college.percent_asian.present? || 
+                                   @college.percent_non_resident_alien.present?
+              has_gender_data = @college.percent_men.present? || @college.percent_women.present?
+            %>
+            
+            <% if has_ethnicity_data || has_gender_data %>
+              <div class="demographics-charts">
+                <% if has_ethnicity_data %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-globe-americas"></i>
+                        民族構成
+                      </h3>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="ethnicityChart"></canvas>
+                    </div>
+                  </div>
+                <% end %>
+                
+                <% if has_gender_data %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-users"></i>
+                        性別構成
+                      </h3>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="genderChart"></canvas>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="no-data-message">
+                <i class="fas fa-chart-pie"></i>
+                <h3>人口統計データは現在利用できません</h3>
+                <p>この大学の詳細な人口統計データは準備中です。</p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Test Scores Section -->
+          <div class="section">
+            <h2 class="section-title">テストスコア</h2>
+            
+            <% 
+              # Check if any test score data is available
+              has_sat_data = @college.sat_math_25.present? || @college.sat_math_75.present? || 
+                            @college.sat_reading_25.present? || @college.sat_reading_75.present?
+              has_act_data = @college.act_composite_25.present? || @college.act_composite_75.present?
+            %>
+            
+            <% if has_sat_data || has_act_data %>
+              <div class="test-scores-charts">
+                <% if has_sat_data %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-chart-bar"></i>
+                        SATスコア範囲（25th-75th percentile）
+                        <span class="info-icon" title="SATスコアの詳細情報">
+                          <i class="fas fa-info-circle"></i>
+                        </span>
+                      </h3>
+                      <div class="chart-description">
+                        <p>入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</p>
+                      </div>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="satChart"></canvas>
+                    </div>
+                    <div class="score-details">
+                      <div class="score-explanation">
+                        <h4>SATについて</h4>
+                        <ul>
+                          <li><strong>数学セクション:</strong> 200-800点（代数、幾何学、三角法、データ分析）</li>
+                          <li><strong>読解セクション:</strong> 200-800点（読解力、文法、語彙）</li>
+                          <li><strong>総合スコア:</strong> 400-1600点（数学+読解）</li>
+                          <li><strong>全米平均:</strong> 数学 520点、読解 530点、総合 1050点</li>
+                          <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+                
+                <% if has_act_data %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-chart-bar"></i>
+                        ACTスコア範囲（25th-75th percentile）
+                        <span class="info-icon" title="ACTスコアの詳細情報">
+                          <i class="fas fa-info-circle"></i>
+                        </span>
+                      </h3>
+                      <div class="chart-description">
+                        <p>入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</p>
+                      </div>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="actChart"></canvas>
+                    </div>
+                    <div class="score-details">
+                      <div class="score-explanation">
+                        <h4>ACTについて</h4>
+                        <ul>
+                          <li><strong>総合スコア:</strong> 1-36点（4つのセクションの平均）</li>
+                          <li><strong>英語セクション:</strong> 1-36点（文法、修辞技法）</li>
+                          <li><strong>数学セクション:</strong> 1-36点（代数、幾何学、三角法）</li>
+                          <li><strong>読解セクション:</strong> 1-36点（散文、人文科学、社会科学、自然科学）</li>
+                          <li><strong>科学セクション:</strong> 1-36点（データ解釈、研究要約、対立する視点）</li>
+                          <li><strong>全米平均:</strong> 約21点</li>
+                          <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="no-data-message">
+                <i class="fas fa-chart-bar"></i>
+                <h3>テストスコアデータは現在利用できません</h3>
+                <p>この大学のSAT・ACTスコア情報は準備中です。</p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Post-Graduation Earnings Section -->
+          <div class="section">
+            <h2 class="section-title">卒業後の収入</h2>
+            
+            <% 
+              # Check if any earnings data is available
+              has_earnings_data = @college.earnings_6yr_median.present? || @college.earnings_10yr_median.present?
+            %>
+            
+            <% if has_earnings_data %>
+              <div class="test-scores-charts">
+                <div class="chart-container">
+                  <div class="chart-header">
+                    <h3 class="chart-title">
+                      <i class="fas fa-dollar-sign"></i>
+                      卒業後の年収推移
+                      <span class="info-icon" title="卒業後の収入データの詳細情報">
+                        <i class="fas fa-info-circle"></i>
+                      </span>
+                    </h3>
+                    <div class="chart-description">
+                      <p>この大学の卒業生の年収中央値。6年後は入学から6年経過時点、10年後は入学から10年経過時点の収入を示しています</p>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="earningsChart"></canvas>
+                  </div>
+                  <div class="score-details">
+                    <div class="score-explanation">
+                      <h4>収入データについて</h4>
+                      <ul>
+                        <li><strong>6年後収入:</strong> 入学から6年後の年収中央値（多くの場合、卒業から2年後）</li>
+                        <li><strong>10年後収入:</strong> 入学から10年後の年収中央値（多くの場合、卒業から6年後）</li>
+                        <li><strong>データ元:</strong> 連邦政府の税務・学生ローンデータに基づく</li>
+                        <li><strong>全米平均（学士号）:</strong> 6年後 約$35,000、10年後 約$45,000</li>
+                        <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="no-data-message">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>収入データは現在利用できません</h3>
+                <p>この大学の卒業後収入情報は準備中です。</p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Financial Aid & Costs Section -->
+          <div class="section">
+            <h2 class="section-title">学費・経済援助</h2>
+            
+            <% 
+              # Check if any financial aid data is available
+              has_aid_data = @college.pell_grant_rate.present? || @college.federal_loan_rate.present? || @college.room_board_cost.present?
+            %>
+            
+            <% if has_aid_data %>
+              <div class="test-scores-charts">
+                <% if @college.pell_grant_rate.present? || @college.federal_loan_rate.present? %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-chart-pie"></i>
+                        経済援助利用状況
+                        <span class="info-icon" title="経済援助の詳細情報">
+                          <i class="fas fa-info-circle"></i>
+                        </span>
+                      </h3>
+                      <div class="chart-description">
+                        <p>学生の経済援助利用率。Pell Grantは低所得世帯向け、Federal Loanは連邦学生ローンの利用率を示します</p>
+                      </div>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="financialAidChart"></canvas>
+                    </div>
+                    <div class="score-details">
+                      <div class="score-explanation">
+                        <h4>経済援助について</h4>
+                        <ul>
+                          <li><strong>Pell Grant:</strong> 返済不要の連邦政府奨学金（年収約$50,000以下の世帯が対象）</li>
+                          <li><strong>Federal Loan:</strong> 連邦学生ローン（低金利で返済条件が良い）</li>
+                          <li><strong>全米平均:</strong> Pell Grant 約35%、Federal Loan 約50%</li>
+                          <li><strong>高い利用率:</strong> 経済的に多様な学生が在籍していることを示す</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+                
+                <% if @college.room_board_cost.present? %>
+                  <div class="chart-container">
+                    <div class="chart-header">
+                      <h3 class="chart-title">
+                        <i class="fas fa-home"></i>
+                        年間費用内訳
+                        <span class="info-icon" title="年間費用の詳細情報">
+                          <i class="fas fa-info-circle"></i>
+                        </span>
+                      </h3>
+                      <div class="chart-description">
+                        <p>年間の主要費用項目。授業料と寮費・食費を比較して総費用を把握できます</p>
+                      </div>
+                    </div>
+                    <div class="chart-wrapper">
+                      <canvas id="costsChart"></canvas>
+                    </div>
+                    <div class="score-details">
+                      <div class="score-explanation">
+                        <h4>費用について</h4>
+                        <ul>
+                          <li><strong>授業料:</strong> 年間の学費（州立大学は州外学生向け料金を表示）</li>
+                          <li><strong>寮費・食費:</strong> キャンパス内居住の年間費用</li>
+                          <li><strong>総費用:</strong> 授業料 + 寮費・食費（教材費・雑費は含まず）</li>
+                          <li><strong>全米平均:</strong> 州立大学 約$25,000、私立大学 約$55,000</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="no-data-message">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>学費・経済援助データは現在利用できません</h3>
+                <p>この大学の経済援助情報は準備中です。</p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Student Support & Retention Section -->
+          <div class="section">
+            <h2 class="section-title">学生サポート・継続率</h2>
+            
+            <% 
+              # Check if retention data is available
+              has_retention_data = @college.retention_rate.present?
+            %>
+            
+            <% if has_retention_data %>
+              <div class="test-scores-charts">
+                <div class="chart-container">
+                  <div class="chart-header">
+                    <h3 class="chart-title">
+                      <i class="fas fa-user-graduate"></i>
+                      1年生継続率
+                      <span class="info-icon" title="継続率の詳細情報">
+                        <i class="fas fa-info-circle"></i>
+                      </span>
+                    </h3>
+                    <div class="chart-description">
+                      <p>1年生が2年生に進級する割合。学生サポートの質や満足度を示す重要な指標です</p>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="retentionChart"></canvas>
+                  </div>
+                  <div class="score-details">
+                    <div class="score-explanation">
+                      <h4>継続率について</h4>
+                      <ul>
+                        <li><strong>継続率:</strong> 1年生が翌年も在籍している割合</li>
+                        <li><strong>全米平均:</strong> 約81%（4年制大学）</li>
+                        <li><strong>高い継続率:</strong> 充実した学生サポート、満足度の高さを示す</li>
+                        <li><strong>低い継続率:</strong> 経済的困難、学習サポート不足等が原因の可能性</li>
+                        <li><strong>判断基準:</strong> 80%以上は良好、70%未満は要注意</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="no-data-message">
+                <i class="fas fa-user-graduate"></i>
+                <h3>継続率データは現在利用できません</h3>
+                <p>この大学の学生継続率情報は準備中です。</p>
+              </div>
+            <% end %>
           </div>
 
           <!-- Major Information Section -->
@@ -1335,6 +2253,9 @@
         // ページ読み込み時に比較リストの状態を確認
         checkCompareStatus(compareBtn);
       }
+
+      // Initialize demographics charts
+      initializeDemographicsCharts();
     });
     
     // ログインモーダル表示
@@ -1391,6 +2312,1031 @@
       // 後でヘッダーに比較数表示を実装予定
       console.log('Compare count:', count);
     }
+
+    // Helper function to get ACT percentile approximation
+    function getACTPercentile(score) {
+      const percentiles = {
+        36: 99, 35: 99, 34: 99, 33: 98, 32: 97,
+        31: 95, 30: 93, 29: 91, 28: 88, 27: 85,
+        26: 82, 25: 79, 24: 76, 23: 73, 22: 69,
+        21: 65, 20: 61, 19: 57, 18: 53, 17: 49,
+        16: 45, 15: 40, 14: 36, 13: 32, 12: 28,
+        11: 24, 10: 20, 9: 16, 8: 13, 7: 10,
+        6: 7, 5: 5, 4: 3, 3: 2, 2: 1, 1: 1
+      };
+      return percentiles[score] || 0;
+    }
+
+    // Demographics Charts
+    function initializeDemographicsCharts() {
+      <% if has_ethnicity_data %>
+        // Prepare ethnicity data
+        const ethnicityData = {
+          labels: [],
+          data: [],
+          colors: []
+        };
+
+        <% if @college.percent_white.present? && @college.percent_white > 0 %>
+          ethnicityData.labels.push('白人');
+          ethnicityData.data.push(<%= (@college.percent_white * 100).round(1) %>);
+          ethnicityData.colors.push('#3B82F6');
+        <% end %>
+
+        <% if @college.percent_black.present? && @college.percent_black > 0 %>
+          ethnicityData.labels.push('黒人');
+          ethnicityData.data.push(<%= (@college.percent_black * 100).round(1) %>);
+          ethnicityData.colors.push('#8B5CF6');
+        <% end %>
+
+        <% if @college.percent_hispanic.present? && @college.percent_hispanic > 0 %>
+          ethnicityData.labels.push('ヒスパニック系');
+          ethnicityData.data.push(<%= (@college.percent_hispanic * 100).round(1) %>);
+          ethnicityData.colors.push('#10B981');
+        <% end %>
+
+        <% if @college.percent_asian.present? && @college.percent_asian > 0 %>
+          ethnicityData.labels.push('アジア系');
+          ethnicityData.data.push(<%= (@college.percent_asian * 100).round(1) %>);
+          ethnicityData.colors.push('#F59E0B');
+        <% end %>
+
+        <% if @college.percent_non_resident_alien.present? && @college.percent_non_resident_alien > 0 %>
+          ethnicityData.labels.push('留学生');
+          ethnicityData.data.push(<%= (@college.percent_non_resident_alien * 100).round(1) %>);
+          ethnicityData.colors.push('#EF4444');
+        <% end %>
+
+        // Create ethnicity chart
+        if (ethnicityData.labels.length > 0) {
+          const ethnicityCtx = document.getElementById('ethnicityChart');
+          if (ethnicityCtx) {
+            new Chart(ethnicityCtx, {
+              type: 'pie',
+              data: {
+                labels: ethnicityData.labels,
+                datasets: [{
+                  data: ethnicityData.data,
+                  backgroundColor: ethnicityData.colors,
+                  borderColor: '#ffffff',
+                  borderWidth: 3,
+                  hoverBorderWidth: 4,
+                  hoverOffset: 8
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'bottom',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568',
+                      usePointStyle: true,
+                      pointStyle: 'circle'
+                    }
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    displayColors: true,
+                    callbacks: {
+                      label: function(context) {
+                        return context.label + ': ' + context.parsed + '%';
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  animateScale: true,
+                  animateRotate: true,
+                  duration: 1000
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      <% if has_gender_data %>
+        // Prepare gender data
+        const genderData = {
+          labels: [],
+          data: [],
+          colors: []
+        };
+
+        <% if @college.percent_men.present? && @college.percent_men > 0 %>
+          genderData.labels.push('男性');
+          genderData.data.push(<%= (@college.percent_men * 100).round(1) %>);
+          genderData.colors.push('#3B82F6');
+        <% end %>
+
+        <% if @college.percent_women.present? && @college.percent_women > 0 %>
+          genderData.labels.push('女性');
+          genderData.data.push(<%= (@college.percent_women * 100).round(1) %>);
+          genderData.colors.push('#EC4899');
+        <% end %>
+
+        // Create gender chart
+        if (genderData.labels.length > 0) {
+          const genderCtx = document.getElementById('genderChart');
+          if (genderCtx) {
+            new Chart(genderCtx, {
+              type: 'pie',
+              data: {
+                labels: genderData.labels,
+                datasets: [{
+                  data: genderData.data,
+                  backgroundColor: genderData.colors,
+                  borderColor: '#ffffff',
+                  borderWidth: 3,
+                  hoverBorderWidth: 4,
+                  hoverOffset: 8
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'bottom',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568',
+                      usePointStyle: true,
+                      pointStyle: 'circle'
+                    }
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    displayColors: true,
+                    callbacks: {
+                      label: function(context) {
+                        return context.label + ': ' + context.parsed + '%';
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  animateScale: true,
+                  animateRotate: true,
+                  duration: 1000
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      // Test Scores Charts
+      <% if has_sat_data %>
+        const satData = {
+          labels: [],
+          data: []
+        };
+
+        <% if @college.sat_math_25.present? && @college.sat_math_75.present? %>
+          satData.labels.push('数学');
+          satData.data.push([<%= @college.sat_math_25 %>, <%= @college.sat_math_75 %>]);
+        <% end %>
+
+        <% if @college.sat_reading_25.present? && @college.sat_reading_75.present? %>
+          satData.labels.push('読解');
+          satData.data.push([<%= @college.sat_reading_25 %>, <%= @college.sat_reading_75 %>]);
+        <% end %>
+
+        if (satData.labels.length > 0) {
+          const satCtx = document.getElementById('satChart');
+          if (satCtx) {
+            // SAT national averages (Math: ~520, Reading: ~530)
+            const satAverages = {
+              '数学': 520,
+              '読解': 530
+            };
+
+            new Chart(satCtx, {
+              type: 'bar',
+              data: {
+                labels: satData.labels,
+                datasets: [{
+                  label: '25th percentile',
+                  data: satData.data.map(range => range[0]),
+                  backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                  borderColor: 'rgba(59, 130, 246, 1)',
+                  borderWidth: 2
+                }, {
+                  label: '75th percentile',
+                  data: satData.data.map(range => range[1]),
+                  backgroundColor: 'rgba(251, 146, 60, 0.8)',
+                  borderColor: 'rgba(251, 146, 60, 1)',
+                  borderWidth: 2
+                }, {
+                  label: '全米平均',
+                  data: satData.labels.map(label => satAverages[label]),
+                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                  borderColor: 'rgba(239, 68, 68, 1)',
+                  borderWidth: 2,
+                  type: 'bar'
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568'
+                    }
+                  },
+                  datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#2d3748',
+                    font: {
+                      family: 'Inter, sans-serif',
+                      weight: '600',
+                      size: 12
+                    },
+                    formatter: function(value, context) {
+                      return value + ' 点';
+                    },
+                    offset: 4
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 12,
+                    callbacks: {
+                      title: function(context) {
+                        return 'SAT ' + context[0].label + ' セクション';
+                      },
+                      label: function(context) {
+                        const score = context.parsed.x;
+                        const percentile = context.dataset.label;
+                        let interpretation = '';
+                        let comparison = '';
+                        
+                        if (context.label === '数学') {
+                          const average = 520;
+                          const diff = score - average;
+                          comparison = diff > 0 ? `全米平均より${diff}点高い` : diff < 0 ? `全米平均より${Math.abs(diff)}点低い` : '全米平均と同じ';
+                          
+                          if (score >= 700) interpretation = '非常に高い（難関大学レベル）';
+                          else if (score >= 600) interpretation = '高い（中上位大学レベル）';
+                          else if (score >= 500) interpretation = '平均的';
+                          else interpretation = '平均以下';
+                        } else if (context.label === '読解') {
+                          const average = 530;
+                          const diff = score - average;
+                          comparison = diff > 0 ? `全米平均より${diff}点高い` : diff < 0 ? `全米平均より${Math.abs(diff)}点低い` : '全米平均と同じ';
+                          
+                          if (score >= 700) interpretation = '非常に高い（難関大学レベル）';
+                          else if (score >= 600) interpretation = '高い（中上位大学レベル）';
+                          else if (score >= 500) interpretation = '平均的';
+                          else interpretation = '平均以下';
+                        }
+                        
+                        return [
+                          percentile + ': ' + score + ' 点',
+                          '評価: ' + interpretation,
+                          comparison
+                        ];
+                      },
+                      footer: function(context) {
+                        return ['', 'このスコア範囲内に入学者の50%が含まれます'];
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                    max: 800,
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif'
+                      }
+                    }
+                  },
+                  y: {
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif',
+                        weight: '500'
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  duration: 1000,
+                  easing: 'easeOutCubic'
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      <% if has_act_data %>
+        const actData = {
+          labels: ['ACT総合'],
+          data: []
+        };
+
+        <% if @college.act_composite_25.present? && @college.act_composite_75.present? %>
+          actData.data.push([<%= @college.act_composite_25 %>, <%= @college.act_composite_75 %>]);
+        <% end %>
+
+        if (actData.data.length > 0) {
+          const actCtx = document.getElementById('actChart');
+          if (actCtx) {
+            // ACT national average (~21)
+            const actAverage = 21;
+
+            new Chart(actCtx, {
+              type: 'bar',
+              data: {
+                labels: actData.labels,
+                datasets: [{
+                  label: '25th percentile',
+                  data: actData.data.map(range => range[0]),
+                  backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                  borderColor: 'rgba(16, 185, 129, 1)',
+                  borderWidth: 2
+                }, {
+                  label: '75th percentile',
+                  data: actData.data.map(range => range[1]),
+                  backgroundColor: 'rgba(139, 92, 246, 0.8)',
+                  borderColor: 'rgba(139, 92, 246, 1)',
+                  borderWidth: 2
+                }, {
+                  label: '全米平均',
+                  data: [actAverage],
+                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                  borderColor: 'rgba(239, 68, 68, 1)',
+                  borderWidth: 2,
+                  type: 'bar'
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568'
+                    }
+                  },
+                  datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#2d3748',
+                    font: {
+                      family: 'Inter, sans-serif',
+                      weight: '600',
+                      size: 12
+                    },
+                    formatter: function(value, context) {
+                      return value + ' 点';
+                    },
+                    offset: 4
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 12,
+                    callbacks: {
+                      title: function(context) {
+                        return 'ACT 総合スコア';
+                      },
+                      label: function(context) {
+                        const score = context.parsed.x;
+                        const percentile = context.dataset.label;
+                        let interpretation = '';
+                        
+                        // ACT average comparison
+                        const average = 21;
+                        const diff = score - average;
+                        const comparison = diff > 0 ? `全米平均より${diff}点高い` : diff < 0 ? `全米平均より${Math.abs(diff)}点低い` : '全米平均と同じ';
+                        
+                        if (score >= 30) interpretation = '非常に高い（難関大学レベル）';
+                        else if (score >= 24) interpretation = '高い（中上位大学レベル）';
+                        else if (score >= 20) interpretation = '平均的';
+                        else interpretation = '平均以下';
+                        
+                        return [
+                          percentile + ': ' + score + ' 点',
+                          '評価: ' + interpretation,
+                          comparison,
+                          '全米での順位: 約' + getACTPercentile(score) + '%ile'
+                        ];
+                      },
+                      footer: function(context) {
+                        return ['', 'このスコア範囲内に入学者の50%が含まれます'];
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                    max: 36,
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif'
+                      }
+                    }
+                  },
+                  y: {
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif',
+                        weight: '500'
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  duration: 1000,
+                  easing: 'easeOutCubic'
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      // Earnings Chart
+      <% if has_earnings_data %>
+        const earningsData = {
+          labels: [],
+          data: []
+        };
+
+        <% if @college.earnings_6yr_median.present? %>
+          earningsData.labels.push('6年後');
+          earningsData.data.push(<%= @college.earnings_6yr_median %>);
+        <% end %>
+
+        <% if @college.earnings_10yr_median.present? %>
+          earningsData.labels.push('10年後');
+          earningsData.data.push(<%= @college.earnings_10yr_median %>);
+        <% end %>
+
+        if (earningsData.labels.length > 0) {
+          const earningsCtx = document.getElementById('earningsChart');
+          if (earningsCtx) {
+            // US national averages for bachelor's degree holders
+            const nationalAverages = {
+              '6年後': 35000,
+              '10年後': 45000
+            };
+
+            new Chart(earningsCtx, {
+              type: 'bar',
+              data: {
+                labels: earningsData.labels,
+                datasets: [{
+                  label: 'この大学の卒業生',
+                  data: earningsData.data,
+                  backgroundColor: 'rgba(34, 197, 94, 0.8)',
+                  borderColor: 'rgba(34, 197, 94, 1)',
+                  borderWidth: 2
+                }, {
+                  label: '全米平均',
+                  data: earningsData.labels.map(label => nationalAverages[label]),
+                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                  borderColor: 'rgba(239, 68, 68, 1)',
+                  borderWidth: 2,
+                  type: 'bar'
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568'
+                    }
+                  },
+                  datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#2d3748',
+                    font: {
+                      family: 'Inter, sans-serif',
+                      weight: '600',
+                      size: 12
+                    },
+                    formatter: function(value, context) {
+                      return '$' + (value / 1000).toFixed(0) + 'K';
+                    },
+                    offset: 4
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    padding: 12,
+                    callbacks: {
+                      title: function(context) {
+                        return '卒業' + context[0].label + 'の年収';
+                      },
+                      label: function(context) {
+                        const earnings = context.parsed.x;
+                        const dataset = context.dataset.label;
+                        
+                        // Comparison with national average
+                        let comparison = '';
+                        if (dataset === 'この大学の卒業生') {
+                          const avgKey = context.label;
+                          const average = nationalAverages[avgKey];
+                          const diff = earnings - average;
+                          comparison = diff > 0 ? `全米平均より$${diff.toLocaleString()}高い` : 
+                                     diff < 0 ? `全米平均より$${Math.abs(diff).toLocaleString()}低い` : 
+                                     '全米平均と同じ';
+                        }
+                        
+                        return [
+                          dataset + ': $' + earnings.toLocaleString(),
+                          comparison
+                        ].filter(Boolean);
+                      },
+                      footer: function(context) {
+                        return ['', '年収中央値（税込み）'];
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif'
+                      },
+                      callback: function(value) {
+                        return '$' + (value / 1000) + 'K';
+                      }
+                    }
+                  },
+                  y: {
+                    grid: {
+                      color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                      color: '#4a5568',
+                      font: {
+                        family: 'Inter, sans-serif',
+                        weight: '500'
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  duration: 1000,
+                  easing: 'easeOutCubic'
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      // Financial Aid Chart
+      <% if has_aid_data && (@college.pell_grant_rate.present? || @college.federal_loan_rate.present?) %>
+        const aidData = {
+          labels: [],
+          data: [],
+          colors: []
+        };
+
+        <% if @college.pell_grant_rate.present? %>
+          aidData.labels.push('Pell Grant利用');
+          aidData.data.push(<%= (@college.pell_grant_rate * 100).round(1) %>);
+          aidData.colors.push('#10B981');
+        <% end %>
+
+        <% if @college.federal_loan_rate.present? %>
+          aidData.labels.push('連邦ローン利用');
+          aidData.data.push(<%= (@college.federal_loan_rate * 100).round(1) %>);
+          aidData.colors.push('#F59E0B');
+        <% end %>
+
+        if (aidData.labels.length > 0) {
+          const aidCtx = document.getElementById('financialAidChart');
+          if (aidCtx) {
+            new Chart(aidCtx, {
+              type: 'pie',
+              data: {
+                labels: aidData.labels,
+                datasets: [{
+                  data: aidData.data,
+                  backgroundColor: aidData.colors,
+                  borderColor: '#ffffff',
+                  borderWidth: 3,
+                  hoverBorderWidth: 4,
+                  hoverOffset: 8
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'bottom',
+                    labels: {
+                      padding: 20,
+                      fontSize: 12,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      color: '#4a5568',
+                      usePointStyle: true,
+                      pointStyle: 'circle'
+                    }
+                  },
+                  tooltip: {
+                    backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#fdba74',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    callbacks: {
+                      label: function(context) {
+                        const percentage = context.parsed;
+                        const label = context.label;
+                        let nationalAvg = '';
+                        
+                        if (label.includes('Pell Grant')) {
+                          nationalAvg = '（全米平均: 35%）';
+                        } else if (label.includes('連邦ローン')) {
+                          nationalAvg = '（全米平均: 50%）';
+                        }
+                        
+                        return [
+                          label + ': ' + percentage + '%',
+                          nationalAvg
+                        ];
+                      }
+                    }
+                  }
+                },
+                animation: {
+                  animateScale: true,
+                  animateRotate: true,
+                  duration: 1000
+                },
+                layout: {
+                  padding: 20
+                }
+              }
+            });
+          }
+        }
+      <% end %>
+
+      // Costs Chart
+      <% if has_aid_data && @college.room_board_cost.present? %>
+        const costsCtx = document.getElementById('costsChart');
+        if (costsCtx) {
+          const tuitionCost = <%= @college.tuition_out_state || @college.tuition || 0 %>;
+          const roomBoardCost = <%= @college.room_board_cost %>;
+          
+          new Chart(costsCtx, {
+            type: 'bar',
+            data: {
+              labels: ['年間費用'],
+              datasets: [{
+                label: '授業料',
+                data: [tuitionCost],
+                backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 2
+              }, {
+                label: '寮費・食費',
+                data: [roomBoardCost],
+                backgroundColor: 'rgba(251, 146, 60, 0.8)',
+                borderColor: 'rgba(251, 146, 60, 1)',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  stacked: true,
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                  },
+                  ticks: {
+                    color: '#4a5568',
+                    font: {
+                      family: 'Inter, sans-serif'
+                    }
+                  }
+                },
+                y: {
+                  stacked: true,
+                  beginAtZero: true,
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                  },
+                  ticks: {
+                    color: '#4a5568',
+                    font: {
+                      family: 'Inter, sans-serif'
+                    },
+                    callback: function(value) {
+                      return '$' + (value / 1000) + 'K';
+                    }
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                  position: 'top',
+                  labels: {
+                    padding: 20,
+                    fontSize: 12,
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: '500',
+                    color: '#4a5568'
+                  }
+                },
+                datalabels: {
+                  display: true,
+                  anchor: 'center',
+                  align: 'center',
+                  color: '#ffffff',
+                  font: {
+                    family: 'Inter, sans-serif',
+                    weight: '600',
+                    size: 11
+                  },
+                  formatter: function(value, context) {
+                    return '$' + (value / 1000).toFixed(0) + 'K';
+                  }
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                  titleColor: '#ffffff',
+                  bodyColor: '#ffffff',
+                  borderColor: '#fdba74',
+                  borderWidth: 1,
+                  cornerRadius: 8,
+                  callbacks: {
+                    label: function(context) {
+                      const cost = context.parsed.y;
+                      return context.dataset.label + ': $' + cost.toLocaleString();
+                    },
+                    footer: function(context) {
+                      const total = tuitionCost + roomBoardCost;
+                      return ['', '年間総費用: $' + total.toLocaleString()];
+                    }
+                  }
+                }
+              },
+              animation: {
+                duration: 1000,
+                easing: 'easeOutCubic'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          });
+        }
+      <% end %>
+
+      // Retention Rate Chart
+      <% if has_retention_data %>
+        const retentionCtx = document.getElementById('retentionChart');
+        if (retentionCtx) {
+          const retentionRate = <%= (@college.retention_rate * 100).round(1) %>;
+          const nationalAverage = 81;
+          
+          new Chart(retentionCtx, {
+            type: 'bar',
+            data: {
+              labels: ['1年生継続率'],
+              datasets: [{
+                label: 'この大学',
+                data: [retentionRate],
+                backgroundColor: retentionRate >= 80 ? 'rgba(34, 197, 94, 0.8)' : 
+                                  retentionRate >= 70 ? 'rgba(251, 146, 60, 0.8)' : 'rgba(239, 68, 68, 0.8)',
+                borderColor: retentionRate >= 80 ? 'rgba(34, 197, 94, 1)' : 
+                            retentionRate >= 70 ? 'rgba(251, 146, 60, 1)' : 'rgba(239, 68, 68, 1)',
+                borderWidth: 2
+              }, {
+                label: '全米平均',
+                data: [nationalAverage],
+                backgroundColor: 'rgba(107, 114, 128, 0.7)',
+                borderColor: 'rgba(107, 114, 128, 1)',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'top',
+                  labels: {
+                    padding: 20,
+                    fontSize: 12,
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: '500',
+                    color: '#4a5568'
+                  }
+                },
+                datalabels: {
+                  display: true,
+                  anchor: 'end',
+                  align: 'right',
+                  color: '#2d3748',
+                  font: {
+                    family: 'Inter, sans-serif',
+                    weight: '600',
+                    size: 12
+                  },
+                  formatter: function(value, context) {
+                    return value + '%';
+                  },
+                  offset: 4
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(45, 55, 72, 0.95)',
+                  titleColor: '#ffffff',
+                  bodyColor: '#ffffff',
+                  borderColor: '#fdba74',
+                  borderWidth: 1,
+                  cornerRadius: 8,
+                  callbacks: {
+                    label: function(context) {
+                      const rate = context.parsed.x;
+                      const dataset = context.dataset.label;
+                      
+                      let evaluation = '';
+                      if (dataset === 'この大学') {
+                        if (rate >= 80) evaluation = '良好';
+                        else if (rate >= 70) evaluation = '平均的';
+                        else evaluation = '要注意';
+                        
+                        const diff = rate - nationalAverage;
+                        const comparison = diff > 0 ? `全米平均より${diff.toFixed(1)}%高い` : 
+                                         diff < 0 ? `全米平均より${Math.abs(diff).toFixed(1)}%低い` : 
+                                         '全米平均と同じ';
+                        
+                        return [
+                          dataset + ': ' + rate + '%',
+                          '評価: ' + evaluation,
+                          comparison
+                        ];
+                      }
+                      
+                      return dataset + ': ' + rate + '%';
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  beginAtZero: true,
+                  max: 100,
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                  },
+                  ticks: {
+                    color: '#4a5568',
+                    font: {
+                      family: 'Inter, sans-serif'
+                    },
+                    callback: function(value) {
+                      return value + '%';
+                    }
+                  }
+                },
+                y: {
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)'
+                  },
+                  ticks: {
+                    color: '#4a5568',
+                    font: {
+                      family: 'Inter, sans-serif',
+                      weight: '500'
+                    }
+                  }
+                }
+              },
+              animation: {
+                duration: 1000,
+                easing: 'easeOutCubic'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          });
+        }
+      <% end %>
+    }
+
+    // Register Chart.js plugins
+    Chart.register(ChartDataLabels);
+
+    // Initialize charts when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeDemographicsCharts();
+    });
   </script>
 </body>
 </html>
