@@ -833,8 +833,6 @@
                 <option value="tuition-desc">授業料 (高い順)</option>
                 <option value="graduation-asc">卒業率 (低い順)</option>
                 <option value="graduation-desc">卒業率 (高い順)</option>
-                <option value="gpa-asc">GPA (低い順)</option>
-                <option value="gpa-desc">GPA (高い順)</option>
               </select>
             </div>
           </div>
@@ -858,9 +856,6 @@
               <th class="sortable" data-sort="tuition">授業料</th>
               <th class="sortable" data-sort="graduation">卒業率</th>
               <th>立地</th>
-              <th>留学生率</th>
-              <th class="sortable" data-sort="gpa">GPA</th>
-              <th>NCAA</th>
               <th class="action-column">アクション</th>
             </tr>
           </thead>
@@ -870,7 +865,6 @@
                   data-students="<%= result.students || 0 %>"
                   data-tuition="<%= result.tuition || 0 %>"
                   data-graduation="<%= result.graduation_rate || 0 %>"
-                  data-gpa="<%= result.GPA && result.GPA != 'N/A' ? result.GPA : 0 %>"
                   data-url="<%= conditions_path(result) %>"
                   onclick="window.location.href='<%= conditions_path(result) %>'">
                 <td>
@@ -1003,9 +997,6 @@
                       "N/A"
                     end
                   %></td>
-                <td data-label="留学生率"><%= result.percent_non_resident_alien.present? ? "#{number_with_precision(result.percent_non_resident_alien * 100, precision: 1)}%" : "N/A" %></td>
-                <td data-label="GPA"><%= result.GPA || "N/A" %></td>
-                <td data-label="NCAA"><%= result.Division || "N/A" %></td>
                 <td class="action-buttons" data-label="アクション" onclick="event.stopPropagation();" style="text-align: center; padding: 8px;">
                   <div class="button-group" style="display: flex; gap: 6px; justify-content: center; align-items: center;">
                     <% if logged_in? %>
@@ -1304,7 +1295,28 @@
       const sortSelect = document.getElementById('sortSelect');
       const perPageSelect = document.getElementById('perPageSelect');
       
+      // URLパラメータから現在のソート状態を取得
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentSortParam = urlParams.get('sort');
       let currentSort = { column: null, direction: null };
+      
+      if (currentSortParam) {
+        const [column, direction] = currentSortParam.split('-');
+        currentSort = { column, direction };
+        
+        // ソートドロップダウンの値を設定
+        if (sortSelect) {
+          sortSelect.value = currentSortParam;
+        }
+        
+        // ヘッダーのソート状態を表示
+        headers.forEach(header => {
+          header.classList.remove('sort-asc', 'sort-desc');
+          if (header.getAttribute('data-sort') === column) {
+            header.classList.add(`sort-${direction}`);
+          }
+        });
+      }
 
       // 表示件数変更イベント
       if (perPageSelect) {
@@ -1318,58 +1330,11 @@
 
       // ソート関数
       function sortTable(column, direction) {
-        const sortedRows = rows.sort((a, b) => {
-          let aValue = a.getAttribute(`data-${column}`);
-          let bValue = b.getAttribute(`data-${column}`);
-          
-          // 数値として比較
-          if (column === 'students' || column === 'tuition' || column === 'graduation' || column === 'gpa') {
-            aValue = parseFloat(aValue) || 0;
-            bValue = parseFloat(bValue) || 0;
-            
-            // 授業料ソートの場合、0値（N/A）の処理
-            if (column === 'tuition') {
-              // 昇順の場合、0値（N/A）を最後に
-              if (direction === 'asc') {
-                if (aValue === 0 && bValue > 0) return 1;
-                if (bValue === 0 && aValue > 0) return -1;
-              }
-              // 降順の場合、0値（N/A）を最後に
-              else {
-                if (aValue === 0 && bValue > 0) return 1;
-                if (bValue === 0 && aValue > 0) return -1;
-              }
-            }
-          }
-          
-          // 文字列として比較
-          if (typeof aValue === 'string') {
-            aValue = aValue.toLowerCase();
-            bValue = bValue.toLowerCase();
-          }
-          
-          if (direction === 'asc') {
-            return aValue > bValue ? 1 : -1;
-          } else {
-            return aValue < bValue ? 1 : -1;
-          }
-        });
-        
-        // テーブルを再構築
-        tbody.innerHTML = '';
-        sortedRows.forEach(row => tbody.appendChild(row));
-        
-        // ヘッダーのクラスを更新（デスクトップのみ）
-        if (window.innerWidth > 768) {
-          headers.forEach(header => {
-            header.classList.remove('sort-asc', 'sort-desc');
-            if (header.getAttribute('data-sort') === column) {
-              header.classList.add(`sort-${direction}`);
-            }
-          });
-        }
-        
-        currentSort = { column, direction };
+        // サーバーサイドソートを実行
+        const currentUrl = new URL(window.location);
+        currentUrl.searchParams.set('sort', `${column}-${direction}`);
+        currentUrl.searchParams.set('page', 1); // ページをリセット
+        window.location.href = currentUrl.toString();
       }
 
       // ヘッダークリックイベント

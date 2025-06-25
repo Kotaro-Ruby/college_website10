@@ -250,7 +250,7 @@
                         nameSearchButton.style.opacity = '0.5';
                     } else {
                         // 他の条件入力がない場合は大学名検索を有効化
-                        const conditionInputs = document.querySelectorAll('.conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"]');
+                        const conditionInputs = document.querySelectorAll('.conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"], input[name="satRadios"], input[name="actRadios"]');
                         const hasOtherConditions = Array.from(conditionInputs).some(inp => {
                             if (inp.type === 'radio' || inp.type === 'checkbox') {
                                 return inp.checked && inp.value !== 'option1';
@@ -312,12 +312,6 @@
                         <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
                         <label class="form-check-label" for="radio3">
                         州立
-                        </label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
-                        <label class="form-check-label" for="radio4">
-                        2年制 (コミカレ・専門学校等)
                         </label>
                         </div>
                     </div>
@@ -435,48 +429,42 @@
                     <div class="tooltip-container3">
                         <span class="tooltip-trigger">？</span>
                         <div class="tooltip-content">
-                        現在、GPAデータを準備中です。近日中に利用可能になります。
+                        SATスコアの範囲で大学を絞り込むことができます。数学と読解の合計スコアで検索されます。
                         </div>
                     </div>   
                     <div class="line-header5">
-                    <h1><i class="fa fa-file-alt me-2"></i>入学者平均GPA（準備中）</h1>
+                    <h1><i class="fa fa-file-alt me-2"></i>SAT総合スコア</h1>
                     </div>
                 <form>
                     <div class="form-group4">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio1" value="option1" checked disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio1">
-                            指定しない（データ準備中）
+                        <input class="form-check-input" type="radio" name="satRadios" id="satRadio1" value="option1" checked>
+                        <label class="form-check-label" for="satRadio1">
+                            指定しない
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio2" value="option2" disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio2">
-                            0~2.49
+                        <input class="form-check-input" type="radio" name="satRadios" id="satRadio2" value="option2">
+                        <label class="form-check-label" for="satRadio2">
+                            800~1000
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio3" value="option3" disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio3">
-                            2.50~2.99
+                        <input class="form-check-input" type="radio" name="satRadios" id="satRadio3" value="option3">
+                        <label class="form-check-label" for="satRadio3">
+                            1000~1200
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio4" value="option4" disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio4">
-                            3.00~3.49
+                        <input class="form-check-input" type="radio" name="satRadios" id="satRadio4" value="option4">
+                        <label class="form-check-label" for="satRadio4">
+                            1200~1400
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio5" value="option5" disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio5">
-                            3.50~3.74
-                        </label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gpaRadios" id="gpaRadio6" value="option6" disabled>
-                        <label class="form-check-label disabled-label" for="gpaRadio6">
-                            3.75~
+                        <input class="form-check-input" type="radio" name="satRadios" id="satRadio5" value="option5">
+                        <label class="form-check-label" for="satRadio5">
+                            1400~1600
                         </label>
                         </div>
                     </div>
@@ -489,32 +477,53 @@
                     <div class="tooltip-container4">
                         <span class="tooltip-trigger">？</span>
                         <div class="tooltip-content">
-                        現在、NCAAデータを準備中です。近日中に利用可能になります。
+                        ACTスコアの範囲で大学を絞り込むことができます。全科目の総合スコアで検索されます。
                         </div>
                     </div> 
                     <div class="line-header6">
-                    <h1><i class="fa fa-baseball-ball me-2"></i>NCAA Division（準備中）</h1>  
+                    <h1><i class="fa fa-pencil-alt me-2"></i>ACT総合スコア</h1>  
                     </div>
                 <form>
                     <div class="form-group5">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ncaaCheck1" disabled>
-                        <label class="form-check-label disabled-label" for="ncaaCheck1">
-                            Division Ⅰ（データ準備中）
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio1" value="option1" checked>
+                        <label class="form-check-label" for="actRadio1">
+                            指定しない
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ncaaCheck2" disabled>
-                        <label class="form-check-label disabled-label" for="ncaaCheck2">
-                            Division Ⅱ（データ準備中）
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio2" value="option2">
+                        <label class="form-check-label" for="actRadio2">
+                            10~15
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ncaaCheck3" disabled>
-                        <label class="form-check-label disabled-label" for="ncaaCheck3">
-                            Division Ⅲ（データ準備中）
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio3" value="option3">
+                        <label class="form-check-label" for="actRadio3">
+                            16~20
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio4" value="option4">
+                        <label class="form-check-label" for="actRadio4">
+                            21~25
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio5" value="option5">
+                        <label class="form-check-label" for="actRadio5">
+                            26~30
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="actRadios" id="actRadio6" value="option6">
+                        <label class="form-check-label" for="actRadio6">
+                            31~36
                         </label>
                         </div>
                     </div>    
@@ -591,28 +600,28 @@
                 <form>
                     <div class="form-group7">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="urbanCheck1">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck1" value="大都市">
                         <label class="form-check-label" for="urbanCheck1">
-                            都市部
+                            大都市
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="urbanCheck2">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck2" value="都市部近郊">
                         <label class="form-check-label" for="urbanCheck2">
-                            郊外
+                            都市部近郊
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="urbanCheck3">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck3" value="小都市">
                         <label class="form-check-label" for="urbanCheck3">
-                            町
+                            小都市
                         </label>
                         </div>
 
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="urbanCheck4">
+                        <input class="form-check-input" type="checkbox" id="urbanCheck4" value="田舎">
                         <label class="form-check-label" for="urbanCheck4">
                             田舎
                         </label>
@@ -638,56 +647,31 @@
                 <h1><i class="fa fa-flask me-2"></i><strong>専攻</strong></h1>
                 </div>
                 <div class="options">
-                    <label><input type="checkbox" name="major" value="biology"> 生物学</label>
-                    <label><input type="checkbox" name="major" value="education"> 教育学</label>
-                    <label><input type="checkbox" name="major" value="political"> 政治学</label>
-                    <label><input type="checkbox" name="major" value="mathematics"> 数学</label>
-                    <label><input type="checkbox" name="major" value="physics"> 物理学</label>
-                    <label><input type="checkbox" name="major" value="economics"> 経済学</label>
-                    <label><input type="checkbox" name="major" value="music"> 音楽</label>
-                    <label><input type="checkbox" name="major" value="agriculture"> 農学</label>
-                    <label><input type="checkbox" name="major" value="business"> 経営学</label>
-                    <label><input type="checkbox" name="major" value="psychology"> 心理学</label>
-                    <label><input type="checkbox" name="major" value="social"> 社会学</label>
-                    <label><input type="checkbox" name="major" value="environmental"> 環境学</label>
-                    <label><input type="checkbox" name="major" value="architecture"> 建築学</label>
-                    <label><input type="checkbox" name="major" value="chemistry"> 化学</label>
-                    <label><input type="checkbox" name="major" value="ethics"> 倫理学</label>
-                    <label><input type="checkbox" name="major" value="history"> 歴史学</label>
-                    <label><input type="checkbox" name="major" value="graphic_design"> グラフィックデザイン</label>
-                    <label><input type="checkbox" name="major" value="engineering"> 工学(エンジニアリング)</label>
-                    <label><input type="checkbox" name="major" value="criminal_justice"> 刑事司法</label>
+                    <label><input type="checkbox" name="major" value="agriculture"> 農業・農学</label>
+                    <label><input type="checkbox" name="major" value="natural_resources"> 天然資源・環境科学</label>
                     <label><input type="checkbox" name="major" value="communication"> コミュニケーション学</label>
-                    <label><input type="checkbox" name="major" value="theater"> 演劇</label>
-                    <label><input type="checkbox" name="major" value="geography"> 地理学</label>
-                    <label><input type="checkbox" name="major" value="statistics"> 統計学</label>
-                    <label><input type="checkbox" name="major" value="public_health"> 公衆衛生学</label>
-                    <label><input type="checkbox" name="major" value="philosophy"> 哲学</label>
-                    <label><input type="checkbox" name="major" value="international"> 国際関係学</label>
-                    <label><input type="checkbox" name="major" value="forensics"> 法医学</label>
-                    <label><input type="checkbox" name="major" value="religion"> 宗教学</label>
-                    <label><input type="checkbox" name="major" value="spanish"> スペイン語</label>
+                    <label><input type="checkbox" name="major" value="computer_science"> コンピューターサイエンス</label>
+                    <label><input type="checkbox" name="major" value="education"> 教育学</label>
+                    <label><input type="checkbox" name="major" value="engineering"> 工学</label>
+                    <label><input type="checkbox" name="major" value="foreign_languages"> 外国語・文学</label>
+                    <label><input type="checkbox" name="major" value="english"> 英語・文学</label>
+                    <label><input type="checkbox" name="major" value="biology"> 生物学</label>
+                    <label><input type="checkbox" name="major" value="mathematics"> 数学・統計学</label>
+                    <label><input type="checkbox" name="major" value="psychology"> 心理学</label>
+                    <label><input type="checkbox" name="major" value="sociology"> 社会学</label>
+                    <label><input type="checkbox" name="major" value="social_sciences"> 社会科学</label>
+                    <label><input type="checkbox" name="major" value="visual_arts"> 視覚・舞台芸術</label>
+                    <label><input type="checkbox" name="major" value="business"> 経営学</label>
+                    <label><input type="checkbox" name="major" value="health_professions"> 健康・医療</label>
+                    <label><input type="checkbox" name="major" value="history"> 歴史学</label>
+                    <label><input type="checkbox" name="major" value="philosophy"> 哲学・宗教学</label>
+                    <label><input type="checkbox" name="major" value="physical_sciences"> 物理科学</label>
+                    <label><input type="checkbox" name="major" value="law"> 法学・刑事司法</label>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- データ状況確認・セットアップボタン -->
-    <% if Rails.env.production? %>
-    <div id="data-status-container" style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
-        <div id="data-status-info">
-            <p style="margin: 0; color: #6c757d; font-size: 14px;">
-                <i class="fa fa-database"></i> データベース状況確認中...
-            </p>
-        </div>
-        <button id="setup-data-btn" class="btn btn-warning" style="display: none; margin-top: 10px;">
-            <i class="fa fa-cog"></i> データセットアップ実行
-        </button>
-        <button id="import-bulk-btn" class="btn btn-success" style="display: none; margin-top: 10px; margin-left: 10px;">
-            <i class="fa fa-download"></i> 全データインポート
-        </button>
-    </div>
-    <% end %>
 
     <div class="search-button-container">
         <button class="cool-search-button" id="search-button"><i class="fa fa-search"></i> 検索</button>
@@ -695,79 +679,10 @@
 
 
     <script>
-        // データベース状況確認（本番環境のみ）
-        <% if Rails.env.production? %>
-        document.addEventListener('DOMContentLoaded', function() {
-            // データベース状況を確認
-            fetch('/admin/status?secret=setup123')
-                .then(response => response.text())
-                .then(data => {
-                    const statusInfo = document.getElementById('data-status-info');
-                    const setupBtn = document.getElementById('setup-data-btn');
-                    const importBtn = document.getElementById('import-bulk-btn');
-                    
-                    if (data.includes('総大学数: 0') || data.includes('総大学数: 1') || data.includes('総大学数: 2')) {
-                        statusInfo.innerHTML = '<p style="margin: 0; color: #dc3545; font-size: 14px;"><i class="fa fa-exclamation-triangle"></i> 大学データが不足しています（検索できません）</p>';
-                        setupBtn.style.display = 'inline-block';
-                        
-                        // 圧縮データファイルが存在する場合はバルクインポートボタンも表示
-                        if (data.includes('圧縮データファイル: 存在')) {
-                            importBtn.style.display = 'inline-block';
-                        }
-                    } else {
-                        statusInfo.innerHTML = '<p style="margin: 0; color: #28a745; font-size: 14px;"><i class="fa fa-check-circle"></i> データベース正常</p>';
-                    }
-                })
-                .catch(error => {
-                    console.log('データ状況確認エラー:', error);
-                    document.getElementById('data-status-info').innerHTML = '<p style="margin: 0; color: #ffc107; font-size: 14px;"><i class="fa fa-exclamation-triangle"></i> データ状況確認中...</p>';
-                });
-            
-            // セットアップボタンのクリックイベント
-            document.getElementById('setup-data-btn').addEventListener('click', function() {
-                this.disabled = true;
-                this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> セットアップ中...';
-                
-                fetch('/admin/setup?secret=setup123')
-                    .then(response => response.text())
-                    .then(data => {
-                        alert('データセットアップが完了しました！ページを再読み込みしてください。');
-                        location.reload();
-                    })
-                    .catch(error => {
-                        alert('セットアップエラーが発生しました: ' + error);
-                        this.disabled = false;
-                        this.innerHTML = '<i class="fa fa-cog"></i> データセットアップ実行';
-                    });
-            });
-            
-            // バルクインポートボタンのクリックイベント
-            document.getElementById('import-bulk-btn').addEventListener('click', function() {
-                if (!confirm('全大学データ（5600校以上）をインポートします。時間がかかりますが続行しますか？')) {
-                    return;
-                }
-                
-                this.disabled = true;
-                this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> インポート中...';
-                
-                fetch('/admin/import?secret=setup123')
-                    .then(response => response.text())
-                    .then(data => {
-                        alert('バルクインポートが完了しました！ページを再読み込みしてください。');
-                        location.reload();
-                    })
-                    .catch(error => {
-                        alert('インポートエラーが発生しました: ' + error);
-                        this.disabled = false;
-                        this.innerHTML = '<i class="fa fa-download"></i> 全データインポート';
-                    });
-            });
-        });
-        <% end %>
 
         // 大学名入力フィールドと条件検索フィールドの干渉を防ぐ
         const collegeNameInput = document.getElementById('college-name-input');
-        const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"], input[name="major"]');
+        const conditionInputs = document.querySelectorAll('.conditions1 select, .conditions2 input, .conditions3 input, .conditions4 input, .conditions5 input, .conditions6 input, .conditions7 input, .conditions8 input, .conditions9 input, input[name="tuitionRadios"], input[name="satRadios"], input[name="actRadios"], input[name="major"]');
         const nameSearchButton = document.getElementById('name-search-button');
         const conditionSearchButton = document.getElementById('search-button');
 
@@ -825,8 +740,8 @@
             });
         });
 
-        // 授業料ラジオボタンのイベントリスナーを追加
-        document.querySelectorAll('input[name="tuitionRadios"]').forEach(radio => {
+        // 授業料・SAT・ACTラジオボタンのイベントリスナーを追加
+        document.querySelectorAll('input[name="tuitionRadios"], input[name="satRadios"], input[name="actRadios"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const hasConditionInput = Array.from(conditionInputs).some(inp => {
                     if (inp.type === 'radio' || inp.type === 'checkbox') {
@@ -907,10 +822,11 @@
                 privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
                 tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.nextElementSibling?.innerText.trim(),
                 students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
-                gpa: '指定しない', // 現在データなしのため
+                sat_score: document.querySelector('input[name="satRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+                act_score: document.querySelector('input[name="actRadios"]:checked')?.nextElementSibling?.innerText.trim(),
                 Division: [], // 現在データなしのため
                 graduation_rate: document.querySelector('.form-group6 input:checked')?.nextElementSibling?.innerText.trim(),
-                urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+                urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.value), // value属性を取得
                 
                 // majorの取得方法を修正
                 major: Array.from(document.querySelectorAll('input[name="major"]:checked'))

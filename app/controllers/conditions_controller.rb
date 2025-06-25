@@ -1,6 +1,7 @@
 class ConditionsController < ApplicationController
   # 結果を取得するメインアクション
   def results
+    Rails.logger.debug("Results action called with params: #{params.inspect}")
     scope = Condition.all
 
     # 大学名検索の処理
@@ -41,7 +42,14 @@ class ConditionsController < ApplicationController
         end
       elsif params[:state] != '指定しない'
         state = params[:state]
-        scope = scope.where('state = ?', state)
+        # 日本語表記から州コードを抽出 例: "カリフォルニア州(CA)" -> "CA"
+        if state.match(/\(([A-Z]{2})\)$/)
+          state_code = state.match(/\(([A-Z]{2})\)$/)[1]
+          scope = scope.where('state = ?', state_code)
+        else
+          # 既に州コードの場合はそのまま使用
+          scope = scope.where('state = ?', state)
+        end
       end
     end
 
@@ -88,22 +96,32 @@ class ConditionsController < ApplicationController
         end
       end
 
-      # GPAの処理
-      if params[:gpa].present?
-        gpa_range = parse_gpa_range(params[:gpa])
-        if gpa_range
-          Rails.logger.debug("GPA range is valid: #{gpa_range.inspect}")
-          # 範囲内のデータとnil（N/A）を検索に含める
-          scope = scope.where('GPA BETWEEN ? AND ?', gpa_range[0], gpa_range[1]).or(scope.where(GPA: nil))
-          Rails.logger.debug("Query for GPA: #{scope.to_sql}")
+      # SATスコアの処理
+      if params[:sat_score].present? && params[:sat_score] != '指定しない'
+        sat_range = parse_sat_range(params[:sat_score])
+        if sat_range
+          Rails.logger.debug("SAT range is valid: #{sat_range.inspect}")
+          # SAT数学と読解の合計スコアで検索（25th percentileで検索）
+          scope = scope.where('(sat_math_25 + sat_reading_25) BETWEEN ? AND ? OR (sat_math_75 + sat_reading_75) BETWEEN ? AND ?', 
+                             sat_range[0], sat_range[1], sat_range[0], sat_range[1])
+          Rails.logger.debug("Query for SAT: #{scope.to_sql}")
         else
-          Rails.logger.debug("Invalid GPA range: #{params[:gpa]}")
-          flash[:error] = "Invalid GPA range selected. Please select a valid range (e.g., 0.0~5.0)."
+          Rails.logger.debug("Invalid SAT range: #{params[:sat_score]}")
         end
-      else
-        # GPAが指定されていない場合、N/A（nil）も含める
-        scope = scope.or(scope.where(GPA: nil))
-        Rails.logger.debug("Query for GPA N/A: #{scope.to_sql}")
+      end
+
+      # ACTスコアの処理  
+      if params[:act_score].present? && params[:act_score] != '指定しない'
+        act_range = parse_act_range(params[:act_score])
+        if act_range
+          Rails.logger.debug("ACT range is valid: #{act_range.inspect}")
+          # ACT総合スコアで検索（25th percentileで検索）
+          scope = scope.where('act_composite_25 BETWEEN ? AND ? OR act_composite_75 BETWEEN ? AND ?', 
+                             act_range[0], act_range[1], act_range[0], act_range[1])
+          Rails.logger.debug("Query for ACT: #{scope.to_sql}")
+        else
+          Rails.logger.debug("Invalid ACT range: #{params[:act_score]}")
+        end
       end
 
       # Division の処理
@@ -127,68 +145,46 @@ class ConditionsController < ApplicationController
         
         majors.each do |major|
           case major
-          when 'biology'
-            major_conditions << 'pcip_biology > 0'
-          when 'education'
-            major_conditions << 'pcip_education > 0'
-          when 'political'
-            major_conditions << 'pcip_social_sciences > 0'  # 政治学は社会科学に含まれる
-          when 'mathematics'
-            major_conditions << 'pcip_mathematics > 0'
-          when 'physics'
-            major_conditions << 'pcip_physical_sciences > 0'
-          when 'economics'
-            major_conditions << 'pcip_social_sciences > 0'  # 経済学は社会科学に含まれる
-          when 'music'
-            major_conditions << 'pcip_visual_arts > 0'  # 音楽は芸術分野に含まれる
           when 'agriculture'
             major_conditions << 'pcip_agriculture > 0'
-          when 'business'
-            major_conditions << 'pcip_business > 0'
-          when 'psychology'
-            major_conditions << 'pcip_psychology > 0'
-          when 'social'
-            major_conditions << 'pcip_sociology > 0'
-          when 'environmental'
+          when 'natural_resources'
             major_conditions << 'pcip_natural_resources > 0'
-          when 'architecture'
-            major_conditions << 'pcip_visual_arts > 0'  # 建築学は視覚芸術に含まれる
-          when 'chemistry'
-            major_conditions << 'pcip_physical_sciences > 0'
-          when 'ethics'
-            major_conditions << 'pcip_philosophy > 0'
-          when 'history'
-            major_conditions << 'pcip_history > 0'
-          when 'graphic_design'
-            major_conditions << 'pcip_visual_arts > 0'
-          when 'engineering'
-            major_conditions << 'pcip_engineering > 0'
-          when 'criminal_justice'
-            major_conditions << 'pcip_law > 0'
           when 'communication'
             major_conditions << 'pcip_communication > 0'
-          when 'theater'
-            major_conditions << 'pcip_visual_arts > 0'  # 演劇は芸術分野に含まれる
-          when 'geography'
-            major_conditions << 'pcip_social_sciences > 0'  # 地理学は社会科学に含まれる
-          when 'statistics'
+          when 'computer_science'
+            major_conditions << 'pcip_computer_science > 0'
+          when 'education'
+            major_conditions << 'pcip_education > 0'
+          when 'engineering'
+            major_conditions << 'pcip_engineering > 0'
+          when 'foreign_languages'
+            major_conditions << 'pcip_foreign_languages > 0'
+          when 'english'
+            major_conditions << 'pcip_english > 0'
+          when 'biology'
+            major_conditions << 'pcip_biology > 0'
+          when 'mathematics'
             major_conditions << 'pcip_mathematics > 0'
-          when 'public_health'
+          when 'psychology'
+            major_conditions << 'pcip_psychology > 0'
+          when 'sociology'
+            major_conditions << 'pcip_sociology > 0'
+          when 'social_sciences'
+            major_conditions << 'pcip_social_sciences > 0'
+          when 'visual_arts'
+            major_conditions << 'pcip_visual_arts > 0'
+          when 'business'
+            major_conditions << 'pcip_business > 0'
+          when 'health_professions'
             major_conditions << 'pcip_health_professions > 0'
+          when 'history'
+            major_conditions << 'pcip_history > 0'
           when 'philosophy'
             major_conditions << 'pcip_philosophy > 0'
-          when 'international'
-            major_conditions << 'pcip_social_sciences > 0'  # 国際関係学は社会科学に含まれる
-          when 'forensics'
+          when 'physical_sciences'
+            major_conditions << 'pcip_physical_sciences > 0'
+          when 'law'
             major_conditions << 'pcip_law > 0'
-          when 'religion'
-            major_conditions << 'pcip_philosophy > 0'  # 宗教学は哲学分野に含まれる
-          when 'spanish'
-            major_conditions << 'pcip_foreign_languages > 0'
-          when 'computer'
-            major_conditions << 'pcip_computer_science > 0'
-          when 'health'
-            major_conditions << 'pcip_health_professions > 0'
           end
         end
         
@@ -203,9 +199,26 @@ class ConditionsController < ApplicationController
       # Urbanicity の処理
       if params[:urbanicity].present?
         urbanicities = params[:urbanicity].split(',').map(&:strip)
-        if urbanicities.any?
-          scope = scope.where(urbanicity: urbanicities)
-          Rails.logger.debug("Filtering by urbanicities: #{urbanicities.inspect}")
+        
+        # 日本語表示名をDBの値にマッピング
+        db_urbanicities = urbanicities.map do |urbanicity|
+          case urbanicity
+          when '大都市'
+            ['11', '12', '13']  # 大都市関連のコード
+          when '都市部近郊'
+            ['21', '22', '23']  # 都市部近郊関連のコード  
+          when '小都市'
+            ['31', '32', '33']  # 小都市関連のコード
+          when '田舎'
+            ['41', '42', '43']  # 田舎関連のコード
+          else
+            urbanicity
+          end
+        end.flatten
+        
+        if db_urbanicities.any?
+          scope = scope.where(urbanicity: db_urbanicities)
+          Rails.logger.debug("Filtering by urbanicities: #{db_urbanicities.inspect}")
         end
       end
 
@@ -220,16 +233,33 @@ class ConditionsController < ApplicationController
       end
     end
 
+    # ソート処理の追加
+    if params[:sort].present?
+      sort_column, sort_direction = params[:sort].split('-')
+      
+      case sort_column
+      when 'name'
+        scope = scope.order(Arel.sql("college #{sort_direction == 'asc' ? 'ASC' : 'DESC'}"))
+      when 'students'
+        scope = scope.order(Arel.sql("students #{sort_direction == 'asc' ? 'ASC' : 'DESC'} NULLS LAST"))
+      when 'tuition'
+        scope = scope.order(Arel.sql("tuition #{sort_direction == 'asc' ? 'ASC' : 'DESC'} NULLS LAST"))
+      when 'graduation'
+        scope = scope.order(Arel.sql("graduation_rate #{sort_direction == 'asc' ? 'ASC' : 'DESC'} NULLS LAST"))
+      end
+      
+      Rails.logger.debug("Sorting by #{sort_column} #{sort_direction}")
+    end
 
-
-
-  # ページネーションの追加
-  page = params[:page] || 1
-  per_page = params[:per_page] || 20
-  
-  @results = scope.page(page).per(per_page)
-  @total_count = scope.count
-  Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
+    # ページネーションの追加
+    page = params[:page] || 1
+    per_page = params[:per_page] || 20
+    
+    @results = scope.page(page).per(per_page)
+    @total_count = scope.count
+    Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
+    
+    render 'results'
   end
 
   def show
@@ -339,29 +369,39 @@ end
 
 
 
-  # GPAの範囲を解析するメソッド
-  def parse_gpa_range(gpa_param)
-    return nil unless gpa_param.present?
-  
-    # パラメータが「0.0~2.49」のような形式の場合
-    if gpa_param.match?(/^(\d+(\.\d{1,2})?)~(\d+(\.\d{1,2})?)$/)
-      range = gpa_param.scan(/(\d+(\.\d{1,2})?)/).map(&:first).map(&:to_f)
-      min_gpa, max_gpa = range.minmax
-      return nil if min_gpa < 0 || max_gpa > 5.0 # 有効な範囲は 0.0~5.0
-      [min_gpa, max_gpa]
-  
-    # パラメータが「~2.49」のような形式の場合
-    elsif gpa_param.match?(/^~(\d+(\.\d{1,2})?)$/)
-      max_value = gpa_param.scan(/(\d+(\.\d{1,2})?)/).first.first.to_f
-      return nil if max_value > 5.0 # 最大値が5.0を超える場合は無効
-      [0.0, max_value]
-  
-    # パラメータが「2.49~」のような形式の場合
-    elsif gpa_param.match?(/^(\d+(\.\d{1,2})?)~$/)
-      min_value = gpa_param.scan(/(\d+(\.\d{1,2})?)/).first.first.to_f
-      return nil if min_value < 0 || min_value > 5.0 # 最小値が無効な場合
-      [min_value, 5.0] # 最大値を5.0に設定
-  
+  # SATスコアの範囲を解析するメソッド
+  def parse_sat_range(sat_param)
+    return nil unless sat_param.present?
+    
+    case sat_param
+    when '800~1000'
+      [800, 1000]
+    when '1000~1200'
+      [1000, 1200] 
+    when '1200~1400'
+      [1200, 1400]
+    when '1400~1600'
+      [1400, 1600]
+    else
+      nil
+    end
+  end
+
+  # ACTスコアの範囲を解析するメソッド
+  def parse_act_range(act_param)
+    return nil unless act_param.present?
+    
+    case act_param
+    when '10~15'
+      [10, 15]
+    when '16~20'
+      [16, 20]
+    when '21~25'
+      [21, 25]
+    when '26~30'
+      [26, 30]
+    when '31~36'
+      [31, 36]
     else
       nil
     end
