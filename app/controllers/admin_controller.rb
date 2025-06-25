@@ -198,12 +198,122 @@ class AdminController < ApplicationController
     result = []
     result << "=== データベース状況 ==="
     result << "総大学数: #{total}"
-    result << "コメント付き: #{comments} (#{(comments.to_f / total * 100).round(1)}%)"
-    result << "授業料データ付き: #{tuition} (#{(tuition.to_f / total * 100).round(1)}%)"
-    result << "専攻データ付き: #{majors} (#{(majors.to_f / total * 100).round(1)}%)"
+    result << "コメント付き: #{comments} (#{(comments.to_f / total * 100).round(1)}%)" if total > 0
+    result << "授業料データ付き: #{tuition} (#{(tuition.to_f / total * 100).round(1)}%)" if total > 0
+    result << "専攻データ付き: #{majors} (#{(majors.to_f / total * 100).round(1)}%)" if total > 0
     result << ""
     result << "API Key設定: #{ENV['COLLEGE_SCORECARD_API_KEY'] ? '設定済み' : '未設定'}"
     
+    # 圧縮データファイルの存在確認
+    compressed_file = Rails.root.join('db', 'college_data_compressed.json.gz')
+    if File.exist?(compressed_file)
+      file_size = File.size(compressed_file) / 1024.0
+      result << "圧縮データファイル: 存在 (#{file_size.round(1)} KB)"
+    else
+      result << "圧縮データファイル: なし"
+    end
+    
     render plain: result.join("\n")
+  end
+  
+  def import_bulk
+    if params[:secret] != 'setup123'
+      render plain: "アクセス拒否"
+      return
+    end
+    
+    begin
+      require 'zlib'
+      
+      result = []
+      result << "=== バルクインポート開始 ==="
+      
+      compressed_file = Rails.root.join('db', 'college_data_compressed.json.gz')
+      
+      unless File.exist?(compressed_file)
+        result << "エラー: 圧縮データファイルが見つかりません"
+        render plain: result.join("\n")
+        return
+      end
+      
+      # 現在のデータ数
+      current_count = Condition.count
+      result << "現在のデータ数: #{current_count}"
+      
+      # 圧縮ファイルを展開してインポート
+      result << "圧縮ファイルを読み込み中..."
+      
+      compressed_data = File.read(compressed_file)
+      json_data = Zlib::Inflate.inflate(compressed_data)
+      data = JSON.parse(json_data)
+      
+      colleges_data = data['data']
+      total_count = colleges_data.size
+      
+      result << "インポート対象: #{total_count}校"
+      result << "エクスポート日時: #{data['export_date']}"
+      result << ""
+      result << "インポート開始..."
+      
+      imported_count = 0
+      updated_count = 0
+      error_count = 0
+      
+      colleges_data.each_with_index do |college_data, index|
+        begin
+          # 短縮フィールド名を元に戻す
+          full_data = {
+            college: college_data['c'],
+            state: college_data['s'],
+            tuition: college_data['t'],
+            students: college_data['st'],
+            privateorpublic: college_data['p'],
+            GPA: college_data['g'],
+            acceptance_rate: college_data['a'],
+            graduation_rate: college_data['gr'],
+            city: college_data['ci'],
+            Division: college_data['d'],
+            comment: college_data['co']
+          }
+          
+          # 既存のレコードを確認
+          existing_college = Condition.find_by(college: full_data[:college])
+          
+          if existing_college
+            # 更新
+            existing_college.update!(full_data)
+            updated_count += 1
+          else
+            # 新規作成
+            Condition.create!(full_data)
+            imported_count += 1
+          end
+          
+          if (index + 1) % 500 == 0
+            result << "進捗: #{index + 1}/#{total_count} (#{((index + 1).to_f / total_count * 100).round(1)}%)"
+          end
+          
+        rescue => e
+          error_count += 1
+          result << "エラー: #{college_data['c']} - #{e.message}" if error_count <= 10
+        end
+      end
+      
+      final_count = Condition.count
+      
+      result << ""
+      result << "=== インポート完了 ==="
+      result << "新規作成: #{imported_count}校"
+      result << "更新: #{updated_count}校"
+      result << "エラー: #{error_count}校"
+      result << "最終データ数: #{final_count}校"
+      result << ""
+      result << "ページを再読み込みして確認してください。"
+      
+      render plain: result.join("\n")
+      
+    rescue => e
+      render plain: "バルクインポートエラーが発生しました: #{e.message}\n#{e.backtrace.first(5).join("\n")}"
+    end
   end
 end

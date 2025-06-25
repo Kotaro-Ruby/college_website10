@@ -683,6 +683,9 @@
         <button id="setup-data-btn" class="btn btn-warning" style="display: none; margin-top: 10px;">
             <i class="fa fa-cog"></i> データセットアップ実行
         </button>
+        <button id="import-bulk-btn" class="btn btn-success" style="display: none; margin-top: 10px; margin-left: 10px;">
+            <i class="fa fa-download"></i> 全データインポート
+        </button>
     </div>
     <% end %>
 
@@ -701,10 +704,16 @@
                 .then(data => {
                     const statusInfo = document.getElementById('data-status-info');
                     const setupBtn = document.getElementById('setup-data-btn');
+                    const importBtn = document.getElementById('import-bulk-btn');
                     
                     if (data.includes('総大学数: 0') || data.includes('総大学数: 1') || data.includes('総大学数: 2')) {
                         statusInfo.innerHTML = '<p style="margin: 0; color: #dc3545; font-size: 14px;"><i class="fa fa-exclamation-triangle"></i> 大学データが不足しています（検索できません）</p>';
                         setupBtn.style.display = 'inline-block';
+                        
+                        // 圧縮データファイルが存在する場合はバルクインポートボタンも表示
+                        if (data.includes('圧縮データファイル: 存在')) {
+                            importBtn.style.display = 'inline-block';
+                        }
                     } else {
                         statusInfo.innerHTML = '<p style="margin: 0; color: #28a745; font-size: 14px;"><i class="fa fa-check-circle"></i> データベース正常</p>';
                     }
@@ -729,6 +738,28 @@
                         alert('セットアップエラーが発生しました: ' + error);
                         this.disabled = false;
                         this.innerHTML = '<i class="fa fa-cog"></i> データセットアップ実行';
+                    });
+            });
+            
+            // バルクインポートボタンのクリックイベント
+            document.getElementById('import-bulk-btn').addEventListener('click', function() {
+                if (!confirm('全大学データ（5600校以上）をインポートします。時間がかかりますが続行しますか？')) {
+                    return;
+                }
+                
+                this.disabled = true;
+                this.innerHTML = '<i class="fa fa-spinner fa-spin"></i> インポート中...';
+                
+                fetch('/admin/import?secret=setup123')
+                    .then(response => response.text())
+                    .then(data => {
+                        alert('バルクインポートが完了しました！ページを再読み込みしてください。');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        alert('インポートエラーが発生しました: ' + error);
+                        this.disabled = false;
+                        this.innerHTML = '<i class="fa fa-download"></i> 全データインポート';
                     });
             });
         });

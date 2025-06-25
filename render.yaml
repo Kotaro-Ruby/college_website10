@@ -13,4 +13,9 @@ services:
       bundle exec puma -C config/puma.rb
     releaseCommand: |
       bundle exec rails db:migrate
-      bundle exec rails render:setup_data
+      if [ -f "db/college_data_compressed.json.gz" ]; then
+        cp db/college_data_compressed.json.gz tmp/
+        bundle exec rails import:from_compressed
+      else
+        bundle exec rails render:setup_data
+      fi

@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   # 一時的なセットアップ用ルート（セットアップ完了後は削除）
   get '/admin/setup', to: 'admin#setup_data'
   get '/admin/status', to: 'admin#status'
+  get '/admin/import', to: 'admin#import_bulk'
 
   get 'result/:id', to: 'conditions#show', as: :conditions
   get '*unmatched_route', to: 'conditions#fallback_page'
