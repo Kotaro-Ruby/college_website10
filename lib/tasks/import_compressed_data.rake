@@ -60,7 +60,7 @@ namespace :import do
             comment: college_data['co']
           }
           
-          # Major分野のデータも追加（存在する場合）
+          # 専攻データを追加（存在する場合）
           if college_data['maj']
             full_data.merge!(college_data['maj'])
           end

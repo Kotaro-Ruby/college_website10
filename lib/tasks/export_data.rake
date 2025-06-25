@@ -79,13 +79,19 @@ namespace :export do
     total_count = Condition.count
     puts "Total colleges to export: #{total_count}"
     
-    # 必須フィールドのみエクスポート（サイズ削減）
+    # 必須フィールドと専攻データをエクスポート（サイズ削減）
     exported_data = Condition.select(
       :college, :state, :tuition, :students, :privateorpublic, 
       :GPA, :acceptance_rate, :graduation_rate, :city, :Division,
-      :comment
+      :comment, :major, :pcip_agriculture, :pcip_natural_resources, 
+      :pcip_communication, :pcip_computer_science, :pcip_education, 
+      :pcip_engineering, :pcip_foreign_languages, :pcip_english, 
+      :pcip_biology, :pcip_mathematics, :pcip_psychology, :pcip_sociology, 
+      :pcip_social_sciences, :pcip_visual_arts, :pcip_business, 
+      :pcip_health_professions, :pcip_history, :pcip_philosophy, 
+      :pcip_physical_sciences, :pcip_law
     ).map do |college|
-      {
+      data = {
         c: college.college,
         s: college.state,
         t: college.tuition,
@@ -98,6 +104,39 @@ namespace :export do
         d: college.Division,
         co: college.comment
       }
+      
+      # 専攻データを追加（値がある場合のみ）
+      major_data = {}
+      {
+        major: college.major,
+        pcip_agriculture: college.pcip_agriculture,
+        pcip_natural_resources: college.pcip_natural_resources,
+        pcip_communication: college.pcip_communication,
+        pcip_computer_science: college.pcip_computer_science,
+        pcip_education: college.pcip_education,
+        pcip_engineering: college.pcip_engineering,
+        pcip_foreign_languages: college.pcip_foreign_languages,
+        pcip_english: college.pcip_english,
+        pcip_biology: college.pcip_biology,
+        pcip_mathematics: college.pcip_mathematics,
+        pcip_psychology: college.pcip_psychology,
+        pcip_sociology: college.pcip_sociology,
+        pcip_social_sciences: college.pcip_social_sciences,
+        pcip_visual_arts: college.pcip_visual_arts,
+        pcip_business: college.pcip_business,
+        pcip_health_professions: college.pcip_health_professions,
+        pcip_history: college.pcip_history,
+        pcip_philosophy: college.pcip_philosophy,
+        pcip_physical_sciences: college.pcip_physical_sciences,
+        pcip_law: college.pcip_law
+      }.each do |field, value|
+        if value && value > 0
+          major_data[field] = value
+        end
+      end
+      
+      data[:maj] = major_data unless major_data.empty?
+      data
     end
     
     # JSONを圧縮
@@ -231,6 +270,11 @@ namespace :import do
           Division: college_data['d'],
           comment: college_data['co']
         }
+        
+        # 専攻データを追加（存在する場合）
+        if college_data['maj']
+          full_data.merge!(college_data['maj'])
+        end
         
         # 既存のレコードを確認
         existing_college = Condition.find_by(college: full_data[:college])
