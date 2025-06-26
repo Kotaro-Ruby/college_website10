@@ -30,6 +30,7 @@ gem 'httparty'
 gem 'rubyXL'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'kaminari'
+gem 'sitemap_generator'
 gem 'bcrypt', '~> 3.1.7'
 
 
