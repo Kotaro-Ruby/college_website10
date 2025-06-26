@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://college-spark.onrender.com/sitemap.xml.gz
+Sitemap: https://college-spark.com/sitemap.xml.gz
