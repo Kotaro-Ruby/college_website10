@@ -79,18 +79,9 @@ namespace :export do
     total_count = Condition.count
     puts "Total colleges to export: #{total_count}"
     
-    # 必須フィールドと専攻データをエクスポート（サイズ削減）
-    exported_data = Condition.select(
-      :college, :state, :tuition, :students, :privateorpublic, 
-      :GPA, :acceptance_rate, :graduation_rate, :city, :Division,
-      :comment, :major, :pcip_agriculture, :pcip_natural_resources, 
-      :pcip_communication, :pcip_computer_science, :pcip_education, 
-      :pcip_engineering, :pcip_foreign_languages, :pcip_english, 
-      :pcip_biology, :pcip_mathematics, :pcip_psychology, :pcip_sociology, 
-      :pcip_social_sciences, :pcip_visual_arts, :pcip_business, 
-      :pcip_health_professions, :pcip_history, :pcip_philosophy, 
-      :pcip_physical_sciences, :pcip_law
-    ).map do |college|
+    # 全フィールドをエクスポート（収入データ、性別分布など含む）
+    exported_data = Condition.all.map do |college|
+      # 基本フィールド（短縮形）
       data = {
         c: college.college,
         s: college.state,
@@ -105,10 +96,63 @@ namespace :export do
         co: college.comment
       }
       
+      # 全ての詳細データを追加（値がある場合のみ）
+      additional_data = {}
+      
+      # 財務・収入データ
+      additional_data[:pell_grant_rate] = college.pell_grant_rate if college.pell_grant_rate
+      additional_data[:federal_loan_rate] = college.federal_loan_rate if college.federal_loan_rate
+      additional_data[:median_debt] = college.median_debt if college.median_debt
+      additional_data[:earnings_10yr_median] = college.earnings_10yr_median if college.earnings_10yr_median
+      additional_data[:earnings_6yr_median] = college.earnings_6yr_median if college.earnings_6yr_median
+      additional_data[:net_price_0_30k] = college.net_price_0_30k if college.net_price_0_30k
+      additional_data[:net_price_30_48k] = college.net_price_30_48k if college.net_price_30_48k
+      additional_data[:net_price_48_75k] = college.net_price_48_75k if college.net_price_48_75k
+      additional_data[:net_price_75_110k] = college.net_price_75_110k if college.net_price_75_110k
+      additional_data[:net_price_110k_plus] = college.net_price_110k_plus if college.net_price_110k_plus
+      
+      # 性別分布データ
+      additional_data[:percent_men] = college.percent_men if college.percent_men
+      additional_data[:percent_women] = college.percent_women if college.percent_women
+      
+      # 人種・民族分布データ
+      additional_data[:percent_white] = college.percent_white if college.percent_white
+      additional_data[:percent_black] = college.percent_black if college.percent_black
+      additional_data[:percent_hispanic] = college.percent_hispanic if college.percent_hispanic
+      additional_data[:percent_asian] = college.percent_asian if college.percent_asian
+      additional_data[:percent_non_resident_alien] = college.percent_non_resident_alien if college.percent_non_resident_alien
+      
+      # SAT/ACTスコア
+      additional_data[:sat_math_25] = college.sat_math_25 if college.sat_math_25
+      additional_data[:sat_math_75] = college.sat_math_75 if college.sat_math_75
+      additional_data[:sat_reading_25] = college.sat_reading_25 if college.sat_reading_25
+      additional_data[:sat_reading_75] = college.sat_reading_75 if college.sat_reading_75
+      additional_data[:act_composite_25] = college.act_composite_25 if college.act_composite_25
+      additional_data[:act_composite_75] = college.act_composite_75 if college.act_composite_75
+      
+      # その他重要データ
+      additional_data[:retention_rate] = college.retention_rate if college.retention_rate
+      additional_data[:faculty_salary] = college.faculty_salary if college.faculty_salary
+      additional_data[:room_board_cost] = college.room_board_cost if college.room_board_cost
+      additional_data[:tuition_in_state] = college.tuition_in_state if college.tuition_in_state
+      additional_data[:tuition_out_state] = college.tuition_out_state if college.tuition_out_state
+      additional_data[:school_type] = college.school_type if college.school_type
+      additional_data[:locale] = college.locale if college.locale
+      additional_data[:carnegie_basic] = college.carnegie_basic if college.carnegie_basic
+      additional_data[:religious_affiliation] = college.religious_affiliation if college.religious_affiliation
+      additional_data[:hbcu] = college.hbcu if college.hbcu
+      additional_data[:hsi] = college.hsi if college.hsi
+      additional_data[:tribal] = college.tribal if college.tribal
+      additional_data[:men_only] = college.men_only if college.men_only
+      additional_data[:women_only] = college.women_only if college.women_only
+      additional_data[:urbanicity] = college.urbanicity if college.urbanicity
+      additional_data[:website] = college.website if college.website
+      additional_data[:address] = college.address if college.address
+      additional_data[:zip] = college.zip if college.zip
+      
       # 専攻データを追加（値がある場合のみ）
       major_data = {}
       {
-        major: college.major,
         pcip_agriculture: college.pcip_agriculture,
         pcip_natural_resources: college.pcip_natural_resources,
         pcip_communication: college.pcip_communication,
@@ -135,6 +179,7 @@ namespace :export do
         end
       end
       
+      data[:add] = additional_data unless additional_data.empty?
       data[:maj] = major_data unless major_data.empty?
       data
     end

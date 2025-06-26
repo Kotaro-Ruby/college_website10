@@ -28,16 +28,11 @@ echo "Colleges with majors: $COLLEGES_WITH_MAJORS"
 # Check if compressed data file exists
 if [ -f "db/college_data_compressed.json.gz" ]; then
     echo "=== Compressed data file found, will be processed in releaseCommand ==="
-elif [ "$TOTAL_COLLEGES" -lt "50" ]; then
-    echo "=== Loading basic sample data ==="
-    bundle exec rails render:setup_data
-    echo "=== Basic data loaded successfully ==="
-elif [ "$COLLEGES_WITH_COMMENTS" -lt "100" ] || [ "$COLLEGES_WITH_MAJORS" -lt "10" ]; then
-    echo "=== Loading supplementary data ==="
-    SKIP_DETAILED_PROGRAMS=true bundle exec rails college_data:setup_production_fast
-    echo "=== Supplementary data loaded successfully ==="
 else
-    echo "=== Data already exists, skipping setup ==="
+    echo "=== No compressed data file found - will be handled in releaseCommand ==="
 fi
+
+# サンプルデータの自動生成を無効化
+# ユーザーの6321校のローカルデータのみを使用
 
 echo "=== Render Build Script Completed ==="

@@ -43,48 +43,76 @@ namespace :import do
       updated_count = 0
       error_count = 0
       
-      colleges_data.each_with_index do |college_data, index|
-        begin
-          # 短縮フィールド名を元に戻す
-          full_data = {
-            college: college_data['c'],
-            state: college_data['s'],
-            tuition: college_data['t'],
-            students: college_data['st'],
-            privateorpublic: college_data['p'],
-            GPA: college_data['g'],
-            acceptance_rate: college_data['a'],
-            graduation_rate: college_data['gr'],
-            city: college_data['ci'],
-            Division: college_data['d'],
-            comment: college_data['co']
-          }
-          
-          # 専攻データを追加（存在する場合）
-          if college_data['maj']
-            full_data.merge!(college_data['maj'])
+      # 大量データを効率的に処理するためバッチ処理を使用
+      batch_size = 500
+      
+      colleges_data.each_slice(batch_size).with_index do |batch, batch_index|
+        batch_records = []
+        
+        batch.each do |college_data|
+          begin
+            # 短縮フィールド名を元に戻す
+            full_data = {
+              college: college_data['c'],
+              state: college_data['s'],
+              tuition: college_data['t'],
+              students: college_data['st'],
+              privateorpublic: college_data['p'],
+              GPA: college_data['g'],
+              acceptance_rate: college_data['a'],
+              graduation_rate: college_data['gr'],
+              city: college_data['ci'],
+              Division: college_data['d'],
+              comment: college_data['co']
+            }
+            
+            # 詳細データを追加（存在する場合）
+            if college_data['add']
+              full_data.merge!(college_data['add'])
+            end
+            
+            # 専攻データを追加（存在する場合）
+            if college_data['maj']
+              full_data.merge!(college_data['maj'])
+            end
+            
+            batch_records << full_data
+            
+          rescue => e
+            error_count += 1
+            puts "エラー: #{college_data['c']} - #{e.message}" if error_count <= 10
           end
-          
-          # 既存のレコードを確認
-          existing_college = Condition.find_by(college: full_data[:college])
-          
-          if existing_college
-            # 更新
-            existing_college.update!(full_data)
-            updated_count += 1
-          else
-            # 新規作成
-            Condition.create!(full_data)
-            imported_count += 1
+        end
+        
+        # バッチで一括処理（upsert使用）
+        if batch_records.any?
+          begin
+            # PostgreSQLのupsertを使用して効率的に処理
+            batch_records.each do |record|
+              existing_college = Condition.find_by(college: record[:college])
+              
+              if existing_college
+                existing_college.update!(record)
+                updated_count += 1
+              else
+                Condition.create!(record)
+                imported_count += 1
+              end
+            end
+            
+            processed = (batch_index + 1) * batch_size
+            percentage = [(processed.to_f / total_count * 100).round(1), 100.0].min
+            puts "進捗: #{[processed, total_count].min}/#{total_count} (#{percentage}%)"
+            
+            # メモリ使用量を抑えるため、定期的にGCを実行
+            if (batch_index + 1) % 10 == 0
+              GC.start
+            end
+            
+          rescue => e
+            puts "バッチ処理エラー: #{e.message}"
+            error_count += batch_records.size
           end
-          
-          if (index + 1) % 500 == 0
-            puts "進捗: #{index + 1}/#{total_count} (#{((index + 1).to_f / total_count * 100).round(1)}%)"
-          end
-          
-        rescue => e
-          error_count += 1
-          puts "エラー: #{college_data['c']} - #{e.message}" if error_count <= 10
         end
       end
       
