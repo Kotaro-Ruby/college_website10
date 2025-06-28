@@ -3,6 +3,23 @@ class HomeController < ApplicationController
   layout 'country_layout', only: [:canada, :australia, :newzealand]
   
   def top
+    # Force no cache for this page during development only
+    if Rails.env.development?
+      response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+      response.headers['Pragma'] = 'no-cache'
+      response.headers['Expires'] = '0'
+    end
+  end
+  
+  def index
+    # 人気大学のデータを取得（例：学生数が多い、または合格率が適度な大学）
+    @popular_colleges = Condition.where.not(students: nil, acceptance_rate: nil)
+                                .where('acceptance_rate > 0.1 AND acceptance_rate < 0.8')
+                                .order(students: :desc)
+                                .limit(5)
+  end
+  
+  def search
   end
   
   def about

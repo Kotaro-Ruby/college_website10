@@ -1,7 +1,9 @@
 # Pin npm packages by running ./bin/importmap
 
-pin "application"
-pin "@hotwired/turbo-rails", to: "turbo.min.js"
-pin "@hotwired/stimulus", to: "stimulus.min.js"
-pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
-pin_all_from "app/javascript/controllers", under: "controllers"
+pin "application", preload: true
+pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
+pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true  
+pin "controllers/index", to: "controllers/index.js"
+pin "controllers/application", to: "controllers/application.js"  
+pin "controllers/application_controller", to: "controllers/application_controller.js"
+pin "controllers/hello_controller", to: "controllers/hello_controller.js"
