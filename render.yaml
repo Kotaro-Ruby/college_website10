@@ -8,7 +8,6 @@ services:
     buildCommand: ./bin/render-build.sh
     startCommand: |
       bundle exec rails db:migrate
-      bundle exec rails db:safe_reset_conditions
       if [ -f "db/college_data_compressed.json.gz" ]; then
         cp db/college_data_compressed.json.gz tmp/
         bundle exec rails import:from_compressed
