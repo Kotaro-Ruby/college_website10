@@ -5,18 +5,12 @@ services:
     plan: free
     region: oregon
     branch: main
-    buildCommand: |
-      bundle install
-      yarn install
-      bundle exec rake assets:precompile
-    startCommand: |
-      bundle exec puma -C config/puma.rb
+    buildCommand: ./bin/render-build.sh
+    startCommand: bundle exec puma -C config/puma.rb
     releaseCommand: |
       bundle exec rails db:migrate
+      bundle exec rails db:safe_reset_conditions
       if [ -f "db/college_data_compressed.json.gz" ]; then
         cp db/college_data_compressed.json.gz tmp/
         bundle exec rails import:from_compressed
-        SKIP_DETAILED_PROGRAMS=true bundle exec rails college_data:setup_production_fast
-      else
-        SKIP_DETAILED_PROGRAMS=true bundle exec rails college_data:setup_production_fast
       fi
