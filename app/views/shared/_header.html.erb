@@ -600,21 +600,22 @@
     }
 
     .header-nav {
-      position: fixed;
-      top: 70px;
-      left: -100%;
-      width: 100%;
-      height: calc(100vh - 70px);
-      background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
-      transition: left 0.3s ease;
-      overflow-y: auto;
-      justify-content: flex-start;
-      padding: 20px 0;
-      z-index: 1000;
+      position: fixed !important;
+      top: 70px !important;
+      left: -100% !important;
+      width: 100% !important;
+      height: calc(100vh - 70px) !important;
+      background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%) !important;
+      transition: left 0.3s ease !important;
+      overflow-y: auto !important;
+      justify-content: flex-start !important;
+      padding: 20px 0 !important;
+      z-index: 1000 !important;
+      display: flex !important;
     }
 
     .header-nav.active {
-      left: 0;
+      left: 0 !important;
     }
 
     .nav-list {
@@ -767,6 +768,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Starting mobile menu setup');
+    
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const headerNav = document.querySelector('.header-nav');
     const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
@@ -774,25 +777,62 @@
     console.log('Mobile menu toggle element:', mobileMenuToggle);
     console.log('Header nav element:', headerNav);
     console.log('Window width:', window.innerWidth);
+    
+    if (mobileMenuToggle) {
+      console.log('Mobile menu toggle styles:', window.getComputedStyle(mobileMenuToggle).display);
+      console.log('Mobile menu toggle position:', mobileMenuToggle.getBoundingClientRect());
+    }
+    
+    if (headerNav) {
+      console.log('Header nav styles:', window.getComputedStyle(headerNav).position);
+      console.log('Header nav left:', window.getComputedStyle(headerNav).left);
+    }
 
     // Mobile menu functionality
     if (mobileMenuToggle && headerNav) {
-      // Click event
-      mobileMenuToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Mobile menu clicked');
+      console.log('Setting up mobile menu event listeners');
+      
+      // Function to toggle menu
+      function toggleMobileMenu(eventType) {
+        console.log('Toggling mobile menu via', eventType);
+        const wasActive = headerNav.classList.contains('active');
+        
         mobileMenuToggle.classList.toggle('active');
         headerNav.classList.toggle('active');
-      });
-
-      // Touch event for mobile devices
-      mobileMenuToggle.addEventListener('touchstart', function(e) {
+        
+        console.log('Menu state changed from', wasActive, 'to', headerNav.classList.contains('active'));
+        console.log('Header nav classes:', headerNav.className);
+        console.log('Mobile toggle classes:', mobileMenuToggle.className);
+        
+        // Force style update with timeout
+        setTimeout(() => {
+          if (headerNav.classList.contains('active')) {
+            headerNav.style.left = '0';
+            headerNav.style.display = 'flex';
+            headerNav.style.visibility = 'visible';
+            headerNav.style.transform = 'translateX(0)';
+            console.log('Forcing menu to show');
+          } else {
+            headerNav.style.left = '-100%';
+            headerNav.style.transform = 'translateX(-100%)';
+            console.log('Forcing menu to hide');
+          }
+        }, 10);
+      }
+      
+      // Unified event handler
+      function handleMenuToggle(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Mobile menu touched');
-        mobileMenuToggle.classList.toggle('active');
-        headerNav.classList.toggle('active');
+        console.log('Menu toggle triggered by:', e.type);
+        toggleMobileMenu(e.type);
+      }
+      
+      // Multiple event listeners for better compatibility
+      mobileMenuToggle.addEventListener('click', handleMenuToggle);
+      mobileMenuToggle.addEventListener('touchstart', handleMenuToggle);
+      mobileMenuToggle.addEventListener('touchend', function(e) {
+        e.preventDefault();
       });
 
       // Close menu when clicking outside
