@@ -507,6 +507,10 @@
     padding: 8px;
     border-radius: 6px;
     transition: background 0.3s ease;
+    z-index: 1001;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
 
   .mobile-menu-toggle:hover {
@@ -606,7 +610,7 @@
       overflow-y: auto;
       justify-content: flex-start;
       padding: 20px 0;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .header-nav.active {
@@ -670,7 +674,7 @@
     }
 
     .mobile-menu-toggle {
-      display: flex;
+      display: flex !important;
     }
 
     .mobile-menu-toggle.active span:nth-child(1) {
@@ -766,10 +770,27 @@
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const headerNav = document.querySelector('.header-nav');
     const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+    
+    console.log('Mobile menu toggle element:', mobileMenuToggle);
+    console.log('Header nav element:', headerNav);
+    console.log('Window width:', window.innerWidth);
 
     // Mobile menu functionality
     if (mobileMenuToggle && headerNav) {
-      mobileMenuToggle.addEventListener('click', function() {
+      // Click event
+      mobileMenuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Mobile menu clicked');
+        mobileMenuToggle.classList.toggle('active');
+        headerNav.classList.toggle('active');
+      });
+
+      // Touch event for mobile devices
+      mobileMenuToggle.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Mobile menu touched');
         mobileMenuToggle.classList.toggle('active');
         headerNav.classList.toggle('active');
       });

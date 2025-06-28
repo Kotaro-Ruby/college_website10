@@ -1256,6 +1256,125 @@
       .no-data-message p {
         font-size: 1rem;
       }
+
+      /* Major Programs Grid - Mobile Responsive */
+      .major-programs-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .major-program-card {
+        padding: 16px !important;
+      }
+
+      .major-program-tags {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+        gap: 8px !important;
+      }
+
+      .major-program-tag {
+        font-size: 0.8rem !important;
+        padding: 6px 8px !important;
+        text-align: center !important;
+      }
+    }
+  </style>
+
+  <style>
+    /* Major Field Information Styles */
+    .major-programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .major-program-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .major-program-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .major-program-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8b5cf6;
+    }
+
+    .major-program-title {
+      margin: 0;
+      color: #2d3748;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .major-program-tags {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 6px;
+    }
+
+    .major-program-tag {
+      font-size: 0.85rem;
+      color: #6b7280;
+      background: #f8fafc;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Mobile Responsive for Major Programs */
+    @media (max-width: 768px) {
+      .major-programs-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .major-program-card {
+        padding: 16px;
+      }
+
+      .major-program-tags {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+      }
+
+      .major-program-tag {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .major-programs-grid {
+        gap: 12px;
+      }
+
+      .major-program-card {
+        padding: 12px;
+      }
+
+      .major-program-tags {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 6px;
+      }
+
+      .major-program-tag {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+      }
     }
   </style>
 </head>
@@ -2061,7 +2180,7 @@
                       <i class="fas fa-list-ul" style="color: #8b5cf6;"></i>
                       提供される専攻プログラム例
                     </h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="major-programs-grid">
                       <% 
                         # 専攻分野ごとの具体的なプログラム例
                         major_programs = {
@@ -2089,14 +2208,14 @@
                           programs = major_programs[major_name] || []
                           next if programs.empty?
                       %>
-                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
-                          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                            <div style="width: 8px; height: 8px; border-radius: 50%; background: #8b5cf6;"></div>
-                            <h5 style="margin: 0; color: #2d3748; font-weight: 600;"><%= major_name %></h5>
+                        <div class="major-program-card">
+                          <div class="major-program-header">
+                            <div class="major-program-dot"></div>
+                            <h5 class="major-program-title"><%= major_name %></h5>
                           </div>
-                          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 6px;">
+                          <div class="major-program-tags">
                             <% programs.each do |program| %>
-                              <span style="font-size: 0.85rem; color: #6b7280; background: #f8fafc; padding: 4px 8px; border-radius: 4px; text-align: center;"><%= program %></span>
+                              <span class="major-program-tag"><%= program %></span>
                             <% end %>
                           </div>
                         </div>
