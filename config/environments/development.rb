@@ -81,9 +81,11 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
 
-  # config/environments/development.rb に追加
-config.assets.debug = true
-config.assets.compile = true
-config.assets.check_precompiled_asset = false
+  # Development asset configuration
+  config.assets.debug = true
+  config.assets.compile = true
+  config.assets.check_precompiled_asset = false
+  config.assets.digest = false
+  config.assets.quiet = true
 
 end

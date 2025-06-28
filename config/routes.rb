@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  root "home#top"
+  root "home#index"
 
   get "conditions/index"
   get "test1/test1"
   get "top" => "home#top"
+  get "search" => "home#search"
 
   get "about" => "home#about"
 
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
+  
+  # Password reset routes
+  resources :password_resets, only: [:new, :create, :show, :update]
   
   # User registration routes
   get "register" => "users#new"

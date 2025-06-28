@@ -1,0 +1,254 @@
+<div class="main">
+  <div class="container">
+    <div class="reset-container">
+      <div class="reset-header">
+        <h1>
+          <i class="fas fa-lock me-2"></i>
+          新しいパスワード設定
+        </h1>
+        <p>新しいパスワードを入力してください</p>
+      </div>
+      
+      <div class="reset-form">
+        <% if flash[:alert] %>
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <% @user.errors.full_messages.each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        <% end %>
+        
+        <%= form_with model: @user, url: password_reset_path(params[:id]), local: true, class: "needs-validation", novalidate: true do |f| %>
+          <div class="mb-4">
+            <label for="password" class="form-label">
+              <i class="fas fa-key me-2"></i>新しいパスワード
+            </label>
+            <div class="position-relative">
+              <%= f.password_field :password, 
+                  class: "form-control", 
+                  id: "password",
+                  placeholder: "6文字以上で入力してください",
+                  required: true,
+                  minlength: 6 %>
+              <button type="button" class="password-toggle" onclick="togglePassword('password', this)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-requirements">
+              <i class="fas fa-info-circle me-1"></i>
+              パスワードは6文字以上で入力してください
+            </div>
+            <div class="invalid-feedback">
+              パスワードは6文字以上で入力してください
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label for="password_confirmation" class="form-label">
+              <i class="fas fa-key me-2"></i>パスワード確認
+            </label>
+            <div class="position-relative">
+              <%= f.password_field :password_confirmation, 
+                  class: "form-control", 
+                  id: "password_confirmation",
+                  placeholder: "パスワードを再度入力してください",
+                  required: true %>
+              <button type="button" class="password-toggle" onclick="togglePassword('password_confirmation', this)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">
+              パスワードが一致しません
+            </div>
+          </div>
+          
+          <div class="d-grid">
+            <%= f.submit "パスワードを更新", class: "btn btn-reset" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .main {
+    min-height: calc(100vh - 80px);
+    padding: 40px 0;
+    background: #f8f9fa;
+  }
+  
+  .reset-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .reset-header {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .reset-header h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .reset-header p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+  
+  .reset-form {
+    padding: 40px 30px;
+  }
+  
+  .form-label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #f39c12;
+    box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    transition: color 0.3s ease;
+  }
+  
+  .password-toggle:hover {
+    color: #f39c12;
+  }
+  
+  .password-requirements {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 8px;
+  }
+  
+  .btn-reset {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-reset:hover {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
+    color: white;
+  }
+  
+  .alert {
+    border-radius: 10px;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .main {
+      padding: 20px 15px;
+    }
+    
+    .reset-header {
+      padding: 25px 20px;
+    }
+    
+    .reset-header h1 {
+      font-size: 24px;
+    }
+    
+    .reset-form {
+      padding: 30px 20px;
+    }
+  }
+</style>
+
+<script>
+  function togglePassword(fieldId, button) {
+    const field = document.getElementById(fieldId);
+    const icon = button.querySelector('i');
+    
+    if (field.type === 'password') {
+      field.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      field.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  }
+
+  // Password confirmation validation
+  document.getElementById('password_confirmation').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    const confirmation = this.value;
+    
+    if (password !== confirmation) {
+      this.setCustomValidity('パスワードが一致しません');
+    } else {
+      this.setCustomValidity('');
+    }
+  });
+
+  // Bootstrap form validation
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

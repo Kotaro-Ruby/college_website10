@@ -264,8 +264,10 @@ class ConditionsController < ApplicationController
 
   def show
     @college = Condition.find_by(slug: params[:id]) || Condition.find_by(id: params[:id])
-  Rails.logger.debug("College found: #{@college.inspect}")
+    Rails.logger.debug("College found: #{@college.inspect}")
     if @college
+      # 閲覧履歴に追加
+      add_to_recently_viewed(@college)
       render :show
     else
       redirect_to :fallback_page

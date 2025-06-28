@@ -1,0 +1,185 @@
+<div class="main">
+  <div class="container">
+    <div class="reset-container">
+      <div class="reset-header">
+        <h1>
+          <i class="fas fa-key me-2"></i>
+          パスワードリセット
+        </h1>
+        <p>登録されたメールアドレスにリセット用のリンクを送信します</p>
+      </div>
+      
+      <div class="reset-form">
+        <% if flash[:alert] %>
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        
+        <%= form_with url: password_resets_path, local: true, class: "needs-validation", novalidate: true do |f| %>
+          <div class="mb-4">
+            <label for="email" class="form-label">
+              <i class="fas fa-envelope me-2"></i>メールアドレス
+            </label>
+            <%= f.email_field :email, 
+                class: "form-control", 
+                id: "email",
+                placeholder: "example@email.com",
+                required: true,
+                autocomplete: "email" %>
+            <div class="invalid-feedback">
+              有効なメールアドレスを入力してください
+            </div>
+          </div>
+          
+          <div class="d-grid mb-4">
+            <%= f.submit "リセットメールを送信", class: "btn btn-reset" %>
+          </div>
+        <% end %>
+        
+        <div class="text-center">
+          <p class="mb-2">
+            <i class="fas fa-arrow-left me-2"></i>
+            <%= link_to "ログインページに戻る", login_path, class: "back-link" %>
+          </p>
+          <p class="mb-0">
+            <i class="fas fa-user-plus me-2"></i>
+            <%= link_to "新規登録はこちら", register_path, class: "back-link" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .main {
+    min-height: calc(100vh - 80px);
+    padding: 40px 0;
+    background: #f8f9fa;
+  }
+  
+  .reset-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .reset-header {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .reset-header h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .reset-header p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+  
+  .reset-form {
+    padding: 40px 30px;
+  }
+  
+  .form-label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #f39c12;
+    box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+  }
+  
+  .btn-reset {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-reset:hover {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
+    color: white;
+  }
+  
+  .back-link {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .back-link:hover {
+    color: #e67e22;
+    text-decoration: underline;
+  }
+  
+  .alert {
+    border-radius: 10px;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .main {
+      padding: 20px 15px;
+    }
+    
+    .reset-header {
+      padding: 25px 20px;
+    }
+    
+    .reset-header h1 {
+      font-size: 24px;
+    }
+    
+    .reset-form {
+      padding: 30px 20px;
+    }
+  }
+</style>
+
+<script>
+  // Bootstrap form validation
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

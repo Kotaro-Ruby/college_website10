@@ -59,14 +59,14 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
   
   def user_update_params
     if params[:user][:password].present?
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     else
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :email)
     end
   end
 end

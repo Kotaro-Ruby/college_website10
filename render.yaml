@@ -18,5 +18,5 @@ services:
         bundle exec rails import:from_compressed
         SKIP_DETAILED_PROGRAMS=true bundle exec rails college_data:setup_production_fast
       else
-        bundle exec rails college_data:setup_production_fast
+        SKIP_DETAILED_PROGRAMS=true bundle exec rails college_data:setup_production_fast
       fi

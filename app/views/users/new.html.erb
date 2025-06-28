@@ -55,6 +55,12 @@
         <% end %>
 
         <div class="form-group">
+          <%= form.label :email, "メールアドレス", class: "form-label" %>
+          <%= form.email_field :email, name: "user[email]", value: @user&.email, class: "form-input", required: true, id: "user_email", placeholder: "example@email.com" %>
+          <small class="help-text">有効なメールアドレスを入力してください</small>
+        </div>
+
+        <div class="form-group">
           <%= form.label :username, "ユーザー名", class: "form-label" %>
           <%= form.text_field :username, name: "user[username]", value: @user&.username, class: "form-input", required: true, id: "user_username" %>
           <small class="help-text">3文字以上50文字以下で入力してください</small>

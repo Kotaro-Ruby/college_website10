@@ -4,13 +4,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:username])
+    # メールアドレスまたはユーザー名での認証に対応
+    user = User.find_by(email: params[:email]&.downcase) || User.find_by(username: params[:email])
     
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_path, notice: 'ログインしました'
     else
-      flash.now[:alert] = 'ユーザー名またはパスワードが間違っています'
+      flash.now[:alert] = 'メールアドレスまたはパスワードが間違っています'
       render :new
     end
   end

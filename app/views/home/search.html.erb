@@ -1,0 +1,613 @@
+<% content_for :title, "大学検索 - College Spark" %>
+<% content_for :description, "アメリカの大学を詳細条件で検索できます。州、学費、専攻、SATスコア、学生数など様々な条件で絞り込んで、あなたにぴったりの大学を見つけましょう。" %>
+<% content_for :keywords, "大学検索, アメリカ大学, 条件検索, 学費, 専攻, SATスコア, 州立大学, 私立大学, 大学選び" %>
+<% content_for :og_title, "大学検索 - College Spark" %>
+<% content_for :og_description, "アメリカの大学を詳細条件で検索。州、学費、専攻、SATスコア、学生数など様々な条件で絞り込んで、あなたにぴったりの大学を見つけましょう。" %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="main">
+    <div class="copy-container">
+        <h1>College Spark</h1>
+        <h2>~条件を指定してアメリカの大学を探そう！~</h2>
+        
+        <!-- 大学名検索機能 -->
+        <div class="college-name-search">
+            <div class="search-header">
+                <h3><i class="fas fa-search"></i>大学名で直接検索</h3>
+            </div>
+            <div class="search-input-container">
+                <input type="text" id="college-name-input" placeholder="例：Harvard University, Stanford University..." class="college-search-input">
+                <button id="name-search-button" class="name-search-btn">
+                    <i class="fas fa-arrow-right"></i> 検索
+                </button>
+            </div>
+            <div class="search-separator">
+                <span>または</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="contents">
+        <div class="conditions1">
+            <div class="box">
+                <div class="line-header1">
+                    <h1><i class="fas fa-map-marked-alt"></i>州</h1>
+                </div>
+                <select class="form-select" id="stateSelect" style="margin-top: 70px;">
+                    <option value="選択してください">選択してください</option>
+                    <option value="指定しない">指定しない</option>
+                    <option value="アラバマ州(AL)">アラバマ州(AL)</option>
+                    <option value="アラスカ州(AK)">アラスカ州(AK)</option>
+                    <option value="アリゾナ州(AZ)">アリゾナ州(AZ)</option>
+                    <option value="アーカンソー州(AR)">アーカンソー州(AR)</option>
+                    <option value="カリフォルニア州(CA)">カリフォルニア州(CA)</option>
+                    <option value="コロラド州(CO)">コロラド州(CO)</option>
+                    <option value="コネチカット州(CT)">コネチカット州(CT)</option>
+                    <option value="デラウェア州(DE)">デラウェア州(DE)</option>
+                    <option value="コロンビア特別区(DC)">コロンビア特別区(DC)</option>
+                    <option value="フロリダ州(FL)">フロリダ州(FL)</option>
+                    <option value="ジョージア州(GA)">ジョージア州(GA)</option>
+                    <option value="ハワイ州(HI)">ハワイ州(HI)</option>
+                    <option value="アイダホ州(ID)">アイダホ州(ID)</option>
+                    <option value="イリノイ州(IL)">イリノイ州(IL)</option>
+                    <option value="インディアナ州(IN)">インディアナ州(IN)</option>
+                    <option value="アイオワ州(IA)">アイオワ州(IA)</option>
+                    <option value="カンザス州(KS)">カンザス州(KS)</option>
+                    <option value="ケンタッキー州(KY)">ケンタッキー州(KY)</option>
+                    <option value="ルイジアナ州(LA)">ルイジアナ州(LA)</option>
+                    <option value="メイン州(ME)">メイン州(ME)</option>
+                    <option value="メリーランド州(MD)">メリーランド州(MD)</option>
+                    <option value="マサチューセッツ州(MA)">マサチューセッツ州(MA)</option>
+                    <option value="ミシガン州(MI)">ミシガン州(MI)</option>
+                    <option value="ミネソタ州(MN)">ミネソタ州(MN)</option>
+                    <option value="ミシシッピ州(MS)">ミシシッピ州(MS)</option>
+                    <option value="ミズーリ州(MO)">ミズーリ州(MO)</option>
+                    <option value="モンタナ州(MT)">モンタナ州(MT)</option>
+                    <option value="ネブラスカ州(NE)">ネブラスカ州(NE)</option>
+                    <option value="ネバダ州(NV)">ネバダ州(NV)</option>
+                    <option value="ニューハンプシャー州(NH)">ニューハンプシャー州(NH)</option>
+                    <option value="ニュージャージー州(NJ)">ニュージャージー州(NJ)</option>
+                    <option value="ニューメキシコ州(NM)">ニューメキシコ州(NM)</option>
+                    <option value="ニューヨーク州(NY)">ニューヨーク州(NY)</option>
+                    <option value="ノースカロライナ州(NC)">ノースカロライナ州(NC)</option>
+                    <option value="ノースダコタ州(ND)">ノースダコタ州(ND)</option>
+                    <option value="オハイオ州(OH)">オハイオ州(OH)</option>
+                    <option value="オクラホマ州(OK)">オクラホマ州(OK)</option>
+                    <option value="オレゴン州(OR)">オレゴン州(OR)</option>
+                    <option value="ペンシルベニア州(PA)">ペンシルベニア州(PA)</option>
+                    <option value="ロードアイランド州(RI)">ロードアイランド州(RI)</option>
+                    <option value="サウスカロライナ州(SC)">サウスカロライナ州(SC)</option>
+                    <option value="サウスダコタ州(SD)">サウスダコタ州(SD)</option>
+                    <option value="テネシー州(TN)">テネシー州(TN)</option>
+                    <option value="テキサス州(TX)">テキサス州(TX)</option>
+                    <option value="ユタ州(UT)">ユタ州(UT)</option>
+                    <option value="バーモント州(VT)">バーモント州(VT)</option>
+                    <option value="バージニア州(VA)">バージニア州(VA)</option>
+                    <option value="ワシントン州(WA)">ワシントン州(WA)</option>
+                    <option value="ウェストバージニア州(WV)">ウェストバージニア州(WV)</option>
+                    <option value="ウィスコンシン州(WI)">ウィスコンシン州(WI)</option>
+                    <option value="ワイオミング州(WY)">ワイオミング州(WY)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="conditions2">
+            <div class="box">
+                <div class="tooltip-container1">
+                    <span class="tooltip-trigger">？</span>
+                    <div class="tooltip-content">
+                        州立大学は、州民以外の学生に対して通常の2~3倍の学費を設定していることに注意が必要です。また、私立大学の方が多くの奨学金を受け取れる傾向にあります。
+                    </div>
+                </div> 
+                <div class="line-header2">
+                    <h1><i class="fas fa-university"></i>私立/州立</h1>
+                </div>
+                <form>
+                    <div class="form-group1">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                            <label class="form-check-label" for="radio1">
+                                指定しない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                            <label class="form-check-label" for="radio2">
+                                私立
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                            <label class="form-check-label" for="radio3">
+                                州立
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions3">
+            <div class="box">
+                <div class="tooltip-container2">
+                    <span class="tooltip-trigger">？</span>
+                    <div class="tooltip-content">
+                        州立大学は州外生向け料金、私立大学はNet Price（実質費用）を表示しています。
+                    </div>
+                </div> 
+                <div class="line-header3">
+                    <h1><i class="fas fa-dollar-sign"></i>年間授業料</h1>
+                </div>
+                <form>
+                    <div class="form-group2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio1" value="option1" checked>
+                            <label class="form-check-label" for="tuitionRadio1">
+                                指定しない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio2" value="option2">
+                            <label class="form-check-label" for="tuitionRadio2">
+                                ~$9,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio3" value="option3">
+                            <label class="form-check-label" for="tuitionRadio3">
+                                $10,000~$19,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio4" value="option4">
+                            <label class="form-check-label" for="tuitionRadio4">
+                                $20,000~$29,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio5" value="option5">
+                            <label class="form-check-label" for="tuitionRadio5">
+                                $30,000~$39,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio6" value="option6">
+                            <label class="form-check-label" for="tuitionRadio6">
+                                $40,000~$49,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio7" value="option7">
+                            <label class="form-check-label" for="tuitionRadio7">
+                                $50,000~$59,999
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio8" value="option8">
+                            <label class="form-check-label" for="tuitionRadio8">
+                                $60,000~
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions4">
+            <div class="box">
+                <div class="line-header4">
+                    <h1><i class="fas fa-user-friends"></i>学生数</h1>    
+                </div>
+                <form>
+                    <div class="form-group3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="groupCheck33.1">
+                            <label class="form-check-label" for="groupCheck33.1">
+                                小規模(~2999人)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="groupCheck34">
+                            <label class="form-check-label" for="groupCheck34">
+                                中規模(3000人~9999人)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="groupCheck35">
+                            <label class="form-check-label" for="groupCheck35">
+                                大規模(10,000人~29,999人)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="groupCheck36">
+                            <label class="form-check-label" for="groupCheck36">
+                                超大規模(30,000人~)
+                            </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions5">
+            <div class="box">
+                <div class="tooltip-container3">
+                    <span class="tooltip-trigger">？</span>
+                    <div class="tooltip-content">
+                        SAT（Scholastic Assessment Test）は、アメリカの大学入学に広く使用される標準テストです。総合スコアは400～1600点で、数学セクション（200～800点）と読解・ライティングセクション（200～800点）の合計です。多くの競争力のある大学では1200点以上、トップ大学では1400点以上が目安とされています。テストは年に7回実施され、何度でも受験可能です。
+                    </div>
+                </div>   
+                <div class="line-header5">
+                    <h1><i class="fas fa-chart-bar"></i>SAT総合スコア</h1>
+                </div>
+                <form>
+                    <div class="form-group4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio1" value="option1" checked>
+                            <label class="form-check-label" for="satRadio1">
+                                指定しない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio2" value="option2">
+                            <label class="form-check-label" for="satRadio2">
+                                800~1000
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio3" value="option3">
+                            <label class="form-check-label" for="satRadio3">
+                                1000~1200
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio4" value="option4">
+                            <label class="form-check-label" for="satRadio4">
+                                1200~1400
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio5" value="option5">
+                            <label class="form-check-label" for="satRadio5">
+                                1400~1600
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions6">
+            <div class="box">
+                <div class="tooltip-container4">
+                    <span class="tooltip-trigger">？</span>
+                    <div class="tooltip-content">
+                        ACT（American College Testing）は、SAT同様にアメリカの大学入学で使用される標準テストです。総合スコア（Composite Score）は1～36点で、英語、数学、読解、科学の4つのセクションの平均値です。全国平均は約21点で、競争力のある大学では24点以上、トップ大学では30点以上が目安です。テストは年に6回実施され、多くの大学でSATとACTは同等に扱われます。
+                    </div>
+                </div> 
+                <div class="line-header6">
+                    <h1><i class="fas fa-chart-line"></i>ACT総合スコア</h1>  
+                </div>
+                <form>
+                    <div class="form-group5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio1" value="option1" checked>
+                            <label class="form-check-label" for="actRadio1">
+                                指定しない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio2" value="option2">
+                            <label class="form-check-label" for="actRadio2">
+                                10~15
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio3" value="option3">
+                            <label class="form-check-label" for="actRadio3">
+                                16~20
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio4" value="option4">
+                            <label class="form-check-label" for="actRadio4">
+                                21~25
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio5" value="option5">
+                            <label class="form-check-label" for="actRadio5">
+                                26~30
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio6" value="option6">
+                            <label class="form-check-label" for="actRadio6">
+                                31~36
+                            </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions7">
+            <div class="box">
+                <div class="tooltip-container5">
+                    <span class="tooltip-trigger">？</span>
+                    <div class="tooltip-content">
+                        難関大学ほど卒業率が高くなる傾向にあります。
+                    </div>
+                </div> 
+                <div class="line-header7">
+                    <h1><i class="fas fa-graduation-cap"></i>卒業率</h1>
+                </div>
+                <form>
+                    <div class="form-group6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio1" value="option1" checked>
+                            <label class="form-check-label" for="gradRadio1">
+                                指定しない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio2" value="option2">
+                            <label class="form-check-label" for="gradRadio2">
+                                50%~
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio3" value="option3">
+                            <label class="form-check-label" for="gradRadio3">
+                                60%~
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio4" value="option4">
+                            <label class="form-check-label" for="gradRadio4">
+                                70%~
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio5" value="option5">
+                            <label class="form-check-label" for="gradRadio5">
+                                80%~
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio6" value="option6">
+                            <label class="form-check-label" for="gradRadio6">
+                                90%~
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="conditions8">
+            <div class="box">
+                <div class="line-header8">
+                    <h1><i class="fas fa-map-pin"></i>大学の立地</h1>    
+                </div>
+                <form>
+                    <div class="form-group7">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="urbanCheck1" value="大都市">
+                            <label class="form-check-label" for="urbanCheck1">
+                                大都市
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="urbanCheck2" value="都市部近郊">
+                            <label class="form-check-label" for="urbanCheck2">
+                                都市部近郊
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="urbanCheck3" value="小都市">
+                            <label class="form-check-label" for="urbanCheck3">
+                                小都市
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="urbanCheck4" value="田舎">
+                            <label class="form-check-label" for="urbanCheck4">
+                                田舎
+                            </label>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="contents1">
+        <div class="conditions9">
+            <div class="box1">
+                <div class="tooltip-container6">
+                    <span class="tooltip-trigger1">？</span>
+                    <div class="tooltip-content">
+                        アメリカの大学では、2つ以上の分野を専攻することができます。また、副専攻として学ぶこともできます。文理の壁がほとんどないため、全く異なる分野を同時に学ぶことができます。
+                    </div>
+                </div>
+                <div class="line-header7-major">
+                    <h1><i class="fas fa-book-open"></i><strong>専攻</strong></h1>
+                </div>
+                <div class="options">
+                    <label><input type="checkbox" name="major" value="health_professions"> 健康・医療 (3,479校)</label>
+                    <label><input type="checkbox" name="major" value="business"> 経営学 (2,829校)</label>
+                    <label><input type="checkbox" name="major" value="computer_science"> コンピューターサイエンス (2,407校)</label>
+                    <label><input type="checkbox" name="major" value="education"> 教育学 (1,995校)</label>
+                    <label><input type="checkbox" name="major" value="visual_arts"> 視覚・舞台芸術 (1,926校)</label>
+                    <label><input type="checkbox" name="major" value="biology"> 生物学 (1,726校)</label>
+                    <label><input type="checkbox" name="major" value="psychology"> 心理学 (1,697校)</label>
+                    <label><input type="checkbox" name="major" value="sociology"> 社会学 (1,517校)</label>
+                    <label><input type="checkbox" name="major" value="social_sciences"> 社会科学 (1,496校)</label>
+                    <label><input type="checkbox" name="major" value="english"> 英語・文学 (1,487校)</label>
+                    <label><input type="checkbox" name="major" value="mathematics"> 数学・統計学 (1,344校)</label>
+                    <label><input type="checkbox" name="major" value="history"> 歴史学 (1,323校)</label>
+                    <label><input type="checkbox" name="major" value="engineering"> 工学 (1,093校)</label>
+                    <label><input type="checkbox" name="major" value="philosophy"> 哲学・宗教学 (898校)</label>
+                    <label><input type="checkbox" name="major" value="agriculture"> 農業・農学 (761校)</label>
+                    <label><input type="checkbox" name="major" value="law"> 法学・刑事司法 (640校)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-button-container">
+        <button class="cool-search-button" id="search-button"><i class="fas fa-search"></i> 条件で検索</button>
+    </div>
+</div>
+
+<script>
+// 大学名検索機能
+document.getElementById('name-search-button').addEventListener('click', function () {
+    const collegeName = document.getElementById('college-name-input').value.trim();
+    if (collegeName) {
+        // 大学名検索用のクエリパラメータを作成
+        const queryString = new URLSearchParams({
+            college_name: collegeName
+        }).toString();
+        
+        // 検索結果ページにリダイレクト
+        window.location.href = `/results?${queryString}`;
+    } else {
+        alert('大学名を入力してください');
+    }
+});
+
+// Enterキーでも検索できるようにする
+document.getElementById('college-name-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        document.getElementById('name-search-button').click();
+    }
+});
+
+// 大学名検索と条件検索の干渉防止機能
+document.addEventListener('DOMContentLoaded', function () {
+    const collegeNameInput = document.getElementById('college-name-input');
+    const nameSearchButton = document.getElementById('name-search-button');
+    
+    // 条件検索の要素を取得
+    const stateSelect = document.getElementById('stateSelect');
+    const conditionInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+    const conditionSearchButton = document.getElementById('search-button');
+    
+    // 条件検索要素を無効化する関数
+    function disableConditionSearch() {
+        stateSelect.disabled = true;
+        stateSelect.classList.add('disabled-field');
+        
+        conditionInputs.forEach(input => {
+            input.disabled = true;
+            input.parentElement.classList.add('disabled-label');
+        });
+        
+        conditionSearchButton.disabled = true;
+        conditionSearchButton.classList.add('disabled-button');
+    }
+    
+    // 条件検索要素を有効化する関数
+    function enableConditionSearch() {
+        stateSelect.disabled = false;
+        stateSelect.classList.remove('disabled-field');
+        
+        conditionInputs.forEach(input => {
+            input.disabled = false;
+            input.parentElement.classList.remove('disabled-label');
+        });
+        
+        conditionSearchButton.disabled = false;
+        conditionSearchButton.classList.remove('disabled-button');
+    }
+    
+    // 大学名検索要素を無効化する関数
+    function disableNameSearch() {
+        collegeNameInput.disabled = true;
+        collegeNameInput.classList.add('disabled-field');
+        nameSearchButton.disabled = true;
+        nameSearchButton.classList.add('disabled-button');
+    }
+    
+    // 大学名検索要素を有効化する関数
+    function enableNameSearch() {
+        collegeNameInput.disabled = false;
+        collegeNameInput.classList.remove('disabled-field');
+        nameSearchButton.disabled = false;
+        nameSearchButton.classList.remove('disabled-button');
+    }
+    
+    // 大学名入力フィールドの監視
+    collegeNameInput.addEventListener('input', function() {
+        if (this.value.trim() !== '') {
+            disableConditionSearch();
+        } else {
+            enableConditionSearch();
+        }
+    });
+    
+    // 条件検索の要素変更を監視
+    function checkConditionInputs() {
+        let hasConditionInput = false;
+        
+        // 州選択をチェック
+        if (stateSelect.value !== '選択してください') {
+            hasConditionInput = true;
+        }
+        
+        // ラジオボタンとチェックボックスをチェック
+        conditionInputs.forEach(input => {
+            if (input.checked && input.value !== 'option1') { // デフォルト選択肢以外
+                hasConditionInput = true;
+            }
+        });
+        
+        if (hasConditionInput) {
+            disableNameSearch();
+        } else {
+            enableNameSearch();
+        }
+    }
+    
+    // 州選択の変更を監視
+    stateSelect.addEventListener('change', checkConditionInputs);
+    
+    // 全ての条件入力要素の変更を監視
+    conditionInputs.forEach(input => {
+        input.addEventListener('change', checkConditionInputs);
+    });
+    
+    console.log('Search interference prevention initialized');
+});
+
+// 検索機能
+document.getElementById('search-button').addEventListener('click', function () {
+    const formData = {
+        state: document.getElementById('stateSelect').value,
+        privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+        tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+        students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
+        sat_score: document.querySelector('input[name="satRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+        act_score: document.querySelector('input[name="actRadios"]:checked')?.nextElementSibling?.innerText.trim(),
+        graduation_rate: document.querySelector('.form-group6 input:checked')?.nextElementSibling?.innerText.trim(),
+        urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.value),
+        major: Array.from(document.querySelectorAll('input[name="major"]:checked'))
+            .map(cb => cb.value)
+            .filter(value => value !== "")
+    };
+
+    // majorが選択されていない場合の処理
+    if (formData.major.length === 0) {
+        formData.major = "未選択";
+    }
+
+    // クエリ文字列を作成
+    const queryString = new URLSearchParams(formData).toString();
+
+    // クエリ文字列を使ってリダイレクト
+    window.location.href = `/results?${queryString}`;
+});
+</script>
