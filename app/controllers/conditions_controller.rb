@@ -34,12 +34,8 @@ class ConditionsController < ApplicationController
     # State の処理（大学名検索の場合はスキップ）
     unless params[:college_name].present?
       if params[:state].blank? || params[:state] == '選択してください'
-        if request.xhr?  # Ajaxリクエストの場合
-          render json: { error: '州を選択してください' }, status: :unprocessable_entity and return
-        else
-          flash.now[:error] = '州を選択してください'
-          render :index and return
-        end
+        # フロントエンドでバリデーションを行うため、サーバー側では検索ページにリダイレクト
+        redirect_to '/search' and return
       elsif params[:state] != '指定しない'
         state = params[:state]
         # 日本語表記から州コードを抽出 例: "カリフォルニア州(CA)" -> "CA"

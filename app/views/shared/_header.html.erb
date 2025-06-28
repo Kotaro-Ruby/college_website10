@@ -32,12 +32,61 @@
     <!-- Navigation -->
     <nav class="header-nav">
       <ul class="nav-list">
-        <li><a href="/about" class="nav-link">College Sparkについて</a></li>
-        <li><a href="/knowledge" class="nav-link">アメリカの大学を知る</a></li>
-        <li><span class="nav-link disabled" onclick="showDevelopmentModal('カナダ版')">カナダ版</span></li>
-        <li><span class="nav-link disabled" onclick="showDevelopmentModal('オーストラリア版')">オーストラリア版</span></li>
-        <li><span class="nav-link disabled" onclick="showDevelopmentModal('ニュージーランド版')">ニュージーランド版</span></li>
-        <li><a href="/degreeseeking" class="nav-link">卒業を目指す留学</a></li>
+        <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
+        <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
+        <li class="nav-dropdown <%= 'active' if request.path.start_with?('/states') %>">
+          <span class="nav-link dropdown-trigger">
+            ツール・ガイド
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </span>
+          <div class="dropdown-menu">
+            <a href="/states" class="dropdown-item <%= 'active' if request.path.start_with?('/states') %>">
+              <i class="fas fa-map-marked-alt"></i>
+              州別ガイド
+            </a>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('大学比較ツール')">
+              <i class="fas fa-balance-scale"></i>
+              大学比較ツール
+            </span>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('合格可能性計算機')">
+              <i class="fas fa-calculator"></i>
+              合格可能性計算機
+            </span>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('学費計算機')">
+              <i class="fas fa-dollar-sign"></i>
+              学費計算機
+            </span>
+          </div>
+        </li>
+        <li class="nav-dropdown <%= 'active' if ['/knowledge', '/degreeseeking'].include?(request.path) %>">
+          <span class="nav-link dropdown-trigger">
+            情報・サポート
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </span>
+          <div class="dropdown-menu">
+            <a href="/knowledge" class="dropdown-item <%= 'active' if request.path == '/knowledge' %>">
+              <i class="fas fa-book"></i>
+              アメリカの大学を知る
+            </a>
+            <a href="/degreeseeking" class="dropdown-item <%= 'active' if request.path == '/degreeseeking' %>">
+              <i class="fas fa-graduation-cap"></i>
+              卒業を目指す留学
+            </a>
+            <div class="dropdown-divider"></div>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('カナダ版')">
+              <i class="fas fa-flag"></i>
+              カナダ版
+            </span>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('オーストラリア版')">
+              <i class="fas fa-flag"></i>
+              オーストラリア版
+            </span>
+            <span class="dropdown-item disabled" onclick="showDevelopmentModal('ニュージーランド版')">
+              <i class="fas fa-flag"></i>
+              ニュージーランド版
+            </span>
+          </div>
+        </li>
       </ul>
     </nav>
 
@@ -180,6 +229,29 @@
     transform: translateY(-1px);
   }
 
+  /* Active state styles */
+  .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-dropdown.active > .dropdown-trigger {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-item.active {
+    background: #f5b342 !important;
+    color: white !important;
+    font-weight: 600 !important;
+  }
+
+  .dropdown-item.active i {
+    color: white !important;
+  }
+
   /* Dropdown */
   .nav-dropdown {
     position: relative;
@@ -197,54 +269,101 @@
     transition: transform 0.3s ease;
   }
 
-  .nav-dropdown:hover .dropdown-arrow {
+  .nav-dropdown:hover .dropdown-arrow,
+  .nav-dropdown.active .dropdown-arrow {
     transform: rotate(180deg);
   }
 
   .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    min-width: 200px;
-    z-index: 1000;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: absolute !important;
+    top: calc(100% + 2px) !important;
+    left: 0 !important;
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.25s ease-out !important;
+    min-width: 250px !important;
+    z-index: 999999 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    padding: 8px 0 !important;
+    pointer-events: none !important;
+    display: block !important;
   }
 
-  .nav-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  /* トリガーとメニュー間の見えない接続エリア */
+  .nav-dropdown::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 10px !important;
+    background: transparent !important;
+    z-index: 999998 !important;
+    display: block !important;
+  }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown.active .dropdown-menu,
+  .nav-dropdown.show .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    display: block !important;
   }
 
   .dropdown-item {
-    display: block;
-    padding: 12px 16px;
-    color: #2d3748;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 18px !important;
+    color: #2d3748 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dropdown-item i {
+    width: 16px !important;
+    text-align: center !important;
+    color: #667eea !important;
+    flex-shrink: 0 !important;
   }
 
   .dropdown-item:hover {
-    background: #f8f9fa;
+    background: #f8f9fa !important;
+    color: #2d3748 !important;
+    text-decoration: none !important;
   }
 
   .dropdown-item.disabled {
-    color: #a0a9b8;
-    cursor: not-allowed;
+    color: #a0a9b8 !important;
+    cursor: not-allowed !important;
+  }
+
+  .dropdown-item.disabled i {
+    color: #a0a9b8 !important;
   }
 
   .dropdown-item.disabled:hover {
-    background: #f1f3f4;
+    background: #f1f3f4 !important;
+  }
+
+  .dropdown-divider {
+    height: 1px !important;
+    background: #e2e8f0 !important;
+    margin: 8px 0 !important;
+    width: 100% !important;
   }
 
   /* User Section */
@@ -534,6 +653,22 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+    }
+
+    .nav-dropdown.active > .dropdown-trigger {
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+    }
+
+    .dropdown-item.active {
+      background: rgba(255, 255, 255, 0.3) !important;
+      color: white !important;
+      font-weight: 600 !important;
+    }
+
     .mobile-menu-toggle {
       display: flex;
     }
@@ -630,7 +765,9 @@
   document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const headerNav = document.querySelector('.header-nav');
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
 
+    // Mobile menu functionality
     if (mobileMenuToggle && headerNav) {
       mobileMenuToggle.addEventListener('click', function() {
         mobileMenuToggle.classList.toggle('active');
@@ -646,7 +783,7 @@
       });
 
       // Close menu when clicking on a link
-      const navLinks = document.querySelectorAll('.nav-link');
+      const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-trigger)');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
           mobileMenuToggle.classList.remove('active');
@@ -654,6 +791,137 @@
         });
       });
     }
+
+    // Dropdown functionality
+    dropdownTriggers.forEach(trigger => {
+      const dropdown = trigger.closest('.nav-dropdown');
+      
+      // Click to toggle dropdown
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Close other dropdowns
+        document.querySelectorAll('.nav-dropdown').forEach(otherDropdown => {
+          if (otherDropdown !== dropdown) {
+            otherDropdown.classList.remove('active', 'show');
+          }
+        });
+        
+        // Toggle current dropdown
+        const isActive = dropdown.classList.contains('active') || dropdown.classList.contains('show');
+        
+        if (isActive) {
+          dropdown.classList.remove('active', 'show');
+        } else {
+          dropdown.classList.add('active', 'show');
+          // 強制的にスタイルを適用
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateY(0)';
+            menu.style.pointerEvents = 'auto';
+          }
+        }
+      });
+      
+      // Mouse enter/leave for desktop with longer delay
+      let hoverTimeout;
+      
+      dropdown.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 768) {
+          clearTimeout(hoverTimeout);
+          dropdown.classList.add('active');
+          console.log('Dropdown mouseenter - opening');
+        }
+      });
+      
+      dropdown.addEventListener('mouseleave', function() {
+        if (window.innerWidth > 768) {
+          // より長い遅延でカーソル移動時の誤閉じを防ぐ
+          hoverTimeout = setTimeout(() => {
+            // クリックで開いた場合は閉じない
+            if (!dropdown.classList.contains('show')) {
+              dropdown.classList.remove('active');
+              console.log('Dropdown mouseleave timeout - closing');
+            }
+          }, 300); // 150ms → 300ms に延長
+        }
+      });
+
+      // ドロップダウンメニュー自体でのマウスイベント
+      const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+      if (dropdownMenu) {
+        dropdownMenu.addEventListener('mouseenter', function() {
+          if (window.innerWidth > 768) {
+            clearTimeout(hoverTimeout);
+            dropdown.classList.add('active');
+            console.log('Dropdown menu mouseenter - keeping open');
+          }
+        });
+
+        dropdownMenu.addEventListener('mouseleave', function() {
+          if (window.innerWidth > 768) {
+            hoverTimeout = setTimeout(() => {
+              if (!dropdown.classList.contains('show')) {
+                dropdown.classList.remove('active');
+                console.log('Dropdown menu mouseleave timeout - closing');
+              }
+            }, 300); // 150ms → 300ms に延長
+          }
+        });
+
+        // ドロップダウンアイテムでのマウスイベント
+        const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+          item.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 768) {
+              clearTimeout(hoverTimeout);
+              dropdown.classList.add('active');
+              console.log('Dropdown item mouseenter - keeping open');
+            }
+          });
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      const isDropdownClick = event.target.closest('.nav-dropdown');
+      const isDropdownItem = event.target.closest('.dropdown-item');
+      
+      if (!isDropdownClick) {
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+          dropdown.classList.remove('active', 'show');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.style.opacity = '';
+            menu.style.visibility = '';
+            menu.style.transform = '';
+            menu.style.pointerEvents = '';
+          }
+        });
+      }
+      
+      // ドロップダウンアイテムがクリックされた場合
+      if (isDropdownItem && !isDropdownItem.classList.contains('disabled')) {
+        if (isDropdownItem.tagName === 'A' || isDropdownItem.onclick) {
+          setTimeout(() => {
+            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+              dropdown.classList.remove('active', 'show');
+              const menu = dropdown.querySelector('.dropdown-menu');
+              if (menu) {
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+                menu.style.transform = '';
+                menu.style.pointerEvents = '';
+              }
+            });
+          }, 100);
+        }
+      }
+    });
   });
 
   // 開発中ポップアップ機能
@@ -709,7 +977,6 @@
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
     
-    // モーダル外をクリックしても閉じる
     modal.addEventListener('click', function(e) {
       if (e.target === modal) {
         modal.remove();

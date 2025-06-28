@@ -2355,8 +2355,7 @@
         checkCompareStatus(compareBtn);
       }
 
-      // Initialize demographics charts
-      initializeDemographicsCharts();
+      // Charts will be initialized by the separate Chart.js initialization code
     });
     
     // ログインモーダル表示
@@ -3431,13 +3430,33 @@
       <% end %>
     }
 
-    // Register Chart.js plugins
-    Chart.register(ChartDataLabels);
+    // Function to safely initialize charts with proper timing
+    function safelyInitializeCharts() {
+      if (typeof Chart === 'undefined') {
+        console.log('Chart.js not yet loaded, retrying...');
+        setTimeout(safelyInitializeCharts, 100);
+        return;
+      }
+      
+      try {
+        // Register Chart.js plugins
+        if (typeof ChartDataLabels !== 'undefined') {
+          Chart.register(ChartDataLabels);
+        }
+        
+        initializeDemographicsCharts();
+        console.log('Charts initialized successfully');
+      } catch (error) {
+        console.error('Error initializing charts:', error);
+      }
+    }
 
     // Initialize charts when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      initializeDemographicsCharts();
-    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', safelyInitializeCharts);
+    } else {
+      safelyInitializeCharts();
+    }
   </script>
 </body>
 </html>

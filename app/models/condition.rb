@@ -23,6 +23,20 @@ class Condition < ApplicationRecord
   def programs_by_category
     detailed_programs.bachelor_and_above.group(:major_category).count
   end
+  
+  # SAT平均スコアを計算
+  def sat_average
+    return nil unless sat_math_25.present? && sat_reading_25.present? && sat_math_75.present? && sat_reading_75.present?
+    (sat_math_25 + sat_reading_25 + sat_math_75 + sat_reading_75) / 4.0
+  end
+  
+  # SAT範囲を表示用に取得
+  def sat_range_display
+    return "N/A" unless sat_math_25.present? && sat_reading_25.present? && sat_math_75.present? && sat_reading_75.present?
+    min_total = sat_math_25 + sat_reading_25
+    max_total = sat_math_75 + sat_reading_75
+    "#{min_total}-#{max_total}"
+  end
 end
   
 # 今は使わない 

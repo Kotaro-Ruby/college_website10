@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
     # 先頭に追加
     session[:recently_viewed].unshift(college.id)
     
-    # 最大5校まで保持
-    session[:recently_viewed] = session[:recently_viewed].first(5)
+    # 最大6校まで保持
+    session[:recently_viewed] = session[:recently_viewed].first(6)
   end
   
   def recently_viewed_colleges
@@ -44,5 +44,10 @@ class ApplicationController < ActionController::Base
     
     # 元の順序を保持してソート
     college_ids.map { |id| colleges.find { |c| c.id == id } }.compact
+  end
+  
+  # セッションを一時的にクリアして6校制限をテストするためのヘルパー
+  def clear_recently_viewed_for_testing
+    session[:recently_viewed] = nil if params[:clear_session] == 'true'
   end
 end

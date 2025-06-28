@@ -12,6 +12,9 @@ class HomeController < ApplicationController
   end
   
   def index
+    # セッションクリア（テスト用）
+    clear_recently_viewed_for_testing
+    
     # 人気大学のデータを取得（例：学生数が多い、または合格率が適度な大学）
     @popular_colleges = Condition.where.not(students: nil, acceptance_rate: nil)
                                 .where('acceptance_rate > 0.1 AND acceptance_rate < 0.8')

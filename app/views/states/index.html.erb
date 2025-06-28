@@ -1,0 +1,447 @@
+<% content_for :title, "州別大学ガイド - College Spark" %>
+<% content_for :description, "アメリカ各州の特色、気候、生活費、主要大学を詳しく紹介。州選びから大学選びまで、留学先選択に役立つ包括的な情報をお届けします。" %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+/* ヘッダースタイル */
+.states-header {
+    background: linear-gradient(rgba(255, 245, 235, 0.85), rgba(255, 245, 235, 0.85)), 
+                asset-url('hero_background.jpg') center/cover no-repeat;
+    color: #2d3748;
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.states-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 25s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.header-icon {
+    font-size: 4rem;
+    color: #f5b342;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(245, 179, 66, 0.3);
+}
+
+.states-header h1 {
+    font-size: clamp(2.8rem, 6vw, 3.5rem);
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+    font-weight: 900;
+    color: #2d3748;
+    margin: 0 0 15px 0;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.05em;
+}
+
+.header-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    margin: 0 0 30px 0;
+    color: #4a5568;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+.header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.header-stats .stat-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(245, 179, 66, 0.2);
+}
+
+.header-stats .stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f5b342;
+    margin-bottom: 5px;
+}
+
+.header-stats .stat-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+/* メインコンテンツ */
+.states-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.intro-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: center;
+}
+
+.intro-content h2 {
+    font-size: 2.2rem;
+    color: #2d3748;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.intro-content p {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.search-hint {
+    background: linear-gradient(135deg, #f5b342, #e09c2a);
+    padding: 25px;
+    border-radius: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 25px rgba(245, 179, 66, 0.3);
+}
+
+.search-hint-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.search-hint-text h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.search-hint-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* 州カードグリッド */
+.states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.state-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.state-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.state-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.state-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.state-flag {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(135deg, #f5b342, #e09c2a);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(245, 179, 66, 0.3);
+}
+
+.state-info h3 {
+    font-size: 1.4rem;
+    color: #2d3748;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.state-info .english-name {
+    font-size: 0.95rem;
+    color: #718096;
+    margin: 0;
+}
+
+.state-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-item {
+    background: #f7fafc;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5b342;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-top: 2px;
+}
+
+.state-highlights {
+    margin: 20px 0;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.highlight-item i {
+    width: 20px;
+    color: #f5b342;
+    margin-right: 10px;
+}
+
+.state-actions {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.view-details-btn {
+    background: linear-gradient(135deg, #f5b342, #e09c2a);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(245, 179, 66, 0.2);
+}
+
+.view-details-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245, 179, 66, 0.4);
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(135deg, #e09c2a, #d4881f);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .states-header {
+        padding: 50px 15px;
+    }
+    
+    .header-icon {
+        font-size: 3rem;
+    }
+    
+    .header-stats {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .header-stats .stat-item {
+        padding: 15px 20px;
+        min-width: 120px;
+    }
+    
+    .header-stats .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .states-container {
+        padding: 30px 15px;
+    }
+    
+    .intro-section {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+    
+    .search-hint {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .search-hint-icon {
+        font-size: 2.5rem;
+    }
+    
+    .states-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .state-card {
+        padding: 20px;
+    }
+    
+    .state-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+</style>
+
+<div class="states-header">
+    <div class="header-icon">
+        <i class="fas fa-map-marked-alt"></i>
+    </div>
+    <h1>州別大学ガイド</h1>
+    <p class="header-subtitle">アメリカ各州の特色と主要大学を詳しく紹介</p>
+    <div class="header-stats">
+        <div class="stat-item">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">州</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">6,300+</span>
+            <span class="stat-label">大学</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">詳細</span>
+            <span class="stat-label">情報</span>
+        </div>
+    </div>
+</div>
+
+<div class="states-container">
+    <div class="intro-section">
+        <div class="intro-content">
+            <h2>あなたにぴったりの州を見つけよう</h2>
+            <p>
+                アメリカ留学では、大学選びと同じくらい「どの州で学ぶか」が重要です。気候、生活費、文化、就職機会など、
+                州によって大きく異なる特色があります。各州の詳細情報と主要大学をチェックして、理想的な留学先を見つけましょう。
+            </p>
+        </div>
+        <div class="search-hint">
+            <div class="search-hint-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="search-hint-text">
+                <h3>検索のコツ</h3>
+                <p>気候や生活費、専攻分野を考慮して州を選ぶことで、より充実した留学生活を送ることができます。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="states-grid">
+        <% @states.each do |state| %>
+            <div class="state-card">
+                <div class="state-header">
+                    <div class="state-flag">
+                        <%= state[:code] %>
+                    </div>
+                    <div class="state-info">
+                        <h3><%= state[:name] %></h3>
+                        <p class="english-name"><%= state[:english_name] %></p>
+                    </div>
+                </div>
+
+                <div class="state-stats">
+                    <div class="stat-item">
+                        <span class="stat-number"><%= state[:college_count] %></span>
+                        <span class="stat-label">大学数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number"><%= state[:population] %></span>
+                        <span class="stat-label">人口</span>
+                    </div>
+                </div>
+
+                <div class="state-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span><%= state[:climate] %></span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>生活費: <%= state[:cost_of_living] %></span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span><%= state[:economy] %></span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-star"></i>
+                        <span><%= state[:famous_for] %></span>
+                    </div>
+                </div>
+
+                <div class="state-actions">
+                    <%= link_to state_detail_path(state[:code].downcase), class: "view-details-btn" do %>
+                        <i class="fas fa-arrow-right"></i>
+                        詳細を見る
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
