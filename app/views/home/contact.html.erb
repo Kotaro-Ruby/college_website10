@@ -16,11 +16,15 @@
 
     <!-- Function Status Notice -->
     <div class="status-notice">
-      <div class="status-icon">🔧</div>
-      <h3>メール送信機能について</h3>
+      <div class="status-icon">📧</div>
+      <h3>お問い合わせ方法について</h3>
       <p><strong>現在、メール送信機能の設定を調整中です。</strong></p>
-      <p>お問い合わせフォームは表示されていますが、実際のメール送信は一時的に利用できません。ご不便をおかけして申し訳ございません。</p>
-      <p>機能の復旧までしばらくお待ちください。</p>
+      <p>お問い合わせフォームは表示されていますが、実際のメール送信は一時的に利用できません。</p>
+      <p class="email-direct">お手数ですが、以下のメールアドレス宛に直接お送りください：</p>
+      <div class="email-address">
+        <a href="mailto:collegespark2025@gmail.com">collegespark2025@gmail.com</a>
+      </div>
+      <p>ご不便をおかけして申し訳ございません。機能の復旧までしばらくお待ちください。</p>
     </div>
 
     <!-- Important Information -->
@@ -193,6 +197,35 @@
 
     .status-notice strong {
       font-weight: 700;
+    }
+
+    .email-direct {
+      font-weight: 600;
+      margin-top: 15px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .email-address {
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid #d97706;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .email-address a {
+      color: #92400e;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      transition: all 0.3s ease;
+    }
+
+    .email-address a:hover {
+      color: #d97706;
+      text-decoration: underline;
     }
 
     .contact-content {
