@@ -399,12 +399,21 @@
       gap: 20px;
     }
 
+    .hero-section {
+      padding: 40px 20px;
+      margin: 0 10px 30px 10px;
+    }
+
     .hero-section h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+    }
+
+    .hero-section p {
+      font-size: 1rem;
     }
 
     .main-content {
-      padding: 40px 15px;
+      padding: 30px 15px;
     }
 
     .content-section,
@@ -412,16 +421,100 @@
     .industry-trends,
     .selection-guide,
     .universities-ranking {
-      padding: 25px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
     }
 
     .ranking-table {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
 
     .ranking-table th,
     .ranking-table td {
-      padding: 10px;
+      padding: 8px;
+      min-width: 120px;
+    }
+
+    .major-card,
+    .career-card,
+    .trend-card {
+      padding: 20px;
+    }
+
+    .major-card h3,
+    .career-card h3,
+    .trend-card h3 {
+      font-size: 1.3rem;
+    }
+
+    .guide-step {
+      padding: 20px;
+    }
+
+    .guide-step h4 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section {
+      padding: 30px 15px;
+      margin: 0 5px 20px 5px;
+    }
+
+    .hero-section h1 {
+      font-size: 1.5rem;
+    }
+
+    .main-content {
+      padding: 20px 10px;
+    }
+
+    .content-section,
+    .career-paths,
+    .industry-trends,
+    .selection-guide,
+    .universities-ranking {
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+    }
+
+    .ranking-table {
+      font-size: 0.8rem;
+    }
+
+    .ranking-table th,
+    .ranking-table td {
+      padding: 6px;
+      min-width: 100px;
+    }
+
+    .major-card,
+    .career-card,
+    .trend-card {
+      padding: 15px;
+    }
+
+    .guide-step {
+      padding: 15px;
+    }
+
+    .rank-number {
+      width: 25px;
+      height: 25px;
+      font-size: 0.8rem;
     }
   }
 </style>

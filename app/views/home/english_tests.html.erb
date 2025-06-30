@@ -387,12 +387,21 @@
       gap: 20px;
     }
 
+    .hero-section {
+      padding: 40px 20px;
+      margin: 0 10px 30px 10px;
+    }
+
     .hero-section h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+    }
+
+    .hero-section p {
+      font-size: 1rem;
     }
 
     .main-content {
-      padding: 40px 15px;
+      padding: 30px 15px;
     }
 
     .content-section,
@@ -400,16 +409,88 @@
     .study-plan,
     .resources-section,
     .strategies-section {
-      padding: 25px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
     }
 
     .score-table {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
 
     .score-table th,
     .score-table td {
-      padding: 10px;
+      padding: 8px;
+      min-width: 120px;
+    }
+
+    .test-card {
+      padding: 20px;
+    }
+
+    .test-card h3 {
+      font-size: 1.3rem;
+    }
+
+    .strategy-card {
+      padding: 20px;
+    }
+
+    .strategy-card h4 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section {
+      padding: 30px 15px;
+      margin: 0 5px 20px 5px;
+    }
+
+    .hero-section h1 {
+      font-size: 1.5rem;
+    }
+
+    .main-content {
+      padding: 20px 10px;
+    }
+
+    .content-section,
+    .score-guide,
+    .study-plan,
+    .resources-section,
+    .strategies-section {
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+    }
+
+    .score-table {
+      font-size: 0.8rem;
+    }
+
+    .score-table th,
+    .score-table td {
+      padding: 6px;
+      min-width: 100px;
+    }
+
+    .test-card {
+      padding: 15px;
+    }
+
+    .strategy-card {
+      padding: 15px;
     }
   }
 </style>

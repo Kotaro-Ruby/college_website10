@@ -839,6 +839,20 @@
     .header-container {
       height: 70px;
       padding: 0 15px;
+      gap: 10px;
+    }
+
+    /* モバイルでの左サイドナビゲーション非表示 */
+    .header-left {
+      display: none;
+    }
+
+    /* モバイルでロゴを左に移動 */
+    .header-center {
+      position: static;
+      transform: none;
+      justify-content: flex-start;
+      flex: 1;
     }
 
     .logo-text {
@@ -853,100 +867,15 @@
       font-size: 26px;
     }
 
-    .header-nav {
-      position: fixed !important;
-      top: 70px !important;
-      left: -100% !important;
-      width: 100% !important;
-      height: calc(100vh - 70px) !important;
-      background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%) !important;
-      transition: left 0.3s ease !important;
-      overflow-y: auto !important;
-      justify-content: flex-start !important;
-      padding: 20px 0 !important;
-      z-index: 1000 !important;
-      display: flex !important;
+    /* モバイルでの右サイドナビゲーション非表示 */
+    .header-right-nav {
+      display: none;
     }
 
-    .header-nav.active {
-      left: 0 !important;
-    }
-
-    .nav-list {
-      flex-direction: column;
-      width: 100%;
-      gap: 0;
-      padding: 0 20px;
-    }
-
-    .nav-list li {
-      width: 100%;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-link {
-      display: block;
-      padding: 16px 0;
-      font-size: 16px;
-      width: 100%;
-    }
-
-    .dropdown-menu {
-      position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: none;
-      border: none;
-      margin-top: 10px;
-      border-radius: 8px;
-    }
-
-    .dropdown-item {
-      color: rgba(255, 255, 255, 0.8);
-      padding: 10px 16px;
-    }
-
-    .dropdown-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-link.active {
-      background: rgba(255, 255, 255, 0.2);
-      font-weight: 600;
-    }
-
-    .nav-dropdown.active > .dropdown-trigger {
-      background: rgba(255, 255, 255, 0.2);
-      font-weight: 600;
-    }
-
-    .dropdown-item.active {
-      background: rgba(255, 255, 255, 0.3) !important;
-      color: white !important;
-      font-weight: 600 !important;
-    }
-
-    .mobile-menu-toggle {
-      display: flex !important;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .mobile-menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-menu-toggle.active span:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-
+    /* ユーザーセクションをコンパクトに */
     .header-right {
-      order: -1;
-      margin-right: auto;
+      order: 1;
+      flex-shrink: 0;
     }
 
     .user-section {
@@ -970,6 +899,26 @@
     .register-btn {
       font-size: 12px;
       padding: 8px 16px;
+    }
+
+    /* ハンバーガーメニューの位置調整 */
+    .hamburger-menu {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      background: rgba(245, 179, 66, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      width: 44px;
+      height: 44px;
+    }
+
+    /* サイドバーメニューの調整 */
+    .sidebar-menu {
+      top: 0;
+      height: 100vh;
+      padding-top: 80px;
     }
   }
 
