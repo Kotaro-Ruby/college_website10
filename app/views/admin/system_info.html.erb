@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>システム情報 - College Spark 管理画面</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .nav {
+      background: #f8f9fa;
+      padding: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .nav a:hover {
+      background: #0056b3;
+    }
+    .nav a.active {
+      background: #28a745;
+    }
+    .content {
+      padding: 30px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .info-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .info-title {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+    .info-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+    .status-good {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .status-warning {
+      color: #ffc107;
+      font-weight: bold;
+    }
+    .status-error {
+      color: #dc3545;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚙️ システム情報</h1>
+      <p>アプリケーションの詳細情報</p>
+    </div>
+    
+    <div class="nav">
+      <a href="/admin/dashboard?admin_key=college_admin_2025">ダッシュボード</a>
+      <a href="/admin/users?admin_key=college_admin_2025">ユーザー一覧</a>
+      <a href="/admin/contacts?admin_key=college_admin_2025">お問い合わせ</a>
+      <a href="/admin/system_info?admin_key=college_admin_2025" class="active">システム情報</a>
+    </div>
+    
+    <div class="content">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-title">環境</div>
+          <div class="info-value"><%= @info[:rails_env].upcase %></div>
+        </div>
+        <div class="info-card">
+          <div class="info-title">Ruby バージョン</div>
+          <div class="info-value"><%= @info[:ruby_version] %></div>
+        </div>
+        <div class="info-card">
+          <div class="info-title">Rails バージョン</div>
+          <div class="info-value"><%= @info[:rails_version] %></div>
+        </div>
+        <div class="info-card">
+          <div class="info-title">データベース</div>
+          <div class="info-value"><%= @info[:database_adapter] %></div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>📊 データ統計</h3>
+        <ul>
+          <li><strong>登録大学数:</strong> <%= number_with_delimiter(@info[:total_colleges]) %>校</li>
+          <li><strong>登録ユーザー数:</strong> <%= @info[:total_users] %>名</li>
+          <li><strong>アプリケーションバージョン:</strong> <%= @info[:app_version] %></li>
+        </ul>
+      </div>
+      
+      <div class="section">
+        <h3>🔧 システム状況</h3>
+        <ul>
+          <li>
+            <strong>データベース接続:</strong> 
+            <% begin %>
+              <% ActiveRecord::Base.connection.execute("SELECT 1") %>
+              <span class="status-good">✅ 正常</span>
+            <% rescue => e %>
+              <span class="status-error">❌ エラー: <%= e.message %></span>
+            <% end %>
+          </li>
+          <li>
+            <strong>お問い合わせファイル:</strong>
+            <% if File.exist?(Rails.root.join('storage', 'contacts', 'contact_submissions.txt')) %>
+              <span class="status-good">✅ 存在</span>
+            <% else %>
+              <span class="status-warning">⚠️ 未作成</span>
+            <% end %>
+          </li>
+          <li>
+            <strong>ストレージディレクトリ:</strong>
+            <% if Dir.exist?(Rails.root.join('storage')) %>
+              <span class="status-good">✅ 存在</span>
+            <% else %>
+              <span class="status-error">❌ 未作成</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="section">
+        <h3>📋 環境変数チェック</h3>
+        <ul>
+          <li>
+            <strong>GMAIL_USERNAME:</strong>
+            <%= ENV['GMAIL_USERNAME'].present? ? "✅ 設定済み" : "❌ 未設定" %>
+          </li>
+          <li>
+            <strong>GMAIL_PASSWORD:</strong>
+            <%= ENV['GMAIL_PASSWORD'].present? ? "✅ 設定済み" : "❌ 未設定" %>
+          </li>
+          <li>
+            <strong>RAILS_MASTER_KEY:</strong>
+            <%= ENV['RAILS_MASTER_KEY'].present? ? "✅ 設定済み" : "❌ 未設定" %>
+          </li>
+          <li>
+            <strong>DATABASE_URL:</strong>
+            <%= ENV['DATABASE_URL'].present? ? "✅ 設定済み" : "❌ 未設定" %>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="section">
+        <h3>ℹ️ サーバー情報</h3>
+        <ul>
+          <li><strong>ホスト名:</strong> <%= `hostname`.strip rescue 'Unknown' %></li>
+          <li><strong>現在時刻:</strong> <%= Time.current.strftime('%Y年%m月%d日 %H時%M分%S秒') %></li>
+          <li><strong>タイムゾーン:</strong> <%= Time.zone.name %></li>
+          <li><strong>Rails ルート:</strong> <%= Rails.root %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

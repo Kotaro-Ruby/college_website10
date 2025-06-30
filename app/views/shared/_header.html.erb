@@ -34,6 +34,7 @@
       <ul class="nav-list">
         <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
         <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
+        <li><a href="/degreeseeking" class="nav-link <%= 'active' if request.path == '/degreeseeking' %>">卒業を目指す留学</a></li>
         <li class="nav-dropdown <%= 'active' if request.path.start_with?('/states') %>">
           <span class="nav-link dropdown-trigger">
             ツール・ガイド
@@ -58,7 +59,7 @@
             </span>
           </div>
         </li>
-        <li class="nav-dropdown <%= 'active' if ['/knowledge', '/degreeseeking'].include?(request.path) %>">
+        <li class="nav-dropdown <%= 'active' if ['/knowledge', '/contact'].include?(request.path) %>">
           <span class="nav-link dropdown-trigger">
             情報・サポート
             <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -68,9 +69,9 @@
               <i class="fas fa-book"></i>
               アメリカの大学を知る
             </a>
-            <a href="/degreeseeking" class="dropdown-item <%= 'active' if request.path == '/degreeseeking' %>">
-              <i class="fas fa-graduation-cap"></i>
-              卒業を目指す留学
+            <a href="/contact" class="dropdown-item <%= 'active' if request.path == '/contact' %>">
+              <i class="fas fa-envelope"></i>
+              お問い合わせ
             </a>
             <div class="dropdown-divider"></div>
             <span class="dropdown-item disabled" onclick="showDevelopmentModal('カナダ版')">
@@ -983,6 +984,67 @@
         }
       }
     });
+
+    // ページ遷移時にドロップダウンメニューを閉じる
+    window.addEventListener('beforeunload', function() {
+      document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active', 'show');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) {
+          menu.style.opacity = '';
+          menu.style.visibility = '';
+          menu.style.transform = '';
+          menu.style.pointerEvents = '';
+        }
+      });
+    });
+
+    // リンククリック時にドロップダウンメニューを閉じる
+    document.addEventListener('click', function(event) {
+      const isLink = event.target.tagName === 'A' || event.target.closest('a');
+      if (isLink && !event.target.closest('.dropdown-menu')) {
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+          dropdown.classList.remove('active', 'show');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.style.opacity = '';
+            menu.style.visibility = '';
+            menu.style.transform = '';
+            menu.style.pointerEvents = '';
+          }
+        });
+      }
+    });
+
+    // ページロード完了時とURL変更時にドロップダウンを閉じる
+    function closeAllDropdowns() {
+      document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active', 'show');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) {
+          menu.style.opacity = '';
+          menu.style.visibility = '';
+          menu.style.transform = '';
+          menu.style.pointerEvents = '';
+        }
+      });
+    }
+
+    // ページロード時
+    window.addEventListener('load', closeAllDropdowns);
+    
+    // URL変更を監視（History APIによるページ遷移）
+    let currentUrl = window.location.href;
+    new MutationObserver(() => {
+      if (currentUrl !== window.location.href) {
+        currentUrl = window.location.href;
+        closeAllDropdowns();
+      }
+    }).observe(document, { subtree: true, childList: true });
+
+    // Turbolinks/Turbo対応（もし使用している場合）
+    document.addEventListener('turbo:load', closeAllDropdowns);
+    document.addEventListener('turbolinks:load', closeAllDropdowns);
   });
 
   // 開発中ポップアップ機能

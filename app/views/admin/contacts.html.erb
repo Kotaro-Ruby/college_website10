@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>お問い合わせ - College Spark 管理画面</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .nav {
+      background: #f8f9fa;
+      padding: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .nav a:hover {
+      background: #0056b3;
+    }
+    .nav a.active {
+      background: #28a745;
+    }
+    .content {
+      padding: 30px;
+    }
+    .contacts-content {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      max-height: 600px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      border: 1px solid #dee2e6;
+      margin-bottom: 30px;
+    }
+    .csv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .csv-table th,
+    .csv-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+    .csv-table th {
+      background: #f8f9fa;
+      font-weight: bold;
+      color: #495057;
+    }
+    .csv-table tr:hover {
+      background: #f5f5f5;
+    }
+    .message-cell {
+      max-width: 300px;
+      word-wrap: break-word;
+    }
+    .no-data {
+      text-align: center;
+      padding: 50px;
+      color: #6c757d;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h3 {
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .download-link {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .download-link:hover {
+      background: #218838;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📞 お問い合わせ管理</h1>
+      <p>ユーザーからのお問い合わせ内容</p>
+    </div>
+    
+    <div class="nav">
+      <a href="/admin/dashboard?admin_key=college_admin_2025">ダッシュボード</a>
+      <a href="/admin/users?admin_key=college_admin_2025">ユーザー一覧</a>
+      <a href="/admin/contacts?admin_key=college_admin_2025" class="active">お問い合わせ</a>
+      <a href="/admin/system_info?admin_key=college_admin_2025">システム情報</a>
+    </div>
+    
+    <div class="content">
+      <% if @contacts_content && @contacts_content != "お問い合わせファイルが見つかりません" %>
+        <div class="section">
+          <h3>📄 お問い合わせ内容（詳細表示）</h3>
+          <div class="contacts-content"><%= @contacts_content %></div>
+        </div>
+        
+        <% if @contacts_csv %>
+          <div class="section">
+            <h3>📊 お問い合わせ一覧（CSV形式）</h3>
+            <table class="csv-table">
+              <thead>
+                <tr>
+                  <th>日時</th>
+                  <th>名前</th>
+                  <th>メールアドレス</th>
+                  <th>カテゴリー</th>
+                  <th>メッセージ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @contacts_csv.each do |row| %>
+                  <tr>
+                    <td><%= row['日時'] %></td>
+                    <td><strong><%= row['名前'] %></strong></td>
+                    <td><%= row['メールアドレス'] %></td>
+                    <td>
+                      <% case row['カテゴリー'] %>
+                      <% when 'site-bug' %>
+                        🐛 サイトのバグ報告
+                      <% when 'feature-request' %>
+                        💡 機能要望
+                      <% when 'general-inquiry' %>
+                        ❓ 一般的なお問い合わせ
+                      <% when 'college-data' %>
+                        🏫 大学データについて
+                      <% when 'other' %>
+                        📝 その他
+                      <% else %>
+                        <%= row['カテゴリー'] %>
+                      <% end %>
+                    </td>
+                    <td class="message-cell"><%= row['メッセージ'] %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-data">
+          <h3>📭 お問い合わせはまだありません</h3>
+          <p>ユーザーからお問い合わせがあると、ここに表示されます。</p>
+          <p><strong>確認事項:</strong></p>
+          <ul style="text-align: left; display: inline-block;">
+            <li>お問い合わせフォームが正常に動作しているか</li>
+            <li>メール送信設定が正しく設定されているか</li>
+            <li>storage/contacts/ ディレクトリが存在するか</li>
+          </ul>
+        </div>
+      <% end %>
+      
+      <div class="section">
+        <h3>ℹ️ ファイルの場所</h3>
+        <ul>
+          <li><strong>詳細版:</strong> storage/contacts/contact_submissions.txt</li>
+          <li><strong>CSV版:</strong> storage/contacts/contact_submissions.csv</li>
+          <li><strong>メール送信先:</strong> kotaro.swifty@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

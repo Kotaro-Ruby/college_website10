@@ -243,6 +243,304 @@
       }
     }
 
+    /* 課題セクションのスタイル */
+    .challenges-container {
+      margin-top: 30px;
+    }
+
+    .challenge-main, .solution-section {
+      margin-bottom: 40px;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(245, 179, 66, 0.15);
+    }
+
+    .challenge-main {
+      background: rgba(255, 0, 0, 0.02);
+      border-left: 4px solid #e74c3c;
+    }
+
+    .solution-section {
+      background: rgba(245, 179, 66, 0.03);
+      border-left: 4px solid #f5b342;
+    }
+
+    .challenge-main h4, .solution-section h4 {
+      color: #2c3e50;
+      margin: 0 0 20px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .challenge-main h4 i {
+      color: #e74c3c;
+    }
+
+    .solution-section h4 i {
+      color: #f5b342;
+    }
+
+    .challenge-items, .solution-items {
+      display: grid;
+      gap: 20px;
+    }
+
+    .challenge-item, .solution-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .challenge-item:hover, .solution-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .challenge-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+    }
+
+    .solution-number {
+      background: linear-gradient(135deg, #f5b342, #f39200);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(245, 179, 66, 0.3);
+    }
+
+    .challenge-content h5, .solution-content h5 {
+      color: #2c3e50;
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .challenge-content p, .solution-content p {
+      color: #666;
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+
+    /* 独立性セクションのスタイル */
+    .independence-section {
+      margin-top: 20px;
+    }
+
+    .independence-message {
+      background: rgba(52, 152, 219, 0.05);
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 30px;
+    }
+
+    .independence-message h4 {
+      color: #2c3e50;
+      margin: 0 0 15px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .independence-message h4 i {
+      color: #3498db;
+    }
+
+    .independence-message p {
+      color: #555;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .independence-message strong {
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .independence-principles {
+      margin-bottom: 30px;
+    }
+
+    .independence-principles h4 {
+      color: #2c3e50;
+      margin: 0 0 20px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .independence-principles h4 i {
+      color: #3498db;
+    }
+
+    .principle-items {
+      display: grid;
+      gap: 20px;
+    }
+
+    .principle-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 20px;
+      background: rgba(52, 152, 219, 0.03);
+      border-radius: 10px;
+      border-left: 4px solid #3498db;
+      transition: all 0.3s ease;
+    }
+
+    .principle-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
+    }
+
+    .principle-number {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    }
+
+    .principle-content h5 {
+      color: #2c3e50;
+      margin: 0 0 8px 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .principle-content p {
+      color: #666;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .commitment-box {
+      background: linear-gradient(135deg, rgba(245, 179, 66, 0.1), rgba(243, 146, 0, 0.08));
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(245, 179, 66, 0.2);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .commitment-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .commitment-text h5 {
+      color: #2c3e50;
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .commitment-text p {
+      color: #555;
+      margin: 0;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .commitment-text strong {
+      color: #f39200;
+      font-weight: 600;
+    }
+
+    /* データソースセクションのスタイル */
+    .data-source-info {
+      margin-top: 20px;
+      background: rgba(245, 179, 66, 0.08);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(245, 179, 66, 0.15);
+    }
+
+    .source-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(245, 179, 66, 0.1);
+      color: #555;
+    }
+
+    .source-item:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+      .challenge-main, .solution-section {
+        padding: 20px 15px;
+      }
+
+      .challenge-item, .solution-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .challenge-icon, .solution-number {
+        align-self: center;
+      }
+
+      .independence-message, .principle-item, .commitment-box {
+        padding: 20px 15px;
+      }
+
+      .commitment-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .principle-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .principle-number {
+        align-self: center;
+      }
+
+      .independence-message h4, .independence-principles h4 {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
     @media (max-width: 480px) {
       .hero-section {
         padding: 60px 20px 40px;
@@ -254,6 +552,22 @@
 
       .stats-grid {
         grid-template-columns: 1fr;
+      }
+
+      .challenges-container {
+        margin-top: 20px;
+      }
+
+      .challenge-main, .solution-section {
+        padding: 15px 10px;
+        margin-bottom: 25px;
+      }
+
+      .challenge-main h4, .solution-section h4 {
+        font-size: 1.1rem;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
       }
     }
   </style>
@@ -313,6 +627,76 @@
           日本ではそのハードルは依然として高いままであり、その原因は
           <span class="emphasis">"圧倒的な情報不足"</span>
           にあると考えています。
+          <br><br>
+          <div class="challenges-container">
+            <div class="challenge-main">
+              <h4><i class="fas fa-exclamation-triangle"></i> 現在の課題</h4>
+              <div class="challenge-items">
+                <div class="challenge-item">
+                  <div class="challenge-icon">🔍</div>
+                  <div class="challenge-content">
+                    <h5>情報の分散と不透明性</h5>
+                    <p>大学の公式サイトは英語で複雑、学費情報は分かりにくく、比較検討が困難</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">💰</div>
+                  <div class="challenge-content">
+                    <h5>学費の実態が見えない</h5>
+                    <p>表示される学費と実際の負担額が異なり、奨学金制度の詳細も不明確</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">🗺️</div>
+                  <div class="challenge-content">
+                    <h5>大学選択の基準が不明</h5>
+                    <p>何を基準に大学を選べば良いか分からず、自分に合った大学を見つけられない</p>
+                  </div>
+                </div>
+                <div class="challenge-item">
+                  <div class="challenge-icon">⚡</div>
+                  <div class="challenge-content">
+                    <h5>情報収集の時間と労力</h5>
+                    <p>個別に大学を調べる必要があり、膨大な時間と労力が必要</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="solution-section">
+              <h4><i class="fas fa-lightbulb"></i> College Sparkの解決アプローチ</h4>
+              <div class="solution-items">
+                <div class="solution-item">
+                  <div class="solution-number">1</div>
+                  <div class="solution-content">
+                    <h5>情報の一元化と日本語化</h5>
+                    <p>4,000校以上の大学情報を1つのプラットフォームに集約し、日本語で分かりやすく提供</p>
+                  </div>
+                </div>
+                <div class="solution-item">
+                  <div class="solution-number">2</div>
+                  <div class="solution-content">
+                    <h5>透明性の高い学費表示</h5>
+                    <p>州立大学の州外生料金、私立大学の実質費用を明確に区別して表示</p>
+                  </div>
+                </div>
+                <div class="solution-item">
+                  <div class="solution-number">3</div>
+                  <div class="solution-content">
+                    <h5>多角的な検索・比較機能</h5>
+                    <p>学費、専攻、立地、規模など20以上の条件で詳細検索・比較が可能</p>
+                  </div>
+                </div>
+                <div class="solution-item">
+                  <div class="solution-number">4</div>
+                  <div class="solution-content">
+                    <h5>信頼できるデータソース</h5>
+                    <p>アメリカ教育省College Scorecardの公式データを使用し、定期的に更新</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -335,12 +719,94 @@
         </div>
       </div>
 
+
+      <div class="section">
+        <div class="section-icon">🛡️</div>
+        <h2 class="section-title">私たちの独立性とコミットメント</h2>
+        <div class="section-content">
+          <div class="independence-section">
+            <div class="independence-message">
+              <h4><i class="fas fa-balance-scale"></i> 公平で中立的な情報提供をお約束します</h4>
+              <p>
+                College Sparkは、特定の大学との提携関係を持たず、<strong>すべての大学を公平に扱う</strong>ことを大切にしています。
+                私たちは、皆さま一人ひとりの目標や希望に合わせて、本当に最適な大学選びができるよう、
+                偏りのない情報提供を心がけています。
+              </p>
+            </div>
+            
+            <div class="independence-principles">
+              <h4><i class="fas fa-shield-alt"></i> 私たちの3つの原則</h4>
+              <div class="principle-items">
+                <div class="principle-item">
+                  <div class="principle-number">1</div>
+                  <div class="principle-content">
+                    <h5>中立的な立場で</h5>
+                    <p>特定の大学との金銭的な関係を持たず、すべての大学を同じ基準で評価し、データに基づいた客観的な情報をお届けします。</p>
+                  </div>
+                </div>
+                <div class="principle-item">
+                  <div class="principle-number">2</div>
+                  <div class="principle-content">
+                    <h5>皆さまの夢を第一に</h5>
+                    <p>一人ひとりの希望や目標を大切にし、その実現に向けて最も適した大学選びができるようサポートいたします。</p>
+                  </div>
+                </div>
+                <div class="principle-item">
+                  <div class="principle-number">3</div>
+                  <div class="principle-content">
+                    <h5>透明性のある情報提供</h5>
+                    <p>すべての情報の出典を明確にし、客観的なデータに基づいた信頼できる情報をお伝えします。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="commitment-box">
+              <div class="commitment-icon">💡</div>
+              <div class="commitment-text">
+                <h5>私たちが目指すもの</h5>
+                <p>
+                  留学を考える皆さまが、ご自身の希望や条件に最も合った大学を見つけられるよう、
+                  幅広い選択肢の中から自由に選べる環境を提供したいと考えています。
+                  <br><br>
+                  College Sparkは、<strong>データと事実に基づいた透明性の高い情報</strong>を提供することで、
+                  皆さまが納得のいく大学選びができるようお手伝いします。
+                  あなたの可能性を最大限に広げる、そんな大学との出会いをサポートすることが私たちの使命です。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-icon">🏆</div>
+        <h2 class="section-title">データソース</h2>
+        <div class="section-content">
+          College Sparkで提供される大学データは、アメリカ教育省が運営する<strong>College Scorecard</strong>を主要なデータソースとして利用しています。これにより、公的機関が認証した正確で信頼性の高い情報を提供しています。
+          <br><br>
+          <div class="data-source-info">
+            <div class="source-item">
+              <strong>College Scorecard</strong>: アメリカ教育省公式データ
+            </div>
+            <div class="source-item">
+              <strong>定期更新</strong>: 最新の学費・入学データを定期的に更新
+            </div>
+            <div class="source-item">
+              <strong>品質管理</strong>: データの正確性を継続的に監視・検証
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="section">
         <div class="section-icon">💫</div>
         <h2 class="section-title">私たちの願い</h2>
         <div class="section-content">
           College Sparkではその問題を解決するために、海外の大学に関する正確で安全な情報の発信に取り組んでいます。
           本サイトが皆さまの夢の実現の一助になれば幸いです。
+          <br><br>
+          アメリカ大学留学は、世界トップレベルの教育環境、多様な価値観との出会い、グローバルな人脈形成など、人生を大きく変える可能性を秘めています。College Sparkがあなたの夢への第一歩をサポートします。
         </div>
       </div>
     </div>

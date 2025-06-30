@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>管理画面 - College Spark</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .nav {
+      background: #f8f9fa;
+      padding: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .nav a:hover {
+      background: #0056b3;
+    }
+    .content {
+      padding: 30px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    .section h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+    .user-list {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .user-item {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-item:last-child {
+      border-bottom: none;
+    }
+    .contacts-content {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      max-height: 400px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .warning {
+      background: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 College Spark 管理画面</h1>
+      <p>本番環境データの確認</p>
+    </div>
+    
+    <div class="nav">
+      <a href="?admin_key=college_admin_2025">ダッシュボード</a>
+      <a href="/admin/users?admin_key=college_admin_2025">ユーザー一覧</a>
+      <a href="/admin/contacts?admin_key=college_admin_2025">お問い合わせ</a>
+      <a href="/admin/system_info?admin_key=college_admin_2025">システム情報</a>
+    </div>
+    
+    <div class="content">
+      <div class="warning">
+        <strong>⚠️ セキュリティ注意:</strong> この管理画面は一時的なものです。本格運用前に適切な認証システムに変更してください。
+      </div>
+      
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number"><%= @total_users %></div>
+          <div class="stat-label">総ユーザー数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><%= @recent_users %></div>
+          <div class="stat-label">7日以内の新規登録</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><%= @database_info[:colleges] %></div>
+          <div class="stat-label">登録大学数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><%= Rails.env.upcase %></div>
+          <div class="stat-label">環境</div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>📊 最近登録されたユーザー</h3>
+        <% if @users.any? %>
+          <div class="user-list">
+            <% @users.limit(10).each do |user| %>
+              <div class="user-item">
+                <div>
+                  <strong><%= user.username %></strong>
+                  <br>
+                  <small><%= user.email || "メール未設定" %></small>
+                </div>
+                <div>
+                  <small><%= user.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>ユーザーがまだ登録されていません。</p>
+        <% end %>
+      </div>
+      
+      <div class="section">
+        <h3>📞 お問い合わせ状況</h3>
+        <% if @contacts_file_exists %>
+          <p><strong>✅ お問い合わせファイルが見つかりました</strong></p>
+          <details>
+            <summary>お問い合わせ内容を表示</summary>
+            <div class="contacts-content"><%= @contacts_content %></div>
+          </details>
+        <% else %>
+          <p>📭 お問い合わせはまだありません。</p>
+        <% end %>
+      </div>
+      
+      <div class="section">
+        <h3>🗄️ データベース情報</h3>
+        <ul>
+          <li><strong>データベース:</strong> <%= @database_info[:adapter] %></li>
+          <li><strong>テーブル数:</strong> <%= @database_info[:tables] %></li>
+          <li><strong>大学データ:</strong> <%= @database_info[:colleges] %>校</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

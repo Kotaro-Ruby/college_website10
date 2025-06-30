@@ -1,0 +1,39 @@
+name: Keep Render Service Alive
+
+on:
+  schedule:
+    # Run every 10 minutes during active hours (JST 6:00-23:00)
+    - cron: '*/10 6-23 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the service
+        run: |
+          echo "Pinging the service at $(date)"
+          
+          # Ping the health endpoint
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            https://college-finder-web-service.onrender.com/ping \
+            --connect-timeout 30 \
+            --max-time 60)
+          
+          echo "Response code: $response"
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Service is alive and responding"
+          else
+            echo "⚠️ Service responded with code: $response"
+            # Try the main page as fallback
+            main_response=$(curl -s -o /dev/null -w "%{http_code}" \
+              https://college-finder-web-service.onrender.com/ \
+              --connect-timeout 30 \
+              --max-time 60)
+            echo "Main page response: $main_response"
+          fi
+          
+      - name: Log timestamp
+        run: |
+          echo "Keep-alive ping completed at: $(date -u)"

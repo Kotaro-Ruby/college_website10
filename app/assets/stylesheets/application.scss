@@ -761,6 +761,8 @@
     font-family: 'Noto Sans JP', sans-serif;
     white-space: normal;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   
   /* 矢印を追加 */
@@ -1260,13 +1262,18 @@
   }
 
   .tooltip-content {
-    width: calc(100vw - 60px);
-    max-width: 280px;
+    width: calc(100vw - 50px);
+    max-width: 320px;
     left: auto;
     right: -5px;
     transform: none;
     font-size: 13px;
     padding: 15px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-align: left;
   }
   
   /* モバイルでは全てのツールチップを右側に表示 */
@@ -1418,9 +1425,15 @@
   }
 
   .tooltip-content {
-    width: 180px;
-    font-size: 14px;
-    padding: 8px;
+    width: calc(100vw - 40px);
+    max-width: 300px;
+    font-size: 13px;
+    padding: 12px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-align: left;
   }
 
   .cool-search-button {
