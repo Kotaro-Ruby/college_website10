@@ -22,7 +22,10 @@
       <p>お問い合わせフォームは表示されていますが、実際のメール送信は一時的に利用できません。</p>
       <p class="email-direct">お手数ですが、以下のメールアドレス宛に直接お送りください：</p>
       <div class="email-address">
-        <a href="mailto:collegespark2025@gmail.com">collegespark2025@gmail.com</a>
+        <a href="mailto:collegespark2025@gmail.com" id="emailLink">collegespark2025@gmail.com</a>
+        <button type="button" class="copy-btn" onclick="copyEmailAddress()" title="メールアドレスをコピー">
+          <i class="fas fa-copy"></i> コピー
+        </button>
       </div>
       <p>ご不便をおかけして申し訳ございません。機能の復旧までしばらくお待ちください。</p>
     </div>
@@ -45,35 +48,29 @@
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form-group">
           <label for="name" class="form-label">お名前 <span class="required">*</span></label>
-          <input type="text" id="name" name="name" class="form-input" required>
+          <input type="text" id="name" name="name" class="form-input" disabled placeholder="現在使用できません">
         </div>
 
         <div class="form-group">
           <label for="email" class="form-label">メールアドレス <span class="required">*</span></label>
-          <input type="email" id="email" name="email" class="form-input" required>
+          <input type="email" id="email" name="email" class="form-input" disabled placeholder="現在使用できません">
           <div class="form-help">返信のために使用いたします。外部に公開することはありません。</div>
         </div>
 
         <div class="form-group">
           <label for="category" class="form-label">お問い合わせの種類 <span class="required">*</span></label>
-          <select id="category" name="category" class="form-select" required>
-            <option value="">選択してください</option>
-            <option value="site-bug">サイトの不具合報告</option>
-            <option value="data-error">データの間違い</option>
-            <option value="feature-request">新機能のご要望</option>
-            <option value="usage-question">使い方について</option>
-            <option value="partnership">提携・協力について</option>
-            <option value="other">その他</option>
+          <select id="category" name="category" class="form-select" disabled>
+            <option value="">現在使用できません</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="message" class="form-label">メッセージ <span class="required">*</span></label>
-          <textarea id="message" name="message" class="form-textarea" rows="6" required placeholder="お問い合わせ内容をできるだけ詳しくお書きください。"></textarea>
+          <textarea id="message" name="message" class="form-textarea" rows="6" disabled placeholder="現在使用できません"></textarea>
         </div>
 
         <div class="form-group">
-          <button type="submit" class="submit-button">送信する</button>
+          <button type="button" class="submit-button" disabled>現在使用できません</button>
         </div>
       </form>
     </div>
@@ -212,6 +209,10 @@
       padding: 15px;
       margin: 15px 0;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .email-address a {
@@ -226,6 +227,65 @@
     .email-address a:hover {
       color: #d97706;
       text-decoration: underline;
+    }
+
+    .copy-btn {
+      background: #d97706;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .copy-btn:hover {
+      background: #b45309;
+      transform: translateY(-1px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-btn.copied {
+      background: #059669;
+      animation: copySuccess 0.3s ease;
+    }
+
+    @keyframes copySuccess {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* 無効化されたフォーム要素のスタイル */
+    .form-input:disabled,
+    .form-select:disabled,
+    .form-textarea:disabled {
+      background-color: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .submit-button:disabled {
+      background-color: #d1d5db;
+      color: #9ca3af;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .submit-button:disabled:hover {
+      background-color: #d1d5db;
+      transform: none;
+      box-shadow: none;
     }
 
     .contact-content {
@@ -346,10 +406,67 @@
       .contact-info {
         padding: 20px;
       }
+
+      .status-notice {
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      .email-address {
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .copy-btn {
+        margin-left: 0;
+        margin-top: 10px;
+        align-self: center;
+      }
     }
 </style>
 
 <script>
+  // メールアドレスコピー機能
+  function copyEmailAddress() {
+    const email = 'collegespark2025@gmail.com';
+    const copyBtn = document.querySelector('.copy-btn');
+    
+    navigator.clipboard.writeText(email).then(function() {
+      // コピー成功
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> コピー完了';
+      copyBtn.classList.add('copied');
+      
+      setTimeout(function() {
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(function(err) {
+      // フォールバック：古いブラウザ対応
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> コピー完了';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(function() {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        alert('コピーに失敗しました。手動でコピーしてください。');
+      }
+      
+      document.body.removeChild(textArea);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     
