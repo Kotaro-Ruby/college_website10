@@ -14,6 +14,15 @@
       <p>お返事には数日お時間をいただく場合がございます。</p>
     </div>
 
+    <!-- Function Status Notice -->
+    <div class="status-notice">
+      <div class="status-icon">🔧</div>
+      <h3>メール送信機能について</h3>
+      <p><strong>現在、メール送信機能の設定を調整中です。</strong></p>
+      <p>お問い合わせフォームは表示されていますが、実際のメール送信は一時的に利用できません。ご不便をおかけして申し訳ございません。</p>
+      <p>機能の復旧までしばらくお待ちください。</p>
+    </div>
+
     <!-- Important Information -->
     <div class="info-section">
       <h3>お問い合わせ前にご確認ください</h3>
@@ -147,6 +156,43 @@
     .info-list li {
       margin-bottom: 8px;
       padding-left: 5px;
+    }
+
+    .status-notice {
+      background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+    }
+
+    .status-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .status-notice h3 {
+      color: #92400e;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .status-notice p {
+      color: #92400e;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .status-notice p:last-child {
+      margin-bottom: 0;
+    }
+
+    .status-notice strong {
+      font-weight: 700;
     }
 
     .contact-content {
