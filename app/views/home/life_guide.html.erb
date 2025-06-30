@@ -1,0 +1,765 @@
+<% content_for :title, "生活情報・準備ガイド | College Finder" %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
+    color: #d4621a;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px 40px 20px;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-section p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #b8621d;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .content-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #fbd38d;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .housing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .housing-card {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: #5d4037;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .housing-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .housing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(25px, -25px);
+  }
+
+  .housing-icon {
+    font-size: 3rem;
+    color: #d4621a;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .housing-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .housing-card .cost-range {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #d4621a;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .housing-card .description {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    line-height: 1.5;
+  }
+
+  .pros-cons {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+  }
+
+  .pros-cons h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .pros-cons-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .pros-cons-list li {
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .pros-cons-list li.pro i {
+    color: #38a169;
+  }
+
+  .pros-cons-list li.con i {
+    color: #e53e3e;
+  }
+
+  .checklist-section {
+    background: linear-gradient(135deg, #fff2e6 0%, #ffe0b3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .checklist-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #fbd38d;
+  }
+
+  .checklist-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checklist-card i {
+    color: #d4621a;
+    font-size: 1.3rem;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .checklist li:last-child {
+    border-bottom: none;
+  }
+
+  .checklist li i {
+    color: #d4621a;
+    font-size: 0.9rem;
+  }
+
+  .culture-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .culture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .culture-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 5px solid #fbd38d;
+  }
+
+  .culture-card .culture-icon {
+    font-size: 2.5rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .culture-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .health-insurance {
+    background: linear-gradient(135deg, #ffd89b 0%, #ffcc80 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .insurance-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .insurance-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .insurance-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .insurance-card .premium {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .emergency-info {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .emergency-info h4 {
+    color: #dc3545;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .emergency-info i {
+    color: #dc3545;
+  }
+
+  .emergency-numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .emergency-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .emergency-item .number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc3545;
+  }
+
+  .tips-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .tip-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #fbd38d;
+  }
+
+  .tip-card .tip-icon {
+    font-size: 2rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .tip-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .housing-grid,
+    .checklist-grid,
+    .culture-grid,
+    .insurance-comparison,
+    .emergency-numbers,
+    .tips-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      padding: 40px 15px;
+    }
+
+    .content-section,
+    .checklist-section,
+    .culture-section,
+    .health-insurance,
+    .tips-section {
+      padding: 25px;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <div class="hero-section">
+    <h1>生活情報・準備ガイド</h1>
+    <p>アメリカでの生活に必要な情報から出発前の準備まで、安心して留学生活を始めるためのガイドです。</p>
+  </div>
+
+  <div class="main-content">
+    <div class="content-section">
+      <h2 class="section-title">住居オプション</h2>
+      <p class="section-subtitle">留学生活での住居選択肢とそれぞれの特徴</p>
+      
+      <div class="housing-grid">
+        <div class="housing-card">
+          <div class="housing-icon"><i class="fas fa-university"></i></div>
+          <h3>大学寮（Dormitory）</h3>
+          <div class="cost-range">月額：$800-$1,500</div>
+          <div class="description">キャンパス内または近隣にある学生専用住宅。多くの留学生が最初に選ぶオプション。</div>
+          <div class="pros-cons">
+            <h4>メリット</h4>
+            <ul class="pros-cons-list">
+              <li class="pro"><i class="fas fa-plus"></i> キャンパスに近い</li>
+              <li class="pro"><i class="fas fa-plus"></i> 友達が作りやすい</li>
+              <li class="pro"><i class="fas fa-plus"></i> 安全性が高い</li>
+              <li class="pro"><i class="fas fa-plus"></i> 家具付き</li>
+            </ul>
+            <h4 style="margin-top: 10px;">デメリット</h4>
+            <ul class="pros-cons-list">
+              <li class="con"><i class="fas fa-minus"></i> プライバシーが少ない</li>
+              <li class="con"><i class="fas fa-minus"></i> 比較的高額</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="housing-card">
+          <div class="housing-icon"><i class="fas fa-home"></i></div>
+          <h3>アパート（Apartment）</h3>
+          <div class="cost-range">月額：$600-$2,000</div>
+          <div class="description">キャンパス外の一般賃貸住宅。一人暮らしまたはルームシェアが一般的。</div>
+          <div class="pros-cons">
+            <h4>メリット</h4>
+            <ul class="pros-cons-list">
+              <li class="pro"><i class="fas fa-plus"></i> プライバシー確保</li>
+              <li class="pro"><i class="fas fa-plus"></i> 料理ができる</li>
+              <li class="pro"><i class="fas fa-plus"></i> 地域コミュニティ体験</li>
+              <li class="pro"><i class="fas fa-plus"></i> 比較的安価</li>
+            </ul>
+            <h4 style="margin-top: 10px;">デメリット</h4>
+            <ul class="pros-cons-list">
+              <li class="con"><i class="fas fa-minus"></i> 通学に時間がかかる</li>
+              <li class="con"><i class="fas fa-minus"></i> 初期費用が高い</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="housing-card">
+          <div class="housing-icon"><i class="fas fa-users"></i></div>
+          <h3>ホームステイ</h3>
+          <div class="cost-range">月額：$700-$1,200</div>
+          <div class="description">現地家族の家に住み、家族の一員として生活。語学留学生に人気。</div>
+          <div class="pros-cons">
+            <h4>メリット</h4>
+            <ul class="pros-cons-list">
+              <li class="pro"><i class="fas fa-plus"></i> 英語環境が充実</li>
+              <li class="pro"><i class="fas fa-plus"></i> 文化体験ができる</li>
+              <li class="pro"><i class="fas fa-plus"></i> 食事付きが多い</li>
+              <li class="pro"><i class="fas fa-plus"></i> サポートが手厚い</li>
+            </ul>
+            <h4 style="margin-top: 10px;">デメリット</h4>
+            <ul class="pros-cons-list">
+              <li class="con"><i class="fas fa-minus"></i> 家族ルールに従う必要</li>
+              <li class="con"><i class="fas fa-minus"></i> 自由度が低い</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h2 class="section-title">出発前チェックリスト</h2>
+      <p class="section-subtitle">アメリカ留学前に準備すべき重要項目</p>
+      
+      <div class="checklist-grid">
+        <div class="checklist-card">
+          <h4><i class="fas fa-passport"></i> 必要書類</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> パスポート（6ヶ月以上有効）</li>
+            <li><i class="fas fa-check"></i> 学生ビザ（F-1/J-1）</li>
+            <li><i class="fas fa-check"></i> I-20/DS-2019原本</li>
+            <li><i class="fas fa-check"></i> 入学許可証</li>
+            <li><i class="fas fa-check"></i> 成績証明書（英文）</li>
+            <li><i class="fas fa-check"></i> 予防接種記録</li>
+            <li><i class="fas fa-check"></i> 健康診断書</li>
+          </ul>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fas fa-money-bill-wave"></i> 金融準備</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> アメリカの銀行口座開設準備</li>
+            <li><i class="fas fa-check"></i> クレジットカード（VISA/Master）</li>
+            <li><i class="fas fa-check"></i> 現金（$500-1,000程度）</li>
+            <li><i class="fas fa-check"></i> 送金サービス登録</li>
+            <li><i class="fas fa-check"></i> 海外送金手数料確認</li>
+            <li><i class="fas fa-check"></i> 財政証明書のコピー</li>
+          </ul>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fas fa-heartbeat"></i> 健康・保険</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 健康保険加入手続き</li>
+            <li><i class="fas fa-check"></i> 常用薬の準備（英文処方箋）</li>
+            <li><i class="fas fa-check"></i> 眼鏡・コンタクトの予備</li>
+            <li><i class="fas fa-check"></i> 歯科治療の完了</li>
+            <li><i class="fas fa-check"></i> 持病の英文診断書</li>
+            <li><i class="fas fa-check"></i> 緊急連絡先リスト</li>
+          </ul>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fas fa-suitcase"></i> 持参品</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 季節に応じた衣類</li>
+            <li><i class="fas fa-check"></i> フォーマルウェア</li>
+            <li><i class="fas fa-check"></i> 電子機器（変圧器含む）</li>
+            <li><i class="fas fa-check"></i> 日本の調味料・食品</li>
+            <li><i class="fas fa-check"></i> お土産・記念品</li>
+            <li><i class="fas fa-check"></i> 学習用品・文房具</li>
+          </ul>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fas fa-wifi"></i> 通信・連絡</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 携帯電話プラン確認</li>
+            <li><i class="fas fa-check"></i> SIMフリー端末準備</li>
+            <li><i class="fas fa-check"></i> 国際ローミング設定</li>
+            <li><i class="fas fa-check"></i> 緊急時連絡方法確認</li>
+            <li><i class="fas fa-check"></i> インターネット接続方法</li>
+            <li><i class="fas fa-check"></i> VPNサービス検討</li>
+          </ul>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fas fa-plane"></i> 渡航準備</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 航空券予約・確認</li>
+            <li><i class="fas fa-check"></i> 空港送迎手配</li>
+            <li><i class="fas fa-check"></i> 時差ボケ対策</li>
+            <li><i class="fas fa-check"></i> 荷物制限確認</li>
+            <li><i class="fas fa-check"></i> 入国審査準備</li>
+            <li><i class="fas fa-check"></i> 到着後スケジュール確認</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="culture-section">
+      <h2 class="section-title">文化・習慣の違い</h2>
+      <p class="section-subtitle">アメリカ生活で知っておくべき文化的差異</p>
+      
+      <div class="culture-grid">
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-handshake"></i></div>
+          <h4>コミュニケーション</h4>
+          <p><strong>直接的表現：</strong> アメリカ人は率直で直接的な表現を好みます。遠回しな表現より明確な意思表示が重要。</p>
+          <p><strong>個人主義：</strong> 個人の意見や自立性を尊重する文化。自分の考えをはっきり述べることが期待されます。</p>
+        </div>
+
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-utensils"></i></div>
+          <h4>食事マナー</h4>
+          <p><strong>チップ文化：</strong> レストランでは15-20%のチップが一般的。サービス業では感謝の意を込めてチップを渡します。</p>
+          <p><strong>食事時間：</strong> 夕食が早く（6-7時）、昼食は軽め。外食の量は日本より大きいことが多いです。</p>
+        </div>
+
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-clock"></i></div>
+          <h4>時間概念</h4>
+          <p><strong>時間厳守：</strong> 約束の時間を守ることが非常に重要。遅刻は失礼とみなされます。</p>
+          <p><strong>効率重視：</strong> 時間を有効活用し、無駄な時間を嫌う傾向があります。</p>
+        </div>
+
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-user-friends"></i></div>
+          <h4>人間関係</h4>
+          <p><strong>フレンドリー：</strong> 初対面でも気軽に話しかける文化。笑顔と挨拶が基本。</p>
+          <p><strong>プライバシー：</strong> 個人のプライベートを尊重し、過度な詮索は避けられます。</p>
+        </div>
+
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h4>学習環境</h4>
+          <p><strong>積極参加：</strong> 授業での発言や質問が評価されます。受動的な学習より能動的な参加が重要。</p>
+          <p><strong>グループワーク：</strong> チームでの協働が多く、リーダーシップと協調性が求められます。</p>
+        </div>
+
+        <div class="culture-card">
+          <div class="culture-icon"><i class="fas fa-balance-scale"></i></div>
+          <h4>多様性・平等</h4>
+          <p><strong>多文化社会：</strong> 様々な文化背景を持つ人々との共生。差別や偏見は法的にも社会的にも禁止。</p>
+          <p><strong>機会平等：</strong> 性別、人種、宗教に関係なく平等な機会が保障されています。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="health-insurance">
+      <h2 class="section-title">健康保険・医療情報</h2>
+      <p class="section-subtitle">アメリカの医療制度と保険について</p>
+      
+      <div class="insurance-comparison">
+        <div class="insurance-card">
+          <h4>大学指定保険</h4>
+          <div class="premium">年額：$1,500-$3,000</div>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 大学が認定する保険</li>
+            <li><i class="fas fa-check"></i> キャンパス内クリニック利用可</li>
+            <li><i class="fas fa-check"></i> 手続きが簡単</li>
+            <li><i class="fas fa-check"></i> 学生向けサービス充実</li>
+            <li><i class="fas fa-check"></i> 緊急時対応が良い</li>
+          </ul>
+        </div>
+
+        <div class="insurance-card">
+          <h4>民間保険</h4>
+          <div class="premium">年額：$800-$2,500</div>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> より安価な選択肢あり</li>
+            <li><i class="fas fa-check"></i> カバー範囲を選択可能</li>
+            <li><i class="fas fa-check"></i> オンライン手続き可能</li>
+            <li><i class="fas fa-check"></i> 24時間サポート</li>
+            <li><i class="fas fa-exclamation-triangle"></i> 大学要件を満たす必要</li>
+          </ul>
+        </div>
+
+        <div class="insurance-card">
+          <h4>日本の海外旅行保険</h4>
+          <div class="premium">年額：$500-$1,500</div>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 日本語サポート</li>
+            <li><i class="fas fa-check"></i> 短期留学に適している</li>
+            <li><i class="fas fa-check"></i> 家族が手続き可能</li>
+            <li><i class="fas fa-exclamation-triangle"></i> 長期留学には不向き</li>
+            <li><i class="fas fa-exclamation-triangle"></i> アメリカ要件に合わない場合</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="emergency-info">
+        <h4><i class="fas fa-exclamation-triangle"></i> 緊急時連絡先</h4>
+        <p>アメリカでの緊急時に覚えておくべき重要な電話番号</p>
+        <div class="emergency-numbers">
+          <div class="emergency-item">
+            <div class="number">911</div>
+            <div>緊急通報（警察・消防・救急）</div>
+          </div>
+          <div class="emergency-item">
+            <div class="number">311</div>
+            <div>非緊急時行政サービス</div>
+          </div>
+          <div class="emergency-item">
+            <div class="number">411</div>
+            <div>電話番号案内</div>
+          </div>
+          <div class="emergency-item">
+            <div class="number">611</div>
+            <div>携帯電話のトラブル</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <h2 class="section-title">生活のコツ・節約術</h2>
+      <p class="section-subtitle">アメリカでの学生生活を快適に、かつ経済的に過ごすためのヒント</p>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h4>食費節約術</h4>
+          <p><strong>自炊中心：</strong> 外食は高額なので、基本的に自炊を心がける。週末にまとめて調理する meal prep が効果的。</p>
+          <p><strong>割引活用：</strong> クーポンアプリやスーパーの特売日を活用。学生割引も積極的に利用しましょう。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-bus"></i></div>
+          <h4>交通費節約</h4>
+          <p><strong>公共交通機関：</strong> 学生は公共交通機関の割引が受けられることが多い。月パスの利用がお得。</p>
+          <p><strong>自転車活用：</strong> 短距離の移動は自転車が経済的で健康的。キャンパス内は自転車レーンも整備されています。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-book"></i></div>
+          <h4>教科書代節約</h4>
+          <p><strong>中古本購入：</strong> Amazon、Chegg、BigWords などで中古教科書を探す。レンタルサービスも活用。</p>
+          <p><strong>図書館利用：</strong> 大学図書館で教科書を借りる。電子版が無料で利用できることも。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-wifi"></i></div>
+          <h4>通信費節約</h4>
+          <p><strong>格安SIM活用：</strong> T-Mobile、AT&T の格安プランや MVNO を検討。WiFi環境を最大限活用。</p>
+          <p><strong>家族プラン：</strong> 友人と家族プランを共有することで月額料金を削減できます。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-users"></i></div>
+          <h4>社交・ネットワーキング</h4>
+          <p><strong>学生団体参加：</strong> 無料のイベントや活動に参加して友人を作る。国際学生会などがおすすめ。</p>
+          <p><strong>コミュニティ活用：</strong> 地域のコミュニティセンターや図書館のイベントに参加して地域とのつながりを作る。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-briefcase"></i></div>
+          <h4>収入機会</h4>
+          <p><strong>キャンパス内就労：</strong> TA、RA、図書館スタッフなど学内での就労機会を探す。時給は$10-15が一般的。</p>
+          <p><strong>スキル活用：</strong> チューターや翻訳など、自分のスキルを活かした副業を検討しましょう。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

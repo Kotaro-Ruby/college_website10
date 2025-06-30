@@ -57,19 +57,22 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_caching = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "college-finder-web-service.onrender.com" }
+  config.action_mailer.default_url_options = { host: "college-finder-web-service.onrender.com", protocol: 'https' }
 
-  # Gmail SMTP settings
+  # Gmail SMTP settings with improved configuration
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'college-finder-web-service.onrender.com',
+    domain: 'gmail.com',
     user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_PASSWORD'],
+    password: ENV['GMAIL_APP_PASSWORD'], # App Password instead of regular password
     authentication: 'plain',
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    open_timeout: 10,
+    read_timeout: 10
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

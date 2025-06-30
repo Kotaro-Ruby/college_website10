@@ -1,11 +1,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <header class="main-header">
   <div class="header-container">
-    <!-- Logo Section -->
+    <!-- Left Side Navigation -->
     <div class="header-left">
+      <div class="hamburger-menu" id="hamburgerMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="left-nav">
+        <ul class="left-nav-list">
+          <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
+          <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Logo Section (Center) -->
+    <div class="header-center">
       <% if request.path.include?('/canada') %>
         <a href="/" class="logo">
           <span class="logo-icon">🇨🇦</span>
@@ -29,67 +44,14 @@
       <% end %>
     </div>
 
-    <!-- Navigation -->
-    <nav class="header-nav">
-      <ul class="nav-list">
-        <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
-        <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
-        <li><a href="/degreeseeking" class="nav-link <%= 'active' if request.path == '/degreeseeking' %>">卒業を目指す留学</a></li>
-        <li class="nav-dropdown <%= 'active' if request.path.start_with?('/states') %>">
-          <span class="nav-link dropdown-trigger">
-            ツール・ガイド
-            <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </span>
-          <div class="dropdown-menu">
-            <a href="/states" class="dropdown-item <%= 'active' if request.path.start_with?('/states') %>">
-              <i class="fas fa-map-marked-alt"></i>
-              州別ガイド
-            </a>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('大学比較ツール')">
-              <i class="fas fa-balance-scale"></i>
-              大学比較ツール
-            </span>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('合格可能性計算機')">
-              <i class="fas fa-calculator"></i>
-              合格可能性計算機
-            </span>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('学費計算機')">
-              <i class="fas fa-dollar-sign"></i>
-              学費計算機
-            </span>
-          </div>
-        </li>
-        <li class="nav-dropdown <%= 'active' if ['/knowledge', '/contact'].include?(request.path) %>">
-          <span class="nav-link dropdown-trigger">
-            情報・サポート
-            <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </span>
-          <div class="dropdown-menu">
-            <a href="/knowledge" class="dropdown-item <%= 'active' if request.path == '/knowledge' %>">
-              <i class="fas fa-book"></i>
-              アメリカの大学を知る
-            </a>
-            <a href="/contact" class="dropdown-item <%= 'active' if request.path == '/contact' %>">
-              <i class="fas fa-envelope"></i>
-              お問い合わせ
-            </a>
-            <div class="dropdown-divider"></div>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('カナダ版')">
-              <i class="fas fa-flag"></i>
-              カナダ版
-            </span>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('オーストラリア版')">
-              <i class="fas fa-flag"></i>
-              オーストラリア版
-            </span>
-            <span class="dropdown-item disabled" onclick="showDevelopmentModal('ニュージーランド版')">
-              <i class="fas fa-flag"></i>
-              ニュージーランド版
-            </span>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <!-- Right Side Navigation -->
+    <div class="header-right-nav">
+      <nav class="header-nav">
+        <ul class="nav-list">
+          <li><a href="/contact" class="nav-link <%= 'active' if request.path == '/contact' %>">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <!-- User Section -->
     <div class="header-right">
@@ -122,6 +84,57 @@
       <span></span>
     </div>
   </div>
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-content">
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">留学準備</h4>
+        <a href="/study_abroad_types" class="sidebar-item <%= 'active' if request.path == '/study_abroad_types' %>">
+          <i class="fas fa-graduation-cap"></i>
+          語学留学 vs 正規留学
+        </a>
+        <a href="/visa_guide" class="sidebar-item <%= 'active' if request.path == '/visa_guide' %>">
+          <i class="fas fa-passport"></i>
+          ビザ・手続きガイド
+        </a>
+        <a href="/english_tests" class="sidebar-item <%= 'active' if request.path == '/english_tests' %>">
+          <i class="fas fa-spell-check"></i>
+          英語試験対策
+        </a>
+        <a href="/life_guide" class="sidebar-item <%= 'active' if request.path == '/life_guide' %>">
+          <i class="fas fa-home"></i>
+          生活情報・準備ガイド
+        </a>
+      </div>
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">学習・キャリア</h4>
+        <a href="/knowledge" class="sidebar-item <%= 'active' if request.path == '/knowledge' %>">
+          <i class="fas fa-book"></i>
+          アメリカの大学を知る
+        </a>
+        <a href="/scholarships" class="sidebar-item <%= 'active' if request.path == '/scholarships' %>">
+          <i class="fas fa-dollar-sign"></i>
+          奨学金・費用サポート
+        </a>
+        <a href="/majors_careers" class="sidebar-item <%= 'active' if request.path == '/majors_careers' %>">
+          <i class="fas fa-briefcase"></i>
+          専攻・キャリアガイド
+        </a>
+      </div>
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">その他</h4>
+        <a href="/degreeseeking" class="sidebar-item <%= 'active' if request.path == '/degreeseeking' %>">
+          <i class="fas fa-university"></i>
+          卒業を目指す留学
+        </a>
+        <a href="/states" class="sidebar-item <%= 'active' if request.path.start_with?('/states') %>">
+          <i class="fas fa-map-marked-alt"></i>
+          州別ガイド
+        </a>
+      </div>
+    </div>
+  </div>
 </header>
 
 <style>
@@ -138,19 +151,81 @@
   .header-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 80px;
-    gap: 30px;
+    gap: 20px;
   }
 
-  /* Logo Section */
+  /* Left Side Navigation */
   .header-left {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .hamburger-menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .hamburger-menu span {
+    width: 24px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Left Navigation */
+  .left-nav {
+    display: flex;
+  }
+
+  .left-nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    align-items: center;
+  }
+
+  /* Logo Section (Center) */
+  .header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .logo {
@@ -185,11 +260,15 @@
     font-size: 24px;
   }
 
-  /* Navigation */
-  .header-nav {
-    flex-grow: 1;
+  /* Right Side Navigation */
+  .header-right-nav {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  .header-nav {
+    display: flex;
   }
 
   .nav-list {
@@ -197,26 +276,29 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 4px;
+    gap: 2px;
     align-items: center;
   }
 
   .nav-link {
     color: white;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    padding: 8px 12px;
-    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px 15px;
+    border-radius: 25px;
     transition: all 0.3s ease;
     white-space: nowrap;
     position: relative;
+    letter-spacing: 0.5px;
   }
 
   .nav-link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.8px;
   }
 
   .nav-link.disabled {
@@ -232,9 +314,11 @@
 
   /* Active state styles */
   .nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .nav-dropdown.active > .dropdown-trigger {
@@ -263,6 +347,22 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .dropdown-arrow {
@@ -367,6 +467,111 @@
     width: 100% !important;
   }
 
+  /* Sidebar style dropdown */
+  .dropdown-menu.sidebar-style {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    transform: translateX(-100%) !important;
+    width: 300px !important;
+    height: calc(100vh - 80px) !important;
+    background: #2d3748 !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    min-width: auto !important;
+    border: none !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+    overflow-y: auto !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .nav-dropdown:hover .dropdown-menu.sidebar-style,
+  .nav-dropdown.active .dropdown-menu.sidebar-style,
+  .nav-dropdown.show .dropdown-menu.sidebar-style {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .sidebar-section {
+    padding: 20px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .sidebar-section:last-child {
+    border-bottom: none !important;
+  }
+
+  .sidebar-title {
+    color: #fbd38d !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 15px 0 !important;
+    padding: 0 25px !important;
+  }
+
+  .sidebar-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    color: #e2e8f0 !important;
+    text-decoration: none !important;
+    padding: 12px 25px !important;
+    transition: all 0.3s ease !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    border-left: 3px solid transparent !important;
+    background: transparent !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .sidebar-item:hover {
+    background: rgba(251, 211, 141, 0.1) !important;
+    color: #fbd38d !important;
+    border-left-color: #fbd38d !important;
+  }
+
+  .sidebar-item.active {
+    background: rgba(251, 211, 141, 0.15) !important;
+    color: #fbd38d !important;
+    border-left-color: #fbd38d !important;
+    font-weight: 600 !important;
+  }
+
+  .sidebar-item i {
+    font-size: 16px !important;
+    width: 20px !important;
+    text-align: center !important;
+    color: inherit !important;
+  }
+
+  /* New Sidebar Menu */
+  .sidebar-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 300px;
+    height: calc(100vh - 80px);
+    background: #2d3748;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+  }
+
+  .sidebar-menu.active {
+    transform: translateX(0);
+  }
+
+  .sidebar-content {
+    padding: 0;
+  }
+
   /* User Section */
   .header-right {
     display: flex;
@@ -462,42 +667,90 @@
   /* Auth Buttons */
   .auth-buttons {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
   .login-btn {
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
     transition: all 0.3s ease;
     font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
   }
 
   .login-btn:hover {
     background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .login-btn:hover::before {
+    left: 100%;
   }
 
   .register-btn {
-    background: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     color: #f5b342;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 24px;
+    border-radius: 50px;
     transition: all 0.3s ease;
     font-family: 'Inter', sans-serif;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(245, 179, 66, 0.2);
+    position: relative;
+    overflow: hidden;
   }
 
   .register-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    background: #fafafa;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #f5b342 0%, #f39200 100%);
+    color: white;
+    border-color: transparent;
+  }
+
+  .register-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(245, 179, 66, 0.3) 0%, transparent 70%);
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .register-btn:hover::before {
+    width: 300px;
+    height: 300px;
   }
 
   /* Mobile Menu */
@@ -530,11 +783,11 @@
   /* Responsive Design */
   @media (max-width: 1400px) {
     .nav-list {
-      gap: 2px;
+      gap: 4px;
     }
 
-    .nav-link {
-      padding: 6px 10px;
+    .nav-link, .dropdown-trigger {
+      padding: 8px 12px;
       font-size: 13px;
     }
   }
@@ -549,7 +802,7 @@
       gap: 2px;
     }
 
-    .nav-link {
+    .nav-link, .dropdown-trigger {
       padding: 6px 8px;
       font-size: 12px;
     }
@@ -568,9 +821,9 @@
       font-size: 32px;
     }
 
-    .nav-link {
+    .nav-link, .dropdown-trigger {
       font-size: 13px;
-      padding: 6px 10px;
+      padding: 8px 12px;
     }
 
     .user-section {
@@ -705,12 +958,51 @@
     }
 
     .auth-buttons {
-      gap: 6px;
+      gap: 4px;
+      padding: 4px;
     }
 
-    .login-btn, .register-btn {
+    .login-btn {
       font-size: 12px;
-      padding: 6px 10px;
+      padding: 8px 14px;
+    }
+
+    .register-btn {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+  }
+
+  /* Medium screens - tablet/small laptop */
+  @media (max-width: 1200px) {
+    .nav-link {
+      font-size: 12px;
+      padding: 10px 8px;
+    }
+    
+    .header-container {
+      gap: 10px;
+    }
+  }
+
+  /* Large tablet screens */
+  @media (max-width: 1024px) {
+    .nav-link {
+      font-size: 11px;
+      padding: 8px 6px;
+    }
+    
+    .header-container {
+      padding: 0 15px;
+      gap: 8px;
+    }
+    
+    .logo {
+      font-size: 28px;
+    }
+    
+    .logo-icon {
+      font-size: 32px;
     }
   }
 
@@ -748,12 +1040,18 @@
     }
 
     .auth-buttons {
-      gap: 4px;
+      gap: 3px;
+      padding: 3px;
     }
 
-    .login-btn, .register-btn {
+    .login-btn {
       font-size: 11px;
-      padding: 5px 8px;
+      padding: 6px 10px;
+    }
+
+    .register-btn {
+      font-size: 11px;
+      padding: 6px 12px;
     }
 
     .register-btn {
@@ -768,91 +1066,73 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded - Starting mobile menu setup');
+  // Ultra-simple hamburger menu with inline handlers
+  function toggleSidebar() {
+    console.log('toggleSidebar called');
+    const hamburger = document.getElementById('hamburgerMenu');
+    const sidebar = document.getElementById('sidebarMenu');
     
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const headerNav = document.querySelector('.header-nav');
-    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
-    
-    console.log('Mobile menu toggle element:', mobileMenuToggle);
-    console.log('Header nav element:', headerNav);
-    console.log('Window width:', window.innerWidth);
-    
-    if (mobileMenuToggle) {
-      console.log('Mobile menu toggle styles:', window.getComputedStyle(mobileMenuToggle).display);
-      console.log('Mobile menu toggle position:', mobileMenuToggle.getBoundingClientRect());
+    if (hamburger && sidebar) {
+      hamburger.classList.toggle('active');
+      sidebar.classList.toggle('active');
+      console.log('Sidebar toggled. Active:', sidebar.classList.contains('active'));
+    } else {
+      console.log('Elements not found:', hamburger, sidebar);
     }
-    
-    if (headerNav) {
-      console.log('Header nav styles:', window.getComputedStyle(headerNav).position);
-      console.log('Header nav left:', window.getComputedStyle(headerNav).left);
-    }
+  }
 
-    // Mobile menu functionality
-    if (mobileMenuToggle && headerNav) {
-      console.log('Setting up mobile menu event listeners');
-      
-      // Function to toggle menu
-      function toggleMobileMenu(eventType) {
-        console.log('Toggling mobile menu via', eventType);
-        const wasActive = headerNav.classList.contains('active');
-        
-        mobileMenuToggle.classList.toggle('active');
-        headerNav.classList.toggle('active');
-        
-        console.log('Menu state changed from', wasActive, 'to', headerNav.classList.contains('active'));
-        console.log('Header nav classes:', headerNav.className);
-        console.log('Mobile toggle classes:', mobileMenuToggle.className);
-        
-        // Force style update with timeout
-        setTimeout(() => {
-          if (headerNav.classList.contains('active')) {
-            headerNav.style.left = '0';
-            headerNav.style.display = 'flex';
-            headerNav.style.visibility = 'visible';
-            headerNav.style.transform = 'translateX(0)';
-            console.log('Forcing menu to show');
-          } else {
-            headerNav.style.left = '-100%';
-            headerNav.style.transform = 'translateX(-100%)';
-            console.log('Forcing menu to hide');
-          }
-        }, 10);
-      }
-      
-      // Unified event handler
-      function handleMenuToggle(e) {
+  function closeSidebar() {
+    console.log('closeSidebar called');
+    const hamburger = document.getElementById('hamburgerMenu');
+    const sidebar = document.getElementById('sidebarMenu');
+    
+    if (hamburger && sidebar) {
+      hamburger.classList.remove('active');
+      sidebar.classList.remove('active');
+      console.log('Sidebar closed');
+    }
+  }
+
+  // Set up event listeners after a short delay to ensure DOM is ready
+  setTimeout(function() {
+    const hamburger = document.getElementById('hamburgerMenu');
+    if (hamburger) {
+      hamburger.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Menu toggle triggered by:', e.type);
-        toggleMobileMenu(e.type);
-      }
-      
-      // Multiple event listeners for better compatibility
-      mobileMenuToggle.addEventListener('click', handleMenuToggle);
-      mobileMenuToggle.addEventListener('touchstart', handleMenuToggle);
-      mobileMenuToggle.addEventListener('touchend', function(e) {
-        e.preventDefault();
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!mobileMenuToggle.contains(event.target) && !headerNav.contains(event.target)) {
-          mobileMenuToggle.classList.remove('active');
-          headerNav.classList.remove('active');
-        }
-      });
-
-      // Close menu when clicking on a link
-      const navLinks = document.querySelectorAll('.nav-link:not(.dropdown-trigger)');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenuToggle.classList.remove('active');
-          headerNav.classList.remove('active');
-        });
-      });
+        toggleSidebar();
+      };
+      console.log('Hamburger onclick set');
+    } else {
+      console.log('Hamburger not found');
     }
+    
+    // Close on outside click
+    document.onclick = function(e) {
+      const hamburger = document.getElementById('hamburgerMenu');
+      const sidebar = document.getElementById('sidebarMenu');
+      
+      if (hamburger && sidebar && sidebar.classList.contains('active')) {
+        if (!e.target.closest('#hamburgerMenu') && !e.target.closest('#sidebarMenu')) {
+          closeSidebar();
+        }
+      }
+    };
+    
+    // Close on sidebar link click
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    sidebarItems.forEach(item => {
+      item.onclick = function() {
+        setTimeout(closeSidebar, 100);
+      };
+    });
+    
+  }, 100);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded');
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+
 
     // Dropdown functionality
     dropdownTriggers.forEach(trigger => {

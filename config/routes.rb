@@ -63,6 +63,13 @@ Rails.application.routes.draw do
 
   get "newzealand" => "home#newzealand"
 
+  get "study_abroad_types" => "home#study_abroad_types"
+  get "scholarships" => "home#scholarships"
+  get "visa_guide" => "home#visa_guide"
+  get "english_tests" => "home#english_tests"
+  get "majors_careers" => "home#majors_careers"
+  get "life_guide" => "home#life_guide"
+
   get '/import_conditions', to: 'import#conditions'
 
 

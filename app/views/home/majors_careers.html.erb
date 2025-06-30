@@ -1,0 +1,734 @@
+<% content_for :title, "専攻・キャリアガイド | College Finder" %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
+    color: #d4621a;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px 40px 20px;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-section p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #b8621d;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .content-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #fbd38d;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .majors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .major-card {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: #5d4037;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .major-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .major-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(25px, -25px);
+  }
+
+  .major-icon {
+    font-size: 3rem;
+    color: #d4621a;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .major-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .major-card .description {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    line-height: 1.5;
+  }
+
+  .major-details {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+  }
+
+  .major-details h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .details-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .details-list li {
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .details-list li i {
+    color: #d4621a;
+    font-size: 0.8rem;
+  }
+
+  .salary-info {
+    background: rgba(212, 98, 26, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #d4621a;
+    position: relative;
+    z-index: 2;
+  }
+
+  .salary-info .salary-amount {
+    font-weight: 700;
+    color: #d4621a;
+    font-size: 1.1rem;
+  }
+
+  .career-paths {
+    background: linear-gradient(135deg, #fff2e6 0%, #ffe0b3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .careers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .career-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #fbd38d;
+  }
+
+  .career-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .career-card i {
+    color: #d4621a;
+    font-size: 1.3rem;
+  }
+
+  .industry-trends {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .trend-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 5px solid #fbd38d;
+  }
+
+  .trend-card .trend-icon {
+    font-size: 2.5rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .trend-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .trend-stats {
+    background: rgba(251, 211, 141, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #fbd38d;
+  }
+
+  .trend-stats .stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .trend-stats .stat-item:last-child {
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #d4621a;
+  }
+
+  .selection-guide {
+    background: linear-gradient(135deg, #ffd89b 0%, #ffcc80 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .guide-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .step-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    background: #d4621a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto 15px auto;
+  }
+
+  .step-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .universities-ranking {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .ranking-table th {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    color: #5d4037;
+    font-weight: 600;
+  }
+
+  .ranking-table tr:hover {
+    background-color: #f7fafc;
+  }
+
+  .rank-number {
+    background: #d4621a;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .majors-grid,
+    .careers-grid,
+    .trends-grid,
+    .guide-steps {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      padding: 40px 15px;
+    }
+
+    .content-section,
+    .career-paths,
+    .industry-trends,
+    .selection-guide,
+    .universities-ranking {
+      padding: 25px;
+    }
+
+    .ranking-table {
+      font-size: 0.9rem;
+    }
+
+    .ranking-table th,
+    .ranking-table td {
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <div class="hero-section">
+    <h1>専攻・キャリアガイド</h1>
+    <p>アメリカの人気専攻分野と卒業後のキャリアパスについて詳しく解説します。あなたの将来に最適な専攻を見つけましょう。</p>
+  </div>
+
+  <div class="main-content">
+    <div class="content-section">
+      <h2 class="section-title">人気専攻分野</h2>
+      <p class="section-subtitle">アメリカで特に人気の高い専攻分野とその特徴をご紹介します</p>
+      
+      <div class="majors-grid">
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>コンピューターサイエンス</h3>
+          <div class="description">AI、機械学習、ソフトウェア開発など、最先端技術を学ぶ分野。就職市場での需要が非常に高い。</div>
+          <div class="major-details">
+            <h4>主要科目</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> プログラミング言語</li>
+              <li><i class="fas fa-check"></i> データ構造・アルゴリズム</li>
+              <li><i class="fas fa-check"></i> 機械学習・AI</li>
+              <li><i class="fas fa-check"></i> ソフトウェア工学</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$95,000-$150,000</div>
+            <div>就職率：95%以上</div>
+          </div>
+        </div>
+
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>ビジネス・経営学</h3>
+          <div class="description">経営戦略、マーケティング、ファイナンスなど、ビジネス全般を学習。MBA進学への基盤となる。</div>
+          <div class="major-details">
+            <h4>主要科目</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> 経営戦略</li>
+              <li><i class="fas fa-check"></i> マーケティング</li>
+              <li><i class="fas fa-check"></i> ファイナンス</li>
+              <li><i class="fas fa-check"></i> 組織行動学</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$65,000-$120,000</div>
+            <div>就職率：90%以上</div>
+          </div>
+        </div>
+
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-cogs"></i></div>
+          <h3>エンジニアリング</h3>
+          <div class="description">機械、電気、化学、土木など多様な分野。実践的なスキルと理論的知識を両立。</div>
+          <div class="major-details">
+            <h4>主要分野</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> 機械工学</li>
+              <li><i class="fas fa-check"></i> 電気工学</li>
+              <li><i class="fas fa-check"></i> 化学工学</li>
+              <li><i class="fas fa-check"></i> 土木工学</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$75,000-$130,000</div>
+            <div>就職率：92%以上</div>
+          </div>
+        </div>
+
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-heartbeat"></i></div>
+          <h3>健康・医療系</h3>
+          <div class="description">医学、看護学、薬学、理学療法など。高い専門性と社会貢献度を持つ分野。</div>
+          <div class="major-details">
+            <h4>主要分野</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> Pre-Med（医学部進学準備）</li>
+              <li><i class="fas fa-check"></i> 看護学</li>
+              <li><i class="fas fa-check"></i> 薬学</li>
+              <li><i class="fas fa-check"></i> 理学療法学</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$70,000-$200,000+</div>
+            <div>就職率：95%以上</div>
+          </div>
+        </div>
+
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-balance-scale"></i></div>
+          <h3>法学・政治学</h3>
+          <div class="description">法律、政治、国際関係を学習。ロースクール進学や政府機関への就職を目指す。</div>
+          <div class="major-details">
+            <h4>主要科目</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> 憲法・民法</li>
+              <li><i class="fas fa-check"></i> 国際関係論</li>
+              <li><i class="fas fa-check"></i> 政治理論</li>
+              <li><i class="fas fa-check"></i> 公共政策</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$60,000-$160,000</div>
+            <div>就職率：85%以上</div>
+          </div>
+        </div>
+
+        <div class="major-card">
+          <div class="major-icon"><i class="fas fa-brain"></i></div>
+          <h3>心理学</h3>
+          <div class="description">人間の心理と行動を科学的に研究。カウンセリング、研究、企業での人材開発など多様な進路。</div>
+          <div class="major-details">
+            <h4>主要分野</h4>
+            <ul class="details-list">
+              <li><i class="fas fa-check"></i> 認知心理学</li>
+              <li><i class="fas fa-check"></i> 臨床心理学</li>
+              <li><i class="fas fa-check"></i> 社会心理学</li>
+              <li><i class="fas fa-check"></i> 発達心理学</li>
+            </ul>
+          </div>
+          <div class="salary-info">
+            <div class="salary-amount">平均年収：$50,000-$100,000</div>
+            <div>就職率：80%以上</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="career-paths">
+      <h2 class="section-title">卒業後のキャリアパス</h2>
+      <p class="section-subtitle">アメリカでの就職から日本帰国まで、多様な選択肢があります</p>
+      
+      <div class="careers-grid">
+        <div class="career-card">
+          <h4><i class="fas fa-building"></i> アメリカ現地就職</h4>
+          <p><strong>OPT/CPT活用：</strong> 卒業後1-3年間の就労許可を利用してアメリカ企業での実務経験を積む。</p>
+          <p><strong>H-1Bビザ：</strong> 企業スポンサーシップによる長期就労ビザ取得を目指す。</p>
+        </div>
+
+        <div class="career-card">
+          <h4><i class="fas fa-plane"></i> 日本帰国・就職</h4>
+          <p><strong>グローバル企業：</strong> 国際経験を活かして外資系企業や海外展開する日系企業に就職。</p>
+          <p><strong>専門性活用：</strong> アメリカで身につけた専門知識を日本の業界で活用。</p>
+        </div>
+
+        <div class="career-card">
+          <h4><i class="fas fa-graduation-cap"></i> 大学院進学</h4>
+          <p><strong>修士・博士課程：</strong> より高度な専門知識習得のためアメリカで大学院進学。</p>
+          <p><strong>専門職学位：</strong> MBA、JD（法学博士）、MD（医学博士）などの専門職学位取得。</p>
+        </div>
+
+        <div class="career-card">
+          <h4><i class="fas fa-lightbulb"></i> 起業・独立</h4>
+          <p><strong>スタートアップ：</strong> アメリカのイノベーション環境を活かした起業。</p>
+          <p><strong>コンサルティング：</strong> 専門知識を活かした独立コンサルタント業。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="industry-trends">
+      <h2 class="section-title">業界トレンド・将来性</h2>
+      <p class="section-subtitle">成長分野と将来性の高い業界について</p>
+      
+      <div class="trends-grid">
+        <div class="trend-card">
+          <div class="trend-icon"><i class="fas fa-robot"></i></div>
+          <h4>AI・機械学習</h4>
+          <p>人工知能技術の急速な発展により、関連職種の需要が爆発的に増加。データサイエンティストやAIエンジニアの年収は特に高額。</p>
+          <div class="trend-stats">
+            <div class="stat-item">
+              <span>成長率</span>
+              <span>年25%以上</span>
+            </div>
+            <div class="stat-item">
+              <span>新規雇用</span>
+              <span>年50万人以上</span>
+            </div>
+            <div class="stat-item">
+              <span>平均年収</span>
+              <span>$120,000-$200,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trend-card">
+          <div class="trend-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>サイバーセキュリティ</h4>
+          <p>デジタル化の進展とサイバー攻撃の増加により、セキュリティ専門家の需要が急拡大。企業・政府両方で高い需要。</p>
+          <div class="trend-stats">
+            <div class="stat-item">
+              <span>成長率</span>
+              <span>年18%以上</span>
+            </div>
+            <div class="stat-item">
+              <span>人材不足</span>
+              <span>350万人以上</span>
+            </div>
+            <div class="stat-item">
+              <span>平均年収</span>
+              <span>$100,000-$160,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trend-card">
+          <div class="trend-icon"><i class="fas fa-dna"></i></div>
+          <h4>バイオテクノロジー</h4>
+          <p>遺伝子治療、個別化医療、新薬開発など革新的技術により、バイオテック業界は急成長中。</p>
+          <div class="trend-stats">
+            <div class="stat-item">
+              <span>成長率</span>
+              <span>年15%以上</span>
+            </div>
+            <div class="stat-item">
+              <span>市場規模</span>
+              <span>$2兆以上</span>
+            </div>
+            <div class="stat-item">
+              <span>平均年収</span>
+              <span>$90,000-$150,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="selection-guide">
+      <h2 class="section-title">専攻選択のステップ</h2>
+      <p class="section-subtitle">最適な専攻を選ぶための4つのステップ</p>
+      
+      <div class="guide-steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>自己分析</h4>
+          <p>興味分野、得意科目、価値観を明確にし、自分の強みと志向を理解する。キャリア診断テストも活用。</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>業界研究</h4>
+          <p>関心のある業界の将来性、働き方、必要スキルを調査。実際に働く人の話を聞く機会を作る。</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>大学・プログラム研究</h4>
+          <p>専攻内容、教授陣、就職実績、立地などを総合的に比較検討。実際にキャンパス訪問も推奨。</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4>最終決定</h4>
+          <p>収集した情報を基に、長期的なキャリア目標と照らし合わせて最終決定。柔軟性も考慮に入れる。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="universities-ranking">
+      <h2 class="section-title">分野別トップ大学</h2>
+      <p class="section-subtitle">主要専攻分野での優秀な大学ランキング</p>
+      
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>順位</th>
+            <th>大学名</th>
+            <th>強い分野</th>
+            <th>特徴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="rank-number">1</div></td>
+            <td>Massachusetts Institute of Technology (MIT)</td>
+            <td>工学・コンピューターサイエンス</td>
+            <td>世界最高峰の理工系大学</td>
+          </tr>
+          <tr>
+            <td><div class="rank-number">2</div></td>
+            <td>Stanford University</td>
+            <td>コンピューターサイエンス・起業</td>
+            <td>シリコンバレーの中心地</td>
+          </tr>
+          <tr>
+            <td><div class="rank-number">3</div></td>
+            <td>Harvard University</td>
+            <td>ビジネス・法学・医学</td>
+            <td>全分野で世界トップクラス</td>
+          </tr>
+          <tr>
+            <td><div class="rank-number">4</div></td>
+            <td>University of California, Berkeley</td>
+            <td>工学・コンピューターサイエンス</td>
+            <td>公立大学のトップ</td>
+          </tr>
+          <tr>
+            <td><div class="rank-number">5</div></td>
+            <td>Carnegie Mellon University</td>
+            <td>コンピューターサイエンス・AI</td>
+            <td>技術系で特に強い</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -51,32 +51,52 @@ class HomeController < ApplicationController
 
     if name.present? && email.present? && category.present? && message.present?
       begin
+        # メール送信
         mail = ContactMailer.contact_form(name, email, category, message)
         mail.deliver_now
         
-        # お問い合わせ内容をファイルに記録
+        # お問い合わせ内容をファイルに記録（バックアップとして）
         save_contact_to_file(name, email, category, message)
         
-        # 開発環境では詳細情報をログに出力
-        if Rails.env.development?
-          Rails.logger.info "=" * 50
-          Rails.logger.info "お問い合わせメール送信成功"
-          Rails.logger.info "送信者: #{name} (#{email})"
-          Rails.logger.info "カテゴリー: #{category}"
-          Rails.logger.info "メッセージ: #{message}"
-          Rails.logger.info "宛先: kotaro.swifty@gmail.com"
-          Rails.logger.info "件名: [College Spark] お問い合わせ: #{category}"
-          Rails.logger.info "=" * 50
-        else
-          Rails.logger.info "お問い合わせメール送信成功: #{name} (#{email})"
-        end
+        # ログ出力
+        Rails.logger.info "=" * 50
+        Rails.logger.info "お問い合わせメール送信成功"
+        Rails.logger.info "送信者: #{name} (#{email})"
+        Rails.logger.info "カテゴリー: #{category}"
+        Rails.logger.info "宛先: kotaro.swifty@gmail.com"
+        Rails.logger.info "送信時刻: #{Time.current}"
+        Rails.logger.info "=" * 50
         
-        render json: { status: 'success', message: 'お問い合わせを受け付けました。' }
+        render json: { 
+          status: 'success', 
+          message: 'お問い合わせを受け付けました。ご連絡いただきありがとうございます。' 
+        }
+        
+      rescue Net::SMTPAuthenticationError => e
+        Rails.logger.error "SMTP認証エラー: #{e.message}"
+        save_contact_to_file(name, email, category, message) # ファイルには保存
+        render json: { 
+          status: 'error', 
+          message: 'メール送信に問題が発生しました。お問い合わせ内容は記録されました。' 
+        }
+        
+      rescue Net::TimeoutError => e
+        Rails.logger.error "メール送信タイムアウト: #{e.message}"
+        save_contact_to_file(name, email, category, message) # ファイルには保存
+        render json: { 
+          status: 'error', 
+          message: 'メール送信がタイムアウトしました。お問い合わせ内容は記録されました。' 
+        }
+        
       rescue => e
         Rails.logger.error "メール送信エラー: #{e.class.name} - #{e.message}"
         Rails.logger.error e.backtrace.join("\n")
-        # 開発環境では詳細なエラーを、本番環境では汎用メッセージを返す
-        error_message = Rails.env.development? ? "エラー詳細: #{e.message}" : 'メール送信に失敗しました。しばらく後でもう一度お試しください。'
+        save_contact_to_file(name, email, category, message) # ファイルには保存
+        
+        error_message = Rails.env.development? ? 
+          "エラー詳細: #{e.message}" : 
+          'メール送信に失敗しましたが、お問い合わせ内容は記録されました。'
+          
         render json: { status: 'error', message: error_message }
       end
     else
@@ -97,6 +117,24 @@ class HomeController < ApplicationController
   end
   
   def newzealand
+  end
+  
+  def study_abroad_types
+  end
+  
+  def scholarships
+  end
+  
+  def visa_guide
+  end
+  
+  def english_tests
+  end
+  
+  def majors_careers
+  end
+  
+  def life_guide
   end
   
   def terms

@@ -1,0 +1,718 @@
+<% content_for :title, "英語試験対策ガイド | College Finder" %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
+    color: #d4621a;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px 40px 20px;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-section p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #b8621d;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .content-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #fbd38d;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .test-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .test-card {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: #5d4037;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .test-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(25px, -25px);
+  }
+
+  .test-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .test-card .score-range {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #d4621a;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .test-card .description {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .test-sections {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+  }
+
+  .test-sections h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .sections-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sections-list li {
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .sections-list li i {
+    color: #d4621a;
+    font-size: 0.8rem;
+  }
+
+  .score-guide {
+    background: linear-gradient(135deg, #fff2e6 0%, #ffe0b3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  .score-table th,
+  .score-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .score-table th {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    color: #5d4037;
+    font-weight: 600;
+  }
+
+  .score-table tr:hover {
+    background-color: #f7fafc;
+  }
+
+  .study-plan {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 30px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #fbd38d, #f6d37b);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 30px;
+    width: 12px;
+    height: 12px;
+    background: #fbd38d;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #fbd38d;
+  }
+
+  .timeline-title {
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .timeline-duration {
+    color: #d4621a;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .timeline-desc {
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .resources-section {
+    background: linear-gradient(135deg, #ffd89b 0%, #ffcc80 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .resource-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .resource-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .resource-card .resource-icon {
+    font-size: 2rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .resource-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resource-list li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .resource-list li:last-child {
+    border-bottom: none;
+  }
+
+  .resource-list li i {
+    color: #d4621a;
+    font-size: 0.9rem;
+  }
+
+  .strategies-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .strategy-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #fbd38d;
+  }
+
+  .strategy-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .strategy-card i {
+    color: #d4621a;
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 768px) {
+    .test-comparison-grid,
+    .resources-grid,
+    .strategies-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      padding: 40px 15px;
+    }
+
+    .content-section,
+    .score-guide,
+    .study-plan,
+    .resources-section,
+    .strategies-section {
+      padding: 25px;
+    }
+
+    .score-table {
+      font-size: 0.9rem;
+    }
+
+    .score-table th,
+    .score-table td {
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <div class="hero-section">
+    <h1>英語試験対策ガイド</h1>
+    <p>TOEFL、IELTS、SATなど、アメリカ留学に必要な英語試験の対策方法を詳しく解説します。</p>
+  </div>
+
+  <div class="main-content">
+    <div class="content-section">
+      <h2 class="section-title">主要英語試験比較</h2>
+      <p class="section-subtitle">留学目的に応じた最適な英語試験を選択しましょう</p>
+      
+      <div class="test-comparison-grid">
+        <div class="test-card">
+          <h3>TOEFL iBT</h3>
+          <div class="score-range">スコア範囲：0-120点</div>
+          <div class="description">アメリカの大学で最も広く受け入れられているインターネット形式の英語能力試験。</div>
+          <div class="test-sections">
+            <h4>試験セクション</h4>
+            <ul class="sections-list">
+              <li><i class="fas fa-headphones"></i> リスニング（60-90分）</li>
+              <li><i class="fas fa-book-open"></i> リーディング（60-80分）</li>
+              <li><i class="fas fa-microphone"></i> スピーキング（20分）</li>
+              <li><i class="fas fa-pen"></i> ライティング（50分）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>IELTS Academic</h3>
+          <div class="score-range">スコア範囲：0-9.0バンド</div>
+          <div class="description">イギリス発祥の国際的な英語能力試験。アメリカでも受け入れが増加中。</div>
+          <div class="test-sections">
+            <h4>試験セクション</h4>
+            <ul class="sections-list">
+              <li><i class="fas fa-headphones"></i> リスニング（30分）</li>
+              <li><i class="fas fa-book-open"></i> リーディング（60分）</li>
+              <li><i class="fas fa-pen"></i> ライティング（60分）</li>
+              <li><i class="fas fa-microphone"></i> スピーキング（11-14分）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>SAT</h3>
+          <div class="score-range">スコア範囲：400-1600点</div>
+          <div class="description">アメリカの大学入学に必要な標準テスト。学部入学時に主に使用。</div>
+          <div class="test-sections">
+            <h4>試験セクション</h4>
+            <ul class="sections-list">
+              <li><i class="fas fa-book-open"></i> Evidence-Based Reading（65分）</li>
+              <li><i class="fas fa-pen"></i> Writing and Language（35分）</li>
+              <li><i class="fas fa-calculator"></i> Math（80分）</li>
+              <li><i class="fas fa-edit"></i> Essay（50分・選択）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>ACT</h3>
+          <div class="score-range">スコア範囲：1-36点</div>
+          <div class="description">SATと並ぶアメリカの大学入学標準テスト。より直接的な問題が特徴。</div>
+          <div class="test-sections">
+            <h4>試験セクション</h4>
+            <ul class="sections-list">
+              <li><i class="fas fa-book-open"></i> English（45分）</li>
+              <li><i class="fas fa-calculator"></i> Mathematics（60分）</li>
+              <li><i class="fas fa-flask"></i> Reading（35分）</li>
+              <li><i class="fas fa-atom"></i> Science（35分）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-guide">
+      <h2 class="section-title">大学レベル別必要スコア</h2>
+      <p class="section-subtitle">志望校レベルに応じた目標スコア設定の参考にしてください</p>
+      
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th>大学レベル</th>
+            <th>TOEFL iBT</th>
+            <th>IELTS</th>
+            <th>SAT</th>
+            <th>ACT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>トップ校</strong><br>（ハーバード、スタンフォード等）</td>
+            <td>100-120</td>
+            <td>7.5-9.0</td>
+            <td>1500-1600</td>
+            <td>33-36</td>
+          </tr>
+          <tr>
+            <td><strong>上位校</strong><br>（州立上位、私立有名校等）</td>
+            <td>90-105</td>
+            <td>7.0-7.5</td>
+            <td>1350-1500</td>
+            <td>29-33</td>
+          </tr>
+          <tr>
+            <td><strong>中堅校</strong><br>（一般的な4年制大学）</td>
+            <td>80-95</td>
+            <td>6.5-7.0</td>
+            <td>1200-1350</td>
+            <td>25-29</td>
+          </tr>
+          <tr>
+            <td><strong>コミュニティカレッジ</strong><br>（2年制大学）</td>
+            <td>60-80</td>
+            <td>5.5-6.5</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><strong>語学学校</strong><br>（ESLプログラム）</td>
+            <td>45-60</td>
+            <td>4.5-5.5</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="study-plan">
+      <h2 class="section-title">6ヶ月学習プラン</h2>
+      <p class="section-subtitle">効率的なスコアアップのための段階的学習計画</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title">フェーズ1：基礎固め</div>
+          <div class="timeline-duration">期間：1-2ヶ月</div>
+          <div class="timeline-desc">
+            英語の基礎力を固め、試験形式に慣れる期間です。語彙力強化と基本文法の復習に重点を置きます。
+          </div>
+          <div class="timeline-checklist">
+            <h5>主な学習内容</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> 基礎語彙3000語の習得</li>
+              <li><i class="fas fa-check"></i> 基本文法の総復習</li>
+              <li><i class="fas fa-check"></i> 試験形式の理解</li>
+              <li><i class="fas fa-check"></i> 診断テストの受験</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">フェーズ2：スキル別対策</div>
+          <div class="timeline-duration">期間：2-3ヶ月</div>
+          <div class="timeline-desc">
+            各セクション別の詳細対策を行い、弱点分野を集中的に強化します。
+          </div>
+          <div class="timeline-checklist">
+            <h5>主な学習内容</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> リスニング：音声変化の理解</li>
+              <li><i class="fas fa-check"></i> リーディング：速読技術習得</li>
+              <li><i class="fas fa-check"></i> スピーキング：発音練習</li>
+              <li><i class="fas fa-check"></i> ライティング：構成パターン習得</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">フェーズ3：実践演習</div>
+          <div class="timeline-duration">期間：1-2ヶ月</div>
+          <div class="timeline-desc">
+            模擬試験を繰り返し、時間管理と本番対策を完成させます。
+          </div>
+          <div class="timeline-checklist">
+            <h5>主な学習内容</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> 週2回の模擬試験実施</li>
+              <li><i class="fas fa-check"></i> 時間配分の最適化</li>
+              <li><i class="fas fa-check"></i> 弱点の最終調整</li>
+              <li><i class="fas fa-check"></i> 本番シミュレーション</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">フェーズ4：最終調整</div>
+          <div class="timeline-duration">期間：試験直前1週間</div>
+          <div class="timeline-desc">
+            体調管理に重点を置き、軽い復習で感覚を維持します。
+          </div>
+          <div class="timeline-checklist">
+            <h5>主な学習内容</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> 軽い復習のみ</li>
+              <li><i class="fas fa-check"></i> 体調管理重視</li>
+              <li><i class="fas fa-check"></i> 試験会場の確認</li>
+              <li><i class="fas fa-check"></i> メンタル調整</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <h2 class="section-title">おすすめ学習リソース</h2>
+      <p class="section-subtitle">効果的な学習のための教材と活用方法</p>
+      
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-book"></i></div>
+          <h4>公式教材</h4>
+          <ul class="resource-list">
+            <li><i class="fas fa-star"></i> ETS公式TOEFL問題集</li>
+            <li><i class="fas fa-star"></i> Cambridge IELTS過去問</li>
+            <li><i class="fas fa-star"></i> College Board SAT問題集</li>
+            <li><i class="fas fa-star"></i> ACT公式ガイド</li>
+            <li><i class="fas fa-star"></i> 各試験の公式アプリ</li>
+          </ul>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-laptop"></i></div>
+          <h4>オンライン学習</h4>
+          <ul class="resource-list">
+            <li><i class="fas fa-globe"></i> Khan Academy（SAT対策）</li>
+            <li><i class="fas fa-globe"></i> Magoosh（TOEFL/IELTS）</li>
+            <li><i class="fas fa-globe"></i> TOEFL Go!（公式アプリ）</li>
+            <li><i class="fas fa-globe"></i> IELTSプレップアプリ</li>
+            <li><i class="fas fa-globe"></i> YouTube学習チャンネル</li>
+          </ul>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-users"></i></div>
+          <h4>対策講座・塾</h4>
+          <ul class="resource-list">
+            <li><i class="fas fa-school"></i> TOEFL対策専門塾</li>
+            <li><i class="fas fa-school"></i> IELTS対策コース</li>
+            <li><i class="fas fa-school"></i> SAT/ACT予備校</li>
+            <li><i class="fas fa-school"></i> オンライン個別指導</li>
+            <li><i class="fas fa-school"></i> 短期集中講座</li>
+          </ul>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-icon"><i class="fas fa-headphones"></i></div>
+          <h4>リスニング強化</h4>
+          <ul class="resource-list">
+            <li><i class="fas fa-podcast"></i> BBC Learning English</li>
+            <li><i class="fas fa-podcast"></i> TED Talks</li>
+            <li><i class="fas fa-podcast"></i> NPR Podcasts</li>
+            <li><i class="fas fa-podcast"></i> VOA Learning English</li>
+            <li><i class="fas fa-podcast"></i> 大学講義動画</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategies-section">
+      <h2 class="section-title">セクション別攻略法</h2>
+      <p class="section-subtitle">各セクションで高スコアを取るための具体的戦略</p>
+      
+      <div class="strategies-grid">
+        <div class="strategy-card">
+          <h4><i class="fas fa-headphones"></i> リスニング戦略</h4>
+          <p><strong>メモ取り技術：</strong> キーワードと数字を中心にメモを取り、話の構造を把握する。</p>
+          <p><strong>予測読み：</strong> 問題を先読みして、聞くべきポイントを予測する。</p>
+        </div>
+
+        <div class="strategy-card">
+          <h4><i class="fas fa-book-open"></i> リーディング戦略</h4>
+          <p><strong>スキミング：</strong> 全体の構造を素早く把握してから詳細を読む。</p>
+          <p><strong>時間配分：</strong> 1パッセージ20分を目安に、難しい問題は後回しにする。</p>
+        </div>
+
+        <div class="strategy-card">
+          <h4><i class="fas fa-microphone"></i> スピーキング戦略</h4>
+          <p><strong>テンプレート活用：</strong> 決まった構成パターンを身につけて自信を持って話す。</p>
+          <p><strong>発音重視：</strong> 流暢さより明確な発音を心がける。</p>
+        </div>
+
+        <div class="strategy-card">
+          <h4><i class="fas fa-pen"></i> ライティング戦略</h4>
+          <p><strong>構成重視：</strong> Introduction-Body-Conclusionの明確な構成を維持する。</p>
+          <p><strong>語彙の多様性：</strong> 同じ表現の繰り返しを避け、多様な語彙を使用する。</p>
+        </div>
+
+        <div class="strategy-card">
+          <h4><i class="fas fa-calculator"></i> 数学戦略（SAT/ACT）</h4>
+          <p><strong>公式暗記：</strong> 基本公式を確実に覚え、素早く適用できるよう練習する。</p>
+          <p><strong>電卓活用：</strong> 許可されているセクションでは電卓を効率的に使用する。</p>
+        </div>
+
+        <div class="strategy-card">
+          <h4><i class="fas fa-clock"></i> 時間管理戦略</h4>
+          <p><strong>優先順位：</strong> 易しい問題から解き、確実に得点を積み重ねる。</p>
+          <p><strong>見直し時間：</strong> 全体の10%の時間を見直しに確保する。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

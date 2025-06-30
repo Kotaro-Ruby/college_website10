@@ -1,0 +1,663 @@
+<% content_for :title, "ビザ・手続きガイド | College Finder" %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
+    color: #d4621a;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px 40px 20px;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-section p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #b8621d;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .content-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #fbd38d;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .visa-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .visa-card {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: #5d4037;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .visa-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(25px, -25px);
+  }
+
+  .visa-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .visa-card .duration {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #d4621a;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .visa-card .description {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .features-list li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .features-list li i {
+    color: #d4621a;
+    font-size: 0.9rem;
+  }
+
+  .process-timeline {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 30px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #fbd38d, #f6d37b);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 30px;
+    width: 12px;
+    height: 12px;
+    background: #fbd38d;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #fbd38d;
+  }
+
+  .timeline-title {
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .timeline-duration {
+    color: #d4621a;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .timeline-desc {
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .timeline-checklist {
+    background: rgba(251, 211, 141, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #fbd38d;
+  }
+
+  .timeline-checklist h5 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .checklist li i {
+    color: #d4621a;
+    font-size: 0.8rem;
+  }
+
+  .documents-section {
+    background: linear-gradient(135deg, #fff2e6 0%, #ffe0b3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .document-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #fbd38d;
+  }
+
+  .document-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .document-card i {
+    color: #d4621a;
+    font-size: 1.3rem;
+  }
+
+  .interview-tips {
+    background: linear-gradient(135deg, #ffd89b 0%, #ffcc80 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .tip-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .tip-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .tip-card .tip-icon {
+    font-size: 2rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .alert-box {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .alert-box h4 {
+    color: #dc3545;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .alert-box i {
+    color: #dc3545;
+  }
+
+  @media (max-width: 768px) {
+    .visa-types-grid,
+    .documents-grid,
+    .tips-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      padding: 40px 15px;
+    }
+
+    .content-section,
+    .process-timeline,
+    .documents-section,
+    .interview-tips {
+      padding: 25px;
+    }
+
+    .timeline-item {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <div class="hero-section">
+    <h1>ビザ・手続きガイド</h1>
+    <p>アメリカ留学に必要なビザ申請から入国手続きまで、ステップバイステップで詳しく解説します。</p>
+  </div>
+
+  <div class="main-content">
+    <div class="content-section">
+      <h2 class="section-title">学生ビザの種類</h2>
+      <p class="section-subtitle">留学目的に応じたビザタイプを選択しましょう</p>
+      
+      <div class="visa-types-grid">
+        <div class="visa-card">
+          <h3>F-1ビザ（学生ビザ）</h3>
+          <div class="duration">滞在期間：学習期間中</div>
+          <div class="description">最も一般的な学生ビザ。4年制大学、大学院、語学学校などでの就学に使用。</div>
+          <ul class="features-list">
+            <li><i class="fas fa-check"></i> フルタイム学習が必須</li>
+            <li><i class="fas fa-check"></i> キャンパス内就労可能</li>
+            <li><i class="fas fa-check"></i> OPT/CPT申請可能</li>
+            <li><i class="fas fa-check"></i> 家族の同行可能（F-2）</li>
+          </ul>
+        </div>
+
+        <div class="visa-card">
+          <h3>J-1ビザ（交換訪問者）</h3>
+          <div class="duration">滞在期間：プログラム期間中</div>
+          <div class="description">交換留学プログラムや研修プログラム参加者向け。政府認定プログラム必須。</div>
+          <ul class="features-list">
+            <li><i class="fas fa-check"></i> 交換プログラム参加</li>
+            <li><i class="fas fa-check"></i> 文化交流重視</li>
+            <li><i class="fas fa-check"></i> 2年間本国居住義務</li>
+            <li><i class="fas fa-check"></i> 家族の同行可能（J-2）</li>
+          </ul>
+        </div>
+
+        <div class="visa-card">
+          <h3>M-1ビザ（職業訓練）</h3>
+          <div class="duration">滞在期間：最大18ヶ月</div>
+          <div class="description">職業学校や技術学校での専門技術習得を目的とした学習者向け。</div>
+          <ul class="features-list">
+            <li><i class="fas fa-check"></i> 職業訓練重視</li>
+            <li><i class="fas fa-check"></i> 実習プログラム含む</li>
+            <li><i class="fas fa-check"></i> 学校変更制限あり</li>
+            <li><i class="fas fa-check"></i> 就労機会は限定的</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-timeline">
+      <h2 class="section-title">F-1ビザ申請プロセス</h2>
+      <p class="section-subtitle">ビザ申請から取得まで、詳細なステップガイド</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title">ステップ1: 大学合格・I-20取得</div>
+          <div class="timeline-duration">所要期間：1-3ヶ月</div>
+          <div class="timeline-desc">
+            SEVIS認定校への入学許可とI-20（入学許可証）の取得が最初のステップです。
+          </div>
+          <div class="timeline-checklist">
+            <h5>必要な手続き</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> 大学への出願・合格</li>
+              <li><i class="fas fa-check"></i> 財政証明書の提出</li>
+              <li><i class="fas fa-check"></i> I-20の受領・確認</li>
+              <li><i class="fas fa-check"></i> SEVIS費用の支払い（$350）</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">ステップ2: DS-160申請書の作成</div>
+          <div class="timeline-duration">所要期間：2-3時間</div>
+          <div class="timeline-desc">
+            オンライン申請書DS-160を正確に記入し、デジタル写真をアップロードします。
+          </div>
+          <div class="timeline-checklist">
+            <h5>準備事項</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> パスポート情報</li>
+              <li><i class="fas fa-check"></i> 過去の渡航歴</li>
+              <li><i class="fas fa-check"></i> 家族情報</li>
+              <li><i class="fas fa-check"></i> デジタル証明写真</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">ステップ3: 面接予約</div>
+          <div class="timeline-duration">所要期間：即日-数週間</div>
+          <div class="timeline-desc">
+            ビザ申請料金を支払い、大使館・領事館での面接日程を予約します。
+          </div>
+          <div class="timeline-checklist">
+            <h5>手続き</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> ビザ申請料金支払い（$160）</li>
+              <li><i class="fas fa-check"></i> 面接日程の予約</li>
+              <li><i class="fas fa-check"></i> 予約確認書の印刷</li>
+              <li><i class="fas fa-check"></i> 必要書類の準備</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">ステップ4: 面接・書類審査</div>
+          <div class="timeline-duration">所要期間：15-30分</div>
+          <div class="timeline-desc">
+            領事との面接で留学目的、財政状況、卒業後の計画などについて質問されます。
+          </div>
+          <div class="timeline-checklist">
+            <h5>持参書類</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> パスポート</li>
+              <li><i class="fas fa-check"></i> I-20原本</li>
+              <li><i class="fas fa-check"></i> DS-160確認ページ</li>
+              <li><i class="fas fa-check"></i> 面接予約確認書</li>
+              <li><i class="fas fa-check"></i> 財政証明書</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">ステップ5: ビザ発給・受取</div>
+          <div class="timeline-duration">所要期間：3-10日</div>
+          <div class="timeline-desc">
+            面接後、通常数日でビザが発給され、パスポートと共に返却されます。
+          </div>
+          <div class="timeline-checklist">
+            <h5>最終確認</h5>
+            <ul class="checklist">
+              <li><i class="fas fa-check"></i> ビザ情報の確認</li>
+              <li><i class="fas fa-check"></i> 有効期限の確認</li>
+              <li><i class="fas fa-check"></i> 渡航準備開始</li>
+              <li><i class="fas fa-check"></i> 入国書類の準備</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="documents-section">
+      <h2 class="section-title">必要書類チェックリスト</h2>
+      <p class="section-subtitle">ビザ申請に必要な書類を事前に準備しましょう</p>
+      
+      <div class="documents-grid">
+        <div class="document-card">
+          <h4><i class="fas fa-passport"></i> 基本書類</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> パスポート（6ヶ月以上有効）</li>
+            <li><i class="fas fa-check"></i> I-20原本</li>
+            <li><i class="fas fa-check"></i> DS-160確認ページ</li>
+            <li><i class="fas fa-check"></i> 面接予約確認書</li>
+            <li><i class="fas fa-check"></i> SEVIS費用支払い証明</li>
+          </ul>
+        </div>
+
+        <div class="document-card">
+          <h4><i class="fas fa-dollar-sign"></i> 財政証明</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 銀行残高証明書</li>
+            <li><i class="fas fa-check"></i> 奨学金証明書</li>
+            <li><i class="fas fa-check"></i> 収入証明書</li>
+            <li><i class="fas fa-check"></i> 保証人の財政証明</li>
+            <li><i class="fas fa-check"></i> 資金提供承諾書</li>
+          </ul>
+        </div>
+
+        <div class="document-card">
+          <h4><i class="fas fa-graduation-cap"></i> 学歴関連</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 成績証明書</li>
+            <li><i class="fas fa-check"></i> 卒業証明書</li>
+            <li><i class="fas fa-check"></i> 英語能力証明書</li>
+            <li><i class="fas fa-check"></i> 合格通知書</li>
+            <li><i class="fas fa-check"></i> 研究計画書（大学院）</li>
+          </ul>
+        </div>
+
+        <div class="document-card">
+          <h4><i class="fas fa-file-alt"></i> 追加書類</h4>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> 履歴書</li>
+            <li><i class="fas fa-check"></i> 志望理由書</li>
+            <li><i class="fas fa-check"></i> 卒業後の計画書</li>
+            <li><i class="fas fa-check"></i> 家族関係証明書</li>
+            <li><i class="fas fa-check"></i> 推薦状</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> 重要な注意事項</h4>
+        <p>すべての書類は英語版または英語翻訳版が必要です。公的書類の翻訳には認証が必要な場合があります。面接の際は原本を持参し、コピーは補助資料として使用してください。</p>
+      </div>
+    </div>
+
+    <div class="interview-tips">
+      <h2 class="section-title">面接成功のコツ</h2>
+      <p class="section-subtitle">ビザ面接で良い印象を与えるためのポイント</p>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-comments"></i></div>
+          <h4>明確な留学目的</h4>
+          <p>なぜその大学・専攻を選んだのか、将来のキャリアプランと留学の関係性を具体的に説明できるよう準備しましょう。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-home"></i></div>
+          <h4>本国との強いつながり</h4>
+          <p>卒業後に本国に戻る理由（家族、仕事、不動産など）を明確に示し、移民の意図がないことを証明しましょう。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-money-bill-wave"></i></div>
+          <h4>十分な資金証明</h4>
+          <p>学費と生活費を含む全留学期間の資金が確保されていることを、具体的な数字と書類で証明しましょう。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-clock"></i></div>
+          <h4>簡潔な回答</h4>
+          <p>質問には簡潔で要点を抑えた回答を心がけ、長々と説明しすぎないよう注意しましょう。準備した答えを暗記するのではなく、自然に話せるよう練習しましょう。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-user-tie"></i></div>
+          <h4>適切な服装・態度</h4>
+          <p>ビジネスカジュアルな服装で、礼儀正しく自信を持って面接に臨みましょう。目を見て話し、誠実な印象を与えることが重要です。</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fas fa-language"></i></div>
+          <h4>英語での面接準備</h4>
+          <p>面接は基本的に英語で行われます。よくある質問に対する英語での回答を事前に練習し、緊張せずに答えられるよう準備しましょう。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2 class="section-title">よくある質問と回答例</h2>
+      <p class="section-subtitle">ビザ面接でよく聞かれる質問への準備</p>
+      
+      <div style="space-y: 25px;">
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+          <h4 style="color: #d4621a; margin-bottom: 10px;">Q: なぜアメリカで学びたいのですか？</h4>
+          <p><strong>回答例：</strong> 私の専攻分野である[専攻名]において、アメリカは世界最先端の研究と技術を持っています。特に[具体的な理由]により、[大学名]で学ぶことが私のキャリア目標達成に不可欠です。</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+          <h4 style="color: #d4621a; margin-bottom: 10px;">Q: 卒業後の計画は？</h4>
+          <p><strong>回答例：</strong> 卒業後は日本に帰国し、学んだ知識と技術を活かして[具体的な職業・業界]で働く予定です。アメリカで得た経験を日本の[業界名]発展に貢献したいと考えています。</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+          <h4 style="color: #d4621a; margin-bottom: 10px;">Q: 学費はどのように支払いますか？</h4>
+          <p><strong>回答例：</strong> 学費と生活費は[資金源：家族の支援/奨学金/貯金]により支払います。[具体的な金額]を[期間]確保しており、財政的な問題はありません。</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+          <h4 style="color: #d4621a; margin-bottom: 10px;">Q: なぜその大学を選んだのですか？</h4>
+          <p><strong>回答例：</strong> [大学名]は[専攻分野]で高い評価を受けており、特に[具体的な教授名やプログラム名]が私の研究興味と一致しています。また[具体的な施設や機会]も魅力的です。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

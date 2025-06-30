@@ -1,0 +1,627 @@
+<% content_for :title, "奨学金・費用サポート情報 | College Finder" %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
+    color: #d4621a;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(240, 177, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px 40px 20px;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #d4621a;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-section p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #b8621d;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .content-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #fbd38d;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .scholarship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .scholarship-card {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: #5d4037;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scholarship-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(25px, -25px);
+  }
+
+  .scholarship-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+
+  .scholarship-card .amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #d4621a;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .scholarship-card .description {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .scholarship-card .requirements {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .scholarship-card .requirements h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .requirements-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .requirements-list li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .requirements-list li i {
+    color: #d4621a;
+    font-size: 0.9rem;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .comparison-table th {
+    background: linear-gradient(135deg, #fbd38d 0%, #f6d37b 100%);
+    color: #5d4037;
+    font-weight: 600;
+  }
+
+  .comparison-table tr:hover {
+    background-color: #f7fafc;
+  }
+
+  .tips-section {
+    background: linear-gradient(135deg, #ffd89b 0%, #ffcc80 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .tip-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .tip-card h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .tip-card i {
+    font-size: 2rem;
+    color: #d4621a;
+    margin-bottom: 15px;
+  }
+
+  .application-timeline {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 30px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #fbd38d, #f6d37b);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 25px;
+    width: 12px;
+    height: 12px;
+    background: #fbd38d;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #fbd38d;
+  }
+
+  .timeline-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .cost-calculator {
+    background: linear-gradient(135deg, #fff2e6 0%, #ffe0b3 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .cost-category {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .cost-category h4 {
+    color: #d4621a;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .cost-item:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    color: #d4621a;
+  }
+
+  @media (max-width: 768px) {
+    .scholarship-grid,
+    .tips-grid,
+    .calculator-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      padding: 40px 15px;
+    }
+
+    .content-section,
+    .tips-section,
+    .application-timeline,
+    .cost-calculator {
+      padding: 25px;
+    }
+
+    .comparison-table {
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="page-container">
+  <div class="hero-section">
+    <h1>奨学金・費用サポート情報</h1>
+    <p>アメリカ留学の費用を抑える奨学金制度や支援制度について詳しく解説します。あなたに最適な支援制度を見つけましょう。</p>
+  </div>
+
+  <div class="main-content">
+    <div class="content-section">
+      <h2 class="section-title">主要奨学金制度</h2>
+      <p class="section-subtitle">アメリカ留学で利用できる主要な奨学金制度をご紹介します</p>
+      
+      <div class="scholarship-grid">
+        <div class="scholarship-card">
+          <h3>フルブライト奨学金</h3>
+          <div class="amount">年額約$50,000</div>
+          <div class="description">アメリカ政府が提供する最も権威ある奨学金制度。学費・生活費・渡航費をカバー。</div>
+          <div class="requirements">
+            <h4>応募条件</h4>
+            <ul class="requirements-list">
+              <li><i class="fas fa-check"></i> 大学院レベル</li>
+              <li><i class="fas fa-check"></i> 英語能力証明</li>
+              <li><i class="fas fa-check"></i> 研究計画書</li>
+              <li><i class="fas fa-check"></i> 推薦状3通</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scholarship-card">
+          <h3>JASSO海外留学支援制度</h3>
+          <div class="amount">月額6-14万円</div>
+          <div class="description">日本学生支援機構による給付型奨学金。返済不要で学位取得プログラムに対応。</div>
+          <div class="requirements">
+            <h4>応募条件</h4>
+            <ul class="requirements-list">
+              <li><i class="fas fa-check"></i> 日本国籍または永住権</li>
+              <li><i class="fas fa-check"></i> GPA 2.3以上</li>
+              <li><i class="fas fa-check"></i> 英語能力証明</li>
+              <li><i class="fas fa-check"></i> 学位取得目的</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scholarship-card">
+          <h3>ロータリー財団奨学金</h3>
+          <div class="amount">年額最大$50,000</div>
+          <div class="description">国際的な平和と理解促進を目的とした奨学金。1-2年間の大学院プログラムに適用。</div>
+          <div class="requirements">
+            <h4>応募条件</h4>
+            <ul class="requirements-list">
+              <li><i class="fas fa-check"></i> 大学卒業以上</li>
+              <li><i class="fas fa-check"></i> 英語能力</li>
+              <li><i class="fas fa-check"></i> リーダーシップ経験</li>
+              <li><i class="fas fa-check"></i> 地域ロータリークラブ推薦</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scholarship-card">
+          <h3>各大学独自奨学金</h3>
+          <div class="amount">$5,000-$30,000</div>
+          <div class="description">各大学が独自に提供する奨学金制度。Merit-based、Need-basedの2種類があります。</div>
+          <div class="requirements">
+            <h4>応募条件</h4>
+            <ul class="requirements-list">
+              <li><i class="fas fa-check"></i> 高い学業成績</li>
+              <li><i class="fas fa-check"></i> 特技・才能</li>
+              <li><i class="fas fa-check"></i> 経済的必要性</li>
+              <li><i class="fas fa-check"></i> 大学への入学</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2 class="section-title">奨学金の種類と特徴</h2>
+      <p class="section-subtitle">奨学金制度を理解して最適な選択肢を見つけましょう</p>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>種類</th>
+            <th>特徴</th>
+            <th>対象者</th>
+            <th>金額目安</th>
+            <th>返済義務</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Merit-based</strong></td>
+            <td>学業成績・才能重視</td>
+            <td>優秀な成績の学生</td>
+            <td>$5,000-$30,000</td>
+            <td>なし</td>
+          </tr>
+          <tr>
+            <td><strong>Need-based</strong></td>
+            <td>経済的必要性重視</td>
+            <td>経済的支援が必要な学生</td>
+            <td>$3,000-$25,000</td>
+            <td>なし</td>
+          </tr>
+          <tr>
+            <td><strong>Athletic</strong></td>
+            <td>スポーツ能力重視</td>
+            <td>優秀なアスリート</td>
+            <td>$10,000-$50,000</td>
+            <td>なし</td>
+          </tr>
+          <tr>
+            <td><strong>Federal Grants</strong></td>
+            <td>連邦政府提供</td>
+            <td>アメリカ市民・永住者</td>
+            <td>$6,000-$12,000</td>
+            <td>なし</td>
+          </tr>
+          <tr>
+            <td><strong>Private Scholarships</strong></td>
+            <td>民間団体・企業提供</td>
+            <td>特定条件満たす学生</td>
+            <td>$1,000-$20,000</td>
+            <td>なし</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="application-timeline">
+      <h2 class="section-title">奨学金申請スケジュール</h2>
+      <p class="section-subtitle">効果的な奨学金申請のためのタイムライン</p>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title">18ヶ月前</div>
+          <div class="timeline-desc">奨学金リサーチ開始・英語試験対策・成績向上</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">12ヶ月前</div>
+          <div class="timeline-desc">推薦状依頼・エッセイ作成開始・必要書類準備</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">6-9ヶ月前</div>
+          <div class="timeline-desc">奨学金申請書提出・面接準備</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">3-6ヶ月前</div>
+          <div class="timeline-desc">合否通知・追加書類提出・最終確認</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">出発前</div>
+          <div class="timeline-desc">奨学金受給手続き・渡航準備</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cost-calculator">
+      <h2 class="section-title">留学費用シミュレーション</h2>
+      <p class="section-subtitle">年間留学費用の目安を確認しましょう</p>
+      
+      <div class="calculator-grid">
+        <div class="cost-category">
+          <h4><i class="fas fa-graduation-cap"></i> 公立大学（州内）</h4>
+          <div class="cost-item">
+            <span>学費</span>
+            <span>$10,000-$15,000</span>
+          </div>
+          <div class="cost-item">
+            <span>生活費</span>
+            <span>$12,000-$18,000</span>
+          </div>
+          <div class="cost-item">
+            <span>その他</span>
+            <span>$3,000-$5,000</span>
+          </div>
+          <div class="cost-item">
+            <span>年間合計</span>
+            <span>$25,000-$38,000</span>
+          </div>
+        </div>
+
+        <div class="cost-category">
+          <h4><i class="fas fa-university"></i> 私立大学</h4>
+          <div class="cost-item">
+            <span>学費</span>
+            <span>$35,000-$55,000</span>
+          </div>
+          <div class="cost-item">
+            <span>生活費</span>
+            <span>$15,000-$20,000</span>
+          </div>
+          <div class="cost-item">
+            <span>その他</span>
+            <span>$5,000-$8,000</span>
+          </div>
+          <div class="cost-item">
+            <span>年間合計</span>
+            <span>$55,000-$83,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <h2 class="section-title">費用を抑えるコツ</h2>
+      <p class="section-subtitle">奨学金以外で留学費用を削減する方法</p>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h4>州立大学を選ぶ</h4>
+          <p>私立大学に比べて学費が大幅に安く、質の高い教育を受けられます。特に州内学生扱いになると更に安価になります。</p>
+        </div>
+
+        <div class="tip-card">
+          <i class="fas fa-home"></i>
+          <h4>滞在費を節約</h4>
+          <p>キャンパス外でのルームシェア、食費の自炊、中古教科書の利用などで生活費を大幅に削減できます。</p>
+        </div>
+
+        <div class="tip-card">
+          <i class="fas fa-briefcase"></i>
+          <h4>キャンパス内就労</h4>
+          <p>F-1ビザでもキャンパス内での就労は可能。TA、RA、図書館スタッフなどで収入を得られます。</p>
+        </div>
+
+        <div class="tip-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h4>春入学を検討</h4>
+          <p>競争率が低く、奨学金獲得の可能性が高まります。また準備期間を長く取れるメリットもあります。</p>
+        </div>
+
+        <div class="tip-card">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>コミュニティカレッジ経由</h4>
+          <p>最初の2年間をコミュニティカレッジで学び、4年制大学に編入することで総費用を大幅に削減できます。</p>
+        </div>
+
+        <div class="tip-card">
+          <i class="fas fa-search"></i>
+          <h4>隠れた奨学金を探す</h4>
+          <p>大学の学部別奨学金、地域の企業・団体奨学金など、競争率の低い奨学金を積極的に探しましょう。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

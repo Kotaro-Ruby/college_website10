@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'noreply@college-finder.com'
+  default from: 'College Spark <noreply@college-spark.app>'
 
   def password_reset(user)
     @user = user
@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
     
     mail(
       to: @user.email,
-      subject: 'パスワードリセットのご案内'
+      subject: '[College Spark] パスワードリセットのご案内',
+      from: 'College Spark <noreply@college-spark.app>'
     )
   end
 end
