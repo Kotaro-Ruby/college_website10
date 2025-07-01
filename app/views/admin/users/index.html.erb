@@ -1,0 +1,315 @@
+<% content_for :title, "ユーザー管理 - Admin" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー管理 - College Spark Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .admin-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-card:nth-child(1) .stat-icon { color: #e74c3c; }
+        .stat-card:nth-child(2) .stat-icon { color: #2ecc71; }
+        .stat-card:nth-child(3) .stat-icon { color: #3498db; }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .users-section {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .users-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .users-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .users-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-details h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .user-details p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .date-cell {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .no-users {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .users-section {
+                padding: 20px;
+            }
+
+            .users-table {
+                font-size: 0.9rem;
+            }
+
+            .users-table th,
+            .users-table td {
+                padding: 10px;
+            }
+
+            .user-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/admin/surveys?secret=admin123" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        管理画面に戻る
+    </a>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-users"></i> ユーザー管理</h1>
+            <p>登録済みユーザーの一覧と統計情報</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number"><%= @total_users %></div>
+                <div class="stat-label">総ユーザー数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-number"><%= @users_this_month %></div>
+                <div class="stat-label">今月の新規登録</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-number"><%= @users_today %></div>
+                <div class="stat-label">今日の新規登録</div>
+            </div>
+        </div>
+
+        <div class="users-section">
+            <h2 class="section-title">
+                <i class="fas fa-list"></i>
+                ユーザー一覧
+            </h2>
+
+            <% if @users.any? %>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ユーザー</th>
+                            <th>メールアドレス</th>
+                            <th>登録日</th>
+                            <th>最終ログイン</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @users.each do |user| %>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">
+                                            <%= user.username.first.upcase %>
+                                        </div>
+                                        <div class="user-details">
+                                            <h4><%= user.username %></h4>
+                                            <p>ID: <%= user.id %></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td class="date-cell">
+                                    <%= user.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
+                                </td>
+                                <td class="date-cell">
+                                    <% if user.respond_to?(:last_login_at) && user.last_login_at %>
+                                        <%= user.last_login_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
+                                    <% else %>
+                                        <span style="color: #95a5a6;">未記録</span>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            <% else %>
+                <div class="no-users">
+                    <i class="fas fa-users" style="font-size: 4rem; color: #bdc3c7; margin-bottom: 20px;"></i>
+                    <h3>登録ユーザーはまだいません</h3>
+                    <p>ユーザーが登録されると、ここに表示されます。</p>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</body>
+</html>

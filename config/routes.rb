@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   # Survey routes
   post "surveys" => "surveys#create"
   get "admin/surveys" => "surveys#admin"
+  
+  # Admin user management
+  get "admin/users" => "admin/users#index"
 
   get "terms" => "home#terms"
 
