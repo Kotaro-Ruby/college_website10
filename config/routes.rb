@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   get "contact" => "home#contact"
   post "contact" => "home#send_contact"
+  
+  # Survey routes
+  post "surveys" => "surveys#create"
+  get "admin/surveys" => "surveys#admin"
 
   get "terms" => "home#terms"
 
