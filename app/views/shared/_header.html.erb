@@ -88,6 +88,23 @@
   <!-- Sidebar Menu -->
   <div class="sidebar-menu" id="sidebarMenu">
     <div class="sidebar-content">
+      <!-- 主要機能セクション -->
+      <div class="sidebar-section">
+        <h4 class="sidebar-title">主要機能</h4>
+        <a href="/search" class="sidebar-item <%= 'active' if request.path == '/search' || request.path == '/results' %>">
+          <i class="fas fa-search"></i>
+          大学検索
+        </a>
+        <a href="/contact" class="sidebar-item <%= 'active' if request.path == '/contact' %>">
+          <i class="fas fa-envelope"></i>
+          お問い合わせ
+        </a>
+        <a href="/about" class="sidebar-item <%= 'active' if request.path == '/about' %>">
+          <i class="fas fa-info-circle"></i>
+          College Sparkについて
+        </a>
+      </div>
+      
       <div class="sidebar-section">
         <h4 class="sidebar-title">留学準備</h4>
         <a href="/study_abroad_types" class="sidebar-item <%= 'active' if request.path == '/study_abroad_types' %>">
@@ -857,6 +874,7 @@
 
     .logo-text {
       font-size: 20px;
+      white-space: nowrap;
     }
 
     .logo-version {
