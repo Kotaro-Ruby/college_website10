@@ -8,6 +8,7 @@ SitemapGenerator::Sitemap.create do
   add "/about", priority: 0.8, changefreq: "monthly"
   add "/knowledge", priority: 0.8, changefreq: "monthly"
   add "/degreeseeking", priority: 0.8, changefreq: "monthly"
+  add "/why_study_abroad", priority: 0.9, changefreq: "monthly"
   add "/info", priority: 0.7, changefreq: "monthly"
   add "/recruit", priority: 0.7, changefreq: "monthly"
   add "/contact", priority: 0.6, changefreq: "monthly"
