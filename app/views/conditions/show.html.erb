@@ -2273,7 +2273,12 @@
           </div>
 
           <!-- Back Button -->
-          <%= link_to results_path, class: "back-button" do %>
+          <% 
+            back_url = session[:search_results_url] || results_path
+            # Clear the session after using it to prevent stale URLs
+            session.delete(:search_results_url) if session[:search_results_url]
+          %>
+          <%= link_to back_url, class: "back-button" do %>
             <i class="fas fa-arrow-left"></i>
             検索結果に戻る
           <% end %>

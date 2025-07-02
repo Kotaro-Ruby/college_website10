@@ -13,8 +13,8 @@
       </div>
       <nav class="left-nav">
         <ul class="left-nav-list">
-          <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
           <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
+          <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
         </ul>
       </nav>
     </div>
@@ -48,7 +48,7 @@
     <div class="header-right-nav">
       <nav class="header-nav">
         <ul class="nav-list">
-          <li><a href="/contact" class="nav-link <%= 'active' if request.path == '/contact' %>">お問い合わせ</a></li>
+          <li><a href="/info" class="nav-link <%= 'active' if request.path == '/info' %>">運営情報</a></li>
         </ul>
       </nav>
     </div>
@@ -91,17 +91,21 @@
       <!-- 主要機能セクション -->
       <div class="sidebar-section">
         <h4 class="sidebar-title">主要機能</h4>
+        <a href="/about" class="sidebar-item <%= 'active' if request.path == '/about' %>">
+          <i class="fas fa-graduation-cap"></i>
+          College Sparkについて
+        </a>
         <a href="/search" class="sidebar-item <%= 'active' if request.path == '/search' || request.path == '/results' %>">
           <i class="fas fa-search"></i>
           大学検索
         </a>
-        <a href="/contact" class="sidebar-item <%= 'active' if request.path == '/contact' %>">
-          <i class="fas fa-envelope"></i>
-          お問い合わせ
+        <a href="/why_study_abroad" class="sidebar-item <%= 'active' if request.path == '/why_study_abroad' %>">
+          <i class="fas fa-globe"></i>
+          なぜ海外進学なのか？
         </a>
-        <a href="/about" class="sidebar-item <%= 'active' if request.path == '/about' %>">
-          <i class="fas fa-info-circle"></i>
-          College Sparkについて
+        <a href="/degreeseeking" class="sidebar-item <%= 'active' if request.path == '/degreeseeking' %>">
+          <i class="fas fa-university"></i>
+          卒業を目指す留学
         </a>
       </div>
       
@@ -123,6 +127,10 @@
           <i class="fas fa-home"></i>
           生活情報・準備ガイド
         </a>
+        <a href="/states" class="sidebar-item <%= 'active' if request.path.start_with?('/states') %>">
+          <i class="fas fa-map-marked-alt"></i>
+          州別ガイド
+        </a>
       </div>
       <div class="sidebar-section">
         <h4 class="sidebar-title">学習・キャリア</h4>
@@ -141,13 +149,13 @@
       </div>
       <div class="sidebar-section">
         <h4 class="sidebar-title">その他</h4>
-        <a href="/degreeseeking" class="sidebar-item <%= 'active' if request.path == '/degreeseeking' %>">
-          <i class="fas fa-university"></i>
-          卒業を目指す留学
+        <a href="/info" class="sidebar-item <%= 'active' if request.path == '/info' %>">
+          <i class="fas fa-info-circle"></i>
+          運営情報
         </a>
-        <a href="/states" class="sidebar-item <%= 'active' if request.path.start_with?('/states') %>">
-          <i class="fas fa-map-marked-alt"></i>
-          州別ガイド
+        <a href="/contact" class="sidebar-item <%= 'active' if request.path == '/contact' %>">
+          <i class="fas fa-envelope"></i>
+          お問い合わせ
         </a>
       </div>
     </div>

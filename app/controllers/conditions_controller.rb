@@ -261,6 +261,12 @@ class ConditionsController < ApplicationController
   def show
     @college = Condition.find_by(slug: params[:id]) || Condition.find_by(id: params[:id])
     Rails.logger.debug("College found: #{@college.inspect}")
+    
+    # 検索結果からの参照元URLを保存
+    if request.referer && request.referer.include?('/results')
+      session[:search_results_url] = request.referer
+    end
+    
     if @college
       # 閲覧履歴に追加
       add_to_recently_viewed(@college)

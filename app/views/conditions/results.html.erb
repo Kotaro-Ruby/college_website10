@@ -285,6 +285,7 @@
       border-bottom: 1px solid #f3f4f6;
       transition: all 0.2s ease;
       cursor: pointer;
+      min-height: 48px;
     }
 
     tbody tr:hover {
@@ -297,6 +298,15 @@
       padding: 16px;
       font-size: 14px;
       white-space: nowrap;
+      vertical-align: top;
+    }
+    
+    /* Allow college name to wrap when needed */
+    td:first-child {
+      white-space: normal;
+      word-wrap: break-word;
+      max-width: 200px;
+      min-height: 48px;
     }
 
     .university-link {
@@ -469,6 +479,8 @@
         text-align: center !important;
         padding: 8px !important;
         vertical-align: middle !important;
+        min-height: 48px !important;
+        display: table-cell !important;
       }
 
       .button-group {
@@ -478,6 +490,7 @@
         align-items: center !important;
         min-height: 32px !important;
         width: 100% !important;
+        height: 100% !important;
       }
 
       .action-btn {
@@ -577,6 +590,14 @@
         position: relative;
         padding-left: 35%;
         border: none;
+        min-height: 32px;
+        vertical-align: top;
+      }
+      
+      td:first-child {
+        white-space: normal;
+        word-wrap: break-word;
+        min-height: 40px;
       }
 
       td:before {
@@ -615,6 +636,9 @@
       .action-buttons {
         padding-left: 0 !important;
         padding-top: 12px !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
       }
       
       .action-buttons:before {
@@ -624,6 +648,8 @@
       .button-group {
         justify-content: flex-start;
         gap: 8px;
+        width: 100%;
+        align-items: center;
       }
       }
 

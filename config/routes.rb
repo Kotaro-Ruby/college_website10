@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   get "english_tests" => "home#english_tests"
   get "majors_careers" => "home#majors_careers"
   get "life_guide" => "home#life_guide"
+  get "why_study_abroad" => "home#why_study_abroad"
 
   get '/import_conditions', to: 'import#conditions'
 

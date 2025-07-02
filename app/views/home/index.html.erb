@@ -13,13 +13,52 @@
     <div class="hero-content">
       <h1 class="hero-title">College Spark</h1>
       <p class="hero-subtitle">あなたにぴったりの大学を見つけよう</p>
-      <p class="hero-description">6,300校以上のアメリカの大学から、あなたの条件に合った大学を検索できます</p>
+      <p class="hero-description">6,300校以上のアメリカの大学・専門学校から、あなたの条件に合った大学を検索できます</p>
     </div>
   </div>
 
   <!-- メインコンテンツ -->
   <div class="main-content">
     <div class="content-padding">
+      
+      <!-- なぜ海外進学なのか？セクション -->
+      <div class="section">
+        <div class="why-study-abroad-summary">
+          <div class="summary-header">
+            <div class="summary-icon">🌍</div>
+            <div class="summary-title-area">
+              <h2>悶々としてる人ほど世界に飛び出してほしい。</h2>
+              <p>自分に自信がない、何かしないといけないと思ってるけど何をしたらいいかわからない、<br>そんな人こそ海外進学を選択肢の一つとして考えてほしい。</p>
+            </div>
+          </div>
+          
+          <div class="summary-content">
+            <div class="personal-story-brief">
+              <div class="story-icon">🔥</div>
+              <div class="story-text">
+                <p><strong>「このままじゃダメだ」その危機感が、あなたを変える最強の武器になる。</strong></p>
+                <p>海外進学は逃げ道ではなく、自分と本気で向き合う場所。言い訳ができない環境で、本当の自分の可能性を見つけられます。</p>
+                <p>必要なのは<span class="highlight-text">才能じゃない、本気度と努力だけ</span>。現状を変えたいその気持ちこそが、成功への第一歩です。</p>
+              </div>
+            </div>
+            
+            <div class="essence-message">
+              <div class="essence-icon">💎</div>
+              <div class="essence-content">
+                <h4>海外進学があなたを変えるのではない</h4>
+                <p>本気で取り組む、その経験こそがあなたを変えます。海外進学は手段にすぎません。<strong>大切なのは、どこにいても本気で挑戦し続ける姿勢です。</strong></p>
+              </div>
+            </div>
+            
+            <div class="cta-section">
+              <p class="cta-text">もし今、心の奥で「このままじゃダメだ」と感じているなら、<br>その直感を信じて、一歩踏み出してみませんか？</p>
+              <%= link_to "/why_study_abroad", class: "btn btn-primary cta-button" do %>
+                私の体験談を読む <i class="fas fa-arrow-right ms-2"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <!-- クイック検索セクション -->
       <div class="section">
@@ -35,7 +74,7 @@
             </button>
           </div>
           <div class="search-note">
-            大学名を入力して直接検索するか、<%= link_to "詳細検索", "/search", class: "link-accent" %>で条件を指定して検索できます
+            または、<%= link_to "詳細検索", "/search", class: "link-accent" %>で条件を指定して検索できます
           </div>
         </div>
       </div>
@@ -935,6 +974,259 @@
 
   .me-2 { margin-right: 0.5rem; }
   .ms-2 { margin-left: 0.5rem; }
+
+  /* なぜ海外進学なのか？サマリーセクション */
+  .why-study-abroad-summary {
+    background: linear-gradient(135deg, #fff9f5 0%, #fef3e2 50%, #fed7aa 100%);
+    border-radius: 20px;
+    padding: 40px;
+    border: 2px solid rgba(251, 146, 60, 0.3);
+    box-shadow: 0 8px 30px rgba(251, 146, 60, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-study-abroad-summary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #fb923c, #f97316);
+  }
+
+  .summary-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(251, 146, 60, 0.2);
+  }
+
+  .summary-icon {
+    font-size: 3.5rem;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .summary-title-area h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .summary-title-area p {
+    font-size: 1.1rem;
+    color: #9a3412;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .personal-story-brief {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(251, 146, 60, 0.3);
+    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.1);
+  }
+
+  .story-icon {
+    font-size: 2.5rem;
+    min-width: 60px;
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .story-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    color: #2d3748;
+  }
+
+  .story-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .highlight-text {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .benefit-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.2);
+  }
+
+  .benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .benefit-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+  }
+
+  .benefit-item p {
+    font-size: 0.9rem;
+    color: #4a5568;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .essence-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(219, 234, 254, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .essence-icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .essence-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 8px;
+  }
+
+  .essence-content p {
+    font-size: 0.95rem;
+    color: #1e3a8a;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    border: 2px solid rgba(251, 146, 60, 0.3);
+  }
+
+  .cta-text {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .cta-button {
+    font-size: 1.1rem;
+    padding: 16px 32px;
+    font-weight: 600;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .why-study-abroad-summary {
+      padding: 25px;
+    }
+
+    .summary-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .summary-title-area h2 {
+      font-size: 1.8rem;
+    }
+
+    .personal-story-brief {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .essence-message {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .cta-text {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .why-study-abroad-summary {
+      padding: 20px;
+    }
+
+    .summary-title-area h2 {
+      font-size: 1.6rem;
+    }
+
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .story-text p {
+      font-size: 0.95rem;
+    }
+
+    .cta-text {
+      font-size: 0.95rem;
+    }
+
+    .cta-button {
+      font-size: 1rem;
+      padding: 14px 28px;
+    }
+  }
 
   /* サイト説明セクションのスタイル */
   .site-description {
