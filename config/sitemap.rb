@@ -14,8 +14,20 @@ SitemapGenerator::Sitemap.create do
   add "/contact", priority: 0.6, changefreq: "monthly"
   add "/terms", priority: 0.5, changefreq: "yearly"
 
+  # 留学ガイドページ
+  add "/study_abroad_types", priority: 0.8, changefreq: "monthly"
+  add "/scholarships", priority: 0.8, changefreq: "monthly"
+  add "/visa_guide", priority: 0.8, changefreq: "monthly"
+  add "/english_tests", priority: 0.8, changefreq: "monthly"
+  add "/majors_careers", priority: 0.8, changefreq: "monthly"
+  add "/life_guide", priority: 0.8, changefreq: "monthly"
+
   # 検索機能
+  add "/search", priority: 0.8, changefreq: "monthly"
   add "/results", priority: 0.9, changefreq: "daily"
+
+  # 州別ガイド
+  add "/states", priority: 0.7, changefreq: "monthly"
 
   # 認証ページ
   add "/login", priority: 0.6, changefreq: "monthly"
