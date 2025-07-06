@@ -73,8 +73,23 @@
               <span>検索</span>
             </button>
           </div>
-          <div class="search-note">
-            または、<%= link_to "詳細検索", "/search", class: "link-accent" %>で条件を指定して検索できます
+          <div class="search-divider">
+            <span class="divider-line"></span>
+            <span class="divider-text">または</span>
+            <span class="divider-line"></span>
+          </div>
+          <div class="advanced-search-cta">
+            <div class="cta-icon">
+              <i class="fas fa-sliders-h"></i>
+            </div>
+            <div class="cta-content">
+              <h4>条件を細かく指定して検索したい方は</h4>
+              <%= link_to "/search", class: "advanced-search-link" do %>
+                <span>詳細検索を使う</span>
+                <i class="fas fa-arrow-right"></i>
+              <% end %>
+              <p class="cta-description">州・学費・専攻・合格率など最大9つの条件で絞り込み可能</p>
+            </div>
           </div>
         </div>
       </div>
@@ -618,10 +633,109 @@
     box-shadow: 0 8px 25px rgba(251, 146, 60, 0.3);
   }
 
-  .search-note {
+  .search-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0 25px;
+    gap: 15px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.3), transparent);
+    max-width: 150px;
+  }
+
+  .divider-text {
     color: #9a3412;
     font-size: 14px;
+    font-weight: 600;
+    padding: 0 15px;
+    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 100%);
+  }
+
+  .advanced-search-cta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    border: 2px solid rgba(251, 146, 60, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .advanced-search-cta:hover {
+    border-color: rgba(251, 146, 60, 0.5);
+    box-shadow: 0 6px 25px rgba(251, 146, 60, 0.15);
+  }
+
+  .cta-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cta-icon i {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .cta-content {
+    flex: 1;
     text-align: center;
+  }
+
+  .cta-content h4 {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .advanced-search-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin: 0 auto 12px;
+  }
+
+  .advanced-search-link:hover {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.3);
+    color: white;
+  }
+
+  .advanced-search-link i {
+    transition: transform 0.3s ease;
+  }
+
+  .advanced-search-link:hover i {
+    transform: translateX(4px);
+  }
+
+  .cta-description {
+    font-size: 0.85rem;
+    color: #718096;
+    margin: 0;
+    line-height: 1.4;
   }
 
   .link-accent {
@@ -909,6 +1023,25 @@
     .search-input-wrapper {
       flex-direction: column;
       gap: 12px;
+    }
+
+    .advanced-search-cta {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .cta-content h4 {
+      font-size: 0.95rem;
+    }
+
+    .advanced-search-link {
+      font-size: 15px;
+      padding: 10px 20px;
+    }
+
+    .cta-description {
+      font-size: 0.8rem;
     }
 
     .search-input {

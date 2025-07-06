@@ -27,15 +27,17 @@
     <meta property="og:title" content="<%= content_for(:og_title) || content_for(:title) || "College Spark - アメリカ大学検索サイト" %>">
     <meta property="og:description" content="<%= content_for(:og_description) || content_for(:description) || "6,300校以上のアメリカの大学から、あなたの条件に合った大学を検索できます。学費、合格率、専攻など詳細な情報で大学選びをサポートします。" %>">
     <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:image" content="<%= content_for(:og_image) || "#{request.base_url}/favicon.ico" %>">
     <meta property="og:site_name" content="College Spark">
-    <meta property="og:image" content="<%= content_for(:og_image) || "#{request.base_url}/icon.png" %>">
     <meta property="og:locale" content="ja_JP">
     
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@college__spark">
+    <meta name="twitter:creator" content="@college__spark">
     <meta name="twitter:title" content="<%= content_for(:twitter_title) || content_for(:og_title) || content_for(:title) || "College Spark - アメリカ大学検索サイト" %>">
     <meta name="twitter:description" content="<%= content_for(:twitter_description) || content_for(:og_description) || content_for(:description) || "6,300校以上のアメリカの大学から、あなたの条件に合った大学を検索できます。" %>">
-    <meta name="twitter:image" content="<%= content_for(:twitter_image) || content_for(:og_image) || "#{request.base_url}/icon.png" %>">
+    <meta name="twitter:image" content="<%= content_for(:twitter_image) || content_for(:og_image) || "#{request.base_url}/favicon.ico" %>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url %>">
@@ -69,9 +71,9 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/icon.svg">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/favicon.ico">
 
     <%# Bootstrap CSS %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -94,19 +96,21 @@
     <%= render 'shared/footer' %>
     
     <!-- Star Rating Widget -->
-    <div id="ratingWidget" class="rating-widget">
+
+    <!-- Rating Widget -->
+    <div id="ratingWidget" class="rating-widget" style="display: none;">
+      <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
       <div class="rating-content">
-        <div class="rating-text">満足度調査にご協力ください！</div>
+        <div class="emoji-icon">🎆</div>
+        <p class="rating-text">✨ ご意見をお聞かせください！</p>
         <div class="star-rating">
-          <button class="star" data-rating="1" onclick="setRating(1)">⭐</button>
-          <button class="star" data-rating="2" onclick="setRating(2)">⭐</button>
-          <button class="star" data-rating="3" onclick="setRating(3)">⭐</button>
-          <button class="star" data-rating="4" onclick="setRating(4)">⭐</button>
-          <button class="star" data-rating="5" onclick="setRating(5)">⭐</button>
+          <span class="star" onclick="setRating(1)">⭐</span>
+          <span class="star" onclick="setRating(2)">⭐</span>
+          <span class="star" onclick="setRating(3)">⭐</span>
+          <span class="star" onclick="setRating(4)">⭐</span>
+          <span class="star" onclick="setRating(5)">⭐</span>
         </div>
-        <div class="rating-message" id="ratingMessage" style="display: none;">
-          <p>ご回答ありがとうございます！</p>
-        </div>
+        <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
       </div>
     </div>
     
@@ -154,9 +158,14 @@
         </form>
         
         <div class="survey-thanks" style="display: none;">
-          <div class="thanks-icon">🎉</div>
-          <h3>ありがとうございました！</h3>
-          <p>貴重なご意見をいただき、ありがとうございます。<br>サービスの改善に活用させていただきます。</p>
+          <div class="thanks-icon">🎉✨</div>
+          <h3>心より感謝申し上げます！</h3>
+          <p>あなたの貴重なご意見は、より良いサービス作りの原動力となります。<br>
+          <strong>College Spark</strong>をより使いやすく、より価値のあるものにするために<br>
+          大切に活用させていただきます。</p>
+          <div class="thanks-message">
+            <p>🚀 今後ともよろしくお願いいたします</p>
+          </div>
         </div>
       </div>
     </div>
@@ -165,72 +174,240 @@
       .rating-widget {
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        left: 20px;
         z-index: 1000;
-        background: white;
-        border-radius: 12px;
-        padding: 10px 15px;
-        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
-        border: 1px solid #e5e7eb;
-        max-width: 220px;
+        background: linear-gradient(135deg, rgba(255, 146, 36, 0.7) 0%, rgba(255, 122, 0, 0.7) 100%);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(255, 122, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.2);
+        max-width: 320px;
+        color: white;
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        display: none; /* 初期状態で非表示 */
+      }
+      
+      /* モバイル対応 */
+      @media (max-width: 768px) {
+        .rating-widget {
+          bottom: 10px;
+          left: 10px;
+          right: 10px;
+          max-width: none;
+          padding: 16px;
+          border-radius: 16px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .rating-widget {
+          bottom: 8px;
+          left: 8px;
+          right: 8px;
+          padding: 14px;
+          border-radius: 14px;
+        }
+      }
+      
+      .rating-widget.show {
+        display: block !important;
+      }
+      
+      .rating-widget.hidden {
+        display: none !important;
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 10px 30px rgba(255, 122, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          transform: scale(1.02);
+          box-shadow: 0 15px 40px rgba(255, 122, 0, 0.4), 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+      }
+      
+      .widget-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      
+      .widget-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg) scale(1.1);
       }
       
       .rating-content {
         text-align: center;
+        position: relative;
       }
       
-      .rating-text {
-        font-size: 0.75rem;
-        color: #374151;
+      .emoji-icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+        animation: bounce 1s ease-in-out infinite;
+      }
+      
+      @media (max-width: 480px) {
+        .emoji-icon {
+          font-size: 32px;
+          margin-bottom: 8px;
+        }
+      }
+      
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      .rating-subtext {
+        margin-top: 12px;
+        font-size: 12px;
+        opacity: 0.9;
         font-weight: 500;
-        margin-bottom: 8px;
-        line-height: 1.2;
+        animation: fadeIn 1s ease-out 0.5s both;
+      }
+      
+      @media (max-width: 480px) {
+        .rating-subtext {
+          font-size: 11px;
+          margin-top: 8px;
+        }
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 0.9; }
+      }
+      
+      @keyframes fadeOut {
+        from { 
+          opacity: 1;
+          transform: scale(1);
+        }
+        to { 
+          opacity: 0;
+          transform: scale(0.8);
+        }
+      }
+      
+      /* トースト通知 */
+      .toast-notification {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        padding: 16px 32px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+        z-index: 10001;
+        opacity: 0;
+        transition: all 0.3s ease-out;
+      }
+      
+      .toast-notification.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      
+      
+      .rating-text {
+        margin: 0 0 16px 0;
+        font-size: 16px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        letter-spacing: 0.5px;
+        animation: slideIn 0.6s ease-out;
+      }
+      
+      @media (max-width: 480px) {
+        .rating-text {
+          font-size: 14px;
+          margin: 0 0 12px 0;
+        }
+      }
+      
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
       
       .star-rating {
         display: flex;
-        gap: 2px;
+        gap: 8px;
         justify-content: center;
-        margin-bottom: 6px;
       }
       
       .star {
-        background: none;
-        border: none;
-        font-size: 1.2rem;
+        font-size: 28px;
         cursor: pointer;
-        color: #d1d5db;
-        transition: all 0.2s ease;
-        padding: 1px;
-        border-radius: 2px;
+        opacity: 0.7;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        animation: starBounce 0.5s ease-out;
+        animation-delay: calc(var(--star-index) * 0.1s);
       }
       
-      .star:hover,
-      .star.active {
-        color: #fbbf24;
-        transform: scale(1.1);
+      @media (max-width: 480px) {
+        .star {
+          font-size: 24px;
+        }
       }
       
-      .star.active {
-        animation: starGlow 0.3s ease;
+      .star:nth-child(1) { --star-index: 0; }
+      .star:nth-child(2) { --star-index: 1; }
+      .star:nth-child(3) { --star-index: 2; }
+      .star:nth-child(4) { --star-index: 3; }
+      .star:nth-child(5) { --star-index: 4; }
+      
+      @keyframes starBounce {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
       }
       
-      @keyframes starGlow {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1.1); }
+      .star:hover {
+        opacity: 1;
+        transform: scale(1.3) rotate(15deg);
+        filter: drop-shadow(0 4px 8px rgba(255, 255, 0, 0.5));
       }
       
-      .rating-message {
-        text-align: center;
-        color: #059669;
-        font-weight: 600;
-        animation: fadeIn 0.3s ease;
-      }
-      
-      .rating-message p {
-        margin: 0;
-        font-size: 0.7rem;
+      .star:active {
+        transform: scale(1.5) rotate(30deg);
       }
       
       /* Detailed Survey Popup Styles */
@@ -259,6 +436,15 @@
         position: relative;
         animation: slideIn 0.3s ease;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      @media (max-width: 480px) {
+        .survey-popup {
+          width: 95%;
+          padding: 20px;
+          border-radius: 12px;
+          max-height: 85vh;
+        }
       }
       
       @keyframes slideIn {
@@ -407,24 +593,67 @@
       
       .survey-thanks {
         text-align: center;
-        padding: 30px 20px;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 12px;
+        animation: thanksFadeIn 0.6s ease-out;
+      }
+      
+      @keyframes thanksFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
       
       .thanks-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: thanksIconBounce 1s ease-out;
+      }
+      
+      @keyframes thanksIconBounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
       }
       
       .survey-thanks h3 {
-        font-size: 1.3rem;
-        color: #1f2937;
-        margin-bottom: 8px;
+        font-size: 1.5rem;
+        color: #0f172a;
+        margin-bottom: 16px;
+        font-weight: 700;
       }
       
       .survey-thanks p {
-        color: #6b7280;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        color: #475569;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      
+      .thanks-message {
+        background: rgba(59, 130, 246, 0.1);
+        padding: 16px;
+        border-radius: 8px;
+        border-left: 4px solid #3b82f6;
+      }
+      
+      .thanks-message p {
+        color: #1e40af;
+        font-weight: 600;
+        margin: 0;
+        font-size: 1.1rem;
       }
       
       @keyframes fadeIn {
@@ -441,16 +670,26 @@
         }
         
         .rating-text {
-          font-size: 0.7rem;
+          font-size: 12px;
         }
         
         .star {
-          font-size: 1.1rem;
+          font-size: 20px;
         }
         
         .survey-popup {
           padding: 20px;
           margin: 20px;
+        }
+        
+        .test-reset-button {
+          top: 10px;
+          right: 10px;
+        }
+        
+        .test-reset-button button {
+          padding: 8px 12px;
+          font-size: 12px;
         }
       }
       
@@ -463,11 +702,11 @@
         }
         
         .rating-text {
-          font-size: 0.65rem;
+          font-size: 11px;
         }
         
         .star {
-          font-size: 1rem;
+          font-size: 18px;
         }
         
         .survey-popup {
@@ -477,115 +716,293 @@
     </style>
     
     <script>
-      // Star Rating Widget
-      let selectedRating = 0;
-      let hasRated = localStorage.getItem('collegeSparkRating') !== null;
-      
-      // 星の評価を設定
+      // 星評価ウィジェット
       function setRating(rating) {
-        if (hasRated) return; // 既に評価済みの場合は無効
-        
-        selectedRating = rating;
-        localStorage.setItem('collegeSparkRating', rating);
-        localStorage.setItem('collegeSparkRatingDate', new Date().toISOString());
-        
-        hasRated = true;
-        updateStarDisplay();
-        showThankYouMessage();
-      }
-      
-      // 星の表示を更新
-      function updateStarDisplay() {
+        // 星のアニメーション
         const stars = document.querySelectorAll('.star');
-        const savedRating = localStorage.getItem('collegeSparkRating');
-        const displayRating = savedRating || selectedRating;
-        
         stars.forEach((star, index) => {
-          const starRating = index + 1;
-          if (starRating <= displayRating) {
-            star.classList.add('active');
-          } else {
-            star.classList.remove('active');
-          }
-          
-          // 既に評価済みの場合は無効化
-          if (hasRated) {
-            star.style.cursor = 'default';
+          if (index < rating) {
+            star.style.color = '#FFD700';
+            star.style.transform = 'scale(1.5) rotate(360deg)';
+            setTimeout(() => {
+              star.style.transform = 'scale(1.2)';
+            }, 300);
           }
         });
-      }
-      
-      // お礼メッセージを表示
-      function showThankYouMessage() {
-        const message = document.getElementById('ratingMessage');
-        const text = document.querySelector('.rating-text');
         
-        text.style.display = 'none';
-        message.style.display = 'block';
+        // 評価メッセージ
+        const messages = [
+          '貴重なご意見ありがとうございます！',
+          'フィードバックありがとうございます！',
+          'ご評価ありがとうございます！',
+          '素晴らしい評価をありがとうございます！',
+          '最高評価をありがとうございます！🎉'
+        ];
         
-        // 2秒後に詳細アンケートを表示
+        // カスタムトースト通知
+        showToast(messages[rating - 1]);
+        
+        // 評価をLocalStorageに保存（即座に保存）
+        localStorage.setItem('collegeSparkRating', rating.toString());
+        localStorage.setItem('collegeSparkRatingDate', new Date().toISOString());
+        console.log('Rating saved to localStorage:', rating);
+        
+        // LocalStorageへの保存を確認
+        const savedRating = localStorage.getItem('collegeSparkRating');
+        console.log('Confirmed saved rating:', savedRating);
+        
+        // ウィジェットをフェードアウト
+        const widget = document.getElementById('ratingWidget');
+        widget.style.animation = 'fadeOut 0.5s ease-out forwards';
+        
         setTimeout(() => {
-          showDetailedSurvey();
-        }, 2000);
-        
-        // 5秒後にウィジェット全体を非表示
-        setTimeout(() => {
-          const widget = document.getElementById('ratingWidget');
+          widget.classList.add('hidden');
           widget.style.display = 'none';
-        }, 5000);
+          console.log('Widget hidden after rating');
+          // 詳細アンケートを表示
+          document.getElementById('detailedSurvey').style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }, 500);
       }
       
-      // 詳細アンケートを表示
-      function showDetailedSurvey() {
-        const detailedSurvey = localStorage.getItem('collegeSparkDetailedSurvey');
-        if (detailedSurvey) return; // 既に回答済み
+      // トースト通知を表示
+      function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        document.body.appendChild(toast);
         
-        document.getElementById('detailedSurvey').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          toast.classList.add('show');
+        }, 100);
+        
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+      
+      // アンケートウィジェットを閉じる
+      function closeSurveyWidget() {
+        // 即座にLocalStorageに保存
+        localStorage.setItem('collegeSparkSurveyClosed', 'true');
+        console.log('Survey closed flag saved to localStorage');
+        
+        const widget = document.getElementById('ratingWidget');
+        widget.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+          widget.classList.add('hidden');
+          widget.style.display = 'none';
+          console.log('Widget closed by user');
+        }, 300);
+        
+        // LocalStorageへの保存を確認
+        const savedClosed = localStorage.getItem('collegeSparkSurveyClosed');
+        console.log('Confirmed survey closed flag:', savedClosed);
       }
       
       // 詳細アンケートを閉じる
       function closeDetailedSurvey() {
+        const currentStatus = localStorage.getItem('collegeSparkDetailedSurvey');
+        
         document.getElementById('detailedSurvey').style.display = 'none';
         document.body.style.overflow = '';
-        localStorage.setItem('collegeSparkDetailedSurvey', 'skipped');
+        
+        // まだ回答していない場合（スキップの場合）
+        if (!currentStatus || currentStatus === 'skipped') {
+          localStorage.setItem('collegeSparkDetailedSurvey', 'skipped');
+          showToast('💭 お時間をいただき、ありがとうございました！');
+        }
       }
       
-      // 星のホバー効果
-      document.addEventListener('DOMContentLoaded', function() {
-        const stars = document.querySelectorAll('.star');
+      // アンケート関連のLocalStorageデータのみを削除（開発・テスト用）
+      function clearSurveyData() {
+        console.log('Clearing all survey data...');
+        localStorage.removeItem('collegeSparkRating');
+        localStorage.removeItem('collegeSparkRatingDate');
+        localStorage.removeItem('collegeSparkSurveyClosed');
+        localStorage.removeItem('collegeSparkDetailedSurvey');
+        localStorage.removeItem('collegeSparkDetailedSurveyData');
         
+        // ウィジェットを即座に表示
+        const widget = document.getElementById('ratingWidget');
+        widget.classList.remove('hidden');
+        widget.style.display = 'block';
+        
+        console.log('Survey data cleared and widget restored.');
+      }
+      
+      // 強制的にウィジェットを表示（デバッグ用）
+      function forceShowWidget() {
+        let widget = document.getElementById('ratingWidget');
+        
+        if (!widget) {
+          console.log('Widget not found, creating new one...');
+          // ウィジェットが存在しない場合は作成
+          const widgetHTML = `
+            <div id="ratingWidget" class="rating-widget" style="display: block;">
+              <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
+              <div class="rating-content">
+                <div class="emoji-icon">🎆</div>
+                <p class="rating-text">✨ ご意見をお聞かせください！</p>
+                <div class="star-rating">
+                  <span class="star" onclick="setRating(1)">⭐</span>
+                  <span class="star" onclick="setRating(2)">⭐</span>
+                  <span class="star" onclick="setRating(3)">⭐</span>
+                  <span class="star" onclick="setRating(4)">⭐</span>
+                  <span class="star" onclick="setRating(5)">⭐</span>
+                </div>
+                <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
+              </div>
+            </div>
+          `;
+          document.body.insertAdjacentHTML('beforeend', widgetHTML);
+          widget = document.getElementById('ratingWidget');
+        } else {
+          // 既存ウィジェットを表示
+          widget.style.display = 'block';
+          widget.classList.remove('hidden');
+        }
+        
+        // ホバーエフェクトを設定
+        setupStarHoverEffects();
+        
+        showToast('👁️ アンケートを強制表示しました');
+        console.log('✅ Widget forced to show');
+      }
+      
+      // 強制的にウィジェットを非表示（デバッグ用）
+      function forceHideWidget() {
+        const widget = document.getElementById('ratingWidget');
+        widget.classList.add('hidden');
+        widget.classList.remove('show');
+        console.log('Widget forced to hide');
+      }
+      
+      // デバッグ用：なぜウィジェットが表示されないかを詳しく調べる
+      function debugWidgetVisibility() {
+        console.log('🔍 === WIDGET VISIBILITY DEBUG ===');
+        
+        const widget = document.getElementById('ratingWidget');
+        console.log('Widget element exists:', !!widget);
+        
+        if (widget) {
+          console.log('Widget display style:', widget.style.display);
+          console.log('Widget computed display:', window.getComputedStyle(widget).display);
+          console.log('Widget classes:', widget.className);
+        }
+        
+        const status = checkSurveyStatus();
+        const hasRated = status.rating !== null && status.rating !== '';
+        const wasClosedByUser = status.surveyClosed === 'true';
+        
+        console.log('🎯 Visibility Decision:');
+        console.log('- Has rated (should hide):', hasRated);
+        console.log('- Was closed by user (should hide):', wasClosedByUser);
+        console.log('- Should be visible:', !hasRated && !wasClosedByUser);
+        
+        return {
+          widgetExists: !!widget,
+          shouldBeVisible: !hasRated && !wasClosedByUser,
+          actuallyVisible: widget ? window.getComputedStyle(widget).display !== 'none' : false
+        };
+      }
+      
+      // 初期化処理を独立した関数として定義
+      function initializeSurveyWidget() {
+        console.log('🔍 Initializing survey widget...');
+        
+        // LocalStorageの状態を確認
+        const status = checkSurveyStatus();
+        
+        // 評価済みまたは明示的に閉じられた場合のみ非表示
+        const hasRated = status.rating !== null && status.rating !== '';
+        const wasClosedByUser = status.surveyClosed === 'true';
+        
+        // 詳細アンケートのスキップは星評価とは無関係なので除外
+        const widget = document.getElementById('ratingWidget');
+        
+        console.log('=== Widget Display Logic ===');
+        console.log('Widget element found:', !!widget);
+        console.log('Rating value:', status.rating);
+        console.log('Survey closed by user:', status.surveyClosed);
+        console.log('Has rated:', hasRated);
+        console.log('Was closed by user:', wasClosedByUser);
+        console.log('Widget should be hidden:', hasRated || wasClosedByUser);
+        
+        if (!widget) {
+          console.error('❌ Widget element not found!');
+          return false;
+        }
+        
+        // 評価済みまたは明示的に閉じられた場合のみ非表示
+        if (hasRated || wasClosedByUser) {
+          console.log('❌ Hiding widget permanently...');
+          widget.style.display = 'none';
+          return false; // ウィジェットは表示されない
+        }
+        
+        console.log('✅ Showing widget (not rated and not closed by user)...');
+        widget.style.display = 'block';
+        widget.classList.remove('hidden');
+        widget.classList.add('show');
+        
+        // 強制的にスタイルを再適用
+        widget.style.background = 'linear-gradient(135deg, rgba(255, 146, 36, 0.7) 0%, rgba(255, 122, 0, 0.7) 100%)';
+        
+        console.log('✅ Widget display set to block');
+        
+        // 星のホバーエフェクトを設定
+        setupStarHoverEffects();
+        
+        // 詳細アンケートフォームの処理も設定
+        setupDetailedSurveyForm();
+        
+        return true; // ウィジェットが表示された
+      }
+      
+      // 星のホバーエフェクトを設定する関数
+      function setupStarHoverEffects() {
+        const stars = document.querySelectorAll('.star');
         stars.forEach((star, index) => {
           star.addEventListener('mouseenter', function() {
-            if (hasRated) return;
-            
             stars.forEach((s, i) => {
               if (i <= index) {
-                s.style.color = '#fbbf24';
+                s.style.color = '#FFD700';
+                s.style.opacity = '1';
               } else {
-                s.style.color = '#d1d5db';
+                s.style.color = '';
+                s.style.opacity = '0.7';
               }
             });
           });
-          
-          star.addEventListener('mouseleave', function() {
-            if (hasRated) return;
-            updateStarDisplay();
-          });
         });
         
-        // 既に評価済みかチェック
-        if (hasRated) {
-          const widget = document.getElementById('ratingWidget');
-          widget.style.display = 'none';
+        // マウスが離れたら元に戻す
+        document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+          stars.forEach(star => {
+            star.style.color = '';
+            star.style.opacity = '0.7';
+          });
+        });
+      }
+      
+      // 詳細アンケートフォームの処理を設定する関数
+      function setupDetailedSurveyForm() {
+        const detailedForm = document.getElementById('detailedSurveyForm');
+        
+        // 既にイベントリスナーが設定されている場合はスキップ
+        if (detailedForm.dataset.listenerAdded === 'true') {
+          console.log('📋 Detailed survey form listener already added, skipping...');
+          return;
         }
         
-        // 詳細アンケートフォーム送信処理
-        const detailedForm = document.getElementById('detailedSurveyForm');
+        console.log('📋 Setting up detailed survey form...');
+        
         detailedForm.addEventListener('submit', function(e) {
           e.preventDefault();
+          console.log('📋 Detailed survey form submitted');
           
-          // フォームデータを収集
           const formData = new FormData(detailedForm);
           const data = {
             purpose: formData.get('purpose'),
@@ -607,36 +1024,197 @@
           .then(result => {
             if (result.status === 'success') {
               localStorage.setItem('collegeSparkDetailedSurvey', 'completed');
-              console.log('Survey data saved successfully');
+              console.log('📋 Survey data saved successfully');
             } else {
-              console.error('Survey save failed:', result.message);
+              console.error('📋 Survey save failed:', result.message);
+              localStorage.setItem('collegeSparkDetailedSurvey', 'completed');
             }
           })
           .catch(error => {
-            console.error('Survey submission error:', error);
-            // フォールバック：ローカルストレージに保存
+            console.error('📋 Survey submission error:', error);
             localStorage.setItem('collegeSparkDetailedSurveyData', JSON.stringify(data));
             localStorage.setItem('collegeSparkDetailedSurvey', 'completed');
           });
           
+          // お礼トースト通知を表示
+          showToast('🎉 詳細アンケートにご回答いただき、ありがとうございました！');
+          
           // Thank youメッセージ表示
+          console.log('📋 Showing thank you message...');
           detailedForm.style.display = 'none';
           document.querySelector('.survey-header').style.display = 'none';
           document.querySelector('.survey-thanks').style.display = 'block';
           
-          // 3秒後に自動的に閉じる
+          // アンケート完了をマーク
+          localStorage.setItem('collegeSparkDetailedSurvey', 'completed');
+          
+          // 6秒後に自動的に閉じる
           setTimeout(() => {
             closeDetailedSurvey();
-          }, 3000);
+            showToast('✨ 貴重なご意見をありがとうございました！');
+          }, 6000);
         });
         
-        // 背景クリックで詳細アンケートを閉じる
-        document.getElementById('detailedSurvey').addEventListener('click', function(e) {
-          if (e.target === this) {
-            closeDetailedSurvey();
-          }
+        // リスナーが追加されたことをマーク
+        detailedForm.dataset.listenerAdded = 'true';
+        console.log('📋 Detailed survey form setup complete');
+        
+        // 背景クリックで詳細アンケートを閉じる処理も設定
+        const detailedSurvey = document.getElementById('detailedSurvey');
+        if (detailedSurvey.dataset.backgroundListenerAdded !== 'true') {
+          detailedSurvey.addEventListener('click', function(e) {
+            if (e.target === this) {
+              closeDetailedSurvey();
+            }
+          });
+          detailedSurvey.dataset.backgroundListenerAdded = 'true';
+        }
+      }
+      
+      // テスト用リセット機能（ブラウザボタン用）
+      function resetSurveyForTesting() {
+        console.log('🔄 Testing: Resetting survey data...');
+        
+        // 既存ウィジェットを削除
+        const existingWidget = document.getElementById('ratingWidget');
+        if (existingWidget) {
+          existingWidget.remove();
+          console.log('🗑️ Removed existing widget');
+        }
+        
+        // 詳細アンケートも閉じる
+        const detailedSurvey = document.getElementById('detailedSurvey');
+        if (detailedSurvey) {
+          detailedSurvey.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+        
+        // LocalStorageを完全にクリア
+        const keysToRemove = [
+          'collegeSparkRating',
+          'collegeSparkRatingDate', 
+          'collegeSparkSurveyClosed',
+          'collegeSparkDetailedSurvey',
+          'collegeSparkDetailedSurveyData'
+        ];
+        
+        keysToRemove.forEach(key => {
+          localStorage.removeItem(key);
+          console.log(`🧹 Removed: ${key}`);
         });
+        
+        // 初期化フラグをリセット
+        window.surveyWidgetInitialized = false;
+        
+        // 新しいウィジェットを作成
+        const widgetHTML = `
+          <div id="ratingWidget" class="rating-widget" style="display: none; background: linear-gradient(135deg, rgba(255, 146, 36, 0.7) 0%, rgba(255, 122, 0, 0.7) 100%);">
+            <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
+            <div class="rating-content">
+              <div class="emoji-icon">🎆</div>
+              <p class="rating-text">✨ ご意見をお聞かせください！</p>
+              <div class="star-rating">
+                <span class="star" onclick="setRating(1)">⭐</span>
+                <span class="star" onclick="setRating(2)">⭐</span>
+                <span class="star" onclick="setRating(3)">⭐</span>
+                <span class="star" onclick="setRating(4)">⭐</span>
+                <span class="star" onclick="setRating(5)">⭐</span>
+              </div>
+              <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
+            </div>
+          </div>
+        `;
+        
+        // HTMLを挿入
+        document.body.insertAdjacentHTML('beforeend', widgetHTML);
+        console.log('✨ Created new widget');
+        
+        // 少し待ってから初期化処理を実行
+        setTimeout(() => {
+          const widgetShown = initializeSurveyWidget();
+          
+          // トースト通知
+          if (widgetShown) {
+            showToast('🔄 アンケートがリセットされました！');
+          } else {
+            showToast('❌ リセットに失敗しました');
+          }
+          
+          console.log('✅ Survey reset complete - widget restored:', widgetShown);
+        }, 100);
+      }
+      
+      // LocalStorageの全状態を確認
+      function checkSurveyStatus() {
+        const status = {
+          rating: localStorage.getItem('collegeSparkRating'),
+          ratingDate: localStorage.getItem('collegeSparkRatingDate'),
+          surveyClosed: localStorage.getItem('collegeSparkSurveyClosed'),
+          detailedSurvey: localStorage.getItem('collegeSparkDetailedSurvey'),
+          detailedSurveyData: localStorage.getItem('collegeSparkDetailedSurveyData')
+        };
+        console.log('=== Survey LocalStorage Status ===');
+        console.log('Rating:', status.rating);
+        console.log('Rating Date:', status.ratingDate);
+        console.log('Survey Closed:', status.surveyClosed);
+        console.log('Detailed Survey:', status.detailedSurvey);
+        console.log('Detailed Survey Data:', status.detailedSurveyData);
+        
+        // 値の詳細分析
+        console.log('--- Value Analysis ---');
+        console.log('rating !== null:', status.rating !== null);
+        console.log('rating !== "":', status.rating !== '');
+        console.log('surveyClosed === "true":', status.surveyClosed === 'true');
+        
+        return status;
+      }
+      
+      // 初期化フラグ
+      window.surveyWidgetInitialized = false;
+      
+      // ページ読み込み時の処理
+      function initializeOnLoad() {
+        console.log('📄 Starting initialization...');
+        const result = initializeSurveyWidget();
+        console.log('📄 Initialization result:', result);
+        return result;
+      }
+      
+      // 複数の方法で初期化を試行
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeOnLoad);
+      } else {
+        // DOM already loaded
+        console.log('📄 DOM already loaded, initializing immediately...');
+        initializeOnLoad();
+      }
+      
+      // 追加の安全策：windowのloadイベントでも実行
+      window.addEventListener('load', function() {
+        console.log('📄 Window load event - checking if widget is visible...');
+        const widget = document.getElementById('ratingWidget');
+        if (widget && window.getComputedStyle(widget).display === 'none') {
+          console.log('📄 Widget still hidden, re-initializing...');
+          initializeOnLoad();
+        }
       });
+      
+      // さらなる安全策：タイマーでチェック
+      setTimeout(() => {
+        const widget = document.getElementById('ratingWidget');
+        if (widget && window.getComputedStyle(widget).display === 'none') {
+          const status = checkSurveyStatus();
+          const hasRated = status.rating !== null && status.rating !== '';
+          const wasClosedByUser = status.surveyClosed === 'true';
+          
+          if (!hasRated && !wasClosedByUser) {
+            console.log('⏰ Timer check: Widget should be visible but is hidden, forcing display...');
+            widget.style.display = 'block';
+          }
+        }
+      }, 1000);
+      
+      // 古いDOMContentLoadedリスナーは削除済み
     </script>
   </body>
 </html>

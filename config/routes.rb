@@ -21,10 +21,31 @@ Rails.application.routes.draw do
   
   # Survey routes
   post "surveys" => "surveys#create"
-  get "admin/surveys" => "surveys#admin"
   
-  # Admin user management
-  get "admin/users" => "admin/users#index"
+  # Admin authentication routes
+  get "admin/login" => "admin/sessions#new", as: :admin_login
+  post "admin/login" => "admin/sessions#create"
+  delete "admin/logout" => "admin/sessions#destroy", as: :admin_logout
+  
+  # Admin setup routes
+  get "admin/setup" => "admin/setup#show", as: :admin_setup
+  post "admin/setup" => "admin/setup#create"
+  
+  # Admin dashboard
+  get "admin" => "admin/dashboard#index", as: :admin_dashboard
+  get "admin/dashboard" => "admin/dashboard#index"
+  
+  # Admin management routes
+  namespace :admin do
+    resources :users, only: [:index, :show, :destroy]
+    resources :conditions, only: [:index, :show, :edit, :update, :destroy]
+    resources :surveys, only: [:index, :show, :destroy] do
+      collection do
+        delete :destroy_all
+        get :export_csv
+      end
+    end
+  end
 
   get "terms" => "home#terms"
 
@@ -96,10 +117,7 @@ Rails.application.routes.draw do
   get 'debug/db_status', to: 'debug#db_status'
   get 'debug/manual_import', to: 'debug#manual_import'
   
-  # 一時的なセットアップ用ルート（セットアップ完了後は削除）
-  get '/admin/setup', to: 'admin#setup_data'
-  get '/admin/status', to: 'admin#status'
-  get '/admin/import', to: 'admin#import_bulk'
+  # 旧セットアップルート（削除済み）
 
   get 'result/:id', to: 'conditions#show', as: :conditions
   get '*unmatched_route', to: 'conditions#fallback_page'

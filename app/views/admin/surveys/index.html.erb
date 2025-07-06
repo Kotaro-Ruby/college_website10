@@ -1,0 +1,115 @@
+<h2>アンケート管理</h2>
+
+<div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 2rem;">
+  <div class="stat-card">
+    <div class="stat-number"><%= @total_responses %></div>
+    <div class="stat-label">総回答数</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number"><%= @responses_this_week %></div>
+    <div class="stat-label">今週の回答</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number"><%= @responses_this_month %></div>
+    <div class="stat-label">今月の回答</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number">
+      <% if @average_rating %>
+        <%= number_with_precision(@average_rating, precision: 1) %>
+      <% else %>
+        N/A
+      <% end %>
+    </div>
+    <div class="stat-label">平均評価</div>
+  </div>
+</div>
+
+<div style="margin-bottom: 2rem;">
+  <h3>評価分布</h3>
+  <% if @rating_distribution.any? %>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <% @rating_distribution.each do |rating, count| %>
+        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; text-align: center;">
+          <div style="font-size: 1.2rem; font-weight: bold;"><%= rating %>⭐</div>
+          <div style="color: #6c757d;"><%= count %>件</div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p style="color: #6c757d;">評価データがありません</p>
+  <% end %>
+</div>
+
+<div style="margin-bottom: 2rem;">
+  <h3>利用目的分布</h3>
+  <% if @purpose_distribution.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>利用目的</th>
+          <th>回答数</th>
+          <th>割合</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @purpose_distribution.each do |purpose, count| %>
+          <tr>
+            <td><%= purpose %></td>
+            <td><%= count %></td>
+            <td><%= number_to_percentage((count.to_f / @total_responses * 100), precision: 1) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style="color: #6c757d;">利用目的データがありません</p>
+  <% end %>
+</div>
+
+<div style="margin-bottom: 2rem;">
+  <%= link_to "全データ削除", admin_surveys_destroy_all_path, method: :delete, 
+              class: "btn btn-danger",
+              confirm: "全てのアンケートデータを削除しますか？この操作は取り消せません。" %>
+</div>
+
+<h3>最近の回答</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>評価</th>
+      <th>利用目的</th>
+      <th>フィードバック</th>
+      <th>回答日時</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recent_responses.each do |response| %>
+      <tr>
+        <td>
+          <% response.rating.times do %>⭐<% end %>
+          (<%= response.rating %>/5)
+        </td>
+        <td><%= response.purpose %></td>
+        <td>
+          <% if response.feedback.present? %>
+            <%= truncate(response.feedback, length: 50) %>
+          <% else %>
+            <span style="color: #6c757d;">なし</span>
+          <% end %>
+        </td>
+        <td><%= response.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td>
+          <%= link_to "詳細", admin_survey_path(response), class: "btn btn-secondary", style: "font-size: 0.8rem; padding: 0.25rem 0.5rem;" %>
+          <%= link_to "削除", admin_survey_path(response), method: :delete, 
+                      class: "btn btn-danger", style: "font-size: 0.8rem; padding: 0.25rem 0.5rem;",
+                      confirm: "このアンケート回答を削除しますか？" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

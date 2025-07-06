@@ -941,6 +941,94 @@ function closeStateRequiredPopup() {
     }
 }
 
+// 大学名入力と詳細条件の相互無効化機能
+function setupMutualExclusion() {
+    const collegeNameInput = document.getElementById('college-name-input');
+    const conditionInputs = document.querySelectorAll('.form-select, input[type="checkbox"], input[type="radio"]');
+    const nameSearchButton = document.getElementById('name-search-button');
+    const conditionSearchButton = document.getElementById('search-button');
+    const allConditionBoxes = document.querySelectorAll('.box, .box1');
+    
+    // 大学名入力時の処理
+    collegeNameInput.addEventListener('input', function() {
+        const hasValue = this.value.trim().length > 0;
+        
+        // 詳細条件を有効/無効化
+        conditionInputs.forEach(input => {
+            input.disabled = hasValue;
+            if (hasValue) {
+                input.classList.add('disabled-field');
+                const label = input.closest('label');
+                if (label) label.classList.add('disabled-label');
+            } else {
+                input.classList.remove('disabled-field');
+                const label = input.closest('label');
+                if (label) label.classList.remove('disabled-label');
+            }
+        });
+        
+        // 条件検索ボタンを有効/無効化
+        conditionSearchButton.disabled = hasValue;
+        if (hasValue) {
+            conditionSearchButton.classList.add('disabled-button');
+        } else {
+            conditionSearchButton.classList.remove('disabled-button');
+        }
+        
+        // 条件ボックスの見た目を変更
+        allConditionBoxes.forEach(box => {
+            if (hasValue) {
+                box.style.opacity = '0.5';
+                box.style.pointerEvents = 'none';
+            } else {
+                box.style.opacity = '1';
+                box.style.pointerEvents = 'auto';
+            }
+        });
+    });
+    
+    // 詳細条件入力時の処理
+    function checkConditionInputs() {
+        let hasCondition = false;
+        
+        // 州が選択されているかチェック
+        const stateSelect = document.getElementById('stateSelect');
+        if (stateSelect.value !== '選択してください') {
+            hasCondition = true;
+        }
+        
+        // その他の条件がチェックされているか確認
+        const checkedInputs = document.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked');
+        if (checkedInputs.length > 0) {
+            hasCondition = true;
+        }
+        
+        // 大学名入力を有効/無効化
+        collegeNameInput.disabled = hasCondition;
+        nameSearchButton.disabled = hasCondition;
+        
+        if (hasCondition) {
+            collegeNameInput.classList.add('disabled-field');
+            nameSearchButton.classList.add('disabled-button');
+            collegeNameInput.placeholder = '詳細条件検索中は大学名検索は使用できません';
+        } else {
+            collegeNameInput.classList.remove('disabled-field');
+            nameSearchButton.classList.remove('disabled-button');
+            collegeNameInput.placeholder = '例：Harvard University, Stanford University...';
+        }
+    }
+    
+    // 全ての条件入力にイベントリスナーを追加
+    conditionInputs.forEach(input => {
+        input.addEventListener('change', checkConditionInputs);
+    });
+}
+
+// ページ読み込み時に相互無効化機能を設定
+document.addEventListener('DOMContentLoaded', function() {
+    setupMutualExclusion();
+});
+
 // 検索機能
 document.getElementById('search-button').addEventListener('click', function () {
     const stateValue = document.getElementById('stateSelect').value;

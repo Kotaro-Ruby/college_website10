@@ -1,0 +1,118 @@
+<h2>ダッシュボード</h2>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number"><%= @total_users %></div>
+    <div class="stat-label">
+      総ユーザー数
+      <% if @users_this_week > 0 %>
+        <br><small style="color: #28a745;">+<%= @users_this_week %> 今週</small>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number"><%= @total_colleges %></div>
+    <div class="stat-label">登録大学数</div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number"><%= @total_survey_responses %></div>
+    <div class="stat-label">
+      アンケート回答数
+      <% if @survey_responses_this_week > 0 %>
+        <br><small style="color: #28a745;">+<%= @survey_responses_this_week %> 今週</small>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-number"><%= @total_admins %></div>
+    <div class="stat-label">管理者数</div>
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+  <div>
+    <h3>人気の大学（お気に入り登録数）</h3>
+    <% if @popular_colleges.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>大学名</th>
+            <th>お気に入り数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @popular_colleges.each do |college| %>
+            <tr>
+              <td><%= college.college %></td>
+              <td><%= college.favorites_count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p style="color: #6c757d;">まだお気に入り登録がありません</p>
+    <% end %>
+  </div>
+  
+  <div>
+    <h3>最近のユーザー登録</h3>
+    <% if @recent_users.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>登録日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recent_users.each do |user| %>
+            <tr>
+              <td><%= user.username %></td>
+              <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p style="color: #6c757d;">ユーザー登録がありません</p>
+    <% end %>
+  </div>
+</div>
+
+<div style="margin-top: 2rem;">
+  <h3>最近のアンケート回答</h3>
+  <% if @recent_surveys.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>評価</th>
+          <th>利用目的</th>
+          <th>回答日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recent_surveys.each do |survey| %>
+          <tr>
+            <td>
+              <% survey.rating.times do %>⭐<% end %>
+              (<%= survey.rating %>/5)
+            </td>
+            <td><%= survey.purpose %></td>
+            <td><%= survey.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style="color: #6c757d;">アンケート回答がありません</p>
+  <% end %>
+</div>
+
+<div style="margin-top: 2rem; text-align: center;">
+  <p style="color: #6c757d;">
+    <small>最終更新: <%= Time.current.strftime("%Y-%m-%d %H:%M:%S") %></small>
+  </p>
+</div>

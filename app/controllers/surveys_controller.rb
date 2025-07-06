@@ -17,25 +17,9 @@ class SurveysController < ApplicationController
     render json: { status: 'error', message: 'サーバーエラーが発生しました' }, status: 500
   end
   
-  def admin
-    redirect_to root_path unless admin_access?
-    
-    @total_responses = SurveyResponse.count
-    @average_rating = SurveyResponse.average_rating
-    @rating_distribution = SurveyResponse.rating_distribution
-    @recent_responses = SurveyResponse.recent.limit(50)
-    @purpose_distribution = SurveyResponse.where.not(purpose: [nil, '']).group(:purpose).count
-  end
-  
   private
   
   def survey_params
     params.permit(:rating, :purpose, :feedback)
-  end
-  
-  def admin_access?
-    # 簡単な管理者認証（本番環境では適切な認証を実装してください）
-    params[:admin_key] == 'college_spark_admin_2025' || 
-    request.headers['X-Admin-Key'] == 'college_spark_admin_2025'
   end
 end

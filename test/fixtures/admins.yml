@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  email: MyString
+  password_digest: MyString
+  role: MyString
+  last_sign_in_at: 2025-07-06 22:51:59
+  session_token: MyString
+
+two:
+  username: MyString
+  email: MyString
+  password_digest: MyString
+  role: MyString
+  last_sign_in_at: 2025-07-06 22:51:59
+  session_token: MyString

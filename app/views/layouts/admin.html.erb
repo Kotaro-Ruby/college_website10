@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College Finder - 管理画面</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  
+  <style>
+    .admin-header {
+      background: #1a1a1a;
+      color: white;
+      padding: 1rem;
+      border-bottom: 3px solid #007bff;
+    }
+    
+    .admin-nav {
+      background: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      padding: 0.5rem 1rem;
+    }
+    
+    .admin-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .admin-nav a {
+      color: #495057;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .admin-nav a:hover {
+      background: #e9ecef;
+    }
+    
+    .admin-nav a.active {
+      background: #007bff;
+      color: white;
+    }
+    
+    .admin-content {
+      padding: 2rem;
+    }
+    
+    .admin-footer {
+      background: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+      padding: 1rem;
+      text-align: center;
+      color: #6c757d;
+      margin-top: 2rem;
+    }
+    
+    .alert {
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+    }
+    
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    
+    .alert-danger {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    
+    .alert-warning {
+      color: #856404;
+      background-color: #fff3cd;
+      border-color: #ffeeba;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #007bff;
+    }
+    
+    .stat-label {
+      color: #6c757d;
+      margin-top: 0.5rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+    
+    .btn-primary:hover {
+      background: #0056b3;
+      border-color: #0056b3;
+    }
+    
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+      border-color: #dc3545;
+    }
+    
+    .btn-danger:hover {
+      background: #c82333;
+      border-color: #c82333;
+    }
+    
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+      border-color: #6c757d;
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6268;
+      border-color: #5a6268;
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #dee2e6;
+      text-align: left;
+    }
+    
+    .table th {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+    
+    .table-striped tbody tr:nth-of-type(odd) {
+      background: #f8f9fa;
+    }
+    
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    
+    .form-control:focus {
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="admin-header">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h1 style="margin: 0;">College Finder 管理画面</h1>
+      <div>
+        <% if admin_logged_in? %>
+          <span>ようこそ、<%= current_admin.username %>さん</span>
+          <%= link_to "ログアウト", admin_logout_path, method: :delete, 
+                      style: "color: #ffc107; margin-left: 1rem;" %>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <% if admin_logged_in? %>
+    <nav class="admin-nav">
+      <ul>
+        <li><%= link_to "ダッシュボード", admin_dashboard_path %></li>
+        <li><%= link_to "大学管理", admin_conditions_path %></li>
+        <li><%= link_to "ユーザー管理", admin_users_path %></li>
+        <li><%= link_to "アンケート管理", admin_surveys_path %></li>
+      </ul>
+    </nav>
+  <% end %>
+
+  <main class="admin-content">
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
+    
+    <% flash.each do |type, message| %>
+      <% next if %w[notice alert].include?(type) %>
+      <div class="alert alert-<%= type == 'error' ? 'danger' : type %>">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </main>
+
+  <footer class="admin-footer">
+    <p>&copy; 2025 College Finder 管理画面</p>
+  </footer>
+</body>
+</html>

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
   
-  helper_method :current_user, :logged_in?, :recently_viewed_colleges
+  helper_method :current_user, :logged_in?, :recently_viewed_colleges, :current_admin, :admin_logged_in?
   
   private
   
@@ -49,5 +49,26 @@ class ApplicationController < ActionController::Base
   # セッションを一時的にクリアして6校制限をテストするためのヘルパー
   def clear_recently_viewed_for_testing
     session[:recently_viewed] = nil if params[:clear_session] == 'true'
+  end
+  
+  # 管理者認証機能
+  def current_admin
+    @current_admin ||= begin
+      if session[:admin_id] && session[:admin_session_token]
+        admin = Admin.find_by(id: session[:admin_id])
+        # セッショントークンの検証
+        if admin && admin.session_token == session[:admin_session_token]
+          admin
+        else
+          nil
+        end
+      else
+        nil
+      end
+    end
+  end
+  
+  def admin_logged_in?
+    !!current_admin
   end
 end

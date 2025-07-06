@@ -1,0 +1,53 @@
+<div style="max-width: 500px; margin: 4rem auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+  <h2 style="text-align: center; margin-bottom: 1rem; color: #333;">初期管理者セットアップ</h2>
+  
+  <div style="background: #e7f3ff; border: 1px solid #b3d9ff; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
+    <p style="margin: 0; color: #0c5460;">
+      <strong>初回セットアップ</strong><br>
+      管理者アカウントが作成されていません。初期管理者を作成してください。
+    </p>
+  </div>
+  
+  <%= form_with model: @admin, url: admin_setup_path, local: true do |form| %>
+    <% if @admin&.errors&.any? %>
+      <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+        <h4>エラーが発生しました：</h4>
+        <ul style="margin: 0.5rem 0 0 1.5rem;">
+          <% @admin.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="form-group">
+      <%= form.label :username, "ユーザー名" %>
+      <%= form.text_field :username, class: "form-control", required: true, autofocus: true %>
+      <small style="color: #6c757d;">3文字以上30文字以下で入力してください</small>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :email, "メールアドレス" %>
+      <%= form.email_field :email, class: "form-control", required: true %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :password, "パスワード" %>
+      <%= form.password_field :password, class: "form-control", required: true %>
+      <small style="color: #6c757d;">8文字以上で入力してください</small>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :password_confirmation, "パスワード（確認）" %>
+      <%= form.password_field :password_confirmation, class: "form-control", required: true %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.submit "初期管理者を作成", class: "btn btn-primary", style: "width: 100%;" %>
+    </div>
+  <% end %>
+  
+  <div style="text-align: center; margin-top: 2rem; color: #6c757d;">
+    <small>この操作は一度だけ実行されます</small>
+  </div>
+</div>

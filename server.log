@@ -1,229 +1,35 @@
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/version.rb:8: warning: already initialized constant RDoc::VERSION
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/version.rb:8: warning: previous definition of VERSION was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/version.rb:8: warning: previous definition of VERSION was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:68: warning: already initialized constant RDoc::VISIBILITIES
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:68: warning: previous definition of VISIBILITIES was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:68: warning: previous definition of VISIBILITIES was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:74: warning: already initialized constant RDoc::DOT_DOC_FILENAME
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:74: warning: previous definition of DOT_DOC_FILENAME was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:74: warning: previous definition of DOT_DOC_FILENAME was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:79: warning: already initialized constant RDoc::GENERAL_MODIFIERS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:79: warning: previous definition of GENERAL_MODIFIERS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:79: warning: previous definition of GENERAL_MODIFIERS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:84: warning: already initialized constant RDoc::CLASS_MODIFIERS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:84: warning: previous definition of CLASS_MODIFIERS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:84: warning: previous definition of CLASS_MODIFIERS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:89: warning: already initialized constant RDoc::ATTR_MODIFIERS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:89: warning: previous definition of ATTR_MODIFIERS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:89: warning: previous definition of ATTR_MODIFIERS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:94: warning: already initialized constant RDoc::CONSTANT_MODIFIERS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:94: warning: previous definition of CONSTANT_MODIFIERS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:94: warning: previous definition of CONSTANT_MODIFIERS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc.rb:99: warning: already initialized constant RDoc::METHOD_MODIFIERS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc.rb:99: warning: previous definition of METHOD_MODIFIERS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc.rb:99: warning: previous definition of METHOD_MODIFIERS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown.rb:257: warning: already initialized constant RDoc::Markdown::KpegPosInfo
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown.rb:257: warning: previous definition of KpegPosInfo was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown.rb:257: warning: previous definition of KpegPosInfo was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown/entities.rb:5: warning: already initialized constant RDoc::Markdown::HTML_ENTITIES
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown/entities.rb:5: warning: previous definition of HTML_ENTITIES was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown/entities.rb:5: warning: previous definition of HTML_ENTITIES was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown/literals.rb:86: warning: already initialized constant RDoc::Markdown::Literals::KpegPosInfo
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown/literals.rb:86: warning: previous definition of KpegPosInfo was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown/literals.rb:86: warning: previous definition of KpegPosInfo was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown/literals.rb:446: warning: already initialized constant RDoc::Markdown::Literals::Rules
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown/literals.rb:446: warning: previous definition of Rules was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown/literals.rb:446: warning: previous definition of Rules was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown.rb:584: warning: already initialized constant RDoc::Markdown::EXTENSIONS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown.rb:584: warning: previous definition of EXTENSIONS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown.rb:584: warning: previous definition of EXTENSIONS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown.rb:589: warning: already initialized constant RDoc::Markdown::DEFAULT_EXTENSIONS
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown.rb:589: warning: previous definition of DEFAULT_EXTENSIONS was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown.rb:589: warning: previous definition of DEFAULT_EXTENSIONS was here
 /Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.10.0/lib/rdoc/markdown.rb:16544: warning: already initialized constant RDoc::Markdown::Rules
-/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.0/lib/rdoc/markdown.rb:16556: warning: previous definition of Rules was here
+/Users/kotaro/.rbenv/versions/3.3.8/lib/ruby/gems/3.3.0/gems/rdoc-6.14.1/lib/rdoc/markdown.rb:16556: warning: previous definition of Rules was here
 => Booting Puma
 => Rails 8.0.1 application starting in development 
 => Run `bin/rails server --help` for more startup options
-Puma starting in single mode...
-* Puma version: 6.5.0 ("Sky's Version")
-* Ruby version: ruby 3.3.8 (2025-04-09 revision b200bad6cd) [arm64-darwin24]
-*  Min threads: 3
-*  Max threads: 3
-*  Environment: development
-*          PID: 21021
-* Listening on http://127.0.0.1:3000
-* Listening on http://[::1]:3000
-Use Ctrl-C to stop
-Started GET "/" for ::1 at 2025-06-28 12:46:57 +0900
-  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CollegeWebsite'*/[0m
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (1.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (64.1ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 83.8ms | GC: 1.4ms)
-Importmap skipped missing path: application.js
-Importmap skipped missing path: application.js
-  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.2ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 86.6ms | GC: 1.4ms)
-Completed 200 OK in 137ms (Views: 24.8ms | ActiveRecord: 65.8ms (3 queries, 1 cached) | GC: 7.3ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:46:59 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.4ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (5.5ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 10.5ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.0ms)
-Completed 200 OK in 13ms (Views: 6.0ms | ActiveRecord: 5.8ms (3 queries, 1 cached) | GC: 0.0ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:46:59 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.5ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (4.4ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 9.7ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 10.5ms | GC: 0.0ms)
-Completed 200 OK in 12ms (Views: 6.1ms | ActiveRecord: 4.8ms (3 queries, 1 cached) | GC: 0.0ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:46:59 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.4ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (6.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 10.5ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 11.4ms | GC: 0.0ms)
-Completed 200 OK in 13ms (Views: 5.5ms | ActiveRecord: 6.3ms (3 queries, 1 cached) | GC: 0.0ms)
-
-
-Started GET "/search" for ::1 at 2025-06-28 12:47:02 +0900
-Processing by HomeController#search as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/search.html.erb within layouts/application
-  Rendered home/search.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.1ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 3.4ms | GC: 0.0ms)
-Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:33 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.7ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (6.9ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 14.5ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.1ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 16.4ms | GC: 0.0ms)
-Completed 200 OK in 19ms (Views: 9.4ms | ActiveRecord: 7.6ms (3 queries, 1 cached) | GC: 0.0ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:33 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.5ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (4.4ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 10.8ms | GC: 0.0ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 12.0ms | GC: 0.0ms)
-Completed 200 OK in 13ms (Views: 7.6ms | ActiveRecord: 4.9ms (3 queries, 1 cached) | GC: 0.0ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:33 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.6ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (4.8ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 42.4ms | GC: 24.7ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 43.1ms | GC: 24.7ms)
-Completed 200 OK in 44ms (Views: 38.0ms | ActiveRecord: 5.3ms (3 queries, 1 cached) | GC: 24.7ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:33 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.9ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (1.9ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 6.5ms | GC: 1.2ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 1.2ms)
-Completed 200 OK in 7ms (Views: 4.3ms | ActiveRecord: 2.9ms (3 queries, 1 cached) | GC: 1.2ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:34 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.4ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (3.7ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 9.6ms | GC: 0.7ms)
-  Rendered shared/_header.html.erb (Duration: 0.1ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 10.8ms | GC: 0.7ms)
-Completed 200 OK in 12ms (Views: 7.0ms | ActiveRecord: 4.1ms (3 queries, 1 cached) | GC: 0.7ms)
-
-
-Started GET "/" for ::1 at 2025-06-28 12:47:34 +0900
-Processing by HomeController#index as HTML
-  Rendering layout layouts/application.html.erb
-  Rendering home/index.html.erb within layouts/application
-  [1m[36mCondition Load (0.3ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456) /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCACHE Condition Load (0.0ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE "conditions"."id" IN (16446, 15209, 15208, 15370, 16456)[0m
-  ↳ app/controllers/application_controller.rb:46:in `block in recently_viewed_colleges'
-  [1m[36mCondition Load (4.8ms)[0m  [1m[34mSELECT "conditions".* FROM "conditions" WHERE NOT ("conditions"."students" IS NULL AND "conditions"."acceptance_rate" IS NULL) AND (acceptance_rate > 0.1 AND acceptance_rate < 0.8) ORDER BY "conditions"."students" DESC LIMIT 5 /*action='index',application='CollegeWebsite',controller='home'*/[0m
-  ↳ app/views/home/index.html.erb:110:in `each_with_index'
-  Rendered home/index.html.erb within layouts/application (Duration: 10.1ms | GC: 0.7ms)
-  Rendered shared/_header.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered shared/_footer.html.erb (Duration: 0.0ms | GC: 0.0ms)
-  Rendered layout layouts/application.html.erb (Duration: 11.2ms | GC: 0.7ms)
-Completed 200 OK in 13ms (Views: 6.4ms | ActiveRecord: 5.0ms (3 queries, 1 cached) | GC: 1.8ms)
-
-
-- Gracefully stopping, waiting for requests to finish
+A server is already running (pid: 80042, file: /Users/kotaro/College Finder/college_website10/tmp/pids/server.pid).
 Exiting
