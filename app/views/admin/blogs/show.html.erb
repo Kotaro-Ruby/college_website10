@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><%= @blog.title %></h1>
+    <div>
+      <%= link_to "編集", edit_admin_blog_path(@blog), class: "btn btn-primary" %>
+      <%= link_to "一覧に戻る", admin_blogs_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-sm-3">著者</dt>
+            <dd class="col-sm-9"><%= @blog.author %></dd>
+            
+            <dt class="col-sm-3">カテゴリー</dt>
+            <dd class="col-sm-9"><%= @blog.category %></dd>
+            
+            <dt class="col-sm-3">公開日時</dt>
+            <dd class="col-sm-9">
+              <% if @blog.published_at %>
+                <%= @blog.published_at.strftime('%Y年%m月%d日 %H:%M') %>
+              <% else %>
+                <span class="text-muted">未設定（下書き）</span>
+              <% end %>
+            </dd>
+            
+            <dt class="col-sm-3">ステータス</dt>
+            <dd class="col-sm-9">
+              <% if @blog.published? %>
+                <span class="badge bg-primary">公開中</span>
+              <% else %>
+                <span class="badge bg-secondary">下書き</span>
+              <% end %>
+              <% if @blog.featured? %>
+                <span class="badge bg-success">おすすめ</span>
+              <% end %>
+            </dd>
+            
+            <dt class="col-sm-3">URLスラッグ</dt>
+            <dd class="col-sm-9">
+              <code><%= @blog.slug %></code>
+              <%= link_to "記事を見る", blog_path(slug: @blog.slug), target: "_blank", class: "ms-2" if @blog.published? %>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">本文</h5>
+        </div>
+        <div class="card-body">
+          <%= simple_format(@blog.content) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

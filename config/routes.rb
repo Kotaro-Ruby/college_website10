@@ -99,6 +99,14 @@ Rails.application.routes.draw do
   get "life_guide" => "home#life_guide"
   get "why_study_abroad" => "home#why_study_abroad"
 
+  # Blog routes
+  get '/blogs', to: 'blogs#index', as: :blogs
+  get '/blogs/:slug', to: 'blogs#show', as: :blog
+  
+  namespace :admin do
+    resources :blogs
+  end
+
   get '/import_conditions', to: 'import#conditions'
 
 

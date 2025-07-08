@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>ブログ管理</h1>
+    <%= link_to "新規作成", new_admin_blog_path, class: "btn btn-primary" %>
+  </div>
+  
+  <% if @blogs.any? %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>著者</th>
+            <th>カテゴリー</th>
+            <th>公開日</th>
+            <th>ステータス</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @blogs.each do |blog| %>
+            <tr>
+              <td>
+                <%= link_to blog.title, admin_blog_path(blog), class: "text-decoration-none" %>
+                <% if blog.featured? %>
+                  <span class="badge bg-success">おすすめ</span>
+                <% end %>
+              </td>
+              <td><%= blog.author %></td>
+              <td><%= blog.category %></td>
+              <td><%= blog.published_at&.strftime('%Y-%m-%d') %></td>
+              <td>
+                <% if blog.published? %>
+                  <span class="badge bg-primary">公開中</span>
+                <% else %>
+                  <span class="badge bg-secondary">下書き</span>
+                <% end %>
+              </td>
+              <td>
+                <div class="btn-group" role="group">
+                  <%= link_to "編集", edit_admin_blog_path(blog), class: "btn btn-sm btn-outline-primary" %>
+                  <%= link_to "削除", admin_blog_path(blog), method: :delete, 
+                      data: { confirm: "本当に削除しますか？" }, 
+                      class: "btn btn-sm btn-outline-danger" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <%= paginate @blogs %>
+  <% else %>
+    <div class="alert alert-info">
+      <p class="mb-0">ブログ記事がありません。</p>
+    </div>
+  <% end %>
+</div>

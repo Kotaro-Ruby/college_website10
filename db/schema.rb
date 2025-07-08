@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_06_135159) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_08_021903) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,6 +28,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_06_135159) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["session_token"], name: "index_admins_on_session_token"
     t.index ["username"], name: "index_admins_on_username", unique: true
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "author"
+    t.string "category"
+    t.datetime "published_at"
+    t.boolean "featured"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_blogs_on_category"
+    t.index ["featured"], name: "index_blogs_on_featured"
+    t.index ["published_at"], name: "index_blogs_on_published_at"
+    t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
   create_table "conditions", force: :cascade do |t|

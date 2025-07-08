@@ -1,0 +1,56 @@
+<%= form_with model: [:admin, blog], local: true do |f| %>
+  <% if blog.errors.any? %>
+    <div class="alert alert-danger">
+      <h6>エラーが発生しました:</h6>
+      <ul class="mb-0">
+        <% blog.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="mb-3">
+    <%= f.label :title, "タイトル", class: "form-label" %>
+    <%= f.text_field :title, class: "form-control", required: true %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :author, "著者", class: "form-label" %>
+    <%= f.text_field :author, class: "form-control", required: true %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :category, "カテゴリー", class: "form-label" %>
+    <%= f.select :category, Blog::CATEGORIES, {}, class: "form-select", required: true %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :content, "本文", class: "form-label" %>
+    <%= f.text_area :content, class: "form-control", rows: 15, required: true %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :published_at, "公開日時", class: "form-label" %>
+    <%= f.datetime_field :published_at, class: "form-control" %>
+    <div class="form-text">空欄の場合は下書きとして保存されます。</div>
+  </div>
+  
+  <div class="mb-3">
+    <div class="form-check">
+      <%= f.check_box :featured, class: "form-check-input" %>
+      <%= f.label :featured, "おすすめ記事に設定", class: "form-check-label" %>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :slug, "URLスラッグ", class: "form-label" %>
+    <%= f.text_field :slug, class: "form-control" %>
+    <div class="form-text">空欄の場合はタイトルから自動生成されます。半角英数字とハイフンのみ使用可能。</div>
+  </div>
+  
+  <div class="d-flex gap-2">
+    <%= f.submit blog.new_record? ? "作成" : "更新", class: "btn btn-primary" %>
+    <%= link_to "キャンセル", admin_blogs_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

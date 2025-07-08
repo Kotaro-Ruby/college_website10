@@ -15,6 +15,7 @@
         <ul class="left-nav-list">
           <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
           <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
+          <li><a href="/blogs" class="nav-link <%= 'active' if request.path.start_with?('/blogs') %>">ブログ</a></li>
         </ul>
       </nav>
     </div>
@@ -106,6 +107,10 @@
         <a href="/degreeseeking" class="sidebar-item <%= 'active' if request.path == '/degreeseeking' %>">
           <i class="fas fa-university"></i>
           卒業を目指す留学
+        </a>
+        <a href="/blogs" class="sidebar-item <%= 'active' if request.path.start_with?('/blogs') %>">
+          <i class="fas fa-blog"></i>
+          ブログ・体験記
         </a>
       </div>
       

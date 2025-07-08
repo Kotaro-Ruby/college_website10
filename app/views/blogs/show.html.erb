@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <article>
+        <h1 class="mb-4"><%= @blog.title %></h1>
+        
+        <div class="blog-meta text-muted mb-4">
+          <span class="me-3">
+            <i class="bi bi-person"></i> <%= @blog.author %>
+          </span>
+          <span class="me-3">
+            <i class="bi bi-calendar"></i> <%= @blog.published_at&.strftime('%Y年%m月%d日') %>
+          </span>
+          <span>
+            <i class="bi bi-tag"></i> <%= @blog.category %>
+          </span>
+        </div>
+        
+        <% if @blog.featured? %>
+          <div class="alert alert-success">
+            <i class="bi bi-star-fill"></i> おすすめ記事
+          </div>
+        <% end %>
+        
+        <div class="blog-content">
+          <%= simple_format(@blog.content) %>
+        </div>
+        
+        <hr class="my-5">
+        
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <%= link_to blogs_path, class: "btn btn-outline-primary" do %>
+            <i class="bi bi-arrow-left"></i> ブログ一覧に戻る
+          <% end %>
+          
+          <div class="social-share">
+            <span class="me-2">この記事をシェア:</span>
+            <%= link_to "https://twitter.com/intent/tweet?text=#{@blog.title}&url=#{request.original_url}", 
+                target: "_blank", class: "btn btn-sm btn-outline-primary" do %>
+              <i class="bi bi-twitter"></i> Twitter
+            <% end %>
+          </div>
+        </div>
+        
+        <% if @related_blogs.any? %>
+          <div class="related-blogs">
+            <h3 class="h4 mb-3">関連記事</h3>
+            <div class="row">
+              <% @related_blogs.each do |related_blog| %>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= link_to related_blog.title, blog_path(slug: related_blog.slug), 
+                            class: "text-decoration-none" %>
+                      </h5>
+                      <p class="card-text small text-muted">
+                        <%= related_blog.published_at&.strftime('%Y年%m月%d日') %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </article>
+    </div>
+  </div>
+</div>

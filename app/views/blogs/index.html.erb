@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="mb-4">留学ブログ・体験記</h1>
+      
+      <% if @blogs.any? %>
+        <% @blogs.each do |blog| %>
+          <div class="blog-item mb-4 pb-4 border-bottom">
+            <h2 class="h3">
+              <%= link_to blog.title, blog_path(slug: blog.slug), class: "text-decoration-none" %>
+            </h2>
+            
+            <div class="blog-meta text-muted mb-2">
+              <span class="me-3">
+                <i class="bi bi-person"></i> <%= blog.author %>
+              </span>
+              <span class="me-3">
+                <i class="bi bi-calendar"></i> <%= blog.published_at&.strftime('%Y年%m月%d日') %>
+              </span>
+              <span>
+                <i class="bi bi-tag"></i> <%= blog.category %>
+              </span>
+            </div>
+            
+            <div class="blog-excerpt">
+              <%= truncate(strip_tags(blog.content), length: 200, omission: '...') %>
+            </div>
+            
+            <%= link_to "続きを読む", blog_path(slug: blog.slug), class: "btn btn-sm btn-primary mt-2" %>
+          </div>
+        <% end %>
+        
+        <%= paginate @blogs %>
+      <% else %>
+        <div class="alert alert-info">
+          <p>まだブログ記事がありません。</p>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">カテゴリー</h5>
+        </div>
+        <div class="card-body">
+          <%= link_to "すべて", blogs_path, class: "d-block mb-2 text-decoration-none #{'fw-bold' unless params[:category].present?}" %>
+          <% @categories.each do |category| %>
+            <%= link_to category, blogs_path(category: category), 
+                class: "d-block mb-2 text-decoration-none #{'fw-bold' if params[:category] == category}" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
