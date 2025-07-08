@@ -27,8 +27,40 @@
   
   <div class="mb-3">
     <%= f.label :content, "本文", class: "form-label" %>
-    <%= f.text_area :content, class: "form-control", rows: 15, required: true %>
+    <%= f.text_area :content, class: "form-control", rows: 15, required: true, id: "blog-content" %>
+    <div class="form-text">
+      <small>使い方: **太字** | *斜体* | # 見出し | [リンク](URL) | - リスト | > 引用</small>
+    </div>
   </div>
+  
+  <script>
+    // シンプルなマークダウンプレビュー
+    document.addEventListener('DOMContentLoaded', function() {
+      const textarea = document.getElementById('blog-content');
+      const preview = document.createElement('div');
+      preview.className = 'border rounded p-3 mt-2 bg-light';
+      preview.innerHTML = '<h6>プレビュー</h6><div id="preview-content"></div>';
+      textarea.parentNode.insertBefore(preview, textarea.nextSibling);
+      
+      function updatePreview() {
+        let html = textarea.value
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+          .replace(/^# (.+)$/gm, '<h3>$1</h3>')
+          .replace(/^## (.+)$/gm, '<h4>$1</h4>')
+          .replace(/^### (.+)$/gm, '<h5>$1</h5>')
+          .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+          .replace(/^- (.+)$/gm, '<li>$1</li>')
+          .replace(/^> (.+)$/gm, '<blockquote class="blockquote">$1</blockquote>')
+          .replace(/\n/g, '<br>');
+        
+        document.getElementById('preview-content').innerHTML = html;
+      }
+      
+      textarea.addEventListener('input', updatePreview);
+      updatePreview();
+    });
+  </script>
   
   <div class="mb-3">
     <%= f.label :published_at, "公開日時", class: "form-label" %>
