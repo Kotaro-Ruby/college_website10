@@ -26,6 +26,15 @@
   </div>
   
   <div class="mb-3">
+    <%= label_tag :template_select, "テンプレートを使用", class: "form-label" %>
+    <%= select_tag :template_select, 
+        options_for_select([['テンプレートなし', '']] + Blog::TEMPLATES.map {|k,v| [v, k]}), 
+        class: "form-select", 
+        id: "template-select" %>
+    <div class="form-text">テンプレートを選択すると、構成が自動で入力されます。</div>
+  </div>
+  
+  <div class="mb-3">
     <%= f.label :content, "本文", class: "form-label" %>
     <%= f.text_area :content, class: "form-control", rows: 15, required: true, id: "blog-content" %>
     <div class="form-text">
@@ -34,13 +43,31 @@
   </div>
   
   <script>
-    // シンプルなマークダウンプレビュー
     document.addEventListener('DOMContentLoaded', function() {
       const textarea = document.getElementById('blog-content');
+      const templateSelect = document.getElementById('template-select');
       const preview = document.createElement('div');
       preview.className = 'border rounded p-3 mt-2 bg-light';
       preview.innerHTML = '<h6>プレビュー</h6><div id="preview-content"></div>';
       textarea.parentNode.insertBefore(preview, textarea.nextSibling);
+      
+      // テンプレート読み込み機能
+      templateSelect.addEventListener('change', function() {
+        if (this.value === '') return;
+        
+        if (textarea.value.trim() && !confirm('現在の内容が削除されます。続行しますか？')) {
+          this.value = '';
+          return;
+        }
+        
+        fetch('/admin/blogs/load_template?template=' + this.value)
+          .then(response => response.text())
+          .then(template => {
+            textarea.value = template;
+            updatePreview();
+          })
+          .catch(error => console.error('Error:', error));
+      });
       
       function updatePreview() {
         let html = textarea.value

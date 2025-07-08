@@ -1,0 +1,111 @@
+/* ブログ記事用のデザインクラス */
+
+/* 情報ボックス */
+.blog-content .info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+/* 警告ボックス */
+.blog-content .warning-box {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+/* 成功ボックス */
+.blog-content .success-box {
+  background: #d4edda;
+  border-left: 4px solid #28a745;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+/* 2カラムレイアウト */
+.blog-content .two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+/* ハイライト */
+.blog-content .highlight {
+  background: linear-gradient(transparent 60%, rgba(255, 235, 59, 0.5) 60%);
+  padding: 0 4px;
+}
+
+/* 大きな引用 */
+.blog-content .big-quote {
+  font-size: 1.5em;
+  text-align: center;
+  padding: 40px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  margin: 30px 0;
+  font-style: italic;
+}
+
+/* ステップ表示 */
+.blog-content .step {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.blog-content .step-number {
+  background: #f0b13d;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+/* 画像キャプション */
+.blog-content figure {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.blog-content figcaption {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+/* CTA（Call to Action）ボタン */
+.blog-content .cta-button {
+  display: inline-block;
+  background: #f0b13d;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin: 20px 0;
+}
+
+.blog-content .cta-button:hover {
+  background: #e0a12d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(240, 177, 61, 0.3);
+}
+
+@media (max-width: 768px) {
+  .blog-content .two-columns {
+    grid-template-columns: 1fr;
+  }
+}

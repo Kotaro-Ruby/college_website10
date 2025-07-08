@@ -38,6 +38,22 @@ class Admin::BlogsController < AdminBaseController
     redirect_to admin_blogs_path, notice: 'ブログ記事を削除しました。'
   end
   
+  def load_template
+    template_name = params[:template]
+    
+    if Blog::TEMPLATES.key?(template_name)
+      template_path = Rails.root.join('app', 'views', 'blog_templates', "#{template_name}.html.erb")
+      
+      if File.exist?(template_path)
+        render plain: File.read(template_path)
+      else
+        render plain: "テンプレートが見つかりません", status: :not_found
+      end
+    else
+      render plain: "無効なテンプレートです", status: :bad_request
+    end
+  end
+  
   private
   
   def set_blog

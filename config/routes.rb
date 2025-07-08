@@ -104,8 +104,15 @@ Rails.application.routes.draw do
   get '/blogs/:slug', to: 'blogs#show', as: :blog
   
   namespace :admin do
-    resources :blogs
+    resources :blogs do
+      collection do
+        get :load_template
+      end
+    end
   end
+  
+  # Dynamic pages (新しい記事はここ)
+  get '/p/:page', to: 'pages#show', as: :page
 
   get '/import_conditions', to: 'import#conditions'
 

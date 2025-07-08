@@ -21,6 +21,14 @@ class Blog < ApplicationRecord
     '現地生活',
     'その他'
   ].freeze
+  
+  # テンプレート関連
+  TEMPLATES = {
+    'experience_story' => '体験談テンプレート',
+    'university_review' => '大学レビューテンプレート',
+    'how_to_guide' => 'ハウツー記事テンプレート',
+    'interview' => 'インタビュー記事テンプレート'
+  }.freeze
 
   def published?
     published_at.present? && published_at <= Time.current
