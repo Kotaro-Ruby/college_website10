@@ -17,7 +17,15 @@ if Condition.count == 0 && File.exist?(Rails.root.join('data', 'colleges_data.cs
         end
       end
       
-      # Handle numeric fields - convert empty strings to nil
+      # Handle numeric fields - convert empty strings to nil  
+      # Note: CSV has 'GPA' but database has 'gpa' - handle the mapping
+      if attributes[:gpa]
+        attributes[:gpa] = attributes[:gpa]
+      elsif attributes[:GPA]
+        attributes[:gpa] = attributes[:GPA]
+        attributes.delete(:GPA)
+      end
+      
       numeric_fields = %i[tuition students gpa acceptance_rate graduation_rate retention_rate
                          sat_math_25 sat_math_75 sat_reading_25 sat_reading_75
                          act_composite_25 act_composite_75 earnings_6yr_median earnings_10yr_median
