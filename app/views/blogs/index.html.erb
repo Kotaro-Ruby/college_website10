@@ -3,35 +3,86 @@
     <div class="col-md-8">
       <h1 class="mb-4">留学ブログ・体験記</h1>
       
-      <% if @blogs.any? %>
-        <% @blogs.each do |blog| %>
-          <div class="blog-item mb-4 pb-4 border-bottom">
-            <h2 class="h3">
-              <%= link_to blog.title, blog_path(slug: blog.slug), class: "text-decoration-none" %>
-            </h2>
-            
-            <div class="blog-meta text-muted mb-2">
-              <span class="me-3">
-                <i class="bi bi-person"></i> <%= blog.author %>
-              </span>
-              <span class="me-3">
-                <i class="bi bi-calendar"></i> <%= blog.published_at&.strftime('%Y年%m月%d日') %>
-              </span>
-              <span>
-                <i class="bi bi-tag"></i> <%= blog.category %>
-              </span>
-            </div>
-            
-            <div class="blog-excerpt">
-              <%= truncate(strip_tags(blog.content), length: 200, omission: '...') %>
-            </div>
-            
-            <%= link_to "続きを読む", blog_path(slug: blog.slug), class: "btn btn-sm btn-primary mt-2" %>
+      <!-- 静的記事（特別表示） -->
+      <% @static_articles.each do |article| %>
+        <article class="featured-article mb-5">
+          <div class="featured-badge">
+            <span class="badge bg-warning text-dark">✨ 特集記事</span>
           </div>
-        <% end %>
-        
-        <%= paginate @blogs %>
-      <% else %>
+          
+          <div class="article-card">
+            <div class="article-header">
+              <div class="article-category">
+                <span class="category-tag <%= article[:category] == '体験談' ? 'experience' : 'review' %>">
+                  <%= article[:category] %>
+                </span>
+                <time class="publish-date"><%= article[:published_at] %></time>
+              </div>
+              
+              <h2 class="article-title">
+                <%= link_to article[:title], article[:url], class: "title-link" %>
+              </h2>
+              
+              <p class="article-subtitle"><%= article[:subtitle] %></p>
+            </div>
+            
+            <div class="article-content">
+              <div class="article-excerpt">
+                <%= article[:excerpt] %>
+              </div>
+              
+              <div class="article-footer">
+                <div class="author-info">
+                  <div class="author-avatar">
+                    <span><%= article[:author][0] %></span>
+                  </div>
+                  <span class="author-name"><%= article[:author] %></span>
+                </div>
+                
+                <%= link_to article[:url], class: "read-more-btn" do %>
+                  この記事を読む
+                  <i class="fas fa-arrow-right"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </article>
+      <% end %>
+      
+      <!-- 通常のブログ記事 -->
+      <% if @blogs.any? %>
+        <div class="regular-blogs">
+          <h3 class="section-title mb-4">その他の記事</h3>
+          
+          <% @blogs.each do |blog| %>
+            <div class="blog-item mb-4 pb-4 border-bottom">
+              <h2 class="h3">
+                <%= link_to blog.title, blog_path(slug: blog.slug), class: "text-decoration-none" %>
+              </h2>
+              
+              <div class="blog-meta text-muted mb-2">
+                <span class="me-3">
+                  <i class="bi bi-person"></i> <%= blog.author %>
+                </span>
+                <span class="me-3">
+                  <i class="bi bi-calendar"></i> <%= blog.published_at&.strftime('%Y年%m月%d日') %>
+                </span>
+                <span>
+                  <i class="bi bi-tag"></i> <%= blog.category %>
+                </span>
+              </div>
+              
+              <div class="blog-excerpt">
+                <%= truncate(strip_tags(blog.content), length: 200, omission: '...') %>
+              </div>
+              
+              <%= link_to "続きを読む", blog_path(slug: blog.slug), class: "btn btn-sm btn-primary mt-2" %>
+            </div>
+          <% end %>
+          
+          <%= paginate @blogs %>
+        </div>
+      <% elsif @static_articles.empty? %>
         <div class="alert alert-info">
           <p>まだブログ記事がありません。</p>
         </div>
@@ -54,3 +105,229 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* 特集記事のスタイル */
+  .featured-article {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+  }
+
+  .featured-article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+
+  .featured-badge .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .article-card {
+    padding: 40px;
+  }
+
+  .article-header {
+    margin-bottom: 25px;
+  }
+
+  .article-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .category-tag {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .category-tag.experience {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+
+  .category-tag.review {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+  }
+
+  .publish-date {
+    color: #64748b;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  .article-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .title-link {
+    color: #1e293b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .title-link:hover {
+    color: #667eea;
+    text-decoration: none;
+  }
+
+  .article-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .article-content {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+  }
+
+  .article-excerpt {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 25px;
+  }
+
+  .article-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e293b;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .read-more-btn:hover {
+    background: #334155;
+    transform: translateX(2px);
+    color: white;
+    text-decoration: none;
+  }
+
+  .read-more-btn i {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .read-more-btn:hover i {
+    transform: translateX(3px);
+  }
+
+  /* セクションタイトル */
+  .section-title {
+    color: #1e293b;
+    font-weight: 600;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: #667eea;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 768px) {
+    .article-card {
+      padding: 25px 20px;
+    }
+
+    .article-title {
+      font-size: 22px;
+    }
+
+    .article-content {
+      padding: 20px;
+    }
+
+    .article-footer {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .read-more-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .featured-badge {
+      top: 15px;
+      right: 15px;
+    }
+
+    .article-category {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+</style>
