@@ -61,4 +61,55 @@ module ApplicationHelper
     
     state_translations[state_code] || "#{state_code}州"
   end
+
+  def is_search_section?
+    # Direct search-related paths
+    search_paths = ['/search', '/results']
+    return true if search_paths.include?(request.path)
+    
+    # Result pages with ID parameter
+    return true if request.path.start_with?('/result/')
+    
+    # Specific college pages
+    specific_colleges = [
+      '/ohio_northern_university',
+      '/ohio_state_university', 
+      '/florida_state_university',
+      '/alabama_state_university'
+    ]
+    return true if specific_colleges.include?(request.path)
+    
+    # Fallback: any path that doesn't match known sections
+    # This handles the catch-all route that goes to conditions#fallback_page
+    known_sections = [
+      '/', '/about', '/info', '/contact', '/terms', '/recruit',
+      '/canada', '/australia', '/newzealand',
+      '/study_abroad_types', '/scholarships', '/visa_guide', '/english_tests',
+      '/majors_careers', '/life_guide', '/why_study_abroad', '/knowledge', '/degreeseeking',
+      '/login', '/register', '/logout', '/profile', '/favorites', '/compare'
+    ]
+    
+    known_prefixes = [
+      '/blogs', '/columns', '/p/', '/states', '/admin', '/profile/', '/password_resets'
+    ]
+    
+    # If it's not in known sections and doesn't start with known prefixes, it's likely a college page
+    return false if known_sections.include?(request.path)
+    return false if known_prefixes.any? { |prefix| request.path.start_with?(prefix) }
+    
+    # If we get here, it's likely a college page handled by the fallback route
+    true
+  end
+
+  def is_blog_section?
+    request.path.start_with?('/blogs')
+  end
+
+  def is_column_section?
+    request.path.start_with?('/columns') || request.path.start_with?('/p/')
+  end
+
+  def is_states_section?
+    request.path.start_with?('/states')
+  end
 end

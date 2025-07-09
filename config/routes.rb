@@ -103,6 +103,9 @@ Rails.application.routes.draw do
   get '/blogs', to: 'blogs#index', as: :blogs
   get '/blogs/:slug', to: 'blogs#show', as: :blog
   
+  # Column routes
+  get '/columns', to: 'columns#index', as: :columns
+  
   namespace :admin do
     resources :blogs do
       collection do

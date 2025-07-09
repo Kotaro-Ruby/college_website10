@@ -14,8 +14,7 @@
       <nav class="left-nav">
         <ul class="left-nav-list">
           <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
-          <li><a href="/search" class="nav-link <%= 'active' if request.path == '/search' || request.path == '/results' %>">大学検索</a></li>
-          <li><a href="/blogs" class="nav-link <%= 'active' if request.path.start_with?('/blogs') %>">ブログ</a></li>
+          <li><a href="/search" class="nav-link <%= 'active' if is_search_section? %>">大学検索</a></li>
         </ul>
       </nav>
     </div>
@@ -96,7 +95,7 @@
           <i class="fas fa-graduation-cap"></i>
           College Sparkについて
         </a>
-        <a href="/search" class="sidebar-item <%= 'active' if request.path == '/search' || request.path == '/results' %>">
+        <a href="/search" class="sidebar-item <%= 'active' if is_search_section? %>">
           <i class="fas fa-search"></i>
           大学検索
         </a>
@@ -108,9 +107,13 @@
           <i class="fas fa-university"></i>
           卒業を目指す留学
         </a>
-        <a href="/blogs" class="sidebar-item <%= 'active' if request.path.start_with?('/blogs') %>">
+        <a href="/blogs" class="sidebar-item <%= 'active' if is_blog_section? %>">
           <i class="fas fa-blog"></i>
-          ブログ・体験記
+          ブログ
+        </a>
+        <a href="/columns" class="sidebar-item <%= 'active' if is_column_section? %>">
+          <i class="fas fa-feather-alt"></i>
+          コラム
         </a>
       </div>
       
@@ -132,7 +135,7 @@
           <i class="fas fa-home"></i>
           生活情報・準備ガイド
         </a>
-        <a href="/states" class="sidebar-item <%= 'active' if request.path.start_with?('/states') %>">
+        <a href="/states" class="sidebar-item <%= 'active' if is_states_section? %>">
           <i class="fas fa-map-marked-alt"></i>
           州別ガイド
         </a>
@@ -169,13 +172,16 @@
 
 <style>
   .main-header {
-    background: linear-gradient(135deg, #f5b342 0%, #e09c2a 100%);
+    background: linear-gradient(135deg, #f5b342 0%, #e09c2a 50%, #d4911e 100%);
     padding: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
   }
 
   .header-container {
@@ -331,6 +337,10 @@
     letter-spacing: 0.8px;
   }
 
+  .nav-link:not(.column-special):hover {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
   .nav-link.disabled {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -350,6 +360,7 @@
     letter-spacing: 0.8px;
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
 
   .nav-dropdown.active > .dropdown-trigger {
     background: rgba(255, 255, 255, 0.2);
@@ -379,14 +390,15 @@
     gap: 6px;
     color: white;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px 15px;
     border-radius: 25px;
     transition: all 0.3s ease;
     white-space: nowrap;
     position: relative;
+    letter-spacing: 0.5px;
   }
 
   .dropdown-trigger:hover {
@@ -407,7 +419,7 @@
 
   .dropdown-menu {
     position: absolute !important;
-    top: calc(100% + 2px) !important;
+    top: calc(100% + 8px) !important;
     left: 0 !important;
     background: white !important;
     border-radius: 12px !important;
@@ -416,7 +428,7 @@
     visibility: hidden !important;
     transform: translateY(-10px) !important;
     transition: all 0.25s ease-out !important;
-    min-width: 250px !important;
+    min-width: 180px !important;
     z-index: 999999 !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     padding: 8px 0 !important;

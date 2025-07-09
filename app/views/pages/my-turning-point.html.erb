@@ -1,4 +1,4 @@
-<% content_for :title, "自信を失った私を変えた一つの決断 - College Spark" %>
+<% content_for :title, "これ以上自分を嫌いになりたくない - College Spark" %>
 
 <article class="column-article">
   <!-- Article Header -->
@@ -9,7 +9,7 @@
         <span class="category">体験談</span>
         <time class="publish-date">2025年7月8日</time>
       </div>
-      <h1 class="article-title">自信を失った私を変えた一つの決断</h1>
+      <h1 class="article-title">これ以上自分を嫌いになりたくない</h1>
       <p class="article-subtitle">何も成し遂げたことがなかった私が、人生をかけて選んだ道</p>
       <div class="author-info">
         <div class="author-avatar">
@@ -27,10 +27,10 @@
   <main class="article-body">
     <div class="article-content">
         <div class="blog-content">
-          <h2>🏫 始まりは、何も考えない選択</h2>
+          <h2>🏫 流されて生きてきた自分に気づいた瞬間</h2>
           
           <p>
-            大学の附属高校に通っていた私は、何も考えず、エスカレーター的に大学へ進むことを決めた。決めたと言っても、それが既定路線で、特に考えることもなく周りと方向を合わせただけと言っていいだろう。年内には全ての手続きを終え、進学が決定していた。
+            大学の附属高校に通っていた私は、何も考えず、エスカレーター式に大学へ進むことを決めた。決めたと言っても、それが既定路線で、特に考えることもなく周りと方向を合わせただけと言っていいだろう。経済学部を選んだのも友達がみんな行くから。そこに意思なんてものは無かった。年内には全ての手続きを終え、進学が決定していた。
           </p>
           
           <p>
@@ -58,7 +58,7 @@
           </p>
           
           <div class="shock-box">
-            <h3>⚡ まさかの現実</h3>
+            <h3>⚡ 現実</h3>
             <p><strong>「君を入部させるわけにはいかない」</strong></p>
             <p>まさかの挑戦拒否。</p>
           </div>
@@ -71,7 +71,7 @@
             ちょうどその日は偶然、入部を決心した日でもあった。家に帰ったら、入部届を書いて翌日提出しよう。そう思っていた日だった。本気だったとは言え、正直、中々入部の決心がついていなかった。練習は相当きついし、遊ぶ時間もない。バイトもできないだろうし。でも遂にそんな葛藤に打ち勝ち、やっと決心できたその日だった。
           </p>
 
-          <h2>😢 人生初の悔し涙</h2>
+          <h2>人生初の悔し涙</h2>
           
           <p>
             これまで楽な方へ楽な方へと逃げ続けて来た私がやっとの思いで挑戦を決断できたのに、そもそもその機会すら与えられなかったことへの悔しさ、悲しさ。それと、一生このまま自分に自信がないまま、自分が嫌いなまま生きていくことになることに対しての、絶望。
@@ -111,7 +111,7 @@
           </p>
 
           <div class="gratitude-box">
-            <h3>🙏 恵まれた環境への感謝</h3>
+            <h3>恵まれた環境への感謝</h3>
             <p>
               私が結局恵まれた環境にいたことはよく理解している。経済的にも、リスク的にも、この選択をすぐに認めてくれる親は中々いないだろう。でも私は仮に親に反対されていても、この決断を変えることはなかっただろう。もうこれ以上自分を嫌いになりたくなかった。
             </p>
@@ -164,17 +164,21 @@
     <div class="share-section">
       <h3>この記事をシェア</h3>
       <div class="share-buttons">
-        <a href="#" class="share-btn twitter">
-          <i class="fab fa-twitter"></i>
-          <span>Twitter</span>
+        <a href="https://twitter.com/intent/tweet?text=これ以上自分を嫌いになりたくない - 何も成し遂げたことがなかった私が、人生をかけて選んだ道&url=<%= request.original_url %>" target="_blank" class="share-btn x">
+          <i class="fab fa-x-twitter"></i>
+          <span>X</span>
         </a>
-        <a href="#" class="share-btn facebook">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>" target="_blank" class="share-btn facebook">
           <i class="fab fa-facebook-f"></i>
           <span>Facebook</span>
         </a>
-        <a href="#" class="share-btn line">
+        <a href="https://line.me/R/msg/text/?これ以上自分を嫌いになりたくない - 何も成し遂げたことがなかった私が、人生をかけて選んだ道%20<%= request.original_url %>" target="_blank" class="share-btn line">
           <i class="fab fa-line"></i>
           <span>LINE</span>
+        </a>
+        <a href="javascript:void(0)" onclick="copyToClipboard('<%= request.original_url %>')" class="share-btn copy-url">
+          <i class="fas fa-copy"></i>
+          <span>URLをコピー</span>
         </a>
       </div>
     </div>
@@ -215,18 +219,12 @@
     position: relative;
     padding: 80px 0 60px;
     text-align: center;
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
-    overflow: hidden;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
   }
 
   .header-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23e0e7ff" opacity="0.5"/><circle cx="80" cy="40" r="1" fill="%23ddd6fe" opacity="0.5"/><circle cx="40" cy="80" r="1" fill="%23e0f2fe" opacity="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-    opacity: 0.6;
+    display: none;
   }
 
   .header-content {
@@ -248,9 +246,10 @@
   }
 
   .category {
-    background: #667eea;
-    color: white;
+    background: transparent;
+    color: #667eea;
     padding: 6px 16px;
+    border: 1px solid #667eea;
     border-radius: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -506,8 +505,8 @@
     color: white;
   }
 
-  .share-btn.twitter {
-    background: #1da1f2;
+  .share-btn.x {
+    background: #000000;
   }
 
   .share-btn.facebook {
@@ -516,6 +515,10 @@
 
   .share-btn.line {
     background: #00c300;
+  }
+
+  .share-btn.copy-url {
+    background: #6b7280;
   }
 
   .share-btn:hover {
@@ -634,3 +637,14 @@
     }
   }
 </style>
+
+<script>
+  function copyToClipboard(url) {
+    navigator.clipboard.writeText(url).then(function() {
+      // アラート表示を削除
+    }, function(err) {
+      console.error('URLのコピーに失敗しました: ', err);
+      alert('URLのコピーに失敗しました。');
+    });
+  }
+</script>

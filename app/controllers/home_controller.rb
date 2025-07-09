@@ -20,6 +20,52 @@ class HomeController < ApplicationController
                                 .where('acceptance_rate > 0.1 AND acceptance_rate < 0.8')
                                 .order(students: :desc)
                                 .limit(5)
+    
+    # 最新記事を取得（コラムとブログの混合）
+    @recent_articles = get_recent_articles
+  end
+
+  private
+
+  def get_recent_articles
+    # 静的なコラムデータ
+    columns = [
+      {
+        title: "これ以上自分を嫌いになりたくない",
+        subtitle: "何も成し遂げたことがなかった私が、人生をかけて選んだ道",
+        author: "運営者",
+        author_bio: "College Spark編集部",
+        category: "留学体験記",
+        article_type: "コラム",
+        published_at: "2025年7月8日",
+        slug: "my-turning-point",
+        excerpt: "大学の附属高校に通っていた私は、何も考えず、エスカレーター的に大学へ進むことを決めた。決めたと言っても、それが既定路線で、特に考えることもなく周りと方向を合わせただけと言っていいだろう。そんな中で気がついた「自分に自信がない」という事実が、私の人生を大きく変えることになった。",
+        url: "/p/my-turning-point",
+        featured: true,
+        tags: ["挑戦", "自信", "海外進学", "転機"],
+        created_at: 1.day.ago
+      }
+    ]
+    
+    # ブログ記事を取得
+    blogs = Blog.published.recent.limit(4).map do |blog|
+      {
+        title: blog.title,
+        subtitle: blog.subtitle,
+        author: blog.author,
+        category: blog.category,
+        article_type: "ブログ",
+        published_at: blog.published_at&.strftime('%Y年%m月%d日'),
+        slug: blog.slug,
+        excerpt: strip_tags(blog.content),
+        url: "/blogs/#{blog.slug}",
+        featured: false,
+        created_at: blog.created_at
+      }
+    end
+    
+    # コラムとブログを混合して最新順にソート、最大5件
+    (columns + blogs).sort_by { |article| article[:created_at] }.reverse.first(5)
   end
   
   def search
