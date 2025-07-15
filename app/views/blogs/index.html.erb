@@ -1,3 +1,24 @@
+<% 
+  page_title = params[:category].present? ? "#{params[:category]} - 留学ブログ" : "留学ブログ"
+  page_description = params[:category].present? ? 
+    "#{params[:category]}に関する留学ブログ記事一覧。実体験に基づく情報とアドバイスをお届けします。" :
+    "留学に関するブログ記事一覧。実体験に基づく情報とアドバイス、留学準備から現地生活まで幅広いトピックをお届けします。"
+%>
+
+<% content_for :title, page_title %>
+<% content_for :description, page_description %>
+<% content_for :keywords, "留学, ブログ, 海外留学, 体験談, 留学準備, #{params[:category]}" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, page_title %>
+<% content_for :og_description, page_description %>
+<% content_for :og_type, "website" %>
+<% content_for :og_url, blogs_url(category: params[:category]) %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, page_title %>
+<% content_for :twitter_description, page_description %>
+
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-3">

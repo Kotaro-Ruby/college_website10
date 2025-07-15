@@ -1,3 +1,61 @@
+<% content_for :title, "コラム - 留学の本質を探る深い洞察" %>
+<% content_for :description, "深い洞察と体験談を通じて留学の本質を探るコラム記事一覧。3分で読める質の高いコンテンツをお届けします。" %>
+<% content_for :keywords, "コラム, 留学, 洞察, 体験談, 深い分析, 留学の本質" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コラム - 留学の本質を探る深い洞察" %>
+<% content_for :og_description, "深い洞察と体験談を通じて留学の本質を探るコラム記事一覧。3分で読める質の高いコンテンツをお届けします。" %>
+<% content_for :og_type, "website" %>
+<% content_for :og_url, columns_url %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コラム - 留学の本質を探る深い洞察" %>
+<% content_for :twitter_description, "深い洞察と体験談を通じて留学の本質を探るコラム記事一覧。3分で読める質の高いコンテンツをお届けします。" %>
+
+<!-- コラム一覧の構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "コラム - 留学の本質を探る深い洞察",
+  "description": "深い洞察と体験談を通じて留学の本質を探るコラム記事一覧。3分で読める質の高いコンテンツをお届けします。",
+  "url": "<%= columns_url %>",
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      <% @columns.each_with_index do |column, index| %>
+      {
+        "@type": "ListItem",
+        "position": <%= index + 1 %>,
+        "item": {
+          "@type": "Article",
+          "name": "<%= j column[:title] %>",
+          "description": "<%= j truncate(column[:excerpt], length: 100) %>",
+          "url": "<%= page_url(page: column[:slug]) %>",
+          "author": {
+            "@type": "Person",
+            "name": "<%= j column[:author] %>"
+          },
+          "datePublished": "<%= Date.parse(column[:published_at]).iso8601 rescue nil %>",
+          "publisher": {
+            "@type": "Organization",
+            "name": "College Spark"
+          }
+        }
+      }<%= index < @columns.length - 1 ? ',' : '' %>
+      <% end %>
+    ]
+  }
+}
+</script>
+<% end %>
+
 <div class="columns-container">
   <div class="columns-header">
     <div class="header-decoration">

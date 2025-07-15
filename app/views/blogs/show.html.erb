@@ -1,3 +1,49 @@
+<% content_for :title, @blog.title %>
+<% content_for :description, truncate(strip_tags(@blog.content), length: 155) %>
+<% content_for :keywords, "#{@blog.category}, 留学, ブログ, #{@blog.author}" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, @blog.title %>
+<% content_for :og_description, truncate(strip_tags(@blog.content), length: 155) %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, blog_url(slug: @blog.slug) %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, @blog.title %>
+<% content_for :twitter_description, truncate(strip_tags(@blog.content), length: 155) %>
+
+<!-- 記事構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "<%= j @blog.title %>",
+  "description": "<%= j truncate(strip_tags(@blog.content), length: 155) %>",
+  "author": {
+    "@type": "Person",
+    "name": "<%= j @blog.author %>"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "<%= asset_url('favicon.ico') %>"
+    }
+  },
+  "datePublished": "<%= @blog.published_at&.iso8601 %>",
+  "dateModified": "<%= @blog.updated_at&.iso8601 %>",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= blog_url(slug: @blog.slug) %>"
+  },
+  "articleSection": "<%= j @blog.category %>",
+  "keywords": "<%= j "#{@blog.category}, 留学, ブログ, #{@blog.author}" %>"
+}
+</script>
+<% end %>
+
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 mx-auto">

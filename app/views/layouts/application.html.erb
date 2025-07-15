@@ -27,7 +27,7 @@
     <meta property="og:title" content="<%= content_for(:og_title) || content_for(:title) || "College Spark - アメリカ大学検索サイト" %>">
     <meta property="og:description" content="<%= content_for(:og_description) || content_for(:description) || "6,300校以上のアメリカの大学から、あなたの条件に合った大学を検索できます。学費、合格率、専攻など詳細な情報で大学選びをサポートします。" %>">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= content_for(:og_image) || "#{request.base_url}/favicon.ico" %>">
+    <meta property="og:image" content="<%= content_for(:og_image) || asset_url('hero_background.jpg') %>">
     <meta property="og:site_name" content="College Spark">
     <meta property="og:locale" content="ja_JP">
     
@@ -37,7 +37,7 @@
     <meta name="twitter:creator" content="@college__spark">
     <meta name="twitter:title" content="<%= content_for(:twitter_title) || content_for(:og_title) || content_for(:title) || "College Spark - アメリカ大学検索サイト" %>">
     <meta name="twitter:description" content="<%= content_for(:twitter_description) || content_for(:og_description) || content_for(:description) || "6,300校以上のアメリカの大学から、あなたの条件に合った大学を検索できます。" %>">
-    <meta name="twitter:image" content="<%= content_for(:twitter_image) || content_for(:og_image) || "#{request.base_url}/favicon.ico" %>">
+    <meta name="twitter:image" content="<%= content_for(:twitter_image) || content_for(:og_image) || asset_url('hero_background.jpg') %>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url %>">
@@ -67,6 +67,7 @@
     </script>
 
     <%= yield :head %>
+    <%= yield :structured_data %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
