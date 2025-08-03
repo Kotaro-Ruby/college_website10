@@ -3,8 +3,13 @@
 <% if @table_missing %>
   <div class="alert alert-warning" style="background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
     <h4><i class="fas fa-exclamation-triangle"></i> テーブルが見つかりません</h4>
-    <p>survey_responsesテーブルが存在しません。マイグレーションを実行してください。</p>
-    <code>rails db:migrate</code>
+    <p>survey_responsesテーブルが存在しません。以下のコマンドを実行してください：</p>
+    <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0; font-family: monospace;">
+      rails db:migrate<br>
+      # または<br>
+      rails db:setup_surveys
+    </div>
+    <p><small>本番環境では、デプロイ時に自動的にマイグレーションが実行される設定にしてください。</small></p>
   </div>
 <% elsif @error_message %>
   <div class="alert alert-danger" style="background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
