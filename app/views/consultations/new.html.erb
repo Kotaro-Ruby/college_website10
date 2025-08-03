@@ -821,6 +821,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // 日付選択時の時間制限設定
   document.addEventListener('change', function(e) {
     if (e.target.classList.contains('date-input')) {
+      console.log('Date input changed:', e.target.value);
       updateTimeOptions(e.target);
     }
   });
@@ -828,24 +829,45 @@ document.addEventListener('DOMContentLoaded', function() {
   // 初期表示時に時間オプションを設定
   document.querySelectorAll('.date-input').forEach(function(dateInput) {
     if (dateInput.value) {
+      console.log('Initial date value found:', dateInput.value);
       updateTimeOptions(dateInput);
     }
   });
+  
+  // ページロード後に少し遅らせて再チェック
+  setTimeout(function() {
+    document.querySelectorAll('.date-input').forEach(function(dateInput) {
+      if (dateInput.value) {
+        console.log('Delayed check - updating time options for:', dateInput.value);
+        updateTimeOptions(dateInput);
+      }
+    });
+  }, 100);
 });
 
 // 選択された日付に基づいて時間オプションを更新
 function updateTimeOptions(dateInput) {
+  console.log('updateTimeOptions called with:', dateInput.value);
   const selectedDate = new Date(dateInput.value);
-  if (!selectedDate || isNaN(selectedDate)) return;
+  if (!selectedDate || isNaN(selectedDate)) {
+    console.log('Invalid date, returning');
+    return;
+  }
   
   const dayOfWeek = selectedDate.getDay(); // 0=日曜日, 1=月曜日, ..., 6=土曜日
   const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6); // 日曜日または土曜日
+  console.log('Day of week:', dayOfWeek, 'Is weekend:', isWeekend);
   
   // 対応する時間選択要素を取得
   const candidate = dateInput.closest('.datetime-candidate');
   const timeSelect = candidate.querySelector('.time-select');
   
-  if (!timeSelect) return;
+  if (!timeSelect) {
+    console.log('Time select not found');
+    return;
+  }
+  
+  console.log('Time select found, updating options');
   
   // 時間オプションをクリア
   timeSelect.innerHTML = '<option value="">時間を選択してください</option>';
@@ -884,5 +906,7 @@ function updateTimeOptions(dateInput) {
     optionElement.textContent = option[0];
     timeSelect.appendChild(optionElement);
   });
+  
+  console.log('Added', timeOptions.length, 'time options');
 }
 </script>
