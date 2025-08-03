@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>College Finder - 管理画面</title>
+  <title>College Spark - 管理画面</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
     .admin-header {
-      background: #1a1a1a;
+      background: linear-gradient(135deg, #fb923c 0%, #f39c12 100%);
       color: white;
       padding: 1rem;
-      border-bottom: 3px solid #007bff;
+      box-shadow: 0 2px 10px rgba(251, 146, 60, 0.3);
     }
     
     .admin-nav {
@@ -37,6 +38,9 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     
     .admin-nav a:hover {
@@ -44,7 +48,7 @@
     }
     
     .admin-nav a.active {
-      background: #007bff;
+      background: #fb923c;
       color: white;
     }
     
@@ -105,7 +109,7 @@
     .stat-number {
       font-size: 2rem;
       font-weight: bold;
-      color: #007bff;
+      color: #fb923c;
     }
     
     .stat-label {
@@ -124,14 +128,14 @@
     }
     
     .btn-primary {
-      background: #007bff;
+      background: #fb923c;
       color: white;
-      border-color: #007bff;
+      border-color: #fb923c;
     }
     
     .btn-primary:hover {
-      background: #0056b3;
-      border-color: #0056b3;
+      background: #f39c12;
+      border-color: #f39c12;
     }
     
     .btn-danger {
@@ -188,9 +192,9 @@
     }
     
     .form-control:focus {
-      border-color: #80bdff;
+      border-color: #fb923c;
       outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      box-shadow: 0 0 0 0.2rem rgba(251, 146, 60, 0.25);
     }
     
     .form-group {
@@ -208,7 +212,10 @@
 <body>
   <header class="admin-header">
     <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h1 style="margin: 0;">College Finder 管理画面</h1>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="/favicon.ico" alt="College Spark" style="width: 32px; height: 32px;">
+        <h1 style="margin: 0;">College Spark 管理画面</h1>
+      </div>
       <div>
         <% if admin_logged_in? %>
           <span>ようこそ、<%= current_admin.username %>さん</span>
@@ -222,12 +229,12 @@
   <% if admin_logged_in? %>
     <nav class="admin-nav">
       <ul>
-        <li><%= link_to "ダッシュボード", admin_dashboard_path %></li>
-        <li><%= link_to "大学管理", admin_conditions_path %></li>
-        <li><%= link_to "ユーザー管理", admin_users_path %></li>
-        <li><%= link_to "相談管理", admin_consultations_path %></li>
-        <li><%= link_to "アンケート管理", admin_surveys_path %></li>
-        <li><%= link_to "ブログ管理", admin_blogs_path %></li>
+        <li><%= link_to admin_dashboard_path do %><i class="fas fa-tachometer-alt"></i> ダッシュボード<% end %></li>
+        <li><%= link_to admin_conditions_path do %><i class="fas fa-university"></i> 大学管理<% end %></li>
+        <li><%= link_to admin_users_path do %><i class="fas fa-users"></i> ユーザー管理<% end %></li>
+        <li><%= link_to admin_consultations_path do %><i class="fas fa-comments"></i> 相談管理<% end %></li>
+        <li><%= link_to admin_surveys_path do %><i class="fas fa-chart-bar"></i> アンケート管理<% end %></li>
+        <li><%= link_to admin_blogs_path do %><i class="fas fa-blog"></i> ブログ管理<% end %></li>
       </ul>
     </nav>
   <% end %>

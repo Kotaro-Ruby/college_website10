@@ -1,5 +1,18 @@
 <h2>アンケート管理</h2>
 
+<% if @table_missing %>
+  <div class="alert alert-warning" style="background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
+    <h4><i class="fas fa-exclamation-triangle"></i> テーブルが見つかりません</h4>
+    <p>survey_responsesテーブルが存在しません。マイグレーションを実行してください。</p>
+    <code>rails db:migrate</code>
+  </div>
+<% elsif @error_message %>
+  <div class="alert alert-danger" style="background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
+    <h4><i class="fas fa-times-circle"></i> エラーが発生しました</h4>
+    <p><%= @error_message %></p>
+  </div>
+<% end %>
+
 <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 2rem;">
   <div class="stat-card">
     <div class="stat-number"><%= @total_responses %></div>
