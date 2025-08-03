@@ -83,7 +83,9 @@ class ApplicationController < ActionController::Base
   # 人気の大学を取得（全ユーザーの閲覧履歴から）
   def get_popular_colleges
     # ViewHistoryテーブルからcondition_idごとの閲覧数をカウント
+    # default_scopeを無効化してGROUP BYクエリを実行
     popular_condition_ids = ViewHistory
+      .unscoped
       .group(:condition_id)
       .order('count_all DESC')
       .limit(5)
