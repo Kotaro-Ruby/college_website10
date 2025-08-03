@@ -15,17 +15,12 @@ class HomeController < ApplicationController
     # セッションクリア（テスト用）
     clear_recently_viewed_for_testing
     
-    # 人気大学のデータを取得（例：学生数が多い、または合格率が適度な大学）
-    @popular_colleges = Condition.where.not(students: nil, acceptance_rate: nil)
-                                .where('acceptance_rate > 0.1 AND acceptance_rate < 0.8')
-                                .order(students: :desc)
-                                .limit(5)
+    # 人気大学のデータを取得（実際の閲覧データに基づく）
+    @popular_colleges = get_popular_colleges
     
     # 最新記事を取得（コラムとブログの混合）
     @recent_articles = get_recent_articles
   end
-
-  private
 
   def get_recent_articles
     # 静的なコラムデータ
@@ -95,6 +90,15 @@ class HomeController < ApplicationController
     category = params[:category]
     message = params[:message]
 
+    # デバッグ情報をログに出力
+    Rails.logger.info "=" * 50
+    Rails.logger.info "お問い合わせフォーム送信データ:"
+    Rails.logger.info "名前: #{name}"
+    Rails.logger.info "メール: #{email}"
+    Rails.logger.info "カテゴリー: #{category}"
+    Rails.logger.info "メッセージ: #{message}"
+    Rails.logger.info "=" * 50
+
     if name.present? && email.present? && category.present? && message.present?
       begin
         # メール送信
@@ -109,30 +113,24 @@ class HomeController < ApplicationController
         Rails.logger.info "お問い合わせメール送信成功"
         Rails.logger.info "送信者: #{name} (#{email})"
         Rails.logger.info "カテゴリー: #{category}"
-        Rails.logger.info "宛先: kotaro.swifty@gmail.com"
+        Rails.logger.info "宛先: collegespark2025@gmail.com"
         Rails.logger.info "送信時刻: #{Time.current}"
         Rails.logger.info "=" * 50
         
-        render json: { 
-          status: 'success', 
-          message: 'お問い合わせを受け付けました。ご連絡いただきありがとうございます。' 
-        }
+        flash[:notice] = '✅ お問い合わせを受け付けました！ご連絡いただきありがとうございます。24時間以内にcollegespark2025@gmail.comからご連絡いたします。'
+        redirect_to contact_path
         
       rescue Net::SMTPAuthenticationError => e
         Rails.logger.error "SMTP認証エラー: #{e.message}"
         save_contact_to_file(name, email, category, message) # ファイルには保存
-        render json: { 
-          status: 'error', 
-          message: 'メール送信に問題が発生しました。お問い合わせ内容は記録されました。' 
-        }
+        flash[:alert] = 'メール送信に問題が発生しました。お問い合わせ内容は記録されました。'
+        redirect_to contact_path
         
       rescue Net::TimeoutError => e
         Rails.logger.error "メール送信タイムアウト: #{e.message}"
         save_contact_to_file(name, email, category, message) # ファイルには保存
-        render json: { 
-          status: 'error', 
-          message: 'メール送信がタイムアウトしました。お問い合わせ内容は記録されました。' 
-        }
+        flash[:alert] = 'メール送信がタイムアウトしました。お問い合わせ内容は記録されました。'
+        redirect_to contact_path
         
       rescue => e
         Rails.logger.error "メール送信エラー: #{e.class.name} - #{e.message}"
@@ -140,10 +138,11 @@ class HomeController < ApplicationController
         save_contact_to_file(name, email, category, message) # ファイルには保存
         
         error_message = Rails.env.development? ? 
-          "エラー詳細: #{e.message}" : 
+          "メール送信エラー: #{e.message}" : 
           'メール送信に失敗しましたが、お問い合わせ内容は記録されました。'
           
-        render json: { status: 'error', message: error_message }
+        flash[:alert] = error_message
+        redirect_to contact_path
       end
     else
       missing_fields = []
@@ -152,7 +151,8 @@ class HomeController < ApplicationController
       missing_fields << 'カテゴリー' unless category.present?
       missing_fields << 'メッセージ' unless message.present?
       
-      render json: { status: 'error', message: "以下の項目を入力してください: #{missing_fields.join(', ')}" }
+      flash[:alert] = "以下の項目を入力してください: #{missing_fields.join(', ')}"
+      redirect_to contact_path
     end
   end
   

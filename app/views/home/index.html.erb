@@ -94,6 +94,7 @@
         </div>
       </div>
 
+
       <!-- 最新記事セクション -->
       <div class="section">
         <h2 class="section-title">
@@ -262,7 +263,7 @@
       </div>
 
       <!-- 最近閲覧した大学セクション -->
-      <% if recently_viewed_colleges.any? %>
+      <% if logged_in? && recently_viewed_colleges.any? %>
         <div class="section">
           <h2 class="section-title">
             <i class="fas fa-history me-2"></i>最近閲覧した大学
@@ -593,7 +594,7 @@
 
   .search-input {
     flex: 1;
-    min-width: 400px;
+    min-width: 600px;
     border: 2px solid rgba(251, 146, 60, 0.2);
     border-radius: 12px;
     padding: 18px 24px;
@@ -1002,7 +1003,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, rgb(240, 177, 61), rgb(255, 195, 85));
   }
 
   .article-window-link:hover .article-window {
@@ -1032,7 +1033,7 @@
   }
 
   .article-type-badge.blog {
-    background: #667eea;
+    background: rgb(240, 177, 61);
     color: white;
   }
 
@@ -1061,7 +1062,7 @@
   }
 
   .article-window-link:hover .article-title {
-    color: #667eea;
+    color: rgb(240, 177, 61);
   }
 
   .article-excerpt {
@@ -1096,7 +1097,7 @@
 
   .view-all-btn {
     padding: 12px 24px;
-    background: #667eea;
+    background: rgb(240, 177, 61);
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -1105,7 +1106,7 @@
   }
 
   .view-all-btn:hover {
-    background: #5a67d8;
+    background: rgb(220, 157, 41);
     color: white;
     text-decoration: none;
     transform: translateY(-2px);
@@ -1152,7 +1153,8 @@
     }
 
     .search-input {
-      min-width: auto;
+      min-width: 100%;
+      width: 100%;
       padding: 16px 20px;
       font-size: 16px;
     }
@@ -1949,6 +1951,8 @@
       font-size: 0.9rem;
     }
   }
+
+
 </style>
 
 <script>
@@ -1971,4 +1975,5 @@
       document.getElementById('hero-search-btn').click();
     }
   });
+
 </script>

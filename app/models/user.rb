@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_conditions, through: :favorites, source: :condition
   
+  # 閲覧履歴関連
+  has_many :view_histories, dependent: :destroy
+  has_many :viewed_conditions, through: :view_histories, source: :condition
+  
   # お気に入りに追加済みかチェック
   def favorite?(condition)
     favorites.exists?(condition: condition)
@@ -39,6 +43,10 @@ class User < ApplicationRecord
     self.password_reset_token = SecureRandom.urlsafe_base64
     self.password_reset_sent_at = Time.current
     save!
+    
+    Rails.logger.info "Password reset token created for user: #{email}"
+    Rails.logger.info "Token: #{self.password_reset_token}"
+    Rails.logger.info "Sent at: #{self.password_reset_sent_at}"
   end
   
   # パスワードリセットトークンの有効性チェック（2時間以内）

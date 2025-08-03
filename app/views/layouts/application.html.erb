@@ -79,6 +79,9 @@
     <%# Bootstrap CSS %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <%# Font Awesome CSS %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload", rel: "stylesheet" %>
     
@@ -95,6 +98,51 @@
       <%= yield %>
     </main>
     <%= render 'shared/footer' %>
+    
+    <!-- フローティングCTAボタン -->
+    <% unless controller_name == 'consultations' && action_name == 'new' %>
+      <button id="floatingCTA" class="floating-cta-btn" onclick="openFloatingConsultation()">
+        <i class="fas fa-comments"></i>
+        <span>無料相談</span>
+      </button>
+    <% end %>
+    
+    <!-- 相談フォームポップアップ -->
+    <div id="floatingConsultationPopup" class="floating-popup-overlay" style="display: none;">
+      <div class="floating-popup">
+        <button class="floating-popup-close" onclick="closeFloatingConsultation()">
+          <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="floating-popup-content">
+          <div class="floating-popup-header">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>留学相談予約</h3>
+            <p>お気軽にご相談ください</p>
+          </div>
+          
+          <div class="floating-popup-features">
+            <div class="floating-feature">
+              <i class="fas fa-check"></i>
+              <span>完全無料</span>
+            </div>
+            <div class="floating-feature">
+              <i class="fas fa-check"></i>
+              <span>オンライン対応</span>
+            </div>
+            <div class="floating-feature">
+              <i class="fas fa-check"></i>
+              <span>経験豊富なアドバイザー</span>
+            </div>
+          </div>
+          
+          <a href="/consultations/new" class="floating-cta-link">
+            相談予約フォームへ
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
     
     <!-- Star Rating Widget -->
 
@@ -172,6 +220,225 @@
     </div>
     
     <style>
+      /* フローティングCTAボタン */
+      .floating-cta-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #F5B531 0%, #F59E0B 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 14px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(245, 181, 49, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: softPulse 3s ease-in-out infinite;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      @keyframes softPulse {
+        0% { 
+          transform: scale(1); 
+          box-shadow: 0 8px 24px rgba(245, 181, 49, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        50% { 
+          transform: scale(1.02); 
+          box-shadow: 0 12px 32px rgba(245, 181, 49, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        100% { 
+          transform: scale(1); 
+          box-shadow: 0 8px 24px rgba(245, 181, 49, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+      }
+      
+      .floating-cta-btn:hover {
+        transform: translateY(-2px) scale(1.05);
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        box-shadow: 0 16px 48px rgba(245, 181, 49, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        animation: none;
+      }
+      
+      .floating-cta-btn i {
+        font-size: 20px;
+      }
+      
+      /* フローティングポップアップ */
+      .floating-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+      }
+      
+      .floating-popup {
+        background: white;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 90%;
+        padding: 30px;
+        position: relative;
+        animation: slideUp 0.4s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .floating-popup-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #f3f4f6;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .floating-popup-close:hover {
+        background: #e5e7eb;
+        transform: rotate(90deg);
+      }
+      
+      .floating-popup-header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      
+      .floating-popup-header i {
+        font-size: 3rem;
+        color: #ff7a00;
+        margin-bottom: 15px;
+        display: block;
+      }
+      
+      .floating-popup-header h3 {
+        font-size: 1.5rem;
+        color: #2d3748;
+        margin-bottom: 8px;
+      }
+      
+      .floating-popup-header p {
+        color: #6b7280;
+        font-size: 1rem;
+      }
+      
+      .floating-popup-features {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 25px;
+      }
+      
+      .floating-feature {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        color: #4a5568;
+      }
+      
+      .floating-feature i {
+        color: #10b981;
+        font-size: 1rem;
+      }
+      
+      .floating-cta-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
+        color: white;
+        padding: 14px 24px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(255, 122, 0, 0.3);
+      }
+      
+      .floating-cta-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(255, 122, 0, 0.4);
+        color: white;
+        text-decoration: none;
+      }
+      
+      .floating-cta-link i {
+        transition: transform 0.3s ease;
+      }
+      
+      .floating-cta-link:hover i {
+        transform: translateX(3px);
+      }
+      
+      /* モバイル対応 */
+      @media (max-width: 768px) {
+        .floating-cta-btn {
+          bottom: 20px;
+          right: 20px;
+          padding: 12px 20px;
+          font-size: 14px;
+        }
+        
+        .floating-cta-btn span {
+          display: none;
+        }
+        
+        .floating-cta-btn i {
+          font-size: 24px;
+        }
+        
+        .floating-popup {
+          padding: 25px 20px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .floating-cta-btn {
+          bottom: 15px;
+          right: 15px;
+          width: 56px;
+          height: 56px;
+          padding: 0;
+          border-radius: 50%;
+          justify-content: center;
+        }
+      }
+      
       .rating-widget {
         position: fixed;
         bottom: 20px;
@@ -1216,6 +1483,31 @@
       }, 1000);
       
       // 古いDOMContentLoadedリスナーは削除済み
+      
+      // フローティングCTAの制御
+      function openFloatingConsultation() {
+        const popup = document.getElementById('floatingConsultationPopup');
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeFloatingConsultation() {
+        const popup = document.getElementById('floatingConsultationPopup');
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+      
+      // オーバーレイクリックで閉じる
+      document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('floatingConsultationPopup');
+        if (overlay) {
+          overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+              closeFloatingConsultation();
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>

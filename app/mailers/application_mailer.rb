@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "College Spark <noreply@college-spark.app>"
+  default from: "College Spark <collegespark2025@gmail.com>"
   layout "mailer"
   
   # メール送信前の共通処理

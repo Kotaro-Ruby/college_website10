@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新しい無料相談予約</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      padding: 30px;
+    }
+    .info-section {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border-left: 4px solid #667eea;
+    }
+    .info-section h3 {
+      margin: 0 0 15px 0;
+      color: #2d3748;
+      font-size: 16px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .label {
+      font-weight: 600;
+      color: #4a5568;
+    }
+    .value {
+      color: #2d3748;
+    }
+    .message-box {
+      background: #e0f2fe;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #0369a1;
+      margin-top: 15px;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background: #f8f9fa;
+      color: #6c757d;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎯 新しい無料相談予約</h1>
+      <p>College Sparkに新しい相談予約が入りました</p>
+    </div>
+    
+    <div class="content">
+      <div class="info-section">
+        <h3>👤 申込者情報</h3>
+        <div class="info-grid">
+          <span class="label">お名前:</span>
+          <span class="value"><%= @consultation.name %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">メールアドレス:</span>
+          <span class="value"><%= @consultation.email %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">電話番号:</span>
+          <span class="value"><%= @consultation.phone %></span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>📅 希望日時</h3>
+        <div class="info-grid">
+          <span class="label">希望日:</span>
+          <span class="value"><%= @consultation.preferred_date.strftime('%Y年%-m月%-d日（%a）') %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">希望時間:</span>
+          <span class="value"><%= @consultation.preferred_time %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">タイムゾーン:</span>
+          <span class="value"><%= @consultation.timezone %></span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>💬 相談内容</h3>
+        <div class="info-grid">
+          <span class="label">相談タイプ:</span>
+          <span class="value"><%= @consultation.consultation_type_display %></span>
+        </div>
+        <div class="message-box">
+          <strong>詳細・ご質問:</strong><br>
+          <%= simple_format(@consultation.message) %>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>📊 予約情報</h3>
+        <div class="info-grid">
+          <span class="label">予約ID:</span>
+          <span class="value">#<%= @consultation.id %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">ステータス:</span>
+          <span class="value"><%= @consultation.status_display %></span>
+        </div>
+        <div class="info-grid">
+          <span class="label">予約日時:</span>
+          <span class="value"><%= @consultation.created_at.strftime('%Y年%-m月%-d日 %H:%M') %></span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="http://localhost:3000/admin/consultations/<%= @consultation.id %>" class="btn">
+          管理画面で確認する
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>この予約に対応するには、管理画面から予約確定の手続きを行ってください。</p>
+      <p>College Spark 管理システム</p>
+    </div>
+  </div>
+</body>
+</html>

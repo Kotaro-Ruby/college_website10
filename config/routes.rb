@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # Consultation routes
+  resources :consultations, only: [:new, :create, :show]
   root "home#index"
 
   get "conditions/index"
@@ -37,6 +39,13 @@ Rails.application.routes.draw do
   
   # Admin management routes
   namespace :admin do
+    resources :consultations, only: [:index, :show, :update, :destroy] do
+      member do
+        patch :confirm
+        patch :cancel
+        patch :complete
+      end
+    end
     resources :users, only: [:index, :show, :destroy]
     resources :conditions, only: [:index, :show, :edit, :update, :destroy]
     resources :surveys, only: [:index, :show, :destroy] do

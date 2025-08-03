@@ -1,0 +1,888 @@
+<div class="consultation-form-container">
+  <!-- ページヘッダー -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <h1>無料留学相談</h1>
+      <p>専門アドバイザーがあなたの留学をサポートします</p>
+    </div>
+  </div>
+
+  <div class="consultation-benefits">
+    <div class="benefit-item">
+      <i class="fas fa-user-graduate"></i>
+      <div>
+        <h3>経験豊富なアドバイザー</h3>
+        <p>アメリカ大学留学のエキスパートが直接対応</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <i class="fas fa-clock"></i>
+      <div>
+        <h3>じっくり相談できる時間</h3>
+        <p>30分〜1時間、あなたのペースで相談可能</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <i class="fas fa-laptop"></i>
+      <div>
+        <h3>オンライン対応</h3>
+        <p>ご自宅から気軽にご参加いただけます</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="consultation-form-wrapper" id="consultation-form">
+    <%= form_with model: @consultation, local: true, class: "consultation-form" do |form| %>
+      <% if @consultation.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= pluralize(@consultation.errors.count, "error") %> prohibited this consultation from being saved:</h4>
+          <ul>
+            <% @consultation.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-section">
+        <h2><i class="fas fa-user"></i> 基本情報</h2>
+        
+        <div class="form-group">
+          <%= form.label :name, "お名前*", class: "form-label" %>
+          <%= form.text_field :name, class: "form-control", placeholder: "山田 太郎" %>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half-width">
+            <%= form.label :email, "メールアドレス*", class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
+          </div>
+          <div class="form-group half-width">
+            <%= form.label :phone, "電話番号*", class: "form-label" %>
+            <%= form.text_field :phone, class: "form-control", placeholder: "090-1234-5678" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2><i class="fas fa-calendar"></i> 希望日時（複数候補選択可）</h2>
+        
+        <%= form.hidden_field :timezone, value: "JST" %>
+
+        <div class="datetime-options">
+          <p class="datetime-description">希望する日時を最大3つまで選択してください（優先順位順）</p>
+          <div class="time-restriction-notice">
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>相談可能時間（日本時間 JST）:</strong>
+              <ul>
+                <li>平日: 20:00〜23:00</li>
+                <li>土日祝日: 9:00〜21:00</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="datetime-candidates" id="datetime-candidates">
+            <div class="datetime-candidate">
+              <div class="candidate-header">
+                <span class="candidate-priority">第1希望</span>
+                <span class="required-mark">*</span>
+              </div>
+              <div class="form-row">
+                <div class="form-group half-width">
+                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
+                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today, required: true %>
+                </div>
+                <div class="form-group half-width">
+                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
+                  <%= select_tag "consultation[preferred_times][]", options_for_select([
+                    ["時間を選択してください", ""]
+                  ]), { class: "form-control time-select", required: true } %>
+                </div>
+              </div>
+            </div>
+
+            <div class="datetime-candidate" style="display: none;">
+              <div class="candidate-header">
+                <span class="candidate-priority">第2希望</span>
+                <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">×</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group half-width">
+                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
+                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
+                </div>
+                <div class="form-group half-width">
+                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
+                  <%= select_tag "consultation[preferred_times][]", options_for_select([
+                    ["時間を選択してください", ""]
+                  ]), { class: "form-control time-select" } %>
+                </div>
+              </div>
+            </div>
+
+            <div class="datetime-candidate" style="display: none;">
+              <div class="candidate-header">
+                <span class="candidate-priority">第3希望</span>
+                <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">×</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group half-width">
+                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
+                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
+                </div>
+                <div class="form-group half-width">
+                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
+                  <%= select_tag "consultation[preferred_times][]", options_for_select([
+                    ["時間を選択してください", ""]
+                  ]), { class: "form-control time-select" } %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="add-candidate-section">
+            <button type="button" class="add-candidate-btn" onclick="addCandidate()">
+              <i class="fas fa-plus"></i> 希望候補を追加
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2><i class="fas fa-comments"></i> 相談内容</h2>
+        
+        <div class="form-group">
+          <%= form.label :consultation_type, "相談タイプ*", class: "form-label" %>
+          <%= form.select :consultation_type, [
+            ["大学留学全般", "general"],
+            ["大学選び", "university_selection"],
+            ["出願サポート", "application_support"],
+            ["奨学金相談", "scholarship"],
+            ["ビザ相談", "visa"],
+            ["その他", "other"]
+          ], { prompt: "相談タイプを選択してください" }, { class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :message, "詳細・ご質問*", class: "form-label" %>
+          <%= form.text_area :message, class: "form-control", rows: 6, placeholder: "相談したい内容を詳しくお聞かせください。" %>
+        </div>
+
+        <div class="consultation-notice">
+          <div class="notice-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="notice-content">
+            <p><strong>ご注意：</strong>こちらの相談は留学全般に関するアドバイスのみとなります。特定の大学に関する詳細な質問や個別の大学に関する相談は承っておりません。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-submit">
+        <%= form.submit "無料相談を予約する", class: "submit-btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="consultation-note">
+    <div class="note-content">
+      <i class="fas fa-info-circle"></i>
+      <div>
+        <h3>ご予約について</h3>
+        <ul>
+          <li>予約確認後、24時間以内にメールでご連絡いたします</li>
+          <li>相談はZoom、Google Meetなどのオンラインツールで行います</li>
+          <li>相談は完全無料です。費用は一切かかりません</li>
+          <li>キャンセルの場合は、予約日の前日までにご連絡ください</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.consultation-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ページヘッダー */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.05) 0%, transparent 70%);
+  animation: gentleFloat 8s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) rotate(180deg); }
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.header-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 24px rgba(255, 122, 0, 0.3);
+}
+
+.header-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin: 0;
+  opacity: 0.8;
+}
+
+
+.consultation-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
+}
+
+.benefit-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: rgba(255, 122, 0, 0.2);
+}
+
+.benefit-item i {
+  font-size: 2.2rem;
+  color: #ff7a00;
+  min-width: 50px;
+  background: rgba(255, 122, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.benefit-item h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.3;
+}
+
+.benefit-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.consultation-form-wrapper {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 30px;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.form-section h2 {
+  color: #2d3748;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-section h2 i {
+  color: #ff7a00;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.half-width {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #ff7a00;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+}
+
+.form-control::placeholder {
+  color: #a0aec0;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4);
+}
+
+.consultation-note {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid #28a745;
+}
+
+.note-content {
+  display: flex;
+  gap: 15px;
+}
+
+.note-content i {
+  color: #28a745;
+  font-size: 1.5rem;
+  margin-top: 2px;
+}
+
+.note-content h3 {
+  margin: 0 0 10px 0;
+  color: #2d3748;
+}
+
+.note-content ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.note-content li {
+  margin-bottom: 5px;
+  color: #4a5568;
+}
+
+/* 相談注意事項 */
+.consultation-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 15px;
+}
+
+.notice-icon {
+  color: #856404;
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.notice-content p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.notice-content strong {
+  font-weight: 600;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.alert h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.alert ul {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .consultation-form-container {
+    padding: 15px;
+  }
+
+  .page-header {
+    padding: 30px 20px;
+    margin-bottom: 30px;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .page-header p {
+    font-size: 1rem;
+  }
+
+  .header-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+  }
+
+  .header-icon i {
+    font-size: 1.8rem;
+  }
+
+  .consultation-benefits {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .benefit-item {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .benefit-item i {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+
+  .benefit-item h3 {
+    font-size: 1.1rem;
+  }
+
+  .consultation-form-wrapper {
+    padding: 25px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .half-width {
+    margin-bottom: 20px;
+  }
+}
+
+.datetime-options {
+  margin-top: 20px;
+}
+
+.datetime-description {
+  color: #4a5568;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.time-restriction-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.time-restriction-notice i {
+  color: #1890ff;
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.time-restriction-notice strong {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.time-restriction-notice ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.time-restriction-notice li {
+  color: #595959;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.datetime-candidates {
+  margin-bottom: 20px;
+}
+
+.datetime-candidate {
+  background: #f8f9fa;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.datetime-candidate:hover {
+  border-color: #ff7a00;
+  background: #fff9f5;
+}
+
+.candidate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.candidate-priority {
+  font-weight: 600;
+  color: #ff7a00;
+  font-size: 1rem;
+}
+
+.required-mark {
+  color: #e53e3e;
+  font-weight: bold;
+}
+
+.remove-candidate-btn {
+  background: #fed7d7;
+  color: #c53030;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.remove-candidate-btn:hover {
+  background: #feb2b2;
+  transform: scale(1.1);
+}
+
+.add-candidate-section {
+  text-align: center;
+}
+
+.add-candidate-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(72, 187, 120, 0.3);
+}
+
+.add-candidate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+}
+
+.add-candidate-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.add-candidate-btn i {
+  margin-right: 8px;
+}
+
+@media (max-width: 480px) {
+  .consultation-hero {
+    padding: 25px 15px;
+  }
+
+  .consultation-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .consultation-form-wrapper {
+    padding: 20px 15px;
+  }
+
+  .note-content {
+    flex-direction: column;
+  }
+
+  .datetime-candidate {
+    padding: 15px;
+  }
+
+  .candidate-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+</style>
+
+<script>
+let candidateCount = 1;
+const maxCandidates = 3;
+
+function addCandidate() {
+  if (candidateCount >= maxCandidates) {
+    return;
+  }
+
+  const candidates = document.querySelectorAll('.datetime-candidate');
+  const nextCandidate = candidates[candidateCount];
+  
+  if (nextCandidate) {
+    nextCandidate.style.display = 'block';
+    candidateCount++;
+    
+    // 新しく表示されたcandidate内の日付入力に時間制限を適用
+    const dateInput = nextCandidate.querySelector('.date-input');
+    if (dateInput && dateInput.value) {
+      updateTimeOptions(dateInput);
+    }
+    
+    updateAddButton();
+  }
+}
+
+function removeCandidate(button) {
+  const candidate = button.closest('.datetime-candidate');
+  const candidates = document.querySelectorAll('.datetime-candidate');
+  const candidateIndex = Array.from(candidates).indexOf(candidate);
+  
+  if (candidateIndex > 0) {
+    candidate.style.display = 'none';
+    
+    const dateInput = candidate.querySelector('input[type="date"]');
+    const timeSelect = candidate.querySelector('select');
+    if (dateInput) dateInput.value = '';
+    if (timeSelect) timeSelect.value = '';
+    
+    candidateCount--;
+    updateAddButton();
+  }
+}
+
+function updateAddButton() {
+  const addButton = document.querySelector('.add-candidate-btn');
+  if (addButton) {
+    if (candidateCount >= maxCandidates) {
+      addButton.disabled = true;
+      addButton.innerHTML = '<i class="fas fa-check"></i> 最大3つまで選択済み';
+    } else {
+      addButton.disabled = false;
+      addButton.innerHTML = '<i class="fas fa-plus"></i> 希望候補を追加';
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateAddButton();
+  
+  // 日付選択時の時間制限設定
+  document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('date-input')) {
+      updateTimeOptions(e.target);
+    }
+  });
+  
+  // 初期表示時に時間オプションを設定
+  document.querySelectorAll('.date-input').forEach(function(dateInput) {
+    if (dateInput.value) {
+      updateTimeOptions(dateInput);
+    }
+  });
+});
+
+// 選択された日付に基づいて時間オプションを更新
+function updateTimeOptions(dateInput) {
+  const selectedDate = new Date(dateInput.value);
+  if (!selectedDate || isNaN(selectedDate)) return;
+  
+  const dayOfWeek = selectedDate.getDay(); // 0=日曜日, 1=月曜日, ..., 6=土曜日
+  const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6); // 日曜日または土曜日
+  
+  // 対応する時間選択要素を取得
+  const candidate = dateInput.closest('.datetime-candidate');
+  const timeSelect = candidate.querySelector('.time-select');
+  
+  if (!timeSelect) return;
+  
+  // 時間オプションをクリア
+  timeSelect.innerHTML = '<option value="">時間を選択してください</option>';
+  
+  let timeOptions = [];
+  
+  if (isWeekend) {
+    // 土日祝日: 9:00-21:00
+    timeOptions = [
+      ["9:00-10:00", "9:00-10:00"],
+      ["10:00-11:00", "10:00-11:00"],
+      ["11:00-12:00", "11:00-12:00"],
+      ["12:00-13:00", "12:00-13:00"],
+      ["13:00-14:00", "13:00-14:00"],
+      ["14:00-15:00", "14:00-15:00"],
+      ["15:00-16:00", "15:00-16:00"],
+      ["16:00-17:00", "16:00-17:00"],
+      ["17:00-18:00", "17:00-18:00"],
+      ["18:00-19:00", "18:00-19:00"],
+      ["19:00-20:00", "19:00-20:00"],
+      ["20:00-21:00", "20:00-21:00"]
+    ];
+  } else {
+    // 平日: 20:00-23:00
+    timeOptions = [
+      ["20:00-21:00", "20:00-21:00"],
+      ["21:00-22:00", "21:00-22:00"],
+      ["22:00-23:00", "22:00-23:00"]
+    ];
+  }
+  
+  // 時間オプションを追加
+  timeOptions.forEach(function(option) {
+    const optionElement = document.createElement('option');
+    optionElement.value = option[1];
+    optionElement.textContent = option[0];
+    timeSelect.appendChild(optionElement);
+  });
+}
+</script>

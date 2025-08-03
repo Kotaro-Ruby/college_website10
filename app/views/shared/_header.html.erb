@@ -38,7 +38,7 @@
         </a>
       <% else %>
         <a href="/" class="logo">
-          <span class="logo-icon">🎓</span>
+          <span class="logo-icon"><img src="/favicon.ico" alt="College Spark" class="logo-favicon"></span>
           <span class="logo-text">College Spark</span>
         </a>
       <% end %>
@@ -114,6 +114,10 @@
         <a href="/columns" class="sidebar-item <%= 'active' if is_column_section? %>">
           <i class="fas fa-feather-alt"></i>
           コラム
+        </a>
+        <a href="/consultations/new" class="sidebar-item <%= 'active' if request.path == '/consultations/new' %>">
+          <i class="fas fa-comments"></i>
+          無料相談
         </a>
       </div>
       
@@ -284,6 +288,15 @@
   .logo-icon {
     font-size: 36px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-favicon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
   }
 
   .logo-text {
@@ -863,6 +876,11 @@
       font-size: 32px;
     }
 
+    .logo-favicon {
+      width: 32px;
+      height: 32px;
+    }
+
     .nav-link, .dropdown-trigger {
       font-size: 13px;
       padding: 8px 12px;
@@ -908,6 +926,11 @@
 
     .logo-icon {
       font-size: 26px;
+    }
+
+    .logo-favicon {
+      width: 26px;
+      height: 26px;
     }
 
     /* モバイルでの右サイドナビゲーション非表示 */
@@ -992,6 +1015,11 @@
     .logo-icon {
       font-size: 32px;
     }
+
+    .logo-favicon {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   @media (max-width: 480px) {
@@ -1011,6 +1039,11 @@
 
     .logo-icon {
       font-size: 24px;
+    }
+
+    .logo-favicon {
+      width: 24px;
+      height: 24px;
     }
 
     .header-nav {

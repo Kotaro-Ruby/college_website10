@@ -1,0 +1,530 @@
+<div class="admin-consultations">
+  <div class="page-header">
+    <h1><i class="fas fa-comments"></i> 無料相談管理</h1>
+    <p>予約された無料相談の管理・確認ができます</p>
+  </div>
+
+  <!-- ステータス統計 -->
+  <div class="status-cards">
+    <div class="status-card <%= 'active' if params[:status].blank? %>">
+      <%= link_to admin_consultations_path do %>
+        <div class="card-content">
+          <div class="card-number"><%= @status_counts[:all] %></div>
+          <div class="card-label">全体</div>
+        </div>
+      <% end %>
+    </div>
+    <div class="status-card pending <%= 'active' if params[:status] == 'pending' %>">
+      <%= link_to admin_consultations_path(status: 'pending') do %>
+        <div class="card-content">
+          <div class="card-number"><%= @status_counts[:pending] %></div>
+          <div class="card-label">確認中</div>
+        </div>
+      <% end %>
+    </div>
+    <div class="status-card confirmed <%= 'active' if params[:status] == 'confirmed' %>">
+      <%= link_to admin_consultations_path(status: 'confirmed') do %>
+        <div class="card-content">
+          <div class="card-number"><%= @status_counts[:confirmed] %></div>
+          <div class="card-label">確定済み</div>
+        </div>
+      <% end %>
+    </div>
+    <div class="status-card completed <%= 'active' if params[:status] == 'completed' %>">
+      <%= link_to admin_consultations_path(status: 'completed') do %>
+        <div class="card-content">
+          <div class="card-number"><%= @status_counts[:completed] %></div>
+          <div class="card-label">完了</div>
+        </div>
+      <% end %>
+    </div>
+    <div class="status-card cancelled <%= 'active' if params[:status] == 'cancelled' %>">
+      <%= link_to admin_consultations_path(status: 'cancelled') do %>
+        <div class="card-content">
+          <div class="card-number"><%= @status_counts[:cancelled] %></div>
+          <div class="card-label">キャンセル</div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- フィルター -->
+  <div class="filters-section">
+    <%= form_tag admin_consultations_path, method: :get, class: "filters-form" do %>
+      <div class="filter-group">
+        <%= label_tag :date_from, "開始日", class: "filter-label" %>
+        <%= date_field_tag :date_from, params[:date_from], class: "filter-input" %>
+      </div>
+      <div class="filter-group">
+        <%= label_tag :date_to, "終了日", class: "filter-label" %>
+        <%= date_field_tag :date_to, params[:date_to], class: "filter-input" %>
+      </div>
+      <div class="filter-group">
+        <%= hidden_field_tag :status, params[:status] %>
+        <%= submit_tag "絞り込み", class: "filter-btn" %>
+        <%= link_to "リセット", admin_consultations_path, class: "reset-btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 相談一覧 -->
+  <div class="consultations-table">
+    <% if @consultations.any? %>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>お名前</th>
+            <th>メール</th>
+            <th>相談タイプ</th>
+            <th>希望日時</th>
+            <th>ステータス</th>
+            <th>予約日</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @consultations.each do |consultation| %>
+            <tr class="consultation-row">
+              <td class="id-cell">#<%= consultation.id %></td>
+              <td class="name-cell">
+                <div class="name-info">
+                  <div class="name"><%= consultation.name %></div>
+                  <div class="phone"><%= consultation.phone %></div>
+                </div>
+              </td>
+              <td class="email-cell"><%= consultation.email %></td>
+              <td class="type-cell">
+                <span class="type-badge">
+                  <%= consultation.consultation_type_display %>
+                </span>
+              </td>
+              <td class="datetime-cell">
+                <div class="datetime-info">
+                  <div class="date"><%= consultation.preferred_date.strftime('%m/%d') %></div>
+                  <div class="time"><%= consultation.preferred_time %></div>
+                  <div class="timezone"><%= consultation.timezone %></div>
+                </div>
+              </td>
+              <td class="status-cell">
+                <span class="status-badge status-<%= consultation.status %>">
+                  <%= consultation.status_display %>
+                </span>
+              </td>
+              <td class="created-cell">
+                <%= consultation.created_at.strftime('%m/%d %H:%M') %>
+              </td>
+              <td class="actions-cell">
+                <div class="action-buttons">
+                  <%= link_to admin_consultation_path(consultation), class: "btn btn-view" do %>
+                    <i class="fas fa-eye"></i>
+                  <% end %>
+                  
+                  <% if consultation.status == 'pending' %>
+                    <%= link_to confirm_admin_consultation_path(consultation), method: :patch, 
+                        class: "btn btn-confirm", 
+                        data: { confirm: "この相談を確定しますか？" } do %>
+                      <i class="fas fa-check"></i>
+                    <% end %>
+                  <% end %>
+                  
+                  <% if consultation.status == 'confirmed' %>
+                    <%= link_to complete_admin_consultation_path(consultation), method: :patch, 
+                        class: "btn btn-complete", 
+                        data: { confirm: "この相談を完了にしますか？" } do %>
+                      <i class="fas fa-check-circle"></i>
+                    <% end %>
+                  <% end %>
+                  
+                  <% unless consultation.status == 'cancelled' %>
+                    <%= link_to cancel_admin_consultation_path(consultation), method: :patch, 
+                        class: "btn btn-cancel", 
+                        data: { confirm: "この相談をキャンセルしますか？" } do %>
+                      <i class="fas fa-times"></i>
+                    <% end %>
+                  <% end %>
+                  
+                  <%= link_to admin_consultation_path(consultation), method: :delete, 
+                      class: "btn btn-delete", 
+                      data: { confirm: "この相談を削除しますか？削除すると元に戻せません。" } do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <!-- ページネーション -->
+      <div class="pagination-wrapper">
+        <%= paginate @consultations if respond_to?(:paginate) %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fas fa-calendar-times"></i>
+        <h3>相談予約がありません</h3>
+        <p>まだ無料相談の予約がありません。</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.admin-consultations {
+  padding: 20px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 20px;
+}
+
+.page-header h1 {
+  color: #2d3748;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-header h1 i {
+  color: #667eea;
+}
+
+.page-header p {
+  color: #718096;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.status-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.status-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.status-card.active {
+  border-color: #667eea;
+  background: #f7fafc;
+}
+
+.status-card a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 5px;
+}
+
+.card-label {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+.status-card.pending .card-number { color: #f59e0b; }
+.status-card.confirmed .card-number { color: #10b981; }
+.status-card.completed .card-number { color: #6366f1; }
+.status-card.cancelled .card-number { color: #ef4444; }
+
+.filters-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters-form {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.filter-input {
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.filter-btn, .reset-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+.filter-btn {
+  background: #667eea;
+  color: white;
+}
+
+.reset-btn {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.consultations-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background: #f8f9fa;
+  padding: 15px 10px;
+  font-weight: 600;
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.data-table td {
+  padding: 15px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+.consultation-row:hover {
+  background: #f8f9fa;
+}
+
+.id-cell {
+  font-weight: 600;
+  color: #667eea;
+  width: 80px;
+}
+
+.name-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.phone {
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.email-cell {
+  font-size: 0.9rem;
+  color: #4a5568;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.type-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.datetime-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.time {
+  font-size: 0.8rem;
+  color: #4a5568;
+}
+
+.timezone {
+  font-size: 0.7rem;
+  color: #718096;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-confirmed {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.status-completed {
+  background: #e0e7ff;
+  color: #5b21b6;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.created-cell {
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.btn-view {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.btn-confirm {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.btn-complete {
+  background: #e0e7ff;
+  color: #5b21b6;
+}
+
+.btn-cancel {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.btn-delete {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #718096;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin-bottom: 10px;
+  color: #4a5568;
+}
+
+.pagination-wrapper {
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .admin-consultations {
+    padding: 15px;
+  }
+
+  .status-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .data-table {
+    font-size: 0.8rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 10px 5px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+</style>

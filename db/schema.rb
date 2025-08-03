@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_08_021903) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -136,6 +136,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_021903) do
     t.index ["tribal"], name: "index_conditions_on_tribal"
   end
 
+  create_table "consultations", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.date "preferred_date"
+    t.string "preferred_time"
+    t.string "timezone"
+    t.string "consultation_type"
+    t.text "message"
+    t.string "status"
+    t.text "admin_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "datetime_candidates"
+  end
+
   create_table "detailed_programs", force: :cascade do |t|
     t.integer "condition_id", null: false
     t.string "cip_code", limit: 255, null: false
@@ -186,7 +202,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_021903) do
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
+  create_table "view_histories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "condition_id", null: false
+    t.datetime "viewed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condition_id"], name: "index_view_histories_on_condition_id"
+    t.index ["user_id"], name: "index_view_histories_on_user_id"
+  end
+
   add_foreign_key "detailed_programs", "conditions"
   add_foreign_key "favorites", "conditions"
   add_foreign_key "favorites", "users"
+  add_foreign_key "view_histories", "conditions"
+  add_foreign_key "view_histories", "users"
 end

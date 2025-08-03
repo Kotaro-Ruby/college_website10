@@ -346,6 +346,8 @@
 
   .college-search-input {
     flex: 1;
+    min-width: 700px;
+    width: 100%;
     padding: 16px 24px;
     border: 2px solid transparent;
     border-radius: 100px;

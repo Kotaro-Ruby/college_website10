@@ -1,0 +1,222 @@
+<div class="consultation-detail">
+  <h1>相談予約詳細</h1>
+  
+  <div class="detail-section">
+    <h2>基本情報</h2>
+    <table class="detail-table">
+      <tr>
+        <th>お名前</th>
+        <td><%= @consultation.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @consultation.email %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @consultation.phone %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>希望日時</h2>
+    <table class="detail-table">
+      <tr>
+        <th>タイムゾーン</th>
+        <td><%= @consultation.timezone %></td>
+      </tr>
+      <tr>
+        <th>希望候補</th>
+        <td>
+          <% if @consultation.datetime_candidates_list.present? %>
+            <ul class="datetime-candidates-list">
+              <% @consultation.datetime_candidates_list.each_with_index do |candidate, index| %>
+                <li class="datetime-candidate-item">
+                  <span class="priority">第<%= index + 1 %>希望:</span>
+                  <span class="datetime"><%= candidate['date'] %> <%= candidate['time'] %></span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <%= @consultation.preferred_date %> <%= @consultation.preferred_time %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>相談内容</h2>
+    <table class="detail-table">
+      <tr>
+        <th>相談タイプ</th>
+        <td><%= @consultation.consultation_type_display %></td>
+      </tr>
+      <tr>
+        <th>詳細・ご質問</th>
+        <td class="message-content"><%= simple_format(@consultation.message) %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>ステータス</h2>
+    <table class="detail-table">
+      <tr>
+        <th>現在のステータス</th>
+        <td><span class="status-badge status-<%= @consultation.status %>"><%= @consultation.status_display %></span></td>
+      </tr>
+      <tr>
+        <th>予約日時</th>
+        <td><%= @consultation.created_at.strftime('%Y年%m月%d日 %H:%M') %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="actions">
+    <%= link_to '一覧に戻る', admin_consultations_path, class: 'btn btn-secondary' %>
+    <%= link_to 'ステータス更新', edit_admin_consultation_path(@consultation), class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<style>
+.consultation-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.consultation-detail h1 {
+  color: #2d3748;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.detail-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.detail-section h2 {
+  color: #4a5568;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detail-table th,
+.detail-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.detail-table th {
+  background: #f7fafc;
+  font-weight: 600;
+  color: #2d3748;
+  width: 160px;
+}
+
+.datetime-candidates-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.datetime-candidate-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.datetime-candidate-item:last-child {
+  border-bottom: none;
+}
+
+.priority {
+  font-weight: 600;
+  color: #667eea;
+  min-width: 60px;
+}
+
+.datetime {
+  color: #2d3748;
+}
+
+.message-content {
+  line-height: 1.6;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.status-confirmed {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.status-completed {
+  background: #bee3f8;
+  color: #2a4365;
+}
+
+.status-cancelled {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5a67d8;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e0;
+}
+</style>

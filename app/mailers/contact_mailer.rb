@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default from: 'College Spark <noreply@college-spark.app>'
+  default from: 'College Spark <collegespark2025@gmail.com>'
 
   def contact_form(name, email, category, message)
     @name = name
@@ -18,10 +18,10 @@ class ContactMailer < ApplicationMailer
                   end
     
     mail(
-      to: 'kotaro.swifty@gmail.com',
+      to: 'collegespark2025@gmail.com',
       subject: "[College Spark] #{category_jp} - #{name}様より",
       reply_to: "#{name} <#{email}>",
-      from: 'College Spark <noreply@college-spark.app>'
+      from: 'College Spark <collegespark2025@gmail.com>'
     )
   end
 end
