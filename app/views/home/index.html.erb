@@ -21,6 +21,33 @@
   <div class="main-content">
     <div class="content-padding">
       
+      <!-- 国選択セクション -->
+      <div class="section country-selection">
+        <h2 class="section-title">
+          <i class="fas fa-globe me-2"></i>留学先を選ぶ
+        </h2>
+        <div class="country-links">
+          <a href="/search" class="country-link active">
+            <span class="country-flag">🇺🇸</span>
+            <span class="country-name">アメリカの大学について</span>
+          </a>
+          <a href="/au/about" class="country-link active">
+            <span class="country-flag">🇦🇺</span>
+            <span class="country-name">オーストラリアの大学について</span>
+          </a>
+          <a href="#" class="country-link disabled">
+            <span class="country-flag">🇨🇦</span>
+            <span class="country-name">カナダの大学について</span>
+            <span class="coming-soon">準備中</span>
+          </a>
+          <a href="#" class="country-link disabled">
+            <span class="country-flag">🇳🇿</span>
+            <span class="country-name">ニュージーランドの大学について</span>
+            <span class="coming-soon">準備中</span>
+          </a>
+        </div>
+      </div>
+      
       <!-- なぜ海外進学なのか？セクション -->
       <div class="section">
         <div class="why-study-abroad-summary">
@@ -1972,6 +1999,80 @@
     }
   }
 
+  /* 国選択セクション */
+  .country-selection {
+    margin-bottom: 40px;
+  }
+
+  .country-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .country-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .country-link.active {
+    border-color: #fb923c;
+    background: linear-gradient(135deg, #fff8f3 0%, #ffecd4 100%);
+  }
+
+  .country-link.active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.2);
+    border-color: #f97316;
+  }
+
+  .country-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f3f4f6;
+  }
+
+  .country-flag {
+    font-size: 2rem;
+  }
+
+  .country-name {
+    font-size: 1rem;
+  }
+
+  .coming-soon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .country-links {
+      flex-direction: column;
+    }
+
+    .country-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 
 </style>
 

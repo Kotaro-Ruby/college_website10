@@ -1,0 +1,2 @@
+class OverseasStudentCountry < ApplicationRecord
+end

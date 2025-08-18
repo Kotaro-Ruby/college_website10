@@ -128,6 +128,17 @@ Rails.application.routes.draw do
 
   get '/import_conditions', to: 'import#conditions'
 
+  # Australia routes
+  namespace :au do
+    get '/', to: 'home#index', as: :home
+    get '/about', to: 'universities#about', as: :about
+    resources :universities, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
 
   #get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'
   #get '/:college_name', to: 'conditions#show', as: 'college_detail'

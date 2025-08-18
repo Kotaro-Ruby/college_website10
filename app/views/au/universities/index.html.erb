@@ -1,0 +1,982 @@
+<div class="au-universities-page">
+  <!-- Hero Section with Australian Theme -->
+  <div class="au-hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🇦🇺 G'day Mate!</div>
+      <h1 class="hero-title">オーストラリア大学検索</h1>
+      <p class="hero-subtitle">世界トップクラスの教育と素晴らしい生活環境</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-number">39</span>
+          <span class="stat-text">総合大学</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number">7</span>
+          <span class="stat-text">世界TOP100</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number">70万+</span>
+          <span class="stat-text">留学生</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links Bar -->
+  <div class="quick-links-bar">
+    <a href="/au/about" class="quick-link">
+      <i class="fas fa-info-circle"></i>
+      <span>オーストラリア留学について</span>
+    </a>
+    <a href="#group-of-eight" class="quick-link">
+      <i class="fas fa-star"></i>
+      <span>Group of Eight</span>
+    </a>
+    <a href="#popular-cities" class="quick-link">
+      <i class="fas fa-city"></i>
+      <span>人気都市</span>
+    </a>
+    <a href="#scholarships" class="quick-link">
+      <i class="fas fa-graduation-cap"></i>
+      <span>奨学金情報</span>
+    </a>
+  </div>
+
+  <div class="main-container">
+    <!-- Search Section -->
+    <div class="search-section">
+      <%= form_with url: search_au_universities_path, method: :get, local: true, class: "search-form" do |f| %>
+        <div class="search-wrapper">
+          <div class="search-input-group">
+            <i class="fas fa-search search-icon"></i>
+            <%= text_field_tag :q, params[:q], 
+                placeholder: "大学名、都市、専攻分野で検索...", 
+                class: "search-input" %>
+            <%= submit_tag "検索", class: "search-button" %>
+          </div>
+          <div class="search-options">
+            <%= check_box_tag :search_courses, '1', params[:search_courses] == '1', class: "custom-checkbox" %>
+            <%= label_tag :search_courses, "コース名も含めて検索", class: "checkbox-label" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <div class="filters-header">
+        <h3><i class="fas fa-filter"></i> 絞り込み検索</h3>
+      </div>
+      <%= form_with url: au_universities_path, method: :get, local: true, class: "filter-form" do |f| %>
+        <div class="filter-grid">
+          <div class="filter-item">
+            <label><i class="fas fa-map-marked-alt"></i> 州・地域</label>
+            <%= select_tag :state, 
+                options_for_select([
+                  ['すべての州', ''],
+                  ['New South Wales (シドニー)', 'NSW'],
+                  ['Victoria (メルボルン)', 'VIC'],
+                  ['Queensland (ブリスベン・ゴールドコースト)', 'QLD'],
+                  ['Western Australia (パース)', 'WA'],
+                  ['South Australia (アデレード)', 'SA'],
+                  ['Australian Capital Territory (キャンベラ)', 'ACT'],
+                  ['Tasmania (ホバート)', 'TAS'],
+                  ['Northern Territory (ダーウィン)', 'NT']
+                ], params[:state]),
+                class: "filter-select" %>
+          </div>
+
+          <div class="filter-item">
+            <label><i class="fas fa-dollar-sign"></i> 年間授業料（AUD）</label>
+            <div class="filter-range">
+              <%= number_field_tag :min_tuition, params[:min_tuition], 
+                  placeholder: "最小", class: "filter-input-small" %>
+              <span class="range-separator">〜</span>
+              <%= number_field_tag :max_tuition, params[:max_tuition], 
+                  placeholder: "最大", class: "filter-input-small" %>
+            </div>
+          </div>
+
+          <div class="filter-item">
+            <label><i class="fas fa-sort"></i> 並び順</label>
+            <%= select_tag :sort,
+                options_for_select([
+                  ['おすすめ順', 'recommended'],
+                  ['大学名（A-Z）', 'name'],
+                  ['学生数が多い順', 'students'],
+                  ['授業料が安い順', 'tuition_low'],
+                  ['コース数が多い順', 'courses']
+                ], params[:sort]),
+                class: "filter-select" %>
+          </div>
+
+          <div class="filter-submit">
+            <%= submit_tag "検索結果を更新", class: "filter-button" %>
+            <a href="/au/universities" class="reset-link">リセット</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section">
+      <div class="results-header">
+        <h2 class="results-title">
+          <span class="results-count"><%= @total_count %></span>校の大学
+        </h2>
+        <div class="view-options">
+          <button class="view-option active" data-view="grid">
+            <i class="fas fa-th"></i>
+          </button>
+          <button class="view-option" data-view="list">
+            <i class="fas fa-list"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="universities-grid">
+        <% @universities.each do |university| %>
+          <div class="university-card">
+            <% if ['The University of Melbourne', 'The University of Sydney', 'The University of Queensland'].include?(university.name) %>
+              <div class="card-badge">TOP University</div>
+            <% end %>
+            
+            <div class="university-header">
+              <h3 class="university-name">
+                <%= link_to university.name, au_university_path(university) %>
+              </h3>
+              <div class="university-location">
+                <i class="fas fa-map-pin"></i>
+                <%= university.city %>, <%= university.state %>
+              </div>
+            </div>
+            
+            <div class="university-highlights">
+              <div class="highlight-item">
+                <div class="highlight-icon">👥</div>
+                <div class="highlight-info">
+                  <div class="highlight-value">
+                    <%= number_with_delimiter(university.total_students_2023 || 0) %>
+                  </div>
+                  <div class="highlight-label">総学生数</div>
+                </div>
+              </div>
+              
+              <div class="highlight-item">
+                <div class="highlight-icon">🌏</div>
+                <div class="highlight-info">
+                  <div class="highlight-value">
+                    <% if university.overseas_percentage %>
+                      <%= university.overseas_percentage.round(0) %>%
+                    <% else %>
+                      -
+                    <% end %>
+                  </div>
+                  <div class="highlight-label">留学生比率</div>
+                </div>
+              </div>
+              
+              <div class="highlight-item">
+                <div class="highlight-icon">📚</div>
+                <div class="highlight-info">
+                  <div class="highlight-value">
+                    <%= number_with_delimiter(university.total_courses_count) %>
+                  </div>
+                  <div class="highlight-label">コース数</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="university-tuition">
+              <div class="tuition-header">
+                <i class="fas fa-tag"></i>
+                年間授業料
+              </div>
+              <div class="tuition-range">
+                <% if university.min_annual_tuition && university.max_annual_tuition %>
+                  <span class="currency">AUD</span>
+                  <span class="amount">
+                    $<%= number_with_delimiter(university.min_annual_tuition.to_i) %>
+                    - $<%= number_with_delimiter(university.max_annual_tuition.to_i) %>
+                  </span>
+                <% else %>
+                  <span class="no-data">データなし</span>
+                <% end %>
+              </div>
+            </div>
+
+            <% if university.popular_fields.present? %>
+              <div class="university-fields">
+                <div class="fields-header">
+                  <i class="fas fa-award"></i> 人気の専攻分野
+                </div>
+                <div class="fields-tags">
+                  <% university.popular_fields.split(',').first(3).each do |field| %>
+                    <span class="field-tag"><%= field.strip %></span>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="university-actions">
+              <%= link_to au_university_path(university), class: "btn-primary" do %>
+                <span>詳細を見る</span>
+                <i class="fas fa-arrow-right"></i>
+              <% end %>
+              <% if university.website.present? %>
+                <%= link_to university.website, target: "_blank", class: "btn-secondary" do %>
+                  <i class="fas fa-external-link-alt"></i>
+                  <span>公式サイト</span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Group of Eight Section -->
+    <div id="group-of-eight" class="go8-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="gold-star">⭐</span>
+          Group of Eight
+          <span class="gold-star">⭐</span>
+        </h2>
+        <p class="section-subtitle">オーストラリアのトップ8研究大学</p>
+      </div>
+      <div class="go8-grid">
+        <% ['The University of Melbourne', 'The University of Sydney', 'UNSW Sydney', 
+            'The University of Queensland', 'Monash University', 'The University of Western Australia',
+            'The University of Adelaide', 'The Australian National University'].each do |go8_name| %>
+          <% go8_uni = @universities.find { |u| u.name == go8_name } %>
+          <% if go8_uni %>
+            <div class="go8-card">
+              <%= link_to au_university_path(go8_uni) do %>
+                <div class="go8-icon">🎓</div>
+                <div class="go8-name"><%= go8_uni.name.gsub('The University of', '').gsub('University', '') %></div>
+                <div class="go8-location"><%= go8_uni.city %></div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .au-universities-page {
+    background: #f8fafb;
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .au-hero-section {
+    position: relative;
+    background: linear-gradient(135deg, #0052cc 0%, #0747a6 50%, #ffcd00 100%);
+    padding: 80px 20px 60px;
+    overflow: hidden;
+  }
+
+  .au-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffcd00;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .stat-text {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 5px;
+  }
+
+  /* Quick Links Bar */
+  .quick-links-bar {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-bottom: 3px solid #ffcd00;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0052cc;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .quick-link:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+  }
+
+  .quick-link i {
+    font-size: 18px;
+  }
+
+  /* Main Container */
+  .main-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  /* Search Section */
+  .search-section {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    border: 2px solid #0052cc;
+  }
+
+  .search-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .search-input-group {
+    position: relative;
+    display: flex;
+    gap: 15px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0052cc;
+    font-size: 18px;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #e6f2ff;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0,82,204,0.1);
+  }
+
+  .search-button {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #0052cc 0%, #0747a6 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,82,204,0.3);
+  }
+
+  .search-options {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .custom-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .checkbox-label {
+    font-weight: 500;
+    color: #4a5568;
+  }
+
+  /* Filters Section */
+  .filters-section {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+  }
+
+  .filters-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f7ff;
+  }
+
+  .filters-header h3 {
+    color: #0052cc;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    align-items: end;
+  }
+
+  .filter-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 14px;
+  }
+
+  .filter-item label i {
+    margin-right: 5px;
+    color: #0052cc;
+  }
+
+  .filter-select,
+  .filter-input-small {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e6f2ff;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
+  }
+
+  .filter-select:focus,
+  .filter-input-small:focus {
+    outline: none;
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0,82,204,0.1);
+  }
+
+  .filter-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .range-separator {
+    color: #718096;
+    font-weight: 500;
+  }
+
+  .filter-submit {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .filter-button {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ffcd00 0%, #ffa000 100%);
+    color: #1a202c;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .filter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,205,0,0.3);
+  }
+
+  .reset-link {
+    color: #718096;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 12px 20px;
+    transition: color 0.3s ease;
+  }
+
+  .reset-link:hover {
+    color: #0052cc;
+  }
+
+  /* Results Section */
+  .results-section {
+    margin-bottom: 50px;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .results-title {
+    font-size: 1.8rem;
+    color: #2d3748;
+  }
+
+  .results-count {
+    color: #0052cc;
+    font-weight: 800;
+  }
+
+  .view-options {
+    display: flex;
+    gap: 10px;
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  .view-option {
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .view-option.active {
+    background: #0052cc;
+    color: white;
+  }
+
+  /* Universities Grid */
+  .universities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 30px;
+  }
+
+  .university-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .university-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: #0052cc;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffcd00 0%, #ffa000 100%);
+    color: #1a202c;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(255,205,0,0.3);
+  }
+
+  .university-header {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f7fafc;
+  }
+
+  .university-name {
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+  }
+
+  .university-name a {
+    color: #0052cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .university-name a:hover {
+    color: #0747a6;
+  }
+
+  .university-location {
+    color: #718096;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .university-location i {
+    color: #0052cc;
+  }
+
+  .university-highlights {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+    padding: 20px 0;
+    background: #f8fafb;
+    border-radius: 12px;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .highlight-icon {
+    font-size: 28px;
+  }
+
+  .highlight-info {
+    text-align: left;
+  }
+
+  .highlight-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0052cc;
+  }
+
+  .highlight-label {
+    font-size: 11px;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .university-tuition {
+    background: linear-gradient(135deg, #e6f2ff 0%, #f0f7ff 100%);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+
+  .tuition-header {
+    font-size: 13px;
+    color: #4a5568;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .tuition-header i {
+    color: #ffcd00;
+    margin-right: 5px;
+  }
+
+  .tuition-range {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .currency {
+    font-size: 14px;
+    color: #718096;
+    font-weight: 600;
+  }
+
+  .amount {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0052cc;
+  }
+
+  .no-data {
+    color: #a0aec0;
+    font-style: italic;
+  }
+
+  .university-fields {
+    margin: 20px 0;
+  }
+
+  .fields-header {
+    font-size: 13px;
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .fields-header i {
+    color: #ffcd00;
+    margin-right: 5px;
+  }
+
+  .fields-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .field-tag {
+    background: #f0f7ff;
+    color: #0052cc;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .university-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #0052cc 0%, #0747a6 100%);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,82,204,0.3);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: #0052cc;
+    border: 2px solid #0052cc;
+  }
+
+  .btn-secondary:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+  }
+
+  /* Group of Eight Section */
+  .go8-section {
+    background: linear-gradient(135deg, #0052cc 0%, #0747a6 100%);
+    border-radius: 20px;
+    padding: 50px 30px;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .go8-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,205,0,0.1) 0%, transparent 70%);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .section-title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .gold-star {
+    font-size: 2rem;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+  }
+
+  .section-subtitle {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+  }
+
+  .go8-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+  }
+
+  .go8-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .go8-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .go8-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .go8-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+
+  .go8-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0052cc;
+    margin-bottom: 5px;
+  }
+
+  .go8-location {
+    font-size: 13px;
+    color: #718096;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .hero-stats {
+      gap: 30px;
+    }
+    
+    .universities-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .filter-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .quick-links-bar {
+      padding: 15px;
+      gap: 10px;
+    }
+    
+    .quick-link {
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+    
+    .quick-link span {
+      display: none;
+    }
+  }
+</style>
