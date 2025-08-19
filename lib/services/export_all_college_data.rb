@@ -31,7 +31,6 @@ CSV.open("all_colleges_export.csv", "w", write_headers: true, headers: [
   "graduation_rate", "GPA", "Division", "tuition", "fields_of_study_json",
   "student_faculty_ratio", "race_ethnicity_json", "sat_score", "act_score"
 ]) do |csv|
-
   1.upto(MAX_PAGES) do |page|
     puts "📄 Fetching page #{page}..."
 

@@ -18,7 +18,7 @@ namespace :import do
     university_mappings = {
       'The University of New South Wales' => 'UNSW',
       'The Australian National University' => 'The Australian National University',
-      'Charles Sturt University' => 'Charles Sturt University',
+      'Charles Sturt University' => 'Charles Sturt University'
       # 他のマッピングも必要に応じて追加
     }
     
