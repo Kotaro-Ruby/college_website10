@@ -744,10 +744,10 @@
     background: linear-gradient(135deg, #fff9f5 0%, #fff4e8 100%);
     border: 1px solid rgba(59, 130, 246, 0.2);
     padding: 18px 20px;
-    width: 450px;
-    max-width: 90vw;
+    width: 380px;
+    max-width: calc(100vw - 40px);
     top: 35px;
-    right: -10px;
+    right: 0;
     z-index: 1000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),
                 0 5px 15px rgba(255, 122, 0, 0.1);
@@ -796,14 +796,14 @@
   .tooltip-container4 .tooltip-content,
   .tooltip-container6 .tooltip-content {
     right: auto;
-    left: -425px;
+    left: -355px;
   }
   
   .tooltip-container3 .tooltip-content::before,
   .tooltip-container4 .tooltip-content::before,
   .tooltip-container6 .tooltip-content::before {
     right: auto;
-    left: 425px;
+    left: 355px;
   }
 
   /* line-header 共通のコンテナスタイル */
@@ -1263,10 +1263,10 @@
 
   .tooltip-content {
     width: calc(100vw - 50px);
-    max-width: 450px;
-    left: auto;
-    right: -5px;
-    transform: none;
+    max-width: 350px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
     font-size: 13px;
     padding: 15px;
     line-height: 1.6;
@@ -1276,17 +1276,19 @@
     text-align: left;
   }
   
-  /* モバイルでは全てのツールチップを右側に表示 */
+  /* モバイルでは全てのツールチップを中央に表示 */
   .tooltip-container3 .tooltip-content,
   .tooltip-container4 .tooltip-content,
   .tooltip-container6 .tooltip-content {
-    left: auto;
-    right: -5px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
   
   .tooltip-content::before {
-    right: 15px;
-    left: auto;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
   }
 
   /* ラインヘッダー */
@@ -1426,14 +1428,24 @@
 
   .tooltip-content {
     width: calc(100vw - 40px);
-    max-width: 300px;
-    font-size: 13px;
+    max-width: 320px;
+    font-size: 12px;
     padding: 12px;
-    line-height: 1.6;
+    line-height: 1.5;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     text-align: left;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-container3 .tooltip-content::before,
+  .tooltip-container4 .tooltip-content::before,
+  .tooltip-container6 .tooltip-content::before {
+    right: auto;
+    left: 50%;
   }
 
   .cool-search-button {

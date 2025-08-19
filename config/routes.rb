@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   get "about" => "home#about"
 
-  get "knowledge" => "home#knowledge"
 
   get "degreeseeking" => "home#degreeseeking"
 
@@ -128,8 +127,41 @@ Rails.application.routes.draw do
 
   get '/import_conditions', to: 'import#conditions'
 
+  # USA routes
+  namespace :us do
+    get '/', to: 'home#index', as: :home
+    get '/about', to: 'universities#about', as: :about
+    resources :universities, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
   # Australia routes
   namespace :au do
+    get '/', to: 'home#index', as: :home
+    get '/about', to: 'universities#about', as: :about
+    resources :universities, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
+  # New Zealand routes
+  namespace :nz do
+    get '/', to: 'home#index', as: :home
+    get '/about', to: 'universities#about', as: :about
+    resources :universities, only: [:index, :show] do
+      collection do
+        get :search
+      end
+    end
+  end
+
+  # Canada routes
+  namespace :ca do
     get '/', to: 'home#index', as: :home
     get '/about', to: 'universities#about', as: :about
     resources :universities, only: [:index, :show] do
