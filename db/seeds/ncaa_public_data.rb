@@ -7,28 +7,28 @@ division_1_schools = [
   { name: "Ohio State University", state: "OH", conference: "Big Ten" },
   { name: "University of Michigan", state: "MI", conference: "Big Ten" },
   { name: "Penn State University", state: "PA", conference: "Big Ten" },
-  
+
   # SEC Conference
   { name: "University of Alabama", state: "AL", conference: "SEC" },
   { name: "University of Florida", state: "FL", conference: "SEC" },
   { name: "University of Georgia", state: "GA", conference: "SEC" },
-  
+
   # Pac-12 Conference
   { name: "Stanford University", state: "CA", conference: "Pac-12" },
   { name: "University of California, Berkeley", state: "CA", conference: "Pac-12" },
   { name: "UCLA", state: "CA", conference: "Pac-12" },
-  
+
   # Ivy League
   { name: "Harvard University", state: "MA", conference: "Ivy League" },
   { name: "Yale University", state: "CT", conference: "Ivy League" },
-  { name: "Princeton University", state: "NJ", conference: "Ivy League" },
+  { name: "Princeton University", state: "NJ", conference: "Ivy League" }
 ]
 
 # NCAA Division III 大学（学術重視）
 division_3_schools = [
   { name: "MIT", state: "MA", conference: "NEWMAC" },
   { name: "University of Chicago", state: "IL", conference: "UAA" },
-  { name: "Johns Hopkins University", state: "MD", conference: "Centennial" },
+  { name: "Johns Hopkins University", state: "MD", conference: "Centennial" }
 ]
 
 # データベースに追加

@@ -30,8 +30,12 @@
     }
 
     .hero-section {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), 
-                  url('/images/sample-campus.jpg') center/cover;
+      <% if @college_photo && @college_photo[:url] %>
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), 
+                    url('<%= @college_photo[:url] %>') center/cover;
+      <% else %>
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+      <% end %>
       min-height: 350px;
       padding: 40px 20px 40px;
       display: flex;
@@ -39,6 +43,29 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+    }
+    
+    .image-attribution {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      z-index: 10;
+    }
+    
+    .image-attribution a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    
+    .image-attribution a:hover {
+      opacity: 1;
+      text-decoration: underline;
     }
 
     .hero-content {
@@ -1431,6 +1458,7 @@
           </div>
         </div>
       </div>
+      
     </section>
 
     <!-- Main Content -->

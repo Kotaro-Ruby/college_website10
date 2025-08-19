@@ -1,0 +1,538 @@
+<div class="au-university-detail">
+  <div class="breadcrumb">
+    <%= link_to "オーストラリア大学検索", au_universities_path %> &gt; <%= @university.name %>
+  </div>
+
+  <div class="university-header">
+    <h1><%= @university.name %></h1>
+    <div class="university-meta">
+      <span class="location">
+        <i class="fas fa-map-marker-alt"></i> 
+        <%= @university.city %>, <%= @university.state %>
+      </span>
+      <% if @university.website.present? %>
+        <%= link_to @university.website, @university.website, target: "_blank", rel: "noopener", class: "official-website" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="university-stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-users"></i></div>
+      <div class="stat-content">
+        <div class="stat-value"><%= number_with_delimiter(@university.total_students_2023 || 0) %></div>
+        <div class="stat-label">全学生数（2023年）</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+      <div class="stat-content">
+        <div class="stat-value"><%= number_with_delimiter(@university.commencing_students_2023 || 0) %></div>
+        <div class="stat-label">新入生（2023年）</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="stat-content">
+        <div class="stat-value">
+          <% if @university.student_growth_rate %>
+            <%= @university.student_growth_rate > 0 ? '+' : '' %><%= @university.student_growth_rate.round(1) %>%
+          <% else %>
+            -
+          <% end %>
+        </div>
+        <div class="stat-label">学生数成長率</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-globe"></i></div>
+      <div class="stat-content">
+        <div class="stat-value">
+          <% if @university.overseas_students_2023 %>
+            <%= number_with_delimiter(@university.overseas_students_2023) %>
+          <% else %>
+            -
+          <% end %>
+        </div>
+        <div class="stat-label">留学生数（推定）※</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+      <div class="stat-content">
+        <div class="stat-value">
+          <% if @university.overseas_percentage %>
+            <%= @university.overseas_percentage.round(1) %>%
+          <% else %>
+            -
+          <% end %>
+        </div>
+        <div class="stat-label">留学生比率（推定）※</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="stat-content">
+        <div class="stat-value"><%= @university.total_courses_count %></div>
+        <div class="stat-label">総コース数</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+      <div class="stat-content">
+        <div class="stat-value"><%= @university.bachelor_courses_count %></div>
+        <div class="stat-label">学士課程</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-award"></i></div>
+      <div class="stat-content">
+        <div class="stat-value"><%= @university.masters_courses_count %></div>
+        <div class="stat-label">修士課程</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+      <div class="stat-content">
+        <div class="stat-value">
+          <% if @university.min_annual_tuition && @university.max_annual_tuition %>
+            $<%= number_with_delimiter(@university.min_annual_tuition.to_i) %>
+          <% else %>
+            データなし
+          <% end %>
+        </div>
+        <div class="stat-label">最低年間授業料（AUD）</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+      <div class="stat-content">
+        <div class="stat-value">
+          <% if @university.max_annual_tuition %>
+            $<%= number_with_delimiter(@university.max_annual_tuition.to_i) %>
+          <% else %>
+            データなし
+          <% end %>
+        </div>
+        <div class="stat-label">最高年間授業料（AUD）</div>
+      </div>
+    </div>
+  </div>
+
+  <% if @university.description.present? %>
+    <div class="university-description-section">
+      <h3>大学概要</h3>
+      <p><%= @university.description %></p>
+    </div>
+  <% end %>
+
+  <% if @university.highlights.present? %>
+    <div class="university-highlights-section">
+      <h3>特徴・強み</h3>
+      <div class="highlights-content">
+        <%= simple_format(@university.highlights) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @university.famous_alumni.present? %>
+    <div class="university-alumni-section">
+      <h3>著名な卒業生</h3>
+      <p><%= @university.famous_alumni %></p>
+    </div>
+  <% end %>
+
+  <% if @university.popular_fields.present? %>
+    <div class="popular-fields-section">
+      <h3>人気の分野</h3>
+      <div class="fields-content">
+        <%= @university.popular_fields %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="courses-section">
+    <div class="section-header">
+      <h2>提供コース一覧</h2>
+      <div class="course-filters">
+        <%= form_with url: au_university_path(@university), method: :get, local: true, class: "filter-form" do |f| %>
+          <div class="filter-group">
+            <%= select_tag :level,
+                options_for_select([
+                  ['全レベル', ''],
+                  ['学士課程', 'bachelor'],
+                  ['修士課程', 'masters'],
+                  ['博士課程', 'doctoral']
+                ], params[:level]),
+                class: "filter-select",
+                onchange: "this.form.submit()" %>
+            
+            <%= select_tag :field,
+                options_for_select([
+                  ['全分野', ''],
+                  ['Natural and Physical Sciences', 'Natural and Physical Sciences'],
+                  ['Information Technology', 'Information Technology'],
+                  ['Engineering and Related Technologies', 'Engineering and Related Technologies'],
+                  ['Architecture and Building', 'Architecture and Building'],
+                  ['Agriculture, Environmental and Related Studies', 'Agriculture, Environmental and Related Studies'],
+                  ['Health', 'Health'],
+                  ['Education', 'Education'],
+                  ['Management and Commerce', 'Management and Commerce'],
+                  ['Society and Culture', 'Society and Culture'],
+                  ['Creative Arts', 'Creative Arts']
+                ], params[:field]),
+                class: "filter-select",
+                onchange: "this.form.submit()" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="courses-table">
+      <table>
+        <thead>
+          <tr>
+            <th>コース名</th>
+            <th>分野</th>
+            <th>レベル</th>
+            <th>期間</th>
+            <th>年間授業料（AUD）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @courses.each do |course| %>
+            <tr>
+              <td class="course-name">
+                <%= course.course_name %>
+                <% if course.cricos_course_code.present? %>
+                  <span class="course-code">(<%= course.cricos_course_code %>)</span>
+                <% end %>
+              </td>
+              <td><%= course.field_of_education_broad || '-' %></td>
+              <td>
+                <span class="level-badge level-<%= course.course_level&.downcase&.gsub(' ', '-') %>">
+                  <%= course.course_level || '-' %>
+                </span>
+              </td>
+              <td><%= course.duration_years ? "#{course.duration_years}年" : '-' %></td>
+              <td class="tuition">
+                <% if course.annual_tuition_fee %>
+                  $<%= number_with_delimiter(course.annual_tuition_fee.to_i) %>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @courses.respond_to?(:total_pages) %>
+      <div class="pagination">
+        <%= paginate @courses %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="data-note">
+    <p><strong>※注記:</strong> 留学生数および留学生比率は、EFTSL（Equivalent Full-Time Student Load）データを基にした推定値です。実際の学生数とは異なる場合があります。</p>
+  </div>
+</div>
+
+<style>
+  .au-university-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .breadcrumb {
+    padding: 10px 0;
+    color: #718096;
+    font-size: 14px;
+  }
+
+  .breadcrumb a {
+    color: #4c51bf;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .university-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+
+  .university-header h1 {
+    margin: 0 0 15px 0;
+    font-size: 2.5rem;
+  }
+
+  .university-meta {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  .official-website {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: background 0.3s;
+  }
+
+  .official-website:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .university-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+  }
+
+  .stat-content {
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d3748;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: #718096;
+    margin-top: 5px;
+  }
+
+  .university-description-section,
+  .university-highlights-section,
+  .university-alumni-section,
+  .popular-fields-section {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+  }
+
+  .university-description-section h3,
+  .university-highlights-section h3,
+  .university-alumni-section h3,
+  .popular-fields-section h3 {
+    margin: 0 0 15px 0;
+    color: #2d3748;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+  }
+
+  .university-description-section p,
+  .university-alumni-section p {
+    color: #4a5568;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .highlights-content {
+    color: #4a5568;
+    line-height: 1.8;
+  }
+
+  .highlights-content p {
+    margin: 10px 0;
+  }
+
+  .fields-content {
+    color: #4a5568;
+    line-height: 1.6;
+  }
+
+  .courses-section {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    color: #2d3748;
+  }
+
+  .filter-form {
+    margin: 0;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .filter-select {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+  }
+
+  .courses-table {
+    overflow-x: auto;
+  }
+
+  .courses-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .courses-table th {
+    background: #f7fafc;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #4a5568;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .courses-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .courses-table tbody tr:hover {
+    background: #f7fafc;
+  }
+
+  .course-name {
+    font-weight: 500;
+    color: #2d3748;
+  }
+
+  .course-code {
+    color: #718096;
+    font-size: 12px;
+  }
+
+  .level-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .level-badge.level-bachelor-degree {
+    background: #bee3f8;
+    color: #2c5282;
+  }
+
+  .level-badge.level-masters-degree-coursework,
+  .level-badge.level-masters-degree-research {
+    background: #d6f5d6;
+    color: #22543d;
+  }
+
+  .level-badge.level-doctoral-degree {
+    background: #fbd38d;
+    color: #744210;
+  }
+
+  .tuition {
+    font-weight: 600;
+    color: #48bb78;
+  }
+
+  .pagination {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .pagination a, .pagination span {
+    padding: 8px 12px;
+    margin: 0 3px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    color: #4a5568;
+    text-decoration: none;
+  }
+
+  .pagination .current {
+    background: #4c51bf;
+    color: white;
+    border-color: #4c51bf;
+  }
+
+  .pagination a:hover {
+    background: #f7fafc;
+  }
+  
+  .data-note {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f7fafc;
+    border-left: 4px solid #4c51bf;
+    border-radius: 6px;
+  }
+  
+  .data-note p {
+    margin: 0;
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+</style>

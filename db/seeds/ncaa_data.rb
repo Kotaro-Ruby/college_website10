@@ -5,7 +5,7 @@ ncaa_data = [
   { college_name: "Ohio State University", ncaa_division: "Division I", conference: "Big Ten" },
   { college_name: "University of Alabama", ncaa_division: "Division I", conference: "SEC" },
   { college_name: "Stanford University", ncaa_division: "Division I", conference: "Pac-12" },
-  { college_name: "MIT", ncaa_division: "Division III", conference: "NEWMAC" },
+  { college_name: "MIT", ncaa_division: "Division III", conference: "NEWMAC" }
   # 他の大学のデータを追加...
 ]
 

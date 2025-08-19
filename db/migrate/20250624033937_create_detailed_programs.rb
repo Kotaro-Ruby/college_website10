@@ -14,7 +14,7 @@ class CreateDetailedPrograms < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :detailed_programs, [:condition_id, :cip_code], unique: true
+    add_index :detailed_programs, [ :condition_id, :cip_code ], unique: true
     add_index :detailed_programs, :cip_code
     add_index :detailed_programs, :major_category
     add_index :detailed_programs, :credential_level

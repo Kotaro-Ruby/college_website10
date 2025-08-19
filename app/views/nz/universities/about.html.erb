@@ -1,0 +1,1585 @@
+<% content_for :title, "ニュージーランドの大学を知る - College Spark" %>
+<% content_for :description, "ニュージーランドの大学について詳しく解説。留学先としての鮅力、教育システム、費用、ビザ情報などを網羅的に紹介します。" %>
+<meta name="turbo-cache-control" content="no-cache">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  .nz-about-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #f0fdf4, #ffffff);
+    color: #1a202c;
+    min-height: 100vh;
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+
+  .nz-about-page .progress-bar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(34, 197, 94, 0.2);
+    z-index: 998;
+  }
+
+  .nz-about-page .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .nz-about-page .hero-section {
+    position: relative;
+    min-height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    }
+
+  .nz-about-page .hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px),
+      repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+  }
+
+  .nz-about-page .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .nz-about-page .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    animation: fadeInUp 1s ease;
+  }
+
+  .nz-about-page .hero-flag {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+  }
+
+  .nz-about-page .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease 0.2s;
+  }
+
+  .nz-about-page .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.4s;
+  }
+
+  .nz-about-page .hero-stat {
+    text-align: center;
+    color: white;
+  }
+
+  .nz-about-page .hero-stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    display: block;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  .nz-about-page .hero-stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .nz-about-page .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+  }
+
+  .nz-about-page .scroll-indicator i {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .nz-about-page .page-nav-menu {
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    z-index: 1001;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .nz-about-page .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .nz-about-page .nav-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .nz-about-page .nav-item {
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    padding: 5px 10px;
+  }
+
+  .nz-about-page .nav-item:hover {
+    color: #22c55e;
+  }
+
+  .nz-about-page .nav-item.active {
+    color: #22c55e;
+  }
+
+  .nz-about-page .nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    border-radius: 2px;
+  }
+
+  .nz-about-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  .nz-about-page .toc-section {
+    margin-bottom: 100px;
+  }
+
+  .nz-about-page .section-title {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .nz-about-page .section-title h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .nz-about-page .section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    border-radius: 2px;
+  }
+
+  .nz-about-page .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+  }
+
+  .nz-about-page .toc-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+  }
+
+  .nz-about-page .toc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .nz-about-page .toc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(34,197,94,0.15);
+    border-color: #bbf7d0;
+  }
+
+  .nz-about-page .toc-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .nz-about-page .toc-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #f0fdf4, #bbf7d0);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .nz-about-page .toc-icon i {
+    font-size: 1.5rem;
+    color: #22c55e;
+  }
+
+  .nz-about-page .toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 10px;
+  }
+
+  .nz-about-page .toc-description {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  .nz-about-page .content-section {
+    background: white;
+    border-radius: 24px;
+    padding: 60px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nz-about-page .content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+  }
+
+  .nz-about-page .content-header {
+    margin-bottom: 40px;
+  }
+
+  .nz-about-page .content-header h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nz-about-page .content-header h2 i {
+    color: #22c55e;
+    font-size: 1.8rem;
+  }
+
+  .nz-about-page .content-header p {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.7;
+  }
+
+  .nz-about-page .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .nz-about-page .stat-card {
+    background: linear-gradient(135deg, #f0fdf4, #bbf7d0);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .nz-about-page .stat-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  }
+
+  .nz-about-page .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(34,197,94,0.2);
+  }
+
+  .nz-about-page .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #166534;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
+  .nz-about-page .stat-label {
+    font-size: 0.9rem;
+    color: #15803d;
+    font-weight: 600;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nz-about-page .info-card {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-left: 4px solid #f59e0b;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 30px 0;
+  }
+
+  .nz-about-page .info-card-title {
+    font-weight: 600;
+    color: #92400e;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nz-about-page .info-card-title i {
+    color: #f59e0b;
+  }
+
+  .nz-about-page .info-card-content {
+    color: #78350f;
+    line-height: 1.7;
+  }
+
+  .nz-about-page .modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 30px 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .nz-about-page .modern-table thead {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+  }
+
+  .nz-about-page .modern-table th {
+    padding: 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nz-about-page .modern-table tbody tr {
+    background: white;
+    transition: all 0.3s;
+  }
+
+  .nz-about-page .modern-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  .nz-about-page .modern-table tbody tr:hover {
+    background: #f0fdf4;
+    transform: scale(1.01);
+  }
+
+  .nz-about-page .modern-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .nz-about-page .modern-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .nz-about-page .modern-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+  }
+
+  .nz-about-page .modern-list li {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    position: relative;
+    padding-left: 50px;
+    transition: all 0.3s;
+  }
+
+  .nz-about-page .modern-list li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 20px rgba(34,197,94,0.15);
+  }
+
+  .nz-about-page .modern-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .nz-about-page .timeline {
+    position: relative;
+    padding: 40px 0;
+  }
+
+  .nz-about-page .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+    transform: translateX(-50%);
+  }
+
+  .nz-about-page .timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nz-about-page .timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .nz-about-page .timeline-content {
+    width: 45%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+  }
+
+  .nz-about-page .timeline-content:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(34,197,94,0.2);
+  }
+
+  .nz-about-page .timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 4px solid #22c55e;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .nz-about-page .timeline-date {
+    font-weight: 600;
+    color: #22c55e;
+    margin-bottom: 10px;
+  }
+
+  .nz-about-page .nz8-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+
+  .nz-about-page .nz8-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+
+  .nz-about-page .nz8-card:hover {
+    transform: translateY(-5px);
+    border-color: #22c55e;
+    box-shadow: 0 15px 40px rgba(34,197,94,0.15);
+  }
+
+  .nz-about-page .nz8-rank {
+    display: inline-block;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .nz-about-page .nz8-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 8px;
+  }
+
+  .nz-about-page .nz8-location {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .nz-about-page .nz8-feature {
+    color: #475569;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .nz-about-page .cta-section {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 24px;
+    padding: 80px 40px;
+    text-align: center;
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nz-about-page .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+
+  .nz-about-page .cta-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nz-about-page .cta-description {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .nz-about-page .cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: white;
+    color: #22c55e;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .nz-about-page .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  }
+
+  /* アニメーション */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .nz-about-page .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease;
+  }
+
+  .nz-about-page .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 768px) {
+    .nz-about-page .container {
+      padding: 40px 15px;
+    }
+
+    .nz-about-page .content-section {
+      padding: 30px 20px;
+    }
+
+    .nz-about-page .hero-stats {
+      gap: 20px;
+    }
+
+    .nz-about-page .toc-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .nz-about-page .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nz-about-page .nz8-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nz-about-page .timeline::before {
+      left: 30px;
+    }
+
+    .nz-about-page .timeline-item {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      padding-left: 60px;
+    }
+
+    .nz-about-page .timeline-content {
+      width: 100%;
+    }
+
+    .nz-about-page .timeline-dot {
+      left: 30px;
+    }
+
+    .nz-about-page .modern-table {
+      font-size: 0.9rem;
+    }
+
+    .nz-about-page .modern-table th,
+    .nz-about-page .modern-table td {
+      padding: 12px;
+    }
+
+    .nz-about-page .nav-items {
+      gap: 15px;
+      padding: 15px 0;
+    }
+
+    .nz-about-page .nav-item {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<div class="nz-about-page">
+  <!-- プログレスバー -->
+  <div class="progress-bar">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <!-- ヒーローセクション -->
+  <div class="hero-section">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-flag">🇳🇿</div>
+      <h1 class="hero-title">
+        ニュージーランドの大学を知る
+      </h1>
+      <p class="hero-subtitle">
+        豊かな自然と質の高い教育で、あなたの可能性を広げる
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-number">8</span>
+          <span class="hero-stat-label">Universities</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">50K+</span>
+          <span class="hero-stat-label">International Students</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">8</span>
+          <span class="hero-stat-label">World Top 3%</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- ナビゲーションメニュー -->
+  <nav class="page-nav-menu" id="navMenu">
+    <div class="nav-container">
+      <div class="nav-items">
+        <a href="#basic-info" class="nav-item">基本情報</a>
+        <a href="#education" class="nav-item">教育システム</a>
+        <a href="#nz8" class="nav-item">8つの大学</a>
+        <a href="#preparation" class="nav-item">準備</a>
+        <a href="#english" class="nav-item">英語要件</a>
+        <a href="#visa" class="nav-item">ビザ・就労</a>
+        <a href="#student-life" class="nav-item">学生生活</a>
+        <a href="#differences" class="nav-item">特徴</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 目次セクション -->
+  <div class="container">
+    <div class="toc-section">
+      <div class="section-title">
+        <h2>学習コンテンツ</h2>
+      </div>
+      <div class="toc-grid">
+        <a href="#basic-info" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="toc-title">基本情報</div>
+          <div class="toc-description">ニュージーランド留学の概要と魅力を理解する</div>
+        </a>
+        <a href="#education" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="toc-title">教育システム</div>
+          <div class="toc-description">NZQF（資格枠組み）と学位制度の詳細</div>
+        </a>
+        <a href="#nz8" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="toc-title">8つの大学</div>
+          <div class="toc-description">国立8大学の特徴と強み</div>
+        </a>
+        <a href="#preparation" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <div class="toc-title">進学準備</div>
+          <div class="toc-description">入学条件とスケジュール</div>
+        </a>
+        <a href="#english" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="toc-title">英語要件</div>
+          <div class="toc-description">IELTSとパスウェイプログラム</div>
+        </a>
+        <a href="#visa" class="toc-card fade-in">
+          <div class="toc-icon">
+            <i class="fas fa-passport"></i>
+          </div>
+          <div class="toc-title">ビザと就労</div>
+          <div class="toc-description">学生ビザと卒業後の選択肢</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 基本情報セクション -->
+    <section id="basic-info" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-info-circle"></i> 基本情報</h2>
+        <p>ニュージーランドは8つの国立大学すべてが世界大学ランキング上位3%に位置する教育大国です。</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">国立大学数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">200K+</div>
+          <div class="stat-label">総在学生数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">50K+</div>
+          <div class="stat-label">留学生数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">世界2位</div>
+          <div class="stat-label">平和指数</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 40px; margin-bottom: 20px;">ニュージーランド留学の魅力</h3>
+      <ul class="modern-list">
+        <li>
+          <strong>世界水準の教育</strong><br>
+          8つの国立大学すべてが世界大学ランキング上位3%に位置
+        </li>
+        <li>
+          <strong>安全な環境</strong><br>
+          世界平和指数で常に上位、治安が良く留学生に優しい国
+        </li>
+        <li>
+          <strong>豊かな自然環境</strong><br>
+          美しい自然に囲まれ、アウトドア活動も豊富
+        </li>
+        <li>
+          <strong>手厚いサポート</strong><br>
+          少人数制教育で、教授との距離が近い学習環境
+        </li>
+        <li>
+          <strong>ワークライフバランス</strong><br>
+          勉強とプライベートの両立を重視する文化
+        </li>
+      </ul>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-lightbulb"></i> 重要なポイント
+        </div>
+        <div class="info-card-content">
+          ニュージーランドの大学はすべて国立で、質の高い教育が保証されています。学費は他の英語圏と比較して比較的安く、卒業後の就労機会も豊富です。
+        </div>
+      </div>
+    </section>
+
+    <!-- 教育システムセクション -->
+    <section id="education" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-university"></i> 教育システム</h2>
+        <p>NZQF（New Zealand Qualifications Framework）に基づく統一された資格枠組み。</p>
+      </div>
+
+      <h3 style="margin-bottom: 20px;">学位の種類と期間</h3>
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>学位</th>
+            <th>期間</th>
+            <th>特徴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bachelor's Degree</strong></td>
+            <td>3年</td>
+            <td>学士号。専門分野の基礎から応用まで学習</td>
+          </tr>
+          <tr>
+            <td><strong>Bachelor Honours</strong></td>
+            <td>1年（学士号取得後）</td>
+            <td>優等学士号。研究プロジェクトを含む上級コース</td>
+          </tr>
+          <tr>
+            <td><strong>Graduate Certificate</strong></td>
+            <td>6ヶ月</td>
+            <td>大学院証書。専門分野の基礎的な大学院レベル教育</td>
+          </tr>
+          <tr>
+            <td><strong>Graduate Diploma</strong></td>
+            <td>1年</td>
+            <td>大学院ディプロマ。修士号への足がかりにもなる</td>
+          </tr>
+          <tr>
+            <td><strong>Master's Degree</strong></td>
+            <td>1-2年</td>
+            <td>修士号。Coursework型とResearch型がある</td>
+          </tr>
+          <tr>
+            <td><strong>PhD</strong></td>
+            <td>3-4年</td>
+            <td>博士号。独自の研究により学術分野に貢献</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 40px; margin-bottom: 20px;">学期制度</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Semester 1</div>
+            <p>2月末〜6月（秋学期）</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Mid-Year Break</div>
+            <p>6月〜7月（冬休み）</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Semester 2</div>
+            <p>7月末〜11月（春学期）</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Summer School</div>
+            <p>11月〜2月（オプション、集中講義など）</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-globe"></i> 南半球の注意点
+        </div>
+        <div class="info-card-content">
+          ニュージーランドは南半球にあるため、季節が日本と逆になります。クリスマスは夏、7月は冬です。服装の準備にご注意ください。
+        </div>
+      </div>
+    </section>
+
+    <!-- 8つの大学セクション -->
+    <section id="nz8" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-star"></i> ニュージーランドの8大学</h2>
+        <p>すべて国立大学で、それぞれに特色と強みがあります。</p>
+      </div>
+
+      <div class="nz8-grid">
+        <div class="nz8-card">
+          <span class="nz8-rank">世界68位</span>
+          <h4 class="nz8-name">オークランド大学</h4>
+          <p class="nz8-location">オークランド</p>
+          <p class="nz8-feature">ニュージーランド最大の大学、研究力トップ</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界217位</span>
+          <h4 class="nz8-name">オタゴ大学</h4>
+          <p class="nz8-location">ダニーデン</p>
+          <p class="nz8-feature">1869年設立、医学部で有名</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界236位</span>
+          <h4 class="nz8-name">ビクトリア大学ウェリントン</h4>
+          <p class="nz8-location">ウェリントン</p>
+          <p class="nz8-feature">首都立地、法学・政治学に強み</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界256位</span>
+          <h4 class="nz8-name">カンタベリー大学</h4>
+          <p class="nz8-location">クライストチャーチ</p>
+          <p class="nz8-feature">工学・サイエンスで有名</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界250-300位</span>
+          <h4 class="nz8-name">ワイカト大学</h4>
+          <p class="nz8-location">ハミルトン</p>
+          <p class="nz8-feature">ビジネス・IT分野に強み</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界292位</span>
+          <h4 class="nz8-name">マッセー大学</h4>
+          <p class="nz8-location">パーマストンノース他</p>
+          <p class="nz8-feature">農学・獣医学・デザインに強み</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界362位</span>
+          <h4 class="nz8-name">リンカーン大学</h4>
+          <p class="nz8-location">クライストチャーチ近郊</p>
+          <p class="nz8-feature">農業・ランドスケープ建築の専門大学</p>
+        </div>
+        <div class="nz8-card">
+          <span class="nz8-rank">世界407位</span>
+          <h4 class="nz8-name">オークランド工科大学（AUT）</h4>
+          <p class="nz8-location">オークランド</p>
+          <p class="nz8-feature">実践的教育、高い就職率</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-graduation-cap"></i> ニュージーランドの大学の特徴
+        </div>
+        <div class="info-card-content">
+          すべて国立大学で質が統一されており、研究と実践のバランスが良いのが特徴です。少人数制で手厚いサポートが受けられ、卒業生の就職率も高い傾向にあります。
+        </div>
+      </div>
+    </section>
+
+    <!-- 準備セクション -->
+    <section id="preparation" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-tasks"></i> 進学準備</h2>
+        <p>日本の高校卒業資格があれば進学可能。英語力と成績の要件を満たす必要があります。</p>
+      </div>
+
+      <h3 style="margin-bottom: 20px;">入学経路</h3>
+      <ul class="modern-list">
+        <li>
+          <strong>直接入学</strong><br>
+          英語力と成績要件を満たしている場合、学部課程に直接入学
+        </li>
+        <li>
+          <strong>Foundation Studies</strong><br>
+          大学準備コース（8ヶ月〜1年）を経て学部入学
+        </li>
+        <li>
+          <strong>Diploma</strong><br>
+          専門学校レベルのコース（1年）を経て、大学2年次に編入
+        </li>
+        <li>
+          <strong>英語コース + 本科</strong><br>
+          英語力が不足している場合、語学学校を経て入学
+        </li>
+      </ul>
+
+      <h3 style="margin-top: 40px; margin-bottom: 30px;">準備スケジュール</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">入学1年前</div>
+            <p>大学リサーチ、英語試験準備開始</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">10ヶ月前</div>
+            <p>IELTS/TOEFL受験、成績証明書準備</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">8ヶ月前</div>
+            <p>出願書類提出</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">6ヶ月前</div>
+            <p>合格通知受領、入学手続き</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">4ヶ月前</div>
+            <p>学生ビザ申請、健康診断</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2ヶ月前</div>
+            <p>住居手配、航空券購入</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-clipboard-check"></i> 必要書類チェックリスト
+        </div>
+        <div class="info-card-content">
+          ✓ 高校の成績証明書（英文）<br>
+          ✓ 高校の卒業証明書（英文）<br>
+          ✓ IELTS/TOEFLスコア<br>
+          ✓ パスポートのコピー<br>
+          ✓ 志望理由書（一部のコース）<br>
+          ✓ 推薦状（大学院の場合）<br>
+          ✓ ポートフォリオ（芸術系の場合）
+        </div>
+      </div>
+    </section>
+
+    <!-- 英語要件セクション -->
+    <section id="english" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-language"></i> 英語要件</h2>
+        <p>授業についていける英語力の証明が必要。IELTSが最も一般的です。</p>
+      </div>
+
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>プログラム</th>
+            <th>IELTS</th>
+            <th>TOEFL iBT</th>
+            <th>PTE Academic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Foundation</strong></td>
+            <td>5.5 (各5.0以上)</td>
+            <td>60-70</td>
+            <td>42-49</td>
+          </tr>
+          <tr>
+            <td><strong>Diploma</strong></td>
+            <td>5.5-6.0</td>
+            <td>70-80</td>
+            <td>50-57</td>
+          </tr>
+          <tr>
+            <td><strong>学部（一般）</strong></td>
+            <td>6.0 (各5.5以上)</td>
+            <td>79-90</td>
+            <td>50-58</td>
+          </tr>
+          <tr>
+            <td><strong>学部（医学・法学）</strong></td>
+            <td>7.0-7.5</td>
+            <td>94-109</td>
+            <td>65-79</td>
+          </tr>
+          <tr>
+            <td><strong>大学院</strong></td>
+            <td>6.5-7.0</td>
+            <td>90-100</td>
+            <td>58-72</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-book-reader"></i> 英語パスウェイプログラム
+        </div>
+        <div class="info-card-content">
+          <strong>ESOL：</strong> 大学付属の英語学校で10-20週間の集中コース<br>
+          <strong>条件付き入学：</strong> 英語以外の要件を満たしていれば、英語コース修了後に本科入学<br>
+          <strong>Direct Entry：</strong> 提携語学学校の特定レベル修了で英語試験免除
+        </div>
+      </div>
+    </section>
+
+    <!-- ビザと就労セクション -->
+    <section id="visa" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-passport"></i> ビザと就労</h2>
+        <p>留学生に対して寛容な就労政策。勉強しながら働くことが可能です。</p>
+      </div>
+
+      <h3 style="margin-bottom: 20px;">学生ビザ</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">20時間</div>
+          <div class="stat-label">週の就労上限</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">NZ$330</div>
+          <div class="stat-label">ビザ申請料</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">4-8週間</div>
+          <div class="stat-label">処理期間</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">NZ$22.70</div>
+          <div class="stat-label">最低時給</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 40px; margin-bottom: 20px;">Post-Study Work Visa</h3>
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>学位</th>
+            <th>ビザ期間</th>
+            <th>条件</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bachelor's Degree</strong></td>
+            <td>3年</td>
+            <td>1年以上のフルタイムコース修了</td>
+          </tr>
+          <tr>
+            <td><strong>Master's Degree</strong></td>
+            <td>3年</td>
+            <td>1年以上のフルタイムコース修了</td>
+          </tr>
+          <tr>
+            <td><strong>PhD</strong></td>
+            <td>3年</td>
+            <td>博士課程修了</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-briefcase"></i> 就労機会の活用
+        </div>
+        <div class="info-card-content">
+          学生ビザでの就労は、生活費を補うだけでなく、現地での実務経験を積む良い機会です。時給は最低NZ$22.70（約2,000円）と高く、カフェ、小売店、大学内でのアルバイトが人気です。
+        </div>
+      </div>
+    </section>
+
+    <!-- 学生生活セクション -->
+    <section id="student-life" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-users"></i> 学生生活</h2>
+        <p>学業と自然の両方を楽しめる、バランスの取れた大学生活。</p>
+      </div>
+
+      <h3 style="margin-bottom: 20px;">住居オプション</h3>
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>タイプ</th>
+            <th>費用（週）</th>
+            <th>メリット</th>
+            <th>デメリット</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>学生寮</strong></td>
+            <td>NZ$250-400</td>
+            <td>キャンパス内、友達作りやすい</td>
+            <td>プライバシー少ない、高め</td>
+          </tr>
+          <tr>
+            <td><strong>ホームステイ</strong></td>
+            <td>NZ$280-350</td>
+            <td>食事付き、現地文化体験</td>
+            <td>通学時間、自由度低い</td>
+          </tr>
+          <tr>
+            <td><strong>フラットシェア</strong></td>
+            <td>NZ$150-250</td>
+            <td>安い、自由度高い</td>
+            <td>家事必要、トラブル可能性</td>
+          </tr>
+          <tr>
+            <td><strong>アパート（一人暮らし）</strong></td>
+            <td>NZ$300-450</td>
+            <td>完全なプライバシー</td>
+            <td>高額、孤独になりやすい</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 40px; margin-bottom: 20px;">生活費の目安（年間）</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">NZ$15,000</div>
+          <div class="stat-label">政府推奨最低生活費</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">NZ$10,000</div>
+          <div class="stat-label">住居費</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">NZ$3,000</div>
+          <div class="stat-label">食費</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">NZ$2,000</div>
+          <div class="stat-label">交通費・その他</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-star"></i> ニュージーランドならではの体験
+        </div>
+        <div class="info-card-content">
+          美しい自然環境を活かして、ハイキング、スキー、サーフィンなどのアウトドア活動が盛ん。大学のクラブ活動も充実しており、勉強と自然の両方を楽しめる環境です。
+        </div>
+      </div>
+    </section>
+
+    <!-- 特徴セクション -->
+    <section id="differences" class="content-section fade-in">
+      <div class="content-header">
+        <h2><i class="fas fa-balance-scale"></i> ニュージーランドの特徴</h2>
+        <p>他の英語圏と比較したニュージーランドならではの特徴。</p>
+      </div>
+
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>ニュージーランド</th>
+            <th>他国との違い</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>大学数</strong></td>
+            <td>8校（すべて国立）</td>
+            <td>質が統一されている</td>
+          </tr>
+          <tr>
+            <td><strong>学費</strong></td>
+            <td>年間250-350万円</td>
+            <td>豪・米・英より安い</td>
+          </tr>
+          <tr>
+            <td><strong>安全性</strong></td>
+            <td>世界平和指数2位</td>
+            <td>世界でも最も安全</td>
+          </tr>
+          <tr>
+            <td><strong>人口</strong></td>
+            <td>500万人</td>
+            <td>小規模で親しみやすい</td>
+          </tr>
+          <tr>
+            <td><strong>教育スタイル</strong></td>
+            <td>少人数制、実践重視</td>
+            <td>手厚いサポート</td>
+          </tr>
+          <tr>
+            <td><strong>就労機会</strong></td>
+            <td>Post-Study Work 3年</td>
+            <td>長期間の就労可能</td>
+          </tr>
+          <tr>
+            <td><strong>自然環境</strong></td>
+            <td>豊かな自然、アウトドア</td>
+            <td>ワークライフバランス重視</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-card">
+        <div class="info-card-title">
+          <i class="fas fa-rocket"></i> 成功のためのアドバイス
+        </div>
+        <div class="info-card-content">
+          ✓ 積極的に授業で発言し、ディスカッションに参加する<br>
+          ✓ 教授とのOffice Hourを活用して関係を築く<br>
+          ✓ 現地の学生やコミュニティと交流する<br>
+          ✓ ニュージーランドの豊かな自然環境を楽しむ<br>
+          ✓ ワークライフバランスを大切にする文化を理解する
+        </div>
+      </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <div class="cta-section">
+      <h2 class="cta-title">🇳🇿 ニュージーランド留学への第一歩を踏み出そう</h2>
+      <p class="cta-description">
+        8つの優れた国立大学から、あなたに最適な留学先を見つけましょう。<br>
+        College Sparkで詳細な大学情報を検索できます。
+      </p>
+      <a href="/nz/universities/search" class="cta-button">
+        <i class="fas fa-search"></i> ニュージーランドの大学を検索
+      </a>
+    </div>
+  </div>
+
+<script>
+  function initializeNzAboutPage() {
+    // プログレスバー処理
+    function handleScroll() {
+      const scrolled = window.scrollY;
+      const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percentage = (scrolled / maxHeight) * 100;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
+        progressBar.style.width = percentage + '%';
+      }
+    }
+
+    // ナビゲーションメニューの表示
+    function handleNavMenu() {
+      const navMenu = document.getElementById('navMenu');
+      if (!navMenu) return;
+      
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 800) {
+        navMenu.classList.add('visible');
+      } else {
+        navMenu.classList.remove('visible');
+      }
+    }
+
+    // アクティブナビゲーション
+    function handleActiveNav() {
+      const sections = document.querySelectorAll('section[id]');
+      const navItems = document.querySelectorAll('.nav-item');
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#' + current) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    // イベントリスナーをクリーンアップしてから追加
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleNavMenu);
+    window.removeEventListener('scroll', handleActiveNav);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleNavMenu);
+    window.addEventListener('scroll', handleActiveNav);
+
+    // セクションのアニメーション
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // スムーススクロール
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 100;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // 初回のアニメーションをトリガー
+    setTimeout(() => {
+      document.querySelectorAll('.section').forEach((section, index) => {
+        setTimeout(() => {
+          section.classList.add('visible');
+        }, index * 100);
+      });
+    }, 100);
+  }
+
+  // Turbo対応
+  document.addEventListener('turbo:load', initializeNzAboutPage);
+  document.addEventListener('DOMContentLoaded', initializeNzAboutPage);
+</script>
+</div>

@@ -57,3 +57,6 @@ coverage/
 
 
 /config/master.key
+
+# Temporarily ignore pending migrations for Australia features
+/db/migrate_pending/

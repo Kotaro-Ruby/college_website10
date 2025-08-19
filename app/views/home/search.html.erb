@@ -7,65 +7,609 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
-/* ヘッダー部分の改良スタイル */
+/* フィルターセクションのヘッダーの色を青系に変更 */
+[class^="line-header"] {
+  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.2), transparent) !important;
+}
+
+[class^="line-header"] > h1 {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+[class^="line-header"] > h1 i {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.line-header7-major {
+  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.2), transparent) !important;
+}
+
+.line-header7-major > h1 {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.line-header7-major > h1 i {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ツールチップマーク（？）を青色に変更 */
+.tooltip-mark,
+.help-icon,
+[data-toggle="tooltip"],
+.fa-question-circle,
+.fas.fa-question-circle {
+  color: #3b82f6 !important;
+  background-color: transparent !important;
+  border-color: #3b82f6 !important;
+}
+
+.tooltip-mark:hover,
+.help-icon:hover,
+[data-toggle="tooltip"]:hover {
+  color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+/* ラジオボタンとチェックボックスを青色に変更 */
+input[type="radio"] {
+  accent-color: #3b82f6 !important;
+}
+
+input[type="radio"]:checked {
+  accent-color: #3b82f6 !important;
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+input[type="radio"]:checked + label,
+input[type="radio"]:checked ~ label {
+  color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+input[type="checkbox"] {
+  accent-color: #3b82f6 !important;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: #3b82f6 !important;
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* ラジオボタンのラベルのホバー効果 */
+label:hover input[type="radio"] {
+  border-color: #3b82f6 !important;
+}
+
+/* フィルター部分のアクティブな要素を青色に */
+.filter-option.active,
+.filter-item.active,
+[class*="filter"].active {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* 各種ボタンのホバー効果を青系に統一 */
+.filter-btn:hover,
+.search-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  border-color: #2563eb !important;
+}
+
+
+/* ヘッダー部分の改良スタイル - オーストラリア版と完全に合わせた */
 .copy-container {
-    background: linear-gradient(135deg, #ffcc99 0%, #ffe0b3 50%, #fff2e6 100%);
-    padding: 40px 20px 50px 20px;
-    text-align: center;
     position: relative;
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 30%, #dc2626 70%, #b91c1c 100%);
+    padding: 80px 20px 60px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .copy-container::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-    animation: rotate 30s linear infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
 }
 
-.copy-container h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 700;
-    color: #d4621a;
-    margin: 0 0 15px 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.hero-content {
     position: relative;
     z-index: 2;
-    letter-spacing: -0.5px;
-}
-
-.copy-container h2 {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: #b8621d;
-    margin: 0 0 30px 0;
-    font-weight: 500;
-    position: relative;
-    z-index: 2;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.college-name-search {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(8px);
-    border-radius: 16px;
-    padding: 30px 25px;
+    max-width: 900px;
     margin: 0 auto;
-    max-width: 800px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    color: white;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 30px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.hero-title {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero-subtitle {
+    color: white;
+    font-size: 1.3rem;
+    opacity: 0.95;
+    margin-bottom: 40px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.stat-text {
+    display: block;
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-stats {
+        gap: 40px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-stats {
+        gap: 30px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .quick-links-bar {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .quick-link {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .quick-link span {
+        display: none;
+    }
+}
+
+/* Quick Links Bar */
+.quick-links-bar {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-bottom: 3px solid #93c5fd;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.quick-link:hover {
+    background: #eff6ff;
+    transform: translateY(-2px);
+}
+
+.quick-link i {
+    font-size: 18px;
+}
+
+/* ツールチップのコンテナ */
+.tooltip-container1,
+.tooltip-container2,
+.tooltip-container3,
+.tooltip-container4,
+.tooltip-container5,
+.tooltip-container6 {
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    display: inline-block;
+    z-index: 15;
+}
+
+/* 専攻のツールチップは右寄りすぎるので調整 */
+.conditions9 .tooltip-container6 {
+    right: 50px;
+}
+
+.tooltip-trigger,
+.tooltip-trigger1 {
+    cursor: pointer;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.tooltip-trigger1 {
+    padding: 4px;
+    margin-left: 10px;
+}
+
+.tooltip-trigger:hover,
+.tooltip-trigger1:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* ツールチップの内容 - 改善版 */
+.tooltip-content {
+    position: absolute;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 18px 20px;
+    width: 380px;
+    max-width: calc(100vw - 60px);
+    top: 35px;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),
+                0 5px 15px rgba(59, 130, 246, 0.1);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5a4b3a;
+    font-family: 'Noto Sans JP', sans-serif;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* 矢印を追加 */
+.tooltip-content::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%);
+    border-left: 1px solid rgba(59, 130, 246, 0.2);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+/* ホバー時にポップアップを表示 */
+.tooltip-container1:hover .tooltip-content,
+.tooltip-container2:hover .tooltip-content,
+.tooltip-container3:hover .tooltip-content,
+.tooltip-container4:hover .tooltip-content,
+.tooltip-container5:hover .tooltip-content,
+.tooltip-container6:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 右端のツールチップは左側に表示 */
+.tooltip-container3 .tooltip-content,
+.tooltip-container4 .tooltip-content,
+.tooltip-container6 .tooltip-content {
+    right: auto;
+    left: -355px;
+}
+
+.tooltip-container3 .tooltip-content::before,
+.tooltip-container4 .tooltip-content::before,
+.tooltip-container6 .tooltip-content::before {
+    right: auto;
+    left: 355px;
+}
+
+/* レスポンシブ対応 - タブレット */
+@media (max-width: 768px) {
+    .tooltip-container1,
+    .tooltip-container2,
+    .tooltip-container3,
+    .tooltip-container4,
+    .tooltip-container5,
+    .tooltip-container6 {
+        right: 20px;
+    }
+
+    .tooltip-content {
+        width: calc(100vw - 50px);
+        max-width: 350px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        font-size: 13px;
+        padding: 15px;
+        line-height: 1.6;
+    }
+    
+    /* モバイルでは全てのツールチップを中央に表示 */
+    .tooltip-container3 .tooltip-content,
+    .tooltip-container4 .tooltip-content,
+    .tooltip-container6 .tooltip-content {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+    
+    .tooltip-content::before {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+
+/* レスポンシブ対応 - スマートフォン */
+@media (max-width: 480px) {
+    .tooltip-content {
+        width: calc(100vw - 40px);
+        max-width: 320px;
+        font-size: 12px;
+        padding: 12px;
+        line-height: 1.5;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+    
+    .tooltip-container3 .tooltip-content::before,
+    .tooltip-container4 .tooltip-content::before,
+    .tooltip-container6 .tooltip-content::before {
+        right: auto;
+        left: 50%;
+    }
+}
+
+/* セレクトボックスのスタイル */
+.form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+.form-select:hover {
+    border-color: #93c5fd;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-select option {
+    padding: 8px;
+    background: white;
+    color: #4a5568;
+}
+
+/* 条件検索ボタン */
+.search-button-container {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.cool-search-button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cool-search-button:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+}
+
+.cool-search-button:active {
+    transform: translateY(-1px);
+}
+
+.cool-search-button i {
+    font-size: 1.1rem;
+}
+
+/* Main Container */
+.main-container {
+    padding: 0 20px;
+}
+
+/* Search Section */
+.search-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.search-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input-group {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 4px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.search-input-group:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+    color: #6c757d;
+    margin: 0 15px;
+    font-size: 1.1rem;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 0;
+    font-size: 1rem;
+    outline: none;
+    color: #495057;
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+}
+
+.search-button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.search-button:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .search-header {
@@ -75,7 +619,7 @@
 .search-header h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #d4621a;
+    color: #3b82f6;
     margin: 0;
     display: flex;
     align-items: center;
@@ -85,7 +629,7 @@
 
 .search-header i {
     font-size: 1.2rem;
-    color: #cc7a3a;
+    color: #2563eb;
 }
 
 .search-input-container {
@@ -110,8 +654,8 @@
 
 .college-search-input:focus {
     outline: none;
-    border-color: #d4621a;
-    box-shadow: 0 3px 15px rgba(212, 98, 26, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 3px 15px rgba(59, 130, 246, 0.15);
     transform: translateY(-1px);
 }
 
@@ -121,7 +665,7 @@
 }
 
 .name-search-btn {
-    background: linear-gradient(135deg, #d4621a, #cc7a3a);
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: white;
     border: none;
     padding: 15px 25px;
@@ -133,15 +677,15 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 15px rgba(212, 98, 26, 0.2);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
     white-space: nowrap;
     min-height: 50px;
 }
 
 .name-search-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 98, 26, 0.3);
-    background: linear-gradient(135deg, #c25818, #b86b32);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
 }
 
 .name-search-btn:active {
@@ -153,14 +697,14 @@
 }
 
 .search-separator span {
-    background: #d4621a;
+    background: #3b82f6;
     color: white;
     font-weight: 500;
     font-size: 0.9rem;
     padding: 8px 16px;
     border-radius: 15px;
     display: inline-block;
-    box-shadow: 0 2px 8px rgba(212, 98, 26, 0.2);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 /* レスポンシブ対応 */
@@ -207,27 +751,62 @@
 }
 </style>
 
-<div class="main">
-    <div class="copy-container">
-        <h1>College Spark</h1>
-        <h2>~条件を指定してアメリカの大学を探そう！~</h2>
-        
-        <!-- 大学名検索機能 -->
-        <div class="college-name-search">
-            <div class="search-header">
-                <h3><i class="fas fa-search"></i>大学名で直接検索</h3>
-            </div>
-            <div class="search-input-container">
-                <input type="text" id="college-name-input" placeholder="例：Harvard University, Stanford University..." class="college-search-input">
-                <button id="name-search-button" class="name-search-btn">
-                    <i class="fas fa-arrow-right"></i> 検索
-                </button>
-            </div>
-            <div class="search-separator">
-                <span>または</span>
+<div class="copy-container">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🇺🇸 Stars and Stripes!</div>
+            <h1 class="hero-title">アメリカ大学検索</h1>
+            <p class="hero-subtitle">世界最高水準の教育と無限の可能性</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-number">4,0
+                        00</span>
+                    <span class="stat-text">総合大学</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-text">世界TOP100</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">100万+</span>
+                    <span class="stat-text">留学生</span>
+                </div>
             </div>
         </div>
     </div>
+
+<!-- Quick Links Bar -->
+<div class="quick-links-bar">
+    <a href="/us/about" class="quick-link">
+        <i class="fas fa-info-circle"></i>
+        <span>アメリカ留学について</span>
+    </a>
+    <a href="#ivy-league" class="quick-link">
+        <i class="fas fa-star"></i>
+        <span>Ivy League</span>
+    </a>
+    <a href="#popular-states" class="quick-link">
+        <i class="fas fa-map-marked-alt"></i>
+        <span>人気の州</span>
+    </a>
+    <a href="#scholarships" class="quick-link">
+        <i class="fas fa-graduation-cap"></i>
+        <span>奨学金情報</span>
+    </a>
+</div>
+
+<div class="main">
+    <div class="main-container">
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-wrapper">
+                <div class="search-input-group">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="college-name-input" placeholder="大学名、都市、専攻分野で検索..." class="search-input">
+                    <button id="name-search-button" class="search-button">検索</button>
+                </div>
+            </div>
+        </div>
 
     <div class="contents">
         <div class="conditions1">
@@ -1065,3 +1644,4 @@ document.getElementById('search-button').addEventListener('click', function () {
     window.location.href = `/results?${queryString}`;
 });
 </script>
+</div>

@@ -1,26 +1,26 @@
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
-  
+
   helper_method :current_user, :logged_in?, :recently_viewed_colleges, :current_admin, :admin_logged_in?, :get_popular_colleges
-  
+
   private
-  
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-  
+
   def logged_in?
     !!current_user
   end
-  
+
   def require_login
     unless logged_in?
-      flash[:alert] = 'ログインが必要です'
+      flash[:alert] = "ログインが必要です"
       redirect_to login_path
     end
   end
-  
+
   # 最近閲覧した大学の管理
   def add_to_recently_viewed(college)
     if logged_in?
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       view_history = current_user.view_histories.find_or_initialize_by(condition: college)
       view_history.viewed_at = Time.current
       view_history.save
-      
+
       # 古い履歴を削除（最新6件のみ保持）
       old_histories = current_user.view_histories.offset(6)
       old_histories.destroy_all if old_histories.any?
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       session[:recently_viewed] = session[:recently_viewed].first(6)
     end
   end
-  
+
   def recently_viewed_colleges
     if logged_in?
       # ログインしている場合はデータベースから取得
@@ -53,12 +53,12 @@ class ApplicationController < ActionController::Base
       college_ids.map { |id| colleges.find { |c| c.id == id } }.compact
     end
   end
-  
+
   # セッションを一時的にクリアして6校制限をテストするためのヘルパー
   def clear_recently_viewed_for_testing
-    session[:recently_viewed] = nil if params[:clear_session] == 'true'
+    session[:recently_viewed] = nil if params[:clear_session] == "true"
   end
-  
+
   # 管理者認証機能
   def current_admin
     @current_admin ||= begin
@@ -75,11 +75,11 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def admin_logged_in?
     !!current_admin
   end
-  
+
   # 人気の大学を取得（全ユーザーの閲覧履歴から）
   def get_popular_colleges
     # ViewHistoryテーブルからcondition_idごとの閲覧数をカウント
@@ -87,18 +87,18 @@ class ApplicationController < ActionController::Base
     popular_condition_ids = ViewHistory
       .unscoped
       .group(:condition_id)
-      .order('count_all DESC')
+      .order("count_all DESC")
       .limit(5)
       .count
       .keys
-    
+
     # 閲覧数が多い順に大学を取得
     if popular_condition_ids.any?
       Condition.where(id: popular_condition_ids).index_by(&:id).slice(*popular_condition_ids).values
     else
       # まだ閲覧履歴がない場合は、デフォルトの人気大学を返す
       Condition.where.not(students: nil, acceptance_rate: nil)
-               .where('acceptance_rate > 0.1 AND acceptance_rate < 0.8')
+               .where("acceptance_rate > 0.1 AND acceptance_rate < 0.8")
                .order(students: :desc)
                .limit(5)
     end

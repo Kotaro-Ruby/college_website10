@@ -8,388 +8,279 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <div class="page-container">
-  <!-- Hero Section -->
+  <!-- Minimal Hero -->
   <div class="hero-section">
-    <div class="hero-content">
-      <h1 class="hero-title">College Spark</h1>
-      <p class="hero-subtitle">あなたにぴったりの大学を見つけよう</p>
-      <p class="hero-description">6,300校以上のアメリカの大学・専門学校から、あなたの条件に合った大学を検索できます</p>
+    <div class="hero-wrapper">
+      <div class="hero-main">
+        <h1 class="hero-title">College Spark</h1>
+        <p class="hero-subtitle">あなたの夢の大学を見つけよう</p>
+      </div>
     </div>
   </div>
 
   <!-- メインコンテンツ -->
   <div class="main-content">
-    <div class="content-padding">
-      
-      <!-- なぜ海外進学なのか？セクション -->
-      <div class="section">
-        <div class="why-study-abroad-summary">
-          <div class="summary-header">
-            <div class="summary-icon">🌍</div>
-            <div class="summary-title-area">
-              <h2>悶々としてる人ほど世界に飛び出してほしい。</h2>
-              <p>自分に自信がない、何かしないといけないと思ってるけど何をしたらいいかわからない、<br>そんな人こそ海外進学を選択肢の一つとして考えてほしい。</p>
+    <!-- Country Selection Section - 横一列で目立つ -->
+    <div class="country-selection-section">
+      <div class="country-container">
+        <div class="country-header">
+          <h2><i class="fas fa-globe-americas"></i> 留学先から探す</h2>
+        </div>
+        <div class="countries-row">
+          <div class="country-card active">
+            <span class="country-flag">🇺🇸</span>
+            <span class="country-name">アメリカ</span>
+            <span class="country-count">6,300校</span>
+            <div class="country-actions">
+              <a href="/search" class="country-btn search-btn">
+                <i class="fas fa-search"></i> 検索
+              </a>
+              <a href="/us/about" class="country-btn about-btn">
+                <i class="fas fa-info-circle"></i> 詳細
+              </a>
+            </div>
+          </div>
+          <div class="country-card active">
+            <span class="country-flag">🇦🇺</span>
+            <span class="country-name">オーストラリア</span>
+            <span class="country-count">39校</span>
+            <div class="country-actions">
+              <a href="/au/universities/search" class="country-btn search-btn">
+                <i class="fas fa-search"></i> 検索
+              </a>
+              <a href="/au/about" class="country-btn about-btn">
+                <i class="fas fa-info-circle"></i> 詳細
+              </a>
+            </div>
+          </div>
+          <div class="country-card active">
+            <span class="country-flag">🇨🇦</span>
+            <span class="country-name">カナダ</span>
+            <span class="coming-soon-badge">準備中</span>
+            <div class="country-actions">
+              <button class="country-btn disabled" disabled>
+                <i class="fas fa-search"></i> 検索
+              </button>
+              <a href="/ca/about" class="country-btn about-btn">
+                <i class="fas fa-info-circle"></i> 詳細
+              </a>
+            </div>
+          </div>
+          <div class="country-card active">
+            <span class="country-flag">🇳🇿</span>
+            <span class="country-name">ニュージーランド</span>
+            <span class="coming-soon-badge">準備中</span>
+            <div class="country-actions">
+              <button class="country-btn disabled" disabled>
+                <i class="fas fa-search"></i> 検索
+              </button>
+              <a href="/nz/about" class="country-btn about-btn">
+                <i class="fas fa-info-circle"></i> 詳細
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Access Grid -->
+    <div class="quick-access-section">
+      <div class="container-narrow">
+        <div class="access-grid">
+          <!-- Quick Stats Card -->
+          <div class="access-card stats-card">
+            <div class="card-header">
+              <i class="fas fa-chart-line"></i>
+              <h3>人気ランキング</h3>
+            </div>
+            <div class="ranking-preview">
+              <% if @popular_colleges&.first(3) %>
+                <% @popular_colleges.first(3).each_with_index do |college, index| %>
+                  <a href="<%= conditions_path(college.slug || college.id) %>" class="rank-item">
+                    <span class="rank-num"><%= index + 1 %></span>
+                    <span class="rank-name"><%= college.college %></span>
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                <% end %>
+              <% end %>
+              <a href="/search" class="see-all-link">
+                すべて見る <i class="fas fa-arrow-right"></i>
+              </a>
             </div>
           </div>
           
-          <div class="summary-content">
-            <div class="personal-story-brief">
-              <div class="story-icon">🔥</div>
-              <div class="story-text">
-                <p><strong>「このままじゃダメだ」その危機感が、あなたを変える最強の武器になる。</strong></p>
-                <p>海外進学は逃げ道ではなく、自分と本気で向き合う場所。言い訳ができない環境で、本当の自分の可能性を見つけられます。</p>
-                <p>必要なのは<span class="highlight-text">才能じゃない、本気度と努力だけ</span>。現状を変えたいその気持ちこそが、成功への第一歩です。</p>
-              </div>
+          <!-- Resources Card -->
+          <div class="access-card resource-card">
+            <div class="card-header">
+              <i class="fas fa-lightbulb"></i>
+              <h3>お役立ち情報</h3>
             </div>
-            
-            <div class="essence-message">
-              <div class="essence-icon">💎</div>
-              <div class="essence-content">
-                <h4>海外進学があなたを変えるのではない</h4>
-                <p>本気で取り組む、その経験こそがあなたを変えます。海外進学は手段にすぎません。<strong>大切なのは、どこにいても本気で挑戦し続ける姿勢です。</strong></p>
-              </div>
-            </div>
-            
-            <div class="cta-section">
-              <p class="cta-text">もし今、心の奥で「このままじゃダメだ」と感じているなら、<br>その直感を信じて、一歩踏み出してみませんか？</p>
-              <%= link_to "/why_study_abroad", class: "btn btn-primary cta-button" do %>
-                私の体験談を読む <i class="fas fa-arrow-right ms-2"></i>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- クイック検索セクション -->
-      <div class="section">
-        <h2 class="section-title">
-          <i class="fas fa-search me-2"></i>大学名で直接検索
-        </h2>
-        <div class="quick-search-container">
-          <div class="search-input-wrapper">
-            <input type="text" id="hero-search-input" placeholder="例：Harvard University, Stanford University..." class="search-input">
-            <button id="hero-search-btn" class="search-btn">
-              <i class="fas fa-search"></i>
-              <span>検索</span>
-            </button>
-          </div>
-          <div class="search-divider">
-            <span class="divider-line"></span>
-            <span class="divider-text">または</span>
-            <span class="divider-line"></span>
-          </div>
-          <div class="advanced-search-cta">
-            <div class="cta-icon">
-              <i class="fas fa-sliders-h"></i>
-            </div>
-            <div class="cta-content">
-              <h4>条件を細かく指定して検索したい方は</h4>
-              <%= link_to "/search", class: "advanced-search-link" do %>
-                <span>詳細検索を使う</span>
-                <i class="fas fa-arrow-right"></i>
-              <% end %>
-              <p class="cta-description">州・学費・専攻・合格率など最大9つの条件で絞り込み可能</p>
+            <div class="resource-links">
+              <a href="/why_study_abroad" class="resource-item">
+                <i class="fas fa-fire"></i>
+                <span>なぜ海外進学？</span>
+              </a>
+              <a href="/blogs" class="resource-item">
+                <i class="fas fa-blog"></i>
+                <span>留学ブログ</span>
+              </a>
+              <a href="/columns" class="resource-item">
+                <i class="fas fa-newspaper"></i>
+                <span>コラム</span>
+              </a>
+              <a href="/search" class="resource-item">
+                <i class="fas fa-question-circle"></i>
+                <span>使い方ガイド</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
-
-
-      <!-- 最新記事セクション -->
-      <div class="section">
-        <h2 class="section-title">
-          <i class="fas fa-newspaper me-2"></i>最新記事
-        </h2>
-        <div class="articles-grid">
-          <% @recent_articles.each do |article| %>
-            <%= link_to article[:url], class: "article-window-link" do %>
-              <div class="article-window">
-                <div class="article-header">
-                  <span class="article-type-badge <%= article[:article_type] == 'コラム' ? 'column' : 'blog' %>">
-                    <%= article[:article_type] %>
-                  </span>
-                  <span class="article-category"><%= article[:category] %></span>
+    </div>
+    
+    <!-- Dynamic Content Section -->
+    <div class="dynamic-section">
+      <div class="container-narrow">
+        <div class="content-grid">
+          <!-- Main Content Area -->
+          <div class="main-area">
+            <!-- Recently Viewed (if logged in) -->
+            <% if logged_in? && recently_viewed_colleges.any? %>
+              <div class="content-block">
+                <div class="block-header">
+                  <h3><i class="fas fa-history"></i> 最近見た大学</h3>
+                  <a href="#" class="see-more">すべて見る</a>
                 </div>
-                <div class="article-content">
-                  <h3 class="article-title">
-                    <%= article[:title] %>
-                  </h3>
-                  <p class="article-excerpt"><%= truncate(article[:excerpt], length: 120) %></p>
-                  <div class="article-meta">
-                    <span class="article-author">by <%= article[:author] %></span>
-                    <span class="article-date"><%= article[:published_at] %></span>
-                  </div>
+                <div class="recent-grid">
+                  <% recently_viewed_colleges.first(4).each do |college| %>
+                    <a href="<%= conditions_path(college.slug || college.id) %>" class="recent-card">
+                      <div class="recent-info">
+                        <h4><%= college.college %></h4>
+                        <p><i class="fas fa-map-marker-alt"></i> <%= translate_state(college.state) %></p>
+                      </div>
+                      <div class="recent-stats">
+                        <span class="stat">
+                          <%= if college.privateorpublic == "州立" || college.privateorpublic == "Public"
+                                if college.tuition_out_state.present?
+                                  "$#{number_with_delimiter(college.tuition_out_state)}"
+                                elsif college.tuition.present?
+                                  "$#{number_with_delimiter(college.tuition)}"
+                                else
+                                  "N/A"
+                                end
+                              else
+                                college.tuition ? "$#{number_with_delimiter(college.tuition)}" : "N/A"
+                              end %>
+                        </span>
+                      </div>
+                    </a>
+                  <% end %>
                 </div>
               </div>
             <% end %>
-          <% end %>
-        </div>
-        <div class="view-all-section">
-          <%= link_to "/blogs", class: "view-all-btn" do %>
-            すべてのブログを見る
-          <% end %>
-          <%= link_to "/columns", class: "view-all-btn" do %>
-            すべてのコラムを見る
-          <% end %>
-        </div>
-      </div>
-
-      <!-- サイト詳細説明セクション -->
-      <div class="section">
-        <div class="site-description">
-          <div class="description-intro">
-            <div class="intro-card">
-              <div class="intro-icon">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
-              <div class="intro-content">
-                <h3>アメリカ大学留学を成功に導く、最も包括的な大学検索プラットフォーム</h3>
-                <p>College Sparkは、アメリカの4年制大学4,000校以上の詳細データを網羅した日本最大級の大学検索サイトです。ハーバード大学、スタンフォード大学、MIT、UC Berkeley、NYUなど、世界トップレベルの大学から、隠れた名門校まで、あなたの夢と条件にぴったりの大学を見つけることができます。</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="why-choose-us">
-            <h3><i class="fas fa-star"></i>なぜCollege Sparkが選ばれるのか</h3>
-            <div class="advantages-grid">
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-database"></i>
-                </div>
-                <h4>圧倒的なデータ量</h4>
-                <p>4,000校以上の大学データを収録。学費、合格率、SAT/ACTスコア、専攻情報、卒業後の収入データまで、大学選びに必要な全ての情報を網羅しています。</p>
-              </div>
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-search-plus"></i>
-                </div>
-                <h4>多角的検索機能</h4>
-                <p>州、学費範囲、専攻分野、入学難易度、学生数、立地環境など、20以上の条件で詳細検索が可能。あなたの優先順位に合わせて最適な大学を絞り込めます。</p>
-              </div>
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-yen-sign"></i>
-                </div>
-                <h4>正確な学費情報</h4>
-                <p>州立大学の州外生料金、私立大学のNet Price（実質費用）を正確に表示。奨学金情報も含めた実際の負担額を把握できます。</p>
-              </div>
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-chart-line"></i>
-                </div>
-                <h4>入学データ分析</h4>
-                <p>合格率、SAT/ACTスコア分布、GPA要件など、入学に必要な統計データを詳細に分析。あなたの学力に適した大学選びをサポートします。</p>
-              </div>
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-book"></i>
-                </div>
-                <h4>専攻分野完全網羅</h4>
-                <p>工学、経営学、コンピューターサイエンス、心理学、生物学など16の主要分野を網羅。各専攻で強い大学をランキング形式で紹介します。</p>
-              </div>
-              <div class="advantage-item">
-                <div class="advantage-icon">
-                  <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h4>使いやすいインターフェース</h4>
-                <p>スマートフォン、タブレット、PCに完全対応。直感的な操作で、いつでもどこでも大学情報にアクセスできます。</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="target-users">
-            <h3><i class="fas fa-users"></i>こんな方におすすめ</h3>
-            <div class="users-grid">
-              <div class="user-item">
-                <i class="fas fa-user-graduate"></i>
-                <h4>高校生・受験生</h4>
-                <p>アメリカの大学進学を考えている高校生。学力や予算に合った大学を効率的に見つけたい方。</p>
-              </div>
-              <div class="user-item">
-                <i class="fas fa-exchange-alt"></i>
-                <h4>編入を検討中の学生</h4>
-                <p>日本の大学やコミュニティカレッジからアメリカの4年制大学への編入を考えている方。</p>
-              </div>
-              <div class="user-item">
-                <i class="fas fa-heart"></i>
-                <h4>保護者の方</h4>
-                <p>お子さんの海外大学進学をサポートしたい保護者。学費や安全性を重視した大学選びをしたい方。</p>
-              </div>
-              <div class="user-item">
-                <i class="fas fa-briefcase"></i>
-                <h4>社会人・キャリアチェンジ</h4>
-                <p>キャリアアップのためMBAや専門学位取得を目指す社会人の方。</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="how-to-use-detailed">
-            <h3><i class="fas fa-route"></i>College Spark活用ガイド</h3>
-            <div class="steps-detailed">
-              <div class="step-detailed">
-                <div class="step-number-large">1</div>
-                <div class="step-content">
-                  <h4>興味のある大学を検索</h4>
-                  <p>大学名での直接検索、または詳細条件での絞り込み検索を選択。まずは広く候補を探してみましょう。</p>
+            
+            <!-- Featured Universities -->
+            <div class="content-block">
+              <div class="block-header">
+                <h3><i class="fas fa-star"></i> 注目の大学</h3>
+                <div class="view-toggle">
+                  <button class="toggle-btn active" data-view="grid">
+                    <i class="fas fa-th"></i>
+                  </button>
+                  <button class="toggle-btn" data-view="list">
+                    <i class="fas fa-list"></i>
+                  </button>
                 </div>
               </div>
-              <div class="step-detailed">
-                <div class="step-number-large">2</div>
-                <div class="step-content">
-                  <h4>詳細情報を比較検討</h4>
-                  <p>気になる大学の学費、合格率、専攻の強さ、キャンパス環境などを詳しく比較。お気に入り機能で候補を保存できます。</p>
-                </div>
-              </div>
-              <div class="step-detailed">
-                <div class="step-number-large">3</div>
-                <div class="step-content">
-                  <h4>出願戦略を立てる</h4>
-                  <p>あなたの学力レベルに応じて、安全校・適正校・チャレンジ校のバランスを考慮した出願校リストを作成しましょう。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="success-message">
-            <div class="success-icon">
-              <i class="fas fa-rocket"></i>
-            </div>
-            <div class="success-content">
-              <h3>あなたの夢のアメリカ大学生活をCollege Sparkがサポートします</h3>
-              <p>世界トップレベルの教育環境、多様な価値観との出会い、グローバルな人脈形成。アメリカ大学留学で得られる経験は、あなたの人生を大きく変える可能性を秘めています。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 最近閲覧した大学セクション -->
-      <% if logged_in? && recently_viewed_colleges.any? %>
-        <div class="section">
-          <h2 class="section-title">
-            <i class="fas fa-history me-2"></i>最近閲覧した大学
-          </h2>
-          <div class="recently-viewed-grid">
-            <% recently_viewed_colleges.each do |college| %>
-              <div class="college-card">
-                <%= link_to conditions_path(college.slug || college.id), class: "college-link" do %>
-                  <div class="college-header">
-                    <h3 class="college-name"><%= college.college %></h3>
-                    <p class="college-location">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <%= translate_state(college.state) %>
-                    </p>
-                  </div>
-                  
-                  <div class="college-stats">
-                    <div class="stat-item">
-                      <span class="stat-label">授業料</span>
-                      <span class="stat-value">
-                        <%= if college.privateorpublic == "州立" || college.privateorpublic == "Public"
-                              if college.tuition_out_state.present?
-                                "$#{number_with_delimiter(college.tuition_out_state)}"
-                              elsif college.tuition.present?
-                                "$#{number_with_delimiter(college.tuition)}"
-                              else
-                                "N/A"
-                              end
-                            else
-                              college.tuition ? "$#{number_with_delimiter(college.tuition)}" : "N/A"
-                            end %>
-                      </span>
+              <div class="featured-universities" id="featured-view">
+                <% if @popular_colleges %>
+                  <% @popular_colleges.first(6).each do |college| %>
+                    <div class="uni-card">
+                      <a href="<%= conditions_path(college.slug || college.id) %>">
+                        <div class="uni-header">
+                          <h4><%= college.college %></h4>
+                          <span class="uni-type"><%= college.privateorpublic == "Private" ? "私立" : "州立" %></span>
+                        </div>
+                        <div class="uni-details">
+                          <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <%= translate_state(college.state) %>
+                          </div>
+                          <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <%= college.students ? "#{number_with_delimiter(college.students)}人" : "N/A" %>
+                          </div>
+                          <div class="detail-item">
+                            <i class="fas fa-percentage"></i>
+                            合格率 <%= college.acceptance_rate ? "#{(college.acceptance_rate * 100).round}%" : "N/A" %>
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                    
-                    <div class="stat-item">
-                      <span class="stat-label">学生数</span>
-                      <span class="stat-value">
-                        <%= college.students ? "#{number_with_delimiter(college.students)}人" : "N/A" %>
-                      </span>
-                    </div>
-                    
-                    <div class="stat-item">
-                      <span class="stat-label">卒業率</span>
-                      <span class="stat-value">
-                        <%= college.graduation_rate ? "#{(college.graduation_rate * 100).round}%" : "N/A" %>
-                      </span>
-                    </div>
-                    
-                    <div class="stat-item">
-                      <span class="stat-label">立地</span>
-                      <span class="stat-value">
-                        <%= if college.locale.present?
-                              case college.locale.to_i
-                              when 11, 12, 13
-                                "大都市"
-                              when 21, 22, 23
-                                "都市部近郊"
-                              when 31, 32, 33
-                                "小都市"
-                              when 41, 42, 43
-                                "田舎"
-                              else
-                                "その他"
-                              end
-                            else
-                              "N/A"
-                            end %>
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div class="card-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
+                  <% end %>
                 <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
-
-      <!-- 人気大学ランキングセクション -->
-      <div class="section">
-        <h2 class="section-title">
-          <i class="fas fa-fire me-2"></i>人気の大学ランキング
-        </h2>
-        <div class="ranking-grid">
-          <% @popular_colleges&.each_with_index do |college, index| %>
-            <div class="ranking-card">
-              <%= link_to conditions_path(college.slug || college.id), class: "ranking-link" do %>
-                <div class="rank-number">
-                  <span><%= index + 1 %></span>
-                </div>
-                
-                <div class="college-info">
-                  <h3 class="college-name"><%= college.college %></h3>
-                  <p class="college-location">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <%= translate_state(college.state) %>
-                  </p>
-                  
-                  <div class="college-highlights">
-                    <% if college.acceptance_rate %>
-                      <span class="highlight">合格率 <%= (college.acceptance_rate * 100).round %>%</span>
-                    <% end %>
-                    <% if college.students %>
-                      <span class="highlight">学生数 <%= number_with_delimiter(college.students) %>人</span>
-                    <% end %>
+          
+          <!-- Sidebar Area -->
+          <div class="sidebar-area">
+            <!-- Quick Guide -->
+            <div class="sidebar-block">
+              <h3><i class="fas fa-compass"></i> クイックガイド</h3>
+              <div class="guide-steps">
+                <div class="guide-step">
+                  <span class="step-num">1</span>
+                  <div class="step-info">
+                    <h4>探す</h4>
+                    <p>条件に合う大学を検索</p>
                   </div>
                 </div>
-                
-                <div class="ranking-arrow">
-                  <i class="fas fa-chevron-right"></i>
+                <div class="guide-step">
+                  <span class="step-num">2</span>
+                  <div class="step-info">
+                    <h4>比較</h4>
+                    <p>学費や特徴を比較検討</p>
+                  </div>
                 </div>
-              <% end %>
+                <div class="guide-step">
+                  <span class="step-num">3</span>
+                  <div class="step-info">
+                    <h4>決める</h4>
+                    <p>出願校リストを作成</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          <% end %>
-        </div>
-        
-        <div class="section-footer">
-          <%= link_to "/search", class: "btn btn-outline" do %>
-            すべての大学を見る <i class="fas fa-arrow-right ms-2"></i>
-          <% end %>
+            
+            <!-- Latest Articles -->
+            <div class="sidebar-block">
+              <h3><i class="fas fa-newspaper"></i> 最新記事</h3>
+              <div class="article-list">
+                <% @recent_articles&.first(3)&.each do |article| %>
+                  <a href="<%= article[:url] %>" class="article-item">
+                    <span class="article-badge <%= article[:article_type] == 'コラム' ? 'column' : 'blog' %>">
+                      <%= article[:article_type] %>
+                    </span>
+                    <h4><%= article[:title] %></h4>
+                    <span class="article-date"><%= article[:published_at] %></span>
+                  </a>
+                <% end %>
+              </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="sidebar-block cta-block">
+              <i class="fas fa-rocket"></i>
+              <h3>まずは行動しよう</h3>
+              <p>悩んでいる時間はもったいない。今すぐ大学探しを始めよう。</p>
+              <a href="/search" class="cta-btn">
+                詳細検索へ <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      
     </div>
   </div>
 </div>
@@ -402,32 +293,31 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
-    color: #2d3748;
-    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
+    color: #1a202c;
+    background: #f7fafc;
     min-height: 100vh;
   }
 
   .page-container {
     min-height: 100vh;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: white;
   }
 
-  /* Hero Section */
+  /* Minimal Hero Section - Just Right */
   .hero-section {
     background: url('<%= asset_path("hero_background_new.jpg") %>') center/cover no-repeat;
-    min-height: 400px;
+    min-height: 300px;
     padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
   }
 
-  .hero-section::after {
+  .hero-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -438,383 +328,280 @@
     z-index: 1;
   }
 
-  .hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="80" r="1.5" fill="%23ffffff" opacity="0.05"/><circle cx="60" cy="40" r="0.5" fill="%23ffffff" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
+  .hero-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    width: 100%;
   }
 
-  .hero-content {
+  .hero-main {
     text-align: center;
     color: #2d3748;
-    z-index: 3;
-    max-width: 800px;
-    padding: 0 20px;
-    position: relative;
   }
 
   .hero-title {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: 2.8rem;
     font-weight: 800;
-    margin-bottom: 1rem;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
     opacity: 0.9;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
   }
 
-  .hero-description {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    opacity: 0.8;
-    line-height: 1.6;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  .hero-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
 
   /* Main Content */
   .main-content {
-    background: white;
-    margin-top: -40px;
-    position: relative;
-    z-index: 3;
-    border-radius: 24px 24px 0 0;
-    box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+    background: #f7fafc;
   }
 
-  .content-padding {
-    padding: 60px 40px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Section Styles */
-  .section {
-    margin-bottom: 60px;
-  }
-
-  .section-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-bottom: 24px;
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .section-title::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
-    width: 4px;
-    background: linear-gradient(135deg, #fb923c, #f97316);
-    border-radius: 2px;
-  }
-
-  .section-footer {
-    text-align: center;
-    margin-top: 30px;
-  }
-
-  /* Button Styles */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 14px 28px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    font-size: 16px;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #fb923c, #f97316);
-    color: white;
-    box-shadow: 0 4px 20px rgba(251, 146, 60, 0.3);
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(251, 146, 60, 0.4);
-    color: white;
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: #fb923c;
-    border-color: #fb923c;
-  }
-
-  .btn-outline:hover {
-    background: #fb923c;
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  /* Quick Search */
-  .quick-search-container {
-    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 100%);
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 4px 20px rgba(254, 215, 170, 0.3);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .search-input-wrapper {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .search-input {
-    flex: 1;
-    min-width: 300px;
-    border: 2px solid rgba(251, 146, 60, 0.2);
-    border-radius: 12px;
-    padding: 18px 24px;
-    font-size: 18px;
-    background: white;
-    transition: all 0.3s ease;
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: #fb923c;
-    box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
-  }
-
-  .search-btn {
-    background: linear-gradient(135deg, #fb923c, #f97316);
-    color: white;
-    border: none;
-    padding: 18px 32px;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap;
-    min-width: 140px;
-    justify-content: center;
-  }
-
-  .search-btn:hover {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.3);
-  }
-
-  .search-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px 0 25px;
-    gap: 15px;
-  }
-
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.3), transparent);
-    max-width: 150px;
-  }
-
-  .divider-text {
-    color: #9a3412;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 0 15px;
-    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 100%);
-  }
-
-  .advanced-search-cta {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 16px;
-    border: 2px solid rgba(251, 146, 60, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .advanced-search-cta:hover {
-    border-color: rgba(251, 146, 60, 0.5);
-    box-shadow: 0 6px 25px rgba(251, 146, 60, 0.15);
-  }
-
-  .cta-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #fb923c, #f97316);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .cta-icon i {
-    font-size: 1.5rem;
-    color: white;
-  }
-
-  .cta-content {
-    flex: 1;
-    text-align: center;
-  }
-
-  .cta-content h4 {
-    font-size: 1rem;
-    color: #4a5568;
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-
-  .advanced-search-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #fb923c, #f97316);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    margin: 0 auto 12px;
-  }
-
-  .advanced-search-link:hover {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.3);
-    color: white;
-  }
-
-  .advanced-search-link i {
-    transition: transform 0.3s ease;
-  }
-
-  .advanced-search-link:hover i {
-    transform: translateX(4px);
-  }
-
-  .cta-description {
-    font-size: 0.85rem;
-    color: #718096;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .link-accent {
-    color: #fb923c;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .link-accent:hover {
-    color: #f97316;
-    text-decoration: underline;
-  }
-
-  /* Recently Viewed & Rankings */
-  .recently-viewed-grid,
-  .ranking-grid {
-    display: grid;
-    gap: 20px;
-  }
-
-  .recently-viewed-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-
-  .college-card,
-  .ranking-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+  /* Country Selection Section - 横一列で目立つデザイン */
+  .country-selection-section {
+    background: linear-gradient(135deg, #fff5ed 0%, #fed7aa 100%);
+    padding: 40px 20px;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(251, 146, 60, 0.1);
   }
 
-  .college-card::before,
-  .ranking-card::before {
+  .country-selection-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, #fb923c, #f97316);
+    height: 3px;
+    background: linear-gradient(90deg, #fb923c, #f97316);
   }
 
-  .college-card:hover,
-  .ranking-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(251, 146, 60, 0.15);
+  .country-container {
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .college-link,
-  .ranking-link {
+  .country-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .country-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a202c;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .country-header i {
+    font-size: 2rem;
+    color: #fb923c;
+  }
+
+  .countries-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .country-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    color: #1a202c;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+  }
+
+  .country-card.active {
+    border: 2px solid #fb923c;
+    background: linear-gradient(135deg, white, #fff8f3);
+  }
+
+  .country-card.active:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(251,146,60,0.3);
+  }
+
+  .country-card.disabled {
+    opacity: 0.6;
+    background: #f3f4f6;
+  }
+
+  .country-card .country-flag {
+    font-size: 3rem;
+    margin-bottom: 8px;
+  }
+
+  .country-card .country-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .country-card .country-count {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .country-card .coming-soon-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+  }
+
+  /* Country Action Buttons */
+  .country-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .country-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-decoration: none;
-    color: inherit;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
   }
 
-  .ranking-card {
+  .country-btn.search-btn {
+    background: #fb923c;
+    color: white;
+  }
+
+  .country-btn.search-btn:hover {
+    background: #f97316;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(251,146,60,0.3);
+  }
+
+  .country-btn.about-btn {
+    background: #e2e8f0;
+    color: #475569;
+  }
+
+  .country-btn.about-btn:hover {
+    background: #cbd5e1;
+    transform: translateY(-1px);
+  }
+
+  .country-btn.disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .country-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Quick Access Section */
+  .quick-access-section {
+    padding: 60px 20px;
+    background: white;
+  }
+
+  .container-narrow {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .access-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+  }
+
+  .access-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .card-header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
 
-  .ranking-link {
+  .card-header i {
+    font-size: 1.5rem;
+    color: #fb923c;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a202c;
+  }
+
+  /* Ranking Preview */
+  .ranking-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rank-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    width: 100%;
+    gap: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: all 0.3s;
   }
 
-  .rank-number {
-    width: 50px;
-    height: 50px;
+  .rank-item:hover {
+    background: #e2e8f0;
+    transform: translateX(4px);
+  }
+
+  .rank-num {
+    width: 28px;
+    height: 28px;
     background: linear-gradient(135deg, #fb923c, #f97316);
     color: white;
     border-radius: 50%;
@@ -822,19 +609,369 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.2rem;
-    flex-shrink: 0;
+    font-size: 0.9rem;
   }
 
-  .college-header {
-    margin-bottom: 15px;
+  .rank-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
   }
 
-  .college-name {
-    font-size: 1.1rem;
+  .see-all-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: white;
+    border: 2px solid #fb923c;
+    border-radius: 8px;
+    color: #fb923c;
+    text-decoration: none;
     font-weight: 600;
-    margin-bottom: 5px;
-    color: #2d3748;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+
+  .see-all-link:hover {
+    background: #fb923c;
+    color: white;
+  }
+
+  /* Resource Links */
+  .resource-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .resource-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+
+  .resource-item:hover {
+    background: linear-gradient(135deg, #fff5ed, #fed7aa);
+    transform: translateY(-2px);
+  }
+
+  .resource-item i {
+    color: #fb923c;
+  }
+
+  /* Dynamic Content Section */
+  .dynamic-section {
+    padding: 40px 20px;
+    background: #f7fafc;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+  }
+
+  .content-block {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .block-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .block-header i {
+    color: #fb923c;
+  }
+
+  /* Featured Universities */
+  .featured-universities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .uni-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s;
+  }
+
+  .uni-card:hover {
+    background: linear-gradient(135deg, #fff5ed, #fed7aa);
+    transform: translateY(-2px);
+  }
+
+  .uni-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .uni-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 12px;
+  }
+
+  .uni-header h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a202c;
+    flex: 1;
+  }
+
+  .uni-type {
+    background: #fb923c;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .uni-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  .detail-item i {
+    color: #fb923c;
+    width: 16px;
+  }
+
+  /* Sidebar */
+  .sidebar-block {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+  }
+
+  .sidebar-block h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-block h3 i {
+    color: #fb923c;
+  }
+
+  /* Guide Steps */
+  .guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .guide-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  .step-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 2px;
+  }
+
+  .step-info p {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Article List */
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .article-item {
+    display: block;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: all 0.3s;
+  }
+
+  .article-item:hover {
+    background: #e2e8f0;
+  }
+
+  .article-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .article-badge.column {
+    background: #1a202c;
+    color: white;
+  }
+
+  .article-badge.blog {
+    background: #fb923c;
+    color: white;
+  }
+
+  .article-item h4 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .article-date {
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  /* CTA Block */
+  .cta-block {
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-block i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-block h3 {
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .cta-block p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    opacity: 0.95;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: white;
+    color: #fb923c;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* Info Footer */
+  .info-footer {
+    background: #1a202c;
+    color: white;
+    padding: 40px 20px;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .footer-block h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-block p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    transition: all 0.3s;
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+    transform: translateX(4px);
   }
 
   .college-location {
@@ -1115,127 +1252,134 @@
     transform: translateY(-2px);
   }
 
-  /* Responsive Design */
-  /* Prevent search button overflow on medium screens */
-  @media (max-width: 900px) {
-    .search-input {
-      min-width: 250px;
-    }
-    .search-btn {
-      min-width: 120px;
-      padding: 18px 24px;
-    }
+  /* Recent Grid */
+  .recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
   }
 
+  .recent-card {
+    display: block;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1a202c;
+    transition: all 0.3s;
+  }
+
+  .recent-card:hover {
+    background: linear-gradient(135deg, #fff5ed, #fed7aa);
+    transform: translateY(-2px);
+  }
+
+  .recent-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .recent-info p {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .recent-stats {
+    font-size: 0.85rem;
+    color: #fb923c;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .content-padding {
-      padding: 40px 20px 30px;
-    }
-
     .hero-section {
-      min-height: 300px;
-      padding: 40px 20px;
+      padding: 30px 15px 40px;
     }
 
-    .quick-search-container {
-      padding: 30px 20px;
-      margin: 0 20px;
-      max-width: calc(100% - 40px);
+    .country-selection-section {
+      padding: 30px 15px;
     }
 
-    .search-input-wrapper {
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .search-input {
-      min-width: auto;
-      width: 100%;
+    .country-header h2 {
+      font-size: 1.4rem;
     }
 
-    .advanced-search-cta {
-      flex-direction: column;
-      text-align: center;
+    .countries-row {
       gap: 15px;
     }
 
-    .cta-content h4 {
-      font-size: 0.95rem;
+    .country-card {
+      padding: 20px;
+      min-width: 150px;
     }
 
-    .advanced-search-link {
-      font-size: 15px;
-      padding: 10px 20px;
+    .country-card .country-flag {
+      font-size: 2.5rem;
     }
 
-    .cta-description {
-      font-size: 0.8rem;
+    .country-card .country-name {
+      font-size: 1rem;
     }
 
-    .search-input {
-      min-width: 100%;
-      width: 100%;
-      padding: 16px 20px;
-      font-size: 16px;
-    }
-
-    .search-btn {
-      padding: 16px 24px;
-      font-size: 16px;
-      min-width: auto;
-    }
-
-    .college-stats {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .ranking-card {
+    .search-tabs {
       flex-direction: column;
-      text-align: center;
-      gap: 15px;
     }
 
-    .ranking-link {
-      flex-direction: column;
-      text-align: center;
-      gap: 15px;
-    }
-
-    .college-highlights {
-      justify-content: center;
-    }
-
-    .features-grid {
+    .quick-filters {
       grid-template-columns: 1fr;
     }
 
-    .section-title {
-      font-size: 1.5rem;
+    .guide-options {
+      grid-template-columns: 1fr;
+    }
+
+    .access-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-universities {
+      grid-template-columns: 1fr;
+    }
+
+    .resource-links {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 480px) {
-    .content-padding {
-      padding: 30px 15px 20px;
+    .hero-title {
+      font-size: 1.5rem;
     }
 
-    .quick-search-container {
-      padding: 20px;
+    .hero-subtitle {
+      font-size: 0.9rem;
     }
 
-    .college-card,
-    .ranking-card {
-      padding: 15px;
+    .country-selection-section {
+      padding: 25px 10px;
     }
 
-    .feature-card {
-      padding: 25px 20px;
+    .country-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .countries-row {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .country-card {
+      width: 100%;
+      max-width: 300px;
     }
   }
-
-  .me-2 { margin-right: 0.5rem; }
-  .ms-2 { margin-left: 0.5rem; }
 
   /* なぜ海外進学なのか？サマリーセクション */
   .why-study-abroad-summary {
@@ -1972,28 +2116,100 @@
     }
   }
 
+  /* 国選択セクション */
+  .country-selection {
+    margin-bottom: 40px;
+  }
+
+  .country-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .country-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .country-link.active {
+    border-color: #fb923c;
+    background: linear-gradient(135deg, #fff8f3 0%, #ffecd4 100%);
+  }
+
+  .country-link.active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.2);
+    border-color: #f97316;
+  }
+
+  .country-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f3f4f6;
+  }
+
+  .country-flag {
+    font-size: 2rem;
+  }
+
+  .country-name {
+    font-size: 1rem;
+  }
+
+  .coming-soon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .country-links {
+      flex-direction: column;
+    }
+
+    .country-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 
 </style>
 
 <script>
-  // Hero search functionality
-  document.getElementById('hero-search-btn').addEventListener('click', function() {
-    const searchInput = document.getElementById('hero-search-input');
-    const query = searchInput.value.trim();
+  document.addEventListener('DOMContentLoaded', function() {
+    // View Toggle for Featured Universities
+    const viewToggles = document.querySelectorAll('.toggle-btn');
+    const featuredView = document.getElementById('featured-view');
     
-    if (query) {
-      // Redirect to results page with college name search
-      window.location.href = `/results?college_name=${encodeURIComponent(query)}`;
-    } else {
-      alert('大学名を入力してください');
-    }
+    viewToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        viewToggles.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        if (this.dataset.view === 'list' && featuredView) {
+          featuredView.style.gridTemplateColumns = '1fr';
+        } else if (featuredView) {
+          featuredView.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+        }
+      });
+    });
   });
-
-  // Enter key support for search
-  document.getElementById('hero-search-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      document.getElementById('hero-search-btn').click();
-    }
-  });
-
 </script>

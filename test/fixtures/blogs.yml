@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  content: MyText
-  author: MyString
-  category: MyString
+  title: Test Blog Post One
+  content: This is the content of the first blog post
+  author: Author One
+  category: Category A
   published_at: 2025-07-08 11:19:03
   featured: false
-  slug: MyString
+  slug: test-blog-post-one
 
 two:
-  title: MyString
-  content: MyText
-  author: MyString
-  category: MyString
+  title: Test Blog Post Two
+  content: This is the content of the second blog post
+  author: Author Two
+  category: Category B
   published_at: 2025-07-08 11:19:03
   featured: false
-  slug: MyString
+  slug: test-blog-post-two

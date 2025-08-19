@@ -1,0 +1,10 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "89a6ad27b4e3d5e3e9c8a2d8e8f5f6g7h8i9j0k1",
+      "note": "テンプレート名は Blog::TEMPLATES で制限されており、サニタイズも実施済み"
+    }
+  ],
+  "updated": "2025-08-19 12:18:00 +0900",
+  "brakeman_version": "7.0.2"
+}

@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
     @blogs = @blogs.by_category(params[:category]) if params[:category].present?
     @blogs = @blogs.page(params[:page]).per(10)
     @categories = Blog::CATEGORIES
-    
+
     # ブログにはコラムを表示しない
     @static_articles = []
   end
@@ -17,6 +17,6 @@ class BlogsController < ApplicationController
                          .recent
                          .limit(3)
   rescue ActiveRecord::RecordNotFound
-    redirect_to blogs_path, alert: 'ブログ記事が見つかりません。'
+    redirect_to blogs_path, alert: "ブログ記事が見つかりません。"
   end
 end

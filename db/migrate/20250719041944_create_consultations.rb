@@ -11,7 +11,7 @@ class CreateConsultations < ActiveRecord::Migration[8.0]
       t.text :message
       t.string :status, default: 'pending'
       t.text :admin_notes
-      
+
       t.index :email
       t.index :status
       t.index :preferred_date

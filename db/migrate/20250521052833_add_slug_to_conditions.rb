@@ -4,4 +4,3 @@ class AddSlugToConditions < ActiveRecord::Migration[7.0]
     add_index :conditions, :slug, unique: true
   end
 end
-

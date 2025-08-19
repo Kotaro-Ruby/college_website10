@@ -1,7 +1,7 @@
 class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :condition
-  
+
   # バリデーション
   validates :user_id, presence: true
   validates :condition_id, presence: true

@@ -13,12 +13,12 @@ sheet = spreadsheet.sheet(0)
 header = sheet.row(1).map(&:strip)
 
 # 特別処理対象のキー
-keep_na_fields = ["graduation_rate", "acceptance_rate", "students"]
-null_fields = ["GPA", "tuition", "Division"]
+keep_na_fields = [ "graduation_rate", "acceptance_rate", "students" ]
+null_fields = [ "GPA", "tuition", "Division" ]
 
 # データ行を処理
 (2..sheet.last_row).each do |i|
-  row = Hash[[header, sheet.row(i)].transpose]
+  row = Hash[[ header, sheet.row(i) ].transpose]
 
   row.each do |key, value|
     value_str = value.to_s.strip
@@ -57,10 +57,3 @@ null_fields = ["GPA", "tuition", "Division"]
 end
 
 puts "✅ Data import complete!"
-
-
-
-
-
-
-

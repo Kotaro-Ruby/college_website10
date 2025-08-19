@@ -5,7 +5,7 @@ header = xlsx.row(1)
 
 File.open("db/seeds_data.rb", "w:utf-8") do |file|
   (2..xlsx.last_row).each do |i|
-    row = Hash[[header, xlsx.row(i)].transpose]
+    row = Hash[[ header, xlsx.row(i) ].transpose]
 
     next if row['college'].nil? || row['college'].strip == ''
 
