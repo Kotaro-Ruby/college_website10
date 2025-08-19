@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_17_074236) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,6 +28,125 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["session_token"], name: "index_admins_on_session_token"
     t.index ["username"], name: "index_admins_on_username", unique: true
+  end
+
+  create_table "au_course_locations", force: :cascade do |t|
+    t.integer "au_course_id", null: false
+    t.integer "au_location_id", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["au_course_id", "au_location_id"], name: "idx_au_course_location_unique", unique: true
+    t.index ["au_course_id"], name: "index_au_course_locations_on_au_course_id"
+    t.index ["au_location_id"], name: "index_au_course_locations_on_au_location_id"
+  end
+
+  create_table "au_courses", force: :cascade do |t|
+    t.integer "au_university_id", null: false
+    t.string "cricos_course_code", null: false
+    t.string "course_name", null: false
+    t.string "vet_national_code"
+    t.string "course_level"
+    t.boolean "dual_qualification", default: false
+    t.boolean "foundation_studies", default: false
+    t.string "field_of_education_broad"
+    t.string "field_of_education_narrow"
+    t.string "field_of_education_detailed"
+    t.integer "duration_weeks"
+    t.decimal "duration_years"
+    t.boolean "work_component", default: false
+    t.decimal "work_component_hours_per_week"
+    t.integer "work_component_weeks"
+    t.integer "work_component_total_hours"
+    t.string "course_language", default: "English"
+    t.decimal "tuition_fee"
+    t.decimal "non_tuition_fee"
+    t.decimal "estimated_total_cost"
+    t.decimal "annual_tuition_fee"
+    t.boolean "expired", default: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "field_of_education_2_broad"
+    t.string "field_of_education_2_narrow"
+    t.string "field_of_education_2_detailed"
+    t.string "institution_name"
+    t.index ["annual_tuition_fee"], name: "index_au_courses_on_annual_tuition_fee"
+    t.index ["au_university_id", "active"], name: "index_au_courses_on_au_university_id_and_active"
+    t.index ["au_university_id", "course_level"], name: "index_au_courses_on_au_university_id_and_course_level"
+    t.index ["au_university_id"], name: "index_au_courses_on_au_university_id"
+    t.index ["course_level"], name: "index_au_courses_on_course_level"
+    t.index ["cricos_course_code"], name: "index_au_courses_on_cricos_course_code", unique: true
+    t.index ["duration_weeks"], name: "index_au_courses_on_duration_weeks"
+    t.index ["field_of_education_2_broad"], name: "index_au_courses_on_field_of_education_2_broad"
+    t.index ["field_of_education_broad"], name: "index_au_courses_on_field_of_education_broad"
+  end
+
+  create_table "au_locations", force: :cascade do |t|
+    t.integer "au_university_id", null: false
+    t.string "cricos_provider_code", null: false
+    t.string "location_name", null: false
+    t.string "location_type"
+    t.string "address_line_1"
+    t.string "address_line_2"
+    t.string "address_line_3"
+    t.string "address_line_4"
+    t.string "city"
+    t.string "state"
+    t.string "postcode"
+    t.text "full_address"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["au_university_id", "location_name"], name: "index_au_locations_on_university_and_name", unique: true
+    t.index ["au_university_id"], name: "index_au_locations_on_au_university_id"
+    t.index ["cricos_provider_code"], name: "index_au_locations_on_cricos_provider_code"
+  end
+
+  create_table "au_universities", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "cricos_provider_code", null: false
+    t.string "trading_name"
+    t.string "institution_type"
+    t.integer "institution_capacity"
+    t.string "city"
+    t.string "state"
+    t.string "postcode"
+    t.text "postal_address"
+    t.string "website"
+    t.integer "total_courses_count", default: 0
+    t.integer "bachelor_courses_count", default: 0
+    t.integer "masters_courses_count", default: 0
+    t.integer "doctoral_courses_count", default: 0
+    t.decimal "min_annual_tuition"
+    t.decimal "max_annual_tuition"
+    t.decimal "avg_annual_tuition"
+    t.string "popular_fields"
+    t.integer "world_ranking"
+    t.integer "domestic_ranking"
+    t.string "slug"
+    t.text "description"
+    t.boolean "active", default: true
+    t.json "comprehensive_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "total_students_2023"
+    t.integer "total_students_2022"
+    t.integer "commencing_students_2023"
+    t.integer "commencing_students_2022"
+    t.float "student_growth_rate"
+    t.integer "overseas_students_2023"
+    t.integer "overseas_commencing_2023"
+    t.float "overseas_percentage"
+    t.text "highlights"
+    t.text "famous_alumni"
+    t.index ["active"], name: "index_au_universities_on_active"
+    t.index ["avg_annual_tuition"], name: "index_au_universities_on_avg_annual_tuition"
+    t.index ["cricos_provider_code"], name: "index_au_universities_on_cricos_provider_code", unique: true
+    t.index ["name"], name: "index_au_universities_on_name"
+    t.index ["slug"], name: "index_au_universities_on_slug", unique: true
+    t.index ["state"], name: "index_au_universities_on_state"
+    t.index ["world_ranking"], name: "index_au_universities_on_world_ranking"
   end
 
   create_table "blogs", force: :cascade do |t|
@@ -145,27 +264,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
     t.string "timezone"
     t.string "consultation_type"
     t.text "message"
-    t.string "status"
+    t.string "status", default: "pending"
     t.text "admin_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "datetime_candidates"
+    t.index ["email"], name: "index_consultations_on_email"
+    t.index ["preferred_date"], name: "index_consultations_on_preferred_date"
+    t.index ["status"], name: "index_consultations_on_status"
   end
 
   create_table "detailed_programs", force: :cascade do |t|
     t.integer "condition_id", null: false
-    t.string "cip_code", limit: 255, null: false
-    t.string "program_title", limit: 255, null: false
-    t.string "program_title_jp", limit: 255
+    t.string "cip_code", null: false
+    t.string "program_title", null: false
+    t.string "program_title_jp"
     t.integer "credential_level"
-    t.string "credential_title", limit: 255
+    t.string "credential_title"
     t.integer "graduates_count"
-    t.string "major_category", limit: 255
+    t.string "major_category"
     t.text "description"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["cip_code"], name: "index_detailed_programs_on_cip_code"
     t.index ["condition_id", "cip_code"], name: "index_detailed_programs_on_condition_id_and_cip_code", unique: true
+    t.index ["condition_id"], name: "index_detailed_programs_on_condition_id"
     t.index ["credential_level"], name: "index_detailed_programs_on_credential_level"
     t.index ["major_category"], name: "index_detailed_programs_on_major_category"
   end
@@ -176,7 +299,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["condition_id"], name: "index_favorites_on_condition_id"
+    t.index ["user_id", "condition_id"], name: "index_favorites_on_user_id_and_condition_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "overseas_student_countries", force: :cascade do |t|
+    t.string "country"
+    t.integer "student_count"
+    t.float "percentage"
+    t.integer "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_responses", force: :cascade do |t|
@@ -209,9 +342,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_063134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["condition_id"], name: "index_view_histories_on_condition_id"
+    t.index ["user_id", "condition_id"], name: "index_view_histories_on_user_id_and_condition_id", unique: true
+    t.index ["user_id", "viewed_at"], name: "index_view_histories_on_user_id_and_viewed_at"
     t.index ["user_id"], name: "index_view_histories_on_user_id"
   end
 
+  add_foreign_key "au_course_locations", "au_courses"
+  add_foreign_key "au_course_locations", "au_locations"
+  add_foreign_key "au_courses", "au_universities"
+  add_foreign_key "au_locations", "au_universities"
   add_foreign_key "detailed_programs", "conditions"
   add_foreign_key "favorites", "conditions"
   add_foreign_key "favorites", "users"
