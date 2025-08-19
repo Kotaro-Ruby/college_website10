@@ -12,4 +12,5 @@ services:
         cp db/college_data_compressed.json.gz tmp/
         bundle exec rails import:from_compressed
       fi
+      bundle exec rails db:seed
       bundle exec puma -C config/puma.rb
