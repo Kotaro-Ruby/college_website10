@@ -73,3 +73,11 @@ if Condition.count == 0 && File.exist?(Rails.root.join('data', 'colleges_data.cs
 else
   puts "📚 College data already exists (#{Condition.count} colleges)"
 end
+
+# Import Australian University data
+if AuUniversity.count == 0
+  puts "\n🇦🇺 Importing Australian University data..."
+  load Rails.root.join('db', 'seeds', 'australia_data.rb')
+else
+  puts "🇦🇺 Australian university data already exists (#{AuUniversity.count} universities)"
+end
