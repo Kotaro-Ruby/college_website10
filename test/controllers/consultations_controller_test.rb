@@ -8,7 +8,18 @@ class ConsultationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create consultation" do
     assert_difference('Consultation.count') do
-      post consultations_url, params: { consultation: { name: "Test", email: "test@example.com", message: "Test message" } }
+      post consultations_url, params: { 
+        consultation: { 
+          name: "Test User", 
+          email: "test@example.com", 
+          phone: "1234567890",
+          timezone: "JST",
+          consultation_type: "留学相談",
+          message: "Test message",
+          preferred_dates: ["2025-01-20"],
+          preferred_times: ["10:00"]
+        } 
+      }
     end
     assert_redirected_to consultation_url(Consultation.last)
   end
