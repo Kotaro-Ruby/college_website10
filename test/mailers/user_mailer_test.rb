@@ -6,7 +6,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.password_reset(user)
     assert_equal "[College Spark] パスワードリセットのご案内", mail.subject
     assert_equal [ user.email ], mail.to
-    assert_equal [ "from@example.com" ], mail.from
-    assert_match "Hi", mail.body.encoded
+    assert_equal [ "collegespark2025@gmail.com" ], mail.from
+    assert_match "パスワードリセット", mail.body.encoded
   end
 end

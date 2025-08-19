@@ -14,7 +14,7 @@ class ConsultationsControllerTest < ActionDispatch::IntegrationTest
           email: "test@example.com", 
           phone: "1234567890",
           timezone: "JST",
-          consultation_type: "留学相談",
+          consultation_type: "general",
           message: "Test message",
           preferred_dates: ["2025-01-20"],
           preferred_times: ["10:00"]
