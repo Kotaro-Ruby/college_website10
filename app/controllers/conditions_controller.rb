@@ -268,8 +268,19 @@ class ConditionsController < ApplicationController
     end
     
     if @college
+      begin
+        # Unsplash APIから大学の画像を取得
+        @unsplash_service = UnsplashService.new
+        Rails.logger.info "Fetching photo for: #{@college.college}"
+        @college_photo = @unsplash_service.get_cached_photo(@college.college, "USA")
+        Rails.logger.info "Photo result: #{@college_photo.inspect}"
+      rescue => e
+        Rails.logger.error "Error fetching photo: #{e.message}"
+        @college_photo = nil
+      end
+      
       # 閲覧履歴に追加
-      add_to_recently_viewed(@college)
+      add_to_recently_viewed(@college) rescue nil
       render :show
     else
       redirect_to :fallback_page
