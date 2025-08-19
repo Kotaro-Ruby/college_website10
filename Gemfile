@@ -20,18 +20,18 @@ gem "jbuilder"
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
-gem 'pg'
-gem 'ransack'
-gem 'listen'
+gem "pg"
+gem "ransack"
+gem "listen"
 
-gem 'roo'
-gem 'csv'
-gem 'httparty'
-gem 'rubyXL'
-gem 'dotenv-rails', groups: [:development, :test]
-gem 'kaminari'
-gem 'sitemap_generator'
-gem 'bcrypt', '~> 3.1.7'
+gem "roo"
+gem "csv"
+gem "httparty"
+gem "rubyXL"
+gem "dotenv-rails", groups: [ :development, :test ]
+gem "kaminari"
+gem "sitemap_generator"
+gem "bcrypt", "~> 3.1.7"
 
 
 

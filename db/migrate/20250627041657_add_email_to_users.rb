@@ -3,7 +3,7 @@ class AddEmailToUsers < ActiveRecord::Migration[8.0]
     add_column :users, :email, :string
     add_column :users, :password_reset_token, :string
     add_column :users, :password_reset_sent_at, :datetime
-    
+
     add_index :users, :email, unique: true
     add_index :users, :password_reset_token
   end

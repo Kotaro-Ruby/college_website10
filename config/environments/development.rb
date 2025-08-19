@@ -39,25 +39,25 @@ Rails.application.configure do
 
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-  
+
   # Mail delivery method for development
   # Use SMTP for actual email sending in development
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  
+
   # Gmail SMTP settings for development
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: "smtp.gmail.com",
     port: 587,
-    domain: 'gmail.com',
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_APP_PASSWORD'],
-    authentication: 'plain',
+    domain: "gmail.com",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_APP_PASSWORD"],
+    authentication: "plain",
     enable_starttls_auto: true,
     open_timeout: 10,
     read_timeout: 10
   }
-  
+
   # Enable logging of mail deliveries
   config.log_level = :debug
 
@@ -99,5 +99,4 @@ Rails.application.configure do
   config.assets.check_precompiled_asset = false
   config.assets.digest = false
   config.assets.quiet = true
-
 end

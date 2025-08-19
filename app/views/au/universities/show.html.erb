@@ -11,9 +11,7 @@
         <%= @university.city %>, <%= @university.state %>
       </span>
       <% if @university.website.present? %>
-        <%= link_to @university.website, target: "_blank", class: "official-website" do %>
-          <i class="fas fa-external-link-alt"></i> 公式サイト
-        <% end %>
+        <%= link_to @university.website, @university.website, target: "_blank", rel: "noopener", class: "official-website" %>
       <% end %>
     </div>
   </div>

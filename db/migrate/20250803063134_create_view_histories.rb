@@ -7,8 +7,8 @@ class CreateViewHistories < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
-    add_index :view_histories, [:user_id, :viewed_at]
-    add_index :view_histories, [:user_id, :condition_id], unique: true
+
+    add_index :view_histories, [ :user_id, :viewed_at ]
+    add_index :view_histories, [ :user_id, :condition_id ], unique: true
   end
 end

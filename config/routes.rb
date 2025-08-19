@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Consultation routes
-  resources :consultations, only: [:new, :create, :show]
+  resources :consultations, only: [ :new, :create, :show ]
   root "home#index"
 
   get "conditions/index"
@@ -19,35 +19,35 @@ Rails.application.routes.draw do
 
   get "contact" => "home#contact"
   post "contact" => "home#send_contact"
-  
+
   # Survey routes
   post "surveys" => "surveys#create"
-  
+
   # Admin authentication routes
   get "admin/login" => "admin/sessions#new", as: :admin_login
   post "admin/login" => "admin/sessions#create"
   delete "admin/logout" => "admin/sessions#destroy", as: :admin_logout
-  
+
   # Admin setup routes
   get "admin/setup" => "admin/setup#show", as: :admin_setup
   post "admin/setup" => "admin/setup#create"
-  
+
   # Admin dashboard
   get "admin" => "admin/dashboard#index", as: :admin_dashboard
   get "admin/dashboard" => "admin/dashboard#index"
-  
+
   # Admin management routes
   namespace :admin do
-    resources :consultations, only: [:index, :show, :update, :destroy] do
+    resources :consultations, only: [ :index, :show, :update, :destroy ] do
       member do
         patch :confirm
         patch :cancel
         patch :complete
       end
     end
-    resources :users, only: [:index, :show, :destroy]
-    resources :conditions, only: [:index, :show, :edit, :update, :destroy]
-    resources :surveys, only: [:index, :show, :destroy] do
+    resources :users, only: [ :index, :show, :destroy ]
+    resources :conditions, only: [ :index, :show, :edit, :update, :destroy ]
+    resources :surveys, only: [ :index, :show, :destroy ] do
       collection do
         delete :destroy_all
         get :export_csv
@@ -61,37 +61,37 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
-  
+
   # Password reset routes
-  resources :password_resets, only: [:new, :create, :show, :update]
-  
+  resources :password_resets, only: [ :new, :create, :show, :update ]
+
   # User registration routes
   get "register" => "users#new"
   post "register" => "users#create"
   post "check_username" => "users#check_username"
-  
-  # ユーザープロフィール関連
-  get '/profile', to: 'users#show'
-  get '/profile/edit', to: 'users#edit'
-  patch '/profile', to: 'users#update'
-  delete '/profile', to: 'users#destroy'
-  
-  # お気に入り関連
-  get '/favorites', to: 'favorites#index'
-  post '/favorites', to: 'favorites#create'
-  delete '/favorites', to: 'favorites#destroy'
-  
-  # 比較機能関連
-  get '/compare', to: 'comparisons#index'
-  post '/compare', to: 'comparisons#create'
-  delete '/compare', to: 'comparisons#destroy'
-  delete '/compare/clear', to: 'comparisons#clear'
 
-  get '/results', to: 'conditions#results'
-  
+  # ユーザープロフィール関連
+  get "/profile", to: "users#show"
+  get "/profile/edit", to: "users#edit"
+  patch "/profile", to: "users#update"
+  delete "/profile", to: "users#destroy"
+
+  # お気に入り関連
+  get "/favorites", to: "favorites#index"
+  post "/favorites", to: "favorites#create"
+  delete "/favorites", to: "favorites#destroy"
+
+  # 比較機能関連
+  get "/compare", to: "comparisons#index"
+  post "/compare", to: "comparisons#create"
+  delete "/compare", to: "comparisons#destroy"
+  delete "/compare/clear", to: "comparisons#clear"
+
+  get "/results", to: "conditions#results"
+
   # 州別ガイドページ
-  get '/states', to: 'states#index'
-  get '/states/:state_code', to: 'states#show', as: 'state_detail'
+  get "/states", to: "states#index"
+  get "/states/:state_code", to: "states#show", as: "state_detail"
 
   get "canada" => "home#canada"
 
@@ -108,12 +108,12 @@ Rails.application.routes.draw do
   get "why_study_abroad" => "home#why_study_abroad"
 
   # Blog routes
-  get '/blogs', to: 'blogs#index', as: :blogs
-  get '/blogs/:slug', to: 'blogs#show', as: :blog
-  
+  get "/blogs", to: "blogs#index", as: :blogs
+  get "/blogs/:slug", to: "blogs#show", as: :blog
+
   # Column routes
-  get '/columns', to: 'columns#index', as: :columns
-  
+  get "/columns", to: "columns#index", as: :columns
+
   namespace :admin do
     resources :blogs do
       collection do
@@ -121,17 +121,17 @@ Rails.application.routes.draw do
       end
     end
   end
-  
-  # Dynamic pages (新しい記事はここ)
-  get '/p/:page', to: 'pages#show', as: :page
 
-  get '/import_conditions', to: 'import#conditions'
+  # Dynamic pages (新しい記事はここ)
+  get "/p/:page", to: "pages#show", as: :page
+
+  get "/import_conditions", to: "import#conditions"
 
   # USA routes
   namespace :us do
-    get '/', to: 'home#index', as: :home
-    get '/about', to: 'universities#about', as: :about
-    resources :universities, only: [:index, :show] do
+    get "/", to: "home#index", as: :home
+    get "/about", to: "universities#about", as: :about
+    resources :universities, only: [ :index, :show ] do
       collection do
         get :search
       end
@@ -140,9 +140,9 @@ Rails.application.routes.draw do
 
   # Australia routes
   namespace :au do
-    get '/', to: 'home#index', as: :home
-    get '/about', to: 'universities#about', as: :about
-    resources :universities, only: [:index, :show] do
+    get "/", to: "home#index", as: :home
+    get "/about", to: "universities#about", as: :about
+    resources :universities, only: [ :index, :show ] do
       collection do
         get :search
       end
@@ -151,9 +151,9 @@ Rails.application.routes.draw do
 
   # New Zealand routes
   namespace :nz do
-    get '/', to: 'home#index', as: :home
-    get '/about', to: 'universities#about', as: :about
-    resources :universities, only: [:index, :show] do
+    get "/", to: "home#index", as: :home
+    get "/about", to: "universities#about", as: :about
+    resources :universities, only: [ :index, :show ] do
       collection do
         get :search
       end
@@ -162,9 +162,9 @@ Rails.application.routes.draw do
 
   # Canada routes
   namespace :ca do
-    get '/', to: 'home#index', as: :home
-    get '/about', to: 'universities#about', as: :about
-    resources :universities, only: [:index, :show] do
+    get "/", to: "home#index", as: :home
+    get "/about", to: "universities#about", as: :about
+    resources :universities, only: [ :index, :show ] do
       collection do
         get :search
       end
@@ -172,27 +172,25 @@ Rails.application.routes.draw do
   end
 
 
-  #get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'
-  #get '/:college_name', to: 'conditions#show', as: 'college_detail'
+  # get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'
+  # get '/:college_name', to: 'conditions#show', as: 'college_detail'
 
 
-  get '/ohio_northern_university', to: 'conditions#ohio_northern_university'
-  get '/ohio_state_university', to: 'conditions#ohio_state_university'
-  get '/florida_state_university', to: 'conditions#florida_state_university'
-  get '/alabama_state_university', to: 'conditions#alabama_state_university'
+  get "/ohio_northern_university", to: "conditions#ohio_northern_university"
+  get "/ohio_state_university", to: "conditions#ohio_state_university"
+  get "/florida_state_university", to: "conditions#florida_state_university"
+  get "/alabama_state_university", to: "conditions#alabama_state_university"
 
   # どのルートにもマッチしない場合、fallback_page アクションを呼び出す
-  
-  
-  get 'debug/db_status', to: 'debug#db_status'
-  get 'debug/manual_import', to: 'debug#manual_import'
-  
+
+
+  get "debug/db_status", to: "debug#db_status"
+  get "debug/manual_import", to: "debug#manual_import"
+
   # 旧セットアップルート（削除済み）
 
-  get 'result/:id', to: 'conditions#show', as: :conditions
-  get '*unmatched_route', to: 'conditions#fallback_page'
- 
-  
+  get "result/:id", to: "conditions#show", as: :conditions
+  get "*unmatched_route", to: "conditions#fallback_page"
 
 
 
@@ -201,7 +199,9 @@ Rails.application.routes.draw do
 
 
 
-  #Set 'college_about/:college_name', to: 'college_about#show', as: 'college_detail'
+
+
+  # Set 'college_about/:college_name', to: 'college_about#show', as: 'college_detail'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -217,8 +217,3 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
-
-
-
-
-

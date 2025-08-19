@@ -2,7 +2,7 @@ class AddComprehensiveDataToConditions < ActiveRecord::Migration[8.0]
   def change
     # JSON field to store all comprehensive College Scorecard data
     add_column :conditions, :comprehensive_data, :text
-    
+
     # Add commonly used fields directly for faster queries
     add_column :conditions, :sat_math_25, :integer
     add_column :conditions, :sat_math_75, :integer
@@ -39,7 +39,7 @@ class AddComprehensiveDataToConditions < ActiveRecord::Migration[8.0]
     add_column :conditions, :religious_affiliation, :integer
     add_column :conditions, :carnegie_basic, :integer
     add_column :conditions, :locale, :integer
-    
+
     # Indexes for commonly searched fields
     add_index :conditions, :sat_math_25
     add_index :conditions, :sat_math_75

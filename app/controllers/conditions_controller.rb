@@ -86,7 +86,10 @@ class ConditionsController < ApplicationController
 
         if students_ranges
           # 複数の範囲を OR 条件で処理する場合
-          scope = scope.where("(" + students_ranges.map { |range| "students BETWEEN ? AND ?" }.join(" OR ") + ")", *students_ranges.flatten)
+          # SQL文字列を安全に構築
+          conditions = students_ranges.map { "students BETWEEN ? AND ?" }
+          sql_string = conditions.join(" OR ")
+          scope = scope.where(sql_string, *students_ranges.flatten)
         else
           Rails.logger.debug("Invalid students range: #{params[:students]}")
         end

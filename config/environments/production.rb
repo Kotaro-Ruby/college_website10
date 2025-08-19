@@ -61,16 +61,16 @@ Rails.application.configure do
   config.action_mailer.logger = Logger.new(STDOUT)
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "college-finder-web-service.onrender.com", protocol: 'https' }
+  config.action_mailer.default_url_options = { host: "college-finder-web-service.onrender.com", protocol: "https" }
 
   # Gmail SMTP settings with improved configuration
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: "smtp.gmail.com",
     port: 587,
-    domain: 'gmail.com',
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_APP_PASSWORD'], # App Password instead of regular password
-    authentication: 'plain',
+    domain: "gmail.com",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_APP_PASSWORD"], # App Password instead of regular password
+    authentication: "plain",
     enable_starttls_auto: true,
     open_timeout: 10,
     read_timeout: 10

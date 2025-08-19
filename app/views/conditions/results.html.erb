@@ -1098,8 +1098,8 @@
           
           <div class="pagination-nav">
             <% if @results.prev_page %>
-              <a href="<%= url_for(params.permit!.merge(page: 1)) %>" class="pagination-btn pagination-first">最初</a>
-              <a href="<%= url_for(params.permit!.merge(page: @results.prev_page)) %>" class="pagination-btn pagination-prev">前へ</a>
+              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: 1)) %>" class="pagination-btn pagination-first">最初</a>
+              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.prev_page)) %>" class="pagination-btn pagination-prev">前へ</a>
             <% else %>
               <span class="pagination-btn pagination-first disabled">最初</span>
               <span class="pagination-btn pagination-prev disabled">前へ</span>
@@ -1114,14 +1114,14 @@
                 <% if page == @results.current_page %>
                   <span class="pagination-btn pagination-current"><%= page %></span>
                 <% else %>
-                  <a href="<%= url_for(params.permit!.merge(page: page)) %>" class="pagination-btn"><%= page %></a>
+                  <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: page)) %>" class="pagination-btn"><%= page %></a>
                 <% end %>
               <% end %>
             </div>
             
             <% if @results.next_page %>
-              <a href="<%= url_for(params.permit!.merge(page: @results.next_page)) %>" class="pagination-btn pagination-next">次へ</a>
-              <a href="<%= url_for(params.permit!.merge(page: @results.total_pages)) %>" class="pagination-btn pagination-last">最後</a>
+              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.next_page)) %>" class="pagination-btn pagination-next">次へ</a>
+              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.total_pages)) %>" class="pagination-btn pagination-last">最後</a>
             <% else %>
               <span class="pagination-btn pagination-next disabled">次へ</span>
               <span class="pagination-btn pagination-last disabled">最後</span>
