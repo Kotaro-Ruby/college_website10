@@ -41,16 +41,21 @@ class Admin::BlogsController < AdminBaseController
   def load_template
     template_name = params[:template]
     
-    if Blog::TEMPLATES.key?(template_name)
-      template_path = Rails.root.join('app', 'views', 'blog_templates', "#{template_name}.html.erb")
-      
-      if File.exist?(template_path)
-        render plain: File.read(template_path)
-      else
-        render plain: "テンプレートが見つかりません", status: :not_found
-      end
-    else
+    # ホワイトリスト方式でテンプレートを検証
+    allowed_templates = Blog::TEMPLATES.keys
+    unless allowed_templates.include?(template_name)
       render plain: "無効なテンプレートです", status: :bad_request
+      return
+    end
+    
+    # 安全なファイル名を構築
+    safe_template_name = template_name.gsub(/[^a-zA-Z0-9_-]/, '')
+    template_path = Rails.root.join('app', 'views', 'blog_templates').join("#{safe_template_name}.html.erb")
+    
+    if File.exist?(template_path) && template_path.to_s.start_with?(Rails.root.join('app', 'views', 'blog_templates').to_s)
+      render plain: File.read(template_path)
+    else
+      render plain: "テンプレートが見つかりません", status: :not_found
     end
   end
   
