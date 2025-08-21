@@ -3,7 +3,7 @@
     <%= link_to "オーストラリア大学検索", au_universities_path %> &gt; <%= @university.name %>
   </div>
 
-  <div class="university-header">
+  <div class="university-header <%= 'has-image' if @university.images.present? %>">
     <% if @university.images.present? %>
       <% images = JSON.parse(@university.images) %>
       <% credits = JSON.parse(@university.image_credits || '[]') %>
@@ -436,13 +436,18 @@
     opacity: 0.8;
   }
 
-  .university-header-content {
+  .university-header.has-image .university-header-content {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 40px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  }
+  
+  .university-header:not(.has-image) .university-header-content {
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 
   .university-header h1 {
