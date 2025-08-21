@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group of Eight - オーストラリアの名門8大学</title>
+  <style>
+    body {
+      font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, rgba(0, 62, 120, 0.9) 0%, rgba(0, 41, 80, 0.95) 100%);
+      color: white;
+      padding: 80px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.5" fill="rgba(255,255,255,0.2)"/><circle cx="5" cy="5" r="0.3" fill="rgba(255,255,255,0.15)"/><circle cx="8" cy="3" r="0.4" fill="rgba(255,255,255,0.18)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .go8-icon {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: -40px auto 0;
+      padding: 0 20px 40px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .intro-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .intro-title {
+      font-size: 1.8rem;
+      color: #003e78;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      text-align: justify;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .universities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .university-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .university-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #003e78, #0066cc);
+    }
+
+    .university-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(0, 62, 120, 0.15);
+      border-color: #003e78;
+    }
+
+    .university-rank {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #333;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .university-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #003e78;
+      margin-bottom: 10px;
+    }
+
+    .university-location {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .university-year {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .university-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .university-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #003e78;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .features-section {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .features-title {
+      font-size: 1.8rem;
+      color: #003e78;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 20px;
+      background: rgba(0, 62, 120, 0.03);
+      border-radius: 12px;
+      border-left: 4px solid #003e78;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      color: #003e78;
+      flex-shrink: 0;
+    }
+
+    .feature-content h3 {
+      margin: 0 0 8px 0;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .feature-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .stats-overview {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 237, 78, 0.08));
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .stats-title {
+      font-size: 1.8rem;
+      color: #003e78;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .overall-stat {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .overall-stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #003e78;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .overall-stat-label {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0, 62, 120, 0.9), rgba(0, 41, 80, 0.95));
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .cta-description {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #003e78;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .universities-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .university-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .container {
+        padding: 0 15px 30px;
+      }
+
+      .intro-card, .features-section, .stats-overview {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="go8-icon">🎓</span>
+        Group of Eight (Go8)
+      </h1>
+      <p class="hero-subtitle">オーストラリアの名門8大学連合</p>
+      <p class="hero-description">
+        Group of Eight（Go8）は、オーストラリアを代表する8つの研究型大学から構成される連合体です。
+        これらの大学は、世界的に認められた研究成果と教育の質、そして長い歴史と伝統を誇ります。
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="intro-card">
+      <h2 class="intro-title">Group of Eightとは</h2>
+      <p class="intro-text">
+        Group of Eight（Go8）は、1999年に設立されたオーストラリアの主要研究型大学の連合です。
+        これらの大学は、<span class="highlight">オーストラリアの大学研究資金の70%以上</span>を受け取り、
+        国内の研究出版物の60%以上を生み出しています。
+        <br><br>
+        Go8の大学は、世界大学ランキングで常に上位にランクインし、ノーベル賞受賞者や各界のリーダーを多数輩出しています。
+        オーストラリアの全大学生の約25%がGo8の大学で学んでおり、留学生にとっても人気の高い選択肢となっています。
+      </p>
+    </div>
+
+    <div class="universities-grid">
+      <div class="university-card">
+        <div class="university-rank">1</div>
+        <h3 class="university-name">University of Melbourne</h3>
+        <div class="university-location">📍 ビクトリア州メルボルン</div>
+        <div class="university-year">創立: 1853年</div>
+        <p class="university-description">
+          オーストラリアで2番目に古い大学。医学、法学、ビジネスなど幅広い分野で
+          世界トップクラスの教育を提供。QS世界ランキング14位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">54,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">40%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">2</div>
+        <h3 class="university-name">Australian National University</h3>
+        <div class="university-location">📍 首都特別地域キャンベラ</div>
+        <div class="university-year">創立: 1946年</div>
+        <p class="university-description">
+          オーストラリア唯一の国立大学。政治学、国際関係、天文学などで世界的評価。
+          ノーベル賞受賞者を多数輩出。QS世界ランキング30位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">25,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">45%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">3</div>
+        <h3 class="university-name">University of Sydney</h3>
+        <div class="university-location">📍 ニューサウスウェールズ州シドニー</div>
+        <div class="university-year">創立: 1850年</div>
+        <p class="university-description">
+          オーストラリア最古の大学。美しいキャンパスと優れた研究施設を持ち、
+          幅広い分野で質の高い教育を提供。QS世界ランキング19位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">73,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">42%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">4</div>
+        <h3 class="university-name">University of Queensland</h3>
+        <div class="university-location">📍 クイーンズランド州ブリスベン</div>
+        <div class="university-year">創立: 1909年</div>
+        <p class="university-description">
+          研究集約型大学として世界的に認知。生物科学、環境科学、鉱業工学などで
+          特に高い評価。QS世界ランキング43位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">54,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">38%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">5</div>
+        <h3 class="university-name">University of New South Wales</h3>
+        <div class="university-location">📍 ニューサウスウェールズ州シドニー</div>
+        <div class="university-year">創立: 1949年</div>
+        <p class="university-description">
+          工学、ビジネス、法学で特に強い。革新的な教育プログラムと
+          産業界との強い連携が特徴。QS世界ランキング19位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">62,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">44%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">6</div>
+        <h3 class="university-name">Monash University</h3>
+        <div class="university-location">📍 ビクトリア州メルボルン</div>
+        <div class="university-year">創立: 1958年</div>
+        <p class="university-description">
+          オーストラリア最大規模の大学。医学、薬学、工学で世界的評価。
+          複数の国にキャンパスを持つ国際的な大学。QS世界ランキング42位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">86,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">41%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">7</div>
+        <h3 class="university-name">University of Western Australia</h3>
+        <div class="university-location">📍 西オーストラリア州パース</div>
+        <div class="university-year">創立: 1911年</div>
+        <p class="university-description">
+          西オーストラリア州最古の大学。海洋科学、鉱業工学、農学で
+          特に強い。美しいキャンパスでも有名。QS世界ランキング72位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">25,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">30%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-rank">8</div>
+        <h3 class="university-name">University of Adelaide</h3>
+        <div class="university-location">📍 南オーストラリア州アデレード</div>
+        <div class="university-year">創立: 1874年</div>
+        <p class="university-description">
+          オーストラリアで3番目に古い大学。ワイン醸造学、農学、健康科学で
+          世界的に認知。5人のノーベル賞受賞者を輩出。QS世界ランキング89位。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">29,000+</span>
+            <span class="stat-label">学生数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">31%</span>
+            <span class="stat-label">留学生比率</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-overview">
+      <h2 class="stats-title">Go8の実績</h2>
+      <div class="stats-grid">
+        <div class="overall-stat">
+          <span class="overall-stat-value">70%+</span>
+          <span class="overall-stat-label">オーストラリアの研究資金</span>
+        </div>
+        <div class="overall-stat">
+          <span class="overall-stat-value">60%+</span>
+          <span class="overall-stat-label">研究出版物</span>
+        </div>
+        <div class="overall-stat">
+          <span class="overall-stat-value">15人</span>
+          <span class="overall-stat-label">ノーベル賞受賞者</span>
+        </div>
+        <div class="overall-stat">
+          <span class="overall-stat-value">400,000+</span>
+          <span class="overall-stat-label">在学生総数</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <h2 class="features-title">Go8大学の特徴</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🔬</div>
+          <div class="feature-content">
+            <h3>世界トップクラスの研究</h3>
+            <p>最先端の研究施設と豊富な研究資金により、革新的な研究成果を生み出しています</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌏</div>
+          <div class="feature-content">
+            <h3>国際的な評価</h3>
+            <p>世界大学ランキングで常に上位にランクインし、グローバルな認知度を誇ります</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-content">
+            <h3>優れた就職実績</h3>
+            <p>卒業生は世界中の企業や研究機関で活躍し、高い就職率を維持しています</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📚</div>
+          <div class="feature-content">
+            <h3>幅広い学問分野</h3>
+            <p>医学、工学、ビジネス、人文科学など、あらゆる分野で質の高い教育を提供</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-content">
+            <h3>産業界との連携</h3>
+            <p>企業や政府機関との強力なパートナーシップにより、実践的な教育機会を提供</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏆</div>
+          <div class="feature-content">
+            <h3>充実した奨学金制度</h3>
+            <p>優秀な留学生向けの様々な奨学金プログラムを用意しています</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2 class="cta-title">Go8大学への留学を検討しよう</h2>
+      <p class="cta-description">
+        世界トップクラスの教育と研究環境で、あなたの可能性を最大限に引き出しましょう
+      </p>
+      <a href="/au/universities" class="cta-button">大学を検索する</a>
+    </div>
+  </div>
+</body>
+</html>

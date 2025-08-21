@@ -106,6 +106,7 @@ Rails.application.routes.draw do
   get "majors_careers" => "home#majors_careers"
   get "life_guide" => "home#life_guide"
   get "why_study_abroad" => "home#why_study_abroad"
+  get "ivy-league" => "home#ivy_league"
 
   # Blog routes
   get "/blogs", to: "blogs#index", as: :blogs
@@ -142,6 +143,9 @@ Rails.application.routes.draw do
   namespace :au do
     get "/", to: "home#index", as: :home
     get "/about", to: "universities#about", as: :about
+    get "/group-of-eight", to: "universities#group_of_eight", as: :group_of_eight
+    get "/popular-cities", to: "universities#popular_cities", as: :popular_cities
+    get "/scholarships", to: "universities#scholarships", as: :scholarships
     resources :universities, only: [ :index, :show ] do
       collection do
         get :search

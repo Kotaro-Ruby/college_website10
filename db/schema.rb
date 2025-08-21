@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_17_074236) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_21_105601) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -140,6 +140,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_074236) do
     t.float "overseas_percentage"
     t.text "highlights"
     t.text "famous_alumni"
+    t.text "images"
+    t.text "image_credits"
     t.index ["active"], name: "index_au_universities_on_active"
     t.index ["avg_annual_tuition"], name: "index_au_universities_on_avg_annual_tuition"
     t.index ["cricos_provider_code"], name: "index_au_universities_on_cricos_provider_code", unique: true

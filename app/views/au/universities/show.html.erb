@@ -4,15 +4,46 @@
   </div>
 
   <div class="university-header">
-    <h1><%= @university.name %></h1>
-    <div class="university-meta">
-      <span class="location">
-        <i class="fas fa-map-marker-alt"></i> 
-        <%= @university.city %>, <%= @university.state %>
-      </span>
-      <% if @university.website.present? %>
-        <%= link_to @university.website, @university.website, target: "_blank", rel: "noopener", class: "official-website" %>
-      <% end %>
+    <% if @university.images.present? %>
+      <% images = JSON.parse(@university.images) %>
+      <% credits = JSON.parse(@university.image_credits || '[]') %>
+      <div class="header-image-slider">
+        <div class="header-slider-wrapper">
+          <% images.each_with_index do |image, index| %>
+            <div class="header-slide <%= 'active' if index == 0 %>">
+              <%= image_tag image, alt: "#{@university.name} Campus #{index + 1}" %>
+              <% if credits[index].present? %>
+                <div class="image-credit"><%= credits[index] %></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if images.length > 1 %>
+          <button class="header-slider-btn header-slider-prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="header-slider-btn header-slider-next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="header-slider-dots">
+            <% images.each_with_index do |_, index| %>
+              <span class="header-dot <%= 'active' if index == 0 %>" data-slide="<%= index %>"></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="university-header-content">
+      <h1><%= @university.name %></h1>
+      <div class="university-meta">
+        <span class="location">
+          <i class="fas fa-map-marker-alt"></i> 
+          <%= @university.city %>, <%= @university.state %>
+        </span>
+        <% if @university.website.present? %>
+          <%= link_to @university.website, @university.website, target: "_blank", rel: "noopener", class: "official-website" %>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -160,11 +191,11 @@
     </div>
   <% end %>
 
-  <div class="courses-section">
+  <div class="courses-section" id="courses">
     <div class="section-header">
       <h2>提供コース一覧</h2>
       <div class="course-filters">
-        <%= form_with url: au_university_path(@university), method: :get, local: true, class: "filter-form" do |f| %>
+        <%= form_with url: au_university_path(@university, anchor: 'courses'), method: :get, local: true, class: "filter-form" do |f| %>
           <div class="filter-group">
             <%= select_tag :level,
                 options_for_select([
@@ -174,24 +205,36 @@
                   ['博士課程', 'doctoral']
                 ], params[:level]),
                 class: "filter-select",
-                onchange: "this.form.submit()" %>
+                onchange: "submitWithScroll(this.form)" %>
             
             <%= select_tag :field,
                 options_for_select([
                   ['全分野', ''],
-                  ['Natural and Physical Sciences', 'Natural and Physical Sciences'],
-                  ['Information Technology', 'Information Technology'],
-                  ['Engineering and Related Technologies', 'Engineering and Related Technologies'],
-                  ['Architecture and Building', 'Architecture and Building'],
-                  ['Agriculture, Environmental and Related Studies', 'Agriculture, Environmental and Related Studies'],
-                  ['Health', 'Health'],
-                  ['Education', 'Education'],
-                  ['Management and Commerce', 'Management and Commerce'],
-                  ['Society and Culture', 'Society and Culture'],
-                  ['Creative Arts', 'Creative Arts']
+                  ['Natural and Physical Sciences (自然科学・物理科学)', '01 - Natural and Physical Sciences'],
+                  ['Information Technology (情報技術)', '02 - Information Technology'],
+                  ['Engineering and Related Technologies (工学・関連技術)', '03 - Engineering and Related Technologies'],
+                  ['Architecture and Building (建築・建設)', '04 - Architecture and Building'],
+                  ['Agriculture, Environmental and Related Studies (農業・環境・関連研究)', '05 - Agriculture, Environmental and Related Studies'],
+                  ['Health (健康・医療)', '06 - Health'],
+                  ['Education (教育)', '07 - Education'],
+                  ['Management and Commerce (経営・商学)', '08 - Management and Commerce'],
+                  ['Society and Culture (社会・文化)', '09 - Society and Culture'],
+                  ['Creative Arts (創造芸術)', '10 - Creative Arts']
                 ], params[:field]),
                 class: "filter-select",
-                onchange: "this.form.submit()" %>
+                onchange: "submitWithScroll(this.form)" %>
+            
+            <%= select_tag :sort,
+                options_for_select([
+                  ['並べ替え', ''],
+                  ['コース名順', 'name'],
+                  ['授業料（安い順）', 'tuition_asc'],
+                  ['授業料（高い順）', 'tuition_desc'],
+                  ['期間（短い順）', 'duration_asc'],
+                  ['期間（長い順）', 'duration_desc']
+                ], params[:sort]),
+                class: "filter-select",
+                onchange: "submitWithScroll(this.form)" %>
           </div>
         <% end %>
       </div>
@@ -211,20 +254,30 @@
         <tbody>
           <% @courses.each do |course| %>
             <tr>
-              <td class="course-name">
-                <%= course.course_name %>
-                <% if course.cricos_course_code.present? %>
-                  <span class="course-code">(<%= course.cricos_course_code %>)</span>
+              <td class="course-name" data-label="コース名">
+                <div class="course-name-wrapper">
+                  <div class="course-name-en"><%= course.course_name %></div>
+                  <div class="course-name-ja"><%= translate_common_course_terms(course.course_name) %></div>
+                </div>
+              </td>
+              <td data-label="分野">
+                <% if course.field_of_education_broad.present? %>
+                  <div class="field-wrapper">
+                    <div class="field-en"><%= course.field_of_education_broad %></div>
+                    <div class="field-ja"><%= translate_au_field(course.field_of_education_broad) %></div>
+                  </div>
+                <% else %>
+                  -
                 <% end %>
               </td>
-              <td><%= course.field_of_education_broad || '-' %></td>
-              <td>
+              <td data-label="レベル">
                 <span class="level-badge level-<%= course.course_level&.downcase&.gsub(' ', '-') %>">
-                  <%= course.course_level || '-' %>
+                  <div class="level-en"><%= course.course_level || '-' %></div>
+                  <div class="level-ja"><%= translate_au_course_level(course.course_level) if course.course_level %></div>
                 </span>
               </td>
-              <td><%= course.duration_years ? "#{course.duration_years}年" : '-' %></td>
-              <td class="tuition">
+              <td data-label="期間"><%= course.duration_years ? "#{course.duration_years}年" : '-' %></td>
+              <td class="tuition" data-label="年間授業料">
                 <% if course.annual_tuition_fee %>
                   $<%= number_with_delimiter(course.annual_tuition_fee.to_i) %>
                 <% else %>
@@ -274,9 +327,122 @@
   .university-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 40px;
     border-radius: 10px;
     margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-image-slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  .header-slider-wrapper {
+    display: flex;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .header-slide {
+    min-width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  .header-slide.active {
+    display: block;
+  }
+
+  .header-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #4a5568;
+    z-index: 2;
+  }
+
+  .header-slider-btn:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .header-slider-prev {
+    left: 20px;
+  }
+
+  .header-slider-next {
+    right: 20px;
+  }
+
+  .header-slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .header-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .header-dot.active {
+    background: white;
+    width: 30px;
+    border-radius: 5px;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .image-credit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(5px);
+    opacity: 0.8;
+  }
+
+  .university-header-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
   }
 
   .university-header h1 {
@@ -462,9 +628,40 @@
     color: #2d3748;
   }
 
+  .course-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .course-name-en {
+    font-weight: 500;
+    color: #2d3748;
+  }
+
+  .course-name-ja {
+    font-size: 12px;
+    color: #718096;
+  }
+
   .course-code {
     color: #718096;
     font-size: 12px;
+  }
+
+  .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .field-en {
+    color: #2d3748;
+  }
+
+  .field-ja {
+    font-size: 12px;
+    color: #718096;
   }
 
   .level-badge {
@@ -473,6 +670,17 @@
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
+  }
+
+  .level-badge .level-en {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .level-badge .level-ja {
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 2px;
   }
 
   .level-badge.level-bachelor-degree {
@@ -535,4 +743,493 @@
     font-size: 14px;
     line-height: 1.6;
   }
+  
+  /* レスポンシブデザイン */
+  @media (max-width: 1024px) {
+    .university-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .au-university-detail {
+      padding: 15px;
+    }
+    
+    /* ヘッダー画像スライダー */
+    .header-image-slider {
+      height: 300px;
+    }
+    
+    .university-header-content {
+      padding: 30px 20px;
+    }
+    
+    .university-header h1 {
+      font-size: 1.8rem;
+    }
+    
+    .university-meta {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    
+    /* 統計グリッド */
+    .university-stats-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    .stat-card {
+      padding: 18px;
+      gap: 15px;
+    }
+    
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+    
+    .stat-value {
+      font-size: 22px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+    }
+    
+    /* セクション */
+    .university-description-section,
+    .university-highlights-section,
+    .university-alumni-section,
+    .popular-fields-section {
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .university-description-section h3,
+    .university-highlights-section h3,
+    .university-alumni-section h3,
+    .popular-fields-section h3 {
+      font-size: 1.1rem;
+    }
+    
+    /* コースセクション */
+    .courses-section {
+      padding: 20px;
+    }
+    
+    .section-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+    }
+    
+    .section-header h2 {
+      font-size: 1.3rem;
+    }
+    
+    .filter-group {
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .filter-select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+    }
+    
+    /* テーブルをカード形式に変換 */
+    .courses-table {
+      overflow-x: visible;
+    }
+    
+    .courses-table table {
+      display: none;
+    }
+    
+    /* モバイル用カード表示 */
+    .courses-table::after {
+      content: '';
+      display: block;
+    }
+    
+    /* テーブル行をカードとして表示 */
+    @media (max-width: 768px) {
+      .courses-table table {
+        display: block;
+      }
+      
+      .courses-table thead {
+        display: none;
+      }
+      
+      .courses-table tbody {
+        display: block;
+      }
+      
+      .courses-table tr {
+        display: block;
+        margin-bottom: 15px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      
+      .courses-table td {
+        display: block;
+        padding: 8px 0;
+        border-bottom: none;
+        position: relative;
+        padding-left: 35%;
+      }
+      
+      .courses-table td:last-child {
+        border-bottom: none;
+      }
+      
+      .courses-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 32%;
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 12px;
+      }
+      
+      /* コース名は全幅で表示 */
+      .courses-table td.course-name {
+        padding-left: 0;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      
+      .courses-table td.course-name::before {
+        display: none;
+      }
+      
+      .course-name-wrapper {
+        gap: 4px;
+      }
+      
+      .course-name-en {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      
+      .course-name-ja {
+        font-size: 11px;
+      }
+      
+      /* レベルバッジ */
+      .level-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+      
+      /* 授業料の強調 */
+      .tuition {
+        font-size: 16px;
+        font-weight: 700;
+        color: #48bb78;
+      }
+    }
+    
+    /* ページネーション */
+    .pagination {
+      margin-top: 20px;
+    }
+    
+    .pagination a, .pagination span {
+      padding: 6px 10px;
+      margin: 0 2px;
+      font-size: 12px;
+    }
+    
+    /* スライダーボタン */
+    .header-slider-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+    
+    .header-slider-prev {
+      left: 10px;
+    }
+    
+    .header-slider-next {
+      right: 10px;
+    }
+    
+    .header-slider-dots {
+      bottom: 15px;
+    }
+    
+    .header-dot {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .header-dot.active {
+      width: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* 小さい画面用の追加調整 */
+    .au-university-detail {
+      padding: 10px;
+    }
+    
+    .header-image-slider {
+      height: 200px;
+    }
+    
+    .university-header-content {
+      padding: 20px 15px;
+    }
+    
+    .university-header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .university-meta {
+      font-size: 14px;
+    }
+    
+    .official-website {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    
+    /* 統計カード */
+    .stat-card {
+      padding: 15px;
+      gap: 12px;
+    }
+    
+    .stat-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
+    }
+    
+    .stat-value {
+      font-size: 20px;
+    }
+    
+    .stat-label {
+      font-size: 11px;
+    }
+    
+    /* セクション */
+    .university-description-section,
+    .university-highlights-section,
+    .university-alumni-section,
+    .popular-fields-section,
+    .courses-section {
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+    
+    .section-header h2 {
+      font-size: 1.1rem;
+    }
+    
+    /* フィルター */
+    .filter-select {
+      padding: 8px;
+      font-size: 13px;
+    }
+    
+    /* コースカード */
+    .courses-table tr {
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .courses-table td {
+      padding: 6px 0;
+      font-size: 13px;
+    }
+    
+    /* データ注記 */
+    .data-note {
+      padding: 15px;
+      margin-top: 20px;
+    }
+    
+    .data-note p {
+      font-size: 12px;
+    }
+  }
+  
+  /* タブレット向け微調整 */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .university-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .courses-table td::before {
+      width: 30%;
+    }
+    
+    .courses-table td {
+      padding-left: 33%;
+    }
+  }
 </style>
+
+<script>
+  function submitWithScroll(form) {
+    // 現在のスクロール位置を取得
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // hiddenフィールドにスクロール位置を保存
+    let scrollInput = form.querySelector('input[name="scroll_pos"]');
+    if (!scrollInput) {
+      scrollInput = document.createElement('input');
+      scrollInput.type = 'hidden';
+      scrollInput.name = 'scroll_pos';
+      form.appendChild(scrollInput);
+    }
+    scrollInput.value = scrollPos;
+    
+    // フォームを送信
+    form.submit();
+  }
+  
+  // ページ読み込み時にスクロール位置を復元
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const scrollPos = urlParams.get('scroll_pos');
+    
+    if (scrollPos) {
+      // URLからscroll_posパラメータを削除
+      urlParams.delete('scroll_pos');
+      const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '') + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+      
+      // スクロール位置を復元
+      setTimeout(function() {
+        window.scrollTo(0, parseInt(scrollPos));
+      }, 100);
+    } else if (window.location.hash === '#courses') {
+      // アンカーリンクがある場合
+      setTimeout(function() {
+        const element = document.getElementById('courses');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  });
+// Header image slider functionality
+function initializeHeaderSlider() {
+  const slider = document.querySelector('.header-image-slider');
+  if (!slider) return;
+  
+  const slides = slider.querySelectorAll('.header-slide');
+  const dots = slider.querySelectorAll('.header-dot');
+  const prevBtn = slider.querySelector('.header-slider-prev');
+  const nextBtn = slider.querySelector('.header-slider-next');
+  let currentSlide = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let autoPlayInterval;
+  
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      // 自動再生を一時停止して再開
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+      
+      if (diff > 0) {
+        // Swipe left - next slide
+        const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+        showSlide(newIndex);
+      } else {
+        // Swipe right - previous slide
+        const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        showSlide(newIndex);
+      }
+    }
+  }
+  
+  // タッチイベントの追加
+  slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  slider.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+      const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+      showSlide(newIndex);
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+      const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+      showSlide(newIndex);
+    });
+  }
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+      showSlide(index);
+    });
+  });
+  
+  // Auto-play slider
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+      const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+      showSlide(newIndex);
+    }, 5000);
+  }
+  
+  // 初期自動再生開始
+  startAutoPlay();
+}
+
+// Initialize slider when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initializeHeaderSlider();
+});
+</script>

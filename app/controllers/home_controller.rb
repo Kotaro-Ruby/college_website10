@@ -181,6 +181,12 @@ class HomeController < ApplicationController
   def life_guide
   end
 
+  def ivy_league
+  end
+
+  def states
+  end
+
   def terms
   end
 

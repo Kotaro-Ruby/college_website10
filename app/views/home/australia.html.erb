@@ -387,32 +387,340 @@
 
     <script>
         document.getElementById('search-button').addEventListener('click', function () {
-            const formData = {
-                state: document.getElementById('dropdownMenuButton').innerText.trim(),
-                privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-                tuition: document.querySelector('.form-group2 input:checked')?.nextElementSibling?.innerText.trim(),
-                students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
-                gpa: document.querySelector('.form-group4 input:checked')?.nextElementSibling?.innerText.trim(),
-                Division: Array.from(document.querySelectorAll('.form-group5 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
-                
-                // majorの取得方法を修正
-                major: Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
-                    .map(cb => cb.parentElement.textContent.trim()) // 親要素のテキストを取得
-                    .filter(text => text !== "") // 空のテキストを除外
+            // 州の選択値を取得してマッピング
+            const stateText = document.getElementById('dropdownMenuButton').innerText.trim();
+            let state = '';
+            
+            // 州名をコードにマッピング
+            const stateMapping = {
+                'すべての州': '',
+                'New South Wales (シドニー)': 'NSW',
+                'Victoria (メルボルン)': 'VIC', 
+                'Queensland (ブリスベン・ゴールドコースト)': 'QLD',
+                'Western Australia (パース)': 'WA',
+                'South Australia (アデレード)': 'SA',
+                'Australian Capital Territory (キャンベラ)': 'ACT',
+                'Tasmania (ホバート)': 'TAS',
+                'Northern Territory (ダーウィン)': 'NT'
             };
-
-            // majorが選択されていない場合の処理
-            if (formData.major.length === 0) {
-                formData.major = "未選択"; // もし選択されていなければ、"未選択" を送信
+            
+            state = stateMapping[stateText] || '';
+            
+            // 年間授業料の範囲を取得
+            const tuitionText = document.querySelector('.form-group2 input:checked')?.nextElementSibling?.innerText.trim();
+            let minTuition = '';
+            let maxTuition = '';
+            
+            if (tuitionText && tuitionText !== '指定しない') {
+                // 授業料の範囲を解析
+                if (tuitionText.includes('~')) {
+                    const match = tuitionText.match(/\$?([\d,]+)~\$?([\d,]+)/);
+                    if (match) {
+                        minTuition = match[1].replace(/,/g, '');
+                        maxTuition = match[2].replace(/,/g, '');
+                    }
+                } else if (tuitionText.includes('～')) {
+                    // 最小値のみ
+                    const match = tuitionText.match(/\$?([\d,]+)~/);
+                    if (match) {
+                        minTuition = match[1].replace(/,/g, '');
+                    }
+                } else {
+                    // 最大値のみ
+                    const match = tuitionText.match(/~\$?([\d,]+)/);
+                    if (match) {
+                        maxTuition = match[1].replace(/,/g, '');
+                    }
+                }
             }
-
-            // クエリ文字列を作成
-            const queryString = new URLSearchParams(formData).toString();
-
-            // クエリ文字列を使ってリダイレクト
-            window.location.href = `/results?${queryString}`;
+            
+            // 専攻分野を取得
+            const fields = Array.from(document.querySelectorAll('.options input[type="checkbox"]:checked'))
+                .map(cb => cb.parentElement.textContent.trim())
+                .filter(text => text !== "");
+            
+            // パラメータを構築
+            const params = new URLSearchParams();
+            if (state) params.append('state', state);
+            if (minTuition) params.append('min_tuition', minTuition);
+            if (maxTuition) params.append('max_tuition', maxTuition);
+            if (fields.length > 0) {
+                fields.forEach(field => params.append('field[]', field));
+            }
+            
+            // オーストラリア大学のインデックスページにリダイレクト
+            window.location.href = `/au/universities?${params.toString()}`;
         });
     </script>
 
 </div> 
 </div>
+
+<style>
+/* オーストラリアページ専用のレスポンシブデザイン */
+
+/* モバイル対応 (768px以下) */
+@media (max-width: 768px) {
+  .main {
+    padding: 15px 10px;
+  }
+  
+  .copy-container {
+    min-height: 300px;
+    padding: 30px 15px 25px;
+  }
+  
+  .copy-container h1 {
+    font-size: 1.8rem;
+  }
+  
+  .copy-container h2 {
+    font-size: 1rem;
+  }
+  
+  /* コンテンツグリッドをモバイル用に調整 */
+  .contents {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .contents1 {
+    padding-top: 15px;
+  }
+  
+  /* ボックスの高さを自動調整 */
+  .box {
+    height: auto;
+    min-height: 250px;
+    padding: 15px;
+  }
+  
+  .box1 {
+    height: auto;
+    min-height: 400px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* ドロップダウンボタンを全幅に */
+  .dropdown button {
+    width: 100%;
+  }
+  
+  /* フォームグループの余白調整 */
+  .form-group1, .form-group2, .form-group3, 
+  .form-group4, .form-group5 {
+    margin-top: 50px;
+  }
+  
+  /* ツールチップコンテナの位置調整 */
+  .tooltip-container1, .tooltip-container2, 
+  .tooltip-container3, .tooltip-container4, 
+  .tooltip-container5 {
+    top: 12px;
+    right: 15px;
+  }
+  
+  /* ツールチップ内容の幅調整 */
+  .tooltip-content {
+    width: calc(100vw - 40px);
+    max-width: 320px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    font-size: 12px;
+    padding: 12px;
+  }
+  
+  /* 右側のツールチップも中央表示 */
+  .tooltip-container3 .tooltip-content,
+  .tooltip-container4 .tooltip-content {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  .tooltip-content::before {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  
+  /* ラインヘッダーのフォントサイズ調整 */
+  .line-header1 h1, .line-header2 h1, .line-header3 h1,
+  .line-header4 h1, .line-header5 h1, .line-header6 h1,
+  .line-header7 h1 {
+    font-size: 16px;
+  }
+  
+  /* 専攻選択オプションをモバイル用に調整 */
+  .options {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 50px;
+  }
+  
+  .options label {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  /* 検索ボタンのサイズ調整 */
+  .btn2.btn-primary {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .search-button-container {
+    margin: 30px 0;
+    padding: 0 10px;
+  }
+}
+
+/* タブレット対応 (769px-1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main {
+    padding: 20px 30px;
+  }
+  
+  .contents {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .box {
+    height: auto;
+    min-height: 280px;
+  }
+  
+  .box1 {
+    height: auto;
+    min-height: 450px;
+  }
+  
+  .options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* 小さい画面 (480px以下) */
+@media (max-width: 480px) {
+  .main {
+    padding: 10px 5px;
+  }
+  
+  .copy-container {
+    min-height: 250px;
+    padding: 20px 10px;
+  }
+  
+  .copy-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .copy-container h2 {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+  
+  .box {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .box1 {
+    padding: 15px 12px;
+  }
+  
+  /* ドロップダウンメニューの高さ調整 */
+  .dropdown-menu {
+    max-height: 200px;
+  }
+  
+  /* フォームチェックの文字サイズ */
+  .form-check-label {
+    font-size: 13px;
+  }
+  
+  /* ツールチップトリガーのサイズ */
+  .tooltip-trigger {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+  
+  /* ツールチップ内容 */
+  .tooltip-content {
+    width: calc(100vw - 30px);
+    font-size: 11px;
+    padding: 10px;
+    line-height: 1.4;
+  }
+  
+  /* ラインヘッダーの調整 */
+  .line-header1 h1, .line-header2 h1, .line-header3 h1,
+  .line-header4 h1, .line-header5 h1, .line-header6 h1,
+  .line-header7 h1 {
+    font-size: 14px;
+  }
+  
+  /* 専攻オプションの文字サイズ */
+  .options label {
+    font-size: 12px;
+    padding: 6px;
+  }
+  
+  .options input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+  }
+  
+  /* 検索ボタン */
+  .btn2.btn-primary {
+    padding: 10px 15px;
+    font-size: 13px;
+    min-width: 150px;
+  }
+}
+
+/* 横向きモバイル対応 */
+@media (max-width: 896px) and (orientation: landscape) {
+  .copy-container {
+    min-height: 200px;
+    padding: 20px 15px;
+  }
+  
+  .contents {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .box {
+    height: auto;
+    min-height: 220px;
+  }
+  
+  .options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* プリント対応 */
+@media print {
+  .tooltip-container1, .tooltip-container2,
+  .tooltip-container3, .tooltip-container4,
+  .tooltip-container5 {
+    display: none;
+  }
+  
+  .box, .box1 {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+</style>

@@ -1,0 +1,3008 @@
+<% content_for :title, "オーストラリア留学奨学金情報 - College Spark" %>
+<% content_for :description, "オーストラリアの大学留学で利用できる奨学金情報を詳しく解説。Australia Awards、Destination Australiaなどの主要奨学金制度から大学独自の奨学金まで網羅的に紹介します。" %>
+<meta name="turbo-cache-control" content="no-cache">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<div class="au-scholarships-page">
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🇦🇺 Study in Australia</div>
+      <div class="hero-flag">🎓</div>
+      <h1 class="hero-title">オーストラリア留学<br>奨学金ガイド</h1>
+      <p class="hero-subtitle">世界トップレベルの教育を手頃な費用で実現するための奨学金情報</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-number">300+</div>
+          <div class="stat-text">奨学金制度</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">AUD 50,000</div>
+          <div class="stat-text">最大支給額</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">15,000+</div>
+          <div class="stat-text">年間受給者数</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Navigation -->
+  <div class="quick-nav">
+    <div class="quick-nav-container">
+      <a href="#overview" class="quick-nav-link">
+        <i class="fas fa-graduation-cap"></i>
+        <span>奨学金概要</span>
+      </a>
+      <a href="#major-programs" class="quick-nav-link">
+        <i class="fas fa-medal"></i>
+        <span>主要制度</span>
+      </a>
+      <a href="#eligibility" class="quick-nav-link">
+        <i class="fas fa-check-circle"></i>
+        <span>申請条件</span>
+      </a>
+      <a href="#application" class="quick-nav-link">
+        <i class="fas fa-file-alt"></i>
+        <span>申請プロセス</span>
+      </a>
+      <a href="#tips" class="quick-nav-link">
+        <i class="fas fa-lightbulb"></i>
+        <span>成功のコツ</span>
+      </a>
+      <a href="#costs" class="quick-nav-link">
+        <i class="fas fa-dollar-sign"></i>
+        <span>費用計画</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Overview Section -->
+    <section id="overview" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-graduation-cap section-icon"></i>
+          オーストラリア留学奨学金概要
+        </h2>
+        <p class="section-subtitle">国際学生向けの豊富な奨学金制度</p>
+      </div>
+
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="card-icon government">
+            <i class="fas fa-landmark"></i>
+          </div>
+          <h3>政府奨学金</h3>
+          <p>オーストラリア政府が提供する国際学生向けの奨学金制度。Australia AwardsやDestination Australiaなど、充実したサポートが特徴です。</p>
+          <div class="card-stats">
+            <span class="stat"><i class="fas fa-users"></i> 2,000人/年</span>
+            <span class="stat"><i class="fas fa-dollar-sign"></i> 全額支給多数</span>
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <div class="card-icon university">
+            <i class="fas fa-university"></i>
+          </div>
+          <h3>大学奨学金</h3>
+          <p>各大学が独自に提供する奨学金制度。学術優秀者向け、分野別、地域別など多様な種類があります。Group of Eight大学は特に充実。</p>
+          <div class="card-stats">
+            <span class="stat"><i class="fas fa-school"></i> 39大学</span>
+            <span class="stat"><i class="fas fa-percentage"></i> 25-100%支給</span>
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <div class="card-icon external">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3>外部奨学金</h3>
+          <p>国際機関、財団、企業が提供する奨学金制度。専門分野や研究領域に特化したものが多く、競争率は高いが支給額も充実。</p>
+          <div class="card-stats">
+            <span class="stat"><i class="fas fa-building"></i> 100+ 団体</span>
+            <span class="stat"><i class="fas fa-trophy"></i> 専門特化型</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Major Programs Section -->
+    <section id="major-programs" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-medal section-icon"></i>
+          主要奨学金制度
+        </h2>
+        <p class="section-subtitle">国際学生が利用できる代表的な奨学金プログラム</p>
+      </div>
+
+      <div class="programs-container">
+        <!-- Australia Awards -->
+        <div class="program-card featured">
+          <div class="program-header">
+            <div class="program-logo">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="program-info">
+              <h3>Australia Awards Scholarships</h3>
+              <span class="program-type">政府奨学金</span>
+            </div>
+            <div class="program-badge">最高峰</div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              オーストラリア政府が提供する最高峰の奨学金制度。発展途上国の優秀な学生を対象とし、学部・大学院レベルの全費用をサポート。
+            </p>
+            <div class="program-details">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-dollar-sign"></i>
+                  <div>
+                    <strong>支給内容</strong>
+                    <span>授業料、生活費、航空券、保険など全額</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <div>
+                    <strong>期間</strong>
+                    <span>学部：3-4年、大学院：2-4年</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-globe-asia"></i>
+                  <div>
+                    <strong>対象国</strong>
+                    <span>アジア・太平洋諸国（日本含まず）</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <div>
+                    <strong>申請期間</strong>
+                    <span>毎年4-6月</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destination Australia -->
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-logo">
+              <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="program-info">
+              <h3>Destination Australia Program</h3>
+              <span class="program-type">政府奨学金</span>
+            </div>
+            <div class="program-badge">地方重点</div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              地方都市での学習を促進する奨学金制度。地方大学で学ぶ国内外の学生を対象とし、年間最大AUD 15,000を支給。
+            </p>
+            <div class="program-details">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-dollar-sign"></i>
+                  <div>
+                    <strong>支給額</strong>
+                    <span>年間最大 AUD 15,000</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <div>
+                    <strong>期間</strong>
+                    <span>最大4年間</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-map"></i>
+                  <div>
+                    <strong>対象地域</strong>
+                    <span>地方都市キャンパス</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-graduation-cap"></i>
+                  <div>
+                    <strong>学位レベル</strong>
+                    <span>学部・大学院・博士課程</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Training Program -->
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-logo">
+              <i class="fas fa-microscope"></i>
+            </div>
+            <div class="program-info">
+              <h3>Research Training Program (RTP)</h3>
+              <span class="program-type">研究奨学金</span>
+            </div>
+            <div class="program-badge">研究重点</div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              大学院研究学位（修士・博士）を目指す学生向けの奨学金制度。研究プロジェクトに参加しながら学位取得をサポート。
+            </p>
+            <div class="program-details">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-dollar-sign"></i>
+                  <div>
+                    <strong>支給内容</strong>
+                    <span>授業料免除 + 生活費支援</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-flask"></i>
+                  <div>
+                    <strong>対象</strong>
+                    <span>研究修士・博士課程</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <div>
+                    <strong>年間枠</strong>
+                    <span>約4,000名</span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-star"></i>
+                  <div>
+                    <strong>選考基準</strong>
+                    <span>学術成績・研究計画</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- University-specific Scholarships -->
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-logo">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="program-info">
+              <h3>大学独自奨学金</h3>
+              <span class="program-type">機関奨学金</span>
+            </div>
+            <div class="program-badge">多様性</div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              各大学が独自に提供する奨学金制度。学術優秀、リーダーシップ、特定分野への情熱など、多様な選考基準があります。
+            </p>
+            
+            <div class="university-examples">
+              <h4>主要大学の奨学金例</h4>
+              <div class="uni-scholarship-list">
+                <div class="uni-item">
+                  <strong>メルボルン大学</strong>
+                  <span>Melbourne International Undergraduate Scholarship - 年間最大AUD 56,000</span>
+                </div>
+                <div class="uni-item">
+                  <strong>シドニー大学</strong>
+                  <span>Sydney Scholars Awards - 年間最大AUD 40,000</span>
+                </div>
+                <div class="uni-item">
+                  <strong>クイーンズランド大学</strong>
+                  <span>UQ Excellence Scholarships - 年間最大AUD 36,800</span>
+                </div>
+                <div class="uni-item">
+                  <strong>モナシュ大学</strong>
+                  <span>Monash International Merit Scholarship - 年間最大AUD 50,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eligibility Section -->
+    <section id="eligibility" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-check-circle section-icon"></i>
+          申請条件・資格要件
+        </h2>
+        <p class="section-subtitle">奨学金申請に必要な基本条件</p>
+      </div>
+
+      <div class="eligibility-container">
+        <div class="eligibility-tabs">
+          <button class="tab-btn active" data-tab="general">一般要件</button>
+          <button class="tab-btn" data-tab="academic">学術成績</button>
+          <button class="tab-btn" data-tab="language">語学力</button>
+          <button class="tab-btn" data-tab="documents">必要書類</button>
+        </div>
+
+        <div class="tab-content active" id="general">
+          <div class="criteria-grid">
+            <div class="criteria-card">
+              <div class="criteria-icon">
+                <i class="fas fa-passport"></i>
+              </div>
+              <h4>国籍・居住要件</h4>
+              <ul>
+                <li>日本国籍または永住権保持者</li>
+                <li>オーストラリア国外居住者</li>
+                <li>過去にオーストラリア政府奨学金を受給していない</li>
+                <li>特定の政府奨学金は対象国限定あり</li>
+              </ul>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h4>年齢制限</h4>
+              <ul>
+                <li>学部課程：18-25歳が一般的</li>
+                <li>修士課程：30歳以下が多い</li>
+                <li>博士課程：35歳以下が一般的</li>
+                <li>研究職志望者は制限緩和される場合あり</li>
+              </ul>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h4>健康要件</h4>
+              <ul>
+                <li>健康診断書の提出</li>
+                <li>オーストラリア政府指定の検査項目</li>
+                <li>精神的・身体的健康の証明</li>
+                <li>持病がある場合は追加書類要</li>
+              </ul>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h4>職業・経験要件</h4>
+              <ul>
+                <li>関連分野での実務経験（修士以上）</li>
+                <li>将来のキャリア計画の明確性</li>
+                <li>母国での社会貢献への意欲</li>
+                <li>リーダーシップ経験（推奨）</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="academic">
+          <div class="academic-requirements">
+            <div class="grade-scale">
+              <h4>最低成績要件</h4>
+              <div class="grade-table">
+                <div class="grade-row header">
+                  <span>学位レベル</span>
+                  <span>最低GPA</span>
+                  <span>日本の成績</span>
+                  <span>推奨レベル</span>
+                </div>
+                <div class="grade-row">
+                  <span>学部課程</span>
+                  <span>5.0/7.0</span>
+                  <span>B以上 (3.0/4.0)</span>
+                  <span>上位25%</span>
+                </div>
+                <div class="grade-row">
+                  <span>修士課程</span>
+                  <span>5.5/7.0</span>
+                  <span>B+以上 (3.3/4.0)</span>
+                  <span>上位20%</span>
+                </div>
+                <div class="grade-row">
+                  <span>博士課程</span>
+                  <span>6.0/7.0</span>
+                  <span>A-以上 (3.7/4.0)</span>
+                  <span>上位10%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="academic-tips">
+              <h4>学術成績向上のポイント</h4>
+              <ul>
+                <li><strong>継続的な高成績</strong> - 一時的ではなく、継続して優秀な成績を維持</li>
+                <li><strong>関連科目重視</strong> - 志望分野に関連する科目での高成績が特に重要</li>
+                <li><strong>研究活動</strong> - 学部生でも研究プロジェクトへの参加は大きなプラス</li>
+                <li><strong>学術賞受賞</strong> - 学内外での学術的な表彰歴があれば明記</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="language">
+          <div class="language-requirements">
+            <h4>英語能力試験スコア要件</h4>
+            <div class="test-comparison">
+              <div class="test-card">
+                <div class="test-header">
+                  <i class="fas fa-certificate"></i>
+                  <h5>IELTS Academic</h5>
+                </div>
+                <div class="score-levels">
+                  <div class="score-level">
+                    <span class="level">学部課程</span>
+                    <span class="score">Overall 6.5 (各セクション6.0以上)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">大学院</span>
+                    <span class="score">Overall 7.0 (各セクション6.5以上)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">博士課程</span>
+                    <span class="score">Overall 7.5 (各セクション7.0以上)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="test-card">
+                <div class="test-header">
+                  <i class="fas fa-globe"></i>
+                  <h5>TOEFL iBT</h5>
+                </div>
+                <div class="score-levels">
+                  <div class="score-level">
+                    <span class="level">学部課程</span>
+                    <span class="score">Overall 79 (W21, S18, R13, L13)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">大学院</span>
+                    <span class="score">Overall 94 (W27, S23, R24, L20)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">博士課程</span>
+                    <span class="score">Overall 102 (各セクション25以上)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="test-card">
+                <div class="test-header">
+                  <i class="fas fa-book"></i>
+                  <h5>PTE Academic</h5>
+                </div>
+                <div class="score-levels">
+                  <div class="score-level">
+                    <span class="level">学部課程</span>
+                    <span class="score">Overall 58 (各セクション50以上)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">大学院</span>
+                    <span class="score">Overall 65 (各セクション58以上)</span>
+                  </div>
+                  <div class="score-level">
+                    <span class="level">博士課程</span>
+                    <span class="score">Overall 73 (各セクション65以上)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="language-tips">
+              <div class="tip-card">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                  <h5>スコア向上戦略</h5>
+                  <ul>
+                    <li>早期からの継続的な学習計画</li>
+                    <li>各セクション別の弱点克服</li>
+                    <li>実戦的な練習（模擬試験の活用）</li>
+                    <li>複数回受験による最高スコア取得</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="tip-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <h5>試験スケジューリング</h5>
+                  <ul>
+                    <li>申請締切の6ヶ月前には目標スコア達成</li>
+                    <li>複数の試験タイプを検討（IELTS/TOEFL/PTE）</li>
+                    <li>スコア有効期限（2年間）を考慮</li>
+                    <li>再受験の間隔と費用を計画</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="documents">
+          <div class="documents-checklist">
+            <div class="doc-category">
+              <h4><i class="fas fa-graduation-cap"></i> 学術関連書類</h4>
+              <div class="doc-items">
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>成績証明書（英文）</strong>
+                    <p>全学年分の公式成績証明書。大学発行の英文版または公認翻訳版</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>卒業証明書（英文）</strong>
+                    <p>学位記のコピーまたは卒業証明書。まだ在学中の場合は在学証明書</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>英語能力証明書</strong>
+                    <p>IELTS、TOEFL、PTE等の公式スコア証明書</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="doc-category">
+              <h4><i class="fas fa-file-alt"></i> 申請書類</h4>
+              <div class="doc-items">
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>志望理由書</strong>
+                    <p>なぜオーストラリア留学を希望するか、将来の目標など（1000-1500語）</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>研究計画書</strong>
+                    <p>大学院以上の場合。研究目的、方法論、期待される成果など</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>推薦状</strong>
+                    <p>指導教員または職場上司からの推薦状（通常2-3通）</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="doc-category">
+              <h4><i class="fas fa-id-card"></i> 身分証明書類</h4>
+              <div class="doc-items">
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>パスポートコピー</strong>
+                    <p>有効期限が十分にあるパスポートの写真ページ</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>証明写真</strong>
+                    <p>パスポート規格の証明写真（デジタル版も含む）</p>
+                  </div>
+                </label>
+                <label class="doc-item">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                  <div class="doc-content">
+                    <strong>健康診断書</strong>
+                    <p>指定医療機関での健康診断結果</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Process Section -->
+    <section id="application" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-file-alt section-icon"></i>
+          申請プロセス・スケジュール
+        </h2>
+        <p class="section-subtitle">奨学金申請の流れと重要な期日</p>
+      </div>
+
+      <div class="process-container">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="step-number">1</span>
+            </div>
+            <div class="timeline-content">
+              <div class="step-header">
+                <h4>情報収集・準備</h4>
+                <span class="timeframe">申請の1年前〜</span>
+              </div>
+              <div class="step-details">
+                <ul>
+                  <li>奨学金制度の詳細調査</li>
+                  <li>申請要件の確認</li>
+                  <li>必要書類リストの作成</li>
+                  <li>語学試験の受験計画</li>
+                  <li>推薦者への事前相談</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="step-number">2</span>
+            </div>
+            <div class="timeline-content">
+              <div class="step-header">
+                <h4>書類準備</h4>
+                <span class="timeframe">申請の6-8ヶ月前</span>
+              </div>
+              <div class="step-details">
+                <ul>
+                  <li>成績証明書・卒業証明書の取得</li>
+                  <li>英語能力試験の受験</li>
+                  <li>志望理由書・研究計画書の作成</li>
+                  <li>推薦状の依頼・取得</li>
+                  <li>健康診断の実施</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="step-number">3</span>
+            </div>
+            <div class="timeline-content">
+              <div class="step-header">
+                <h4>申請書提出</h4>
+                <span class="timeframe">申請締切日</span>
+              </div>
+              <div class="step-details">
+                <ul>
+                  <li>オンライン申請フォームの完成</li>
+                  <li>全必要書類のアップロード</li>
+                  <li>申請料の支払い（該当する場合）</li>
+                  <li>申請内容の最終確認</li>
+                  <li>期限内での正式提出</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="step-number">4</span>
+            </div>
+            <div class="timeline-content">
+              <div class="step-header">
+                <h4>選考プロセス</h4>
+                <span class="timeframe">提出後2-4ヶ月</span>
+              </div>
+              <div class="step-details">
+                <ul>
+                  <li>書類審査（1次選考）</li>
+                  <li>面接選考（2次選考）</li>
+                  <li>追加書類提出（必要に応じて）</li>
+                  <li>選考結果の通知待ち</li>
+                  <li>大学への入学手続き並行</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="step-number">5</span>
+            </div>
+            <div class="timeline-content">
+              <div class="step-header">
+                <h4>結果通知・手続き</h4>
+                <span class="timeframe">結果発表後</span>
+              </div>
+              <div class="step-details">
+                <ul>
+                  <li>選考結果の受領</li>
+                  <li>奨学金受給手続き</li>
+                  <li>学生ビザ申請</li>
+                  <li>渡航準備・住居確保</li>
+                  <li>オリエンテーション参加</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-dates">
+          <h4>重要な申請期日</h4>
+          <div class="dates-grid">
+            <div class="date-card">
+              <div class="date-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <h5>Australia Awards</h5>
+              <div class="date-info">
+                <span class="deadline">申請期間: 4月1日 - 6月30日</span>
+                <span class="result">結果発表: 12月</span>
+                <span class="start">開始: 翌年2月</span>
+              </div>
+            </div>
+
+            <div class="date-card">
+              <div class="date-icon">
+                <i class="fas fa-map-marked-alt"></i>
+              </div>
+              <h5>Destination Australia</h5>
+              <div class="date-info">
+                <span class="deadline">申請期間: 大学により異なる</span>
+                <span class="result">結果発表: 11-12月</span>
+                <span class="start">開始: 翌年2月/7月</span>
+              </div>
+            </div>
+
+            <div class="date-card">
+              <div class="date-icon">
+                <i class="fas fa-university"></i>
+              </div>
+              <h5>大学奨学金</h5>
+              <div class="date-info">
+                <span class="deadline">申請期間: 9月-1月</span>
+                <span class="result">結果発表: 3-5月</span>
+                <span class="start">開始: 7月/2月</span>
+              </div>
+            </div>
+
+            <div class="date-card">
+              <div class="date-icon">
+                <i class="fas fa-microscope"></i>
+              </div>
+              <h5>RTP奨学金</h5>
+              <div class="date-info">
+                <span class="deadline">申請期間: 8月-10月</span>
+                <span class="result">結果発表: 12月-2月</span>
+                <span class="start">開始: 2月/7月</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips for Success Section -->
+    <section id="tips" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-lightbulb section-icon"></i>
+          奨学金申請成功のコツ
+        </h2>
+        <p class="section-subtitle">採用確率を高める実践的なアドバイス</p>
+      </div>
+
+      <div class="tips-container">
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-target"></i>
+            </div>
+            <h4>明確な目標設定</h4>
+            <div class="tip-content">
+              <p><strong>なぜオーストラリアなのか</strong>を具体的に説明できることが重要です。</p>
+              <ul>
+                <li>特定の大学・プログラムを選ぶ理由</li>
+                <li>将来のキャリア目標との関連性</li>
+                <li>母国への貢献計画</li>
+                <li>研究テーマの独自性と重要性</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-edit"></i>
+            </div>
+            <h4>説得力ある志望理由書</h4>
+            <div class="tip-content">
+              <p>ストーリー性を持たせた<strong>個人的な体験談</strong>を盛り込みましょう。</p>
+              <ul>
+                <li>具体的なエピソードの活用</li>
+                <li>論理的な構成（問題→解決→将来）</li>
+                <li>数値や実績による裏付け</li>
+                <li>ネイティブチェックによる英文校正</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>強力な推薦状確保</h4>
+            <div class="tip-content">
+              <p><strong>あなたをよく知る指導者</strong>からの具体的な推薦を得ましょう。</p>
+              <ul>
+                <li>事前の十分な相談と準備期間</li>
+                <li>推薦者への詳細な情報提供</li>
+                <li>具体的なエピソードの共有</li>
+                <li>複数の推薦者によるバランス</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>継続的な成果蓄積</h4>
+            <div class="tip-content">
+              <p><strong>一貫した優秀性</strong>を示す実績を積み重ねることが大切です。</p>
+              <ul>
+                <li>学術成績の継続的な向上</li>
+                <li>研究活動・学会発表</li>
+                <li>ボランティア・リーダーシップ経験</li>
+                <li>専門分野での受賞歴</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h4>ネットワーク活用</h4>
+            <div class="tip-content">
+              <p><strong>既存の奨学金受給者</strong>からの情報収集と助言が有効です。</p>
+              <ul>
+                <li>先輩留学生への相談</li>
+                <li>大学説明会・セミナー参加</li>
+                <li>オンラインコミュニティ活用</li>
+                <li>教育機関の留学センター利用</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4>早期準備と計画性</h4>
+            <div class="tip-content">
+              <p><strong>1年前からの準備</strong>で余裕を持った申請準備を行いましょう。</p>
+              <ul>
+                <li>詳細なスケジュール作成</li>
+                <li>複数の奨学金への同時申請</li>
+                <li>バックアッププランの準備</li>
+                <li>書類の複数回見直し</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="success-stories">
+          <h4>成功事例のポイント</h4>
+          <div class="stories-grid">
+            <div class="story-card">
+              <div class="story-header">
+                <span class="story-type">Australia Awards受給者</span>
+                <span class="story-field">環境工学専攻</span>
+              </div>
+              <p class="story-content">
+                「母国の水質汚染問題解決」という明確な目標を設定し、具体的な研究計画と帰国後の活動計画を詳細に記述。現地NGOでのボランティア経験も評価された。
+              </p>
+              <div class="story-points">
+                <span>✓ 社会問題への具体的アプローチ</span>
+                <span>✓ 実践経験の活用</span>
+              </div>
+            </div>
+
+            <div class="story-card">
+              <div class="story-header">
+                <span class="story-type">大学奨学金受給者</span>
+                <span class="story-field">IT専攻</span>
+              </div>
+              <p class="story-content">
+                継続して学年首席を維持し、学部時代から研究活動に参加。国際学会での発表経験や、オープンソースプロジェクトへの貢献も評価ポイントとなった。
+              </p>
+              <div class="story-points">
+                <span>✓ 学術的優秀性の継続</span>
+                <span>✓ 研究実績の早期蓄積</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Living Costs and Financial Planning Section -->
+    <section id="costs" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-dollar-sign section-icon"></i>
+          生活費用・資金計画
+        </h2>
+        <p class="section-subtitle">オーストラリア留学の総費用と資金管理</p>
+      </div>
+
+      <div class="costs-container">
+        <div class="costs-overview">
+          <div class="cost-categories">
+            <div class="cost-card major">
+              <div class="cost-header">
+                <h4><i class="fas fa-graduation-cap"></i> 授業料</h4>
+                <span class="cost-range">年間 AUD 30,000 - 50,000</span>
+              </div>
+              <div class="cost-breakdown">
+                <div class="cost-item">
+                  <span>学部課程</span>
+                  <span>AUD 30,000 - 45,000</span>
+                </div>
+                <div class="cost-item">
+                  <span>修士課程</span>
+                  <span>AUD 35,000 - 50,000</span>
+                </div>
+                <div class="cost-item">
+                  <span>博士課程</span>
+                  <span>AUD 28,000 - 45,000</span>
+                </div>
+                <div class="cost-item special">
+                  <span>医学・歯学</span>
+                  <span>AUD 60,000 - 80,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cost-card">
+              <div class="cost-header">
+                <h4><i class="fas fa-home"></i> 生活費</h4>
+                <span class="cost-range">年間 AUD 21,000 - 30,000</span>
+              </div>
+              <div class="cost-breakdown">
+                <div class="cost-item">
+                  <span>住居費</span>
+                  <span>AUD 12,000 - 18,000</span>
+                </div>
+                <div class="cost-item">
+                  <span>食費</span>
+                  <span>AUD 4,000 - 6,000</span>
+                </div>
+                <div class="cost-item">
+                  <span>交通費</span>
+                  <span>AUD 1,500 - 2,500</span>
+                </div>
+                <div class="cost-item">
+                  <span>その他</span>
+                  <span>AUD 3,500 - 5,500</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cost-card">
+              <div class="cost-header">
+                <h4><i class="fas fa-plane"></i> 初期費用</h4>
+                <span class="cost-range">AUD 5,000 - 10,000</span>
+              </div>
+              <div class="cost-breakdown">
+                <div class="cost-item">
+                  <span>航空券</span>
+                  <span>AUD 1,500 - 2,500</span>
+                </div>
+                <div class="cost-item">
+                  <span>ビザ申請料</span>
+                  <span>AUD 620</span>
+                </div>
+                <div class="cost-item">
+                  <span>健康保険(OSHC)</span>
+                  <span>AUD 500 - 700/年</span>
+                </div>
+                <div class="cost-item">
+                  <span>教材・設備</span>
+                  <span>AUD 1,000 - 2,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="city-comparison">
+          <h4>主要都市別生活費比較</h4>
+          <div class="cities-grid">
+            <div class="city-card">
+              <h5><i class="fas fa-building"></i> シドニー</h5>
+              <div class="city-costs">
+                <div class="cost-row">
+                  <span>家賃（シェア）</span>
+                  <span>AUD 250-400/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>食費</span>
+                  <span>AUD 100-150/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>交通費</span>
+                  <span>AUD 40-60/週</span>
+                </div>
+                <div class="city-total">
+                  <strong>月額概算: AUD 1,700-2,600</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="city-card">
+              <h5><i class="fas fa-city"></i> メルボルン</h5>
+              <div class="city-costs">
+                <div class="cost-row">
+                  <span>家賃（シェア）</span>
+                  <span>AUD 220-350/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>食費</span>
+                  <span>AUD 90-130/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>交通費</span>
+                  <span>AUD 35-50/週</span>
+                </div>
+                <div class="city-total">
+                  <strong>月額概算: AUD 1,500-2,300</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="city-card">
+              <h5><i class="fas fa-sun"></i> ブリスベン</h5>
+              <div class="city-costs">
+                <div class="cost-row">
+                  <span>家賃（シェア）</span>
+                  <span>AUD 200-320/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>食費</span>
+                  <span>AUD 80-120/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>交通費</span>
+                  <span>AUD 30-45/週</span>
+                </div>
+                <div class="city-total">
+                  <strong>月額概算: AUD 1,350-2,100</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="city-card">
+              <h5><i class="fas fa-water"></i> パース</h5>
+              <div class="city-costs">
+                <div class="cost-row">
+                  <span>家賃（シェア）</span>
+                  <span>AUD 180-280/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>食費</span>
+                  <span>AUD 80-110/週</span>
+                </div>
+                <div class="cost-row">
+                  <span>交通費</span>
+                  <span>AUD 25-40/週</span>
+                </div>
+                <div class="city-total">
+                  <strong>月額概算: AUD 1,250-1,900</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="financial-planning">
+          <h4>資金計画のポイント</h4>
+          <div class="planning-grid">
+            <div class="planning-card">
+              <div class="planning-icon">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <h5>総予算の見積もり</h5>
+              <ul>
+                <li><strong>学部3年間</strong>: AUD 180,000-270,000</li>
+                <li><strong>修士2年間</strong>: AUD 130,000-190,000</li>
+                <li><strong>博士3-4年間</strong>: AUD 180,000-260,000</li>
+                <li>為替変動を考慮した10-15%の余裕を確保</li>
+              </ul>
+            </div>
+
+            <div class="planning-card">
+              <div class="planning-icon">
+                <i class="fas fa-piggy-bank"></i>
+              </div>
+              <h5>節約術</h5>
+              <ul>
+                <li><strong>シェアハウス</strong>で住居費を30-40%削減</li>
+                <li><strong>学生割引</strong>の活用（交通費、娯楽費）</li>
+                <li><strong>自炊中心</strong>で食費を50%程度に削減</li>
+                <li><strong>中古教材</strong>の購入で教材費を節約</li>
+              </ul>
+            </div>
+
+            <div class="planning-card">
+              <div class="planning-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h5>アルバイト収入</h5>
+              <ul>
+                <li>学生ビザで<strong>週20時間まで</strong>就労可能</li>
+                <li>時給相場: AUD 15-25（職種により異なる）</li>
+                <li>月収目安: AUD 1,200-2,000</li>
+                <li>休暇中は時間制限なしで就労可能</li>
+              </ul>
+            </div>
+
+            <div class="planning-card">
+              <div class="planning-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h5>緊急資金</h5>
+              <ul>
+                <li>最低<strong>3-6ヶ月分</strong>の生活費を確保</li>
+                <li>医療費など予期しない出費に備える</li>
+                <li>帰国用航空券代金の確保</li>
+                <li>複数の資金源（親、貯蓄、奨学金）の分散</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="funding-calculator">
+          <h4>資金計画シミュレータ</h4>
+          <div class="calculator-container">
+            <div class="calculator-inputs">
+              <div class="input-group">
+                <label>学位レベル</label>
+                <select id="degreeLevel">
+                  <option value="bachelor">学部課程</option>
+                  <option value="masters">修士課程</option>
+                  <option value="phd">博士課程</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>都市</label>
+                <select id="city">
+                  <option value="sydney">シドニー</option>
+                  <option value="melbourne">メルボルン</option>
+                  <option value="brisbane">ブリスベン</option>
+                  <option value="perth">パース</option>
+                  <option value="adelaide">アデレード</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>期間（年）</label>
+                <input type="number" id="duration" min="1" max="6" value="2">
+              </div>
+              <div class="input-group">
+                <label>奨学金支給額（年額AUD）</label>
+                <input type="number" id="scholarship" min="0" max="60000" value="25000">
+              </div>
+            </div>
+            <button class="calc-button" onclick="calculateCosts()">計算する</button>
+            <div class="calculator-results" id="calculatorResults" style="display: none;">
+              <div class="result-item">
+                <span>授業料総額</span>
+                <span id="totalTuition"></span>
+              </div>
+              <div class="result-item">
+                <span>生活費総額</span>
+                <span id="totalLiving"></span>
+              </div>
+              <div class="result-item">
+                <span>初期費用</span>
+                <span id="initialCosts"></span>
+              </div>
+              <div class="result-item total">
+                <span><strong>総費用</strong></span>
+                <span id="grandTotal"></span>
+              </div>
+              <div class="result-item scholarship">
+                <span><strong>奨学金総額</strong></span>
+                <span id="totalScholarship"></span>
+              </div>
+              <div class="result-item final">
+                <span><strong>自己負担額</strong></span>
+                <span id="selfFunding"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h3>オーストラリア留学の夢を実現しませんか？</h3>
+          <p>豊富な奨学金制度と世界トップレベルの教育環境があなたを待っています</p>
+        </div>
+        <div class="cta-buttons">
+          <%= link_to au_universities_path, class: "cta-btn primary" do %>
+            <i class="fas fa-search"></i>
+            大学を探す
+          <% end %>
+          <%= link_to au_about_path, class: "cta-btn secondary" do %>
+            <i class="fas fa-info-circle"></i>
+            留学情報を見る
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style>
+  .au-scholarships-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #f8fafb, #ffffff);
+    color: #1a202c;
+    min-height: 100vh;
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 82, 204, 0.2);
+    z-index: 998;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0052cc, #0747a6);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0052cc 0%, #0747a6 50%, #ffcd00 100%);
+    padding: 60px 20px;
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px),
+      repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    color: white;
+  }
+
+  .hero-flag {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffcd00;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .stat-text {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.9);
+    margin-top: 5px;
+  }
+
+  /* Quick Navigation */
+  .quick-nav {
+    background: white;
+    border-bottom: 3px solid #ffcd00;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 84px;
+    z-index: 100;
+  }
+
+  .quick-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+  }
+
+  .quick-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    color: #0052cc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+
+  .quick-nav-link:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+  }
+
+  .quick-nav-link i {
+    font-size: 16px;
+  }
+
+  /* Main Container */
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Content Sections */
+  .content-section {
+    padding: 60px 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .section-icon {
+    color: #0052cc;
+  }
+
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Overview Section */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .overview-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .overview-card:hover {
+    transform: translateY(-5px);
+    border-color: #0052cc;
+    box-shadow: 0 10px 30px rgba(0,82,204,0.15);
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .card-icon.government {
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+  }
+
+  .card-icon.university {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  }
+
+  .card-icon.external {
+    background: linear-gradient(135deg, #059669, #047857);
+  }
+
+  .overview-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 12px;
+  }
+
+  .overview-card p {
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .card-stats .stat {
+    background: #f8fafc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .card-stats .stat i {
+    color: #0052cc;
+  }
+
+  /* Programs Section */
+  .programs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .program-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .program-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  }
+
+  .program-card.featured {
+    border: 2px solid #ffcd00;
+    position: relative;
+  }
+
+  .program-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0052cc, #ffcd00);
+  }
+
+  .program-header {
+    display: flex;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+  }
+
+  .program-logo {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin-right: 20px;
+  }
+
+  .program-info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 5px 0;
+  }
+
+  .program-type {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .program-badge {
+    position: absolute;
+    right: 30px;
+    background: #ffcd00;
+    color: #1a202c;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .program-content {
+    padding: 30px;
+  }
+
+  .program-description {
+    font-size: 1rem;
+    color: #475569;
+    margin-bottom: 25px;
+    line-height: 1.7;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .detail-item i {
+    color: #0052cc;
+    margin-top: 2px;
+    font-size: 16px;
+  }
+
+  .detail-item strong {
+    display: block;
+    color: #1a202c;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .detail-item span:last-child {
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+
+  .university-examples {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .university-examples h4 {
+    color: #1a202c;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .uni-scholarship-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .uni-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+  }
+
+  .uni-item strong {
+    color: #1a202c;
+    font-weight: 600;
+    min-width: 120px;
+  }
+
+  .uni-item span:last-child {
+    color: #0052cc;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  /* Eligibility Section */
+  .eligibility-container {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .eligibility-tabs {
+    display: flex;
+    background: #f8fafc;
+    padding: 0;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+  }
+
+  .tab-btn.active,
+  .tab-btn:hover {
+    color: #0052cc;
+    border-bottom-color: #0052cc;
+    background: white;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 40px 30px;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  .criteria-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 25px;
+  }
+
+  .criteria-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .criteria-card h4 {
+    font-size: 1.2rem;
+    color: #1a202c;
+    margin-bottom: 12px;
+  }
+
+  .criteria-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .criteria-card li {
+    color: #475569;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .criteria-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #059669;
+    font-weight: bold;
+  }
+
+  /* Academic Requirements */
+  .academic-requirements {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .grade-scale h4 {
+    color: #1a202c;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .grade-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .grade-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 15px 20px;
+    align-items: center;
+  }
+
+  .grade-row.header {
+    background: #0052cc;
+    color: white;
+    font-weight: 600;
+  }
+
+  .grade-row:not(.header) {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .grade-row:last-child {
+    border-bottom: none;
+  }
+
+  .academic-tips {
+    margin-top: 30px;
+    background: #f0f9ff;
+    border-radius: 12px;
+    padding: 25px;
+  }
+
+  .academic-tips h4 {
+    color: #0052cc;
+    margin-bottom: 15px;
+  }
+
+  .academic-tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .academic-tips li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    color: #1e40af;
+  }
+
+  .academic-tips li::before {
+    content: '💡';
+    position: absolute;
+    left: 0;
+  }
+
+  /* Language Requirements */
+  .language-requirements {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .language-requirements h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1a202c;
+  }
+
+  .test-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .test-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .test-header {
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .test-header i {
+    font-size: 20px;
+  }
+
+  .test-header h5 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .score-levels {
+    padding: 20px;
+  }
+
+  .score-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .score-level:last-child {
+    border-bottom: none;
+  }
+
+  .score-level .level {
+    font-weight: 600;
+    color: #1a202c;
+  }
+
+  .score-level .score {
+    color: #0052cc;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .language-tips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .tip-card {
+    background: #f0f9ff;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .tip-card i {
+    color: #0052cc;
+    font-size: 20px;
+    margin-top: 3px;
+  }
+
+  .tip-card h5 {
+    color: #1e40af;
+    margin-bottom: 10px;
+  }
+
+  .tip-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tip-card li {
+    color: #1e40af;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+  }
+
+  .tip-card li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #0052cc;
+  }
+
+  /* Documents Checklist */
+  .documents-checklist {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .doc-category {
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .doc-category h4 {
+    color: #1a202c;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .doc-category h4 i {
+    color: #0052cc;
+  }
+
+  .doc-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .doc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .doc-item:hover {
+    background: #f8fafc;
+  }
+
+  .doc-item input[type="checkbox"] {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .doc-content strong {
+    color: #1a202c;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .doc-content p {
+    color: #64748b;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Timeline */
+  .process-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    position: relative;
+    margin-bottom: 50px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #0052cc, #0747a6);
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 80px;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border: 4px solid #0052cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .step-number {
+    font-weight: 700;
+    color: #0052cc;
+    font-size: 1.2rem;
+  }
+
+  .timeline-content {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-left: 20px;
+  }
+
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .step-header h4 {
+    color: #1a202c;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  .timeframe {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .step-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .step-details li {
+    color: #475569;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .step-details li::before {
+    content: '📋';
+    position: absolute;
+    left: 0;
+  }
+
+  /* Important Dates */
+  .important-dates h4 {
+    text-align: center;
+    color: #1a202c;
+    margin-bottom: 30px;
+  }
+
+  .dates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .date-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  .date-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin: 0 auto 15px;
+  }
+
+  .date-card h5 {
+    color: #1a202c;
+    margin-bottom: 15px;
+  }
+
+  .date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .date-info span {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+
+  .deadline {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+
+  .result {
+    background: #dbeafe;
+    color: #2563eb;
+  }
+
+  .start {
+    background: #d1fae5;
+    color: #059669;
+  }
+
+  /* Tips Section */
+  .tips-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .tip-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  }
+
+  .tip-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .tip-card h4 {
+    color: #1a202c;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .tip-content p {
+    color: #64748b;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  .tip-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tip-content li {
+    color: #475569;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.9rem;
+  }
+
+  .tip-content li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #0052cc;
+    font-weight: bold;
+  }
+
+  /* Success Stories */
+  .success-stories h4 {
+    color: #1a202c;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+  }
+
+  .story-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 5px solid #0052cc;
+  }
+
+  .story-header {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .story-type {
+    background: #0052cc;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .story-field {
+    background: white;
+    color: #0052cc;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid #0052cc;
+  }
+
+  .story-content {
+    color: #1e40af;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .story-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .story-points span {
+    background: white;
+    color: #059669;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Costs Section */
+  .costs-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .costs-overview {
+    margin-bottom: 50px;
+  }
+
+  .cost-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .cost-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .cost-card.major {
+    border: 2px solid #0052cc;
+  }
+
+  .cost-header {
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    color: white;
+    padding: 20px;
+  }
+
+  .cost-header h4 {
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cost-range {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffcd00;
+  }
+
+  .cost-breakdown {
+    padding: 20px;
+  }
+
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .cost-item:last-child {
+    border-bottom: none;
+  }
+
+  .cost-item.special {
+    background: #fef3c7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+  }
+
+  .cost-item span:first-child {
+    color: #1a202c;
+    font-weight: 500;
+  }
+
+  .cost-item span:last-child {
+    color: #0052cc;
+    font-weight: 600;
+  }
+
+  /* City Comparison */
+  .city-comparison h4 {
+    text-align: center;
+    color: #1a202c;
+    margin-bottom: 30px;
+  }
+
+  .cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .city-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  }
+
+  .city-card h5 {
+    color: #1a202c;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .city-card h5 i {
+    color: #0052cc;
+  }
+
+  .city-costs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 5px 0;
+  }
+
+  .cost-row span:first-child {
+    color: #64748b;
+  }
+
+  .cost-row span:last-child {
+    color: #0052cc;
+    font-weight: 500;
+  }
+
+  .city-total {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #e2e8f0;
+    text-align: center;
+    color: #1a202c;
+  }
+
+  /* Financial Planning */
+  .financial-planning h4 {
+    text-align: center;
+    color: #1a202c;
+    margin-bottom: 30px;
+  }
+
+  .planning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .planning-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  }
+
+  .planning-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #059669, #047857);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .planning-card h5 {
+    color: #1a202c;
+    margin-bottom: 15px;
+  }
+
+  .planning-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .planning-card li {
+    color: #475569;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.9rem;
+  }
+
+  .planning-card li::before {
+    content: '💰';
+    position: absolute;
+    left: 0;
+  }
+
+  /* Calculator */
+  .funding-calculator {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 40px;
+  }
+
+  .funding-calculator h4 {
+    text-align: center;
+    color: #1a202c;
+    margin-bottom: 25px;
+  }
+
+  .calculator-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .input-group label {
+    display: block;
+    color: #1a202c;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .input-group select,
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .input-group select:focus,
+  .input-group input:focus {
+    outline: none;
+    border-color: #0052cc;
+  }
+
+  .calc-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .calc-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,82,204,0.3);
+  }
+
+  .calculator-results {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .result-item:last-child {
+    border-bottom: none;
+  }
+
+  .result-item.total {
+    background: #f8fafc;
+    padding: 15px;
+    margin: 10px -20px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .result-item.scholarship {
+    color: #059669;
+  }
+
+  .result-item.final {
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    color: white;
+    padding: 15px;
+    margin: 10px -20px;
+    border-radius: 8px;
+    border: none;
+  }
+
+  /* Call to Action */
+  .cta-section {
+    background: linear-gradient(135deg, #1a202c, #2d3748);
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-text h3 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .cta-text p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn.primary {
+    background: linear-gradient(135deg, #0052cc, #0747a6);
+    color: white;
+  }
+
+  .cta-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,82,204,0.3);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .cta-btn.secondary:hover {
+    background: white;
+    color: #1a202c;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-stats {
+      gap: 30px;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+    }
+
+    .quick-nav-container {
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .quick-nav-link span {
+      display: none;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .overview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .eligibility-tabs {
+      flex-direction: column;
+    }
+
+    .tab-content {
+      padding: 20px 15px;
+    }
+
+    .criteria-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .test-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline::before {
+      left: 20px;
+    }
+
+    .timeline-item {
+      padding-left: 60px;
+    }
+
+    .timeline-marker {
+      width: 40px;
+      height: 40px;
+    }
+
+    .step-number {
+      font-size: 1rem;
+    }
+
+    .timeline-content {
+      margin-left: 10px;
+    }
+
+    .dates-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tips-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stories-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cost-categories {
+      grid-template-columns: 1fr;
+    }
+
+    .cities-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .planning-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .calculator-inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-btn {
+      width: 200px;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content {
+      padding: 20px 10px;
+    }
+
+    .hero-title {
+      font-size: 1.8rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .main-container {
+      padding: 0 10px;
+    }
+
+    .content-section {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .overview-card,
+    .program-card,
+    .tip-card,
+    .cost-card,
+    .planning-card {
+      padding: 20px;
+    }
+
+    .grade-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .grade-row span {
+      font-size: 0.8rem;
+    }
+
+    .uni-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+  }
+</style>
+
+<script>
+// Progress bar functionality
+window.addEventListener('scroll', function() {
+  const progressBar = document.getElementById('progressBar');
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrollPercent + '%';
+});
+
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.quick-nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 100;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+
+// Tab functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const targetTab = this.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and contents
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      // Add active class to clicked tab and corresponding content
+      this.classList.add('active');
+      document.getElementById(targetTab).classList.add('active');
+    });
+  });
+});
+
+// Calculator functionality
+function calculateCosts() {
+  const degree = document.getElementById('degreeLevel').value;
+  const city = document.getElementById('city').value;
+  const duration = parseInt(document.getElementById('duration').value);
+  const scholarship = parseInt(document.getElementById('scholarship').value);
+  
+  // Tuition costs (annual)
+  let tuitionCosts = {
+    bachelor: 37500,
+    masters: 42500,
+    phd: 36500
+  };
+  
+  // Living costs by city (annual)
+  let livingCosts = {
+    sydney: 26000,
+    melbourne: 23000,
+    brisbane: 21000,
+    perth: 19000,
+    adelaide: 18000
+  };
+  
+  const initialCosts = 7500; // Initial setup costs
+  const annualTuition = tuitionCosts[degree];
+  const annualLiving = livingCosts[city];
+  
+  const totalTuition = annualTuition * duration;
+  const totalLiving = annualLiving * duration;
+  const grandTotal = totalTuition + totalLiving + initialCosts;
+  const totalScholarship = scholarship * duration;
+  const selfFunding = Math.max(0, grandTotal - totalScholarship);
+  
+  // Display results
+  document.getElementById('totalTuition').textContent = 'AUD ' + totalTuition.toLocaleString();
+  document.getElementById('totalLiving').textContent = 'AUD ' + totalLiving.toLocaleString();
+  document.getElementById('initialCosts').textContent = 'AUD ' + initialCosts.toLocaleString();
+  document.getElementById('grandTotal').textContent = 'AUD ' + grandTotal.toLocaleString();
+  document.getElementById('totalScholarship').textContent = 'AUD ' + totalScholarship.toLocaleString();
+  document.getElementById('selfFunding').textContent = 'AUD ' + selfFunding.toLocaleString();
+  
+  document.getElementById('calculatorResults').style.display = 'block';
+}
+</script>

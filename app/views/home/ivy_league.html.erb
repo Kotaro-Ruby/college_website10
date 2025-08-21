@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ivy League - アイビーリーグ8大学</title>
+  <style>
+    body {
+      font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, rgba(15, 76, 129, 0.9) 0%, rgba(0, 49, 82, 0.95) 100%);
+      color: white;
+      padding: 80px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="ivy" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 5 Q 5 10, 10 15 T 10 25" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23ivy)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .ivy-icon {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: -40px auto 0;
+      padding: 0 20px 40px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .intro-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .intro-title {
+      font-size: 1.8rem;
+      color: #0f4c81;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      text-align: justify;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #fef3c7 0%, #fbbf24 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .universities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .university-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .university-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0f4c81, #003152);
+    }
+
+    .university-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(15, 76, 129, 0.15);
+      border-color: #0f4c81;
+    }
+
+    .university-number {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: linear-gradient(135deg, #0f4c81, #003152);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .university-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f4c81;
+      margin-bottom: 10px;
+    }
+
+    .university-location {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .university-year {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .university-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .university-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0f4c81;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .features-section {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .features-title {
+      font-size: 1.8rem;
+      color: #0f4c81;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 20px;
+      background: rgba(15, 76, 129, 0.03);
+      border-radius: 12px;
+      border-left: 4px solid #0f4c81;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      color: #0f4c81;
+      flex-shrink: 0;
+    }
+
+    .feature-content h3 {
+      margin: 0 0 8px 0;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .feature-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, rgba(15, 76, 129, 0.9), rgba(0, 49, 82, 0.95));
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .cta-description {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #0f4c81;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .universities-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .university-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 15px 30px;
+      }
+
+      .intro-card, .features-section {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="ivy-icon">🌿</span>
+        Ivy League
+      </h1>
+      <p class="hero-subtitle">アメリカ最高峰の8つの名門私立大学</p>
+      <p class="hero-description">
+        1954年に結成されたアイビーリーグは、アメリカ北東部に位置する8つの伝統ある私立大学から構成される、
+        世界でも最も権威ある大学連盟の一つです。優れた学術的評価、豊富な研究資源、そして卓越した教育の質で知られています。
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="intro-card">
+      <h2 class="intro-title">アイビーリーグとは</h2>
+      <p class="intro-text">
+        アイビーリーグ（Ivy League）は、もともとはスポーツ競技連盟として始まりましたが、
+        現在では<span class="highlight">世界最高水準の教育機関</span>を表す代名詞となっています。
+        これらの大学は、厳格な入学基準、優秀な教授陣、豊富な研究予算、そして歴史的な伝統を共有しています。
+        <br><br>
+        アイビーリーグの大学は、アメリカの政治、経済、文化、学術界のリーダーを数多く輩出しており、
+        卒業生には多くのノーベル賞受賞者、大統領、最高裁判事、企業経営者が含まれています。
+        入学競争は極めて激しく、合格率は多くの場合10%以下となっています。
+      </p>
+    </div>
+
+    <div class="universities-grid">
+      <div class="university-card">
+        <div class="university-number">1</div>
+        <h3 class="university-name">Harvard University</h3>
+        <div class="university-location">📍 マサチューセッツ州ケンブリッジ</div>
+        <div class="university-year">創立: 1636年</div>
+        <p class="university-description">
+          アメリカ最古の高等教育機関。世界大学ランキングで常にトップを争い、
+          最大規模の大学基金を持つ。ビジネス、法学、医学など全分野で最高峰。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">3.2%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$57,261</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">2</div>
+        <h3 class="university-name">Yale University</h3>
+        <div class="university-location">📍 コネチカット州ニューヘイブン</div>
+        <div class="university-year">創立: 1701年</div>
+        <p class="university-description">
+          リベラルアーツ教育の伝統を重視。法学部は特に有名で、多くの大統領や
+          最高裁判事を輩出。寮制度による密接な学生コミュニティが特徴。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">4.5%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$64,700</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">3</div>
+        <h3 class="university-name">Princeton University</h3>
+        <div class="university-location">📍 ニュージャージー州プリンストン</div>
+        <div class="university-year">創立: 1746年</div>
+        <p class="university-description">
+          学部教育に特に力を入れる。少人数制のセミナーと教授との密接な関係が特徴。
+          数学と物理学で世界最高レベルの研究機関。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">4.0%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$59,710</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">4</div>
+        <h3 class="university-name">Columbia University</h3>
+        <div class="university-location">📍 ニューヨーク州ニューヨーク市</div>
+        <div class="university-year">創立: 1754年</div>
+        <p class="university-description">
+          マンハッタンに位置する都市型大学。ジャーナリズム、国際関係、
+          ビジネスで特に強い。ピューリッツァー賞の授与機関。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">3.9%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$65,524</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">5</div>
+        <h3 class="university-name">University of Pennsylvania</h3>
+        <div class="university-location">📍 ペンシルベニア州フィラデルフィア</div>
+        <div class="university-year">創立: 1740年</div>
+        <p class="university-description">
+          ベンジャミン・フランクリンが創設。ウォートン・スクール（ビジネス）は
+          世界最高峰。実践的な教育と研究を重視。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">5.9%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$66,104</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">6</div>
+        <h3 class="university-name">Brown University</h3>
+        <div class="university-location">📍 ロードアイランド州プロビデンス</div>
+        <div class="university-year">創立: 1764年</div>
+        <p class="university-description">
+          オープンカリキュラムで有名。学生が自由に科目を選択でき、
+          創造的で革新的な教育アプローチが特徴。リベラルな校風。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">5.0%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$65,656</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">7</div>
+        <h3 class="university-name">Dartmouth College</h3>
+        <div class="university-location">📍 ニューハンプシャー州ハノーバー</div>
+        <div class="university-year">創立: 1769年</div>
+        <p class="university-description">
+          最小規模のアイビーリーグ校。少人数教育と密接な学生・教授関係が特徴。
+          タック・スクール（MBA）は世界トップクラス。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">6.2%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$65,133</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="university-card">
+        <div class="university-number">8</div>
+        <h3 class="university-name">Cornell University</h3>
+        <div class="university-location">📍 ニューヨーク州イサカ</div>
+        <div class="university-year">創立: 1865年</div>
+        <p class="university-description">
+          最も新しく最大規模のアイビーリーグ校。工学、農学、ホテル経営学など
+          実践的な分野に強い。一部公立部門も持つユニークな構造。
+        </p>
+        <div class="university-stats">
+          <div class="stat-item">
+            <span class="stat-value">7.9%</span>
+            <span class="stat-label">合格率</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">$66,014</span>
+            <span class="stat-label">年間学費</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <h2 class="features-title">アイビーリーグの特徴</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎓</div>
+          <div class="feature-content">
+            <h3>世界最高水準の教育</h3>
+            <p>ノーベル賞受賞者を含む世界的に著名な教授陣による少人数制の授業</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💰</div>
+          <div class="feature-content">
+            <h3>充実した奨学金制度</h3>
+            <p>Need-based の奨学金により、家庭の経済状況に関わらず優秀な学生を支援</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔬</div>
+          <div class="feature-content">
+            <h3>最先端の研究施設</h3>
+            <p>潤沢な研究予算と世界トップクラスの研究施設・設備</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-content">
+            <h3>グローバルなネットワーク</h3>
+            <p>世界中のリーダーとなる卒業生による強力な人脈ネットワーク</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏛️</div>
+          <div class="feature-content">
+            <h3>歴史と伝統</h3>
+            <p>250年以上の歴史を持つ大学も含む、アメリカの知的伝統の継承</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-content">
+            <h3>厳格な選考プロセス</h3>
+            <p>学業成績だけでなく、リーダーシップや課外活動も重視する総合的評価</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2 class="cta-title">アイビーリーグへの挑戦を始めよう</h2>
+      <p class="cta-description">
+        世界最高峰の教育を受けるチャンスを掴むため、今から準備を始めましょう
+      </p>
+      <a href="/search" class="cta-button">大学を検索する</a>
+    </div>
+  </div>
+</body>
+</html>
