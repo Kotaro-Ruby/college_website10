@@ -5,23 +5,24 @@ puts "🖼️ Fixing Australian university image URLs for production..."
 
 github_base = "https://raw.githubusercontent.com/Kotaro-Ruby/college_website10/main/app/assets/images"
 
-AuUniversity.find_each do |uni|
-  if uni.images.present?
-    images = JSON.parse(uni.images)
-    
-    # Convert local paths to GitHub URLs
-    updated_images = images.map do |img|
-      if img.start_with?('/assets/')
-        # Remove /assets/ prefix and add GitHub base URL
-        path = img.sub('/assets/', '')
-        "#{github_base}/#{path}"
-      else
-        img
-      end
-    end
-    
-    uni.update(images: updated_images.to_json)
-    puts "✅ Updated images for #{uni.name}"
+# Force update for specific universities with known images
+uni_images = {
+  'Macquarie University' => [
+    'au/universities/macquarie-university.jpg',
+    'au/universities/macquarie-university-2.jpg',
+    'au/universities/macquarie-university-3.jpg'
+  ],
+  'The University of Sydney' => ['au/universities/university-of-sydney.jpg'],
+  'Bond University' => ['au/universities/bond-university.jpg'],
+  'Australian Catholic University' => ['au/universities/australian-catholic-university.jpg']
+}
+
+uni_images.each do |name, images|
+  uni = AuUniversity.find_by(name: name)
+  if uni
+    github_urls = images.map { |img| "#{github_base}/#{img}" }
+    uni.update!(images: github_urls.to_json)
+    puts "✅ Updated #{name} with GitHub URLs"
   end
 end
 

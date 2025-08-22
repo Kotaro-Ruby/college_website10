@@ -51,13 +51,10 @@ namespace :setup do
       end
     end
     
-    # 6. Fix image URLs for production if needed
-    if Rails.env.production? && AuUniversity.exists?
-      sample_uni = AuUniversity.first
-      if sample_uni.images.present? && JSON.parse(sample_uni.images).first.start_with?('/assets/')
-        puts "🖼️ Fixing image URLs for production..."
-        load Rails.root.join('db/seeds/fix_au_image_urls.rb')
-      end
+    # 6. Fix image URLs for production (always run in production)
+    if Rails.env.production?
+      puts "🔧 Ensuring image URLs are production-ready..."
+      load Rails.root.join('db/seeds/fix_au_image_urls.rb')
     end
     
     # 7. Run any custom setup scripts
