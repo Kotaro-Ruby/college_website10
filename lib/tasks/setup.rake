@@ -27,6 +27,12 @@ namespace :setup do
       puts "✅ Australian universities already exist (#{AuUniversity.count} records)"
     end
     
+    # 3.5. Update Australian university images
+    if AuUniversity.exists? && AuUniversity.where.not(images: nil).count == 0
+      puts "🖼️ Adding images to Australian universities..."
+      load Rails.root.join('db/seeds/update_au_university_images.rb')
+    end
+    
     # 4. Check and import New Zealand universities (future)
     if defined?(NzUniversity) && NzUniversity.count == 0
       nz_seed = Rails.root.join('db/seeds/nz_data.rb')
