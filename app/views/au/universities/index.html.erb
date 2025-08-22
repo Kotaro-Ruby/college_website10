@@ -162,12 +162,11 @@
 
       <div class="universities-grid">
         <% @universities.each do |university| %>
-          <div class="university-card" data-images="<%= university.images %>">
+          <div class="university-card">
             <% if ['The University of Melbourne', 'The University of Sydney', 'The University of Queensland'].include?(university.name) %>
               <div class="card-badge">TOP University</div>
             <% end %>
             
-            <!-- Debug: images = <%= university.images.inspect %> -->
             <% if university.images.present? %>
               <% images = JSON.parse(university.images) %>
               <% if images.length > 1 %>
@@ -176,8 +175,12 @@
                     <div class="slider-wrapper">
                       <% images.each_with_index do |image, index| %>
                         <div class="slider-slide <%= 'active' if index == 0 %>">
-                          <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
-                          <%= image_tag clean_path, alt: "#{university.name} Campus #{index + 1}" %>
+                          <% if image.start_with?('http') %>
+                            <img src="<%= image %>" alt="<%= university.name %> Campus <%= index + 1 %>">
+                          <% else %>
+                            <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
+                            <%= image_tag clean_path, alt: "#{university.name} Campus #{index + 1}" %>
+                          <% end %>
                         </div>
                       <% end %>
                     </div>
@@ -196,8 +199,12 @@
                 </div>
               <% else %>
                 <div class="card-image">
-                  <% clean_path = images.first.start_with?('/assets/') ? images.first.sub('/assets/', '') : images.first %>
-                  <%= image_tag clean_path, alt: university.name %>
+                  <% if images.first.start_with?('http') %>
+                    <img src="<%= images.first %>" alt="<%= university.name %>">
+                  <% else %>
+                    <% clean_path = images.first.start_with?('/assets/') ? images.first.sub('/assets/', '') : images.first %>
+                    <%= image_tag clean_path, alt: university.name %>
+                  <% end %>
                 </div>
               <% end %>
             <% end %>

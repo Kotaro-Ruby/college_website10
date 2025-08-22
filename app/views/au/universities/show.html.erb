@@ -11,8 +11,12 @@
         <div class="header-slider-wrapper">
           <% images.each_with_index do |image, index| %>
             <div class="header-slide <%= 'active' if index == 0 %>">
-              <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
-              <%= image_tag clean_path, alt: "#{@university.name} Campus #{index + 1}" %>
+              <% if image.start_with?('http') %>
+                <img src="<%= image %>" alt="<%= @university.name %> Campus <%= index + 1 %>">
+              <% else %>
+                <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
+                <%= image_tag clean_path, alt: "#{@university.name} Campus #{index + 1}" %>
+              <% end %>
               <% if credits[index].present? %>
                 <div class="image-credit"><%= credits[index] %></div>
               <% end %>
