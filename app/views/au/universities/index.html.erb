@@ -162,11 +162,12 @@
 
       <div class="universities-grid">
         <% @universities.each do |university| %>
-          <div class="university-card">
+          <div class="university-card" data-images="<%= university.images %>">
             <% if ['The University of Melbourne', 'The University of Sydney', 'The University of Queensland'].include?(university.name) %>
               <div class="card-badge">TOP University</div>
             <% end %>
             
+            <!-- Debug: images = <%= university.images.inspect %> -->
             <% if university.images.present? %>
               <% images = JSON.parse(university.images) %>
               <% if images.length > 1 %>
