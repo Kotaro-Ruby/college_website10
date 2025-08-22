@@ -11,11 +11,8 @@
         <div class="header-slider-wrapper">
           <% images.each_with_index do |image, index| %>
             <div class="header-slide <%= 'active' if index == 0 %>">
-              <% if image.start_with?('/assets/') %>
-                <img src="<%= image %>" alt="<%= @university.name %> Campus <%= index + 1 %>">
-              <% else %>
-                <%= image_tag image, alt: "#{@university.name} Campus #{index + 1}" %>
-              <% end %>
+              <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
+              <%= image_tag clean_path, alt: "#{@university.name} Campus #{index + 1}" %>
               <% if credits[index].present? %>
                 <div class="image-credit"><%= credits[index] %></div>
               <% end %>
@@ -1239,6 +1236,11 @@ function initializeHeaderSlider() {
 
 // Initialize slider when page loads
 document.addEventListener('DOMContentLoaded', function() {
+  initializeHeaderSlider();
+});
+
+// Also initialize on Turbo navigation
+document.addEventListener('turbo:load', function() {
   initializeHeaderSlider();
 });
 </script>

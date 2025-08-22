@@ -175,11 +175,8 @@
                     <div class="slider-wrapper">
                       <% images.each_with_index do |image, index| %>
                         <div class="slider-slide <%= 'active' if index == 0 %>">
-                          <% if image.start_with?('/assets/') %>
-                          <img src="<%= image %>" alt="<%= university.name %> Campus <%= index + 1 %>">
-                        <% else %>
-                          <%= image_tag image, alt: "#{university.name} Campus #{index + 1}" %>
-                        <% end %>
+                          <% clean_path = image.start_with?('/assets/') ? image.sub('/assets/', '') : image %>
+                          <%= image_tag clean_path, alt: "#{university.name} Campus #{index + 1}" %>
                         </div>
                       <% end %>
                     </div>
@@ -198,11 +195,8 @@
                 </div>
               <% else %>
                 <div class="card-image">
-                  <% if images.first.start_with?('/assets/') %>
-                    <img src="<%= images.first %>" alt="<%= university.name %>">
-                  <% else %>
-                    <%= image_tag images.first, alt: university.name %>
-                  <% end %>
+                  <% clean_path = images.first.start_with?('/assets/') ? images.first.sub('/assets/', '') : images.first %>
+                  <%= image_tag clean_path, alt: university.name %>
                 </div>
               <% end %>
             <% end %>

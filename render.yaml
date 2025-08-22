@@ -7,10 +7,5 @@ services:
     branch: main
     buildCommand: ./bin/render-build.sh
     startCommand: |
-      bundle exec rails db:migrate
-      if [ -f "db/college_data_compressed.json.gz" ]; then
-        cp db/college_data_compressed.json.gz tmp/
-        bundle exec rails import:from_compressed
-      fi
-      bundle exec rails db:seed
+      bundle exec rails setup:production
       bundle exec puma -C config/puma.rb
