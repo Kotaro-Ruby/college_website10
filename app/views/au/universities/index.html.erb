@@ -1829,39 +1829,41 @@ function initializeFilters() {
       const url = new URL(window.location);
       url.searchParams.set('sort', this.value);
       
-      // Turboを使用してページ遷移
-      if (window.Turbo) {
-        Turbo.visit(url.toString());
-      } else {
-        // Turboが無い場合はfetchを使用
-        fetch(url.toString(), {
-          headers: {
-            'Accept': 'text/html',
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-        })
-        .then(response => response.text())
-        .then(html => {
+      // AJAXリクエスト
+      fetch(url.toString(), {
+        headers: {
+          'Accept': 'text/html',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then(response => response.text())
+      .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
-        // Update results section
-        const newResults = doc.querySelector('.results-section');
-        const currentResults = document.querySelector('.results-section');
-        if (newResults && currentResults) {
-          currentResults.innerHTML = newResults.innerHTML;
+        // 大学リストの部分を更新
+        const newGrid = doc.querySelector('.universities-grid');
+        const currentGrid = document.querySelector('.universities-grid');
+        if (newGrid && currentGrid) {
+          currentGrid.innerHTML = newGrid.innerHTML;
         }
         
-        // Update URL
+        // 結果数を更新
+        const newCount = doc.querySelector('.results-header h2');
+        const currentCount = document.querySelector('.results-header h2');
+        if (newCount && currentCount) {
+          currentCount.innerHTML = newCount.innerHTML;
+        }
+        
+        // URLを更新
         window.history.pushState({}, '', url);
         
-        // Re-initialize
-        setTimeout(() => {
-          initializeFilters();
-          initializeImageSliders();
-        }, 100);
+        // スライダーを再初期化
+        initializeImageSliders();
+      })
+      .catch(error => {
+        console.error('Sort error:', error);
       });
-      }
     });
   }
   

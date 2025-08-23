@@ -56,6 +56,12 @@ class Au::UniversitiesController < ApplicationController
     end
 
     @total_count = @universities.count
+    
+    # AJAXリクエストに対応
+    respond_to do |format|
+      format.html # 通常のHTMLレスポンス
+      format.json { render json: @universities }
+    end
   end
 
   def search
