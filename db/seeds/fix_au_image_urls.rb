@@ -12,7 +12,12 @@ uni_images = {
   ],
   'The University of Sydney' => ['/images/au/universities/university-of-sydney.jpg'],
   'Bond University' => ['/images/au/universities/bond-university.jpg'],
-  'Australian Catholic University' => ['/images/au/universities/australian-catholic-university.jpg']
+  'Australian Catholic University' => ['/images/au/universities/australian-catholic-university.jpg'],
+  'RMIT University' => [
+    '/images/au/universities/rmit-university.jpg',
+    '/images/au/universities/rmit-university-2.jpg'
+  ],
+  'Queensland University of Technology' => ['/images/au/universities/queensland-university-of-technology.jpg']
 }
 
 uni_images.each do |name, images|
