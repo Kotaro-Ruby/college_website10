@@ -1852,7 +1852,12 @@ function initializeSortSelect() {
   const sortSelect = document.getElementById('sort-select');
   if (sortSelect) {
     console.log('Sort select found:', sortSelect);
-    sortSelect.addEventListener('change', function() {
+    
+    // Remove any existing event listeners
+    const newSortSelect = sortSelect.cloneNode(true);
+    sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
+    
+    newSortSelect.addEventListener('change', function() {
       console.log('Sort changed to:', this.value);
       const url = new URL(window.location);
       url.searchParams.set('sort', this.value);
@@ -1865,8 +1870,12 @@ function initializeSortSelect() {
           'X-Requested-With': 'XMLHttpRequest'
         }
       })
-      .then(response => response.text())
+      .then(response => {
+        console.log('Response received:', response.status);
+        return response.text();
+      })
       .then(html => {
+        console.log('HTML length:', html.length);
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
