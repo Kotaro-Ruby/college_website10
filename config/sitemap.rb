@@ -21,6 +21,11 @@ SitemapGenerator::Sitemap.create do
   add "/english_tests", priority: 0.8, changefreq: "monthly"
   add "/majors_careers", priority: 0.8, changefreq: "monthly"
   add "/life_guide", priority: 0.8, changefreq: "monthly"
+  add "/ivy-league", priority: 0.8, changefreq: "monthly"
+  
+  # ブログ・コラム
+  add "/blogs", priority: 0.7, changefreq: "weekly"
+  add "/columns", priority: 0.7, changefreq: "weekly"
 
   # 検索機能
   add "/search", priority: 0.8, changefreq: "monthly"
@@ -38,11 +43,43 @@ SitemapGenerator::Sitemap.create do
   add "/favorites", priority: 0.6, changefreq: "monthly"
   add "/compare", priority: 0.6, changefreq: "monthly"
   add "/profile", priority: 0.5, changefreq: "monthly"
+  add "/profile/edit", priority: 0.5, changefreq: "monthly"
+  
+  # 相談・お問い合わせ
+  add "/consultations/new", priority: 0.9, changefreq: "monthly"
 
   # 国別情報ページ
   add "/canada", priority: 0.7, changefreq: "monthly"
   add "/australia", priority: 0.7, changefreq: "monthly"
   add "/newzealand", priority: 0.7, changefreq: "monthly"
+  
+  # アメリカ大学ページ
+  add "/us", priority: 0.8, changefreq: "weekly"
+  add "/us/about", priority: 0.7, changefreq: "monthly"
+  add "/us/universities", priority: 0.8, changefreq: "weekly"
+  add "/us/universities/search", priority: 0.7, changefreq: "daily"
+  
+  # オーストラリア大学ページ
+  add "/au", priority: 0.8, changefreq: "weekly"
+  add "/au/universities", priority: 0.8, changefreq: "weekly"
+  add "/au/universities/top", priority: 0.8, changefreq: "weekly"
+  add "/au/about", priority: 0.7, changefreq: "monthly"
+  add "/au/group-of-eight", priority: 0.8, changefreq: "monthly"
+  add "/au/popular-cities", priority: 0.7, changefreq: "monthly"
+  add "/au/scholarships", priority: 0.8, changefreq: "monthly"
+  add "/au/universities/search", priority: 0.7, changefreq: "daily"
+  
+  # ニュージーランド大学ページ
+  add "/nz", priority: 0.8, changefreq: "weekly"
+  add "/nz/universities", priority: 0.8, changefreq: "weekly"
+  add "/nz/about", priority: 0.7, changefreq: "monthly"
+  add "/nz/universities/search", priority: 0.7, changefreq: "daily"
+  
+  # カナダ大学ページ
+  add "/ca", priority: 0.8, changefreq: "weekly"
+  add "/ca/universities", priority: 0.8, changefreq: "weekly"
+  add "/ca/about", priority: 0.7, changefreq: "monthly"
+  add "/ca/universities/search", priority: 0.7, changefreq: "daily"
 
   # 特定大学の詳細ページ
   add "/ohio_northern_university", priority: 0.7, changefreq: "weekly"

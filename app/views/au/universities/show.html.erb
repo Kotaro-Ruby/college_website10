@@ -51,6 +51,12 @@
       </div>
     </div>
   </div>
+  
+  <% if @university.images.present? %>
+    <div class="image-note">
+      ※ 画像はWikimedia Commons APIより自動取得されたものです。関連性の低い画像が表示される場合があります。
+    </div>
+  <% end %>
 
   <div class="university-stats-grid">
     <div class="stat-card">
@@ -303,7 +309,9 @@
   </div>
   
   <div class="data-note">
-    <p><strong>※注記:</strong> 留学生数および留学生比率は、EFTSL（Equivalent Full-Time Student Load）データを基にした推定値です。実際の学生数とは異なる場合があります。</p>
+    <p><strong>※注記:</strong></p>
+    <p>• 留学生数および留学生比率は、EFTSL（Equivalent Full-Time Student Load）データを基にした推定値です。実際の学生数とは異なる場合があります。</p>
+    <p>• 掲載されている画像は、Wikimedia Commons APIを使用して自動取得されたものです。大学名での検索結果を表示しているため、実際のキャンパスと異なる場合や関連性の低い画像が含まれている可能性があります。</p>
   </div>
 </div>
 
@@ -439,6 +447,14 @@
     letter-spacing: 0.3px;
     backdrop-filter: blur(5px);
     opacity: 0.8;
+  }
+
+  .image-note {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    color: #64748b;
+    font-size: 12px;
+    text-align: center;
   }
 
   .university-header.has-image .university-header-content {

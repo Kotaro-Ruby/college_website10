@@ -213,6 +213,9 @@
                   <% end %>
                 </div>
               <% end %>
+              <div class="image-note-small">
+                ※ 画像は自動取得されているため、関連性の低いものが含まれる場合があります。
+              </div>
             <% end %>
             
             <div class="card-content">
@@ -314,6 +317,12 @@
       </div>
     </div>
 
+  </div>
+  
+  <div class="page-footer-note" style="max-width: 1200px; margin: 20px auto; padding: 16px 20px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+    <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.6;">
+      <strong>※画像について:</strong> 掲載されている画像は、Wikimedia Commons APIを使用して自動取得されたものです。大学名での検索結果を表示しているため、実際のキャンパスと異なる場合や関連性の低い画像が含まれている可能性があります。
+    </p>
   </div>
 </div>
 
@@ -1325,6 +1334,29 @@
     border-radius: 4px;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  .image-credit {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(5px);
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .image-note-small {
+    color: #94a3b8;
+    font-size: 10px;
+    text-align: center;
+    padding: 4px 0 8px;
   }
 
   .card-actions {
