@@ -61,5 +61,3 @@ coverage/
 # Temporarily ignore pending migrations for Australia features
 /db/migrate_pending/
 
-# Public images (copied from assets)
-public/images/
