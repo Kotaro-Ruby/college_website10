@@ -83,8 +83,25 @@ class Au::UniversitiesController < ApplicationController
       @universities = @universities.where(field_conditions, *field_values)
     end
 
+    # ソート
+    case params[:sort]
+    when "name"
+      @universities = @universities.order(:name)
+    when "students"
+      @universities = @universities.order(total_students_2023: :desc)
+    when "courses"
+      @universities = @universities.order(total_courses_count: :desc)
+    else
+      @universities = @universities.order(:name)
+    end
+
     @total_count = @universities.count
-    render :index
+    
+    # AJAXリクエストに対応
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @universities }
+    end
   end
 
   def show

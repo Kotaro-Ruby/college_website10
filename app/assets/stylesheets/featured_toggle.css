@@ -1,0 +1,142 @@
+/* 注目の大学セクションの表示切り替えスタイル */
+
+/* グリッド表示とリスト表示の切り替えアイコン */
+.view-toggle-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.view-toggle-icon,
+.fa-th,
+.fa-list {
+  cursor: pointer;
+  color: #999;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.view-toggle-icon:hover,
+.fa-th:hover,
+.fa-list:hover {
+  color: #ff7a00;
+  background-color: rgba(255, 122, 0, 0.1);
+}
+
+.view-toggle-icon.active,
+.fa-th.active,
+.fa-list.active {
+  color: #ff7a00;
+  background-color: rgba(255, 122, 0, 0.15);
+}
+
+/* グリッド表示のスタイル */
+.colleges-grid.grid-view,
+.featured-colleges.grid-view,
+.colleges-container.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* リスト表示のスタイル */
+.colleges-grid.list-view,
+.featured-colleges.list-view,
+.colleges-container.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.colleges-grid.list-view .college-card,
+.featured-colleges.list-view .college-card,
+.colleges-container.list-view .college-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.colleges-grid.list-view .college-card:hover,
+.featured-colleges.list-view .college-card:hover,
+.colleges-container.list-view .college-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* リスト表示時の大学情報レイアウト */
+.list-view .college-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.list-view .college-name {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.list-view .college-details {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.list-view .college-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.list-view .college-stat i {
+  color: #ff7a00;
+  font-size: 0.9rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .colleges-grid.grid-view,
+  .featured-colleges.grid-view,
+  .colleges-container.grid-view {
+    grid-template-columns: 1fr;
+  }
+  
+  .list-view .college-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .list-view .college-details {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+/* アニメーション */
+.colleges-grid,
+.featured-colleges,
+.colleges-container {
+  transition: all 0.3s ease;
+}
+
+/* デフォルトでグリッド表示 */
+.colleges-grid:not(.list-view):not(.grid-view),
+.featured-colleges:not(.list-view):not(.grid-view),
+.colleges-container:not(.list-view):not(.grid-view) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}

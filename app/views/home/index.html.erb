@@ -2190,26 +2190,135 @@
       justify-content: center;
     }
   }
+  
+  /* View toggle buttons style */
+  .view-toggle {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .toggle-btn:hover {
+    background: #f3f4f6;
+    color: #fb923c;
+  }
+  
+  .toggle-btn.active {
+    background: #fef3c7;
+    color: #fb923c;
+  }
+  
+  .toggle-btn:focus {
+    outline: none;
+  }
+  
+  .toggle-btn i {
+    font-size: 16px;
+  }
 
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    initializeFeaturedToggle();
+  });
+  
+  document.addEventListener('turbo:load', function() {
+    initializeFeaturedToggle();
+  });
+  
+  function initializeFeaturedToggle() {
     // View Toggle for Featured Universities
     const viewToggles = document.querySelectorAll('.toggle-btn');
     const featuredView = document.getElementById('featured-view');
     
+    if (!viewToggles.length || !featuredView) return;
+    
+    // Remove existing event listeners to prevent duplicates
     viewToggles.forEach(toggle => {
-      toggle.addEventListener('click', function() {
-        viewToggles.forEach(t => t.classList.remove('active'));
+      const newToggle = toggle.cloneNode(true);
+      toggle.parentNode.replaceChild(newToggle, toggle);
+    });
+    
+    // Get fresh references after cloning
+    const newToggles = document.querySelectorAll('.toggle-btn');
+    
+    newToggles.forEach(toggle => {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remove active class from all buttons
+        newToggles.forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked button
         this.classList.add('active');
         
-        if (this.dataset.view === 'list' && featuredView) {
-          featuredView.style.gridTemplateColumns = '1fr';
-        } else if (featuredView) {
+        // Get the view type
+        const viewType = this.dataset.view;
+        
+        // Update the view styles based on selection
+        if (viewType === 'list') {
+          // List view - single column
+          featuredView.classList.add('list-view');
+          featuredView.classList.remove('grid-view');
+          featuredView.style.display = 'flex';
+          featuredView.style.flexDirection = 'column';
+          featuredView.style.gap = '20px';
+          featuredView.style.gridTemplateColumns = '';
+          
+          // Update card styles for list view
+          const cards = featuredView.querySelectorAll('.college-card');
+          cards.forEach(card => {
+            card.style.display = 'flex';
+            card.style.flexDirection = 'row';
+            card.style.alignItems = 'center';
+            card.style.padding = '20px';
+            card.style.gap = '20px';
+          });
+        } else {
+          // Grid view - multiple columns
+          featuredView.classList.add('grid-view');
+          featuredView.classList.remove('list-view');
+          featuredView.style.display = 'grid';
           featuredView.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+          featuredView.style.gap = '20px';
+          featuredView.style.flexDirection = '';
+          
+          // Reset card styles for grid view
+          const cards = featuredView.querySelectorAll('.college-card');
+          cards.forEach(card => {
+            card.style.display = '';
+            card.style.flexDirection = '';
+            card.style.alignItems = '';
+            card.style.padding = '';
+            card.style.gap = '';
+          });
         }
+        
+        // Save preference to localStorage
+        localStorage.setItem('preferredFeaturedView', viewType);
       });
     });
-  });
+    
+    // Apply saved preference on load
+    const savedView = localStorage.getItem('preferredFeaturedView');
+    if (savedView) {
+      const savedButton = document.querySelector(`.toggle-btn[data-view="${savedView}"]`);
+      if (savedButton) {
+        savedButton.click();
+      }
+    }
+  }
 </script>
