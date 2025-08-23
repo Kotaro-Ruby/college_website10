@@ -5,6 +5,18 @@ puts "Updating Australian university images from WikiCommons..."
 
 # 画像データ（WikiCommons APIで取得済みのもの）
 image_updates = {
+  "Monash University" => {
+    images: [
+      "/images/au/universities/monash-university.jpg",
+      "/images/au/universities/monash-university-2.jpg",
+      "/images/au/universities/monash-university-3.jpg"
+    ],
+    credits: [
+      "Photo by Devesh Thapa on Unsplash",
+      "Photo from Wikimedia Commons",
+      "Photo from Wikimedia Commons"
+    ]
+  },
   "Charles Sturt University" => {
     images: [
       "/images/au/universities/charles-sturt-university.jpg",
