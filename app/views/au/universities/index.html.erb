@@ -1829,14 +1829,19 @@ function initializeFilters() {
       const url = new URL(window.location);
       url.searchParams.set('sort', this.value);
       
-      fetch(url.toString(), {
-        headers: {
-          'Accept': 'text/html',
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      })
-      .then(response => response.text())
-      .then(html => {
+      // Turboを使用してページ遷移
+      if (window.Turbo) {
+        Turbo.visit(url.toString());
+      } else {
+        // Turboが無い場合はfetchを使用
+        fetch(url.toString(), {
+          headers: {
+            'Accept': 'text/html',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(response => response.text())
+        .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
@@ -1856,6 +1861,7 @@ function initializeFilters() {
           initializeImageSliders();
         }, 100);
       });
+      }
     });
   }
   
