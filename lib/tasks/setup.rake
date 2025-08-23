@@ -55,6 +55,9 @@ namespace :setup do
     if Rails.env.production?
       puts "🔧 Ensuring image URLs are production-ready..."
       load Rails.root.join('db/seeds/fix_au_image_urls.rb')
+      
+      puts "🖼️ Updating WikiCommons images for AU universities..."
+      load Rails.root.join('db/seeds/update_au_wiki_images.rb')
     end
     
     # 7. Run any custom setup scripts
