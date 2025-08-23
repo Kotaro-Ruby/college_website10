@@ -1882,8 +1882,14 @@ function initializeSortSelect() {
         // 大学リストの部分を更新
         const newGrid = doc.querySelector('.universities-grid');
         const currentGrid = document.querySelector('.universities-grid');
+        console.log('New grid found:', !!newGrid);
+        console.log('Current grid found:', !!currentGrid);
         if (newGrid && currentGrid) {
+          console.log('Updating grid with', newGrid.children.length, 'items');
           currentGrid.innerHTML = newGrid.innerHTML;
+          console.log('Grid updated');
+        } else {
+          console.error('Grid elements not found');
         }
         
         // 結果数を更新
