@@ -2,3 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers/index"
 import "header_dropdown"
+
+// English Conversation page specific
+if (window.location.pathname === '/english_conversation') {
+  import("english_conversation")
+}

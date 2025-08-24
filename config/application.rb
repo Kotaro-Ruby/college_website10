@@ -6,6 +6,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Explicitly require gemini-ai
+require 'gemini-ai'
+
 module CollegeWebsite
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

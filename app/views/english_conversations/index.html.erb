@@ -1,0 +1,1675 @@
+<% content_for :title do %>English Conversation Practice - College Spark<% end %>
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+<% end %>
+
+<div class="english-conversation-container">
+  <div class="ec-container">
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+      <button id="lang-en" class="lang-btn active">EN</button>
+      <button id="lang-ja" class="lang-btn">日本語</button>
+    </div>
+    
+    <h1 class="ec-title" data-en="English Conversation Practice" data-ja="英会話練習">English Conversation Practice</h1>
+    
+    <!-- Situation Selector -->
+    <div class="situation-selector">
+      <h3 class="selector-title" data-en="Choose a Situation:" data-ja="シチュエーションを選択:">Choose a Situation:</h3>
+      <div class="situation-cards">
+        <div class="situation-card" data-situation="free">
+          <div class="card-icon">💬</div>
+          <div class="card-title" data-en="Free Talk" data-ja="フリートーク">Free Talk</div>
+          <div class="card-description" data-en="Open conversation on any topic" data-ja="自由な話題で会話">Open conversation on any topic</div>
+        </div>
+        <div class="situation-card" data-situation="restaurant">
+          <div class="card-icon">🍽️</div>
+          <div class="card-title" data-en="Restaurant" data-ja="レストラン">Restaurant</div>
+          <div class="card-description" data-en="Ordering food and dining out" data-ja="注文や外食の場面">Ordering food and dining out</div>
+        </div>
+        <div class="situation-card" data-situation="shopping">
+          <div class="card-icon">🛍️</div>
+          <div class="card-title" data-en="Shopping" data-ja="ショッピング">Shopping</div>
+          <div class="card-description" data-en="Buying items at a store" data-ja="店での買い物">Buying items at a store</div>
+        </div>
+        <div class="situation-card" data-situation="airport">
+          <div class="card-icon">✈️</div>
+          <div class="card-title" data-en="Airport & Travel" data-ja="空港・旅行">Airport & Travel</div>
+          <div class="card-description" data-en="Check-in and travel situations" data-ja="チェックインや旅行の場面">Check-in and travel situations</div>
+        </div>
+        <div class="situation-card" data-situation="job-interview">
+          <div class="card-icon">💼</div>
+          <div class="card-title" data-en="Job Interview" data-ja="就職面接">Job Interview</div>
+          <div class="card-description" data-en="Professional interview practice" data-ja="プロフェッショナルな面接練習">Professional interview practice</div>
+        </div>
+        <div class="situation-card" data-situation="hotel">
+          <div class="card-icon">🏨</div>
+          <div class="card-title" data-en="Hotel" data-ja="ホテル">Hotel</div>
+          <div class="card-description" data-en="Booking and staying at hotels" data-ja="予約とホテル滞在">Booking and staying at hotels</div>
+        </div>
+        <div class="situation-card" data-situation="doctor">
+          <div class="card-icon">🏥</div>
+          <div class="card-title" data-en="Doctor's Office" data-ja="病院">Doctor's Office</div>
+          <div class="card-description" data-en="Medical appointments" data-ja="医療機関での会話">Medical appointments</div>
+        </div>
+        <div class="situation-card" data-situation="school">
+          <div class="card-icon">🎓</div>
+          <div class="card-title" data-en="School/University" data-ja="学校・大学">School/University</div>
+          <div class="card-description" data-en="Academic conversations" data-ja="学術的な会話">Academic conversations</div>
+        </div>
+      </div>
+      <div class="current-situation">
+        <span class="current-label" data-en="Current situation:" data-ja="現在のシチュエーション:">Current situation:</span>
+        <span id="current-situation-text" class="current-text" data-en="None selected" data-ja="未選択">None selected</span>
+      </div>
+    </div>
+    
+    <div class="conversation-area" id="conversation-area">
+      <div id="conversation-history">
+        <% if @conversation_history.present? %>
+          <% @conversation_history.each do |exchange| %>
+            <div class="message-pair">
+              <div class="user-message">
+                <span class="message-label user-label">You:</span>
+                <span class="message-text"><%= exchange[:user] %></span>
+              </div>
+              <div class="assistant-message">
+                <span class="message-label assistant-label">Tutor:</span>
+                <span class="message-text"><%= exchange[:assistant] %></span>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="welcome-message">
+            <p class="welcome-title" data-en="Welcome to English Conversation Practice!" data-ja="英会話練習へようこそ！">Welcome to English Conversation Practice!</p>
+            <p class="welcome-subtitle" data-en="Please select a situation above to begin your practice." data-ja="上記からシチュエーションを選択して練習を始めてください。">Please select a situation above to begin your practice.</p>
+          </div>
+        <% end %>
+      </div>
+      
+      <div id="current-transcript" class="current-transcript hidden">
+        <span class="transcript-label">Listening...</span>
+        <p id="transcript-text" class="transcript-text"></p>
+      </div>
+    </div>
+    
+    <div class="controls-area">
+      <!-- Mode Toggle -->
+      <div class="mode-toggle">
+        <button id="voice-mode" class="mode-btn active" data-en="🎤 Voice Mode" data-ja="🎤 音声モード">🎤 Voice Mode</button>
+        <button id="silent-mode" class="mode-btn" data-en="⌨️ Silent Mode" data-ja="⌨️ サイレントモード">⌨️ Silent Mode</button>
+      </div>
+      
+      <!-- Voice Input Controls -->
+      <div id="voice-controls" class="input-controls">
+        <div class="button-group">
+          <button id="mic-button" class="mic-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mic-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+            </svg>
+          </button>
+          
+          <button id="clear-button" class="clear-button" data-en="Clear History" data-ja="履歴をクリア">
+            Clear History
+          </button>
+        </div>
+      </div>
+      
+      <!-- Text Input Controls -->
+      <div id="text-controls" class="input-controls hidden">
+        <div class="text-input-group">
+          <input type="text" id="text-input" class="text-input" placeholder="Type your message here..." data-placeholder-en="Type your message here..." data-placeholder-ja="メッセージを入力してください...">
+          <button id="send-button" class="send-button" data-en="Send" data-ja="送信">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="send-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+            </svg>
+          </button>
+        </div>
+        <div class="silent-options">
+          <label class="sound-toggle">
+            <input type="checkbox" id="sound-enabled">
+            <span data-en="🔊 Play responses" data-ja="🔊 音声再生">🔊 Play responses</span>
+          </label>
+          <button id="clear-button-text" class="clear-button" data-en="Clear History" data-ja="履歴をクリア">
+            Clear History
+          </button>
+        </div>
+      </div>
+      
+      <div class="status-area">
+        <p id="status-message" class="status-message"></p>
+      </div>
+      
+      <div id="browser-notice" class="browser-notice hidden">
+        <p data-en="Your browser doesn't support speech recognition. Please use Chrome, Edge, or Safari." data-ja="あなたのブラウザは音声認識をサポートしていません。Chrome、Edge、またはSafariをお使いください。">Your browser doesn't support speech recognition. Please use Chrome, Edge, or Safari.</p>
+      </div>
+    </div>
+    
+    <div class="tips-section">
+      <h3 class="tips-title" data-en="Tips for Practice:" data-ja="練習のコツ:">Tips for Practice:</h3>
+      <ul class="tips-list">
+        <li data-en="Speak clearly and at a natural pace" data-ja="はっきりと自然なペースで話しましょう">Speak clearly and at a natural pace</li>
+        <li data-en="Try to use complete sentences" data-ja="完全な文章で話してみましょう">Try to use complete sentences</li>
+        <li data-en="Don't worry about making mistakes - the tutor will help you" data-ja="間違えても心配ありません - チューターがサポートします">Don't worry about making mistakes - the tutor will help you</li>
+        <li data-en="Practice common topics like introducing yourself, hobbies, or daily activities" data-ja="自己紹介、趣味、日常活動などの一般的なトピックを練習しましょう">Practice common topics like introducing yourself, hobbies, or daily activities</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Modal Popup -->
+<div id="confirmation-modal" class="modal-overlay hidden">
+  <div class="modal-content modal-content-extended">
+    <div class="modal-icon">🎭</div>
+    <h3 class="modal-title" data-en="Start New Conversation" data-ja="新しい会話を開始">Start New Conversation</h3>
+    <p class="modal-message" data-en="Choose your preferred input mode:" data-ja="入力モードを選択してください:">Choose your preferred input mode:</p>
+    
+    <!-- Mode Selection in Modal -->
+    <div class="modal-mode-selection">
+      <label class="modal-mode-option">
+        <input type="radio" name="modal-mode" value="voice" checked>
+        <div class="modal-mode-card">
+          <span class="mode-icon">🎤</span>
+          <span class="mode-label" data-en="Voice Mode" data-ja="音声モード">Voice Mode</span>
+          <span class="mode-desc" data-en="Speak naturally" data-ja="自然に話す">Speak naturally</span>
+        </div>
+      </label>
+      <label class="modal-mode-option">
+        <input type="radio" name="modal-mode" value="silent">
+        <div class="modal-mode-card">
+          <span class="mode-icon">⌨️</span>
+          <span class="mode-label" data-en="Silent Mode" data-ja="サイレントモード">Silent Mode</span>
+          <span class="mode-desc" data-en="Type your messages" data-ja="メッセージを入力">Type your messages</span>
+        </div>
+      </label>
+    </div>
+    
+    <p class="modal-note" data-en="Note: This will clear your current conversation." data-ja="注意: 現在の会話はクリアされます。">Note: This will clear your current conversation.</p>
+    
+    <div class="modal-buttons">
+      <button id="modal-cancel" class="modal-btn modal-btn-cancel" data-en="Cancel" data-ja="キャンセル">Cancel</button>
+      <button id="modal-confirm" class="modal-btn modal-btn-confirm" data-en="Start" data-ja="開始">Start</button>
+    </div>
+  </div>
+</div>
+
+<!-- Clear History Modal -->
+<div id="clear-modal" class="modal-overlay hidden">
+  <div class="modal-content">
+    <div class="modal-icon">🗑️</div>
+    <h3 class="modal-title" data-en="Clear Conversation?" data-ja="会話をクリアしますか？">Clear Conversation?</h3>
+    <p class="modal-message" data-en="Are you sure you want to clear the conversation history?" data-ja="会話履歴をクリアしてもよろしいですか？">Are you sure you want to clear the conversation history?</p>
+    <div class="modal-buttons">
+      <button id="clear-cancel" class="modal-btn modal-btn-cancel" data-en="Cancel" data-ja="キャンセル">Cancel</button>
+      <button id="clear-confirm" class="modal-btn modal-btn-confirm" data-en="Clear" data-ja="クリア">Clear</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .english-conversation-container {
+    min-height: calc(100vh - 160px);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px 20px;
+  }
+  
+  .ec-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .ec-title {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .conversation-area {
+    background: #f0f2f5;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  
+  .conversation-area::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .conversation-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .conversation-area::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  .conversation-area::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .message-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-message, .assistant-message {
+    max-width: 70%;
+    word-wrap: break-word;
+    padding: 10px 15px;
+    border-radius: 18px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+    background: #007aff;
+    color: white;
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .assistant-message {
+    align-self: flex-start;
+    background: white;
+    color: #1f2937;
+    border-radius: 18px 18px 18px 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .message-label {
+    display: none;
+  }
+  
+  .message-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .welcome-message {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .welcome-title {
+    color: #6b7280;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-subtitle {
+    color: #9ca3af;
+    font-size: 1rem;
+  }
+  
+  .current-transcript {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f3f4f6;
+    border-radius: 10px;
+  }
+  
+  .current-transcript.hidden {
+    display: none;
+  }
+  
+  .transcript-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .transcript-text {
+    color: #111827;
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+  
+  .controls-area {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .mic-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+  }
+  
+  .mic-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+  }
+  
+  .mic-button.recording {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    animation: pulse 1.5s infinite;
+  }
+  
+  .mic-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 30px rgba(239, 68, 68, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+  }
+  
+  .clear-button {
+    padding: 12px 24px;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .clear-button:hover {
+    background: #4b5563;
+    transform: translateY(-2px);
+  }
+  
+  .status-area {
+    text-align: center;
+  }
+  
+  .status-message {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+  
+  .browser-notice {
+    text-align: center;
+    padding: 15px;
+    background: #fee2e2;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .browser-notice.hidden {
+    display: none;
+  }
+  
+  .browser-notice p {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  
+  .tips-section {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  
+  .tips-title {
+    color: #111827;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .tips-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #4b5563;
+    line-height: 1.8;
+  }
+  
+  .tips-list li {
+    margin-bottom: 8px;
+  }
+  
+  /* Situation Selector Styles */
+  .situation-selector {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  
+  .selector-title {
+    color: #111827;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .situation-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .situation-card {
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .situation-card:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .situation-card.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+  }
+  
+  .situation-card.active .card-title,
+  .situation-card.active .card-description {
+    color: white;
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+  
+  .card-description {
+    font-size: 0.75rem;
+    color: #6b7280;
+    line-height: 1.3;
+  }
+  
+  .current-situation {
+    padding: 12px 20px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .current-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .current-text {
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  @media (max-width: 768px) {
+    .ec-title {
+      font-size: 2rem;
+    }
+    
+    .conversation-area {
+      padding: 20px;
+      min-height: 300px;
+      max-height: 400px;
+    }
+    
+    .controls-area, .tips-section, .situation-selector {
+      padding: 20px;
+    }
+    
+    .mic-button {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .mic-icon {
+      width: 35px;
+      height: 35px;
+    }
+    
+    .situation-cards {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+    
+    .situation-card {
+      padding: 10px;
+    }
+    
+    .card-icon {
+      font-size: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 0.85rem;
+    }
+    
+    .card-description {
+      font-size: 0.7rem;
+    }
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  .modal-overlay.hidden {
+    display: none;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .modal-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .modal-title {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .modal-message {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content-extended {
+    max-width: 500px;
+  }
+  
+  /* Modal Mode Selection Styles */
+  .modal-mode-selection {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-mode-option {
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .modal-mode-option input[type="radio"] {
+    display: none;
+  }
+  
+  .modal-mode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .modal-mode-option input[type="radio"]:checked + .modal-mode-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+  }
+  
+  .modal-mode-option input[type="radio"]:checked + .modal-mode-card .mode-label,
+  .modal-mode-option input[type="radio"]:checked + .modal-mode-card .mode-desc {
+    color: white;
+  }
+  
+  .modal-mode-card:hover {
+    border-color: #9ca3af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .mode-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  
+  .mode-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+  
+  .mode-desc {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  
+  .modal-note {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .modal-btn {
+    padding: 12px 30px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+  }
+  
+  .modal-btn-cancel {
+    background: #f3f4f6;
+    color: #4b5563;
+  }
+  
+  .modal-btn-cancel:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+  }
+  
+  .modal-btn-confirm {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+  
+  .modal-btn-confirm:hover {
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 20px;
+    }
+    
+    .modal-icon {
+      font-size: 2.5rem;
+    }
+    
+    .modal-title {
+      font-size: 1.25rem;
+    }
+    
+    .modal-message {
+      font-size: 0.9rem;
+    }
+    
+    .modal-mode-selection {
+      flex-direction: column;
+    }
+    
+    .modal-mode-card {
+      padding: 15px;
+    }
+    
+    .mode-icon {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* Language Toggle Styles */
+  .language-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+    background: white;
+    border-radius: 25px;
+    padding: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .lang-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .lang-btn:hover {
+    background: #f3f4f6;
+  }
+  
+  .lang-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .language-toggle {
+      top: 5px;
+      right: 5px;
+    }
+    
+    .lang-btn {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+    
+    .ec-title {
+      margin-top: 60px;
+      font-size: 1.8rem;
+    }
+  }
+  
+  /* Mode Toggle Styles */
+  .mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .mode-btn {
+    padding: 10px 20px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    border-radius: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+  
+  .mode-btn:hover {
+    background: #f3f4f6;
+  }
+  
+  .mode-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+  }
+  
+  /* Input Controls */
+  .input-controls {
+    transition: all 0.3s ease;
+  }
+  
+  .input-controls.hidden {
+    display: none;
+  }
+  
+  /* Text Input Styles */
+  .text-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  
+  .text-input {
+    flex: 1;
+    max-width: 500px;
+    padding: 12px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .text-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  .send-button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  
+  .send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  }
+  
+  .send-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #clear-button-text {
+    display: inline-block;
+  }
+  
+  .silent-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .sound-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #4b5563;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+  
+  .sound-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .sound-toggle:hover {
+    color: #111827;
+  }
+  
+  @media (max-width: 768px) {
+    .mode-toggle {
+      flex-direction: column;
+    }
+    
+    .mode-btn {
+      width: 100%;
+    }
+    
+    .text-input-group {
+      flex-direction: column;
+    }
+    
+    .text-input {
+      max-width: 100%;
+    }
+    
+    .send-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+// Complete inline implementation
+(function() {
+  'use strict';
+  
+  console.log('Starting inline English Conversation script');
+  
+  // Global state
+  window.ECInline = window.ECInline || {
+    currentSituation: null,
+    pendingCard: null,
+    currentMode: 'voice',
+    currentLanguage: 'en',
+    recognition: null,
+    isRecording: false,
+    finalTranscript: ''
+  };
+  
+  function initInline() {
+    console.log('Initializing inline handlers');
+    
+    const container = document.querySelector('.english-conversation-container');
+    if (!container) {
+      console.log('Container not found');
+      return;
+    }
+    
+    // Initialize speech recognition
+    initSpeechRecognition();
+    
+    // Language buttons
+    const langEn = document.getElementById('lang-en');
+    const langJa = document.getElementById('lang-ja');
+    
+    if (langEn) {
+      langEn.onclick = function(e) {
+        e.preventDefault();
+        console.log('English button clicked');
+        switchLanguage('en');
+      };
+    }
+    
+    if (langJa) {
+      langJa.onclick = function(e) {
+        e.preventDefault();
+        console.log('Japanese button clicked');
+        switchLanguage('ja');
+      };
+    }
+    
+    // Mode buttons
+    const voiceMode = document.getElementById('voice-mode');
+    const silentMode = document.getElementById('silent-mode');
+    
+    if (voiceMode) {
+      voiceMode.onclick = function(e) {
+        e.preventDefault();
+        console.log('Voice mode clicked');
+        switchToVoiceMode();
+      };
+    }
+    
+    if (silentMode) {
+      silentMode.onclick = function(e) {
+        e.preventDefault();
+        console.log('Silent mode clicked');
+        switchToSilentMode();
+      };
+    }
+    
+    // Situation cards
+    document.querySelectorAll('.situation-card').forEach(card => {
+      card.onclick = function(e) {
+        e.preventDefault();
+        console.log('Situation card clicked:', this.dataset.situation);
+        handleSituationClick(this);
+      };
+    });
+    
+    // Modal buttons
+    const modalCancel = document.getElementById('modal-cancel');
+    const modalConfirm = document.getElementById('modal-confirm');
+    
+    if (modalCancel) {
+      modalCancel.onclick = function(e) {
+        e.preventDefault();
+        console.log('Modal cancel clicked');
+        hideModal();
+      };
+    }
+    
+    if (modalConfirm) {
+      modalConfirm.onclick = function(e) {
+        e.preventDefault();
+        console.log('Modal confirm clicked');
+        confirmSituationChange();
+      };
+    }
+    
+    // Modal background click
+    const modal = document.getElementById('confirmation-modal');
+    if (modal) {
+      modal.onclick = function(e) {
+        if (e.target === this) {
+          hideModal();
+        }
+      };
+    }
+    
+    // Clear button and modal
+    const clearButton = document.getElementById('clear-button');
+    const clearButtonText = document.getElementById('clear-button-text');
+    const clearModal = document.getElementById('clear-modal');
+    const clearCancel = document.getElementById('clear-cancel');
+    const clearConfirm = document.getElementById('clear-confirm');
+    
+    if (clearButton) {
+      clearButton.onclick = function(e) {
+        e.preventDefault();
+        console.log('Clear button clicked');
+        showClearModal();
+      };
+    }
+    
+    if (clearButtonText) {
+      clearButtonText.onclick = function(e) {
+        e.preventDefault();
+        console.log('Clear button text clicked');
+        showClearModal();
+      };
+    }
+    
+    if (clearCancel) {
+      clearCancel.onclick = function(e) {
+        e.preventDefault();
+        hideClearModal();
+      };
+    }
+    
+    if (clearConfirm) {
+      clearConfirm.onclick = function(e) {
+        e.preventDefault();
+        clearConversation();
+        hideClearModal();
+      };
+    }
+    
+    if (clearModal) {
+      clearModal.onclick = function(e) {
+        if (e.target === this) {
+          hideClearModal();
+        }
+      };
+    }
+    
+    // Text input and send button for silent mode
+    const textInput = document.getElementById('text-input');
+    const sendButton = document.getElementById('send-button');
+    
+    if (textInput) {
+      textInput.onkeypress = function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendTextMessage();
+        }
+      };
+    }
+    
+    if (sendButton) {
+      sendButton.onclick = function(e) {
+        e.preventDefault();
+        console.log('Send button clicked');
+        sendTextMessage();
+      };
+    }
+    
+    // Mic button with speech recognition
+    const micButton = document.getElementById('mic-button');
+    if (micButton) {
+      micButton.onclick = function(e) {
+        e.preventDefault();
+        console.log('Mic button clicked');
+        toggleRecording();
+      };
+    }
+    
+    console.log('All inline handlers attached');
+  }
+  
+  function switchLanguage(lang) {
+    window.ECInline.currentLanguage = lang;
+    
+    const langEnBtn = document.getElementById('lang-en');
+    const langJaBtn = document.getElementById('lang-ja');
+    
+    if (lang === 'en') {
+      if (langEnBtn) langEnBtn.classList.add('active');
+      if (langJaBtn) langJaBtn.classList.remove('active');
+    } else {
+      if (langEnBtn) langEnBtn.classList.remove('active');
+      if (langJaBtn) langJaBtn.classList.add('active');
+    }
+    
+    document.querySelectorAll('[data-en][data-ja]').forEach(element => {
+      const text = element.getAttribute(`data-${lang}`);
+      if (text) element.textContent = text;
+    });
+    
+    const textInput = document.getElementById('text-input');
+    if (textInput) {
+      const placeholderText = lang === 'en' 
+        ? textInput.getAttribute('data-placeholder-en')
+        : textInput.getAttribute('data-placeholder-ja');
+      if (placeholderText) {
+        textInput.placeholder = placeholderText;
+      }
+    }
+  }
+  
+  function switchToVoiceMode() {
+    window.ECInline.currentMode = 'voice';
+    const voiceModeBtn = document.getElementById('voice-mode');
+    const silentModeBtn = document.getElementById('silent-mode');
+    const voiceControls = document.getElementById('voice-controls');
+    const textControls = document.getElementById('text-controls');
+    
+    if (voiceModeBtn) voiceModeBtn.classList.add('active');
+    if (silentModeBtn) silentModeBtn.classList.remove('active');
+    if (voiceControls) voiceControls.classList.remove('hidden');
+    if (textControls) textControls.classList.add('hidden');
+  }
+  
+  function switchToSilentMode() {
+    window.ECInline.currentMode = 'silent';
+    const silentModeBtn = document.getElementById('silent-mode');
+    const voiceModeBtn = document.getElementById('voice-mode');
+    const textControls = document.getElementById('text-controls');
+    const voiceControls = document.getElementById('voice-controls');
+    
+    if (silentModeBtn) silentModeBtn.classList.add('active');
+    if (voiceModeBtn) voiceModeBtn.classList.remove('active');
+    if (textControls) textControls.classList.remove('hidden');
+    if (voiceControls) voiceControls.classList.add('hidden');
+  }
+  
+  function handleSituationClick(card) {
+    if (card.classList.contains('active')) {
+      return;
+    }
+    
+    window.ECInline.pendingCard = card;
+    
+    const modal = document.getElementById('confirmation-modal');
+    if (modal) {
+      // Set current mode as default in modal
+      const modeRadios = document.querySelectorAll('input[name="modal-mode"]');
+      modeRadios.forEach(radio => {
+        radio.checked = radio.value === window.ECInline.currentMode;
+      });
+      modal.classList.remove('hidden');
+    }
+  }
+  
+  function hideModal() {
+    const modal = document.getElementById('confirmation-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+    window.ECInline.pendingCard = null;
+  }
+  
+  function confirmSituationChange() {
+    if (window.ECInline.pendingCard) {
+      const selectedModeRadio = document.querySelector('input[name="modal-mode"]:checked');
+      const selectedMode = selectedModeRadio ? selectedModeRadio.value : 'voice';
+      
+      // Remove active from all cards
+      document.querySelectorAll('.situation-card').forEach(c => c.classList.remove('active'));
+      
+      // Add active to selected card
+      window.ECInline.pendingCard.classList.add('active');
+      
+      // Update situation
+      window.ECInline.currentSituation = window.ECInline.pendingCard.dataset.situation;
+      
+      // Update situation text
+      const currentSituationText = document.getElementById('current-situation-text');
+      if (currentSituationText) {
+        const cardTitle = window.ECInline.pendingCard.querySelector('.card-title');
+        if (cardTitle) {
+          currentSituationText.textContent = cardTitle.textContent;
+        }
+      }
+      
+      // Apply selected mode
+      if (selectedMode === 'voice') {
+        switchToVoiceMode();
+      } else {
+        switchToSilentMode();
+      }
+      
+      // Clear conversation and get initial message
+      clearConversation(false);
+      getInitialMessage(window.ECInline.currentSituation);
+    }
+    
+    hideModal();
+  }
+  
+  function showClearModal() {
+    const modal = document.getElementById('clear-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+    }
+  }
+  
+  function hideClearModal() {
+    const modal = document.getElementById('clear-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+  
+  function clearConversation(showWelcome = true) {
+    const conversationHistory = document.getElementById('conversation-history');
+    if (!conversationHistory) return;
+    
+    if (showWelcome) {
+      const welcomeTitle = window.ECInline.currentLanguage === 'ja' 
+        ? '英会話練習へようこそ！' 
+        : 'Welcome to English Conversation Practice!';
+      const welcomeSubtitle = window.ECInline.currentLanguage === 'ja'
+        ? '上記からシチュエーションを選択して練習を始めてください。'
+        : 'Please select a situation above to begin your practice.';
+      
+      conversationHistory.innerHTML = `
+        <div class="welcome-message">
+          <p class="welcome-title">${welcomeTitle}</p>
+          <p class="welcome-subtitle">${welcomeSubtitle}</p>
+        </div>
+      `;
+    } else {
+      conversationHistory.innerHTML = '';
+    }
+    
+    // Clear server session
+    fetch('/english_conversation/clear', {
+      method: 'POST',
+      headers: {
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      }
+    });
+  }
+  
+  function getInitialMessage(situation) {
+    const statusMessage = document.getElementById('status-message');
+    if (statusMessage) statusMessage.textContent = 'Processing...';
+    
+    fetch('/english_conversation/initial', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ situation: situation })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const conversationHistory = document.getElementById('conversation-history');
+      if (conversationHistory) {
+        conversationHistory.innerHTML = `
+          <div class="message-pair">
+            <div class="assistant-message">
+              <span class="message-label assistant-label">Tutor:</span>
+              <span class="message-text">${escapeHtml(data.response)}</span>
+            </div>
+          </div>
+        `;
+      }
+      if (statusMessage) statusMessage.textContent = '';
+      
+      // Play audio response
+      playAudioResponse(data.response);
+    })
+    .catch(error => {
+      console.error('Error getting initial message:', error);
+      if (statusMessage) statusMessage.textContent = '';
+    });
+  }
+  
+  // Audio playback function
+  function playAudioResponse(text) {
+    // Check if sound is enabled in silent mode
+    if (window.ECInline.currentMode === 'silent') {
+      const soundEnabled = document.getElementById('sound-enabled');
+      if (soundEnabled && !soundEnabled.checked) {
+        console.log('Sound disabled in silent mode');
+        return;
+      }
+    }
+    
+    console.log('Playing audio for:', text);
+    
+    // Use Google TTS as primary
+    console.log('Calling Google TTS');
+    fetch('/english_conversation/tts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ text: text })
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error('TTS server error:', response.status);
+        throw new Error('TTS server error');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.audio) {
+        console.log('Playing Google TTS audio');
+        const audio = new Audio('data:audio/mp3;base64,' + data.audio);
+        audio.play()
+          .then(() => {
+            console.log('Audio playback started successfully');
+          })
+          .catch(e => {
+            console.error('Error playing audio:', e);
+            // Fallback to browser TTS if audio playback fails
+            useBrowserTTS(text);
+          });
+      } else if (data.error) {
+        console.error('TTS error from server:', data.error);
+        // Fallback to browser TTS
+        useBrowserTTS(text);
+      }
+    })
+    .catch(error => {
+      console.error('TTS fetch error:', error);
+      // Fallback to browser TTS
+      useBrowserTTS(text);
+    });
+  }
+  
+  // Browser TTS fallback function
+  function useBrowserTTS(text) {
+    if ('speechSynthesis' in window) {
+      console.log('Using browser TTS as fallback');
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+      
+      // Try to find a good English voice
+      const voices = speechSynthesis.getVoices();
+      const englishVoice = voices.find(voice => 
+        voice.lang.startsWith('en') && voice.name.includes('Female')
+      ) || voices.find(voice => voice.lang.startsWith('en'));
+      
+      if (englishVoice) {
+        utterance.voice = englishVoice;
+      }
+      
+      speechSynthesis.speak(utterance);
+    } else {
+      console.log('No TTS available');
+    }
+  }
+  
+  function sendTextMessage() {
+    const textInput = document.getElementById('text-input');
+    if (!textInput) return;
+    
+    const text = textInput.value.trim();
+    if (!text) return;
+    
+    textInput.value = '';
+    processUserInput(text);
+  }
+  
+  function processUserInput(text) {
+    const statusMessage = document.getElementById('status-message');
+    const conversationHistory = document.getElementById('conversation-history');
+    
+    if (statusMessage) statusMessage.textContent = 'Processing...';
+    
+    // Add user message
+    const welcomeMessage = conversationHistory.querySelector('.welcome-message');
+    if (welcomeMessage) welcomeMessage.remove();
+    
+    const userMessageId = 'msg-' + Date.now();
+    conversationHistory.innerHTML += `
+      <div class="message-pair" id="${userMessageId}">
+        <div class="user-message">
+          <span class="message-label user-label">You:</span>
+          <span class="message-text">${escapeHtml(text)}</span>
+        </div>
+      </div>
+    `;
+    
+    // Send to server
+    fetch('/english_conversation/speech', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ 
+        text: text,
+        situation: window.ECInline.currentSituation 
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const messagePair = document.getElementById(userMessageId);
+      if (messagePair && data.response) {
+        messagePair.innerHTML += `
+          <div class="assistant-message">
+            <span class="message-label assistant-label">Tutor:</span>
+            <span class="message-text">${escapeHtml(data.response)}</span>
+          </div>
+        `;
+        
+        // Play audio response
+        playAudioResponse(data.response);
+      }
+      if (statusMessage) statusMessage.textContent = '';
+    })
+    .catch(error => {
+      console.error('Error processing input:', error);
+      if (statusMessage) statusMessage.textContent = 'Error processing request';
+    });
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // Speech recognition functions
+  function initSpeechRecognition() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      console.log('Speech recognition not supported');
+      const browserNotice = document.getElementById('browser-notice');
+      if (browserNotice) browserNotice.classList.remove('hidden');
+      return;
+    }
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.ECInline.recognition = new SpeechRecognition();
+    
+    window.ECInline.recognition.continuous = true;
+    window.ECInline.recognition.interimResults = true;
+    window.ECInline.recognition.lang = 'en-US';
+    
+    window.ECInline.recognition.onstart = function() {
+      window.ECInline.isRecording = true;
+      window.ECInline.finalTranscript = '';
+      const micButton = document.getElementById('mic-button');
+      const statusMessage = document.getElementById('status-message');
+      const currentTranscript = document.getElementById('current-transcript');
+      
+      if (micButton) micButton.classList.add('recording');
+      if (statusMessage) statusMessage.textContent = 'Listening... Speak now';
+      if (currentTranscript) currentTranscript.classList.remove('hidden');
+    };
+    
+    window.ECInline.recognition.onend = function() {
+      window.ECInline.isRecording = false;
+      const micButton = document.getElementById('mic-button');
+      const statusMessage = document.getElementById('status-message');
+      const currentTranscript = document.getElementById('current-transcript');
+      
+      if (micButton) micButton.classList.remove('recording');
+      if (statusMessage) statusMessage.textContent = '';
+      if (currentTranscript) currentTranscript.classList.add('hidden');
+      
+      if (window.ECInline.finalTranscript) {
+        processUserInput(window.ECInline.finalTranscript);
+      }
+    };
+    
+    window.ECInline.recognition.onerror = function(event) {
+      console.error('Speech error:', event.error);
+      window.ECInline.isRecording = false;
+      const micButton = document.getElementById('mic-button');
+      const statusMessage = document.getElementById('status-message');
+      
+      if (micButton) micButton.classList.remove('recording');
+      if (statusMessage) {
+        statusMessage.textContent = 'Error: ' + event.error;
+        setTimeout(function() { statusMessage.textContent = ''; }, 3000);
+      }
+    };
+    
+    window.ECInline.recognition.onresult = function(event) {
+      let interimTranscript = '';
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          window.ECInline.finalTranscript += transcript + ' ';
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      
+      const transcriptText = document.getElementById('transcript-text');
+      if (transcriptText) {
+        transcriptText.textContent = window.ECInline.finalTranscript + interimTranscript;
+      }
+    };
+  }
+  
+  function toggleRecording() {
+    if (!window.ECInline.recognition) {
+      alert('Speech recognition is not available in your browser. Please use Chrome or Edge.');
+      return;
+    }
+    
+    if (window.ECInline.isRecording) {
+      window.ECInline.recognition.stop();
+    } else {
+      window.ECInline.recognition.start();
+    }
+  }
+  
+  // Initialize on multiple events
+  function tryInit() {
+    initInline();
+  }
+  
+  // Try immediately
+  tryInit();
+  
+  // Try on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryInit);
+  }
+  
+  // Try on Turbo events
+  document.addEventListener('turbo:load', tryInit);
+  document.addEventListener('turbo:render', tryInit);
+  
+  // Try with delays
+  setTimeout(tryInit, 100);
+  setTimeout(tryInit, 500);
+  setTimeout(tryInit, 1000);
+})();
+</script>
+

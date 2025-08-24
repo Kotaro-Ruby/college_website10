@@ -33,6 +33,10 @@ gem "kaminari"
 gem "sitemap_generator"
 gem "bcrypt", "~> 3.1.7"
 
+# API integrations for English Conversation
+gem "gemini-ai", require: "gemini-ai"  # For Google Gemini API
+gem "google-cloud-text_to_speech"  # For Google TTS
+
 
 
 

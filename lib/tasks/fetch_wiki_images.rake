@@ -62,14 +62,14 @@ namespace :wiki do
             end
           end
           
-          return { images: images, credits: credits }
+          { images: images, credits: credits }
         else
           puts "  Error: HTTP #{response.code}"
-          return { images: [], credits: [] }
+          { images: [], credits: [] }
         end
       rescue => e
         puts "  Error fetching images: #{e.message}"
-        return { images: [], credits: [] }
+        { images: [], credits: [] }
       end
     end
 
@@ -91,14 +91,14 @@ namespace :wiki do
           end
           
           puts "    Saved: #{filename}"
-          return true
+          true
         else
           puts "    Failed to download: HTTP #{response.code}"
-          return false
+          false
         end
       rescue => e
         puts "    Error downloading: #{e.message}"
-        return false
+        false
       end
     end
 
