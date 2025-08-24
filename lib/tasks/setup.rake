@@ -18,8 +18,11 @@ namespace :setup do
     else
       puts "✅ US universities already exist (#{Condition.count} records)"
       
-      # 詳細データが不足している場合は更新
+      # 詳細データが不足している場合は強制更新
       if Condition.where.not(percent_white: nil).count < 100
+        puts "📊 Force updating US universities with all data..."
+        Rake::Task['import:force_update_all'].invoke
+      elsif Condition.where.not(percent_white: nil).count < 4000
         puts "📊 Updating US universities with detailed data..."
         Rake::Task['import:update_detailed_data'].invoke
       end
