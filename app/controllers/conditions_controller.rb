@@ -291,7 +291,7 @@ class ConditionsController < ApplicationController
   end
 
   def fallback_page
-    render plain: "申し訳ありませんが、この大学の詳細ページはまだ作成されていません。", status: :not_found
+    render plain: "申し訳ありませんが、このページはまだ作成されていません。", status: :not_found
   end
 
   private

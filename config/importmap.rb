@@ -8,3 +8,4 @@ pin "controllers/application", to: "controllers/application.js"
 pin "controllers/application_controller", to: "controllers/application_controller.js"
 pin "controllers/hello_controller", to: "controllers/hello_controller.js"
 pin "header_dropdown", preload: true
+pin "english_conversation", preload: true
