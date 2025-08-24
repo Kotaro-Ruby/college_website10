@@ -17,6 +17,12 @@ namespace :setup do
       end
     else
       puts "✅ US universities already exist (#{Condition.count} records)"
+      
+      # 詳細データが不足している場合は更新
+      if Condition.where.not(percent_white: nil).count < 100
+        puts "📊 Updating US universities with detailed data..."
+        Rake::Task['import:update_detailed_data'].invoke
+      end
     end
     
     # 3. Check and import Australian universities
