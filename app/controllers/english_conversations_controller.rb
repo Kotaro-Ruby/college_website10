@@ -120,16 +120,39 @@ class EnglishConversationsController < ApplicationController
   def generate_audio(text)
     require "google/cloud/text_to_speech"
     
-    # JSONファイルから認証情報を読み込む
-    credentials_path = Rails.root.join('config', 'tts-credentials.json')
-    
-    unless File.exist?(credentials_path)
-      Rails.logger.warn "Google TTS credentials file not found - skipping audio generation"
-      return nil
-    end
-    
-    client = Google::Cloud::TextToSpeech.text_to_speech do |config|
-      config.credentials = credentials_path.to_s
+    # Try environment variable first (for production)
+    if ENV['GOOGLE_TTS_CREDENTIALS']
+      Rails.logger.info "Using TTS credentials from environment variable"
+      
+      # Create a temporary file with credentials from environment
+      require 'tempfile'
+      temp_file = Tempfile.new(['tts-credentials', '.json'])
+      begin
+        # Parse the JSON string from environment variable
+        creds_json = ENV['GOOGLE_TTS_CREDENTIALS']
+        temp_file.write(creds_json)
+        temp_file.rewind
+        
+        client = Google::Cloud::TextToSpeech.text_to_speech do |config|
+          config.credentials = temp_file.path
+        end
+      ensure
+        temp_file.close
+        temp_file.unlink
+      end
+    else
+      # Fallback to JSON file (for development)
+      credentials_path = Rails.root.join('config', 'tts-credentials.json')
+      
+      unless File.exist?(credentials_path)
+        Rails.logger.warn "Google TTS credentials not found - using browser TTS fallback"
+        return nil
+      end
+      
+      Rails.logger.info "Using TTS credentials from local file"
+      client = Google::Cloud::TextToSpeech.text_to_speech do |config|
+        config.credentials = credentials_path.to_s
+      end
     end
     
     synthesis_input = { text: text }
