@@ -1529,3 +1529,264 @@ input[disabled] + .disabled-label {
 
 
 
+/* Countries Index Page */
+.countries-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.countries-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.country-card {
+  display: block;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, transform 0.3s;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.country-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.country-card-content {
+  padding: 1.5rem;
+}
+
+.country-flag {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.country-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.country-info {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.country-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.country-info-row:last-child {
+  border-bottom: none;
+}
+
+.country-info-label {
+  color: #6b7280;
+}
+
+.country-info-value {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* Countries Show Page */
+.country-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.back-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.country-detail-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.country-header {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 2rem;
+}
+
+.country-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.country-header-info h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.country-header-info .official-name {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.country-header-flag {
+  font-size: 4rem;
+}
+
+.country-body {
+  padding: 2rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-section {
+  margin-bottom: 2rem;
+}
+
+.info-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.info-list {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #1f2937;
+  text-align: right;
+}
+
+.languages-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #1f2937;
+}
+
+.languages-list li {
+  padding: 0.25rem 0;
+}
+
+.timezone-section {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.timezone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.timezone-item {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #1f2937;
+}
+
+.timezone-range {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 1rem;
+}
+
+.university-section {
+  background: #eff6ff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.university-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.university-section p {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.search-button {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background: #1d4ed8;
+}

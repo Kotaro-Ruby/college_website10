@@ -1,6 +1,7 @@
 class Us::HomeController < ApplicationController
   def index
     # アメリカ版のトップページ
-    redirect_to us_universities_path
+    # 既存のアメリカ大学検索ページにリダイレクト
+    redirect_to search_path
   end
 end

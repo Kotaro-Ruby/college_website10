@@ -1,0 +1,304 @@
+<!-- 国の基本情報セクション -->
+<% if country %>
+<style>
+  .country-basic-info {
+    background: white;
+    padding: 60px 20px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .country-basic-info .info-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .country-basic-info .info-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .country-basic-info .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .country-basic-info .info-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+  }
+
+  .country-basic-info .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .country-basic-info .info-icon {
+    font-size: 2rem;
+    color: #0ea5e9;
+    flex-shrink: 0;
+  }
+
+  .country-basic-info .info-content {
+    flex: 1;
+  }
+
+  .country-basic-info .info-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+
+  .country-basic-info .info-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .country-basic-info .country-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .country-basic-info .symbols-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .country-basic-info .symbol-display {
+    text-align: center;
+  }
+
+  .country-basic-info .symbol-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 15px;
+  }
+
+  .country-basic-info .country-flag {
+    max-width: 200px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  }
+
+  .country-basic-info .country-coat-of-arms {
+    max-width: 150px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+  }
+
+  .country-basic-info .map-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .country-basic-info .map-link {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .country-basic-info .map-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+  }
+
+  .country-basic-info .data-credit {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+  }
+
+  .country-basic-info .data-credit p {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  .country-basic-info .data-credit a {
+    color: #0ea5e9;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .country-basic-info .data-credit a:hover {
+    text-decoration: underline;
+    color: #0284c7;
+  }
+
+  .country-basic-info .credit-note {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .country-basic-info .info-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .country-basic-info .country-visual {
+      flex-direction: column;
+    }
+
+    .country-basic-info .credit-note {
+      display: inline-block;
+      margin-top: 0;
+      margin-left: 10px;
+    }
+  }
+</style>
+
+<section class="country-basic-info" id="basic-info">
+  <div class="info-container">
+    <h2 class="info-title">
+      <i class="fas fa-info-circle"></i> <%= country.name %>基本情報
+    </h2>
+    
+    <div class="info-grid">
+      <!-- 首都・地域 -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-city"></i></div>
+        <div class="info-content">
+          <div class="info-label">首都</div>
+          <div class="info-value"><%= country.capital %></div>
+        </div>
+      </div>
+      
+      <!-- 通貨 -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-coins"></i></div>
+        <div class="info-content">
+          <div class="info-label">通貨</div>
+          <div class="info-value">
+            <%= country.currency_name %><br>
+            <small>(<%= country.currency_code %> <%= country.currency_symbol %>)</small>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 公用語 -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-language"></i></div>
+        <div class="info-content">
+          <div class="info-label">公用語</div>
+          <div class="info-value">
+            <% if country.languages.present? %>
+              <%= country.languages.values.join(", ") %>
+            <% else %>
+              英語
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <!-- タイムゾーン -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-clock"></i></div>
+        <div class="info-content">
+          <div class="info-label">タイムゾーン</div>
+          <div class="info-value">
+            <%= country.timezone_range %>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 車両通行 -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-car"></i></div>
+        <div class="info-content">
+          <div class="info-label">車両通行</div>
+          <div class="info-value">
+            <%= country.car_side == "left" ? "左側通行" : "右側通行" %>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 面積 -->
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <div class="info-content">
+          <div class="info-label">面積</div>
+          <div class="info-value">
+            <%= number_to_human(country.area, units: {thousand: "千", million: "百万"}, precision: 1, locale: :en) %> km²
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 国旗と国章と地図リンク -->
+    <div class="country-visual">
+      <div class="symbols-container">
+        <% if country.flag_svg.present? %>
+        <div class="symbol-display">
+          <h4 class="symbol-title">国旗</h4>
+          <img src="<%= country.flag_svg %>" alt="<%= country.name %>国旗" class="country-flag">
+        </div>
+        <% end %>
+        
+        <% if country.coat_of_arms_svg.present? %>
+        <div class="symbol-display">
+          <h4 class="symbol-title">国章</h4>
+          <img src="<%= country.coat_of_arms_svg %>" alt="<%= country.name %>国章" class="country-coat-of-arms">
+        </div>
+        <% end %>
+      </div>
+      
+      <div class="map-links">
+        <% if country.maps_google.present? %>
+          <a href="<%= country.maps_google %>" target="_blank" class="map-link">
+            <i class="fab fa-google"></i> Google Mapsで見る
+          </a>
+        <% end %>
+        <% if country.maps_openstreetmap.present? %>
+          <a href="<%= country.maps_openstreetmap %>" target="_blank" class="map-link">
+            <i class="fas fa-map-marked-alt"></i> OpenStreetMapで見る
+          </a>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- データソースのクレジット -->
+    <div class="data-credit">
+      <p>
+        <i class="fas fa-info-circle"></i>
+        データ提供: <a href="https://restcountries.com" target="_blank" rel="noopener noreferrer">REST Countries API</a>
+        <span class="credit-note">※一部のデータは最新でない場合があります</span>
+      </p>
+    </div>
+  </div>
+</section>
+<% end %>

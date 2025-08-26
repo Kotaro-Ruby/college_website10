@@ -144,6 +144,9 @@ class Au::UniversitiesController < ApplicationController
   end
 
   def about
+    # 国の基本情報を取得
+    @country = Country.find_by(code: 'AU')
+    
     # オーストラリアの大学統計情報
     @total_universities = AuUniversity.count
     @total_courses = AuCourse.count

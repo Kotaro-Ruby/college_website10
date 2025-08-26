@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_21_105601) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_034842) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -274,6 +274,53 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_105601) do
     t.index ["email"], name: "index_consultations_on_email"
     t.index ["preferred_date"], name: "index_consultations_on_preferred_date"
     t.index ["status"], name: "index_consultations_on_status"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "official_name"
+    t.string "capital"
+    t.string "currency_code"
+    t.string "currency_name"
+    t.string "currency_symbol"
+    t.text "languages"
+    t.integer "population"
+    t.string "flag_emoji"
+    t.text "timezones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "area"
+    t.boolean "landlocked"
+    t.text "borders"
+    t.text "alt_spellings"
+    t.string "region"
+    t.string "subregion"
+    t.boolean "un_member"
+    t.boolean "independent"
+    t.string "status"
+    t.float "gini_coefficient"
+    t.integer "gini_year"
+    t.text "car_signs"
+    t.string "car_side"
+    t.string "start_of_week"
+    t.string "coat_of_arms_png"
+    t.string "coat_of_arms_svg"
+    t.string "flag_png"
+    t.string "flag_svg"
+    t.string "flag_alt"
+    t.string "maps_google"
+    t.string "maps_openstreetmap"
+    t.string "fifa_code"
+    t.string "postal_code_format"
+    t.string "postal_code_regex"
+    t.text "demonyms"
+    t.text "translations"
+    t.text "tld"
+    t.string "idd_root"
+    t.text "idd_suffixes"
+    t.text "capital_latlng"
+    t.text "country_latlng"
   end
 
   create_table "detailed_programs", force: :cascade do |t|

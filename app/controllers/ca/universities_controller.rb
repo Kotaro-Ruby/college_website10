@@ -19,6 +19,8 @@ class Ca::UniversitiesController < ApplicationController
   end
 
   def about
+    # 国の基本情報を取得
+    @country = Country.find_by(code: 'CA')
     # カナダの大学についてのページ
     # 静的なページなので特別な処理は不要
   end

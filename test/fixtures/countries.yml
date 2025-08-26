@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  official_name: MyString
+  capital: MyString
+  currency_code: MyString
+  currency_name: MyString
+  currency_symbol: MyString
+  languages: MyText
+  population: 1
+  flag_emoji: MyString
+  timezones: MyText
+
+two:
+  code: MyString
+  name: MyString
+  official_name: MyString
+  capital: MyString
+  currency_code: MyString
+  currency_name: MyString
+  currency_symbol: MyString
+  languages: MyText
+  population: 1
+  flag_emoji: MyString
+  timezones: MyText
