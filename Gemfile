@@ -33,6 +33,11 @@ gem "kaminari"
 gem "sitemap_generator"
 gem "bcrypt", "~> 3.1.7"
 
+# OAuth authentication
+gem "omniauth", "~> 2.1"
+gem "omniauth-google-oauth2", "~> 1.1"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 # API integrations for English Conversation
 gem "gemini-ai", require: "gemini-ai"  # For Google Gemini API
 gem "google-cloud-text_to_speech"  # For Google TTS

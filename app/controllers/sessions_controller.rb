@@ -16,6 +16,16 @@ class SessionsController < ApplicationController
     end
   end
 
+  def google_oauth2
+    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user.persisted?
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Googleアカウントでログインしました"
+    else
+      redirect_to login_path, alert: "ログインに失敗しました"
+    end
+  end
+
   def destroy
     session[:user_id] = nil
     redirect_to root_path, notice: "ログアウトしました"

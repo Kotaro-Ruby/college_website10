@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_034842) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_21_064259) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -371,8 +371,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_034842) do
     t.string "email"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
   create_table "view_histories", force: :cascade do |t|

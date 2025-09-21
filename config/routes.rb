@@ -61,6 +61,10 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
+  
+  # OAuth routes
+  get "/auth/:provider/callback" => "sessions#google_oauth2"
+  get "/auth/failure" => redirect("/login")
 
   # Password reset routes
   resources :password_resets, only: [ :new, :create, :show, :update ]
