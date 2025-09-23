@@ -1,3 +1,4 @@
+
 class AdminController < ApplicationController
   # ⚠️ 警告: このコントローラーは非推奨です ⚠️
   # 新しい管理者認証システムが実装されました。

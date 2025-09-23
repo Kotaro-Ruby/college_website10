@@ -72,6 +72,71 @@ class DebugController < ApplicationController
     TEXT
   end
 
+  def mail_test
+    if params[:secret] != "mailtest2025"
+      render plain: "Unauthorized", status: :unauthorized
+      return
+    end
+
+    result = []
+    result << "=== メール設定診断 ==="
+    result << "環境: #{Rails.env}"
+    result << "ホスト: #{request.host}"
+    result << ""
+    
+    # 環境変数チェック
+    result << "=== 環境変数 ==="
+    result << "GMAIL_USERNAME: #{ENV['GMAIL_USERNAME'].present? ? ENV['GMAIL_USERNAME'] : 'NOT SET'}"
+    result << "GMAIL_APP_PASSWORD: #{ENV['GMAIL_APP_PASSWORD'].present? ? '***' + ENV['GMAIL_APP_PASSWORD'][-4..] : 'NOT SET'}"
+    result << ""
+    
+    # ActionMailer設定
+    result << "=== ActionMailer設定 ==="
+    result << "delivery_method: #{ActionMailer::Base.delivery_method}"
+    result << "perform_deliveries: #{ActionMailer::Base.perform_deliveries}"
+    result << "raise_delivery_errors: #{ActionMailer::Base.raise_delivery_errors}"
+    result << "smtp_settings: #{ActionMailer::Base.smtp_settings.inspect}"
+    result << ""
+    
+    # SMTP接続テスト
+    result << "=== SMTP接続テスト ==="
+    begin
+      require 'net/smtp'
+      smtp = Net::SMTP.new('smtp.gmail.com', 587)
+      smtp.enable_starttls
+      smtp.start('gmail.com', ENV['GMAIL_USERNAME'], ENV['GMAIL_APP_PASSWORD'], :plain) do |smtp|
+        result << "✅ SMTP認証成功！"
+      end
+    rescue => e
+      result << "❌ SMTPエラー: #{e.class} - #{e.message}"
+    end
+    result << ""
+    
+    # テストメール送信
+    if params[:send] == "true"
+      result << "=== テストメール送信 ==="
+      begin
+        ActionMailer::Base.mail(
+          from: 'collegespark2025@gmail.com',
+          to: 'collegespark2025@gmail.com',
+          subject: "[Test] Production Email Test - #{Time.current}",
+          body: "テストメール from #{Rails.env} environment\n\nHost: #{request.host}\nTime: #{Time.current}"
+        ).deliver_now
+        result << "✅ メール送信成功！collegespark2025@gmail.comをチェックしてください"
+      rescue => e
+        result << "❌ メール送信エラー: #{e.class}"
+        result << "メッセージ: #{e.message}"
+        result << "バックトレース:"
+        result << e.backtrace.first(5).join("\n")
+      end
+    else
+      result << "=== メール送信テスト ==="
+      result << "?send=true パラメータを追加してテストメールを送信"
+    end
+    
+    render plain: result.join("\n")
+  end
+
   def manual_import
     if params[:secret] != "import123"
       render plain: "アクセス拒否"

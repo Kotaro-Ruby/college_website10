@@ -61,8 +61,8 @@
             <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
           </div>
           <div class="form-group half-width">
-            <%= form.label :phone, "電話番号*", class: "form-label" %>
-            <%= form.text_field :phone, class: "form-control", placeholder: "090-1234-5678" %>
+            <%= form.label :phone, "電話番号（任意）", class: "form-label" %>
+            <%= form.text_field :phone, class: "form-control", placeholder: "090-1234-5678（緊急連絡用）" %>
           </div>
         </div>
       </div>
@@ -816,34 +816,132 @@ function updateAddButton() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded fired');
   updateAddButton();
   
-  // 日付選択時の時間制限設定
+  // 初期表示時に時間オプションを設定
+  const timeSelects = document.querySelectorAll('.time-select');
+  console.log('Found time selects:', timeSelects.length);
+  
+  timeSelects.forEach(function(timeSelect, index) {
+    console.log('Setting default options for select', index);
+    // 直接オプションを追加（関数呼び出しではなく）
+    timeSelect.innerHTML = '';
+    
+    // デフォルトオプション
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = '時間を選択してください';
+    timeSelect.appendChild(defaultOption);
+    
+    // 平日の時間
+    const weekdayTimes = [
+      '20:00-21:00 (平日)',
+      '21:00-22:00 (平日)', 
+      '22:00-23:00 (平日)'
+    ];
+    
+    weekdayTimes.forEach(function(time) {
+      const option = document.createElement('option');
+      option.value = time.split(' ')[0];
+      option.textContent = time;
+      timeSelect.appendChild(option);
+    });
+    
+    // 土日祝の時間
+    const weekendTimes = [
+      '9:00-10:00 (土日祝)',
+      '10:00-11:00 (土日祝)',
+      '11:00-12:00 (土日祝)',
+      '12:00-13:00 (土日祝)',
+      '13:00-14:00 (土日祝)',
+      '14:00-15:00 (土日祝)',
+      '15:00-16:00 (土日祝)',
+      '16:00-17:00 (土日祝)',
+      '17:00-18:00 (土日祝)',
+      '18:00-19:00 (土日祝)',
+      '19:00-20:00 (土日祝)',
+      '20:00-21:00 (土日祝)'
+    ];
+    
+    weekendTimes.forEach(function(time) {
+      const option = document.createElement('option');
+      option.value = time.split(' ')[0];
+      option.textContent = time;
+      timeSelect.appendChild(option);
+    });
+    
+    console.log('Options added for select', index);
+  });
+  
+  // 日付選択時の時間制限設定 - 直接日付入力フィールドに登録
+  const dateInputs = document.querySelectorAll('.date-input');
+  console.log('Found date inputs:', dateInputs.length);
+  
+  dateInputs.forEach(function(dateInput, index) {
+    console.log('Attaching listener to date input', index);
+    
+    dateInput.addEventListener('change', function(e) {
+      console.log('Date changed for input', index, ':', e.target.value);
+      updateTimeOptions(e.target);
+    });
+    
+    dateInput.addEventListener('input', function(e) {
+      console.log('Date input event for input', index, ':', e.target.value);
+      updateTimeOptions(e.target);
+    });
+  });
+  
+  // 全体的なイベントリスナー（バックアップ）
   document.addEventListener('change', function(e) {
-    if (e.target.classList.contains('date-input')) {
-      console.log('Date input changed:', e.target.value);
+    if (e.target.classList.contains('date-input') || e.target.type === 'date') {
+      console.log('Global: Date input changed:', e.target.value);
       updateTimeOptions(e.target);
     }
   });
+});
+
+// デフォルトの時間オプションを設定（日付が選択されていない場合）
+function setDefaultTimeOptions(timeSelect) {
+  // デフォルトで平日の時間を表示
+  timeSelect.innerHTML = '<option value="">時間を選択してください</option>';
   
-  // 初期表示時に時間オプションを設定
-  document.querySelectorAll('.date-input').forEach(function(dateInput) {
-    if (dateInput.value) {
-      console.log('Initial date value found:', dateInput.value);
-      updateTimeOptions(dateInput);
-    }
+  const defaultTimeOptions = [
+    ["20:00-21:00", "20:00-21:00"],
+    ["21:00-22:00", "21:00-22:00"],
+    ["22:00-23:00", "22:00-23:00"]
+  ];
+  
+  defaultTimeOptions.forEach(function(option) {
+    const optionElement = document.createElement('option');
+    optionElement.value = option[1];
+    optionElement.textContent = option[0] + ' (平日)';
+    timeSelect.appendChild(optionElement);
   });
   
-  // ページロード後に少し遅らせて再チェック
-  setTimeout(function() {
-    document.querySelectorAll('.date-input').forEach(function(dateInput) {
-      if (dateInput.value) {
-        console.log('Delayed check - updating time options for:', dateInput.value);
-        updateTimeOptions(dateInput);
-      }
-    });
-  }, 100);
-});
+  // 週末の時間も表示（参考として）
+  const weekendTimeOptions = [
+    ["9:00-10:00", "9:00-10:00"],
+    ["10:00-11:00", "10:00-11:00"],
+    ["11:00-12:00", "11:00-12:00"],
+    ["12:00-13:00", "12:00-13:00"],
+    ["13:00-14:00", "13:00-14:00"],
+    ["14:00-15:00", "14:00-15:00"],
+    ["15:00-16:00", "15:00-16:00"],
+    ["16:00-17:00", "16:00-17:00"],
+    ["17:00-18:00", "17:00-18:00"],
+    ["18:00-19:00", "18:00-19:00"],
+    ["19:00-20:00", "19:00-20:00"],
+    ["20:00-21:00", "20:00-21:00"]
+  ];
+  
+  weekendTimeOptions.forEach(function(option) {
+    const optionElement = document.createElement('option');
+    optionElement.value = option[1];
+    optionElement.textContent = option[0] + ' (土日祝)';
+    timeSelect.appendChild(optionElement);
+  });
+}
 
 // 選択された日付に基づいて時間オプションを更新
 function updateTimeOptions(dateInput) {

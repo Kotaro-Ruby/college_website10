@@ -1,362 +1,206 @@
-<div class="main">
-  <div class="login-container">
-    <!-- Page Header -->
-    <div class="page-header">
+<div class="auth-page-wrapper">
+  <div class="auth-card">
+    <!-- Logo/Title Section -->
+    <div class="auth-header">
       <h1>ログイン</h1>
-      <p>College Sparkにログインしてください</p>
+      <p>College Sparkアカウントにログイン</p>
+    </div>
+
+    <!-- Flash Messages -->
+    <% if flash[:alert] %>
+      <div class="alert alert-error">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <!-- Google Login Button -->
+    <div class="auth-form">
+      <%= link_to "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "google-auth-button" do %>
+        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        <span>Googleで続ける</span>
+      <% end %>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits-section">
+      <div class="benefit-item">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 12V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>簡単・安全なログイン</span>
+      </div>
+      <div class="benefit-item">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.84 4.61C20.3 4.07 19.56 3.75 18.75 3.75C17.94 3.75 17.2 4.07 16.66 4.61L15 6.27L13.34 4.61C12.8 4.07 12.06 3.75 11.25 3.75C10.44 3.75 9.7 4.07 9.16 4.61C8.62 5.15 8.3 5.89 8.3 6.7C8.3 7.51 8.62 8.25 9.16 8.79L15 14.63L20.84 8.79C21.38 8.25 21.7 7.51 21.7 6.7C21.7 5.89 21.38 5.15 20.84 4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>お気に入り機能</span>
+      </div>
+      <div class="benefit-item">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 11H3V21H9V11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 3H15V21H21V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>大学比較機能</span>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="auth-footer">
+      <p>初めてご利用の方は<%= link_to "新規登録", register_path %>へ</p>
+      <%= link_to "ホームに戻る", root_path, class: "home-link" %>
+    </div>
+
+    <%# メール/パスワードログインフォームは一時的にコメントアウト %>
+    <%# 必要に応じて後で復元可能 %>
+    <% if false %>
+    <div class="divider">
+      <span>または</span>
+    </div>
+
+    <%= form_with url: login_path, method: :post, local: true, class: "login-form" do |form| %>
+      <div class="form-group">
+        <%= form.label :email, "メールアドレス", class: "form-label" %>
+        <%= form.email_field :email, class: "form-input", required: true, placeholder: "example@email.com" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :password, "パスワード", class: "form-label" %>
+        <%= form.password_field :password, class: "form-input", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "メールアドレスでログイン", class: "submit-button email-login" %>
+      </div>
       
-      <!-- Login Benefits -->
-      <div class="login-benefits">
-        <p>💖 ログインすると各大学のお気に入り登録ができるようになります</p>
+      <div class="form-group text-center">
+        <%= link_to "パスワードを忘れた方はこちら", new_password_reset_path, class: "forgot-password-link" %>
       </div>
-      
-      <!-- Registration Link in Header -->
-      <div class="header-register-link">
-        <p>ユーザー登録されていない方は<%= link_to "こちら", register_path, class: "header-register-link-btn" %>から新規登録してください</p>
-      </div>
-    </div>
-
-    <!-- Login Form -->
-    <div class="login-content">
-      <% if flash[:alert] %>
-        <div class="error-popup-overlay" id="errorPopup">
-          <div class="error-popup">
-            <div class="error-icon">⚠️</div>
-            <h3>ログインエラー</h3>
-            <p><%= flash[:alert] %></p>
-            <button onclick="closeErrorPopup()" class="error-popup-button">了解しました</button>
-          </div>
-        </div>
-      <% end %>
-
-      <!-- Google Login Button -->
-      <div class="oauth-section">
-        <%= link_to "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "google-login-button" do %>
-          <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          <span>Googleでログイン</span>
-        <% end %>
-      </div>
-
-      <%# メール/パスワードログインフォームは一時的にコメントアウト %>
-      <%# 必要に応じて後で復元可能 %>
-      <% if false %>
-      <div class="divider">
-        <span>または</span>
-      </div>
-
-      <%= form_with url: login_path, method: :post, local: true, class: "login-form" do |form| %>
-        <div class="form-group">
-          <%= form.label :email, "メールアドレス", class: "form-label" %>
-          <%= form.email_field :email, class: "form-input", required: true, placeholder: "example@email.com" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :password, "パスワード", class: "form-label" %>
-          <%= form.password_field :password, class: "form-input", required: true %>
-        </div>
-
-        <div class="form-group">
-          <%= form.submit "メールアドレスでログイン", class: "submit-button email-login" %>
-        </div>
-        
-        <div class="form-group text-center">
-          <%= link_to "パスワードを忘れた方はこちら", new_password_reset_path, class: "forgot-password-link" %>
-        </div>
-      <% end %>
-      <% end %>
-    </div>
-
-
-    <!-- Back to Home -->
-    <div class="back-to-home">
-      <%= link_to "トップページに戻る", root_path, class: "back-button" %>
-    </div>
+    <% end %>
+    <% end %>
   </div>
 </div>
 
 <style>
-  .login-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  /* Base Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  .page-header {
+  /* Page wrapper */
+  .auth-page-wrapper {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: #f7f8fc;
+  }
+
+  /* Card */
+  .auth-card {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 48px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .auth-header {
     text-align: center;
-    margin-bottom: 40px;
-    padding: 30px 20px;
-    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
-    color: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(240, 177, 61, 0.2);
+    margin-bottom: 36px;
   }
 
-  .page-header h1 {
-    font-size: 36px;
+  .auth-header h1 {
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .page-header p {
-    font-size: 16px;
-    opacity: 0.9;
-    margin-bottom: 15px;
-  }
-
-  .login-benefits {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 12px 20px;
-    border-radius: 8px;
-    margin: 15px 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .login-benefits p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    opacity: 1;
-    color: white;
-    text-align: center;
-  }
-
-  .header-register-link {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    border: 1px solid rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .header-register-link p {
-    margin: 0;
-    font-size: 14px;
-    color: #2d3748;
-    font-weight: 500;
-  }
-
-  .header-register-link-btn {
-    color: rgb(240, 177, 61);
-    text-decoration: underline;
-    font-weight: 600;
-    text-decoration-color: rgb(240, 177, 61);
-  }
-
-  .header-register-link-btn:hover {
-    color: rgb(220, 157, 41);
-    text-decoration-color: rgb(220, 157, 41);
-  }
-
-  /* Error Popup Styles */
-  .error-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .error-popup {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease;
-  }
-
-  .error-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-
-  .error-popup h3 {
-    margin: 0 0 15px 0;
-    color: #e74c3c;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .error-popup p {
-    margin: 0 0 25px 0;
-    color: #666;
-    line-height: 1.6;
-    font-size: 16px;
-  }
-
-  .error-popup-button {
-    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
-  }
-
-  .error-popup-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(240, 177, 61, 0.4);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes slideIn {
-    from { 
-      opacity: 0;
-      transform: translateY(-50px) scale(0.9);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .login-content {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-  }
-
-  .login-form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .form-group {
-    margin-bottom: 25px;
-  }
-
-  .form-label {
-    display: block;
-    font-weight: 600;
+    color: #1a202c;
     margin-bottom: 8px;
-    color: #2d3748;
-    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans CJK JP', sans-serif;
   }
 
-  .form-input {
-    width: 100%;
+  .auth-header p {
+    font-size: 15px;
+    color: #718096;
+    font-weight: 400;
+  }
+
+  /* Alerts */
+  .alert {
     padding: 12px 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-  }
-
-  .form-input:focus {
-    outline: none;
-    border-color: rgb(240, 177, 61);
-    box-shadow: 0 0 0 3px rgba(240, 177, 61, 0.1);
-  }
-
-  .submit-button {
-    background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(255, 195, 85) 100%);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
-  }
-
-  .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(240, 177, 61, 0.4);
-  }
-
-  .back-to-home {
-    text-align: center;
-  }
-
-  .back-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background: #f8f9fa;
-    color: #6c757d;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid #dee2e6;
-  }
-
-  .back-button:hover {
-    background: #e9ecef;
-    color: #495057;
-    text-decoration: none;
-  }
-
-  .forgot-password-link {
-    color: rgb(240, 177, 61);
-    text-decoration: none;
+    border-radius: 12px;
+    margin-bottom: 24px;
     font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-    display: block;
+    animation: slideDown 0.3s ease;
   }
 
-  .forgot-password-link:hover {
-    color: rgb(255, 195, 85);
-    text-decoration: underline;
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* OAuth Styles */
-  .oauth-section {
-    margin-bottom: 25px;
+  .alert-error {
+    background: #fed7d7;
+    color: #9b2c2c;
+    border: 1px solid #feb2b2;
   }
 
-  .google-login-button {
+  .alert-success {
+    background: #c6f6d5;
+    color: #22543d;
+    border: 1px solid #9ae6b4;
+  }
+
+  /* Google Button */
+  .auth-form {
+    margin-bottom: 32px;
+  }
+
+  .google-auth-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 12px;
     width: 100%;
-    padding: 12px 20px;
+    padding: 14px 24px;
     background: white;
     border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     color: #2d3748;
     text-decoration: none;
-    transition: all 0.3s ease;
-    gap: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
   }
 
-  .google-login-button:hover {
-    background: #f8f9fa;
+  .google-auth-button:hover {
+    background: #f7fafc;
     border-color: #cbd5e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    text-decoration: none;
-    color: #2d3748;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   .google-icon {
@@ -364,82 +208,81 @@
     height: 20px;
   }
 
-  .divider {
-    text-align: center;
-    margin: 30px 0;
-    position: relative;
+  /* Benefits */
+  .benefits-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
   }
 
-  .divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #e2e8f0;
-  }
-
-  .divider span {
-    background: white;
-    padding: 0 20px;
-    color: #a0aec0;
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #4a5568;
     font-size: 14px;
-    position: relative;
   }
 
-  .submit-button.email-login {
-    background: #6c757d;
+  .benefit-item svg {
+    width: 20px;
+    height: 20px;
+    color: #f0b13d;
   }
 
-  .submit-button.email-login:hover {
-    background: #5a6268;
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+  /* Footer */
+  .auth-footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
   }
 
-  /* Mobile Styles */
-  @media (max-width: 768px) {
-    .login-container {
-      padding: 20px 10px;
-    }
-
-    .page-header h1 {
-      font-size: 28px;
-    }
-
-    .login-content {
-      padding: 25px 20px;
-    }
-  }
-</style>
-
-<script>
-  function closeErrorPopup() {
-    const popup = document.getElementById('errorPopup');
-    if (popup) {
-      popup.style.animation = 'fadeOut 0.3s ease';
-      setTimeout(() => {
-        popup.remove();
-      }, 300);
-    }
+  .auth-footer p {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 12px;
   }
 
-  // モーダル外をクリックしても閉じる
-  document.addEventListener('DOMContentLoaded', function() {
-    const popup = document.getElementById('errorPopup');
-    if (popup) {
-      popup.addEventListener('click', function(e) {
-        if (e.target === popup) {
-          closeErrorPopup();
-        }
-      });
-    }
-  });
-</script>
+  .auth-footer a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
 
-<style>
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+  .auth-footer a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+  }
+
+  .home-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #a0aec0 !important;
+    font-size: 13px;
+    font-weight: 400 !important;
+  }
+
+  .home-link:hover {
+    color: #718096 !important;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .auth-card {
+      padding: 32px 24px;
+    }
+
+    .auth-header h1 {
+      font-size: 24px;
+    }
+
+    .benefits-section {
+      padding: 16px;
+    }
   }
 </style>

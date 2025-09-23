@@ -201,6 +201,7 @@ Rails.application.routes.draw do
 
   get "debug/db_status", to: "debug#db_status"
   get "debug/manual_import", to: "debug#manual_import"
+  get "debug/mail_test", to: "debug#mail_test"
 
   # 旧セットアップルート（削除済み）
 
