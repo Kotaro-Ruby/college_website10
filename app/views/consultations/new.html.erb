@@ -35,7 +35,7 @@
   </div>
 
   <div class="consultation-form-wrapper" id="consultation-form">
-    <%= form_with model: @consultation, local: true, class: "consultation-form" do |form| %>
+    <%= form_with model: @consultation, local: true, class: "consultation-form", data: { turbo: false } do |form| %>
       <% if @consultation.errors.any? %>
         <div class="alert alert-danger">
           <h4><%= pluralize(@consultation.errors.count, "error") %> prohibited this consultation from being saved:</h4>
@@ -183,7 +183,7 @@
       </div>
 
       <div class="form-submit">
-        <%= form.submit "無料相談を予約する", class: "submit-btn" %>
+        <%= form.submit "無料相談を予約する", class: "submit-btn", data: { disable_with: "送信中..." }, onclick: "this.form.submit(); this.disabled=true; return true;" %>
       </div>
     <% end %>
   </div>
