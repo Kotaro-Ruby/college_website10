@@ -3,31 +3,28 @@ class ApplicationMailer < ActionMailer::Base
   layout "mailer"
 
   # メール送信前の共通処理
-  before_action :set_delivery_options
+  before_action :log_delivery_setup
   after_action :log_delivery_attempt
 
   private
 
-  def set_delivery_options
+  def log_delivery_setup
     # 本番環境でのメール送信設定確認
     if Rails.env.production?
       Rails.logger.info "=== EMAIL DELIVERY SETUP ==="
       Rails.logger.info "Gmail username present: #{ENV['GMAIL_USERNAME'].present?}"
       Rails.logger.info "Gmail app password present: #{ENV['GMAIL_APP_PASSWORD'].present?}"
       Rails.logger.info "Gmail username value: #{ENV['GMAIL_USERNAME']}" if ENV["GMAIL_USERNAME"].present?
-
-      mail.delivery_method.settings.merge!(
-        open_timeout: 10,
-        read_timeout: 10
-      )
     end
   end
 
   def log_delivery_attempt
-    Rails.logger.info "=== EMAIL DELIVERY ATTEMPT ==="
-    Rails.logger.info "To: #{mail.to}"
-    Rails.logger.info "Subject: #{mail.subject}"
-    Rails.logger.info "From: #{mail.from}"
-    Rails.logger.info "Delivery method: #{mail.delivery_method.class.name}"
+    if mail
+      Rails.logger.info "=== EMAIL DELIVERY ATTEMPT ==="
+      Rails.logger.info "To: #{mail.to}"
+      Rails.logger.info "Subject: #{mail.subject}"
+      Rails.logger.info "From: #{mail.from}"
+      Rails.logger.info "Delivery method: #{mail.delivery_method.class.name}"
+    end
   end
 end
