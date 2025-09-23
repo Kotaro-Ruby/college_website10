@@ -74,6 +74,19 @@ else
   puts "📚 College data already exists (#{Condition.count} colleges)"
 end
 
+# Import Country data from REST Countries API
+if Country.count == 0
+  puts "\n🌍 Importing country data from REST Countries API..."
+  if CountryApiService.fetch_and_update_countries
+    count = Country.count
+    puts "✅ Successfully imported #{count} countries (US, AU, NZ, CA)"
+  else
+    puts "⚠️  Failed to import country data - will retry on next deploy"
+  end
+else
+  puts "🌍 Country data already exists (#{Country.count} countries)"
+end
+
 # Import Australian University data
 if AuUniversity.count == 0
   puts "\n🇦🇺 Importing Australian University data..."
