@@ -815,8 +815,20 @@ function updateAddButton() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded fired - v2');
+// Turboとの互換性のため、turbo:loadイベントも使用
+document.addEventListener('turbo:load', initializeConsultationForm);
+document.addEventListener('DOMContentLoaded', initializeConsultationForm);
+
+function initializeConsultationForm() {
+  console.log('Form initialization started - v3');
+  
+  // 既に初期化済みの場合はスキップ
+  if (window.consultationFormInitialized) {
+    console.log('Already initialized, skipping');
+    return;
+  }
+  window.consultationFormInitialized = true;
+  
   updateAddButton();
   
   // 初期表示時に時間オプションを設定
@@ -874,32 +886,39 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Options added for select', index);
   });
   
-  // 日付選択時の時間制限設定 - 直接日付入力フィールドに登録
-  const dateInputs = document.querySelectorAll('.date-input');
-  console.log('Found date inputs:', dateInputs.length);
+  // 日付選択時の時間制限設定 - イベント委譲を使用（本番環境対応）
+  console.log('Setting up date input listeners...');
   
-  dateInputs.forEach(function(dateInput, index) {
-    console.log('Attaching listener to date input', index);
-    
-    dateInput.addEventListener('change', function(e) {
-      console.log('Date changed for input', index, ':', e.target.value);
-      updateTimeOptions(e.target);
-    });
-    
-    dateInput.addEventListener('input', function(e) {
-      console.log('Date input event for input', index, ':', e.target.value);
-      updateTimeOptions(e.target);
-    });
-  });
-  
-  // 全体的なイベントリスナー（バックアップ）
-  document.addEventListener('change', function(e) {
-    if (e.target.classList.contains('date-input') || e.target.type === 'date') {
-      console.log('Global: Date input changed:', e.target.value);
+  // イベント委譲で確実にキャッチ
+  document.body.addEventListener('change', function(e) {
+    console.log('Change event on:', e.target.tagName, e.target.type, e.target.className);
+    if (e.target.type === 'date' || e.target.classList.contains('date-input')) {
+      console.log('Date input changed:', e.target.value);
       updateTimeOptions(e.target);
     }
   });
-});
+  
+  document.body.addEventListener('input', function(e) {
+    if (e.target.type === 'date' || e.target.classList.contains('date-input')) {
+      console.log('Date input event:', e.target.value);
+      updateTimeOptions(e.target);
+    }
+  });
+  
+  // 念のため個別にも登録
+  setTimeout(function() {
+    const dateInputs = document.querySelectorAll('input[type="date"], .date-input');
+    console.log('Found date inputs (delayed):', dateInputs.length);
+    
+    dateInputs.forEach(function(dateInput, index) {
+      console.log('Attaching direct listener to input', index);
+      dateInput.addEventListener('change', function(e) {
+        console.log('Direct: Date changed for input', index, ':', e.target.value);
+        updateTimeOptions(e.target);
+      });
+    });
+  }, 100);
+}
 
 // デフォルトの時間オプションを設定（日付が選択されていない場合）
 function setDefaultTimeOptions(timeSelect) {
