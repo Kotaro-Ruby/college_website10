@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.logger = Logger.new(STDOUT)
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "college-finder-web-service.onrender.com", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "college-spark.com", protocol: "https" }
 
   # Gmail SMTP settings with improved configuration
   config.action_mailer.smtp_settings = {
