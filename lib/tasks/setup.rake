@@ -28,7 +28,19 @@ namespace :setup do
       end
     end
     
-    # 3. Check and import Australian universities
+    # 3. Check and import Country data
+    if Country.count == 0
+      puts "🌍 Importing country data from REST Countries API..."
+      if CountryApiService.fetch_and_update_countries
+        puts "✅ Successfully imported #{Country.count} countries (US, AU, NZ, CA)"
+      else
+        puts "⚠️  Failed to import country data - will retry on next deploy"
+      end
+    else
+      puts "✅ Country data already exists (#{Country.count} countries)"
+    end
+    
+    # 4. Check and import Australian universities
     if AuUniversity.count == 0
       puts "🇦🇺 Importing Australian universities..."
       load Rails.root.join('db/seeds/australia_data.rb')
@@ -36,13 +48,13 @@ namespace :setup do
       puts "✅ Australian universities already exist (#{AuUniversity.count} records)"
     end
     
-    # 3.5. Update Australian university images
+    # 4.5. Update Australian university images
     if AuUniversity.exists? && AuUniversity.where.not(images: nil).count == 0
       puts "🖼️ Adding images to Australian universities..."
       load Rails.root.join('db/seeds/update_au_university_images.rb')
     end
     
-    # 4. Check and import New Zealand universities (future)
+    # 5. Check and import New Zealand universities (future)
     if defined?(NzUniversity) && NzUniversity.count == 0
       nz_seed = Rails.root.join('db/seeds/nz_data.rb')
       if File.exist?(nz_seed)
@@ -51,7 +63,7 @@ namespace :setup do
       end
     end
     
-    # 5. Check and import Canadian universities (future)
+    # 6. Check and import Canadian universities (future)
     if defined?(CaUniversity) && CaUniversity.count == 0
       ca_seed = Rails.root.join('db/seeds/canada_data.rb')
       if File.exist?(ca_seed)
@@ -60,7 +72,7 @@ namespace :setup do
       end
     end
     
-    # 6. Fix image URLs for production (always run in production)
+    # 7. Fix image URLs for production (always run in production)
     if Rails.env.production?
       puts "🔧 Ensuring image URLs are production-ready..."
       load Rails.root.join('db/seeds/fix_au_image_urls.rb')
@@ -69,7 +81,7 @@ namespace :setup do
       load Rails.root.join('db/seeds/update_au_wiki_images.rb')
     end
     
-    # 7. Run any custom setup scripts
+    # 8. Run any custom setup scripts
     setup_dir = Rails.root.join('db/setup')
     if Dir.exist?(setup_dir)
       Dir[setup_dir.join('*.rb')].sort.each do |file|
@@ -80,6 +92,7 @@ namespace :setup do
     
     puts "✨ Production setup completed!"
     puts "📊 Final counts:"
+    puts "  - Countries: #{Country.count}"
     puts "  - US Universities: #{Condition.count}"
     puts "  - AU Universities: #{AuUniversity.count}" if defined?(AuUniversity)
     puts "  - NZ Universities: #{NzUniversity.count}" if defined?(NzUniversity) && NzUniversity.table_exists?
