@@ -16,6 +16,10 @@
     padding-top: 80px;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   .us-about-page .progress-bar {
     position: fixed;
     top: 80px;
@@ -762,14 +766,14 @@
   <nav class="page-nav-menu" id="navMenu">
     <div class="nav-container">
       <div class="nav-items">
-        <a href="#basic-info" class="nav-item">基本情報</a>
-        <a href="#preparation" class="nav-item">準備</a>
-        <a href="#english" class="nav-item">英語力</a>
-        <a href="#choosing" class="nav-item">志望校選び</a>
-        <a href="#application" class="nav-item">出願</a>
-        <a href="#student-life" class="nav-item">学生生活</a>
-        <a href="#graduation" class="nav-item">卒業</a>
-        <a href="#differences" class="nav-item">日米の違い</a>
+        <a href="#basic-info" class="nav-item" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">基本情報</a>
+        <a href="#preparation" class="nav-item" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">準備</a>
+        <a href="#english" class="nav-item" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">英語力</a>
+        <a href="#choosing" class="nav-item" onclick="event.preventDefault(); document.querySelector('#choosing').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">志望校選び</a>
+        <a href="#application" class="nav-item" onclick="event.preventDefault(); document.querySelector('#application').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">出願</a>
+        <a href="#student-life" class="nav-item" onclick="event.preventDefault(); document.querySelector('#student-life').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">学生生活</a>
+        <a href="#graduation" class="nav-item" onclick="event.preventDefault(); document.querySelector('#graduation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">卒業</a>
+        <a href="#differences" class="nav-item" onclick="event.preventDefault(); document.querySelector('#differences').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">日米の違い</a>
       </div>
     </div>
   </nav>
@@ -784,42 +788,42 @@
         <h2>学習コンテンツ</h2>
       </div>
       <div class="toc-grid">
-        <a href="#basic-info" class="toc-card fade-in">
+        <a href="#basic-info" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-info-circle"></i>
           </div>
           <div class="toc-title">基本情報</div>
           <div class="toc-description">アメリカの大学システムの概要と特徴を理解する</div>
         </a>
-        <a href="#preparation" class="toc-card fade-in">
+        <a href="#preparation" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-tasks"></i>
           </div>
           <div class="toc-title">進学準備</div>
           <div class="toc-description">必要な準備と計画的なスケジュール</div>
         </a>
-        <a href="#english" class="toc-card fade-in">
+        <a href="#english" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-language"></i>
           </div>
           <div class="toc-title">英語力</div>
           <div class="toc-description">求められる英語レベルと試験対策</div>
         </a>
-        <a href="#choosing" class="toc-card fade-in">
+        <a href="#choosing" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#choosing').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-search"></i>
           </div>
           <div class="toc-title">志望校選び</div>
           <div class="toc-description">最適な大学を見つけるための戦略</div>
         </a>
-        <a href="#application" class="toc-card fade-in">
+        <a href="#application" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#application').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-file-alt"></i>
           </div>
           <div class="toc-title">出願プロセス</div>
           <div class="toc-description">出願から入学までの詳細な流れ</div>
         </a>
-        <a href="#student-life" class="toc-card fade-in">
+        <a href="#student-life" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#student-life').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-users"></i>
           </div>
@@ -1302,6 +1306,8 @@
 
 <script>
   function initializeUsAboutPage() {
+    console.log('initializeUsAboutPage called');
+
     // プログレスバー処理
     function handleScroll() {
       const scrolled = window.scrollY;
@@ -1332,18 +1338,21 @@
       const sections = document.querySelectorAll('section[id]');
       const navItems = document.querySelectorAll('.nav-item');
       let current = '';
-      
+
+      const scrollPos = window.scrollY || window.pageYOffset;
+
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 150;
+        const sectionTop = section.offsetTop - 200;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
           current = section.getAttribute('id');
         }
       });
 
       navItems.forEach(item => {
         item.classList.remove('active');
-        if (item.getAttribute('href') === '#' + current) {
+        const href = item.getAttribute('href');
+        if (href === '#' + current) {
           item.classList.add('active');
         }
       });
@@ -1356,6 +1365,9 @@
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('scroll', handleNavMenu);
     window.addEventListener('scroll', handleActiveNav);
+
+    // 初回実行
+    handleActiveNav();
 
     // セクションのアニメーション
     const observerOptions = {
@@ -1375,7 +1387,7 @@
       observer.observe(section);
     });
 
-    // スムーススクロール
+    // スムーススクロール（ナビゲーションメニュー用）
     document.querySelectorAll('.nav-item').forEach(item => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1392,6 +1404,45 @@
         }
       });
     });
+
+    // スムーススクロール（目次カード用）- イベント委譲を使用
+    const tocGrid = document.querySelector('.toc-grid');
+    console.log('Found toc-grid:', tocGrid);
+
+    if (tocGrid) {
+      tocGrid.addEventListener('click', function(e) {
+        console.log('=== Click detected on toc-grid ===');
+        console.log('Target element:', e.target);
+        console.log('Current target:', e.currentTarget);
+
+        // クリックされた要素から最も近い .toc-card を探す
+        const card = e.target.closest('.toc-card');
+        console.log('Closest toc-card:', card);
+
+        if (card) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const targetId = card.getAttribute('href');
+          console.log('Card clicked, target:', targetId);
+
+          if (targetId && targetId !== '#') {
+            const targetSection = document.querySelector(targetId);
+            console.log('Target section found:', targetSection);
+
+            if (targetSection) {
+              const offsetTop = targetSection.offsetTop - 100;
+              console.log('Scrolling to:', offsetTop);
+
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      });
+    }
 
     // 初回のアニメーションをトリガー
     setTimeout(() => {

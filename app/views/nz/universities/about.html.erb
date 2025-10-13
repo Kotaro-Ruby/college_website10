@@ -16,6 +16,10 @@
     padding-top: 80px;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   .nz-about-page .progress-bar {
     position: fixed;
     top: 80px;
@@ -819,14 +823,14 @@
   <nav class="page-nav-menu" id="navMenu">
     <div class="nav-container">
       <div class="nav-items">
-        <a href="#basic-info" class="nav-item">基本情報</a>
-        <a href="#education" class="nav-item">教育システム</a>
-        <a href="#nz8" class="nav-item">8つの大学</a>
-        <a href="#preparation" class="nav-item">準備</a>
-        <a href="#english" class="nav-item">英語要件</a>
-        <a href="#visa" class="nav-item">ビザ・就労</a>
-        <a href="#student-life" class="nav-item">学生生活</a>
-        <a href="#differences" class="nav-item">特徴</a>
+        <a href="#basic-info" class="nav-item" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">基本情報</a>
+        <a href="#education" class="nav-item" onclick="event.preventDefault(); document.querySelector('#education').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">教育システム</a>
+        <a href="#nz8" class="nav-item" onclick="event.preventDefault(); document.querySelector('#nz8').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">8つの大学</a>
+        <a href="#preparation" class="nav-item" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">準備</a>
+        <a href="#english" class="nav-item" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">英語要件</a>
+        <a href="#visa" class="nav-item" onclick="event.preventDefault(); document.querySelector('#visa').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">ビザ・就労</a>
+        <a href="#student-life" class="nav-item" onclick="event.preventDefault(); document.querySelector('#student-life').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">学生生活</a>
+        <a href="#differences" class="nav-item" onclick="event.preventDefault(); document.querySelector('#differences').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">特徴</a>
       </div>
     </div>
   </nav>
@@ -841,42 +845,42 @@
         <h2>学習コンテンツ</h2>
       </div>
       <div class="toc-grid">
-        <a href="#basic-info" class="toc-card fade-in">
+        <a href="#basic-info" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-info-circle"></i>
           </div>
           <div class="toc-title">基本情報</div>
           <div class="toc-description">ニュージーランド留学の概要と魅力を理解する</div>
         </a>
-        <a href="#education" class="toc-card fade-in">
+        <a href="#education" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#education').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-university"></i>
           </div>
           <div class="toc-title">教育システム</div>
           <div class="toc-description">NZQF（資格枠組み）と学位制度の詳細</div>
         </a>
-        <a href="#nz8" class="toc-card fade-in">
+        <a href="#nz8" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#nz8').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-star"></i>
           </div>
           <div class="toc-title">8つの大学</div>
           <div class="toc-description">国立8大学の特徴と強み</div>
         </a>
-        <a href="#preparation" class="toc-card fade-in">
+        <a href="#preparation" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-tasks"></i>
           </div>
           <div class="toc-title">進学準備</div>
           <div class="toc-description">入学条件とスケジュール</div>
         </a>
-        <a href="#english" class="toc-card fade-in">
+        <a href="#english" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-language"></i>
           </div>
           <div class="toc-title">英語要件</div>
           <div class="toc-description">IELTSとパスウェイプログラム</div>
         </a>
-        <a href="#visa" class="toc-card fade-in">
+        <a href="#visa" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#visa').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-passport"></i>
           </div>
@@ -1510,22 +1514,27 @@
       const sections = document.querySelectorAll('section[id]');
       const navItems = document.querySelectorAll('.nav-item');
       let current = '';
-      
+      const scrollPos = window.scrollY || window.pageYOffset;
+
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 150;
+        const sectionTop = section.offsetTop - 200;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
           current = section.getAttribute('id');
         }
       });
 
       navItems.forEach(item => {
         item.classList.remove('active');
-        if (item.getAttribute('href') === '#' + current) {
+        const href = item.getAttribute('href');
+        if (href === '#' + current) {
           item.classList.add('active');
         }
       });
     }
+
+    // 初回実行
+    handleActiveNav();
 
     // イベントリスナーをクリーンアップしてから追加
     window.removeEventListener('scroll', handleScroll);

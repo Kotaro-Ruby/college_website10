@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_21_064259) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_13_035238) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -350,6 +350,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_21_064259) do
     t.index ["condition_id"], name: "index_favorites_on_condition_id"
     t.index ["user_id", "condition_id"], name: "index_favorites_on_user_id_and_condition_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.text "description"
+    t.string "image_url"
+    t.datetime "published_at"
+    t.string "source"
+    t.string "country"
+    t.string "japanese_title"
+    t.text "japanese_description"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_responses", force: :cascade do |t|

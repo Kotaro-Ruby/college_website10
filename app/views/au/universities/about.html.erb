@@ -16,6 +16,10 @@
     padding-top: 80px;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* プログレスバー */
   .au-about-page .progress-bar {
     position: fixed;
@@ -1310,15 +1314,15 @@
   <nav class="page-nav-menu" id="navMenu">
     <div class="nav-container">
       <div class="nav-items">
-        <a href="#basic-info" class="nav-item">基本情報</a>
-        <a href="#preparation" class="nav-item">準備</a>
-        <a href="#english" class="nav-item">英語力</a>
-        <a href="#choosing" class="nav-item">志望校選び</a>
-        <a href="#application" class="nav-item">出願</a>
-        <a href="#student-life" class="nav-item">学生生活</a>
-        <a href="#graduation" class="nav-item">卒業</a>
-        <a href="#why" class="nav-item">なぜオーストラリア？</a>
-        <a href="#universities" class="nav-item">大学一覧</a>
+        <a href="#basic-info" class="nav-item" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">基本情報</a>
+        <a href="#preparation" class="nav-item" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">準備</a>
+        <a href="#english" class="nav-item" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">英語力</a>
+        <a href="#choosing" class="nav-item" onclick="event.preventDefault(); document.querySelector('#choosing').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">志望校選び</a>
+        <a href="#application" class="nav-item" onclick="event.preventDefault(); document.querySelector('#application').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">出願</a>
+        <a href="#student-life" class="nav-item" onclick="event.preventDefault(); document.querySelector('#student-life').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">学生生活</a>
+        <a href="#graduation" class="nav-item" onclick="event.preventDefault(); document.querySelector('#graduation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">卒業</a>
+        <a href="#why" class="nav-item" onclick="event.preventDefault(); document.querySelector('#why').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">なぜオーストラリア？</a>
+        <a href="#universities" class="nav-item" onclick="event.preventDefault(); document.querySelector('#universities').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">大学一覧</a>
       </div>
     </div>
   </nav>
@@ -1444,49 +1448,49 @@
         <h2>学習コンテンツ</h2>
       </div>
       <div class="toc-grid">
-        <a href="#basic-info" class="toc-card fade-in">
+        <a href="#basic-info" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#basic-info').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-info-circle"></i>
           </div>
           <div class="toc-title">基本情報</div>
           <div class="toc-description">オーストラリアの大学システムと特徴を理解する</div>
         </a>
-        <a href="#preparation" class="toc-card fade-in">
+        <a href="#preparation" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#preparation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-tasks"></i>
           </div>
           <div class="toc-title">進学準備</div>
           <div class="toc-description">必要な準備と計画的なスケジュール</div>
         </a>
-        <a href="#english" class="toc-card fade-in">
+        <a href="#english" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#english').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-language"></i>
           </div>
           <div class="toc-title">英語力</div>
           <div class="toc-description">IELTSの要件と効果的な学習法</div>
         </a>
-        <a href="#choosing" class="toc-card fade-in">
+        <a href="#choosing" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#choosing').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-search"></i>
           </div>
           <div class="toc-title">志望校選び</div>
           <div class="toc-description">39校から最適な大学を見つける戦略</div>
         </a>
-        <a href="#application" class="toc-card fade-in">
+        <a href="#application" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#application').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-file-alt"></i>
           </div>
           <div class="toc-title">出願プロセス</div>
           <div class="toc-description">出願から入学までの詳細な流れ</div>
         </a>
-        <a href="#student-life" class="toc-card fade-in">
+        <a href="#student-life" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#student-life').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-users"></i>
           </div>
           <div class="toc-title">学生生活</div>
           <div class="toc-description">オーストラリアでのキャンパスライフ</div>
         </a>
-        <a href="#graduation" class="toc-card fade-in">
+        <a href="#graduation" class="toc-card fade-in" data-turbo="false" onclick="event.preventDefault(); document.querySelector('#graduation').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;">
           <div class="toc-icon">
             <i class="fas fa-trophy"></i>
           </div>
@@ -2126,22 +2130,29 @@
     // アクティブナビゲーション
     const handleActiveNav = () => {
       const sections = document.querySelectorAll('section[id]');
-      const scrollY = window.scrollY;
+      const navItems = document.querySelectorAll('.nav-item');
+      let current = '';
+      const scrollPos = window.scrollY || window.pageYOffset;
 
       sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
         const sectionTop = section.offsetTop - 200;
-        const sectionId = section.getAttribute('id');
-        const navItem = document.querySelector(`.nav-item[href="#${sectionId}"]`);
+        const sectionHeight = section.clientHeight;
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
 
-        if (navItem) {
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            navItem.classList.add('active');
-          }
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        const href = item.getAttribute('href');
+        if (href === '#' + current) {
+          item.classList.add('active');
         }
       });
     };
+
+    // 初回実行
+    handleActiveNav();
 
     // イベントリスナーをクリーンアップして再登録
     window.removeEventListener('scroll', handleScroll);

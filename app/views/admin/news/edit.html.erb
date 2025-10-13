@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h1>ニュース編集</h1>
+
+  <%= form_with model: @news, url: admin_news_path(@news), method: :patch, local: true do |f| %>
+    <div class="mb-3">
+      <label class="form-label">元タイトル（英語）</label>
+      <input type="text" class="form-control" value="<%= @news.title %>" disabled>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :japanese_title, "日本語タイトル", class: "form-label" %>
+      <%= f.text_field :japanese_title, class: "form-control", placeholder: "日本語でタイトルを入力" %>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">元説明（英語）</label>
+      <textarea class="form-control" rows="3" disabled><%= @news.description %></textarea>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :japanese_description, "日本語説明・解説", class: "form-label" %>
+      <%= f.text_area :japanese_description, class: "form-control", rows: "5", placeholder: "日本語で説明・解説を入力" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :url, "URL", class: "form-label" %>
+      <%= f.text_field :url, class: "form-control" %>
+      <small class="text-muted"><%= link_to "元記事を開く", @news.url, target: "_blank" %></small>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mb-3">
+          <%= f.label :country, "国", class: "form-label" %>
+          <%= f.select :country, [ "USA", "Australia", "Canada", "New Zealand", "その他" ], {}, class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mb-3">
+          <%= f.label :source, "ソース", class: "form-label" %>
+          <%= f.text_field :source, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mb-3">
+          <%= f.label :published_at, "公開日", class: "form-label" %>
+          <%= f.datetime_local_field :published_at, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :image_url, "画像URL", class: "form-label" %>
+      <%= f.text_field :image_url, class: "form-control" %>
+    </div>
+
+    <div class="d-flex gap-2">
+      <%= f.submit "保存", class: "btn btn-primary" %>
+      <%= link_to "キャンセル", admin_news_index_path, class: "btn btn-secondary" %>
+      <% if @news.draft? %>
+        <%= button_to "保存して公開", admin_news_path(@news), method: :patch, params: { news: { status: :published } }, class: "btn btn-success" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

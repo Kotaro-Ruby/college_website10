@@ -20,6 +20,9 @@ class HomeController < ApplicationController
 
     # 最新記事を取得（コラムとブログの混合）
     @recent_articles = get_recent_articles
+
+    # 最新の留学ニュースを取得（公開済みのみ、最新10件）
+    @recent_news = News.published.recent.limit(10)
   end
 
   def get_recent_articles
@@ -191,6 +194,30 @@ class HomeController < ApplicationController
   end
 
   def why_study_abroad
+  end
+
+  def news_index
+    @news_items = News.published.recent
+
+    # 国別フィルター
+    if params[:country].present?
+      @news_items = @news_items.where(country: params[:country])
+    end
+
+    @news_items = @news_items.page(params[:page]).per(12)
+
+    # 国のリストを取得（公開済みニュースのみ）
+    @countries = News.published.distinct.pluck(:country).compact.sort
+
+    # 各国の件数を取得
+    @country_counts = News.published.group(:country).count
+    @total_count = News.published.count
+  end
+
+  def news_detail
+    @news = News.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "ニュースが見つかりませんでした"
   end
 
   private

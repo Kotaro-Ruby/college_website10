@@ -16,7 +16,24 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Cache assets for far-future expiry since they are all digest stamped.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+  config.public_file_server.headers = { 
+    "cache-control" => "public, max-age=#{1.year.to_i}",
+    "expires" => 1.year.from_now.httpdate,
+    "vary" => "Accept-Encoding"
+  }
+  
+  # Enable gzip compression
+  config.middleware.use Rack::Deflater
+  
+  # Cache control for static pages
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'SAMEORIGIN',
+    'X-XSS-Protection' => '1; mode=block',
+    'X-Content-Type-Options' => 'nosniff',
+    'X-Download-Options' => 'noopen',
+    'X-Permitted-Cross-Domain-Policies' => 'none',
+    'Referrer-Policy' => 'strict-origin-when-cross-origin'
+  }
   
   # Serve static files from the `/public` folder
   config.public_file_server.enabled = true

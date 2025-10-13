@@ -1,6 +1,53 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# College Spark robots.txt
+# https://college-spark.com
 
+# All search engines
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tmp/
+Disallow: /assets/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+Crawl-delay: 1
 
+# Googlebot specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tmp/
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Bingbot specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tmp/
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap locations
 Sitemap: https://college-spark.com/sitemap.xml.gz
+Sitemap: https://college-spark.com/sitemap.xml

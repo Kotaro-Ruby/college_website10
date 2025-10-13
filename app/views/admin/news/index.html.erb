@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <h1>ニュース管理</h1>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">下書き</h5>
+          <p class="card-text display-4"><%= @draft_count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">公開済み</h5>
+          <p class="card-text display-4"><%= @published_count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <%= button_to "新しいニュースを取得", fetch_admin_news_index_path, method: :post, class: "btn btn-light btn-lg w-100" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>国</th>
+        <th>公開日</th>
+        <th>ステータス</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @news.each do |news| %>
+        <tr>
+          <td>
+            <%= link_to news.japanese_title.presence || news.title, news.url, target: "_blank" %>
+          </td>
+          <td><%= news.country %></td>
+          <td><%= news.published_at&.strftime("%Y/%m/%d") %></td>
+          <td>
+            <% if news.draft? %>
+              <span class="badge bg-secondary">下書き</span>
+            <% elsif news.published? %>
+              <span class="badge bg-success">公開済み</span>
+            <% elsif news.archived? %>
+              <span class="badge bg-dark">アーカイブ</span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "編集", edit_admin_news_path(news), class: "btn btn-sm btn-primary" %>
+            <% if news.draft? %>
+              <%= button_to "公開", publish_admin_news_path(news), method: :patch, class: "btn btn-sm btn-success" %>
+            <% end %>
+            <%= button_to "削除", admin_news_path(news), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @news %>
+</div>

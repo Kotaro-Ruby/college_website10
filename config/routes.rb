@@ -38,6 +38,15 @@ Rails.application.routes.draw do
 
   # Admin management routes
   namespace :admin do
+    resources :news, only: [ :index, :edit, :update, :destroy ] do
+      collection do
+        post :fetch
+      end
+      member do
+        patch :publish
+        patch :archive
+      end
+    end
     resources :consultations, only: [ :index, :show, :update, :destroy ] do
       member do
         patch :confirm
@@ -118,6 +127,10 @@ Rails.application.routes.draw do
   get "life_guide" => "home#life_guide"
   get "why_study_abroad" => "home#why_study_abroad"
   get "ivy-league" => "home#ivy_league"
+
+  # News routes
+  get "news" => "home#news_index", as: :news_index
+  get "news/:id" => "home#news_detail", as: :news_detail
 
   # Blog routes
   get "/blogs", to: "blogs#index", as: :blogs

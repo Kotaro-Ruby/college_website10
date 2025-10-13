@@ -32,6 +32,7 @@ gem "dotenv-rails", groups: [ :development, :test ]
 gem "kaminari"
 gem "sitemap_generator"
 gem "bcrypt", "~> 3.1.7"
+gem "feedjira"  # RSS feed parser
 
 # OAuth authentication
 gem "omniauth", "~> 2.1"
@@ -93,3 +94,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sitemap_generator"

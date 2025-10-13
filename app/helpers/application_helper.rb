@@ -216,4 +216,33 @@ module ApplicationHelper
     
     translated
   end
+
+  def random_news_image(country)
+    # 国名を正規化（USA, Canada, Australia, New Zealand）
+    country_dir = case country&.downcase
+    when "usa", "united states", "america"
+      "usa"
+    when "canada"
+      "canada"
+    when "australia"
+      "australia"
+    when "new zealand", "newzealand", "nz"
+      "newzealand"
+    else
+      "usa" # デフォルト
+    end
+
+    # 画像の枚数を取得（publicディレクトリから）
+    images_dir = Rails.root.join("public", "images", "news", country_dir)
+    return nil unless Dir.exist?(images_dir)
+
+    image_files = Dir.glob("#{images_dir}/*.{jpg,jpeg,png,webp}")
+    return nil if image_files.empty?
+
+    # ランダムに1枚選択
+    random_image = image_files.sample
+    filename = File.basename(random_image)
+
+    "/images/news/#{country_dir}/#{filename}"
+  end
 end

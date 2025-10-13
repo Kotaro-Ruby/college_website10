@@ -83,6 +83,49 @@
       </div>
     </div>
 
+    <!-- Latest News Section -->
+    <% if @recent_news&.any? %>
+      <div class="news-section">
+        <div class="container-narrow">
+          <div class="news-header">
+            <h2><i class="fas fa-newspaper"></i> 最新留学ニュース</h2>
+            <%= link_to news_index_path, class: "news-more-link" do %>
+              すべて見る <i class="fas fa-arrow-right"></i>
+            <% end %>
+          </div>
+          <div class="news-grid-wrapper">
+            <div class="news-grid">
+              <% @recent_news.first(10).each do |news| %>
+                <%= link_to news_detail_path(news), class: "news-card" do %>
+                  <% if news.image_url.present? %>
+                    <div class="news-image" style="background-image: url('<%= news.image_url %>');"></div>
+                  <% else %>
+                    <% random_image = random_news_image(news.country) %>
+                    <% if random_image %>
+                      <div class="news-image" style="background-image: url('<%= random_image %>');"></div>
+                    <% else %>
+                      <div class="news-image news-image-placeholder">
+                        <i class="fas fa-globe-americas"></i>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <div class="news-content">
+                    <div class="news-meta">
+                      <span class="news-country"><%= news.country %></span>
+                      <span class="news-date"><%= news.published_at&.strftime("%Y/%m/%d") %></span>
+                    </div>
+                    <h3><%= news.japanese_title.presence || news.title %></h3>
+                    <p><%= truncate(news.japanese_description.presence || news.description, length: 100) %></p>
+                    <span class="news-source"><i class="fas fa-arrow-right"></i> 詳細を見る</span>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <!-- Quick Access Grid -->
     <div class="quick-access-section">
       <div class="container-narrow">
@@ -525,6 +568,179 @@
   .country-btn.disabled:hover {
     transform: none;
     box-shadow: none;
+  }
+
+  /* Latest News Section */
+  .news-section {
+    padding: 50px 20px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .news-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .news-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .news-header i {
+    color: #fb923c;
+    font-size: 2rem;
+  }
+
+  .news-more-link {
+    color: #fb923c;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+
+  .news-more-link:hover {
+    gap: 10px;
+    color: #f97316;
+  }
+
+  /* News Grid with Scroll */
+  .news-grid-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #fb923c #f1f1f1;
+    padding-bottom: 10px;
+  }
+
+  .news-grid-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .news-grid-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .news-grid-wrapper::-webkit-scrollbar-thumb {
+    background: #fb923c;
+    border-radius: 10px;
+  }
+
+  .news-grid-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #f97316;
+  }
+
+  .news-grid {
+    display: flex;
+    gap: 24px;
+    width: fit-content;
+  }
+
+  .news-card {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e2e8f0;
+    min-width: 350px;
+    max-width: 350px;
+    flex-shrink: 0;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(251,146,60,0.2);
+    border-color: #fb923c;
+  }
+
+  .news-image {
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .news-image-placeholder {
+    background: linear-gradient(135deg, #fff5ed, #fed7aa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .news-image-placeholder i {
+    font-size: 4rem;
+    color: #fb923c;
+    opacity: 0.5;
+  }
+
+  .news-content {
+    padding: 20px;
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .news-country {
+    background: #fb923c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .news-date {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .news-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .news-content p {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .news-source {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fb923c;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .news-source i {
+    font-size: 0.75rem;
   }
 
   /* Quick Access Section */
@@ -1349,6 +1565,24 @@
     }
 
     .resource-links {
+      grid-template-columns: 1fr;
+    }
+
+    .news-section {
+      padding: 40px 15px;
+    }
+
+    .news-header {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+
+    .news-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .news-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -2233,12 +2467,18 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     initializeFeaturedToggle();
+    initializeNewsCarousel();
   });
-  
+
   document.addEventListener('turbo:load', function() {
     initializeFeaturedToggle();
+    initializeNewsCarousel();
   });
-  
+
+  function initializeNewsCarousel() {
+    // No carousel functionality needed - just displaying 3 cards in grid
+  }
+
   function initializeFeaturedToggle() {
     // View Toggle for Featured Universities
     const viewToggles = document.querySelectorAll('.toggle-btn');
