@@ -81,7 +81,20 @@ namespace :setup do
       load Rails.root.join('db/seeds/update_au_wiki_images.rb')
     end
     
-    # 8. Run any custom setup scripts
+    # 8. Check and fetch news articles (initial setup only)
+    if defined?(News) && News.table_exists? && News.count == 0
+      puts "📰 Fetching initial news articles..."
+      begin
+        NewsFetcherService.fetch_all_countries
+        puts "✅ Successfully fetched #{News.count} news articles"
+      rescue => e
+        puts "⚠️  Failed to fetch news: #{e.message}"
+      end
+    elsif defined?(News) && News.table_exists?
+      puts "✅ News articles already exist (#{News.count} articles)"
+    end
+
+    # 9. Run any custom setup scripts
     setup_dir = Rails.root.join('db/setup')
     if Dir.exist?(setup_dir)
       Dir[setup_dir.join('*.rb')].sort.each do |file|
@@ -89,7 +102,7 @@ namespace :setup do
         load file
       end
     end
-    
+
     puts "✨ Production setup completed!"
     puts "📊 Final counts:"
     puts "  - Countries: #{Country.count}"
@@ -97,6 +110,7 @@ namespace :setup do
     puts "  - AU Universities: #{AuUniversity.count}" if defined?(AuUniversity)
     puts "  - NZ Universities: #{NzUniversity.count}" if defined?(NzUniversity) && NzUniversity.table_exists?
     puts "  - CA Universities: #{CaUniversity.count}" if defined?(CaUniversity) && CaUniversity.table_exists?
+    puts "  - News Articles: #{News.count}" if defined?(News) && News.table_exists?
   end
   
   desc "Quick health check"
