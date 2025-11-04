@@ -190,7 +190,6 @@
     <div id="ratingWidget" class="rating-widget" style="display: none;">
       <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
       <div class="rating-content">
-        <div class="emoji-icon">🎆</div>
         <p class="rating-text">✨ ご意見をお聞かせください！</p>
         <div class="star-rating">
           <span class="star" onclick="setRating(1)">⭐</span>
@@ -539,21 +538,22 @@
       
       .widget-close {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 8px;
+        right: 8px;
         background: rgba(255, 255, 255, 0.2);
         border: none;
         color: white;
-        font-size: 18px;
+        font-size: 24px;
         cursor: pointer;
-        width: 28px;
-        height: 28px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
         backdrop-filter: blur(10px);
+        padding: 0;
       }
       
       .widget-close:hover {
@@ -762,17 +762,21 @@
       
       .survey-close {
         position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 28px;
-        height: 28px;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
         border: none;
         background: #f3f4f6;
         border-radius: 50%;
-        font-size: 18px;
+        font-size: 24px;
         cursor: pointer;
         color: #6b7280;
         transition: all 0.2s ease;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       
       .survey-close:hover {

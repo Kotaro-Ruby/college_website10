@@ -37,6 +37,11 @@ class Condition < ApplicationRecord
     max_total = sat_math_75 + sat_reading_75
     "#{min_total}-#{max_total}"
   end
+
+  # 閲覧数を取得（インスタンス変数またはViewHistoryから取得）
+  def view_count
+    @view_count || ViewHistory.where(condition_id: id).count
+  end
 end
 
 # 今は使わない

@@ -28,11 +28,10 @@
     .results-header {
       background: white;
       color: #333;
-      padding: 25px 30px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e5e7eb;
+      padding: 20px 24px;
+      border-radius: 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .header-content {
@@ -44,10 +43,10 @@
     }
 
     .results-count {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: rgb(240, 177, 61);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #6b7280;
     }
 
     .results-info {
@@ -58,8 +57,33 @@
     .controls-container {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
+    }
+
+    .change-conditions-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #f97316;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .change-conditions-btn:hover {
+      background: #ea580c;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+    }
+
+    .change-conditions-btn i {
+      font-size: 0.875rem;
     }
 
     .per-page-container {
@@ -208,23 +232,27 @@
     }
 
     .data-source {
-      background-color: #fef3c7;
-      padding: 12px 18px;
-      border-radius: 8px;
-      margin-bottom: 25px;
-      border-left: 4px solid rgb(240, 177, 61);
-      font-size: 14px;
+      background-color: #f9fafb;
+      padding: 12px 16px;
+      border-radius: 0;
+      margin-bottom: 20px;
+      border-left: 3px solid #e5e7eb;
+      font-size: 0.8125rem;
+      color: #6b7280;
+    }
+
+    .data-source i {
+      color: #9ca3af;
     }
 
     .data-source a {
-      color: rgb(240, 177, 61);
+      color: #f97316;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .data-source a:hover {
       text-decoration: underline;
-      color: rgb(220, 157, 41);
     }
 
     .results-table {
@@ -264,21 +292,23 @@
     }
 
     th.sortable::after {
-      content: '⇅';
-      position: absolute;
-      right: 8px;
+      content: ' ⇅';
+      position: relative;
       opacity: 0.5;
-      font-size: 12px;
+      font-size: 14px;
+      margin-left: 4px;
     }
 
     th.sort-asc::after {
-      content: '↑';
+      content: ' ↑';
       opacity: 1;
+      color: #f97316;
     }
 
     th.sort-desc::after {
-      content: '↓';
+      content: ' ↓';
       opacity: 1;
+      color: #f97316;
     }
 
     tbody tr {
@@ -838,6 +868,10 @@
             </div>
           </div>
           <div class="controls-container">
+            <a href="/search" class="change-conditions-btn">
+              <i class="fas fa-filter"></i>
+              条件を変更
+            </a>
             <div class="per-page-container">
               <span class="per-page-label">表示件数:</span>
               <select class="per-page-select" id="perPageSelect">
@@ -846,28 +880,13 @@
                 <option value="100" <%= 'selected' if params[:per_page] == '100' %>>100件</option>
               </select>
             </div>
-            
-            <div class="sort-container">
-              <span class="sort-label">並べ替え:</span>
-              <select class="sort-select" id="sortSelect">
-                <option value="">選択してください</option>
-                <option value="name-asc">大学名 (A-Z)</option>
-                <option value="name-desc">大学名 (Z-A)</option>
-                <option value="students-asc">学生数 (少ない順)</option>
-                <option value="students-desc">学生数 (多い順)</option>
-                <option value="tuition-asc">授業料 (安い順)</option>
-                <option value="tuition-desc">授業料 (高い順)</option>
-                <option value="graduation-asc">卒業率 (低い順)</option>
-                <option value="graduation-desc">卒業率 (高い順)</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>
 
       <div class="data-source">
         <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-        本サイトの大学情報は、アメリカ教育省 College Scorecardのデータに基づいています。
+        大学情報は、アメリカ教育省 College Scorecardのデータに基づいています。
         詳細については<a href="https://collegescorecard.ed.gov/" target="_blank">こちら</a>をご覧ください。
       </div>
 
@@ -876,7 +895,7 @@
           <thead>
             <tr>
               <th class="sortable" data-sort="name">大学名</th>
-              <th>州</th>
+              <th class="sortable" data-sort="state">州</th>
               <th>区分</th>
               <th class="sortable" data-sort="students">学生数</th>
               <th class="sortable" data-sort="tuition">授業料</th>
@@ -1097,31 +1116,39 @@
           </div>
           
           <div class="pagination-nav">
+            <%
+              # 全ての検索パラメータを許可
+              permitted_params = params.permit(
+                :state, :college_name, :privateorpublic, :tuition, :students,
+                :sat_score, :act_score, :Division, :urbanicity, :graduation_rate,
+                :sort, major: []
+              )
+            %>
             <% if @results.prev_page %>
-              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: 1)) %>" class="pagination-btn pagination-first">最初</a>
-              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.prev_page)) %>" class="pagination-btn pagination-prev">前へ</a>
+              <a href="<%= url_for(permitted_params.merge(page: 1)) %>" class="pagination-btn pagination-first">最初</a>
+              <a href="<%= url_for(permitted_params.merge(page: @results.prev_page)) %>" class="pagination-btn pagination-prev">前へ</a>
             <% else %>
               <span class="pagination-btn pagination-first disabled">最初</span>
               <span class="pagination-btn pagination-prev disabled">前へ</span>
             <% end %>
-            
+
             <div class="pagination-pages">
               <% start_page = [@results.current_page - 2, 1].max %>
               <% end_page = [start_page + 4, @results.total_pages].min %>
               <% start_page = [end_page - 4, 1].max %>
-              
+
               <% (start_page..end_page).each do |page| %>
                 <% if page == @results.current_page %>
                   <span class="pagination-btn pagination-current"><%= page %></span>
                 <% else %>
-                  <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: page)) %>" class="pagination-btn"><%= page %></a>
+                  <a href="<%= url_for(permitted_params.merge(page: page)) %>" class="pagination-btn"><%= page %></a>
                 <% end %>
               <% end %>
             </div>
-            
+
             <% if @results.next_page %>
-              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.next_page)) %>" class="pagination-btn pagination-next">次へ</a>
-              <a href="<%= url_for(params.permit(:state, :toefl_score, :university_type, :location_type, :ielts_score, :student_type, :program_type, :sort).merge(page: @results.total_pages)) %>" class="pagination-btn pagination-last">最後</a>
+              <a href="<%= url_for(permitted_params.merge(page: @results.next_page)) %>" class="pagination-btn pagination-next">次へ</a>
+              <a href="<%= url_for(permitted_params.merge(page: @results.total_pages)) %>" class="pagination-btn pagination-last">最後</a>
             <% else %>
               <span class="pagination-btn pagination-next disabled">次へ</span>
               <span class="pagination-btn pagination-last disabled">最後</span>
@@ -1313,28 +1340,26 @@
       });
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    function initializeSorting() {
       const table = document.getElementById('resultsTable');
+      if (!table) return;
+
       const tbody = table.querySelector('tbody');
+      if (!tbody) return;
+
       const rows = Array.from(tbody.querySelectorAll('tr'));
       const headers = table.querySelectorAll('th.sortable');
-      const sortSelect = document.getElementById('sortSelect');
       const perPageSelect = document.getElementById('perPageSelect');
-      
+
       // URLパラメータから現在のソート状態を取得
       const urlParams = new URLSearchParams(window.location.search);
       const currentSortParam = urlParams.get('sort');
       let currentSort = { column: null, direction: null };
-      
+
       if (currentSortParam) {
         const [column, direction] = currentSortParam.split('-');
         currentSort = { column, direction };
-        
-        // ソートドロップダウンの値を設定
-        if (sortSelect) {
-          sortSelect.value = currentSortParam;
-        }
-        
+
         // ヘッダーのソート状態を表示
         headers.forEach(header => {
           header.classList.remove('sort-asc', 'sort-desc');
@@ -1368,27 +1393,18 @@
         header.addEventListener('click', function() {
           const column = this.getAttribute('data-sort');
           let direction = 'asc';
-          
+
           if (currentSort.column === column && currentSort.direction === 'asc') {
             direction = 'desc';
           }
-          
+
           sortTable(column, direction);
-          
-          // ドロップダウンも更新
-          sortSelect.value = `${column}-${direction}`;
         });
       });
+    }
 
-      // ドロップダウン変更イベント
-      sortSelect.addEventListener('change', function() {
-        const value = this.value;
-        if (value) {
-          const [column, direction] = value.split('-');
-          sortTable(column, direction);
-        }
-      });
-
+    // お気に入りと比較ボタンの初期化
+    function initializeFavoriteAndCompare() {
       // お気に入りボタンのイベントリスナー
       console.log('Setting up favorite buttons...');
       const favoriteButtons = document.querySelectorAll('.favorite-btn-small');
@@ -1491,6 +1507,16 @@
           });
         });
       });
+    }
+
+    // DOMContentLoadedとturbo:loadの両方で初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeSorting();
+      initializeFavoriteAndCompare();
+    });
+    document.addEventListener('turbo:load', function() {
+      initializeSorting();
+      initializeFavoriteAndCompare();
     });
   </script>
 </body>

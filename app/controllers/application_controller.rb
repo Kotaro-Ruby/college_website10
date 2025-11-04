@@ -84,23 +84,30 @@ class ApplicationController < ActionController::Base
   def get_popular_colleges
     # ViewHistoryテーブルからcondition_idごとの閲覧数をカウント
     # default_scopeを無効化してGROUP BYクエリを実行
-    popular_condition_ids = ViewHistory
+    view_counts = ViewHistory
       .unscoped
       .group(:condition_id)
       .order("count_all DESC")
-      .limit(5)
+      .limit(6)
       .count
-      .keys
 
     # 閲覧数が多い順に大学を取得
-    if popular_condition_ids.any?
-      Condition.where(id: popular_condition_ids).index_by(&:id).slice(*popular_condition_ids).values
+    if view_counts.any?
+      colleges = Condition.where(id: view_counts.keys).index_by(&:id)
+      # 閲覧数順に並べて、閲覧数情報を追加
+      view_counts.keys.map do |college_id|
+        college = colleges[college_id]
+        college.instance_variable_set(:@view_count, view_counts[college_id]) if college
+        college
+      end.compact
     else
-      # まだ閲覧履歴がない場合は、デフォルトの人気大学を返す
-      Condition.where.not(students: nil, acceptance_rate: nil)
+      # まだ閲覧履歴がない場合は、デフォルトの人気大学を返す（閲覧数は0）
+      colleges = Condition.where.not(students: nil, acceptance_rate: nil)
                .where("acceptance_rate > 0.1 AND acceptance_rate < 0.8")
                .order(students: :desc)
-               .limit(5)
+               .limit(6)
+      colleges.each { |c| c.instance_variable_set(:@view_count, 0) }
+      colleges
     end
   end
 end

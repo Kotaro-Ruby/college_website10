@@ -23,6 +23,12 @@ class HomeController < ApplicationController
 
     # 最新の留学ニュースを取得（公開済みのみ、最新10件）
     @recent_news = News.published.recent.limit(10)
+
+    # THE分野別ランキングデータを取得
+    @subject_rankings = get_the_subject_rankings
+
+    # DBベースのランキングデータを取得
+    @db_rankings = get_db_rankings
   end
 
   def get_recent_articles
@@ -221,6 +227,121 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def get_db_rankings
+    # 4年制大学のみを対象（Carnegie分類15-23が4年制大学、学生数1000人以上）
+    base_scope = Condition.where("carnegie_basic >= 15 AND carnegie_basic <= 23")
+                          .where("students >= 1000")
+
+    {
+      affordable: base_scope.where.not(tuition_in_state: nil)
+                          .where("tuition_in_state > 0")
+                          .order(tuition_in_state: :asc)
+                          .limit(3),
+      high_acceptance: base_scope.where.not(acceptance_rate: nil)
+                               .where("acceptance_rate > 0.5 AND acceptance_rate < 1.0")
+                               .order(acceptance_rate: :desc)
+                               .limit(3),
+      high_graduation: base_scope.where.not(graduation_rate: nil)
+                                .where("graduation_rate > 0.5 AND graduation_rate < 1.0")
+                                .order(graduation_rate: :desc)
+                                .limit(3),
+      large_enrollment: base_scope.where.not(students: nil)
+                                .where("students > 0")
+                                .order(students: :desc)
+                                .limit(3),
+      high_earnings: base_scope.where.not(earnings_10yr_median: nil)
+                              .where("earnings_10yr_median > 0")
+                              .order(earnings_10yr_median: :desc)
+                              .limit(3),
+      high_sat: base_scope.where.not(sat_math_75: nil, sat_reading_75: nil)
+                        .where("sat_math_75 > 700 AND sat_reading_75 > 700")
+                        .order(Arel.sql("(sat_math_75 + sat_reading_75) DESC"))
+                        .limit(3)
+    }
+  end
+
+  def get_the_subject_rankings
+    {
+      "人文科学" => [
+        "Massachusetts Institute of Technology",
+        "Stanford University",
+        "Harvard University",
+        "Princeton University",
+        "University of California-Berkeley"
+      ],
+      "ビジネス・経済学" => [
+        "Massachusetts Institute of Technology",
+        "Stanford University",
+        "Harvard University",
+        "University of California-Berkeley",
+        "University of Chicago"
+      ],
+      "コンピューターサイエンス" => [
+        "Massachusetts Institute of Technology",
+        "Stanford University",
+        "Carnegie Mellon University",
+        "Princeton University",
+        "University of California-Berkeley"
+      ],
+      "教育学" => [
+        "Stanford University",
+        "University of California-Berkeley",
+        "Harvard University",
+        "University of Michigan-Ann Arbor",
+        "University of California-Los Angeles"
+      ],
+      "工学" => [
+        "Harvard University",
+        "Stanford University",
+        "Massachusetts Institute of Technology",
+        "University of California-Berkeley",
+        "California Institute of Technology"
+      ],
+      "法学" => [
+        "Stanford University",
+        "Harvard University",
+        "New York University",
+        "Columbia University",
+        "University of California-Berkeley"
+      ],
+      "生命科学" => [
+        "Harvard University",
+        "Massachusetts Institute of Technology",
+        "Stanford University",
+        "Yale University",
+        "Princeton University"
+      ],
+      "医学・健康科学" => [
+        "Harvard University",
+        "Johns Hopkins University",
+        "Stanford University",
+        "Yale University",
+        "University of Pennsylvania"
+      ],
+      "物理科学" => [
+        "California Institute of Technology",
+        "Harvard University",
+        "Stanford University",
+        "Massachusetts Institute of Technology",
+        "Princeton University"
+      ],
+      "心理学" => [
+        "Stanford University",
+        "Princeton University",
+        "Harvard University",
+        "University of California-Berkeley",
+        "Yale University"
+      ],
+      "社会科学" => [
+        "Massachusetts Institute of Technology",
+        "Stanford University",
+        "Harvard University",
+        "Princeton University",
+        "University of California-Berkeley"
+      ]
+    }
+  end
 
   def save_contact_to_file(name, email, category, message)
     require "csv"

@@ -1,506 +1,901 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学位を目指す留学 - College Spark</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-      line-height: 1.8;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .hero-section {
-      background: linear-gradient(135deg, rgb(251, 211, 141) 0%, rgb(255, 228, 181) 100%);
-      color: #5d4037;
-      padding: 60px 40px;
-      border-radius: 15px;
-      text-align: center;
-      margin-bottom: 40px;
-      box-shadow: 0 8px 25px rgba(251, 211, 141, 0.2);
-    }
-
-    .hero-section h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .hero-section p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .content-section {
-      background: white;
-      margin-bottom: 30px;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .content-section h2 {
-      color: #2c3e50;
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      border-left: 5px solid rgb(251, 211, 141);
-      padding-left: 20px;
-    }
-
-    .content-section h3 {
-      color: #34495e;
-      font-size: 1.5rem;
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
-
-    .content-section p {
-      margin-bottom: 20px;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-      padding: 25px;
-      border-radius: 12px;
-      margin: 25px 0;
-      border-left: 5px solid rgb(251, 211, 141);
-    }
-
-    .highlight-box h4 {
-      color: #8d6e63;
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin: 30px 0;
-    }
-
-    .stat-card {
-      background: linear-gradient(135deg, rgb(251, 211, 141) 0%, rgb(255, 228, 181) 100%);
-      color: #5d4037;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .info-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .info-list li {
-      padding: 15px 0;
-      border-bottom: 1px solid #ecf0f1;
-      position: relative;
-      padding-left: 30px;
-    }
-
-    .info-list li:before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #8d6e63;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .process-steps {
-      counter-reset: step-counter;
-    }
-
-    .process-step {
-      background: white;
-      border: 2px solid #f0f0f0;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 20px;
-      position: relative;
-      counter-increment: step-counter;
-    }
-
-    .process-step:before {
-      content: counter(step-counter);
-      position: absolute;
-      top: -15px;
-      left: 25px;
-      background: linear-gradient(135deg, rgb(251, 211, 141) 0%, rgb(255, 228, 181) 100%);
-      color: #5d4037;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .process-step h4 {
-      color: #2c3e50;
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 25px 0;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .comparison-table th {
-      background: linear-gradient(135deg, rgb(251, 211, 141) 0%, rgb(255, 228, 181) 100%);
-      color: #5d4037;
-      padding: 20px;
-      text-align: left;
-      font-weight: 600;
-    }
-
-    .comparison-table td {
-      padding: 20px;
-      border-bottom: 1px solid #ecf0f1;
-    }
-
-    .comparison-table tr:nth-child(even) {
-      background-color: #f8f9fa;
-    }
-
-    .cta-section {
-      background: linear-gradient(135deg, rgb(251, 211, 141) 0%, rgb(255, 228, 181) 100%);
-      color: #5d4037;
-      padding: 50px 40px;
-      border-radius: 15px;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 15px 40px;
-      background: white;
-      color: #8d6e63;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-top: 25px;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      .hero-section h1 {
-        font-size: 2rem;
-      }
-      
-      .container {
-        padding: 0 15px;
-      }
-      
-      .content-section {
-        padding: 25px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
+<div class="main">
+  <div class="professional-info-container">
     <!-- Hero Section -->
-    <div class="hero-section">
-      <h1><i class="fas fa-graduation-cap"></i> 学位を目指す留学</h1>
-      <p>海外で学位を取得し、グローバルに活躍できる人材を目指すあなたのための包括的ガイド。準備から卒業まで、成功への道筋をサポートします。</p>
-    </div>
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">学位を目指す留学</h1>
+        <p class="hero-subtitle">Degree Seeking Study Abroad</p>
+        <div class="hero-divider"></div>
+        <p class="hero-description">
+          海外で学位を取得し、グローバルに活躍できる人材を目指すあなたのための包括的ガイド
+        </p>
+      </div>
+    </section>
 
     <!-- Basic Info Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-info-circle"></i> 学位留学とは</h2>
-      
-      <p>学位留学とは、海外の大学や大学院で正規の学生として学び、学士号（Bachelor's）、修士号（Master's）、博士号（Ph.D.）などの学位取得を目指す留学形態です。</p>
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>学位留学とは</h2>
+          <p class="section-description">What is Degree Seeking</p>
+        </div>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">4年</div>
-          <div class="stat-label">学士号取得期間</div>
+        <div class="intro-text">
+          <p>
+            学位留学とは、海外の大学や大学院で正規の学生として学び、学士号（Bachelor's）、修士号（Master's）、博士号（Ph.D.）などの学位取得を目指す留学形態です。
+          </p>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">2年</div>
-          <div class="stat-label">修士号取得期間</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">4年</div>
+            <div class="stat-label">学士号取得期間</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2年</div>
+            <div class="stat-label">修士号取得期間</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3-7年</div>
+            <div class="stat-label">博士号取得期間</div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">3-7年</div>
-          <div class="stat-label">博士号取得期間</div>
+
+        <div class="degree-types">
+          <h3>学位の種類</h3>
+          <div class="degree-grid">
+            <div class="degree-card">
+              <h4>学士号（Bachelor's）</h4>
+              <p>4年制大学の学部課程を修了</p>
+            </div>
+            <div class="degree-card">
+              <h4>修士号（Master's）</h4>
+              <p>大学院の修士課程を修了（1-2年）</p>
+            </div>
+            <div class="degree-card">
+              <h4>博士号（Ph.D.）</h4>
+              <p>大学院の博士課程を修了（3-7年）</p>
+            </div>
+            <div class="degree-card">
+              <h4>専門職学位</h4>
+              <p>MBA、JD（法務博士）、MD（医学博士）など</p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <h3>学位の種類</h3>
-      <ul class="info-list">
-        <li><strong>学士号（Bachelor's）：</strong> 4年制大学の学部課程を修了</li>
-        <li><strong>修士号（Master's）：</strong> 大学院の修士課程を修了（1-2年）</li>
-        <li><strong>博士号（Ph.D.）：</strong> 大学院の博士課程を修了（3-7年）</li>
-        <li><strong>専門職学位：</strong> MBA、JD（法務博士）、MD（医学博士）など</li>
-      </ul>
     </section>
 
     <!-- Benefits Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-star"></i> 学位留学のメリット</h2>
-      
-      <p>学位留学は単なる語学習得を超えた、人生を変える経験となります。</p>
+    <section class="section-wrapper benefits-section-bg">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>学位留学のメリット</h2>
+          <p class="section-description">Benefits</p>
+        </div>
 
-      <h3>アカデミックなメリット</h3>
-      <ul class="info-list">
-        <li>世界最高水準の教育を受けられる</li>
-        <li>専門分野の最新知識と技術を習得</li>
-        <li>批判的思考力と問題解決能力の向上</li>
-        <li>研究能力とアカデミックライティングスキルの習得</li>
-      </ul>
+        <div class="intro-text">
+          <p>学位留学は単なる語学習得を超えた、人生を変える経験となります。</p>
+        </div>
 
-      <h3>キャリア上のメリット</h3>
-      <ul class="info-list">
-        <li>国際的に認められた学位の取得</li>
-        <li>多国籍企業への就職機会の拡大</li>
-        <li>海外での就職・起業の可能性</li>
-        <li>高い年収とキャリアアップの機会</li>
-      </ul>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">📚</div>
+            <h3>アカデミックなメリット</h3>
+            <ul>
+              <li>世界最高水準の教育を受けられる</li>
+              <li>専門分野の最新知識と技術を習得</li>
+              <li>批判的思考力と問題解決能力の向上</li>
+              <li>研究能力とアカデミックライティングスキルの習得</li>
+            </ul>
+          </div>
 
-      <h3>個人的成長のメリット</h3>
-      <ul class="info-list">
-        <li>異文化適応能力の向上</li>
-        <li>国際的な人脈の構築</li>
-        <li>自立心と自信の向上</li>
-        <li>世界的な視野の獲得</li>
-      </ul>
+          <div class="benefit-card">
+            <div class="benefit-icon">💼</div>
+            <h3>キャリア上のメリット</h3>
+            <ul>
+              <li>国際的に認められた学位の取得</li>
+              <li>多国籍企業への就職機会の拡大</li>
+              <li>海外での就職・起業の可能性</li>
+              <li>高い年収とキャリアアップの機会</li>
+            </ul>
+          </div>
 
-      <div class="highlight-box">
-        <h4>💡 投資対効果</h4>
-        <p>学位留学は高額な投資ですが、長期的には高い投資対効果が期待できます。アメリカの大学院卒業生の平均年収は学部卒業生より20-30%高いというデータがあります。</p>
+          <div class="benefit-card">
+            <div class="benefit-icon">🌟</div>
+            <h3>個人的成長のメリット</h3>
+            <ul>
+              <li>異文化適応能力の向上</li>
+              <li>国際的な人脈の構築</li>
+              <li>自立心と自信の向上</li>
+              <li>世界的な視野の獲得</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h4>💡 投資対効果</h4>
+          <p>学位留学は高額な投資ですが、長期的には高い投資対効果が期待できます。アメリカの大学院卒業生の平均年収は学部卒業生より20-30%高いというデータがあります。</p>
+        </div>
       </div>
     </section>
 
     <!-- Preparation Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-tasks"></i> 必要な準備</h2>
-      
-      <p>学位留学の成功には、早期からの計画的な準備が不可欠です。</p>
-
-      <h3>語学力の準備</h3>
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th>学位レベル</th>
-            <th>TOEFL iBT</th>
-            <th>IELTS</th>
-            <th>追加要件</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>学士号</strong></td>
-            <td>80-100点</td>
-            <td>6.5-7.0</td>
-            <td>SAT/ACT（アメリカ）</td>
-          </tr>
-          <tr>
-            <td><strong>修士号</strong></td>
-            <td>90-110点</td>
-            <td>7.0-7.5</td>
-            <td>GRE/GMAT</td>
-          </tr>
-          <tr>
-            <td><strong>博士号</strong></td>
-            <td>100-120点</td>
-            <td>7.5-8.0</td>
-            <td>GRE + 研究経験</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>財政準備</h3>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">$30-70K</div>
-          <div class="stat-label">年間学費（アメリカ）</div>
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>必要な準備</h2>
+          <p class="section-description">Preparation</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">$15-25K</div>
-          <div class="stat-label">年間生活費</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">70%</div>
-          <div class="stat-label">奨学金受給者割合</div>
-        </div>
-      </div>
 
-      <div class="highlight-box">
-        <h4>💰 資金調達方法</h4>
-        <ul class="info-list">
-          <li>大学からの奨学金・助成金</li>
-          <li>政府奨学金（JASSO、Fulbright等）</li>
-          <li>民間奨学金・財団助成金</li>
-          <li>教育ローン・銀行融資</li>
-          <li>TA/RA（Teaching/Research Assistant）</li>
-        </ul>
+        <div class="intro-text">
+          <p>学位留学の成功には、早期からの計画的な準備が不可欠です。</p>
+        </div>
+
+        <h3>語学力の準備</h3>
+        <div class="table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>学位レベル</th>
+                <th>TOEFL iBT</th>
+                <th>IELTS</th>
+                <th>追加要件</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>学士号</strong></td>
+                <td>80-100点</td>
+                <td>6.5-7.0</td>
+                <td>SAT/ACT（アメリカ）</td>
+              </tr>
+              <tr>
+                <td><strong>修士号</strong></td>
+                <td>90-110点</td>
+                <td>7.0-7.5</td>
+                <td>GRE/GMAT</td>
+              </tr>
+              <tr>
+                <td><strong>博士号</strong></td>
+                <td>100-120点</td>
+                <td>7.5-8.0</td>
+                <td>GRE + 研究経験</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>財政準備</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">$30-70K</div>
+            <div class="stat-label">年間学費（アメリカ）</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">$15-25K</div>
+            <div class="stat-label">年間生活費</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">70%</div>
+            <div class="stat-label">奨学金受給者割合</div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h4>💰 資金調達方法</h4>
+          <ul>
+            <li>大学からの奨学金・助成金</li>
+            <li>政府奨学金（JASSO、Fulbright等）</li>
+            <li>民間奨学金・財団助成金</li>
+            <li>教育ローン・銀行融資</li>
+            <li>TA/RA（Teaching/Research Assistant）</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- Process Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-route"></i> 留学実現プロセス</h2>
-      
-      <p>学位留学を実現するための段階的なプロセスをご紹介します。</p>
-
-      <div class="process-steps">
-        <div class="process-step">
-          <h4>情報収集・目標設定（18-24ヶ月前）</h4>
-          <p>専攻分野、希望国・地域、大学のリサーチを行い、明確な目標を設定します。キャリアプランとの整合性も重要です。</p>
+    <section class="section-wrapper process-section-bg">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>留学実現プロセス</h2>
+          <p class="section-description">Process</p>
         </div>
 
-        <div class="process-step">
-          <h4>語学力向上・標準試験対策（12-18ヶ月前）</h4>
-          <p>TOEFL/IELTS、GRE/GMAT等の準備を開始。複数回受験を想定したスケジュールを立てます。</p>
+        <div class="intro-text">
+          <p>学位留学を実現するための段階的なプロセスをご紹介します。</p>
         </div>
 
-        <div class="process-step">
-          <h4>出願準備・書類作成（6-12ヶ月前）</h4>
-          <p>Statement of Purpose、推薦状、履歴書等の準備。研究計画書（大学院の場合）の作成も重要です。</p>
-        </div>
+        <div class="process-steps">
+          <div class="process-card">
+            <div class="process-number">01</div>
+            <h4>情報収集・目標設定</h4>
+            <p class="process-timing">18-24ヶ月前</p>
+            <p>専攻分野、希望国・地域、大学のリサーチを行い、明確な目標を設定します。キャリアプランとの整合性も重要です。</p>
+          </div>
 
-        <div class="process-step">
-          <h4>出願・面接（3-6ヶ月前）</h4>
-          <p>オンライン出願の提出。面接がある場合は十分な準備を行います。出願料や送料も考慮に入れましょう。</p>
-        </div>
+          <div class="process-card">
+            <div class="process-number">02</div>
+            <h4>語学力向上・標準試験対策</h4>
+            <p class="process-timing">12-18ヶ月前</p>
+            <p>TOEFL/IELTS、GRE/GMAT等の準備を開始。複数回受験を想定したスケジュールを立てます。</p>
+          </div>
 
-        <div class="process-step">
-          <h4>合格後手続き（1-3ヶ月前）</h4>
-          <p>合格通知受領後、入学許可書（I-20等）の取得、ビザ申請、住居確保、航空券手配を行います。</p>
-        </div>
+          <div class="process-card">
+            <div class="process-number">03</div>
+            <h4>出願準備・書類作成</h4>
+            <p class="process-timing">6-12ヶ月前</p>
+            <p>Statement of Purpose、推薦状、履歴書等の準備。研究計画書（大学院の場合）の作成も重要です。</p>
+          </div>
 
-        <div class="process-step">
-          <h4>渡航・オリエンテーション</h4>
-          <p>現地到着後、大学のオリエンテーション参加、履修登録、生活基盤の整備を行います。</p>
+          <div class="process-card">
+            <div class="process-number">04</div>
+            <h4>出願・面接</h4>
+            <p class="process-timing">3-6ヶ月前</p>
+            <p>オンライン出願の提出。面接がある場合は十分な準備を行います。出願料や送料も考慮に入れましょう。</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">05</div>
+            <h4>合格後手続き</h4>
+            <p class="process-timing">1-3ヶ月前</p>
+            <p>合格通知受領後、入学許可書（I-20等）の取得、ビザ申請、住居確保、航空券手配を行います。</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-number">06</div>
+            <h4>渡航・オリエンテーション</h4>
+            <p class="process-timing">出発</p>
+            <p>現地到着後、大学のオリエンテーション参加、履修登録、生活基盤の整備を行います。</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Success Tips Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-lightbulb"></i> 成功のポイント</h2>
-      
-      <h3>出願成功のコツ</h3>
-      <ul class="info-list">
-        <li>早期からの計画的な準備</li>
-        <li>複数の大学への出願（リーチ・マッチ・セーフティ校のバランス）</li>
-        <li>個性的で説得力のあるエッセイ作成</li>
-        <li>強力な推薦状の確保</li>
-        <li>研究経験や実務経験のアピール</li>
-      </ul>
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>成功のポイント</h2>
+          <p class="section-description">Success Tips</p>
+        </div>
 
-      <h3>留学生活成功のコツ</h3>
-      <ul class="info-list">
-        <li>積極的な授業参加とディスカッション</li>
-        <li>教授とのコミュニケーション</li>
-        <li>学内外でのネットワーキング</li>
-        <li>インターンシップや研究活動への参加</li>
-        <li>文化的な違いへの理解と適応</li>
-      </ul>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <h3>出願成功のコツ</h3>
+            <ul>
+              <li>早期からの計画的な準備</li>
+              <li>複数の大学への出願（リーチ・マッチ・セーフティ校のバランス）</li>
+              <li>個性的で説得力のあるエッセイ作成</li>
+              <li>強力な推薦状の確保</li>
+              <li>研究経験や実務経験のアピール</li>
+            </ul>
+          </div>
 
-      <div class="highlight-box">
-        <h4>🎯 よくある失敗とその対策</h4>
-        <ul class="info-list">
-          <li><strong>語学力不足：</strong> 出願時の点数だけでなく、実用的な英語力も向上させる</li>
-          <li><strong>資金不足：</strong> 予備費を含めた十分な資金計画を立てる</li>
-          <li><strong>文化適応困難：</strong> 事前の文化学習と現地でのサポート活用</li>
-          <li><strong>学業についていけない：</strong> 学習スタイルの違いを理解し、サポートを求める</li>
-        </ul>
+          <div class="tip-card">
+            <h3>留学生活成功のコツ</h3>
+            <ul>
+              <li>積極的な授業参加とディスカッション</li>
+              <li>教授とのコミュニケーション</li>
+              <li>学内外でのネットワーキング</li>
+              <li>インターンシップや研究活動への参加</li>
+              <li>文化的な違いへの理解と適応</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h4>🎯 よくある失敗とその対策</h4>
+          <ul>
+            <li><strong>語学力不足：</strong> 出願時の点数だけでなく、実用的な英語力も向上させる</li>
+            <li><strong>資金不足：</strong> 予備費を含めた十分な資金計画を立てる</li>
+            <li><strong>文化適応困難：</strong> 事前の文化学習と現地でのサポート活用</li>
+            <li><strong>学業についていけない：</strong> 学習スタイルの違いを理解し、サポートを求める</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Career Prospects Section -->
-    <section class="content-section">
-      <h2><i class="fas fa-briefcase"></i> 卒業後のキャリア</h2>
-      
-      <p>学位留学後のキャリアパスは多様で、グローバルな活躍の機会が広がります。</p>
+    <!-- Career Section -->
+    <section class="section-wrapper career-section-bg">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>卒業後のキャリア</h2>
+          <p class="section-description">Career Prospects</p>
+        </div>
 
-      <h3>主なキャリアパス</h3>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number"><i class="fas fa-building"></i></div>
-          <div class="stat-label">多国籍企業</div>
+        <div class="intro-text">
+          <p>学位留学後のキャリアパスは多様で、グローバルな活躍の機会が広がります。</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-number"><i class="fas fa-microscope"></i></div>
-          <div class="stat-label">研究機関</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number"><i class="fas fa-rocket"></i></div>
-          <div class="stat-label">起業・スタートアップ</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number"><i class="fas fa-globe"></i></div>
-          <div class="stat-label">国際機関</div>
-        </div>
-      </div>
 
-      <h3>OPT・就労ビザについて</h3>
-      <p>アメリカでは、学位取得後にOptional Practical Training (OPT)として最大12ヶ月（STEM分野は最大36ヶ月）の就労が可能です。その後、H-1Bビザ等で継続就労する道もあります。</p>
+        <h3>主なキャリアパス</h3>
+        <div class="career-grid">
+          <div class="career-card">
+            <div class="career-icon">🏢</div>
+            <h4>多国籍企業</h4>
+          </div>
+          <div class="career-card">
+            <div class="career-icon">🔬</div>
+            <h4>研究機関</h4>
+          </div>
+          <div class="career-card">
+            <div class="career-icon">🚀</div>
+            <h4>起業・スタートアップ</h4>
+          </div>
+          <div class="career-card">
+            <div class="career-icon">🌏</div>
+            <h4>国際機関</h4>
+          </div>
+        </div>
 
-      <div class="highlight-box">
-        <h4>📈 キャリア統計</h4>
-        <ul class="info-list">
-          <li>海外MBA卒業生の平均年収：$150,000-200,000</li>
-          <li>STEM分野博士号取得者の就職率：95%以上</li>
-          <li>海外学位保持者の昇進率：国内学位者の1.5倍</li>
-          <li>国際的なポジションへの登用率：3倍以上</li>
-        </ul>
+        <h3>OPT・就労ビザについて</h3>
+        <p class="career-info">
+          アメリカでは、学位取得後にOptional Practical Training (OPT)として最大12ヶ月（STEM分野は最大36ヶ月）の就労が可能です。その後、H-1Bビザ等で継続就労する道もあります。
+        </p>
+
+        <div class="highlight-box">
+          <h4>📈 キャリア統計</h4>
+          <ul>
+            <li>海外MBA卒業生の平均年収：$150,000-200,000</li>
+            <li>STEM分野博士号取得者の就職率：95%以上</li>
+            <li>海外学位保持者の昇進率：国内学位者の1.5倍</li>
+            <li>国際的なポジションへの登用率：3倍以上</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Call to Action -->
-    <div class="cta-section">
-      <h2>🎓 あなたの学位留学への第一歩</h2>
-      <p>夢の実現に向けて、今すぐ行動を開始しましょう。College Sparkで理想の大学を見つけ、学位留学の第一歩を踏み出してください。</p>
-      <a href="/" class="cta-button">
-        <i class="fas fa-search"></i> 大学検索を始める
-      </a>
-    </div>
+    <!-- CTA Section -->
+    <section class="section-wrapper cta-section-bg">
+      <div class="section-content">
+        <div class="cta-content">
+          <h2>あなたの学位留学への第一歩</h2>
+          <p>夢の実現に向けて、今すぐ行動を開始しましょう。College Sparkで理想の大学を見つけ、学位留学の第一歩を踏み出してください。</p>
+          <a href="/" class="cta-button">大学検索を始める</a>
+        </div>
+      </div>
+    </section>
+
   </div>
-</body>
-</html>
+</div>
+
+<style>
+  /* Container */
+  .professional-info-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: rgb(240, 177, 61);
+    margin: 30px auto;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Section Wrapper */
+  .section-wrapper {
+    padding: 80px 20px;
+  }
+
+  .section-content {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+  }
+
+  .section-description {
+    font-size: 16px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 300;
+  }
+
+  /* Alternating Backgrounds */
+  .benefits-section-bg {
+    background: #f5f5f5;
+  }
+
+  .process-section-bg {
+    background: #f5f5f5;
+  }
+
+  .career-section-bg {
+    background: #f5f5f5;
+  }
+
+  .cta-section-bg {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+  }
+
+  /* Intro Text */
+  .intro-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  .intro-text p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.8;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+  }
+
+  .stat-card {
+    background: linear-gradient(135deg, rgba(240, 177, 61, 0.12) 0%, rgba(240, 177, 61, 0.08) 100%);
+    padding: 35px 25px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(240, 177, 61, 0.2);
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgb(200, 140, 40);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: rgb(200, 140, 40);
+    opacity: 0.9;
+  }
+
+  /* Degree Types */
+  .degree-types {
+    margin-top: 50px;
+  }
+
+  .degree-types h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .degree-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .degree-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .degree-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .degree-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+
+  .degree-card p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .benefit-card {
+    background: white;
+    padding: 35px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+  }
+
+  .benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .benefit-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+
+  .benefit-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .benefit-card li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .benefit-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: rgb(200, 140, 40);
+    font-weight: bold;
+  }
+
+  /* Highlight Box */
+  .highlight-box {
+    background: rgba(240, 177, 61, 0.08);
+    border: 2px solid rgba(240, 177, 61, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    margin: 40px 0;
+  }
+
+  .highlight-box h4 {
+    color: rgb(200, 140, 40);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .highlight-box p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .highlight-box ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+  }
+
+  .highlight-box li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .highlight-box strong {
+    color: rgb(200, 140, 40);
+    font-weight: 600;
+  }
+
+  /* Table */
+  .section-content h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 50px 0 25px 0;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 30px 0;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+  }
+
+  .comparison-table th {
+    background: linear-gradient(135deg, rgba(240, 177, 61, 0.12) 0%, rgba(240, 177, 61, 0.08) 100%);
+    color: rgb(200, 140, 40);
+    padding: 18px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .comparison-table td {
+    padding: 18px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparison-table strong {
+    color: #1a1a1a;
+  }
+
+  /* Process Steps */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+  }
+
+  .process-card {
+    background: white;
+    padding: 35px 30px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-number {
+    font-size: 70px;
+    font-weight: 700;
+    color: rgba(240, 177, 61, 0.08);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    line-height: 1;
+  }
+
+  .process-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-timing {
+    font-size: 13px;
+    color: rgb(200, 140, 40);
+    font-weight: 600;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Tips Grid */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .tip-card {
+    background: white;
+    padding: 35px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+  }
+
+  .tip-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+  }
+
+  .tip-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tip-card li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .tip-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: rgb(200, 140, 40);
+    font-weight: bold;
+  }
+
+  /* Career Grid */
+  .career-info {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    margin: 20px 0 40px 0;
+  }
+
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0 50px 0;
+  }
+
+  .career-card {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .career-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .career-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  /* CTA Section */
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .cta-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: rgb(240, 177, 61);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(240, 177, 61, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(240, 177, 61, 0.5);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 36px;
+    }
+
+    .section-wrapper {
+      padding: 50px 15px;
+    }
+
+    .section-header h2 {
+      font-size: 28px;
+    }
+
+    .degree-grid,
+    .benefits-grid,
+    .tips-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid,
+    .career-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .process-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-table {
+      font-size: 12px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 12px;
+    }
+  }
+</style>

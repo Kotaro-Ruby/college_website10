@@ -346,8 +346,8 @@ label:hover input[type="radio"] {
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     border: 1px solid rgba(59, 130, 246, 0.2);
     padding: 18px 20px;
-    width: 380px;
-    max-width: calc(100vw - 60px);
+    width: 520px;
+    max-width: calc(100vw - 40px);
     top: 35px;
     right: 0;
     z-index: 1000;
@@ -398,17 +398,45 @@ label:hover input[type="radio"] {
 .tooltip-container4 .tooltip-content,
 .tooltip-container6 .tooltip-content {
     right: auto;
-    left: -355px;
+    left: -495px;
 }
 
 .tooltip-container3 .tooltip-content::before,
 .tooltip-container4 .tooltip-content::before,
 .tooltip-container6 .tooltip-content::before {
     right: auto;
-    left: 355px;
+    left: 495px;
 }
 
 /* レスポンシブ対応 - タブレット */
+@media (max-width: 1024px) {
+    .tooltip-content {
+        width: calc(100vw - 40px);
+        max-width: calc(100vw - 40px);
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        font-size: 13px;
+        padding: 16px 18px;
+        line-height: 1.7;
+    }
+
+    /* タブレットでも全てのツールチップを中央に表示 */
+    .tooltip-container3 .tooltip-content,
+    .tooltip-container4 .tooltip-content,
+    .tooltip-container6 .tooltip-content {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .tooltip-content::before {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+
 @media (max-width: 768px) {
     .tooltip-container1,
     .tooltip-container2,
@@ -420,50 +448,22 @@ label:hover input[type="radio"] {
     }
 
     .tooltip-content {
-        width: calc(100vw - 50px);
-        max-width: 350px;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+        width: calc(100vw - 40px);
+        max-width: calc(100vw - 40px);
         font-size: 13px;
         padding: 15px;
         line-height: 1.6;
-    }
-    
-    /* モバイルでは全てのツールチップを中央に表示 */
-    .tooltip-container3 .tooltip-content,
-    .tooltip-container4 .tooltip-content,
-    .tooltip-container6 .tooltip-content {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-    }
-    
-    .tooltip-content::before {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
     }
 }
 
 /* レスポンシブ対応 - スマートフォン */
 @media (max-width: 480px) {
     .tooltip-content {
-        width: calc(100vw - 40px);
-        max-width: 320px;
+        width: calc(100vw - 30px);
+        max-width: calc(100vw - 30px);
         font-size: 12px;
-        padding: 12px;
+        padding: 12px 14px;
         line-height: 1.5;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-    }
-    
-    .tooltip-container3 .tooltip-content::before,
-    .tooltip-container4 .tooltip-content::before,
-    .tooltip-container6 .tooltip-content::before {
-        right: auto;
-        left: 50%;
     }
 }
 
@@ -567,6 +567,7 @@ label:hover input[type="radio"] {
     padding: 4px;
     border: 2px solid #e9ecef;
     transition: all 0.3s ease;
+    gap: 8px;
 }
 
 .search-input-group:focus-within {
@@ -578,6 +579,7 @@ label:hover input[type="radio"] {
     color: #6c757d;
     margin: 0 15px;
     font-size: 1.1rem;
+    flex-shrink: 0;
 }
 
 .search-input {
@@ -588,6 +590,7 @@ label:hover input[type="radio"] {
     font-size: 1rem;
     outline: none;
     color: #495057;
+    min-width: 0;
 }
 
 .search-input::placeholder {
@@ -603,7 +606,8 @@ label:hover input[type="radio"] {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-left: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .search-button:hover {
@@ -712,24 +716,49 @@ label:hover input[type="radio"] {
     .copy-container {
         padding: 30px 15px 40px 15px;
     }
-    
+
+    .search-section {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+
+    .search-input-group {
+        padding: 4px;
+        gap: 4px;
+    }
+
+    .search-icon {
+        margin: 0 8px;
+        font-size: 1rem;
+    }
+
+    .search-input {
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .search-button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
     .college-name-search {
         padding: 25px 20px;
         margin: 0 15px;
         max-width: calc(100% - 30px);
     }
-    
+
     .search-input-container {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .college-search-input {
         padding: 15px 18px;
         font-size: 16px;
         min-height: 50px;
     }
-    
+
     .name-search-btn {
         justify-content: center;
         padding: 15px 25px;
@@ -739,12 +768,41 @@ label:hover input[type="radio"] {
 }
 
 @media (max-width: 480px) {
+    .search-section {
+        padding: 15px 10px;
+        margin: 15px 0;
+    }
+
+    .search-input-group {
+        padding: 3px;
+        gap: 3px;
+    }
+
+    .search-icon {
+        margin: 0 6px;
+        font-size: 0.9rem;
+    }
+
+    .search-input {
+        padding: 10px 0;
+        font-size: 13px;
+    }
+
+    .search-input::placeholder {
+        font-size: 13px;
+    }
+
+    .search-button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
     .college-name-search {
         padding: 20px 15px;
         margin: 0 10px;
         max-width: calc(100% - 20px);
     }
-    
+
     .search-header h3 {
         font-size: 1rem;
     }
@@ -803,7 +861,7 @@ label:hover input[type="radio"] {
                 <div class="search-input-group">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" id="college-name-input" placeholder="大学名、都市、専攻分野で検索..." class="search-input">
-                    <button id="name-search-button" class="search-button">検索</button>
+                    <button id="name-search-button" class="search-button"><span class="button-text">検索</span></button>
                 </div>
             </div>
         </div>

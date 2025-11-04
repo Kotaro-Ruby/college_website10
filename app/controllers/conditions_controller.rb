@@ -239,6 +239,8 @@ class ConditionsController < ApplicationController
       case sort_column
       when "name"
         scope = scope.order(Arel.sql("college #{sort_direction == 'asc' ? 'ASC' : 'DESC'}"))
+      when "state"
+        scope = scope.order(Arel.sql("state #{sort_direction == 'asc' ? 'ASC' : 'DESC'}"))
       when "students"
         scope = scope.order(Arel.sql("students #{sort_direction == 'asc' ? 'ASC' : 'DESC'} NULLS LAST"))
       when "tuition"
