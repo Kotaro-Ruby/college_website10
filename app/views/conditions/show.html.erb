@@ -29,18 +29,29 @@
 
     .hero-section {
       <% if @college_photo && @college_photo[:url] %>
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
+        background: linear-gradient(135deg, rgba(26, 32, 44, 0.85), rgba(45, 55, 72, 0.85)),
                     url('<%= @college_photo[:url] %>') center/cover;
       <% else %>
-        background: linear-gradient(135deg, #f97316, #ea580c);
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
       <% end %>
-      min-height: 350px;
-      padding: 40px 20px 40px;
+      min-height: 400px;
+      padding: 80px 20px 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: #f0b13d;
     }
     
     .image-attribution {
@@ -133,72 +144,89 @@
     .quick-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 1px;
       margin-bottom: 60px;
+      background: #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     .stat-card {
-      background: #fafafa;
+      background: white;
       color: #1c1917;
-      padding: 0;
+      padding: 32px 20px;
       border-radius: 0;
       text-align: center;
       position: relative;
       overflow: hidden;
       border: none;
-      border-bottom: 3px solid transparent;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
-    .stat-card:nth-child(1) {
-      border-bottom-color: #f97316;
+    .stat-card:first-child {
+      border-radius: 12px 0 0 12px;
     }
 
-    .stat-card:nth-child(2) {
-      border-bottom-color: #fb923c;
-    }
-
-    .stat-card:nth-child(3) {
-      border-bottom-color: #fdba74;
-    }
-
-    .stat-card:nth-child(4) {
-      border-bottom-color: #fed7aa;
+    .stat-card:last-child {
+      border-radius: 0 12px 12px 0;
     }
 
     .stat-card:hover {
-      background: white;
+      background: #fffbf7;
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(240, 177, 61, 0.15);
     }
 
     .stat-card::before {
-      display: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(240, 177, 61, 0.1) 0%, rgba(240, 177, 61, 0.3) 50%, rgba(240, 177, 61, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
     }
 
     .stat-icon {
-      font-size: 1.5rem;
-      margin: 24px 0 12px 0;
-      color: #f97316;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #a0a0a0;
       display: block;
+      transition: color 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+      color: #f0b13d;
     }
 
     .stat-value {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      margin: 0;
+      margin: 0 0 8px 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      color: #1c1917;
+      color: #1a202c;
       line-height: 1;
       letter-spacing: -0.03em;
+      transition: color 0.3s ease;
+    }
+
+    .stat-card:hover .stat-value {
+      color: #2d3748;
     }
 
     .stat-label {
       font-size: 0.75rem;
-      color: #78716c;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+      color: #718096;
+      font-weight: 500;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      margin: 12px 0 24px 0;
+      margin: 0;
       display: block;
     }
 
@@ -224,7 +252,7 @@
       transform: translateY(-50%);
       width: 4px;
       height: 30px;
-      background: #f97316;
+      background: #f0b13d;
       border-radius: 2px;
     }
 
@@ -241,7 +269,7 @@
       border-radius: 0;
       transition: all 0.2s ease;
       border: 1px solid #e5e7eb;
-      border-left: 4px solid #f97316;
+      border-left: 4px solid #f0b13d;
       text-align: left;
       position: relative;
       overflow: hidden;
@@ -252,14 +280,14 @@
     }
 
     .detail-card:hover {
-      border-left-color: #ea580c;
+      border-left-color: #d4a445;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transform: translateX(4px);
     }
 
     .detail-icon {
       font-size: 1rem;
-      color: #f97316;
+      color: #f0b13d;
       margin-bottom: 8px;
       display: block;
     }
@@ -310,7 +338,7 @@
     .info-card-icon {
       width: 36px;
       height: 36px;
-      background: #f97316;
+      background: #f0b13d;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -324,13 +352,13 @@
       background: #fffbf7;
       padding: 24px;
       border-radius: 12px;
-      border: 1px solid #fed7aa;
+      border: 1px solid #f9e5c5;
       color: #78716c;
       line-height: 1.7;
     }
 
     .social-section {
-      background: #f97316;
+      background: #f0b13d;
       color: white;
       padding: 32px;
       border-radius: 12px;
@@ -378,7 +406,7 @@
       align-items: center;
       gap: 10px;
       padding: 12px 24px;
-      background: #f97316;
+      background: #f0b13d;
       color: white;
       text-decoration: none;
       border-radius: 12px;
@@ -395,11 +423,11 @@
     .back-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
-      background: #ea580c;
+      background: #d4a445;
     }
 
     .website-link {
-      color: #fed7aa;
+      color: #f9e5c5;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
@@ -414,7 +442,7 @@
       padding: 32px;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border-left: 4px solid #fdba74;
+      border-left: 4px solid #f0b13d;
       position: relative;
       margin-bottom: 20px;
     }
@@ -423,7 +451,7 @@
       position: absolute;
       top: -10px;
       left: 20px;
-      background: #f97316;
+      background: #f0b13d;
       color: white;
       width: 40px;
       height: 40px;
@@ -604,7 +632,7 @@
     }
 
     .login-modal-header {
-      background: #f97316;
+      background: #f0b13d;
       color: white;
       padding: 20px 24px;
       display: flex;
@@ -682,7 +710,7 @@
     }
 
     .login-btn-primary {
-      background: #f97316;
+      background: #f0b13d;
       color: white;
       box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
     }
@@ -690,20 +718,20 @@
     .login-btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
-      background: #ea580c;
+      background: #d4a445;
       color: white;
     }
 
     .login-btn-secondary {
       background: white;
-      color: #fb923c;
-      border: 2px solid #fdba74;
+      color: #f0b13d;
+      border: 2px solid #f0b13d;
     }
 
     .login-btn-secondary:hover {
       background: #fef3e2;
       transform: translateY(-2px);
-      color: #fb923c;
+      color: #f0b13d;
     }
 
     /* Demographics Charts Styling */
@@ -747,7 +775,7 @@
     }
 
     .chart-title i {
-      color: #fb923c;
+      color: #f0b13d;
       font-size: 1.3rem;
     }
 
@@ -759,7 +787,7 @@
     }
 
     .info-icon:hover {
-      color: #fb923c;
+      color: #f0b13d;
     }
 
     .chart-description {
@@ -767,7 +795,7 @@
       padding: 12px 16px;
       background: rgba(251, 146, 60, 0.05);
       border-radius: 8px;
-      border-left: 4px solid #fb923c;
+      border-left: 4px solid #f0b13d;
     }
 
     .chart-description p {
@@ -839,7 +867,7 @@
     }
 
     .subsection-title i {
-      color: #fb923c;
+      color: #f0b13d;
       font-size: 1.1rem;
     }
 
@@ -955,12 +983,12 @@
       padding: 16px;
       background: rgba(251, 146, 60, 0.03);
       border-radius: 12px;
-      border-left: 4px solid #fb923c;
+      border-left: 4px solid #f0b13d;
       flex: 1;
     }
 
     .location-item i {
-      color: #fb923c;
+      color: #f0b13d;
       font-size: 1.1rem;
       margin-top: 2px;
       min-width: 20px;
@@ -1033,12 +1061,12 @@
       padding: 60px 40px;
       background: #fffbf7;
       border-radius: 12px;
-      border: 2px dashed #fed7aa;
+      border: 2px dashed #f9e5c5;
     }
 
     .no-data-message i {
       font-size: 3.5rem;
-      color: #fdba74;
+      color: #f0b13d;
       margin-bottom: 20px;
     }
 
@@ -2067,7 +2095,7 @@
           <div class="major-info-section">
             <div class="major-info-card">
               <h2 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 1.8rem; color: #1c1917; margin-bottom: 32px; display: flex; align-items: center; gap: 16px;">
-                <div style="width: 48px; height: 48px; background: #f97316; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;">
+                <div style="width: 48px; height: 48px; background: #f0b13d; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;">
                   <i class="fas fa-graduation-cap"></i>
                 </div>
                 専攻分野情報
@@ -2160,9 +2188,9 @@
                 
                 <% if majors.any? %>
                   <!-- 専攻統計サマリー -->
-                  <div style="background: #fffbf7; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #fed7aa;">
+                  <div style="background: #fffbf7; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #f9e5c5;">
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                      <i class="fas fa-chart-pie" style="color: #fb923c; font-size: 1.2rem;"></i>
+                      <i class="fas fa-chart-pie" style="color: #f0b13d; font-size: 1.2rem;"></i>
                       <h4 style="margin: 0; color: #2d3748; font-weight: 600;">専攻分野の概要</h4>
                     </div>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">
@@ -2260,8 +2288,8 @@
                     </div>
                   </div>
                 <% else %>
-                  <div style="text-align: center; padding: 40px 20px; background: #fffbf7; border-radius: 12px; border: 2px dashed #fed7aa;">
-                    <i class="fas fa-university" style="font-size: 3rem; color: #fdba74; margin-bottom: 16px;"></i>
+                  <div style="text-align: center; padding: 40px 20px; background: #fffbf7; border-radius: 12px; border: 2px dashed #f9e5c5;">
+                    <i class="fas fa-university" style="font-size: 3rem; color: #f0b13d; margin-bottom: 16px;"></i>
                     <h4 style="color: #2d3748; margin-bottom: 12px;">専攻分野データ準備中</h4>
                     <p style="color: #6b7280; margin: 0; line-height: 1.6;">
                       この大学では多様な専攻分野を提供しており、学生一人ひとりの興味や将来の目標に合わせて選択できる<br>
@@ -2587,31 +2615,31 @@
         <% if @college.percent_white.present? && @college.percent_white > 0 %>
           ethnicityData.labels.push('白人');
           ethnicityData.data.push(<%= (@college.percent_white * 100).round(1) %>);
-          ethnicityData.colors.push('#3B82F6');
+          ethnicityData.colors.push('#2C5282');
         <% end %>
 
         <% if @college.percent_black.present? && @college.percent_black > 0 %>
           ethnicityData.labels.push('黒人');
           ethnicityData.data.push(<%= (@college.percent_black * 100).round(1) %>);
-          ethnicityData.colors.push('#8B5CF6');
+          ethnicityData.colors.push('#4A5568');
         <% end %>
 
         <% if @college.percent_hispanic.present? && @college.percent_hispanic > 0 %>
           ethnicityData.labels.push('ヒスパニック系');
           ethnicityData.data.push(<%= (@college.percent_hispanic * 100).round(1) %>);
-          ethnicityData.colors.push('#10B981');
+          ethnicityData.colors.push('#2C7A7B');
         <% end %>
 
         <% if @college.percent_asian.present? && @college.percent_asian > 0 %>
           ethnicityData.labels.push('アジア系');
           ethnicityData.data.push(<%= (@college.percent_asian * 100).round(1) %>);
-          ethnicityData.colors.push('#F59E0B');
+          ethnicityData.colors.push('#9C8B7A');
         <% end %>
 
         <% if @college.percent_non_resident_alien.present? && @college.percent_non_resident_alien > 0 %>
           ethnicityData.labels.push('留学生');
           ethnicityData.data.push(<%= (@college.percent_non_resident_alien * 100).round(1) %>);
-          ethnicityData.colors.push('#EF4444');
+          ethnicityData.colors.push('#f0b13d');
         <% end %>
 
         // Create ethnicity chart
@@ -2651,7 +2679,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     displayColors: true,
@@ -2687,13 +2715,13 @@
         <% if @college.percent_men.present? && @college.percent_men > 0 %>
           genderData.labels.push('男性');
           genderData.data.push(<%= (@college.percent_men * 100).round(1) %>);
-          genderData.colors.push('#3B82F6');
+          genderData.colors.push('#2C5282');
         <% end %>
 
         <% if @college.percent_women.present? && @college.percent_women > 0 %>
           genderData.labels.push('女性');
           genderData.data.push(<%= (@college.percent_women * 100).round(1) %>);
-          genderData.colors.push('#EC4899');
+          genderData.colors.push('#2C7A7B');
         <% end %>
 
         // Create gender chart
@@ -2733,7 +2761,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     displayColors: true,
@@ -2791,20 +2819,20 @@
                 datasets: [{
                   label: '25th percentile',
                   data: satData.data.map(range => range[0]),
-                  backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                  borderColor: 'rgba(59, 130, 246, 1)',
+                  backgroundColor: 'rgba(44, 82, 130, 0.8)',
+                  borderColor: 'rgba(44, 82, 130, 1)',
                   borderWidth: 2
                 }, {
                   label: '75th percentile',
                   data: satData.data.map(range => range[1]),
-                  backgroundColor: 'rgba(251, 146, 60, 0.8)',
-                  borderColor: 'rgba(251, 146, 60, 1)',
+                  backgroundColor: 'rgba(74, 85, 104, 0.8)',
+                  borderColor: 'rgba(74, 85, 104, 1)',
                   borderWidth: 2
                 }, {
                   label: '全米平均',
                   data: satData.labels.map(label => satAverages[label]),
-                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                  borderColor: 'rgba(239, 68, 68, 1)',
+                  backgroundColor: 'rgba(240, 177, 61, 0.7)',
+                  borderColor: 'rgba(240, 177, 61, 1)',
                   borderWidth: 2,
                   type: 'bar'
                 }]
@@ -2843,7 +2871,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     padding: 12,
@@ -2952,20 +2980,20 @@
                 datasets: [{
                   label: '25th percentile',
                   data: actData.data.map(range => range[0]),
-                  backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                  borderColor: 'rgba(16, 185, 129, 1)',
+                  backgroundColor: 'rgba(44, 82, 130, 0.8)',
+                  borderColor: 'rgba(44, 82, 130, 1)',
                   borderWidth: 2
                 }, {
                   label: '75th percentile',
                   data: actData.data.map(range => range[1]),
-                  backgroundColor: 'rgba(139, 92, 246, 0.8)',
-                  borderColor: 'rgba(139, 92, 246, 1)',
+                  backgroundColor: 'rgba(74, 85, 104, 0.8)',
+                  borderColor: 'rgba(74, 85, 104, 1)',
                   borderWidth: 2
                 }, {
                   label: '全米平均',
                   data: [actAverage],
-                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                  borderColor: 'rgba(239, 68, 68, 1)',
+                  backgroundColor: 'rgba(240, 177, 61, 0.7)',
+                  borderColor: 'rgba(240, 177, 61, 1)',
                   borderWidth: 2,
                   type: 'bar'
                 }]
@@ -3004,7 +3032,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     padding: 12,
@@ -3113,14 +3141,14 @@
                 datasets: [{
                   label: 'この大学の卒業生',
                   data: earningsData.data,
-                  backgroundColor: 'rgba(34, 197, 94, 0.8)',
-                  borderColor: 'rgba(34, 197, 94, 1)',
+                  backgroundColor: 'rgba(44, 122, 123, 0.8)',
+                  borderColor: 'rgba(44, 122, 123, 1)',
                   borderWidth: 2
                 }, {
                   label: '全米平均',
                   data: earningsData.labels.map(label => nationalAverages[label]),
-                  backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                  borderColor: 'rgba(239, 68, 68, 1)',
+                  backgroundColor: 'rgba(240, 177, 61, 0.7)',
+                  borderColor: 'rgba(240, 177, 61, 1)',
                   borderWidth: 2,
                   type: 'bar'
                 }]
@@ -3159,7 +3187,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     padding: 12,
@@ -3246,13 +3274,13 @@
         <% if @college.pell_grant_rate.present? %>
           aidData.labels.push('Pell Grant利用');
           aidData.data.push(<%= (@college.pell_grant_rate * 100).round(1) %>);
-          aidData.colors.push('#10B981');
+          aidData.colors.push('#2C5282');
         <% end %>
 
         <% if @college.federal_loan_rate.present? %>
           aidData.labels.push('連邦ローン利用');
           aidData.data.push(<%= (@college.federal_loan_rate * 100).round(1) %>);
-          aidData.colors.push('#F59E0B');
+          aidData.colors.push('#4A5568');
         <% end %>
 
         if (aidData.labels.length > 0) {
@@ -3291,7 +3319,7 @@
                     backgroundColor: 'rgba(45, 55, 72, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
-                    borderColor: '#fdba74',
+                    borderColor: '#f0b13d',
                     borderWidth: 1,
                     cornerRadius: 8,
                     callbacks: {
@@ -3342,14 +3370,14 @@
               datasets: [{
                 label: '授業料',
                 data: [tuitionCost],
-                backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                borderColor: 'rgba(59, 130, 246, 1)',
+                backgroundColor: 'rgba(44, 82, 130, 0.8)',
+                borderColor: 'rgba(44, 82, 130, 1)',
                 borderWidth: 2
               }, {
                 label: '寮費・食費',
                 data: [roomBoardCost],
-                backgroundColor: 'rgba(251, 146, 60, 0.8)',
-                borderColor: 'rgba(251, 146, 60, 1)',
+                backgroundColor: 'rgba(44, 122, 123, 0.8)',
+                borderColor: 'rgba(44, 122, 123, 1)',
                 borderWidth: 2
               }]
             },
@@ -3415,7 +3443,7 @@
                   backgroundColor: 'rgba(45, 55, 72, 0.95)',
                   titleColor: '#ffffff',
                   bodyColor: '#ffffff',
-                  borderColor: '#fdba74',
+                  borderColor: '#f0b13d',
                   borderWidth: 1,
                   cornerRadius: 8,
                   callbacks: {
@@ -3456,16 +3484,16 @@
               datasets: [{
                 label: 'この大学',
                 data: [retentionRate],
-                backgroundColor: retentionRate >= 80 ? 'rgba(34, 197, 94, 0.8)' : 
-                                  retentionRate >= 70 ? 'rgba(251, 146, 60, 0.8)' : 'rgba(239, 68, 68, 0.8)',
-                borderColor: retentionRate >= 80 ? 'rgba(34, 197, 94, 1)' : 
-                            retentionRate >= 70 ? 'rgba(251, 146, 60, 1)' : 'rgba(239, 68, 68, 1)',
+                backgroundColor: retentionRate >= 80 ? 'rgba(44, 122, 123, 0.8)' :
+                                  retentionRate >= 70 ? 'rgba(156, 139, 122, 0.8)' : 'rgba(139, 92, 92, 0.8)',
+                borderColor: retentionRate >= 80 ? 'rgba(44, 122, 123, 1)' :
+                            retentionRate >= 70 ? 'rgba(156, 139, 122, 1)' : 'rgba(139, 92, 92, 1)',
                 borderWidth: 2
               }, {
                 label: '全米平均',
                 data: [nationalAverage],
-                backgroundColor: 'rgba(107, 114, 128, 0.7)',
-                borderColor: 'rgba(107, 114, 128, 1)',
+                backgroundColor: 'rgba(240, 177, 61, 0.7)',
+                borderColor: 'rgba(240, 177, 61, 1)',
                 borderWidth: 2
               }]
             },
@@ -3503,7 +3531,7 @@
                   backgroundColor: 'rgba(45, 55, 72, 0.95)',
                   titleColor: '#ffffff',
                   bodyColor: '#ffffff',
-                  borderColor: '#fdba74',
+                  borderColor: '#f0b13d',
                   borderWidth: 1,
                   cornerRadius: 8,
                   callbacks: {

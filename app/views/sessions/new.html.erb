@@ -199,7 +199,6 @@
   .google-auth-button:hover {
     background: #f7fafc;
     border-color: #cbd5e0;
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
@@ -248,15 +247,31 @@
   }
 
   .auth-footer a {
-    color: #667eea;
+    color: #f0b13d;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s;
+    position: relative;
+  }
+
+  .auth-footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #f0b13d;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
   }
 
   .auth-footer a:hover {
-    color: #764ba2;
-    text-decoration: underline;
+    color: #d99a2d;
+  }
+
+  .auth-footer a:hover::after {
+    transform: scaleX(1);
   }
 
   .home-link {

@@ -14,7 +14,30 @@
       <nav class="left-nav">
         <ul class="left-nav-list">
           <li><a href="/about" class="nav-link <%= 'active' if request.path == '/about' %>">College Sparkについて</a></li>
-          <li><a href="/search" class="nav-link <%= 'active' if is_search_section? %>">大学検索</a></li>
+          <li class="nav-dropdown">
+            <div class="dropdown-trigger">
+              <span>大学検索</span>
+              <i class="fas fa-chevron-down dropdown-arrow"></i>
+            </div>
+            <div class="dropdown-menu">
+              <a href="/search" class="dropdown-item <%= 'active' if request.path == '/search' %>">
+                <span class="dropdown-flag">🇺🇸</span>
+                アメリカ
+              </a>
+              <a href="/au/universities/search" class="dropdown-item <%= 'active' if request.path == '/au/universities/search' %>">
+                <span class="dropdown-flag">🇦🇺</span>
+                オーストラリア
+              </a>
+              <div class="dropdown-item disabled">
+                <span class="dropdown-flag">🇨🇦</span>
+                カナダ（準備中）
+              </div>
+              <div class="dropdown-item disabled">
+                <span class="dropdown-flag">🇳🇿</span>
+                ニュージーランド（準備中）
+              </div>
+            </div>
+          </li>
         </ul>
       </nav>
     </div>
@@ -71,8 +94,8 @@
         </div>
       <% else %>
         <div class="auth-buttons">
-          <a href="/login" class="login-btn">ログイン</a>
-          <a href="/register" class="register-btn">新規登録</a>
+          <a href="/login" class="login-btn <%= 'active' if request.path == '/login' %>">ログイン</a>
+          <a href="/register" class="register-btn <%= 'active' if request.path == '/register' %>">新規登録</a>
         </div>
       <% end %>
     </div>
@@ -288,14 +311,13 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 32px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     opacity: 1 !important;
     visibility: visible !important;
   }
 
   .logo:hover {
-    transform: translateY(-1px);
-    color: #f5b342 !important;
+    color: #f0b13d !important;
   }
 
   .logo-icon {
@@ -349,25 +371,34 @@
     font-weight: 600;
     font-family: 'Montserrat', sans-serif;
     padding: 12px 15px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     white-space: nowrap;
     position: relative;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     opacity: 1 !important;
     visibility: visible !important;
   }
 
-  .nav-link:hover {
-    background: rgba(245, 179, 66, 0.1);
-    color: #f5b342 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    letter-spacing: 0.8px;
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: #f0b13d;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
   }
 
-  .nav-link:not(.column-special):hover {
-    border: 1px solid rgba(255, 255, 255, 0.3);
+  .nav-link:hover {
+    background: rgba(240, 177, 61, 0.08);
+    color: #2d3748 !important;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
   }
 
   .nav-link.disabled {
@@ -383,28 +414,33 @@
 
   /* Active state styles */
   .nav-link.active {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(240, 177, 61, 0.12);
     font-weight: 700;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
-    letter-spacing: 0.8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #f0b13d !important;
+  }
+
+  .nav-link.active::after {
+    transform: scaleX(1);
   }
 
 
   .nav-dropdown.active > .dropdown-trigger {
-    background: rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(240, 177, 61, 0.12);
+    color: #f0b13d;
+  }
+
+  .nav-dropdown.active > .dropdown-trigger::after {
+    transform: scaleX(1);
   }
 
   .dropdown-item.active {
-    background: #f5b342 !important;
-    color: white !important;
+    background: rgba(240, 177, 61, 0.12) !important;
+    color: #f0b13d !important;
     font-weight: 600 !important;
   }
 
   .dropdown-item.active i {
-    color: white !important;
+    color: #f0b13d !important;
   }
 
   /* Dropdown */
@@ -417,23 +453,38 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: white;
+    color: #333333;
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
     font-family: 'Montserrat', sans-serif;
     padding: 12px 15px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     white-space: nowrap;
     position: relative;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+  }
+
+  .dropdown-trigger::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: #f0b13d;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
   }
 
   .dropdown-trigger:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(240, 177, 61, 0.08);
+    color: #2d3748;
+  }
+
+  .dropdown-trigger:hover::after {
+    transform: scaleX(1);
   }
 
   .dropdown-arrow {
@@ -510,6 +561,14 @@
     text-align: center !important;
     color: #667eea !important;
     flex-shrink: 0 !important;
+  }
+
+  .dropdown-flag {
+    font-size: 16px !important;
+    width: 20px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
   }
 
   .dropdown-item:hover {
@@ -740,88 +799,92 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 6px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   }
 
   .login-btn {
-    color: rgba(51, 51, 51, 0.9);
+    color: #333333;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
-    padding: 10px 18px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    padding: 12px 18px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
     position: relative;
-    overflow: hidden;
+  }
+
+  .login-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+    background: #f0b13d;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
   }
 
   .login-btn:hover {
-    background: rgba(245, 179, 66, 0.1);
-    color: #f5b342;
-    transform: translateY(-1px);
+    background: rgba(240, 177, 61, 0.08);
+    color: #2d3748;
   }
 
-  .login-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+  .login-btn:hover::after {
+    transform: scaleX(1);
   }
 
-  .login-btn:hover::before {
-    left: 100%;
+  .login-btn.active {
+    background: rgba(240, 177, 61, 0.12);
+    color: #f0b13d;
+  }
+
+  .login-btn.active::after {
+    transform: scaleX(1);
   }
 
   .register-btn {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    color: #f5b342;
+    color: #f0b13d;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
     padding: 12px 24px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(245, 179, 66, 0.2);
+    border: 2px solid #f0b13d;
     position: relative;
-    overflow: hidden;
+  }
+
+  .register-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: #f0b13d;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
   }
 
   .register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #f5b342 0%, #f39200 100%);
-    color: white;
-    border-color: transparent;
+    background: rgba(240, 177, 61, 0.08);
+    color: #2d3748;
   }
 
-  .register-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(245, 179, 66, 0.3) 0%, transparent 70%);
-    transition: all 0.5s ease;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
+  .register-btn:hover::after {
+    transform: scaleX(1);
   }
 
-  .register-btn:hover::before {
-    width: 300px;
-    height: 300px;
+  .register-btn.active {
+    background: rgba(240, 177, 61, 0.12);
+    color: #f0b13d;
+    border-color: #f0b13d;
+  }
+
+  .register-btn.active::after {
+    transform: scaleX(1);
   }
 
   /* Mobile Menu */
