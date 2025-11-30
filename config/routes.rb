@@ -119,12 +119,12 @@ Rails.application.routes.draw do
   get "english_tests" => "home#english_tests"
   get "majors_careers" => "home#majors_careers"
   
-  # English Conversation Practice
-  get "english_conversation" => "english_conversations#index"
-  post "english_conversation/speech" => "english_conversations#process_speech"
-  post "english_conversation/tts" => "english_conversations#text_to_speech"
-  post "english_conversation/clear" => "english_conversations#clear_history"
-  post "english_conversation/initial" => "english_conversations#get_initial_message"
+  # English Conversation Practice (一時停止中)
+  # get "english_conversation" => "english_conversations#index"
+  # post "english_conversation/speech" => "english_conversations#process_speech"
+  # post "english_conversation/tts" => "english_conversations#text_to_speech"
+  # post "english_conversation/clear" => "english_conversations#clear_history"
+  # post "english_conversation/initial" => "english_conversations#get_initial_message"
   get "life_guide" => "home#life_guide"
   get "why_study_abroad" => "home#why_study_abroad"
   get "ivy-league" => "home#ivy_league"
