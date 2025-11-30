@@ -17,6 +17,10 @@ bundle exec rails db:migrate
 # Run seeds (日本語名データなど)
 bundle exec rails db:seed
 
+# Generate sitemap
+echo "=== Generating sitemap ==="
+bundle exec rails sitemap:refresh:no_ping
+
 # Check if data setup is needed
 echo "=== Checking if data setup is needed ==="
 
