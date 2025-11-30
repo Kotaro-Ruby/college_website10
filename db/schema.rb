@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_13_035238) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_30_024313) do
   create_table "active_storage_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -377,6 +377,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_13_035238) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "university_translations", force: :cascade do |t|
+    t.integer "condition_id", null: false
+    t.string "locale", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condition_id", "locale"], name: "index_university_translations_on_condition_id_and_locale", unique: true
+    t.index ["condition_id"], name: "index_university_translations_on_condition_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -414,6 +424,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_13_035238) do
   add_foreign_key "detailed_programs", "conditions"
   add_foreign_key "favorites", "conditions"
   add_foreign_key "favorites", "users"
+  add_foreign_key "university_translations", "conditions"
   add_foreign_key "view_histories", "conditions"
   add_foreign_key "view_histories", "users"
 end

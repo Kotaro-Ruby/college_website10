@@ -4,7 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <title><%= @college.college %> - 詳細</title>
+
+  <%# SEO最適化 %>
+  <% seo_title = @college.seo_title %>
+  <% state_name = @college.state %>
+  <% tuition_display = @college.tuition.present? ? number_to_currency(@college.tuition, precision: 0) : "N/A" %>
+  <% acceptance_display = @college.acceptance_rate.present? ? "#{(@college.acceptance_rate * 100).round(1)}%" : "N/A" %>
+
+  <title><%= seo_title %>の留学情報・学費・合格率 | College Spark</title>
+  <meta name="description" content="<%= seo_title %>（<%= state_name %>州）の詳細情報。学費: <%= tuition_display %>、合格率: <%= acceptance_display %>。留学に必要な情報を徹底解説。">
+  <meta name="keywords" content="<%= @college.college %>, <%= @college.name_ja %>, <%= state_name %>, アメリカ留学, 大学留学, 学費, 合格率">
+
+  <%# OGP %>
+  <meta property="og:title" content="<%= seo_title %>の留学情報 | College Spark">
+  <meta property="og:description" content="<%= seo_title %>（<%= state_name %>州）の学費・合格率・入学条件など詳細情報を掲載。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="<%= request.original_url %>">
+  <meta property="og:site_name" content="College Spark">
+  <meta property="og:locale" content="ja_JP">
+
+  <%# Twitter Cards %>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="<%= seo_title %> | College Spark">
+  <meta name="twitter:description" content="<%= seo_title %>（<%= state_name %>州）の留学情報。学費・合格率・入学条件を掲載。">
+
+  <%# Canonical URL %>
+  <link rel="canonical" href="<%= conditions_url(@college) %>">
+
+  <%# 構造化データ (JSON-LD) %>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "<%= @college.college %>",
+    <% if @college.name_ja.present? %>"alternateName": "<%= @college.name_ja %>",<% end %>
+    "url": "<%= @college.website.present? ? (@college.website.match?(/^https?:\/\//) ? @college.website : "https://#{@college.website}") : conditions_url(@college) %>",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "<%= @college.city %>",
+      "addressRegion": "<%= @college.state %>",
+      "postalCode": "<%= @college.zip %>",
+      "addressCountry": "US"
+    },
+    <% if @college.tuition.present? %>
+    "isAccessibleForFree": false,
+    <% end %>
+    "sameAs": "<%= conditions_url(@college) %>"
+  }
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <style>
@@ -1433,7 +1481,14 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title"><%= @college.college %></h1>
+        <h1 class="hero-title">
+          <% if @college.name_ja.present? %>
+            <%= @college.name_ja %><br>
+            <span style="font-size: 0.7em; opacity: 0.9;"><%= @college.college %></span>
+          <% else %>
+            <%= @college.college %>
+          <% end %>
+        </h1>
         <p class="hero-subtitle">
           <% if @college.website.present? %>
             <% url = @college.website.gsub(/\/$/, '') %>

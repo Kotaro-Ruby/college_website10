@@ -9,6 +9,28 @@ class Condition < ApplicationRecord
   # 詳細専攻プログラム関連
   has_many :detailed_programs, dependent: :destroy
 
+  # 多言語翻訳
+  has_many :university_translations, dependent: :destroy
+
+  # 日本語名を取得
+  def name_ja
+    university_translations.find_by(locale: 'ja')&.name
+  end
+
+  # 表示用の名前（日本語名があれば「日本語名（英語名）」形式）
+  def display_name
+    if name_ja.present?
+      "#{name_ja}（#{college}）"
+    else
+      college
+    end
+  end
+
+  # SEO用タイトル（日本語名があれば優先）
+  def seo_title
+    name_ja.present? ? "#{name_ja}（#{college}）" : college
+  end
+
   # お気に入り数を取得
   def favorites_count
     favorites.count
