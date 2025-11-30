@@ -14,6 +14,9 @@ bundle exec rails assets:precompile
 # Run database migrations
 bundle exec rails db:migrate
 
+# Run seeds (日本語名データなど)
+bundle exec rails db:seed
+
 # Check if data setup is needed
 echo "=== Checking if data setup is needed ==="
 
