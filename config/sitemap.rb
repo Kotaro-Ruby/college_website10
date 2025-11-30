@@ -27,6 +27,17 @@ SitemapGenerator::Sitemap.create do
   add "/blogs", priority: 0.7, changefreq: "weekly"
   add "/columns", priority: 0.7, changefreq: "weekly"
 
+  # ブログ記事
+  add "/p/my-turning-point", priority: 0.8, changefreq: "monthly"
+
+  # コラム記事（コミカレシリーズ）
+  add "/p/what-is-community-college", priority: 0.9, changefreq: "monthly"
+  add "/p/community-college-cost", priority: 0.9, changefreq: "monthly"
+  add "/p/community-college-transfer", priority: 0.9, changefreq: "monthly"
+  add "/p/how-to-choose-community-college", priority: 0.9, changefreq: "monthly"
+  add "/p/community-college-life", priority: 0.8, changefreq: "monthly"
+  add "/p/community-college-courses", priority: 0.9, changefreq: "monthly"
+
   # 検索機能
   add "/search", priority: 0.8, changefreq: "monthly"
   add "/results", priority: 0.9, changefreq: "daily"

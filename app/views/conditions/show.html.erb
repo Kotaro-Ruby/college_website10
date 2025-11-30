@@ -178,11 +178,11 @@
 
     .main-content {
       background: white;
-      margin-top: -80px;
+      margin-top: -60px;
       position: relative;
       z-index: 3;
-      border-radius: 24px 24px 0 0;
-      box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
     }
 
     .content-padding {
@@ -192,37 +192,25 @@
     .quick-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1px;
+      gap: 16px;
       margin-bottom: 60px;
-      background: #e5e5e5;
-      border-radius: 12px;
-      overflow: hidden;
     }
 
     .stat-card {
       background: white;
-      color: #1c1917;
-      padding: 32px 20px;
-      border-radius: 0;
+      color: #1a1a1a;
+      padding: 28px 20px;
+      border-radius: 8px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      border: none;
-      transition: all 0.3s ease;
-    }
-
-    .stat-card:first-child {
-      border-radius: 12px 0 0 12px;
-    }
-
-    .stat-card:last-child {
-      border-radius: 0 12px 12px 0;
+      border: 1px solid #e5e5e5;
+      transition: all 0.2s ease;
     }
 
     .stat-card:hover {
-      background: #fffbf7;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(240, 177, 61, 0.15);
+      border-color: #1a1a1a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .stat-card::before {
@@ -232,9 +220,9 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, rgba(240, 177, 61, 0.1) 0%, rgba(240, 177, 61, 0.3) 50%, rgba(240, 177, 61, 0.1) 100%);
+      background: rgb(240, 177, 61);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.2s ease;
     }
 
     .stat-card:hover::before {
@@ -242,35 +230,30 @@
     }
 
     .stat-icon {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 12px;
-      color: #a0a0a0;
+      color: #999;
       display: block;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
     }
 
     .stat-card:hover .stat-icon {
-      color: #f0b13d;
+      color: rgb(240, 177, 61);
     }
 
     .stat-value {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
       margin: 0 0 8px 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      color: #1a202c;
+      color: #1a1a1a;
       line-height: 1;
-      letter-spacing: -0.03em;
-      transition: color 0.3s ease;
-    }
-
-    .stat-card:hover .stat-value {
-      color: #2d3748;
+      letter-spacing: -0.02em;
     }
 
     .stat-label {
       font-size: 0.75rem;
-      color: #718096;
+      color: #666;
       font-weight: 500;
       letter-spacing: 0.03em;
       text-transform: uppercase;
@@ -284,10 +267,10 @@
 
     .section-title {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #2d3748;
-      margin-bottom: 20px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 24px;
       position: relative;
       padding-left: 16px;
     }
@@ -299,8 +282,8 @@
       top: 50%;
       transform: translateY(-50%);
       width: 4px;
-      height: 30px;
-      background: #f0b13d;
+      height: 28px;
+      background: rgb(240, 177, 61);
       border-radius: 2px;
     }
 
@@ -314,10 +297,10 @@
     .detail-card {
       background: white;
       padding: 24px;
-      border-radius: 0;
+      border-radius: 8px;
       transition: all 0.2s ease;
-      border: 1px solid #e5e7eb;
-      border-left: 4px solid #f0b13d;
+      border: 1px solid #e5e5e5;
+      border-left: 4px solid rgb(240, 177, 61);
       text-align: left;
       position: relative;
       overflow: hidden;
@@ -328,9 +311,9 @@
     }
 
     .detail-card:hover {
-      border-left-color: #d4a445;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      transform: translateX(4px);
+      border-color: #1a1a1a;
+      border-left-color: rgb(240, 177, 61);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .detail-icon {
@@ -453,25 +436,24 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 24px;
-      background: #f0b13d;
+      padding: 12px 28px;
+      background: #1a1a1a;
       color: white;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 25px;
       font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+      transition: all 0.2s ease;
       margin: 40px auto;
       display: flex;
       justify-content: center;
-      max-width: 200px;
+      max-width: 220px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
 
     .back-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
-      background: #d4a445;
+      background: rgb(240, 177, 61);
+      color: white;
+      text-decoration: none;
     }
 
     .website-link {
@@ -486,11 +468,11 @@
     }
 
     .comment-section {
-      background: white;
+      background: #f8f8f8;
       padding: 32px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border-left: 4px solid #f0b13d;
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
+      border-left: 4px solid rgb(240, 177, 61);
       position: relative;
       margin-bottom: 20px;
     }
@@ -499,22 +481,21 @@
       position: absolute;
       top: -10px;
       left: 20px;
-      background: #f0b13d;
+      background: #1a1a1a;
       color: white;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+      font-size: 1rem;
     }
 
     .comment-content {
-      font-size: 1.1rem;
+      font-size: 1rem;
       line-height: 1.8;
-      color: #4a5568;
+      color: #333;
       font-style: italic;
       padding-top: 10px;
       text-align: justify;
@@ -650,27 +631,27 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 10000;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(4px);
     }
 
     .login-modal-content {
       background: white;
-      border-radius: 20px;
-      max-width: 420px;
+      border-radius: 12px;
+      max-width: 400px;
       width: 90%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: modalSlideIn 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: modalSlideIn 0.25s ease;
       overflow: hidden;
     }
 
     @keyframes modalSlideIn {
       from {
-        transform: translateY(-50px);
+        transform: translateY(-30px);
         opacity: 0;
       }
       to {
@@ -680,7 +661,7 @@
     }
 
     .login-modal-header {
-      background: #f0b13d;
+      background: #1a1a1a;
       color: white;
       padding: 20px 24px;
       display: flex;
@@ -690,7 +671,7 @@
 
     .login-modal-header h3 {
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
@@ -699,20 +680,22 @@
       background: none;
       border: none;
       color: white;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
       padding: 0;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      transition: background 0.3s ease;
+      transition: background 0.2s ease;
+      opacity: 0.7;
     }
 
     .login-modal-close:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+      opacity: 1;
     }
 
     .login-modal-body {
@@ -721,17 +704,16 @@
     }
 
     .login-modal-icon {
-      font-size: 3rem;
-      color: #ff6b6b;
+      font-size: 2.5rem;
+      color: rgb(240, 177, 61);
       margin-bottom: 20px;
-      filter: drop-shadow(0 4px 15px rgba(255, 107, 107, 0.3));
     }
 
     .login-modal-text {
-      font-size: 16px;
-      color: #4a5568;
+      font-size: 15px;
+      color: #333;
       line-height: 1.6;
-      margin: 0 0 32px 0;
+      margin: 0 0 28px 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -747,39 +729,37 @@
       align-items: center;
       gap: 8px;
       padding: 12px 24px;
-      border-radius: 12px;
+      border-radius: 25px;
       text-decoration: none;
       font-weight: 600;
       font-size: 14px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       min-width: 120px;
       justify-content: center;
     }
 
     .login-btn-primary {
-      background: #f0b13d;
+      background: #1a1a1a;
       color: white;
-      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
     }
 
     .login-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
-      background: #d4a445;
+      background: rgb(240, 177, 61);
       color: white;
+      text-decoration: none;
     }
 
     .login-btn-secondary {
       background: white;
-      color: #f0b13d;
-      border: 2px solid #f0b13d;
+      color: #1a1a1a;
+      border: 1px solid #e5e5e5;
     }
 
     .login-btn-secondary:hover {
-      background: #fef3e2;
-      transform: translateY(-2px);
-      color: #f0b13d;
+      border-color: #1a1a1a;
+      color: #1a1a1a;
+      text-decoration: none;
     }
 
     /* Demographics Charts Styling */
@@ -793,16 +773,15 @@
 
     .chart-container {
       background: white;
-      padding: 32px;
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+      padding: 28px;
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
+      transition: all 0.2s ease;
     }
 
     .chart-container:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      border-color: #1a1a1a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .chart-header {
@@ -812,19 +791,19 @@
 
     .chart-title {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #2d3748;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1a1a1a;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin: 0;
     }
 
     .chart-title i {
-      color: #f0b13d;
-      font-size: 1.3rem;
+      color: rgb(240, 177, 61);
+      font-size: 1.1rem;
     }
 
     .info-icon {
@@ -841,31 +820,31 @@
     .chart-description {
       margin-top: 12px;
       padding: 12px 16px;
-      background: rgba(251, 146, 60, 0.05);
-      border-radius: 8px;
-      border-left: 4px solid #f0b13d;
+      background: #f8f8f8;
+      border-radius: 6px;
+      border-left: 3px solid rgb(240, 177, 61);
     }
 
     .chart-description p {
       margin: 0;
       font-size: 14px;
-      color: #4a5568;
+      color: #666;
       line-height: 1.5;
     }
 
     .score-details {
       margin-top: 24px;
       padding: 20px;
-      background: rgba(59, 130, 246, 0.03);
-      border-radius: 12px;
-      border: 1px solid rgba(59, 130, 246, 0.1);
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
     }
 
     .score-explanation h4 {
       margin: 0 0 16px 0;
-      color: #2d3748;
+      color: #1a1a1a;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -874,7 +853,7 @@
 
     .score-explanation h4::before {
       content: '📊';
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .score-explanation ul {
@@ -978,9 +957,9 @@
       border-radius: 20px;
       font-size: 14px;
       font-weight: 500;
-      color: #6b7280;
-      background: #f9fafb;
-      border: 2px solid #e5e7eb;
+      color: #666;
+      background: #f8f8f8;
+      border: 1px solid #e5e5e5;
     }
 
     .badge-tooltip {
