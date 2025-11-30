@@ -1,41 +1,46 @@
-<div class="profile-wrapper">
-  <div class="profile-container">
-    <!-- Profile Header Card -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar">
-          <% if @user.image.present? %>
-            <%= image_tag @user.image, alt: @user.username, class: "avatar-image" %>
-          <% else %>
-            <div class="avatar-placeholder">
-              <%= @user.username[0].upcase %>
-            </div>
-          <% end %>
-        </div>
-        <div class="profile-details">
-          <h1 class="profile-name"><%= @user.username %></h1>
-          <p class="profile-meta">
-            <span class="meta-item">
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-              </svg>
-              <%= @user.email || "メールアドレス未設定" %>
-            </span>
-            <span class="meta-item">
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
-              </svg>
-              <%= @user.created_at.strftime("%Y年%m月%d日") %>に登録
-            </span>
-          </p>
-        </div>
+<% content_for :title, "マイページ | College Spark" %>
+
+<div class="profile-page">
+  <!-- Hero Section -->
+  <section class="profile-hero">
+    <div class="hero-content">
+      <div class="profile-avatar-large">
+        <% if @user.image.present? %>
+          <%= image_tag @user.image, alt: @user.username, class: "avatar-image" %>
+        <% else %>
+          <div class="avatar-placeholder">
+            <%= @user.username[0].upcase %>
+          </div>
+        <% end %>
+      </div>
+      <h1 class="profile-title"><%= @user.username %></h1>
+      <p class="profile-subtitle">My Page</p>
+      <div class="hero-divider"></div>
+      <div class="profile-meta-hero">
+        <span class="meta-item">
+          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+          </svg>
+          <%= @user.email || "メールアドレス未設定" %>
+        </span>
+        <span class="meta-item">
+          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+          </svg>
+          <%= @user.created_at.strftime("%Y年%m月%d日") %>に登録
+        </span>
       </div>
     </div>
+  </section>
 
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <h2 class="section-title">クイックアクセス</h2>
+  <!-- Quick Actions Section -->
+  <section class="section-wrapper">
+    <div class="section-content">
+      <div class="section-header">
+        <h2>クイックアクセス</h2>
+        <p class="section-description">Quick Access</p>
+      </div>
       <div class="action-grid">
         <a href="/favorites" class="action-card">
           <div class="action-icon favorites">
@@ -68,59 +73,102 @@
             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
           </svg>
         </a>
-      </div>
-    </div>
 
-    <!-- Account Settings -->
-    <div class="account-section">
-      <h2 class="section-title">アカウント設定</h2>
-      <div class="settings-grid">
-        <div class="setting-item">
-          <div class="setting-label">ユーザーID</div>
-          <div class="setting-value">#<%= @user.id %></div>
-        </div>
-        <div class="setting-item">
-          <div class="setting-label">ユーザー名</div>
-          <div class="setting-value"><%= @user.username %></div>
-        </div>
-        <% if @user.provider.present? %>
-        <div class="setting-item">
-          <div class="setting-label">認証方法</div>
-          <div class="setting-value">
-            <span class="provider-badge">
-              <% if @user.provider == 'google_oauth2' %>
-                <svg class="provider-icon" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
-                Google
-              <% else %>
-                <%= @user.provider.capitalize %>
-              <% end %>
-            </span>
+        <a href="/search" class="action-card">
+          <div class="action-icon search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
           </div>
-        </div>
-        <% end %>
-      </div>
-
-      <div class="action-buttons">
-        <a href="/profile/edit" class="btn btn-secondary">
-          <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+          <div class="action-content">
+            <h3>大学検索</h3>
+            <p>条件に合う大学を探す</p>
+          </div>
+          <svg class="arrow" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
           </svg>
-          プロフィール編集
         </a>
-        <button type="button" class="btn btn-danger-outline" onclick="showDeleteModal()">
-          <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+
+        <a href="/rankings" class="action-card">
+          <div class="action-icon rankings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="action-content">
+            <h3>ランキング</h3>
+            <p>人気大学をチェック</p>
+          </div>
+          <svg class="arrow" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
           </svg>
-          アカウント削除
-        </button>
+        </a>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Account Settings Section -->
+  <section class="section-wrapper section-alt">
+    <div class="section-content">
+      <div class="section-header">
+        <h2>アカウント設定</h2>
+        <p class="section-description">Account Settings</p>
+      </div>
+
+      <div class="settings-card">
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-label">ユーザーID</div>
+            <div class="setting-value">#<%= @user.id %></div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">ユーザー名</div>
+            <div class="setting-value"><%= @user.username %></div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">メールアドレス</div>
+            <div class="setting-value"><%= @user.email || "未設定" %></div>
+          </div>
+          <% if @user.provider.present? %>
+          <div class="setting-item">
+            <div class="setting-label">認証方法</div>
+            <div class="setting-value">
+              <span class="provider-badge">
+                <% if @user.provider == 'google_oauth2' %>
+                  <svg class="provider-icon" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+                  Google
+                <% else %>
+                  <%= @user.provider.capitalize %>
+                <% end %>
+              </span>
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/profile/edit" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+            </svg>
+            プロフィール編集
+          </a>
+          <button type="button" class="btn btn-danger-outline" onclick="showDeleteModal()">
+            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+            アカウント削除
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Delete Confirmation Modal -->
@@ -155,135 +203,163 @@
 </div>
 
 <style>
-/* Container */
-.profile-wrapper {
-  min-height: calc(100vh - 200px);
-  background: #f8f9fa;
-  padding: 40px 0;
+/* Base */
+.profile-page {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #ffffff;
 }
 
-.profile-container {
-  max-width: 900px;
+/* Hero Section */
+.profile-hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
+.hero-content {
+  max-width: 800px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
-/* Profile Card */
-.profile-card {
-  background: white;
-  border-radius: 12px;
-  padding: 32px;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.profile-avatar-large {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
 }
 
-.profile-header {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.profile-avatar {
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
-}
-
-.avatar-image {
+.profile-avatar-large .avatar-image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
 }
 
-.avatar-placeholder {
+.profile-avatar-large .avatar-placeholder {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  background: linear-gradient(135deg, #3d3d3d 0%, #4d4d4d 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 600;
-  color: #6c757d;
+  color: rgba(255, 255, 255, 0.9);
+  border: 4px solid rgba(255, 255, 255, 0.2);
 }
 
-.profile-details {
-  flex: 1;
-}
-
-.profile-name {
-  font-size: 24px;
-  font-weight: 600;
-  color: #212529;
+.profile-title {
+  font-size: 36px;
+  font-weight: 700;
   margin: 0 0 8px 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.5px;
 }
 
-.profile-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+.profile-subtitle {
+  font-size: 16px;
+  font-weight: 300;
+  opacity: 0.7;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   margin: 0;
 }
 
-.meta-item {
+.hero-divider {
+  width: 60px;
+  height: 3px;
+  background: rgb(240, 177, 61);
+  margin: 24px auto;
+}
+
+.profile-meta-hero {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.profile-meta-hero .meta-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #6c757d;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
 }
 
-.meta-item .icon {
+.profile-meta-hero .icon {
   width: 16px;
   height: 16px;
-  color: #adb5bd;
+  opacity: 0.7;
 }
 
-/* Section Title */
-.section-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #212529;
-  margin: 0 0 16px 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+/* Section Styles */
+.section-wrapper {
+  padding: 80px 20px;
 }
 
-/* Quick Actions */
-.quick-actions {
-  margin-bottom: 24px;
+.section-alt {
+  background: #f5f5f5;
 }
 
+.section-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+}
+
+.section-description {
+  font-size: 14px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Action Cards */
 .action-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .action-card {
   background: white;
   border-radius: 12px;
-  padding: 20px;
+  padding: 24px;
   display: flex;
   align-items: center;
   gap: 16px;
   text-decoration: none;
-  transition: all 0.2s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e5e5e5;
   position: relative;
 }
 
 .action-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgb(240, 177, 61);
 }
 
 .action-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,18 +367,28 @@
 }
 
 .action-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
 }
 
 .action-icon.favorites {
-  background: #fff5f5;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
   color: #ef4444;
 }
 
 .action-icon.compare {
-  background: #eff6ff;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
   color: #3b82f6;
+}
+
+.action-icon.search {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #22c55e;
+}
+
+.action-icon.rankings {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  color: rgb(240, 177, 61);
 }
 
 .action-content {
@@ -312,33 +398,39 @@
 .action-content h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #212529;
+  color: #1a1a1a;
   margin: 0 0 4px 0;
 }
 
 .action-content p {
   font-size: 13px;
-  color: #6c757d;
+  color: #888;
   margin: 0;
 }
 
 .action-card .arrow {
   width: 20px;
   height: 20px;
-  color: #adb5bd;
+  color: #ccc;
+  transition: all 0.3s ease;
 }
 
-/* Account Section */
-.account-section {
+.action-card:hover .arrow {
+  color: rgb(240, 177, 61);
+  transform: translateX(4px);
+}
+
+/* Settings Card */
+.settings-card {
   background: white;
   border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  border: 1px solid #e5e5e5;
 }
 
 .settings-grid {
   display: grid;
-  gap: 20px;
+  gap: 16px;
   margin-bottom: 32px;
 }
 
@@ -346,30 +438,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #f8f9fa;
+  padding: 20px 24px;
+  background: #fafafa;
   border-radius: 8px;
+  border: 1px solid #eee;
 }
 
 .setting-label {
   font-size: 14px;
-  color: #6c757d;
+  color: #666;
   font-weight: 500;
 }
 
 .setting-value {
   font-size: 14px;
-  color: #212529;
+  color: #1a1a1a;
   font-weight: 600;
 }
 
 .provider-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  gap: 8px;
+  padding: 6px 12px;
   background: white;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e5e5e5;
   border-radius: 6px;
   font-size: 13px;
 }
@@ -382,7 +475,8 @@
 /* Buttons */
 .action-buttons {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -390,15 +484,15 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   text-decoration: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: inherit;
 }
 
 .btn-icon {
@@ -406,19 +500,20 @@
   height: 18px;
 }
 
-.btn-secondary {
-  background: #e9ecef;
-  color: #495057;
+.btn-primary {
+  background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(220, 157, 41) 100%);
+  color: white;
 }
 
-.btn-secondary:hover {
-  background: #dee2e6;
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 177, 61, 0.4);
 }
 
 .btn-danger-outline {
   background: white;
   color: #dc3545;
-  border: 1px solid #dc3545;
+  border: 2px solid #dc3545;
 }
 
 .btn-danger-outline:hover {
@@ -451,7 +546,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -467,43 +562,43 @@
 
 .modal-content {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e9ecef;
+  padding: 24px 28px;
+  border-bottom: 1px solid #eee;
 }
 
 .modal-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: #212529;
+  font-weight: 700;
+  color: #1a1a1a;
   margin: 0;
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border: none;
-  background: none;
-  color: #6c757d;
+  background: #f5f5f5;
+  color: #666;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all 0.2s;
 }
 
 .modal-close:hover {
-  background: #f8f9fa;
-  color: #495057;
+  background: #eee;
+  color: #333;
 }
 
 .modal-close svg {
@@ -512,15 +607,15 @@
 }
 
 .modal-body {
-  padding: 32px 24px;
+  padding: 40px 28px;
   text-align: center;
 }
 
 .warning-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 20px;
-  background: #fff5f5;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -528,28 +623,28 @@
 }
 
 .warning-icon svg {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   color: #dc3545;
 }
 
 .modal-message {
-  font-size: 16px;
-  font-weight: 600;
-  color: #212529;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
   margin: 0 0 12px 0;
 }
 
 .modal-warning {
   font-size: 14px;
-  color: #6c757d;
+  color: #666;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .modal-footer {
-  padding: 20px 24px;
-  background: #f8f9fa;
+  padding: 20px 28px;
+  background: #f9f9f9;
   display: flex;
   gap: 12px;
   justify-content: flex-end;
@@ -561,29 +656,60 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .profile-wrapper {
-    padding: 20px 0;
+  .profile-hero {
+    padding: 60px 20px;
   }
-  
-  .profile-header {
+
+  .profile-title {
+    font-size: 28px;
+  }
+
+  .profile-avatar-large {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-avatar-large .avatar-placeholder {
+    font-size: 40px;
+  }
+
+  .profile-meta-hero {
     flex-direction: column;
-    text-align: center;
+    gap: 12px;
   }
-  
-  .profile-meta {
-    justify-content: center;
+
+  .section-wrapper {
+    padding: 60px 20px;
   }
-  
+
+  .section-header h2 {
+    font-size: 26px;
+  }
+
   .action-grid {
     grid-template-columns: 1fr;
   }
-  
+
+  .settings-card {
+    padding: 24px;
+  }
+
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .action-buttons {
     flex-direction: column;
   }
-  
+
   .btn {
     width: 100%;
+  }
+
+  .modal-footer {
+    flex-direction: column;
   }
 }
 </style>
