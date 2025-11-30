@@ -14,14 +14,14 @@ SitemapGenerator::Sitemap.create do
   add "/contact", priority: 0.6, changefreq: "monthly"
   add "/terms", priority: 0.5, changefreq: "yearly"
 
-  # 留学ガイドページ
-  add "/study_abroad_types", priority: 0.8, changefreq: "monthly"
-  add "/scholarships", priority: 0.8, changefreq: "monthly"
-  add "/visa_guide", priority: 0.8, changefreq: "monthly"
-  add "/english_tests", priority: 0.8, changefreq: "monthly"
-  add "/majors_careers", priority: 0.8, changefreq: "monthly"
-  add "/life_guide", priority: 0.8, changefreq: "monthly"
-  add "/ivy-league", priority: 0.8, changefreq: "monthly"
+  # 留学ガイドページ（SEO強化済み）
+  add "/study_abroad_types", priority: 0.9, changefreq: "weekly"
+  add "/scholarships", priority: 0.9, changefreq: "weekly"
+  add "/visa_guide", priority: 0.9, changefreq: "weekly"
+  add "/english_tests", priority: 0.9, changefreq: "weekly"
+  add "/majors_careers", priority: 0.9, changefreq: "weekly"
+  add "/life_guide", priority: 0.9, changefreq: "weekly"
+  add "/ivy-league", priority: 0.9, changefreq: "weekly"
   
   # ブログ・コラム
   add "/blogs", priority: 0.7, changefreq: "weekly"
@@ -87,8 +87,10 @@ SitemapGenerator::Sitemap.create do
   add "/florida_state_university", priority: 0.7, changefreq: "weekly"
   add "/alabama_state_university", priority: 0.7, changefreq: "weekly"
 
-  # 全大学ページを追加
-  Condition.find_each do |college|
-    add conditions_path(college), lastmod: college.updated_at, priority: 0.7, changefreq: "weekly"
+  # 全大学ページを追加（日本語名がある大学は優先度高め）
+  Condition.includes(:university_translations).find_each do |college|
+    has_japanese_name = college.university_translations.exists?(locale: 'ja')
+    priority = has_japanese_name ? 0.8 : 0.6
+    add conditions_path(college), lastmod: college.updated_at, priority: priority, changefreq: "weekly"
   end
 end

@@ -1474,6 +1474,102 @@
         padding: 4px 6px;
       }
     }
+
+    /* 関連大学セクション */
+    .related-colleges-section {
+      background: #f8f9fa;
+      padding: 60px 20px;
+      margin-top: 40px;
+    }
+
+    .related-section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .related-section-title i {
+      color: #f59e0b;
+    }
+
+    .related-colleges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .related-college-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .related-college-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .related-college-name {
+      margin-bottom: 12px;
+    }
+
+    .related-name-ja {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 4px;
+    }
+
+    .related-name-en {
+      display: block;
+      font-size: 0.85rem;
+      color: #718096;
+    }
+
+    .related-name-en-only {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a202c;
+    }
+
+    .related-college-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .related-info-item {
+      font-size: 0.85rem;
+      color: #4a5568;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .related-info-item i {
+      color: #f59e0b;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .related-colleges-section {
+        padding: 40px 15px;
+      }
+
+      .related-colleges-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2399,6 +2495,46 @@
         </div>
       </div>
     </div>
+
+    <!-- 関連大学セクション -->
+    <% if @related_colleges.present? %>
+    <section class="related-colleges-section">
+      <div class="container">
+        <h2 class="related-section-title">
+          <i class="fas fa-university"></i>
+          <%= @college.state %>州の他の大学
+        </h2>
+        <div class="related-colleges-grid">
+          <% @related_colleges.each do |related| %>
+            <a href="<%= conditions_path(related) %>" class="related-college-card">
+              <div class="related-college-name">
+                <% if related.name_ja.present? %>
+                  <span class="related-name-ja"><%= related.name_ja %></span>
+                  <span class="related-name-en"><%= related.college %></span>
+                <% else %>
+                  <span class="related-name-en-only"><%= related.college %></span>
+                <% end %>
+              </div>
+              <div class="related-college-info">
+                <% if related.tuition.present? %>
+                  <span class="related-info-item">
+                    <i class="fas fa-dollar-sign"></i>
+                    <%= number_to_currency(related.tuition, precision: 0) %>
+                  </span>
+                <% end %>
+                <% if related.acceptance_rate.present? %>
+                  <span class="related-info-item">
+                    <i class="fas fa-percentage"></i>
+                    合格率 <%= (related.acceptance_rate * 100).round(1) %>%
+                  </span>
+                <% end %>
+              </div>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <% end %>
   </div>
 
   <!-- ログイン誘導モーダル -->

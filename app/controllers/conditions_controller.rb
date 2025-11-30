@@ -286,6 +286,15 @@ class ConditionsController < ApplicationController
 
       # 閲覧履歴に追加
       add_to_recently_viewed(@college) rescue nil
+
+      # 関連大学を取得（同じ州で日本語名があるものを優先）
+      @related_colleges = Condition
+        .where(state: @college.state)
+        .where.not(id: @college.id)
+        .includes(:university_translations)
+        .order(Arel.sql("CASE WHEN id IN (SELECT condition_id FROM university_translations WHERE locale = 'ja') THEN 0 ELSE 1 END"))
+        .limit(6)
+
       render :show
     else
       redirect_to :fallback_page
