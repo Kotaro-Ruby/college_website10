@@ -1,0 +1,106 @@
+<%# パンくずリスト
+  使用例:
+  <%= render 'shared/breadcrumb', items: [
+    { name: 'ホーム', path: root_path },
+    { name: 'アメリカ大学', path: '/us' },
+    { name: @college.college }
+  ] %>
+%>
+
+<% items ||= [] %>
+<% return if items.empty? %>
+
+<nav aria-label="パンくずリスト" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <% items.each_with_index do |item, index| %>
+      <li class="breadcrumb-item<%= ' active' if index == items.length - 1 %>">
+        <% if item[:path].present? && index < items.length - 1 %>
+          <a href="<%= item[:path] %>"><%= item[:name] %></a>
+        <% else %>
+          <span><%= item[:name] %></span>
+        <% end %>
+        <% if index < items.length - 1 %>
+          <span class="breadcrumb-separator">/</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
+
+<%# BreadcrumbList構造化データ %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    <% items.each_with_index do |item, index| %>
+    {
+      "@type": "ListItem",
+      "position": <%= index + 1 %>,
+      "name": "<%= item[:name] %>"<% if item[:path].present? %>,
+      "item": "<%= item[:path].start_with?('http') ? item[:path] : "#{request.base_url}#{item[:path]}" %>"<% end %>
+    }<%= ',' unless index == items.length - 1 %>
+    <% end %>
+  ]
+}
+</script>
+
+<style>
+  .breadcrumb-nav {
+    padding: 12px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.875rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-item a {
+    color: #4a5568;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-item a:hover {
+    color: #f59e0b;
+    text-decoration: underline;
+  }
+
+  .breadcrumb-item.active span {
+    color: #1a202c;
+    font-weight: 500;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 8px;
+    color: #a0aec0;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumb-nav {
+      padding: 10px 15px;
+    }
+
+    .breadcrumb-list {
+      font-size: 0.8rem;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 5px;
+    }
+  }
+</style>
