@@ -201,15 +201,6 @@ Rails.application.routes.draw do
   end
 
 
-  # get 'college_about/:college_name', to: 'conditions#show', as: 'college_detail'
-  # get '/:college_name', to: 'conditions#show', as: 'college_detail'
-
-
-  get "/ohio_northern_university", to: "conditions#ohio_northern_university"
-  get "/ohio_state_university", to: "conditions#ohio_state_university"
-  get "/florida_state_university", to: "conditions#florida_state_university"
-  get "/alabama_state_university", to: "conditions#alabama_state_university"
-
   # どのルートにもマッチしない場合、fallback_page アクションを呼び出す
 
 

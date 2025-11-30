@@ -435,21 +435,4 @@ end
       nil
     end
   end
-
-
-  def ohio_northern_university
-    render "ohio_northern_university"
-  end
-
-  def ohio_state_university
-    render "ohio_state_university"
-  end
-
-  def florida_state_university
-    render "florida_state_university"
-  end
-
-  def alabama_state_university
-    render "alabama_state_university"
-  end
 end

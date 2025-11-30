@@ -82,12 +82,6 @@ SitemapGenerator::Sitemap.create do
   add "/ca/about", priority: 0.7, changefreq: "monthly"
   add "/ca/universities/search", priority: 0.7, changefreq: "daily"
 
-  # 特定大学の詳細ページ
-  add "/ohio_northern_university", priority: 0.7, changefreq: "weekly"
-  add "/ohio_state_university", priority: 0.7, changefreq: "weekly"
-  add "/florida_state_university", priority: 0.7, changefreq: "weekly"
-  add "/alabama_state_university", priority: 0.7, changefreq: "weekly"
-
   # 全大学ページを追加（日本語名がある大学は優先度高め）
   Condition.includes(:university_translations).find_each do |college|
     has_japanese_name = college.university_translations.exists?(locale: 'ja')
