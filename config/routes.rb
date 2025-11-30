@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "test1/test1"
   get "top" => "home#top"
   get "search" => "home#search"
+  get "rankings" => "home#rankings"
 
   get "about" => "home#about"
 

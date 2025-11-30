@@ -2,6 +2,58 @@
 <% content_for :description, "アメリカ留学に必要なF-1学生ビザの取得方法を徹底解説。必要書類、面接対策、申請費用、取得までの流れをステップバイステップで紹介します。" %>
 <% content_for :keywords, "アメリカ ビザ, F-1ビザ, 学生ビザ 取得, 留学 ビザ 申請, アメリカ留学 手続き" %>
 
+<%# FAQ構造化データ %>
+<% content_for :head do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "なぜアメリカで学びたいのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "私の専攻分野においてアメリカは世界最先端の研究と技術を持っています。特に志望大学のプログラムは、教授陣、研究施設、カリキュラムにより、私のキャリア目標達成に不可欠です。日本では得られない具体的な経験や知識を習得できると確信しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "卒業後の計画は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "卒業後は日本に帰国し、学んだ知識と技術を活かして働く予定です。特に習得したスキルや知識を活用して、日本の業界発展に貢献したいと考えています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "学費はどのように支払いますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "学費と生活費は家族の支援、奨学金、貯金により支払います。必要な金額を留学期間分確保しており、銀行残高証明書でも示している通り、財政的な問題はありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "なぜその大学を選んだのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "志望大学は専攻分野で高い評価を受けており、特に教授やプログラムが私の研究興味と一致しています。また研究施設、インターンシップ、産学連携プログラムも非常に魅力的で、学習目標達成に最適な環境だと確信しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "アメリカでの就労予定はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "学習の一環としてキャンパス内での就労やOPT（実習）を考えていますが、これは学位取得に必要な実践的経験を得るためです。卒業後は日本に帰国する予定で、アメリカでの永住や長期就労は考えていません。"
+      }
+    }
+  ]
+}
+</script>
+<% end %>
+
 <div class="professional-info-container">
   <style>
     .professional-info-container * {

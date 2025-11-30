@@ -383,4 +383,40 @@ class HomeController < ApplicationController
   rescue => e
     Rails.logger.error "ファイル保存エラー: #{e.message}"
   end
+
+  public
+
+  def rankings
+    # 学費が安い大学TOP50
+    @cheap_tuition = Condition
+      .where.not(tuition: nil)
+      .where("tuition > 0")
+      .includes(:university_translations)
+      .order(tuition: :asc)
+      .limit(50)
+
+    # 合格率が高い大学TOP50（入りやすい）
+    @high_acceptance = Condition
+      .where.not(acceptance_rate: nil)
+      .where("acceptance_rate > 0")
+      .includes(:university_translations)
+      .order(acceptance_rate: :desc)
+      .limit(50)
+
+    # 卒業率が高い大学TOP50
+    @high_graduation = Condition
+      .where.not(graduation_rate: nil)
+      .where("graduation_rate > 0")
+      .includes(:university_translations)
+      .order(graduation_rate: :desc)
+      .limit(50)
+
+    # 卒業後の年収が高い大学TOP50
+    @high_earnings = Condition
+      .where.not(earnings_10yr_median: nil)
+      .where("earnings_10yr_median > 0")
+      .includes(:university_translations)
+      .order(earnings_10yr_median: :desc)
+      .limit(50)
+  end
 end

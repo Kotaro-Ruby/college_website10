@@ -31,6 +31,7 @@ SitemapGenerator::Sitemap.create do
   add "/search", priority: 0.8, changefreq: "monthly"
   add "/results", priority: 0.9, changefreq: "daily"
   add "/top", priority: 0.7, changefreq: "monthly"
+  add "/rankings", priority: 0.9, changefreq: "weekly"
 
   # 州別ガイド
   add "/states", priority: 0.7, changefreq: "monthly"

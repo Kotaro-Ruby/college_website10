@@ -1,0 +1,353 @@
+<% content_for :title, "アメリカ大学ランキング2025 | 学費・合格率・卒業率・年収で比較 - College Spark" %>
+<% content_for :description, "アメリカ大学を学費の安さ、合格率、卒業率、卒業後の年収でランキング。留学先選びに役立つ客観的なデータに基づいたランキングを紹介。" %>
+<% content_for :keywords, "アメリカ大学 ランキング, 学費が安い大学, 合格率が高い大学, 卒業率 ランキング, アメリカ留学" %>
+
+<%# 構造化データ %>
+<% content_for :head do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "アメリカ大学ランキング - 学費が安い大学TOP50",
+  "description": "アメリカの学費が安い大学ランキング",
+  "numberOfItems": 50,
+  "itemListElement": [
+    <% @cheap_tuition.first(10).each_with_index do |college, index| %>
+    {
+      "@type": "ListItem",
+      "position": <%= index + 1 %>,
+      "item": {
+        "@type": "EducationalOrganization",
+        "name": "<%= college.college %>"<% if college.name_ja.present? %>,
+        "alternateName": "<%= college.name_ja %>"<% end %>
+      }
+    }<%= ',' unless index == 9 %>
+    <% end %>
+  ]
+}
+</script>
+<% end %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+  .rankings-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9fafb;
+    min-height: 100vh;
+  }
+
+  .rankings-hero {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    color: white;
+    padding: 60px 30px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .rankings-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .rankings-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ranking-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ranking-tab {
+    padding: 12px 24px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #4a5568;
+    transition: all 0.3s;
+  }
+
+  .ranking-tab:hover {
+    border-color: #f59e0b;
+    color: #f59e0b;
+  }
+
+  .ranking-tab.active {
+    background: #f59e0b;
+    border-color: #f59e0b;
+    color: white;
+  }
+
+  .ranking-section {
+    display: none;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .ranking-section.active {
+    display: block;
+  }
+
+  .ranking-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ranking-section h2 i {
+    color: #f59e0b;
+  }
+
+  .ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+  }
+
+  .ranking-item:hover {
+    background: #fff7ed;
+    transform: translateX(5px);
+  }
+
+  .ranking-number {
+    width: 40px;
+    height: 40px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #4a5568;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+
+  .ranking-item:nth-child(1) .ranking-number {
+    background: linear-gradient(135deg, #ffd700, #ffb800);
+    color: white;
+  }
+
+  .ranking-item:nth-child(2) .ranking-number {
+    background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+    color: white;
+  }
+
+  .ranking-item:nth-child(3) .ranking-number {
+    background: linear-gradient(135deg, #cd7f32, #b87333);
+    color: white;
+  }
+
+  .ranking-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ranking-name-ja {
+    font-weight: 600;
+    color: #1a202c;
+    font-size: 1rem;
+  }
+
+  .ranking-name-en {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 2px;
+  }
+
+  .ranking-name-only {
+    font-weight: 600;
+    color: #1a202c;
+    font-size: 0.95rem;
+  }
+
+  .ranking-value {
+    font-weight: 700;
+    color: #f59e0b;
+    font-size: 1.1rem;
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .ranking-state {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .rankings-hero {
+      padding: 40px 20px;
+    }
+
+    .rankings-hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .ranking-tab {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+
+    .ranking-section {
+      padding: 20px 15px;
+    }
+
+    .ranking-item {
+      padding: 12px 15px;
+    }
+
+    .ranking-value {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<div class="rankings-container">
+  <div class="rankings-hero">
+    <h1><i class="fas fa-trophy"></i> アメリカ大学ランキング</h1>
+    <p>学費、合格率、卒業率、卒業後の年収など、客観的なデータに基づいたランキングで大学選びをサポート</p>
+  </div>
+
+  <div class="ranking-tabs">
+    <button class="ranking-tab active" onclick="showRanking('cheap')">
+      <i class="fas fa-dollar-sign"></i> 学費が安い
+    </button>
+    <button class="ranking-tab" onclick="showRanking('acceptance')">
+      <i class="fas fa-door-open"></i> 合格率が高い
+    </button>
+    <button class="ranking-tab" onclick="showRanking('graduation')">
+      <i class="fas fa-graduation-cap"></i> 卒業率が高い
+    </button>
+    <button class="ranking-tab" onclick="showRanking('earnings')">
+      <i class="fas fa-chart-line"></i> 卒業後年収
+    </button>
+  </div>
+
+  <!-- 学費が安い大学 -->
+  <section id="ranking-cheap" class="ranking-section active">
+    <h2><i class="fas fa-dollar-sign"></i> 学費が安い大学 TOP50</h2>
+    <div class="ranking-list">
+      <% @cheap_tuition.each_with_index do |college, index| %>
+        <a href="<%= conditions_path(college) %>" class="ranking-item">
+          <span class="ranking-number"><%= index + 1 %></span>
+          <div class="ranking-info">
+            <% if college.name_ja.present? %>
+              <div class="ranking-name-ja"><%= college.name_ja %></div>
+              <div class="ranking-name-en"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% else %>
+              <div class="ranking-name-only"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% end %>
+          </div>
+          <span class="ranking-value"><%= number_to_currency(college.tuition, precision: 0) %></span>
+        </a>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- 合格率が高い大学 -->
+  <section id="ranking-acceptance" class="ranking-section">
+    <h2><i class="fas fa-door-open"></i> 合格率が高い大学 TOP50</h2>
+    <div class="ranking-list">
+      <% @high_acceptance.each_with_index do |college, index| %>
+        <a href="<%= conditions_path(college) %>" class="ranking-item">
+          <span class="ranking-number"><%= index + 1 %></span>
+          <div class="ranking-info">
+            <% if college.name_ja.present? %>
+              <div class="ranking-name-ja"><%= college.name_ja %></div>
+              <div class="ranking-name-en"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% else %>
+              <div class="ranking-name-only"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% end %>
+          </div>
+          <span class="ranking-value"><%= (college.acceptance_rate * 100).round(1) %>%</span>
+        </a>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- 卒業率が高い大学 -->
+  <section id="ranking-graduation" class="ranking-section">
+    <h2><i class="fas fa-graduation-cap"></i> 卒業率が高い大学 TOP50</h2>
+    <div class="ranking-list">
+      <% @high_graduation.each_with_index do |college, index| %>
+        <a href="<%= conditions_path(college) %>" class="ranking-item">
+          <span class="ranking-number"><%= index + 1 %></span>
+          <div class="ranking-info">
+            <% if college.name_ja.present? %>
+              <div class="ranking-name-ja"><%= college.name_ja %></div>
+              <div class="ranking-name-en"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% else %>
+              <div class="ranking-name-only"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% end %>
+          </div>
+          <span class="ranking-value"><%= (college.graduation_rate * 100).round(1) %>%</span>
+        </a>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- 卒業後の年収 -->
+  <section id="ranking-earnings" class="ranking-section">
+    <h2><i class="fas fa-chart-line"></i> 卒業後の年収が高い大学 TOP50</h2>
+    <div class="ranking-list">
+      <% @high_earnings.each_with_index do |college, index| %>
+        <a href="<%= conditions_path(college) %>" class="ranking-item">
+          <span class="ranking-number"><%= index + 1 %></span>
+          <div class="ranking-info">
+            <% if college.name_ja.present? %>
+              <div class="ranking-name-ja"><%= college.name_ja %></div>
+              <div class="ranking-name-en"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% else %>
+              <div class="ranking-name-only"><%= college.college %><span class="ranking-state">(<%= college.state %>)</span></div>
+            <% end %>
+          </div>
+          <span class="ranking-value"><%= number_to_currency(college.earnings_10yr_median, precision: 0) %></span>
+        </a>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+<script>
+function showRanking(type) {
+  // すべてのタブとセクションを非アクティブに
+  document.querySelectorAll('.ranking-tab').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.ranking-section').forEach(section => section.classList.remove('active'));
+
+  // クリックされたタブとセクションをアクティブに
+  event.target.classList.add('active');
+  document.getElementById('ranking-' + type).classList.add('active');
+}
+</script>

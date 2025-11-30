@@ -1,5 +1,32 @@
-<% content_for :title, "#{@state_data[:name]}の大学・特色ガイド - College Spark" %>
-<% content_for :description, "#{@state_data[:name]}の気候、生活費、文化、主要大学を詳しく紹介。#{@state_data[:name]}での留学生活に必要な情報を包括的にお届けします。" %>
+<% content_for :title, "#{@state_data[:name]}（#{@state_data[:english_name]}）の大学一覧・留学ガイド【#{@total_colleges}校】- College Spark" %>
+<% content_for :description, "#{@state_data[:name]}（#{@state_data[:english_name]}）の大学#{@total_colleges}校を紹介。気候、生活費、文化、主要大学を詳しく解説。#{@state_data[:education_highlights]}" %>
+<% content_for :keywords, "#{@state_data[:name]} 大学, #{@state_data[:english_name]} 留学, #{@state_data[:name]} 留学, アメリカ #{@state_data[:name]}, #{@state_data[:largest_city]} 大学" %>
+
+<%# 構造化データ %>
+<% content_for :head do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "<%= @state_data[:name] %>の大学一覧",
+  "description": "<%= @state_data[:name] %>にある<%= @total_colleges %>校の大学情報",
+  "numberOfItems": <%= @total_colleges %>,
+  "itemListElement": [
+    <% @top_colleges.each_with_index do |college, index| %>
+    {
+      "@type": "ListItem",
+      "position": <%= index + 1 %>,
+      "item": {
+        "@type": "EducationalOrganization",
+        "name": "<%= college.college %>"<% if college.name_ja.present? %>,
+        "alternateName": "<%= college.name_ja %>"<% end %>
+      }
+    }<%= ',' unless index == @top_colleges.length - 1 %>
+    <% end %>
+  ]
+}
+</script>
+<% end %>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
