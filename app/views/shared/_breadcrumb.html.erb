@@ -1,10 +1,11 @@
-<%# パンくずリスト
+<%#
+  パンくずリスト
   使用例:
-  <%= render 'shared/breadcrumb', items: [
+  render 'shared/breadcrumb', items: [
     { name: 'ホーム', path: root_path },
     { name: 'アメリカ大学', path: '/us' },
     { name: @college.college }
-  ] %>
+  ]
 %>
 
 <% items ||= [] %>
@@ -20,7 +21,7 @@
           <span><%= item[:name] %></span>
         <% end %>
         <% if index < items.length - 1 %>
-          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-separator">›</span>
         <% end %>
       </li>
     <% end %>
@@ -67,6 +68,14 @@
   .breadcrumb-item {
     display: flex;
     align-items: center;
+  }
+
+  .breadcrumb-item::before {
+    content: none !important;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: none !important;
   }
 
   .breadcrumb-item a {

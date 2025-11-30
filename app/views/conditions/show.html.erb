@@ -1481,7 +1481,6 @@
   <%= render 'shared/breadcrumb', items: [
     { name: 'ホーム', path: root_path },
     { name: 'アメリカ大学検索', path: '/results' },
-    { name: @college.state, path: "/states/#{@college.state&.parameterize}" },
     { name: @college.name_ja || @college.college }
   ] %>
 
