@@ -6,1240 +6,760 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+<div class="main">
+  <div class="professional-search-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">🇺🇸 United States</div>
+        <h1 class="hero-title">アメリカ大学検索</h1>
+        <p class="hero-subtitle">Search Universities in the USA</p>
+        <div class="hero-divider"></div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">4,000+</span>
+            <span class="stat-text">大学数</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">50+</span>
+            <span class="stat-text">世界TOP100</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">100万+</span>
+            <span class="stat-text">留学生</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Search -->
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="search-card">
+          <h2><i class="fas fa-search"></i> 大学名で検索</h2>
+          <div class="search-input-wrapper">
+            <input type="text" id="college-name-input" placeholder="大学名、都市、専攻分野で検索...">
+            <button id="name-search-button">検索</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="section-wrapper filter-section-bg">
+      <div class="section-content">
+        <div class="section-header">
+          <h2>詳細条件で検索</h2>
+          <p>条件を指定して、あなたに合った大学を見つけましょう</p>
+        </div>
+
+        <div class="filter-grid">
+          <!-- 州 -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-map-marked-alt"></i>
+              <h3>州</h3>
+            </div>
+            <select class="filter-select" id="stateSelect">
+              <option value="指定しない" selected>指定しない</option>
+              <option value="アラバマ州(AL)">アラバマ州(AL)</option>
+              <option value="アラスカ州(AK)">アラスカ州(AK)</option>
+              <option value="アリゾナ州(AZ)">アリゾナ州(AZ)</option>
+              <option value="アーカンソー州(AR)">アーカンソー州(AR)</option>
+              <option value="カリフォルニア州(CA)">カリフォルニア州(CA)</option>
+              <option value="コロラド州(CO)">コロラド州(CO)</option>
+              <option value="コネチカット州(CT)">コネチカット州(CT)</option>
+              <option value="デラウェア州(DE)">デラウェア州(DE)</option>
+              <option value="コロンビア特別区(DC)">コロンビア特別区(DC)</option>
+              <option value="フロリダ州(FL)">フロリダ州(FL)</option>
+              <option value="ジョージア州(GA)">ジョージア州(GA)</option>
+              <option value="ハワイ州(HI)">ハワイ州(HI)</option>
+              <option value="アイダホ州(ID)">アイダホ州(ID)</option>
+              <option value="イリノイ州(IL)">イリノイ州(IL)</option>
+              <option value="インディアナ州(IN)">インディアナ州(IN)</option>
+              <option value="アイオワ州(IA)">アイオワ州(IA)</option>
+              <option value="カンザス州(KS)">カンザス州(KS)</option>
+              <option value="ケンタッキー州(KY)">ケンタッキー州(KY)</option>
+              <option value="ルイジアナ州(LA)">ルイジアナ州(LA)</option>
+              <option value="メイン州(ME)">メイン州(ME)</option>
+              <option value="メリーランド州(MD)">メリーランド州(MD)</option>
+              <option value="マサチューセッツ州(MA)">マサチューセッツ州(MA)</option>
+              <option value="ミシガン州(MI)">ミシガン州(MI)</option>
+              <option value="ミネソタ州(MN)">ミネソタ州(MN)</option>
+              <option value="ミシシッピ州(MS)">ミシシッピ州(MS)</option>
+              <option value="ミズーリ州(MO)">ミズーリ州(MO)</option>
+              <option value="モンタナ州(MT)">モンタナ州(MT)</option>
+              <option value="ネブラスカ州(NE)">ネブラスカ州(NE)</option>
+              <option value="ネバダ州(NV)">ネバダ州(NV)</option>
+              <option value="ニューハンプシャー州(NH)">ニューハンプシャー州(NH)</option>
+              <option value="ニュージャージー州(NJ)">ニュージャージー州(NJ)</option>
+              <option value="ニューメキシコ州(NM)">ニューメキシコ州(NM)</option>
+              <option value="ニューヨーク州(NY)">ニューヨーク州(NY)</option>
+              <option value="ノースカロライナ州(NC)">ノースカロライナ州(NC)</option>
+              <option value="ノースダコタ州(ND)">ノースダコタ州(ND)</option>
+              <option value="オハイオ州(OH)">オハイオ州(OH)</option>
+              <option value="オクラホマ州(OK)">オクラホマ州(OK)</option>
+              <option value="オレゴン州(OR)">オレゴン州(OR)</option>
+              <option value="ペンシルベニア州(PA)">ペンシルベニア州(PA)</option>
+              <option value="ロードアイランド州(RI)">ロードアイランド州(RI)</option>
+              <option value="サウスカロライナ州(SC)">サウスカロライナ州(SC)</option>
+              <option value="サウスダコタ州(SD)">サウスダコタ州(SD)</option>
+              <option value="テネシー州(TN)">テネシー州(TN)</option>
+              <option value="テキサス州(TX)">テキサス州(TX)</option>
+              <option value="ユタ州(UT)">ユタ州(UT)</option>
+              <option value="バーモント州(VT)">バーモント州(VT)</option>
+              <option value="バージニア州(VA)">バージニア州(VA)</option>
+              <option value="ワシントン州(WA)">ワシントン州(WA)</option>
+              <option value="ウェストバージニア州(WV)">ウェストバージニア州(WV)</option>
+              <option value="ウィスコンシン州(WI)">ウィスコンシン州(WI)</option>
+              <option value="ワイオミング州(WY)">ワイオミング州(WY)</option>
+            </select>
+          </div>
+
+          <!-- 大学タイプ -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-university"></i>
+              <h3>大学タイプ</h3>
+              <span class="help-tooltip" data-tooltip="州立大学は州外生に対して2〜3倍の学費を設定しています。私立大学は奨学金が充実しており、表示価格より実質費用が安くなる傾向があります。">?</span>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="exampleRadios" id="radio1" value="option1" checked><span>4年制</span></label>
+              <label class="filter-option"><input type="radio" name="exampleRadios" id="radio2" value="option2"><span>4年制私立</span></label>
+              <label class="filter-option"><input type="radio" name="exampleRadios" id="radio3" value="option3"><span>4年制州立</span></label>
+              <label class="filter-option"><input type="radio" name="exampleRadios" id="radio4" value="option4"><span>2年制（コミカレ等）</span></label>
+              <label class="filter-option"><input type="radio" name="exampleRadios" id="radio5" value="option5"><span>営利</span></label>
+            </div>
+          </div>
+
+          <!-- 年間授業料 -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-dollar-sign"></i>
+              <h3>年間授業料</h3>
+              <span class="help-tooltip" data-tooltip="州立大学は州外生向け料金、私立大学はNet Price（奨学金適用後の実質費用）を表示。">?</span>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio1" value="option1" checked><span>指定しない</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio2" value="option2"><span>~$9,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio3" value="option3"><span>$10,000~$19,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio4" value="option4"><span>$20,000~$29,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio5" value="option5"><span>$30,000~$39,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio6" value="option6"><span>$40,000~$49,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio7" value="option7"><span>$50,000~$59,999</span></label>
+              <label class="filter-option"><input type="radio" name="tuitionRadios" id="tuitionRadio8" value="option8"><span>$60,000~</span></label>
+            </div>
+          </div>
+
+          <!-- 学生数 -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-user-friends"></i>
+              <h3>学生数</h3>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" id="groupCheck33.1"><span>小規模(~2,999人)</span></label>
+              <label class="filter-option"><input type="checkbox" id="groupCheck34"><span>中規模(3,000~9,999人)</span></label>
+              <label class="filter-option"><input type="checkbox" id="groupCheck35"><span>大規模(10,000~29,999人)</span></label>
+              <label class="filter-option"><input type="checkbox" id="groupCheck36"><span>超大規模(30,000人~)</span></label>
+            </div>
+          </div>
+
+          <!-- SAT -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-chart-bar"></i>
+              <h3>SAT総合スコア</h3>
+              <span class="help-tooltip" data-tooltip="アメリカの大学入試で使用される標準テスト。総合スコアは400〜1600点。競争力のある大学では1200点以上、トップ大学では1400点以上が目安。">?</span>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="satRadios" id="satRadio1" value="option1" checked><span>指定しない</span></label>
+              <label class="filter-option"><input type="radio" name="satRadios" id="satRadio2" value="option2"><span>800~1000</span></label>
+              <label class="filter-option"><input type="radio" name="satRadios" id="satRadio3" value="option3"><span>1000~1200</span></label>
+              <label class="filter-option"><input type="radio" name="satRadios" id="satRadio4" value="option4"><span>1200~1400</span></label>
+              <label class="filter-option"><input type="radio" name="satRadios" id="satRadio5" value="option5"><span>1400~1600</span></label>
+            </div>
+          </div>
+
+          <!-- ACT -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-chart-line"></i>
+              <h3>ACT総合スコア</h3>
+              <span class="help-tooltip" data-tooltip="SATと同等に扱われる標準テスト。総合スコアは1〜36点。全国平均は約21点、トップ大学では30点以上が目安。">?</span>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio1" value="option1" checked><span>指定しない</span></label>
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio2" value="option2"><span>10~15</span></label>
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio3" value="option3"><span>16~20</span></label>
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio4" value="option4"><span>21~25</span></label>
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio5" value="option5"><span>26~30</span></label>
+              <label class="filter-option"><input type="radio" name="actRadios" id="actRadio6" value="option6"><span>31~36</span></label>
+            </div>
+          </div>
+
+          <!-- 卒業率 -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-graduation-cap"></i>
+              <h3>卒業率</h3>
+              <span class="help-tooltip" data-tooltip="6年以内に卒業した学生の割合。難関大学ほど卒業率が高い傾向があります。全米平均は約60%。">?</span>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio1" value="option1" checked><span>指定しない</span></label>
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio2" value="option2"><span>50%~</span></label>
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio3" value="option3"><span>60%~</span></label>
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio4" value="option4"><span>70%~</span></label>
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio5" value="option5"><span>80%~</span></label>
+              <label class="filter-option"><input type="radio" name="graduationRadios" id="gradRadio6" value="option6"><span>90%~</span></label>
+            </div>
+          </div>
+
+          <!-- 立地 -->
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <i class="fas fa-map-pin"></i>
+              <h3>大学の立地</h3>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" id="urbanCheck1" value="大都市"><span>大都市</span></label>
+              <label class="filter-option"><input type="checkbox" id="urbanCheck2" value="都市部近郊"><span>都市部近郊</span></label>
+              <label class="filter-option"><input type="checkbox" id="urbanCheck3" value="小都市"><span>小都市</span></label>
+              <label class="filter-option"><input type="checkbox" id="urbanCheck4" value="田舎"><span>田舎</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 専攻 Section -->
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="major-card">
+          <div class="major-card-header">
+            <i class="fas fa-book-open"></i>
+            <h3>専攻分野</h3>
+            <span class="help-tooltip" data-tooltip="アメリカの大学では、2つ以上の分野を専攻できます。文理の壁がほとんどないため、全く異なる分野を同時に学ぶことが可能です。">?</span>
+          </div>
+          <div class="major-options">
+            <label><input type="checkbox" name="major" value="health_professions"> 健康・医療 (3,479校)</label>
+            <label><input type="checkbox" name="major" value="business"> 経営学 (2,829校)</label>
+            <label><input type="checkbox" name="major" value="computer_science"> コンピューターサイエンス (2,407校)</label>
+            <label><input type="checkbox" name="major" value="education"> 教育学 (1,995校)</label>
+            <label><input type="checkbox" name="major" value="visual_arts"> 視覚・舞台芸術 (1,926校)</label>
+            <label><input type="checkbox" name="major" value="biology"> 生物学 (1,726校)</label>
+            <label><input type="checkbox" name="major" value="psychology"> 心理学 (1,697校)</label>
+            <label><input type="checkbox" name="major" value="sociology"> 社会学 (1,517校)</label>
+            <label><input type="checkbox" name="major" value="social_sciences"> 社会科学 (1,496校)</label>
+            <label><input type="checkbox" name="major" value="english"> 英語・文学 (1,487校)</label>
+            <label><input type="checkbox" name="major" value="mathematics"> 数学・統計学 (1,344校)</label>
+            <label><input type="checkbox" name="major" value="history"> 歴史学 (1,323校)</label>
+            <label><input type="checkbox" name="major" value="engineering"> 工学 (1,093校)</label>
+            <label><input type="checkbox" name="major" value="philosophy"> 哲学・宗教学 (898校)</label>
+            <label><input type="checkbox" name="major" value="agriculture"> 農業・農学 (761校)</label>
+            <label><input type="checkbox" name="major" value="law"> 法学・刑事司法 (640校)</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Button -->
+    <section class="section-wrapper search-button-section">
+      <div class="section-content">
+        <button class="main-search-button" id="search-button">
+          <i class="fas fa-search"></i>
+          条件で検索
+        </button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
 <style>
-/* フィルターセクションのヘッダーの色を青系に変更 */
-[class^="line-header"] {
-  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.2), transparent) !important;
+/* ===== Professional Search Page Design ===== */
+
+.professional-search-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
 }
 
-[class^="line-header"] > h1 {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
-[class^="line-header"] > h1 i {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
-.line-header7-major {
-  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.2), transparent) !important;
-}
-
-.line-header7-major > h1 {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
-.line-header7-major > h1 i {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-}
-
-/* ツールチップマーク（？）を青色に変更 */
-.tooltip-mark,
-.help-icon,
-[data-toggle="tooltip"],
-.fa-question-circle,
-.fas.fa-question-circle {
-  color: #3b82f6 !important;
-  background-color: transparent !important;
-  border-color: #3b82f6 !important;
-}
-
-.tooltip-mark:hover,
-.help-icon:hover,
-[data-toggle="tooltip"]:hover {
-  color: #2563eb !important;
-  border-color: #2563eb !important;
-}
-
-/* ラジオボタンとチェックボックスを青色に変更 */
-input[type="radio"] {
-  accent-color: #3b82f6 !important;
-}
-
-input[type="radio"]:checked {
-  accent-color: #3b82f6 !important;
-  background-color: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
-
-input[type="radio"]:checked + label,
-input[type="radio"]:checked ~ label {
-  color: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
-
-input[type="checkbox"] {
-  accent-color: #3b82f6 !important;
-}
-
-input[type="checkbox"]:checked {
-  accent-color: #3b82f6 !important;
-  background-color: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
-
-/* ラジオボタンのラベルのホバー効果 */
-label:hover input[type="radio"] {
-  border-color: #3b82f6 !important;
-}
-
-/* フィルター部分のアクティブな要素を青色に */
-.filter-option.active,
-.filter-item.active,
-[class*="filter"].active {
-  background-color: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-  color: white !important;
-}
-
-/* 各種ボタンのホバー効果を青系に統一 */
-.filter-btn:hover,
-.search-btn:hover {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-  border-color: #2563eb !important;
-}
-
-
-/* ヘッダー部分の改良スタイル - オーストラリア版と完全に合わせた */
-.copy-container {
-    position: relative;
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 30%, #dc2626 70%, #b91c1c 100%);
-    padding: 80px 20px 60px;
-    overflow: hidden;
-}
-
-.copy-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/us-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 8px 20px;
-    border-radius: 30px;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  display: inline-block;
+  background: rgba(240, 177, 61, 0.15);
+  border: 1px solid rgba(240, 177, 61, 0.3);
+  padding: 8px 20px;
+  border-radius: 30px;
+  color: rgb(240, 177, 61);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .hero-title {
-    color: white;
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
 }
 
 .hero-subtitle {
-    color: white;
-    font-size: 1.3rem;
-    opacity: 0.95;
-    margin-bottom: 40px;
+  font-size: 18px;
+  font-weight: 300;
+  opacity: 0.7;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 3px;
+  background: rgb(240, 177, 61);
+  margin: 0 auto 40px;
 }
 
 .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
 }
 
 .hero-stat {
-    text-align: center;
+  text-align: center;
 }
 
 .stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgb(240, 177, 61);
 }
 
 .stat-text {
-    display: block;
-    font-size: 0.9rem;
-    color: white;
-    opacity: 0.9;
-    margin-top: 5px;
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
 }
 
-/* レスポンシブ対応 */
+/* Section Wrapper */
+.section-wrapper {
+  padding: 50px 20px;
+}
+
+.section-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.filter-section-bg {
+  background: #f5f5f5;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  font-size: 15px;
+  color: #666;
+}
+
+/* Search Card */
+.search-card {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.search-card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-card h2 i {
+  color: rgb(200, 140, 40);
+}
+
+.search-input-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #1a1a1a;
+  transition: all 0.3s;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: rgb(200, 140, 40);
+  box-shadow: 0 0 0 3px rgba(200, 140, 40, 0.1);
+}
+
+.search-input-wrapper input::placeholder {
+  color: #999;
+}
+
+.search-input-wrapper button {
+  padding: 16px 32px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.search-input-wrapper button:hover {
+  background: #2d2d2d;
+}
+
+/* Filter Grid */
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Filter Card */
+.filter-card {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+
+.filter-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-card-header i {
+  font-size: 18px;
+  color: rgb(200, 140, 40);
+}
+
+.filter-card-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+/* Help Tooltip */
+.help-tooltip {
+  width: 20px;
+  height: 20px;
+  background: rgb(200, 140, 40);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: help;
+  position: relative;
+}
+
+.help-tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 280px;
+  padding: 15px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  font-size: 13px;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.6;
+  z-index: 100;
+}
+
+/* Filter Options */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-option:hover {
+  background: #f5f5f5;
+}
+
+.filter-option input {
+  accent-color: rgb(200, 140, 40);
+}
+
+.filter-option span {
+  font-size: 14px;
+  color: #555;
+}
+
+.filter-option input:checked + span {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* Filter Select */
+.filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23c88c28' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: rgb(200, 140, 40);
+}
+
+/* Major Card */
+.major-card {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+
+.major-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.major-card-header i {
+  font-size: 24px;
+  color: rgb(200, 140, 40);
+}
+
+.major-card-header h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+.major-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.major-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #555;
+}
+
+.major-options label:hover {
+  background: #f5f5f5;
+}
+
+.major-options input {
+  accent-color: rgb(200, 140, 40);
+}
+
+.major-options input:checked + span,
+.major-options label:has(input:checked) {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* Search Button Section */
+.search-button-section {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 60px 20px;
+}
+
+.main-search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  background: rgb(240, 177, 61);
+  color: #1a1a1a;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.main-search-button:hover {
+  background: rgb(220, 160, 50);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(240, 177, 61, 0.3);
+}
+
+.main-search-button i {
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .major-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-    
-    .hero-stats {
-        gap: 40px;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-}
+  .hero-title {
+    font-size: 32px;
+  }
 
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .hero-stats {
-        gap: 30px;
-    }
-    
-    .stat-number {
-        font-size: 1.8rem;
-    }
-    
-    .quick-links-bar {
-        padding: 15px;
-        gap: 10px;
-    }
-    
-    .quick-link {
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-    
-    .quick-link span {
-        display: none;
-    }
-}
-
-/* Quick Links Bar */
-.quick-links-bar {
-    background: white;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    display: flex;
-    justify-content: center;
+  .hero-stats {
     gap: 30px;
-    flex-wrap: wrap;
-    border-bottom: 3px solid #93c5fd;
-}
+  }
 
-.quick-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
+  .stat-number {
+    font-size: 2rem;
+  }
 
-.quick-link:hover {
-    background: #eff6ff;
-    transform: translateY(-2px);
-}
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
 
-.quick-link i {
-    font-size: 18px;
-}
+  .major-options {
+    grid-template-columns: 1fr;
+  }
 
-/* ===== ツールチップ 完全リデザイン ===== */
+  .search-input-wrapper {
+    flex-direction: column;
+  }
 
-/* ❔ボタンのコンテナ - 各セクションのヘッダー右側に配置 */
-.tooltip-container1,
-.tooltip-container2,
-.tooltip-container3,
-.tooltip-container4,
-.tooltip-container5,
-.tooltip-container6 {
-    position: absolute;
-    top: 18px;
-    right: 25px;
-    z-index: 100;
-}
+  .search-card {
+    padding: 25px;
+  }
 
-.conditions9 .tooltip-container6 {
-    right: 50px;
-}
+  .major-card {
+    padding: 25px;
+  }
 
-/* ❔ボタン本体 */
-.tooltip-trigger,
-.tooltip-trigger1 {
-    cursor: pointer;
-    font-weight: 700;
-    color: #fff;
-    font-size: 12px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #3b82f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s;
-    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
-}
-
-.tooltip-trigger1 {
-    padding: 4px;
-    margin-left: 10px;
-}
-
-.tooltip-trigger:hover,
-.tooltip-trigger1:hover {
-    background: #2563eb;
-    transform: scale(1.1);
-}
-
-/* ツールチップ本体 - ❔マークのすぐ下に表示 */
-.tooltip-content {
-    position: absolute !important;
-    top: 35px !important;
-    left: auto !important;
-    right: 0 !important;
-    transform: none !important;
-    width: 350px !important;
-    max-width: calc(100vw - 80px) !important;
-    background: #fff;
-    border: 2px solid #3b82f6;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    z-index: 9999 !important;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s, visibility 0.2s;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #333;
-}
-
-/* ホバーで表示 */
-.tooltip-container1:hover .tooltip-content,
-.tooltip-container2:hover .tooltip-content,
-.tooltip-container3:hover .tooltip-content,
-.tooltip-container4:hover .tooltip-content,
-.tooltip-container5:hover .tooltip-content,
-.tooltip-container6:hover .tooltip-content {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* スマホ対応 */
-@media (max-width: 600px) {
-    .tooltip-content {
-        width: calc(100% - 32px) !important;
-        left: 16px !important;
-        right: 16px !important;
-        transform: none !important;
-        font-size: 13px;
-        padding: 16px;
-    }
-}
-
-/* セレクトボックスのスタイル */
-.form-select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: white;
-    color: #4a5568;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-    background-position: right 12px center;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    padding-right: 40px;
-}
-
-.form-select:hover {
-    border-color: #93c5fd;
-}
-
-.form-select:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.form-select option {
-    padding: 8px;
-    background: white;
-    color: #4a5568;
-}
-
-/* 条件検索ボタン */
-.search-button-container {
-    text-align: center;
-    margin: 40px 0;
-    padding: 20px;
-}
-
-.cool-search-button {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    border: none;
-    padding: 18px 45px;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.cool-search-button:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
-}
-
-.cool-search-button:active {
-    transform: translateY(-1px);
-}
-
-.cool-search-button i {
-    font-size: 1.1rem;
-}
-
-/* Main Container */
-.main-container {
-    padding: 0 20px;
-}
-
-/* Search Section */
-.search-section {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    margin: 30px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-}
-
-.search-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.search-input-group {
-    display: flex;
-    align-items: center;
-    background: #f8f9fa;
-    border-radius: 12px;
-    padding: 4px;
-    border: 2px solid #e9ecef;
-    transition: all 0.3s ease;
-    gap: 8px;
-}
-
-.search-input-group:focus-within {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.search-icon {
-    color: #6c757d;
-    margin: 0 15px;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-}
-
-.search-input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 15px 0;
-    font-size: 1rem;
-    outline: none;
-    color: #495057;
-    min-width: 0;
-}
-
-.search-input::placeholder {
-    color: #adb5bd;
-}
-
-.search-button {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.search-button:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-.search-header {
-    margin-bottom: 20px;
-}
-
-.search-header h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #3b82f6;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.search-header i {
-    font-size: 1.2rem;
-    color: #2563eb;
-}
-
-.search-input-container {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 18px;
-    align-items: stretch;
-}
-
-.college-search-input {
-    flex: 1;
-    padding: 15px 20px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 1rem;
-    color: #4a5568;
-    background: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    min-height: 50px;
-}
-
-.college-search-input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 3px 15px rgba(59, 130, 246, 0.15);
-    transform: translateY(-1px);
-}
-
-.college-search-input::placeholder {
-    color: #a0aec0;
-    font-style: italic;
-}
-
-.name-search-btn {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
-    white-space: nowrap;
-    min-height: 50px;
-}
-
-.name-search-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-}
-
-.name-search-btn:active {
-    transform: translateY(-1px);
-}
-
-.search-separator {
-    text-align: center;
-}
-
-.search-separator span {
-    background: #3b82f6;
-    color: white;
-    font-weight: 500;
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    border-radius: 15px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .copy-container {
-        padding: 30px 15px 40px 15px;
-    }
-
-    .search-section {
-        padding: 20px 15px;
-        margin: 20px 0;
-    }
-
-    .search-input-group {
-        padding: 4px;
-        gap: 4px;
-    }
-
-    .search-icon {
-        margin: 0 8px;
-        font-size: 1rem;
-    }
-
-    .search-input {
-        padding: 12px 0;
-        font-size: 14px;
-    }
-
-    .search-button {
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-
-    .college-name-search {
-        padding: 25px 20px;
-        margin: 0 15px;
-        max-width: calc(100% - 30px);
-    }
-
-    .search-input-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .college-search-input {
-        padding: 15px 18px;
-        font-size: 16px;
-        min-height: 50px;
-    }
-
-    .name-search-btn {
-        justify-content: center;
-        padding: 15px 25px;
-        font-size: 16px;
-        min-height: 50px;
-    }
+  .help-tooltip:hover::after {
+    width: 220px;
+    right: -100px;
+  }
 }
 
 @media (max-width: 480px) {
-    .search-section {
-        padding: 15px 10px;
-        margin: 15px 0;
-    }
+  .hero-section {
+    padding: 50px 15px;
+  }
 
-    .search-input-group {
-        padding: 3px;
-        gap: 3px;
-    }
+  .hero-title {
+    font-size: 28px;
+  }
 
-    .search-icon {
-        margin: 0 6px;
-        font-size: 0.9rem;
-    }
+  .section-wrapper {
+    padding: 30px 15px;
+  }
 
-    .search-input {
-        padding: 10px 0;
-        font-size: 13px;
-    }
-
-    .search-input::placeholder {
-        font-size: 13px;
-    }
-
-    .search-button {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
-
-    .college-name-search {
-        padding: 20px 15px;
-        margin: 0 10px;
-        max-width: calc(100% - 20px);
-    }
-
-    .search-header h3 {
-        font-size: 1rem;
-    }
+  .filter-card {
+    padding: 20px;
+  }
 }
 </style>
-
-<div class="copy-container">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-badge">🇺🇸 Stars and Stripes!</div>
-            <h1 class="hero-title">アメリカ大学検索</h1>
-            <p class="hero-subtitle">世界最高水準の教育と無限の可能性</p>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="stat-number">4,0
-                        00</span>
-                    <span class="stat-text">総合大学</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-text">世界TOP100</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="stat-number">100万+</span>
-                    <span class="stat-text">留学生</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Quick Links Bar -->
-<div class="quick-links-bar">
-    <a href="/us/about" class="quick-link">
-        <i class="fas fa-info-circle"></i>
-        <span>アメリカ留学について</span>
-    </a>
-    <a href="/ivy-league" class="quick-link">
-        <i class="fas fa-star"></i>
-        <span>Ivy League</span>
-    </a>
-    <a href="/states" class="quick-link">
-        <i class="fas fa-map-marked-alt"></i>
-        <span>人気の州</span>
-    </a>
-    <a href="/scholarships" class="quick-link">
-        <i class="fas fa-graduation-cap"></i>
-        <span>奨学金情報</span>
-    </a>
-</div>
-
-<div class="main">
-    <div class="main-container">
-        <!-- Search Section -->
-        <div class="search-section">
-            <div class="search-wrapper">
-                <div class="search-input-group">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="college-name-input" placeholder="大学名、都市、専攻分野で検索..." class="search-input">
-                    <button id="name-search-button" class="search-button"><span class="button-text">検索</span></button>
-                </div>
-            </div>
-        </div>
-
-    <div class="contents">
-        <div class="conditions1">
-            <div class="box">
-                <div class="line-header1">
-                    <h1><i class="fas fa-map-marked-alt"></i>州</h1>
-                </div>
-                <select class="form-select" id="stateSelect" style="margin-top: 70px;">
-                    <option value="指定しない" selected>指定しない</option>
-                    <option value="アラバマ州(AL)">アラバマ州(AL)</option>
-                    <option value="アラスカ州(AK)">アラスカ州(AK)</option>
-                    <option value="アリゾナ州(AZ)">アリゾナ州(AZ)</option>
-                    <option value="アーカンソー州(AR)">アーカンソー州(AR)</option>
-                    <option value="カリフォルニア州(CA)">カリフォルニア州(CA)</option>
-                    <option value="コロラド州(CO)">コロラド州(CO)</option>
-                    <option value="コネチカット州(CT)">コネチカット州(CT)</option>
-                    <option value="デラウェア州(DE)">デラウェア州(DE)</option>
-                    <option value="コロンビア特別区(DC)">コロンビア特別区(DC)</option>
-                    <option value="フロリダ州(FL)">フロリダ州(FL)</option>
-                    <option value="ジョージア州(GA)">ジョージア州(GA)</option>
-                    <option value="ハワイ州(HI)">ハワイ州(HI)</option>
-                    <option value="アイダホ州(ID)">アイダホ州(ID)</option>
-                    <option value="イリノイ州(IL)">イリノイ州(IL)</option>
-                    <option value="インディアナ州(IN)">インディアナ州(IN)</option>
-                    <option value="アイオワ州(IA)">アイオワ州(IA)</option>
-                    <option value="カンザス州(KS)">カンザス州(KS)</option>
-                    <option value="ケンタッキー州(KY)">ケンタッキー州(KY)</option>
-                    <option value="ルイジアナ州(LA)">ルイジアナ州(LA)</option>
-                    <option value="メイン州(ME)">メイン州(ME)</option>
-                    <option value="メリーランド州(MD)">メリーランド州(MD)</option>
-                    <option value="マサチューセッツ州(MA)">マサチューセッツ州(MA)</option>
-                    <option value="ミシガン州(MI)">ミシガン州(MI)</option>
-                    <option value="ミネソタ州(MN)">ミネソタ州(MN)</option>
-                    <option value="ミシシッピ州(MS)">ミシシッピ州(MS)</option>
-                    <option value="ミズーリ州(MO)">ミズーリ州(MO)</option>
-                    <option value="モンタナ州(MT)">モンタナ州(MT)</option>
-                    <option value="ネブラスカ州(NE)">ネブラスカ州(NE)</option>
-                    <option value="ネバダ州(NV)">ネバダ州(NV)</option>
-                    <option value="ニューハンプシャー州(NH)">ニューハンプシャー州(NH)</option>
-                    <option value="ニュージャージー州(NJ)">ニュージャージー州(NJ)</option>
-                    <option value="ニューメキシコ州(NM)">ニューメキシコ州(NM)</option>
-                    <option value="ニューヨーク州(NY)">ニューヨーク州(NY)</option>
-                    <option value="ノースカロライナ州(NC)">ノースカロライナ州(NC)</option>
-                    <option value="ノースダコタ州(ND)">ノースダコタ州(ND)</option>
-                    <option value="オハイオ州(OH)">オハイオ州(OH)</option>
-                    <option value="オクラホマ州(OK)">オクラホマ州(OK)</option>
-                    <option value="オレゴン州(OR)">オレゴン州(OR)</option>
-                    <option value="ペンシルベニア州(PA)">ペンシルベニア州(PA)</option>
-                    <option value="ロードアイランド州(RI)">ロードアイランド州(RI)</option>
-                    <option value="サウスカロライナ州(SC)">サウスカロライナ州(SC)</option>
-                    <option value="サウスダコタ州(SD)">サウスダコタ州(SD)</option>
-                    <option value="テネシー州(TN)">テネシー州(TN)</option>
-                    <option value="テキサス州(TX)">テキサス州(TX)</option>
-                    <option value="ユタ州(UT)">ユタ州(UT)</option>
-                    <option value="バーモント州(VT)">バーモント州(VT)</option>
-                    <option value="バージニア州(VA)">バージニア州(VA)</option>
-                    <option value="ワシントン州(WA)">ワシントン州(WA)</option>
-                    <option value="ウェストバージニア州(WV)">ウェストバージニア州(WV)</option>
-                    <option value="ウィスコンシン州(WI)">ウィスコンシン州(WI)</option>
-                    <option value="ワイオミング州(WY)">ワイオミング州(WY)</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="conditions2">
-            <div class="box">
-                <div class="tooltip-container1">
-                    <span class="tooltip-trigger">？</span>
-                    <div class="tooltip-content">
-                        州立大学は州外生に対して2〜3倍の学費を設定しています。一方、私立大学は奨学金が充実しており、表示価格より実質費用が安くなる傾向があります。
-                    </div>
-                </div> 
-                <div class="line-header2">
-                    <h1><i class="fas fa-university"></i>大学タイプ</h1>
-                </div>
-                <form>
-                    <div class="form-group1">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
-                            <label class="form-check-label" for="radio1">
-                                4年制
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
-                            <label class="form-check-label" for="radio2">
-                                4年制私立
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
-                            <label class="form-check-label" for="radio3">
-                                4年制州立
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
-                            <label class="form-check-label" for="radio4">
-                                2年制（コミカレ、ジュニアカレッジ等）
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio5" value="option5">
-                            <label class="form-check-label" for="radio5">
-                                営利
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions3">
-            <div class="box">
-                <div class="tooltip-container2">
-                    <span class="tooltip-trigger">？</span>
-                    <div class="tooltip-content">
-                        州立大学は州外生向け料金、私立大学はNet Price（奨学金適用後の実質費用）を表示。私立大学の実際の支払額は表示価格より大幅に安くなることがあります。
-                    </div>
-                </div> 
-                <div class="line-header3">
-                    <h1><i class="fas fa-dollar-sign"></i>年間授業料</h1>
-                </div>
-                <form>
-                    <div class="form-group2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio1" value="option1" checked>
-                            <label class="form-check-label" for="tuitionRadio1">
-                                指定しない
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio2" value="option2">
-                            <label class="form-check-label" for="tuitionRadio2">
-                                ~$9,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio3" value="option3">
-                            <label class="form-check-label" for="tuitionRadio3">
-                                $10,000~$19,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio4" value="option4">
-                            <label class="form-check-label" for="tuitionRadio4">
-                                $20,000~$29,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio5" value="option5">
-                            <label class="form-check-label" for="tuitionRadio5">
-                                $30,000~$39,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio6" value="option6">
-                            <label class="form-check-label" for="tuitionRadio6">
-                                $40,000~$49,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio7" value="option7">
-                            <label class="form-check-label" for="tuitionRadio7">
-                                $50,000~$59,999
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tuitionRadios" id="tuitionRadio8" value="option8">
-                            <label class="form-check-label" for="tuitionRadio8">
-                                $60,000~
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions4">
-            <div class="box">
-                <div class="line-header4">
-                    <h1><i class="fas fa-user-friends"></i>学生数</h1>    
-                </div>
-                <form>
-                    <div class="form-group3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="groupCheck33.1">
-                            <label class="form-check-label" for="groupCheck33.1">
-                                小規模(~2999人)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="groupCheck34">
-                            <label class="form-check-label" for="groupCheck34">
-                                中規模(3000人~9999人)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="groupCheck35">
-                            <label class="form-check-label" for="groupCheck35">
-                                大規模(10,000人~29,999人)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="groupCheck36">
-                            <label class="form-check-label" for="groupCheck36">
-                                超大規模(30,000人~)
-                            </label>
-                        </div>
-                    </div>    
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions5">
-            <div class="box">
-                <div class="tooltip-container3">
-                    <span class="tooltip-trigger">？</span>
-                    <div class="tooltip-content">
-                        アメリカの大学入試で使用される標準テスト。総合スコアは400〜1600点（数学+読解ライティング）。競争力のある大学では1200点以上、トップ大学では1400点以上が目安。年7回実施、何度でも受験可能です。
-                    </div>
-                </div>   
-                <div class="line-header5">
-                    <h1><i class="fas fa-chart-bar"></i>SAT総合スコア</h1>
-                </div>
-                <form>
-                    <div class="form-group4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio1" value="option1" checked>
-                            <label class="form-check-label" for="satRadio1">
-                                指定しない
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio2" value="option2">
-                            <label class="form-check-label" for="satRadio2">
-                                800~1000
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio3" value="option3">
-                            <label class="form-check-label" for="satRadio3">
-                                1000~1200
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio4" value="option4">
-                            <label class="form-check-label" for="satRadio4">
-                                1200~1400
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="satRadios" id="satRadio5" value="option5">
-                            <label class="form-check-label" for="satRadio5">
-                                1400~1600
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions6">
-            <div class="box">
-                <div class="tooltip-container4">
-                    <span class="tooltip-trigger">？</span>
-                    <div class="tooltip-content">
-                        SATと同等に扱われる標準テスト。総合スコアは1〜36点（英語・数学・読解・科学の平均）。全国平均は約21点、競争力のある大学では24点以上、トップ大学では30点以上が目安。年6回実施。
-                    </div>
-                </div> 
-                <div class="line-header6">
-                    <h1><i class="fas fa-chart-line"></i>ACT総合スコア</h1>  
-                </div>
-                <form>
-                    <div class="form-group5">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio1" value="option1" checked>
-                            <label class="form-check-label" for="actRadio1">
-                                指定しない
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio2" value="option2">
-                            <label class="form-check-label" for="actRadio2">
-                                10~15
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio3" value="option3">
-                            <label class="form-check-label" for="actRadio3">
-                                16~20
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio4" value="option4">
-                            <label class="form-check-label" for="actRadio4">
-                                21~25
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio5" value="option5">
-                            <label class="form-check-label" for="actRadio5">
-                                26~30
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="actRadios" id="actRadio6" value="option6">
-                            <label class="form-check-label" for="actRadio6">
-                                31~36
-                            </label>
-                        </div>
-                    </div>    
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions7">
-            <div class="box">
-                <div class="tooltip-container5">
-                    <span class="tooltip-trigger">？</span>
-                    <div class="tooltip-content">
-                        6年以内に卒業した学生の割合。難関大学ほど卒業率が高い傾向があります。全米平均は約60%で、トップ大学では90%以上になります。
-                    </div>
-                </div> 
-                <div class="line-header7">
-                    <h1><i class="fas fa-graduation-cap"></i>卒業率</h1>
-                </div>
-                <form>
-                    <div class="form-group6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio1" value="option1" checked>
-                            <label class="form-check-label" for="gradRadio1">
-                                指定しない
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio2" value="option2">
-                            <label class="form-check-label" for="gradRadio2">
-                                50%~
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio3" value="option3">
-                            <label class="form-check-label" for="gradRadio3">
-                                60%~
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio4" value="option4">
-                            <label class="form-check-label" for="gradRadio4">
-                                70%~
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio5" value="option5">
-                            <label class="form-check-label" for="gradRadio5">
-                                80%~
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="graduationRadios" id="gradRadio6" value="option6">
-                            <label class="form-check-label" for="gradRadio6">
-                                90%~
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="conditions8">
-            <div class="box">
-                <div class="line-header8">
-                    <h1><i class="fas fa-map-pin"></i>大学の立地</h1>    
-                </div>
-                <form>
-                    <div class="form-group7">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="urbanCheck1" value="大都市">
-                            <label class="form-check-label" for="urbanCheck1">
-                                大都市
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="urbanCheck2" value="都市部近郊">
-                            <label class="form-check-label" for="urbanCheck2">
-                                都市部近郊
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="urbanCheck3" value="小都市">
-                            <label class="form-check-label" for="urbanCheck3">
-                                小都市
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="urbanCheck4" value="田舎">
-                            <label class="form-check-label" for="urbanCheck4">
-                                田舎
-                            </label>
-                        </div>
-                    </div>    
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="contents1">
-        <div class="conditions9">
-            <div class="box1">
-                <div class="tooltip-container6">
-                    <span class="tooltip-trigger1">？</span>
-                    <div class="tooltip-content">
-                        アメリカの大学では、2つ以上の分野を専攻することができます。また、副専攻として学ぶこともできます。文理の壁がほとんどないため、全く異なる分野を同時に学ぶことができます。
-                    </div>
-                </div>
-                <div class="line-header7-major">
-                    <h1><i class="fas fa-book-open"></i><strong>専攻</strong></h1>
-                </div>
-                <div class="options">
-                    <label><input type="checkbox" name="major" value="health_professions"> 健康・医療 (3,479校)</label>
-                    <label><input type="checkbox" name="major" value="business"> 経営学 (2,829校)</label>
-                    <label><input type="checkbox" name="major" value="computer_science"> コンピューターサイエンス (2,407校)</label>
-                    <label><input type="checkbox" name="major" value="education"> 教育学 (1,995校)</label>
-                    <label><input type="checkbox" name="major" value="visual_arts"> 視覚・舞台芸術 (1,926校)</label>
-                    <label><input type="checkbox" name="major" value="biology"> 生物学 (1,726校)</label>
-                    <label><input type="checkbox" name="major" value="psychology"> 心理学 (1,697校)</label>
-                    <label><input type="checkbox" name="major" value="sociology"> 社会学 (1,517校)</label>
-                    <label><input type="checkbox" name="major" value="social_sciences"> 社会科学 (1,496校)</label>
-                    <label><input type="checkbox" name="major" value="english"> 英語・文学 (1,487校)</label>
-                    <label><input type="checkbox" name="major" value="mathematics"> 数学・統計学 (1,344校)</label>
-                    <label><input type="checkbox" name="major" value="history"> 歴史学 (1,323校)</label>
-                    <label><input type="checkbox" name="major" value="engineering"> 工学 (1,093校)</label>
-                    <label><input type="checkbox" name="major" value="philosophy"> 哲学・宗教学 (898校)</label>
-                    <label><input type="checkbox" name="major" value="agriculture"> 農業・農学 (761校)</label>
-                    <label><input type="checkbox" name="major" value="law"> 法学・刑事司法 (640校)</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="search-button-container">
-        <button class="cool-search-button" id="search-button"><i class="fas fa-search"></i> 条件で検索</button>
-    </div>
-</div>
 
 <script>
 // 大学名検索機能
 document.getElementById('name-search-button').addEventListener('click', function () {
     const collegeName = document.getElementById('college-name-input').value.trim();
     if (collegeName) {
-        // 大学名検索用のクエリパラメータを作成
         const queryString = new URLSearchParams({
             college_name: collegeName
         }).toString();
-        
-        // 検索結果ページにリダイレクト
         window.location.href = `/results?${queryString}`;
     } else {
         alert('大学名を入力してください');
@@ -1253,220 +773,29 @@ document.getElementById('college-name-input').addEventListener('keypress', funct
     }
 });
 
-// 大学名検索と条件検索の干渉防止機能
-document.addEventListener('DOMContentLoaded', function () {
-    const collegeNameInput = document.getElementById('college-name-input');
-    const nameSearchButton = document.getElementById('name-search-button');
-    
-    // 条件検索の要素を取得
-    const stateSelect = document.getElementById('stateSelect');
-    const conditionInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
-    const conditionSearchButton = document.getElementById('search-button');
-    
-    // 条件検索要素を無効化する関数
-    function disableConditionSearch() {
-        stateSelect.disabled = true;
-        stateSelect.classList.add('disabled-field');
-        
-        conditionInputs.forEach(input => {
-            input.disabled = true;
-            input.parentElement.classList.add('disabled-label');
-        });
-        
-        conditionSearchButton.disabled = true;
-        conditionSearchButton.classList.add('disabled-button');
-    }
-    
-    // 条件検索要素を有効化する関数
-    function enableConditionSearch() {
-        stateSelect.disabled = false;
-        stateSelect.classList.remove('disabled-field');
-        
-        conditionInputs.forEach(input => {
-            input.disabled = false;
-            input.parentElement.classList.remove('disabled-label');
-        });
-        
-        conditionSearchButton.disabled = false;
-        conditionSearchButton.classList.remove('disabled-button');
-    }
-    
-    // 大学名検索要素を無効化する関数
-    function disableNameSearch() {
-        collegeNameInput.disabled = true;
-        collegeNameInput.classList.add('disabled-field');
-        nameSearchButton.disabled = true;
-        nameSearchButton.classList.add('disabled-button');
-    }
-    
-    // 大学名検索要素を有効化する関数
-    function enableNameSearch() {
-        collegeNameInput.disabled = false;
-        collegeNameInput.classList.remove('disabled-field');
-        nameSearchButton.disabled = false;
-        nameSearchButton.classList.remove('disabled-button');
-    }
-    
-    // 大学名入力フィールドの監視
-    collegeNameInput.addEventListener('input', function() {
-        if (this.value.trim() !== '') {
-            disableConditionSearch();
-        } else {
-            enableConditionSearch();
-        }
-    });
-    
-    // 条件検索の要素変更を監視
-    function checkConditionInputs() {
-        let hasConditionInput = false;
-        
-        // 州選択をチェック（「指定しない」以外が選択されていれば条件あり）
-        if (stateSelect.value !== '指定しない') {
-            hasConditionInput = true;
-        }
-        
-        // ラジオボタンとチェックボックスをチェック
-        conditionInputs.forEach(input => {
-            if (input.checked && input.value !== 'option1') { // デフォルト選択肢以外
-                hasConditionInput = true;
-            }
-        });
-        
-        if (hasConditionInput) {
-            disableNameSearch();
-        } else {
-            enableNameSearch();
-        }
-    }
-    
-    // 州選択の変更を監視
-    stateSelect.addEventListener('change', checkConditionInputs);
-    
-    // 全ての条件入力要素の変更を監視
-    conditionInputs.forEach(input => {
-        input.addEventListener('change', checkConditionInputs);
-    });
-    
-    console.log('Search interference prevention initialized');
-});
-
-
-// 大学名入力と詳細条件の相互無効化機能
-function setupMutualExclusion() {
-    const collegeNameInput = document.getElementById('college-name-input');
-    const conditionInputs = document.querySelectorAll('.form-select, input[type="checkbox"], input[type="radio"]');
-    const nameSearchButton = document.getElementById('name-search-button');
-    const conditionSearchButton = document.getElementById('search-button');
-    const allConditionBoxes = document.querySelectorAll('.box, .box1');
-    
-    // 大学名入力時の処理
-    collegeNameInput.addEventListener('input', function() {
-        const hasValue = this.value.trim().length > 0;
-        
-        // 詳細条件を有効/無効化
-        conditionInputs.forEach(input => {
-            input.disabled = hasValue;
-            if (hasValue) {
-                input.classList.add('disabled-field');
-                const label = input.closest('label');
-                if (label) label.classList.add('disabled-label');
-            } else {
-                input.classList.remove('disabled-field');
-                const label = input.closest('label');
-                if (label) label.classList.remove('disabled-label');
-            }
-        });
-        
-        // 条件検索ボタンを有効/無効化
-        conditionSearchButton.disabled = hasValue;
-        if (hasValue) {
-            conditionSearchButton.classList.add('disabled-button');
-        } else {
-            conditionSearchButton.classList.remove('disabled-button');
-        }
-        
-        // 条件ボックスの見た目を変更
-        allConditionBoxes.forEach(box => {
-            if (hasValue) {
-                box.style.opacity = '0.5';
-                box.style.pointerEvents = 'none';
-            } else {
-                box.style.opacity = '1';
-                box.style.pointerEvents = 'auto';
-            }
-        });
-    });
-    
-    // 詳細条件入力時の処理
-    function checkConditionInputs() {
-        let hasCondition = false;
-        
-        // 州が選択されているかチェック（「指定しない」以外なら条件あり）
-        const stateSelect = document.getElementById('stateSelect');
-        if (stateSelect.value !== '指定しない') {
-            hasCondition = true;
-        }
-        
-        // その他の条件がチェックされているか確認
-        const checkedInputs = document.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked');
-        if (checkedInputs.length > 0) {
-            hasCondition = true;
-        }
-        
-        // 大学名入力を有効/無効化
-        collegeNameInput.disabled = hasCondition;
-        nameSearchButton.disabled = hasCondition;
-        
-        if (hasCondition) {
-            collegeNameInput.classList.add('disabled-field');
-            nameSearchButton.classList.add('disabled-button');
-            collegeNameInput.placeholder = '詳細条件検索中は大学名検索は使用できません';
-        } else {
-            collegeNameInput.classList.remove('disabled-field');
-            nameSearchButton.classList.remove('disabled-button');
-            collegeNameInput.placeholder = '例：Harvard University, Stanford University...';
-        }
-    }
-    
-    // 全ての条件入力にイベントリスナーを追加
-    conditionInputs.forEach(input => {
-        input.addEventListener('change', checkConditionInputs);
-    });
-}
-
-// ページ読み込み時に相互無効化機能を設定
-document.addEventListener('DOMContentLoaded', function() {
-    setupMutualExclusion();
-});
-
 // 検索機能
 document.getElementById('search-button').addEventListener('click', function () {
     const stateValue = document.getElementById('stateSelect').value;
 
     const formData = {
         state: stateValue,
-        privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-        tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-        students: Array.from(document.querySelectorAll('.form-group3 input:checked')).map(cb => cb.nextElementSibling?.innerText.trim()),
-        sat_score: document.querySelector('input[name="satRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-        act_score: document.querySelector('input[name="actRadios"]:checked')?.nextElementSibling?.innerText.trim(),
-        graduation_rate: document.querySelector('.form-group6 input:checked')?.nextElementSibling?.innerText.trim(),
-        urbanicity: Array.from(document.querySelectorAll('.form-group7 input:checked')).map(cb => cb.value),
+        privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+        tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+        students: Array.from(document.querySelectorAll('.filter-card input[type="checkbox"][id^="groupCheck"]:checked')).map(cb => cb.parentElement.querySelector('span')?.innerText.trim()),
+        sat_score: document.querySelector('input[name="satRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+        act_score: document.querySelector('input[name="actRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+        graduation_rate: document.querySelector('input[name="graduationRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+        urbanicity: Array.from(document.querySelectorAll('input[id^="urbanCheck"]:checked')).map(cb => cb.value),
         major: Array.from(document.querySelectorAll('input[name="major"]:checked'))
             .map(cb => cb.value)
             .filter(value => value !== "")
     };
 
-    // majorが選択されていない場合の処理
     if (formData.major.length === 0) {
         formData.major = "未選択";
     }
 
-    // クエリ文字列を作成
     const queryString = new URLSearchParams(formData).toString();
-
-    // クエリ文字列を使ってリダイレクト
     window.location.href = `/results?${queryString}`;
 });
 </script>
-</div>
