@@ -30,34 +30,7 @@ namespace :render do
       puts "   Render環境変数でCOLLEGE_SCORECARD_API_KEY=eFbenl6AhOp1FYATeuHHTa4nXQZYsRi7w3JNxcBl を設定してください"
     end
     
-    # 3. コメント追加（高速）
-    if colleges_with_comments < total_colleges * 0.5
-      puts "\n=== コメント追加開始 ==="
-      require_relative '../college_comment_generator'
-      
-      comment_count = 0
-      Condition.where(comment: [nil, '']).limit(1000).find_each do |college|
-        comment_data = {
-          students: college.students,
-          acceptance_rate: college.acceptance_rate,
-          ownership: college.privateorpublic,
-          school_type: college.school_type
-        }
-        
-        comment = CollegeCommentGenerator.generate_comment_for_college(college.college, comment_data)
-        college.update(comment: comment)
-        comment_count += 1
-        
-        if comment_count % 100 == 0
-          puts "  コメント追加進捗: #{comment_count}"
-        end
-      end
-      puts "  ✓ #{comment_count}件のコメントを追加しました"
-    else
-      puts "\n✓ コメントは既に十分追加されています"
-    end
-    
-    # 4. 授業料データ追加（APIを使用）
+    # 3. 授業料データ追加（APIを使用）
     if api_key && colleges_with_tuition < total_colleges * 0.3
       puts "\n=== 授業料データ追加開始 ==="
       require 'net/http'
@@ -117,8 +90,8 @@ namespace :render do
     else
       puts "\n✓ 授業料データは既に十分追加されているか、API Keyが未設定です"
     end
-    
-    # 5. 専攻データ追加（限定的）
+
+    # 4. 専攻データ追加（限定的）
     if api_key && colleges_with_majors < total_colleges * 0.1
       puts "\n=== 専攻データ追加開始（50校限定）==="
       require_relative '../college_major_importer'
@@ -140,8 +113,8 @@ namespace :render do
     else
       puts "\n✓ 専攻データは既に十分追加されているか、API Keyが未設定です"
     end
-    
-    # 6. 最終統計
+
+    # 5. 最終統計
     puts "\n=== 最終統計 ==="
     final_total = Condition.count
     final_tuition = Condition.where.not(tuition: [nil, 0]).count
@@ -155,36 +128,5 @@ namespace :render do
     
     puts "\n=== セットアップ完了 ==="
     puts "ブラウザでページを再読み込みして確認してください。"
-  end
-  
-  desc "Quick setup - comments only"
-  task quick_setup: :environment do
-    puts "=== 高速セットアップ（コメントのみ）==="
-    
-    require_relative '../college_comment_generator'
-    
-    total = Condition.where(comment: [nil, '']).count
-    puts "コメント追加対象: #{total}校"
-    
-    count = 0
-    Condition.where(comment: [nil, '']).find_each do |college|
-      comment_data = {
-        students: college.students,
-        acceptance_rate: college.acceptance_rate,
-        ownership: college.privateorpublic,
-        school_type: college.school_type
-      }
-      
-      comment = CollegeCommentGenerator.generate_comment_for_college(college.college, comment_data)
-      college.update(comment: comment)
-      count += 1
-      
-      if count % 500 == 0
-        puts "進捗: #{count}/#{total}"
-      end
-    end
-    
-    puts "✓ #{count}件のコメントを追加しました"
-    puts "現在のコメント数: #{Condition.where.not(comment: [nil, '']).count}校"
   end
 end

@@ -1,10 +1,9 @@
 namespace :import do
-  desc "Import fresh college data from College Scorecard with tuition, comments, and major data"
+  desc "Import fresh college data from College Scorecard with tuition and major data"
   task fresh_colleges: :environment do
     require 'net/http'
     require 'json'
     require 'dotenv/load'
-    require_relative '../college_comment_generator'
     require_relative '../college_major_importer'
     
     api_key = ENV['COLLEGE_SCORECARD_API_KEY']
@@ -155,16 +154,6 @@ namespace :import do
               graduation_rate: school['latest.completion.completion_rate_4yr_150nt'],
               acceptance_rate: school['latest.admissions.admission_rate.overall']
             }
-            
-            # コメントがない場合は生成
-            if condition.comment.blank?
-              comment_data = {
-                students: school['latest.student.size'],
-                acceptance_rate: school['latest.admissions.admission_rate.overall'],
-                ownership: ownership
-              }
-              college_data[:comment] = CollegeCommentGenerator.generate_comment_for_college(name, comment_data)
-            end
             
             condition.update(college_data)
             
