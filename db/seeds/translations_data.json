@@ -1,0 +1,1867 @@
+[
+  {
+    "college": "Harvard University",
+    "locale": "ja",
+    "name": "ハーバード大学"
+  },
+  {
+    "college": "Yale University",
+    "locale": "ja",
+    "name": "イェール大学"
+  },
+  {
+    "college": "Princeton University",
+    "locale": "ja",
+    "name": "プリンストン大学"
+  },
+  {
+    "college": "Columbia University in the City of New York",
+    "locale": "ja",
+    "name": "コロンビア大学"
+  },
+  {
+    "college": "University of Pennsylvania",
+    "locale": "ja",
+    "name": "ペンシルベニア大学"
+  },
+  {
+    "college": "Brown University",
+    "locale": "ja",
+    "name": "ブラウン大学"
+  },
+  {
+    "college": "Dartmouth College",
+    "locale": "ja",
+    "name": "ダートマスカレッジ"
+  },
+  {
+    "college": "Cornell University",
+    "locale": "ja",
+    "name": "コーネル大学"
+  },
+  {
+    "college": "Stanford University",
+    "locale": "ja",
+    "name": "スタンフォード大学"
+  },
+  {
+    "college": "Massachusetts Institute of Technology",
+    "locale": "ja",
+    "name": "マサチューセッツ工科大学（MIT）"
+  },
+  {
+    "college": "California Institute of Technology",
+    "locale": "ja",
+    "name": "カリフォルニア工科大学（Caltech）"
+  },
+  {
+    "college": "Duke University",
+    "locale": "ja",
+    "name": "デューク大学"
+  },
+  {
+    "college": "Northwestern University",
+    "locale": "ja",
+    "name": "ノースウェスタン大学"
+  },
+  {
+    "college": "Johns Hopkins University",
+    "locale": "ja",
+    "name": "ジョンズ・ホプキンス大学"
+  },
+  {
+    "college": "University of Chicago",
+    "locale": "ja",
+    "name": "シカゴ大学"
+  },
+  {
+    "college": "Vanderbilt University",
+    "locale": "ja",
+    "name": "ヴァンダービルト大学"
+  },
+  {
+    "college": "Rice University",
+    "locale": "ja",
+    "name": "ライス大学"
+  },
+  {
+    "college": "Washington University in St Louis",
+    "locale": "ja",
+    "name": "ワシントン大学セントルイス"
+  },
+  {
+    "college": "University of Notre Dame",
+    "locale": "ja",
+    "name": "ノートルダム大学"
+  },
+  {
+    "college": "Emory University",
+    "locale": "ja",
+    "name": "エモリー大学"
+  },
+  {
+    "college": "Georgetown University",
+    "locale": "ja",
+    "name": "ジョージタウン大学"
+  },
+  {
+    "college": "Carnegie Mellon University",
+    "locale": "ja",
+    "name": "カーネギーメロン大学"
+  },
+  {
+    "college": "University of Southern California",
+    "locale": "ja",
+    "name": "南カリフォルニア大学（USC）"
+  },
+  {
+    "college": "New York University",
+    "locale": "ja",
+    "name": "ニューヨーク大学（NYU）"
+  },
+  {
+    "college": "Boston University",
+    "locale": "ja",
+    "name": "ボストン大学"
+  },
+  {
+    "college": "Boston College",
+    "locale": "ja",
+    "name": "ボストンカレッジ"
+  },
+  {
+    "college": "Tufts University",
+    "locale": "ja",
+    "name": "タフツ大学"
+  },
+  {
+    "college": "Wake Forest University",
+    "locale": "ja",
+    "name": "ウェイクフォレスト大学"
+  },
+  {
+    "college": "Brandeis University",
+    "locale": "ja",
+    "name": "ブランダイス大学"
+  },
+  {
+    "college": "Case Western Reserve University",
+    "locale": "ja",
+    "name": "ケースウェスタンリザーブ大学"
+  },
+  {
+    "college": "Northeastern University",
+    "locale": "ja",
+    "name": "ノースイースタン大学"
+  },
+  {
+    "college": "Tulane University of Louisiana",
+    "locale": "ja",
+    "name": "チューレーン大学"
+  },
+  {
+    "college": "Pepperdine University",
+    "locale": "ja",
+    "name": "ペパーダイン大学"
+  },
+  {
+    "college": "University of Miami",
+    "locale": "ja",
+    "name": "マイアミ大学"
+  },
+  {
+    "college": "George Washington University",
+    "locale": "ja",
+    "name": "ジョージ・ワシントン大学"
+  },
+  {
+    "college": "Syracuse University",
+    "locale": "ja",
+    "name": "シラキュース大学"
+  },
+  {
+    "college": "Fordham University",
+    "locale": "ja",
+    "name": "フォーダム大学"
+  },
+  {
+    "college": "University of Rochester",
+    "locale": "ja",
+    "name": "ロチェスター大学"
+  },
+  {
+    "college": "Rensselaer Polytechnic Institute",
+    "locale": "ja",
+    "name": "レンセラー工科大学"
+  },
+  {
+    "college": "Santa Clara University",
+    "locale": "ja",
+    "name": "サンタクララ大学"
+  },
+  {
+    "college": "Villanova University",
+    "locale": "ja",
+    "name": "ヴィラノバ大学"
+  },
+  {
+    "college": "Lehigh University",
+    "locale": "ja",
+    "name": "リーハイ大学"
+  },
+  {
+    "college": "Stevens Institute of Technology",
+    "locale": "ja",
+    "name": "スティーブンス工科大学"
+  },
+  {
+    "college": "Southern Methodist University",
+    "locale": "ja",
+    "name": "サザンメソジスト大学"
+  },
+  {
+    "college": "Loyola Marymount University",
+    "locale": "ja",
+    "name": "ロヨラメリーマウント大学"
+  },
+  {
+    "college": "University of California-Berkeley",
+    "locale": "ja",
+    "name": "カリフォルニア大学バークレー校（UCバークレー）"
+  },
+  {
+    "college": "University of California-Los Angeles",
+    "locale": "ja",
+    "name": "カリフォルニア大学ロサンゼルス校（UCLA）"
+  },
+  {
+    "college": "University of California-San Diego",
+    "locale": "ja",
+    "name": "カリフォルニア大学サンディエゴ校"
+  },
+  {
+    "college": "University of California-Santa Barbara",
+    "locale": "ja",
+    "name": "カリフォルニア大学サンタバーバラ校"
+  },
+  {
+    "college": "University of California-Irvine",
+    "locale": "ja",
+    "name": "カリフォルニア大学アーバイン校"
+  },
+  {
+    "college": "University of California-Davis",
+    "locale": "ja",
+    "name": "カリフォルニア大学デービス校"
+  },
+  {
+    "college": "University of California-Santa Cruz",
+    "locale": "ja",
+    "name": "カリフォルニア大学サンタクルーズ校"
+  },
+  {
+    "college": "University of California-Riverside",
+    "locale": "ja",
+    "name": "カリフォルニア大学リバーサイド校"
+  },
+  {
+    "college": "University of California-Merced",
+    "locale": "ja",
+    "name": "カリフォルニア大学マーセド校"
+  },
+  {
+    "college": "University of Michigan-Ann Arbor",
+    "locale": "ja",
+    "name": "ミシガン大学アナーバー校"
+  },
+  {
+    "college": "University of Wisconsin-Madison",
+    "locale": "ja",
+    "name": "ウィスコンシン大学マディソン校"
+  },
+  {
+    "college": "University of Illinois Urbana-Champaign",
+    "locale": "ja",
+    "name": "イリノイ大学アーバナ・シャンペーン校"
+  },
+  {
+    "college": "Pennsylvania State University-Main Campus",
+    "locale": "ja",
+    "name": "ペンシルベニア州立大学"
+  },
+  {
+    "college": "Ohio State University-Main Campus",
+    "locale": "ja",
+    "name": "オハイオ州立大学"
+  },
+  {
+    "college": "University of Minnesota-Twin Cities",
+    "locale": "ja",
+    "name": "ミネソタ大学ツインシティーズ校"
+  },
+  {
+    "college": "Purdue University-Main Campus",
+    "locale": "ja",
+    "name": "パデュー大学"
+  },
+  {
+    "college": "Indiana University-Bloomington",
+    "locale": "ja",
+    "name": "インディアナ大学ブルーミントン校"
+  },
+  {
+    "college": "University of Iowa",
+    "locale": "ja",
+    "name": "アイオワ大学"
+  },
+  {
+    "college": "Michigan State University",
+    "locale": "ja",
+    "name": "ミシガン州立大学"
+  },
+  {
+    "college": "Rutgers University-New Brunswick",
+    "locale": "ja",
+    "name": "ラトガース大学"
+  },
+  {
+    "college": "University of Maryland-College Park",
+    "locale": "ja",
+    "name": "メリーランド大学カレッジパーク校"
+  },
+  {
+    "college": "University of Nebraska-Lincoln",
+    "locale": "ja",
+    "name": "ネブラスカ大学リンカーン校"
+  },
+  {
+    "college": "University of Virginia-Main Campus",
+    "locale": "ja",
+    "name": "バージニア大学"
+  },
+  {
+    "college": "University of North Carolina at Chapel Hill",
+    "locale": "ja",
+    "name": "ノースカロライナ大学チャペルヒル校"
+  },
+  {
+    "college": "University of Florida",
+    "locale": "ja",
+    "name": "フロリダ大学"
+  },
+  {
+    "college": "Georgia Institute of Technology-Main Campus",
+    "locale": "ja",
+    "name": "ジョージア工科大学"
+  },
+  {
+    "college": "University of Washington-Seattle Campus",
+    "locale": "ja",
+    "name": "ワシントン大学シアトル校"
+  },
+  {
+    "college": "University of Colorado Boulder",
+    "locale": "ja",
+    "name": "コロラド大学ボルダー校"
+  },
+  {
+    "college": "University of Georgia",
+    "locale": "ja",
+    "name": "ジョージア大学"
+  },
+  {
+    "college": "Florida State University",
+    "locale": "ja",
+    "name": "フロリダ州立大学"
+  },
+  {
+    "college": "University of Arizona",
+    "locale": "ja",
+    "name": "アリゾナ大学"
+  },
+  {
+    "college": "University of Pittsburgh-Pittsburgh Campus",
+    "locale": "ja",
+    "name": "ピッツバーグ大学"
+  },
+  {
+    "college": "University of Connecticut",
+    "locale": "ja",
+    "name": "コネチカット大学"
+  },
+  {
+    "college": "University of Utah",
+    "locale": "ja",
+    "name": "ユタ大学"
+  },
+  {
+    "college": "University of Oregon",
+    "locale": "ja",
+    "name": "オレゴン大学"
+  },
+  {
+    "college": "Oregon State University",
+    "locale": "ja",
+    "name": "オレゴン州立大学"
+  },
+  {
+    "college": "Colorado State University-Fort Collins",
+    "locale": "ja",
+    "name": "コロラド州立大学"
+  },
+  {
+    "college": "University of South Carolina-Columbia",
+    "locale": "ja",
+    "name": "サウスカロライナ大学"
+  },
+  {
+    "college": "University of Kentucky",
+    "locale": "ja",
+    "name": "ケンタッキー大学"
+  },
+  {
+    "college": "Louisiana State University and Agricultural & Mechanical College",
+    "locale": "ja",
+    "name": "ルイジアナ州立大学"
+  },
+  {
+    "college": "University of Kansas",
+    "locale": "ja",
+    "name": "カンザス大学"
+  },
+  {
+    "college": "University of Missouri-Columbia",
+    "locale": "ja",
+    "name": "ミズーリ大学"
+  },
+  {
+    "college": "University of Oklahoma-Norman Campus",
+    "locale": "ja",
+    "name": "オクラホマ大学"
+  },
+  {
+    "college": "University of Arkansas",
+    "locale": "ja",
+    "name": "アーカンソー大学"
+  },
+  {
+    "college": "University of Mississippi",
+    "locale": "ja",
+    "name": "ミシシッピ大学"
+  },
+  {
+    "college": "University of Hawaii at Manoa",
+    "locale": "ja",
+    "name": "ハワイ大学マノア校"
+  },
+  {
+    "college": "California State University-Long Beach",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学ロングビーチ校"
+  },
+  {
+    "college": "California State University-Fullerton",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学フラートン校"
+  },
+  {
+    "college": "San Diego State University",
+    "locale": "ja",
+    "name": "サンディエゴ州立大学"
+  },
+  {
+    "college": "San Jose State University",
+    "locale": "ja",
+    "name": "サンノゼ州立大学"
+  },
+  {
+    "college": "California State University-Northridge",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学ノースリッジ校"
+  },
+  {
+    "college": "California Polytechnic State University-San Luis Obispo",
+    "locale": "ja",
+    "name": "カリフォルニアポリテクニック州立大学"
+  },
+  {
+    "college": "California State University-Los Angeles",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学ロサンゼルス校"
+  },
+  {
+    "college": "San Francisco State University",
+    "locale": "ja",
+    "name": "サンフランシスコ州立大学"
+  },
+  {
+    "college": "Stony Brook University",
+    "locale": "ja",
+    "name": "ストーニーブルック大学"
+  },
+  {
+    "college": "University at Buffalo",
+    "locale": "ja",
+    "name": "ニューヨーク州立大学バッファロー校"
+  },
+  {
+    "college": "Binghamton University",
+    "locale": "ja",
+    "name": "ビンガムトン大学"
+  },
+  {
+    "college": "University at Albany",
+    "locale": "ja",
+    "name": "ニューヨーク州立大学オールバニー校"
+  },
+  {
+    "college": "Williams College",
+    "locale": "ja",
+    "name": "ウィリアムズカレッジ"
+  },
+  {
+    "college": "Amherst College",
+    "locale": "ja",
+    "name": "アマーストカレッジ"
+  },
+  {
+    "college": "Swarthmore College",
+    "locale": "ja",
+    "name": "スワースモアカレッジ"
+  },
+  {
+    "college": "Wellesley College",
+    "locale": "ja",
+    "name": "ウェルズリーカレッジ"
+  },
+  {
+    "college": "Pomona College",
+    "locale": "ja",
+    "name": "ポモナカレッジ"
+  },
+  {
+    "college": "Bowdoin College",
+    "locale": "ja",
+    "name": "ボウディンカレッジ"
+  },
+  {
+    "college": "Middlebury College",
+    "locale": "ja",
+    "name": "ミドルベリーカレッジ"
+  },
+  {
+    "college": "Carleton College",
+    "locale": "ja",
+    "name": "カールトンカレッジ"
+  },
+  {
+    "college": "Claremont McKenna College",
+    "locale": "ja",
+    "name": "クレアモントマッケナカレッジ"
+  },
+  {
+    "college": "Haverford College",
+    "locale": "ja",
+    "name": "ハバフォードカレッジ"
+  },
+  {
+    "college": "Vassar College",
+    "locale": "ja",
+    "name": "ヴァッサーカレッジ"
+  },
+  {
+    "college": "Colgate University",
+    "locale": "ja",
+    "name": "コルゲート大学"
+  },
+  {
+    "college": "Hamilton College",
+    "locale": "ja",
+    "name": "ハミルトンカレッジ"
+  },
+  {
+    "college": "Wesleyan University",
+    "locale": "ja",
+    "name": "ウェズリアン大学"
+  },
+  {
+    "college": "Grinnell College",
+    "locale": "ja",
+    "name": "グリネルカレッジ"
+  },
+  {
+    "college": "Barnard College",
+    "locale": "ja",
+    "name": "バーナードカレッジ"
+  },
+  {
+    "college": "Smith College",
+    "locale": "ja",
+    "name": "スミスカレッジ"
+  },
+  {
+    "college": "Oberlin College",
+    "locale": "ja",
+    "name": "オーバリンカレッジ"
+  },
+  {
+    "college": "Colorado College",
+    "locale": "ja",
+    "name": "コロラドカレッジ"
+  },
+  {
+    "college": "Bryn Mawr College",
+    "locale": "ja",
+    "name": "ブリンマーカレッジ"
+  },
+  {
+    "college": "Rhode Island School of Design",
+    "locale": "ja",
+    "name": "ロードアイランド・スクール・オブ・デザイン"
+  },
+  {
+    "college": "Pratt Institute-Main",
+    "locale": "ja",
+    "name": "プラット・インスティテュート"
+  },
+  {
+    "college": "California Institute of the Arts",
+    "locale": "ja",
+    "name": "カリフォルニア芸術大学"
+  },
+  {
+    "college": "Savannah College of Art and Design",
+    "locale": "ja",
+    "name": "サバンナ芸術工科大学"
+  },
+  {
+    "college": "Fashion Institute of Technology",
+    "locale": "ja",
+    "name": "ファッション工科大学"
+  },
+  {
+    "college": "The Juilliard School",
+    "locale": "ja",
+    "name": "ジュリアード音楽院"
+  },
+  {
+    "college": "Berklee College of Music",
+    "locale": "ja",
+    "name": "バークリー音楽院"
+  },
+  {
+    "college": "Manhattan School of Music",
+    "locale": "ja",
+    "name": "マンハッタン音楽院"
+  },
+  {
+    "college": "Curtis Institute of Music",
+    "locale": "ja",
+    "name": "カーティス音楽院"
+  },
+  {
+    "college": "Chapman University",
+    "locale": "ja",
+    "name": "チャップマン大学"
+  },
+  {
+    "college": "Babson College",
+    "locale": "ja",
+    "name": "バブソンカレッジ"
+  },
+  {
+    "college": "Bentley University",
+    "locale": "ja",
+    "name": "ベントレー大学"
+  },
+  {
+    "college": "Worcester Polytechnic Institute",
+    "locale": "ja",
+    "name": "ウースター工科大学"
+  },
+  {
+    "college": "Illinois Institute of Technology",
+    "locale": "ja",
+    "name": "イリノイ工科大学"
+  },
+  {
+    "college": "Rose-Hulman Institute of Technology",
+    "locale": "ja",
+    "name": "ローズハルマン工科大学"
+  },
+  {
+    "college": "Harvey Mudd College",
+    "locale": "ja",
+    "name": "ハーヴェイマッドカレッジ"
+  },
+  {
+    "college": "Virginia Polytechnic Institute and State University",
+    "locale": "ja",
+    "name": "バージニア工科大学"
+  },
+  {
+    "college": "Texas A & M University-College Station",
+    "locale": "ja",
+    "name": "テキサスA&M大学"
+  },
+  {
+    "college": "Howard University",
+    "locale": "ja",
+    "name": "ハワード大学"
+  },
+  {
+    "college": "Spelman College",
+    "locale": "ja",
+    "name": "スペルマンカレッジ"
+  },
+  {
+    "college": "Morehouse College",
+    "locale": "ja",
+    "name": "モアハウスカレッジ"
+  },
+  {
+    "college": "Hampton University",
+    "locale": "ja",
+    "name": "ハンプトン大学"
+  },
+  {
+    "college": "Fisk University",
+    "locale": "ja",
+    "name": "フィスク大学"
+  },
+  {
+    "college": "Tuskegee University",
+    "locale": "ja",
+    "name": "タスキーギー大学"
+  },
+  {
+    "college": "Ohio Northern University",
+    "locale": "ja",
+    "name": "オハイオノーザン大学"
+  },
+  {
+    "college": "University of Alabama at Birmingham",
+    "locale": "ja",
+    "name": "アラバマ大学バーミンガム校"
+  },
+  {
+    "college": "The University of Alabama",
+    "locale": "ja",
+    "name": "アラバマ大学"
+  },
+  {
+    "college": "Auburn University",
+    "locale": "ja",
+    "name": "オーバーン大学"
+  },
+  {
+    "college": "University of South Alabama",
+    "locale": "ja",
+    "name": "南アラバマ大学"
+  },
+  {
+    "college": "Troy University",
+    "locale": "ja",
+    "name": "トロイ大学"
+  },
+  {
+    "college": "University of Alaska Anchorage",
+    "locale": "ja",
+    "name": "アラスカ大学アンカレッジ校"
+  },
+  {
+    "college": "Arizona State University Campus Immersion",
+    "locale": "ja",
+    "name": "アリゾナ州立大学"
+  },
+  {
+    "college": "Northern Arizona University",
+    "locale": "ja",
+    "name": "北アリゾナ大学"
+  },
+  {
+    "college": "Arkansas State University",
+    "locale": "ja",
+    "name": "アーカンソー州立大学"
+  },
+  {
+    "college": "California State University-Stanislaus",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学スタニスラウス校"
+  },
+  {
+    "college": "California State University-San Bernardino",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学サンバーナーディーノ校"
+  },
+  {
+    "college": "California State Polytechnic University-Pomona",
+    "locale": "ja",
+    "name": "カリフォルニア州立工科大学ポモナ校"
+  },
+  {
+    "college": "California State University-Chico",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学チコ校"
+  },
+  {
+    "college": "California State University-Dominguez Hills",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学ドミンゲスヒルズ校"
+  },
+  {
+    "college": "California State University-Fresno",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学フレズノ校"
+  },
+  {
+    "college": "California State University-East Bay",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学イーストベイ校"
+  },
+  {
+    "college": "California State University-Sacramento",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学サクラメント校"
+  },
+  {
+    "college": "Western University of Health Sciences",
+    "locale": "ja",
+    "name": "ウェスタン健康科学大学"
+  },
+  {
+    "college": "Occidental College",
+    "locale": "ja",
+    "name": "オクシデンタルカレッジ"
+  },
+  {
+    "college": "Pitzer College",
+    "locale": "ja",
+    "name": "ピッツァーカレッジ"
+  },
+  {
+    "college": "University of San Diego",
+    "locale": "ja",
+    "name": "サンディエゴ大学"
+  },
+  {
+    "college": "University of San Francisco",
+    "locale": "ja",
+    "name": "サンフランシスコ大学"
+  },
+  {
+    "college": "Scripps College",
+    "locale": "ja",
+    "name": "スクリップスカレッジ"
+  },
+  {
+    "college": "University of Colorado Denver/Anschutz Medical Campus",
+    "locale": "ja",
+    "name": "コロラド大学デンバー校"
+  },
+  {
+    "college": "University of Colorado Colorado Springs",
+    "locale": "ja",
+    "name": "コロラド大学コロラドスプリングス校"
+  },
+  {
+    "college": "University of Denver",
+    "locale": "ja",
+    "name": "デンバー大学"
+  },
+  {
+    "college": "Metropolitan State University of Denver",
+    "locale": "ja",
+    "name": "メトロポリタン州立大学デンバー校"
+  },
+  {
+    "college": "Connecticut College",
+    "locale": "ja",
+    "name": "コネチカットカレッジ"
+  },
+  {
+    "college": "Trinity College",
+    "locale": "ja",
+    "name": "トリニティカレッジ"
+  },
+  {
+    "college": "University of Delaware",
+    "locale": "ja",
+    "name": "デラウェア大学"
+  },
+  {
+    "college": "Wilmington University",
+    "locale": "ja",
+    "name": "ウィルミントン大学"
+  },
+  {
+    "college": "American University",
+    "locale": "ja",
+    "name": "アメリカン大学"
+  },
+  {
+    "college": "University of Central Florida",
+    "locale": "ja",
+    "name": "セントラルフロリダ大学"
+  },
+  {
+    "college": "Florida Atlantic University",
+    "locale": "ja",
+    "name": "フロリダ・アトランティック大学"
+  },
+  {
+    "college": "Florida International University",
+    "locale": "ja",
+    "name": "フロリダ国際大学"
+  },
+  {
+    "college": "University of North Florida",
+    "locale": "ja",
+    "name": "北フロリダ大学"
+  },
+  {
+    "college": "University of South Florida",
+    "locale": "ja",
+    "name": "南フロリダ大学"
+  },
+  {
+    "college": "The University of Tampa",
+    "locale": "ja",
+    "name": "タンパ大学"
+  },
+  {
+    "college": "University of West Florida",
+    "locale": "ja",
+    "name": "西フロリダ大学"
+  },
+  {
+    "college": "Georgia Southern University",
+    "locale": "ja",
+    "name": "ジョージアサザン大学"
+  },
+  {
+    "college": "Georgia State University",
+    "locale": "ja",
+    "name": "ジョージア州立大学"
+  },
+  {
+    "college": "Valdosta State University",
+    "locale": "ja",
+    "name": "バルドスタ州立大学"
+  },
+  {
+    "college": "Boise State University",
+    "locale": "ja",
+    "name": "ボイシ州立大学"
+  },
+  {
+    "college": "University of Idaho",
+    "locale": "ja",
+    "name": "アイダホ大学"
+  },
+  {
+    "college": "Brigham Young University-Idaho",
+    "locale": "ja",
+    "name": "ブリガムヤング大学アイダホ校"
+  },
+  {
+    "college": "DePaul University",
+    "locale": "ja",
+    "name": "デポール大学"
+  },
+  {
+    "college": "University of Illinois Chicago",
+    "locale": "ja",
+    "name": "イリノイ大学シカゴ校"
+  },
+  {
+    "college": "Illinois State University",
+    "locale": "ja",
+    "name": "イリノイ州立大学"
+  },
+  {
+    "college": "Loyola University Chicago",
+    "locale": "ja",
+    "name": "ロヨラ大学シカゴ校"
+  },
+  {
+    "college": "Northern Illinois University",
+    "locale": "ja",
+    "name": "ノーザンイリノイ大学"
+  },
+  {
+    "college": "Southern Illinois University-Carbondale",
+    "locale": "ja",
+    "name": "南イリノイ大学カーボンデール校"
+  },
+  {
+    "college": "Southern Illinois University-Edwardsville",
+    "locale": "ja",
+    "name": "南イリノイ大学エドワーズビル校"
+  },
+  {
+    "college": "Ball State University",
+    "locale": "ja",
+    "name": "ボール州立大学"
+  },
+  {
+    "college": "DePauw University",
+    "locale": "ja",
+    "name": "デポー大学"
+  },
+  {
+    "college": "Earlham College",
+    "locale": "ja",
+    "name": "アーラムカレッジ"
+  },
+  {
+    "college": "Indiana University-Indianapolis",
+    "locale": "ja",
+    "name": "インディアナ大学インディアナポリス校"
+  },
+  {
+    "college": "University of Southern Indiana",
+    "locale": "ja",
+    "name": "南インディアナ大学"
+  },
+  {
+    "college": "Wabash College",
+    "locale": "ja",
+    "name": "ウォバッシュカレッジ"
+  },
+  {
+    "college": "Iowa State University",
+    "locale": "ja",
+    "name": "アイオワ州立大学"
+  },
+  {
+    "college": "University of Northern Iowa",
+    "locale": "ja",
+    "name": "北アイオワ大学"
+  },
+  {
+    "college": "Fort Hays State University",
+    "locale": "ja",
+    "name": "フォートヘイズ州立大学"
+  },
+  {
+    "college": "Kansas State University",
+    "locale": "ja",
+    "name": "カンザス州立大学"
+  },
+  {
+    "college": "Wichita State University",
+    "locale": "ja",
+    "name": "ウィチタ州立大学"
+  },
+  {
+    "college": "Centre College",
+    "locale": "ja",
+    "name": "センターカレッジ"
+  },
+  {
+    "college": "Eastern Kentucky University",
+    "locale": "ja",
+    "name": "東ケンタッキー大学"
+  },
+  {
+    "college": "Frontier Nursing University",
+    "locale": "ja",
+    "name": "フロンティア看護大学"
+  },
+  {
+    "college": "University of Louisville",
+    "locale": "ja",
+    "name": "ルイビル大学"
+  },
+  {
+    "college": "Murray State University",
+    "locale": "ja",
+    "name": "マレー州立大学"
+  },
+  {
+    "college": "Union College",
+    "locale": "ja",
+    "name": "ユニオンカレッジ"
+  },
+  {
+    "college": "Western Kentucky University",
+    "locale": "ja",
+    "name": "西ケンタッキー大学"
+  },
+  {
+    "college": "University of New Orleans",
+    "locale": "ja",
+    "name": "ニューオーリンズ大学"
+  },
+  {
+    "college": "Southeastern Louisiana University",
+    "locale": "ja",
+    "name": "南東ルイジアナ大学"
+  },
+  {
+    "college": "University of Louisiana at Lafayette",
+    "locale": "ja",
+    "name": "ルイジアナ大学ラファイエット校"
+  },
+  {
+    "college": "Bates College",
+    "locale": "ja",
+    "name": "ベイツカレッジ"
+  },
+  {
+    "college": "Colby College",
+    "locale": "ja",
+    "name": "コルビーカレッジ"
+  },
+  {
+    "college": "University of Maine",
+    "locale": "ja",
+    "name": "メイン大学"
+  },
+  {
+    "college": "University of Maryland-Baltimore County",
+    "locale": "ja",
+    "name": "メリーランド大学ボルチモア郡校"
+  },
+  {
+    "college": "Towson University",
+    "locale": "ja",
+    "name": "タウソン大学"
+  },
+  {
+    "college": "College of the Holy Cross",
+    "locale": "ja",
+    "name": "ホーリークロスカレッジ"
+  },
+  {
+    "college": "University of Massachusetts-Lowell",
+    "locale": "ja",
+    "name": "マサチューセッツ大学ローウェル校"
+  },
+  {
+    "college": "University of Massachusetts-Amherst",
+    "locale": "ja",
+    "name": "マサチューセッツ大学アマースト校"
+  },
+  {
+    "college": "University of Massachusetts-Boston",
+    "locale": "ja",
+    "name": "マサチューセッツ大学ボストン校"
+  },
+  {
+    "college": "Mount Holyoke College",
+    "locale": "ja",
+    "name": "マウント・ホリヨークカレッジ"
+  },
+  {
+    "college": "University of Massachusetts-Dartmouth",
+    "locale": "ja",
+    "name": "マサチューセッツ大学ダートマス校"
+  },
+  {
+    "college": "Central Michigan University",
+    "locale": "ja",
+    "name": "セントラルミシガン大学"
+  },
+  {
+    "college": "Eastern Michigan University",
+    "locale": "ja",
+    "name": "東ミシガン大学"
+  },
+  {
+    "college": "Grand Valley State University",
+    "locale": "ja",
+    "name": "グランドバレー州立大学"
+  },
+  {
+    "college": "Oakland University",
+    "locale": "ja",
+    "name": "オークランド大学"
+  },
+  {
+    "college": "Wayne State University",
+    "locale": "ja",
+    "name": "ウェイン州立大学"
+  },
+  {
+    "college": "Western Michigan University",
+    "locale": "ja",
+    "name": "西ミシガン大学"
+  },
+  {
+    "college": "Macalester College",
+    "locale": "ja",
+    "name": "マカレスターカレッジ"
+  },
+  {
+    "college": "Minnesota State University-Mankato",
+    "locale": "ja",
+    "name": "ミネソタ州立大学マンケート校"
+  },
+  {
+    "college": "St Olaf College",
+    "locale": "ja",
+    "name": "セント・オラフカレッジ"
+  },
+  {
+    "college": "Mississippi State University",
+    "locale": "ja",
+    "name": "ミシシッピ州立大学"
+  },
+  {
+    "college": "University of Southern Mississippi",
+    "locale": "ja",
+    "name": "南ミシシッピ大学"
+  },
+  {
+    "college": "A T Still University of Health Sciences",
+    "locale": "ja",
+    "name": "A.T.スティル健康科学大学"
+  },
+  {
+    "college": "Truman State University",
+    "locale": "ja",
+    "name": "トルーマン州立大学"
+  },
+  {
+    "college": "Missouri State University-Springfield",
+    "locale": "ja",
+    "name": "ミズーリ州立大学スプリングフィールド校"
+  },
+  {
+    "college": "Montana State University Billings",
+    "locale": "ja",
+    "name": "モンタナ州立大学ビリングス校"
+  },
+  {
+    "college": "Montana State University",
+    "locale": "ja",
+    "name": "モンタナ州立大学"
+  },
+  {
+    "college": "The University of Montana",
+    "locale": "ja",
+    "name": "モンタナ大学"
+  },
+  {
+    "college": "Creighton University",
+    "locale": "ja",
+    "name": "クレイトン大学"
+  },
+  {
+    "college": "University of Nebraska at Omaha",
+    "locale": "ja",
+    "name": "ネブラスカ大学オマハ校"
+  },
+  {
+    "college": "University of Nevada-Las Vegas",
+    "locale": "ja",
+    "name": "ネバダ大学ラスベガス校"
+  },
+  {
+    "college": "University of Nevada-Reno",
+    "locale": "ja",
+    "name": "ネバダ大学リノ校"
+  },
+  {
+    "college": "University of New Hampshire-Main Campus",
+    "locale": "ja",
+    "name": "ニューハンプシャー大学"
+  },
+  {
+    "college": "Rowan University",
+    "locale": "ja",
+    "name": "ローワン大学"
+  },
+  {
+    "college": "Kean University",
+    "locale": "ja",
+    "name": "キーン大学"
+  },
+  {
+    "college": "Montclair State University",
+    "locale": "ja",
+    "name": "モントクレア州立大学"
+  },
+  {
+    "college": "Stockton University",
+    "locale": "ja",
+    "name": "ストックトン大学"
+  },
+  {
+    "college": "University of New Mexico-Main Campus",
+    "locale": "ja",
+    "name": "ニューメキシコ大学"
+  },
+  {
+    "college": "New Mexico State University-Main Campus",
+    "locale": "ja",
+    "name": "ニューメキシコ州立大学"
+  },
+  {
+    "college": "Northeast College of Health Sciences",
+    "locale": "ja",
+    "name": "ノースイースト健康科学大学"
+  },
+  {
+    "college": "Rochester Institute of Technology",
+    "locale": "ja",
+    "name": "ロチェスター工科大学"
+  },
+  {
+    "college": "Skidmore College",
+    "locale": "ja",
+    "name": "スキッドモアカレッジ"
+  },
+  {
+    "college": "St. John's University-New York",
+    "locale": "ja",
+    "name": "セント・ジョンズ大学"
+  },
+  {
+    "college": "Appalachian State University",
+    "locale": "ja",
+    "name": "アパラチアン州立大学"
+  },
+  {
+    "college": "Davidson College",
+    "locale": "ja",
+    "name": "デイビッドソンカレッジ"
+  },
+  {
+    "college": "East Carolina University",
+    "locale": "ja",
+    "name": "東カロライナ大学"
+  },
+  {
+    "college": "North Carolina A & T State University",
+    "locale": "ja",
+    "name": "ノースカロライナA&T州立大学"
+  },
+  {
+    "college": "University of North Carolina at Charlotte",
+    "locale": "ja",
+    "name": "ノースカロライナ大学シャーロット校"
+  },
+  {
+    "college": "University of North Carolina at Greensboro",
+    "locale": "ja",
+    "name": "ノースカロライナ大学グリーンズボロ校"
+  },
+  {
+    "college": "North Carolina State University at Raleigh",
+    "locale": "ja",
+    "name": "ノースカロライナ州立大学"
+  },
+  {
+    "college": "University of North Carolina Wilmington",
+    "locale": "ja",
+    "name": "ノースカロライナ大学ウィルミントン校"
+  },
+  {
+    "college": "Western Carolina University",
+    "locale": "ja",
+    "name": "西カロライナ大学"
+  },
+  {
+    "college": "University of North Dakota",
+    "locale": "ja",
+    "name": "ノースダコタ大学"
+  },
+  {
+    "college": "North Dakota State University-Main Campus",
+    "locale": "ja",
+    "name": "ノースダコタ州立大学"
+  },
+  {
+    "college": "University of Akron Main Campus",
+    "locale": "ja",
+    "name": "アクロン大学"
+  },
+  {
+    "college": "Bowling Green State University-Main Campus",
+    "locale": "ja",
+    "name": "ボウリンググリーン州立大学"
+  },
+  {
+    "college": "University of Cincinnati-Main Campus",
+    "locale": "ja",
+    "name": "シンシナティ大学"
+  },
+  {
+    "college": "Cleveland State University",
+    "locale": "ja",
+    "name": "クリーブランド州立大学"
+  },
+  {
+    "college": "Denison University",
+    "locale": "ja",
+    "name": "デニソン大学"
+  },
+  {
+    "college": "Kent State University at Kent",
+    "locale": "ja",
+    "name": "ケント州立大学"
+  },
+  {
+    "college": "Kenyon College",
+    "locale": "ja",
+    "name": "ケニオンカレッジ"
+  },
+  {
+    "college": "Miami University-Oxford",
+    "locale": "ja",
+    "name": "マイアミ大学オックスフォード校"
+  },
+  {
+    "college": "Ohio University-Main Campus",
+    "locale": "ja",
+    "name": "オハイオ大学"
+  },
+  {
+    "college": "University of Toledo",
+    "locale": "ja",
+    "name": "トレド大学"
+  },
+  {
+    "college": "Wright State University-Main Campus",
+    "locale": "ja",
+    "name": "ライト州立大学"
+  },
+  {
+    "college": "University of Central Oklahoma",
+    "locale": "ja",
+    "name": "セントラルオクラホマ大学"
+  },
+  {
+    "college": "Oklahoma State University-Main Campus",
+    "locale": "ja",
+    "name": "オクラホマ州立大学"
+  },
+  {
+    "college": "Lewis & Clark College",
+    "locale": "ja",
+    "name": "ルイス&クラークカレッジ"
+  },
+  {
+    "college": "Portland State University",
+    "locale": "ja",
+    "name": "ポートランド州立大学"
+  },
+  {
+    "college": "Reed College",
+    "locale": "ja",
+    "name": "リードカレッジ"
+  },
+  {
+    "college": "Bucknell University",
+    "locale": "ja",
+    "name": "バックネル大学"
+  },
+  {
+    "college": "Dickinson College",
+    "locale": "ja",
+    "name": "ディキンソンカレッジ"
+  },
+  {
+    "college": "Drexel University",
+    "locale": "ja",
+    "name": "ドレクセル大学"
+  },
+  {
+    "college": "Franklin and Marshall College",
+    "locale": "ja",
+    "name": "フランクリン&マーシャルカレッジ"
+  },
+  {
+    "college": "Gettysburg College",
+    "locale": "ja",
+    "name": "ゲティスバーグカレッジ"
+  },
+  {
+    "college": "Lafayette College",
+    "locale": "ja",
+    "name": "ラファイエットカレッジ"
+  },
+  {
+    "college": "Slippery Rock University of Pennsylvania",
+    "locale": "ja",
+    "name": "スリッパリーロック大学"
+  },
+  {
+    "college": "Temple University",
+    "locale": "ja",
+    "name": "テンプル大学"
+  },
+  {
+    "college": "West Chester University of Pennsylvania",
+    "locale": "ja",
+    "name": "ウェストチェスター大学"
+  },
+  {
+    "college": "University of Rhode Island",
+    "locale": "ja",
+    "name": "ロードアイランド大学"
+  },
+  {
+    "college": "Clemson University",
+    "locale": "ja",
+    "name": "クレムソン大学"
+  },
+  {
+    "college": "Furman University",
+    "locale": "ja",
+    "name": "ファーマン大学"
+  },
+  {
+    "college": "Coastal Carolina University",
+    "locale": "ja",
+    "name": "コースタルカロライナ大学"
+  },
+  {
+    "college": "South Dakota State University",
+    "locale": "ja",
+    "name": "サウスダコタ州立大学"
+  },
+  {
+    "college": "University of South Dakota",
+    "locale": "ja",
+    "name": "サウスダコタ大学"
+  },
+  {
+    "college": "East Tennessee State University",
+    "locale": "ja",
+    "name": "東テネシー州立大学"
+  },
+  {
+    "college": "University of Memphis",
+    "locale": "ja",
+    "name": "メンフィス大学"
+  },
+  {
+    "college": "Middle Tennessee State University",
+    "locale": "ja",
+    "name": "中テネシー州立大学"
+  },
+  {
+    "college": "Rhodes College",
+    "locale": "ja",
+    "name": "ローズカレッジ"
+  },
+  {
+    "college": "The University of the South",
+    "locale": "ja",
+    "name": "サワニー（南部大学）"
+  },
+  {
+    "college": "The University of Tennessee-Chattanooga",
+    "locale": "ja",
+    "name": "テネシー大学チャタヌーガ校"
+  },
+  {
+    "college": "The University of Tennessee-Knoxville",
+    "locale": "ja",
+    "name": "テネシー大学ノックスビル校"
+  },
+  {
+    "college": "Baylor University",
+    "locale": "ja",
+    "name": "ベイラー大学"
+  },
+  {
+    "college": "University of Houston-Downtown",
+    "locale": "ja",
+    "name": "ヒューストン大学ダウンタウン校"
+  },
+  {
+    "college": "University of Houston",
+    "locale": "ja",
+    "name": "ヒューストン大学"
+  },
+  {
+    "college": "University of North Texas",
+    "locale": "ja",
+    "name": "北テキサス大学"
+  },
+  {
+    "college": "The University of Texas Rio Grande Valley",
+    "locale": "ja",
+    "name": "テキサス大学リオグランデバレー校"
+  },
+  {
+    "college": "Prairie View A & M University",
+    "locale": "ja",
+    "name": "プレーリービューA&M大学"
+  },
+  {
+    "college": "Sam Houston State University",
+    "locale": "ja",
+    "name": "サムヒューストン州立大学"
+  },
+  {
+    "college": "Stephen F Austin State University",
+    "locale": "ja",
+    "name": "スティーブン・F・オースティン州立大学"
+  },
+  {
+    "college": "Texas State University",
+    "locale": "ja",
+    "name": "テキサス州立大学"
+  },
+  {
+    "college": "Tarleton State University",
+    "locale": "ja",
+    "name": "ターレトン州立大学"
+  },
+  {
+    "college": "University of Texas Southwestern Medical Center",
+    "locale": "ja",
+    "name": "テキサス大学サウスウェスタン医療センター"
+  },
+  {
+    "college": "The University of Texas at Arlington",
+    "locale": "ja",
+    "name": "テキサス大学アーリントン校"
+  },
+  {
+    "college": "The University of Texas at Austin",
+    "locale": "ja",
+    "name": "テキサス大学オースティン校"
+  },
+  {
+    "college": "The University of Texas at Dallas",
+    "locale": "ja",
+    "name": "テキサス大学ダラス校"
+  },
+  {
+    "college": "The University of Texas at El Paso",
+    "locale": "ja",
+    "name": "テキサス大学エルパソ校"
+  },
+  {
+    "college": "Texas Christian University",
+    "locale": "ja",
+    "name": "テキサスクリスチャン大学"
+  },
+  {
+    "college": "The University of Texas at San Antonio",
+    "locale": "ja",
+    "name": "テキサス大学サンアントニオ校"
+  },
+  {
+    "college": "Texas Tech University",
+    "locale": "ja",
+    "name": "テキサス工科大学"
+  },
+  {
+    "college": "Texas Woman's University",
+    "locale": "ja",
+    "name": "テキサス女子大学"
+  },
+  {
+    "college": "Brigham Young University",
+    "locale": "ja",
+    "name": "ブリガムヤング大学"
+  },
+  {
+    "college": "Southern Utah University",
+    "locale": "ja",
+    "name": "南ユタ大学"
+  },
+  {
+    "college": "Utah State University",
+    "locale": "ja",
+    "name": "ユタ州立大学"
+  },
+  {
+    "college": "Utah Valley University",
+    "locale": "ja",
+    "name": "ユタバレー大学"
+  },
+  {
+    "college": "Weber State University",
+    "locale": "ja",
+    "name": "ウェーバー州立大学"
+  },
+  {
+    "college": "University of Vermont",
+    "locale": "ja",
+    "name": "バーモント大学"
+  },
+  {
+    "college": "William & Mary",
+    "locale": "ja",
+    "name": "ウィリアム&メアリー"
+  },
+  {
+    "college": "Emory & Henry University",
+    "locale": "ja",
+    "name": "エモリー&ヘンリー大学"
+  },
+  {
+    "college": "George Mason University",
+    "locale": "ja",
+    "name": "ジョージ・メイソン大学"
+  },
+  {
+    "college": "James Madison University",
+    "locale": "ja",
+    "name": "ジェームズ・マディソン大学"
+  },
+  {
+    "college": "Old Dominion University",
+    "locale": "ja",
+    "name": "オールドドミニオン大学"
+  },
+  {
+    "college": "Virginia Commonwealth University",
+    "locale": "ja",
+    "name": "バージニア・コモンウェルス大学"
+  },
+  {
+    "college": "Washington and Lee University",
+    "locale": "ja",
+    "name": "ワシントン&リー大学"
+  },
+  {
+    "college": "Eastern Washington University",
+    "locale": "ja",
+    "name": "東ワシントン大学"
+  },
+  {
+    "college": "Gonzaga University",
+    "locale": "ja",
+    "name": "ゴンザガ大学"
+  },
+  {
+    "college": "Washington State University",
+    "locale": "ja",
+    "name": "ワシントン州立大学"
+  },
+  {
+    "college": "Western Washington University",
+    "locale": "ja",
+    "name": "西ワシントン大学"
+  },
+  {
+    "college": "Whitman College",
+    "locale": "ja",
+    "name": "ウィットマンカレッジ"
+  },
+  {
+    "college": "Marshall University",
+    "locale": "ja",
+    "name": "マーシャル大学"
+  },
+  {
+    "college": "West Virginia University",
+    "locale": "ja",
+    "name": "ウェストバージニア大学"
+  },
+  {
+    "college": "Beloit College",
+    "locale": "ja",
+    "name": "ビロイトカレッジ"
+  },
+  {
+    "college": "Marquette University",
+    "locale": "ja",
+    "name": "マーケット大学"
+  },
+  {
+    "college": "Medical College of Wisconsin",
+    "locale": "ja",
+    "name": "ウィスコンシン医科大学"
+  },
+  {
+    "college": "University of Wisconsin-Whitewater",
+    "locale": "ja",
+    "name": "ウィスコンシン大学ホワイトウォーター校"
+  },
+  {
+    "college": "University of Wisconsin-Eau Claire",
+    "locale": "ja",
+    "name": "ウィスコンシン大学オークレア校"
+  },
+  {
+    "college": "University of Wisconsin-La Crosse",
+    "locale": "ja",
+    "name": "ウィスコンシン大学ラクロス校"
+  },
+  {
+    "college": "University of Wisconsin-Milwaukee",
+    "locale": "ja",
+    "name": "ウィスコンシン大学ミルウォーキー校"
+  },
+  {
+    "college": "University of Wyoming",
+    "locale": "ja",
+    "name": "ワイオミング大学"
+  },
+  {
+    "college": "Ponce Health Sciences University",
+    "locale": "ja",
+    "name": "ポンセ健康科学大学"
+  },
+  {
+    "college": "University of Puerto Rico-Mayaguez",
+    "locale": "ja",
+    "name": "プエルトリコ大学マヤグエス校"
+  },
+  {
+    "college": "University of Puerto Rico-Rio Piedras",
+    "locale": "ja",
+    "name": "プエルトリコ大学リオピエドラス校"
+  },
+  {
+    "college": "California State University-San Marcos",
+    "locale": "ja",
+    "name": "カリフォルニア州立大学サンマルコス校"
+  },
+  {
+    "college": "University of St. Augustine for Health Sciences",
+    "locale": "ja",
+    "name": "セント・オーガスティン健康科学大学"
+  },
+  {
+    "college": "Florida Gulf Coast University",
+    "locale": "ja",
+    "name": "フロリダガルフコースト大学"
+  },
+  {
+    "college": "NorthShore University HealthSystem School of Nurse Anesthesia",
+    "locale": "ja",
+    "name": "ノースショア大学ヘルスシステム麻酔看護学校"
+  },
+  {
+    "college": "Daoist Traditions College of Chinese Medical Arts",
+    "locale": "ja",
+    "name": "道教伝統中国医療芸術カレッジ"
+  },
+  {
+    "college": "University of North Georgia",
+    "locale": "ja",
+    "name": "北ジョージア大学"
+  },
+  {
+    "college": "Kennesaw State University",
+    "locale": "ja",
+    "name": "ケネソー州立大学"
+  },
+  {
+    "college": "California Health Sciences University",
+    "locale": "ja",
+    "name": "カリフォルニア健康科学大学"
+  },
+  {
+    "college": "Ponce Health Sciences University-Centro Universitario de San Juan",
+    "locale": "ja",
+    "name": "ポンセ健康科学大学サンフアン校"
+  },
+  {
+    "college": "Commonwealth University of Pennsylvania",
+    "locale": "ja",
+    "name": "コモンウェルス大学ペンシルベニア校"
+  }
+]
