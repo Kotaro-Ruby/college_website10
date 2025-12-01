@@ -49,16 +49,24 @@ class ConditionsController < ApplicationController
       end
     end
 
-    # privateorpublicの処理（大学名検索の場合はスキップ）
+    # 大学タイプの処理（大学名検索の場合はスキップ）
     unless params[:college_name].present?
-      if params[:privateorpublic].present? && params[:privateorpublic] !="指定しない"
-        privateorpublic = params[:privateorpublic]
+      if params[:privateorpublic].present?
+        university_type = params[:privateorpublic]
 
-        # 2年制（コミュニティカレッジ）の場合はschool_typeで検索
-        if privateorpublic == "2年制 (コミュニティカレッジ)"
-          scope = scope.where("school_type = ?", "2年制")
-        else
-          scope = scope.where("privateorpublic = ?", privateorpublic)
+        case university_type
+        when "4年制"
+          # 4年制（私立+州立）: Carnegie 15以上
+          scope = scope.where("carnegie_basic >= 15").where(privateorpublic: ["私立", "州立"])
+        when "4年制私立"
+          scope = scope.where("carnegie_basic >= 15").where(privateorpublic: "私立")
+        when "4年制州立"
+          scope = scope.where("carnegie_basic >= 15").where(privateorpublic: "州立")
+        when "2年制（コミカレ、ジュニアカレッジ等）"
+          # 2年制: Carnegie 1-14
+          scope = scope.where("carnegie_basic BETWEEN 1 AND 14")
+        when "営利"
+          scope = scope.where(privateorpublic: "営利")
         end
       end
     end

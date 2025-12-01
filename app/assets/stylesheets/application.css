@@ -738,73 +738,7 @@
     box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
   }
 
-/* ツールチップの内容 */
-  .tooltip-content {
-    position: absolute;
-    background: linear-gradient(135deg, #fff9f5 0%, #fff4e8 100%);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    padding: 18px 20px;
-    width: 380px;
-    max-width: calc(100vw - 40px);
-    top: 35px;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),
-                0 5px 15px rgba(255, 122, 0, 0.1);
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.8;
-    color: #5a4b3a;
-    font-family: 'Noto Sans JP', sans-serif;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  /* 矢印を追加 */
-  .tooltip-content::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: 20px;
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(135deg, #fff9f5 0%, #fff4e8 50%);
-    border-left: 1px solid rgba(59, 130, 246, 0.2);
-    border-top: 1px solid rgba(59, 130, 246, 0.2);
-    transform: rotate(45deg);
-    z-index: -1;
-  }
-
-  /* ホバー時にポップアップを表示 */
-  .tooltip-container1:hover .tooltip-content,
-  .tooltip-container2:hover .tooltip-content,
-  .tooltip-container3:hover .tooltip-content,
-  .tooltip-container4:hover .tooltip-content,
-  .tooltip-container5:hover .tooltip-content,
-  .tooltip-container6:hover .tooltip-content {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  /* 右端のツールチップは左側に表示 */
-  .tooltip-container3 .tooltip-content,
-  .tooltip-container4 .tooltip-content,
-  .tooltip-container6 .tooltip-content {
-    right: auto;
-    left: -355px;
-  }
-  
-  .tooltip-container3 .tooltip-content::before,
-  .tooltip-container4 .tooltip-content::before,
-  .tooltip-container6 .tooltip-content::before {
-    right: auto;
-    left: 355px;
-  }
+/* ツールチップスタイルは search.html.erb のインラインCSSで定義 */
 
   /* line-header 共通のコンテナスタイル */
 [class^="line-header"] {
@@ -1251,45 +1185,7 @@
     margin-top: 50px;
   }
 
-  /* ツールチップ */
-  .tooltip-container1,
-  .tooltip-container2,
-  .tooltip-container3,
-  .tooltip-container4,
-  .tooltip-container5,
-  .tooltip-container6 {
-    right: 20px;
-  }
-
-  .tooltip-content {
-    width: calc(100vw - 50px);
-    max-width: 350px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    font-size: 13px;
-    padding: 15px;
-    line-height: 1.6;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: left;
-  }
-  
-  /* モバイルでは全てのツールチップを中央に表示 */
-  .tooltip-container3 .tooltip-content,
-  .tooltip-container4 .tooltip-content,
-  .tooltip-container6 .tooltip-content {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-  
-  .tooltip-content::before {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-  }
+  /* ツールチップ - モバイルスタイルは search.html.erb で定義 */
 
   /* ラインヘッダー */
   [class^="line-header"] h1,
@@ -1426,27 +1322,7 @@
     font-size: 16px;
   }
 
-  .tooltip-content {
-    width: calc(100vw - 40px);
-    max-width: 320px;
-    font-size: 12px;
-    padding: 12px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: left;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-  
-  .tooltip-container3 .tooltip-content::before,
-  .tooltip-container4 .tooltip-content::before,
-  .tooltip-container6 .tooltip-content::before {
-    right: auto;
-    left: 50%;
-  }
+  /* ツールチップ - 小さなモバイルスタイルは search.html.erb で定義 */
 
   .cool-search-button {
     padding: 8px 30px;

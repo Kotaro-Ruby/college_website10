@@ -291,7 +291,9 @@ label:hover input[type="radio"] {
     font-size: 18px;
 }
 
-/* ツールチップのコンテナ */
+/* ===== ツールチップ 完全リデザイン ===== */
+
+/* ❔ボタンのコンテナ - 各セクションのヘッダー右側に配置 */
 .tooltip-container1,
 .tooltip-container2,
 .tooltip-container3,
@@ -301,31 +303,29 @@ label:hover input[type="radio"] {
     position: absolute;
     top: 18px;
     right: 25px;
-    display: inline-block;
-    z-index: 15;
+    z-index: 100;
 }
 
-/* 専攻のツールチップは右寄りすぎるので調整 */
 .conditions9 .tooltip-container6 {
     right: 50px;
 }
 
+/* ❔ボタン本体 */
 .tooltip-trigger,
 .tooltip-trigger1 {
     cursor: pointer;
     font-weight: 700;
-    color: #ffffff;
+    color: #fff;
     font-size: 12px;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    text-align: center;
+    background: #3b82f6;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
 }
 
 .tooltip-trigger1 {
@@ -335,54 +335,34 @@ label:hover input[type="radio"] {
 
 .tooltip-trigger:hover,
 .tooltip-trigger1:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: #2563eb;
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
-/* ツールチップの内容 - 改善版 */
+/* ツールチップ本体 - ❔マークのすぐ下に表示 */
 .tooltip-content {
-    position: absolute;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    padding: 18px 20px;
-    width: 520px;
-    max-width: calc(100vw - 40px);
-    top: 35px;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),
-                0 5px 15px rgba(59, 130, 246, 0.1);
+    position: absolute !important;
+    top: 35px !important;
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+    width: 350px !important;
+    max-width: calc(100vw - 80px) !important;
+    background: #fff;
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 9999 !important;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 16px;
+    transition: opacity 0.2s, visibility 0.2s;
     font-size: 14px;
-    line-height: 1.8;
-    color: #5a4b3a;
-    font-family: 'Noto Sans JP', sans-serif;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    line-height: 1.7;
+    color: #333;
 }
 
-/* 矢印を追加 */
-.tooltip-content::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: 20px;
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%);
-    border-left: 1px solid rgba(59, 130, 246, 0.2);
-    border-top: 1px solid rgba(59, 130, 246, 0.2);
-    transform: rotate(45deg);
-    z-index: -1;
-}
-
-/* ホバー時にポップアップを表示 */
+/* ホバーで表示 */
 .tooltip-container1:hover .tooltip-content,
 .tooltip-container2:hover .tooltip-content,
 .tooltip-container3:hover .tooltip-content,
@@ -393,77 +373,15 @@ label:hover input[type="radio"] {
     opacity: 1;
 }
 
-/* 右端のツールチップは左側に表示 */
-.tooltip-container3 .tooltip-content,
-.tooltip-container4 .tooltip-content,
-.tooltip-container6 .tooltip-content {
-    right: auto;
-    left: -495px;
-}
-
-.tooltip-container3 .tooltip-content::before,
-.tooltip-container4 .tooltip-content::before,
-.tooltip-container6 .tooltip-content::before {
-    right: auto;
-    left: 495px;
-}
-
-/* レスポンシブ対応 - タブレット */
-@media (max-width: 1024px) {
+/* スマホ対応 */
+@media (max-width: 600px) {
     .tooltip-content {
-        width: calc(100vw - 40px);
-        max-width: calc(100vw - 40px);
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+        width: calc(100% - 32px) !important;
+        left: 16px !important;
+        right: 16px !important;
+        transform: none !important;
         font-size: 13px;
-        padding: 16px 18px;
-        line-height: 1.7;
-    }
-
-    /* タブレットでも全てのツールチップを中央に表示 */
-    .tooltip-container3 .tooltip-content,
-    .tooltip-container4 .tooltip-content,
-    .tooltip-container6 .tooltip-content {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-    }
-
-    .tooltip-content::before {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-    }
-}
-
-@media (max-width: 768px) {
-    .tooltip-container1,
-    .tooltip-container2,
-    .tooltip-container3,
-    .tooltip-container4,
-    .tooltip-container5,
-    .tooltip-container6 {
-        right: 20px;
-    }
-
-    .tooltip-content {
-        width: calc(100vw - 40px);
-        max-width: calc(100vw - 40px);
-        font-size: 13px;
-        padding: 15px;
-        line-height: 1.6;
-    }
-}
-
-/* レスポンシブ対応 - スマートフォン */
-@media (max-width: 480px) {
-    .tooltip-content {
-        width: calc(100vw - 30px);
-        max-width: calc(100vw - 30px);
-        font-size: 12px;
-        padding: 12px 14px;
-        line-height: 1.5;
+        padding: 16px;
     }
 }
 
@@ -873,8 +791,7 @@ label:hover input[type="radio"] {
                     <h1><i class="fas fa-map-marked-alt"></i>州</h1>
                 </div>
                 <select class="form-select" id="stateSelect" style="margin-top: 70px;">
-                    <option value="選択してください">選択してください</option>
-                    <option value="指定しない">指定しない</option>
+                    <option value="指定しない" selected>指定しない</option>
                     <option value="アラバマ州(AL)">アラバマ州(AL)</option>
                     <option value="アラスカ州(AK)">アラスカ州(AK)</option>
                     <option value="アリゾナ州(AZ)">アリゾナ州(AZ)</option>
@@ -935,30 +852,42 @@ label:hover input[type="radio"] {
                 <div class="tooltip-container1">
                     <span class="tooltip-trigger">？</span>
                     <div class="tooltip-content">
-                        州立大学は、州民以外の学生に対して通常の2~3倍の学費を設定していることに注意が必要です。また、私立大学の方が多くの奨学金を受け取れる傾向にあります。
+                        州立大学は州外生に対して2〜3倍の学費を設定しています。一方、私立大学は奨学金が充実しており、表示価格より実質費用が安くなる傾向があります。
                     </div>
                 </div> 
                 <div class="line-header2">
-                    <h1><i class="fas fa-university"></i>私立/州立</h1>
+                    <h1><i class="fas fa-university"></i>大学タイプ</h1>
                 </div>
                 <form>
                     <div class="form-group1">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
                             <label class="form-check-label" for="radio1">
-                                指定しない
+                                4年制
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
                             <label class="form-check-label" for="radio2">
-                                私立
+                                4年制私立
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
                             <label class="form-check-label" for="radio3">
-                                州立
+                                4年制州立
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" value="option4">
+                            <label class="form-check-label" for="radio4">
+                                2年制（コミカレ、ジュニアカレッジ等）
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="radio5" value="option5">
+                            <label class="form-check-label" for="radio5">
+                                営利
                             </label>
                         </div>
                     </div>
@@ -971,7 +900,7 @@ label:hover input[type="radio"] {
                 <div class="tooltip-container2">
                     <span class="tooltip-trigger">？</span>
                     <div class="tooltip-content">
-                        州立大学は州外生向け料金、私立大学はNet Price（実質費用）を表示しています。
+                        州立大学は州外生向け料金、私立大学はNet Price（奨学金適用後の実質費用）を表示。私立大学の実際の支払額は表示価格より大幅に安くなることがあります。
                     </div>
                 </div> 
                 <div class="line-header3">
@@ -1073,7 +1002,7 @@ label:hover input[type="radio"] {
                 <div class="tooltip-container3">
                     <span class="tooltip-trigger">？</span>
                     <div class="tooltip-content">
-                        SAT（Scholastic Assessment Test）は、アメリカの大学入学に広く使用される標準テストです。総合スコアは400～1600点で、数学セクション（200～800点）と読解・ライティングセクション（200～800点）の合計です。多くの競争力のある大学では1200点以上、トップ大学では1400点以上が目安とされています。テストは年に7回実施され、何度でも受験可能です。
+                        アメリカの大学入試で使用される標準テスト。総合スコアは400〜1600点（数学+読解ライティング）。競争力のある大学では1200点以上、トップ大学では1400点以上が目安。年7回実施、何度でも受験可能です。
                     </div>
                 </div>   
                 <div class="line-header5">
@@ -1121,7 +1050,7 @@ label:hover input[type="radio"] {
                 <div class="tooltip-container4">
                     <span class="tooltip-trigger">？</span>
                     <div class="tooltip-content">
-                        ACT（American College Testing）は、SAT同様にアメリカの大学入学で使用される標準テストです。総合スコア（Composite Score）は1～36点で、英語、数学、読解、科学の4つのセクションの平均値です。全国平均は約21点で、競争力のある大学では24点以上、トップ大学では30点以上が目安です。テストは年に6回実施され、多くの大学でSATとACTは同等に扱われます。
+                        SATと同等に扱われる標準テスト。総合スコアは1〜36点（英語・数学・読解・科学の平均）。全国平均は約21点、競争力のある大学では24点以上、トップ大学では30点以上が目安。年6回実施。
                     </div>
                 </div> 
                 <div class="line-header6">
@@ -1175,7 +1104,7 @@ label:hover input[type="radio"] {
                 <div class="tooltip-container5">
                     <span class="tooltip-trigger">？</span>
                     <div class="tooltip-content">
-                        難関大学ほど卒業率が高くなる傾向にあります。
+                        6年以内に卒業した学生の割合。難関大学ほど卒業率が高い傾向があります。全米平均は約60%で、トップ大学では90%以上になります。
                     </div>
                 </div> 
                 <div class="line-header7">
@@ -1391,8 +1320,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function checkConditionInputs() {
         let hasConditionInput = false;
         
-        // 州選択をチェック
-        if (stateSelect.value !== '選択してください') {
+        // 州選択をチェック（「指定しない」以外が選択されていれば条件あり）
+        if (stateSelect.value !== '指定しない') {
             hasConditionInput = true;
         }
         
@@ -1421,162 +1350,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Search interference prevention initialized');
 });
 
-// ポップアップ表示機能
-function showStateRequiredPopup() {
-    // 既存のポップアップを削除
-    const existingPopup = document.getElementById('stateRequiredPopup');
-    if (existingPopup) {
-        existingPopup.remove();
-    }
-
-    // ポップアップ要素を作成
-    const popup = document.createElement('div');
-    popup.id = 'stateRequiredPopup';
-    popup.innerHTML = `
-        <div class="popup-overlay">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>州を選択してください</h3>
-                </div>
-                <div class="popup-body">
-                    <p>検索を実行するには州を選択する必要があります。</p>
-                    <p>州を指定したくない場合は「指定しない」を選択してください。</p>
-                </div>
-                <div class="popup-actions">
-                    <button class="popup-btn popup-btn-primary" onclick="closeStateRequiredPopup()">
-                        <i class="fas fa-arrow-left"></i> 戻る
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // スタイルを追加
-    const style = document.createElement('style');
-    style.textContent = `
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        .popup-content {
-            background: white;
-            border-radius: 12px;
-            padding: 0;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        .popup-header {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 20px;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .popup-header i {
-            font-size: 1.2rem;
-        }
-        
-        .popup-header h3 {
-            margin: 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        
-        .popup-body {
-            padding: 24px;
-        }
-        
-        .popup-body p {
-            margin: 0 0 12px 0;
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .popup-body p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .popup-actions {
-            padding: 0 24px 24px 24px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .popup-btn {
-            background: linear-gradient(135deg, #ffb366, #ff9933);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .popup-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.3);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(-20px) scale(0.95);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-    `;
-    
-    document.head.appendChild(style);
-    document.body.appendChild(popup);
-    
-    // ESCキーでポップアップを閉じる
-    const escHandler = (e) => {
-        if (e.key === 'Escape') {
-            closeStateRequiredPopup();
-            document.removeEventListener('keydown', escHandler);
-        }
-    };
-    document.addEventListener('keydown', escHandler);
-}
-
-function closeStateRequiredPopup() {
-    const popup = document.getElementById('stateRequiredPopup');
-    if (popup) {
-        popup.style.animation = 'fadeOut 0.2s ease-out';
-        setTimeout(() => {
-            popup.remove();
-        }, 200);
-    }
-}
 
 // 大学名入力と詳細条件の相互無効化機能
 function setupMutualExclusion() {
@@ -1628,9 +1401,9 @@ function setupMutualExclusion() {
     function checkConditionInputs() {
         let hasCondition = false;
         
-        // 州が選択されているかチェック
+        // 州が選択されているかチェック（「指定しない」以外なら条件あり）
         const stateSelect = document.getElementById('stateSelect');
-        if (stateSelect.value !== '選択してください') {
+        if (stateSelect.value !== '指定しない') {
             hasCondition = true;
         }
         
@@ -1669,13 +1442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // 検索機能
 document.getElementById('search-button').addEventListener('click', function () {
     const stateValue = document.getElementById('stateSelect').value;
-    
-    // 州が選択されていない場合はポップアップを表示
-    if (stateValue === '選択してください') {
-        showStateRequiredPopup();
-        return;
-    }
-    
+
     const formData = {
         state: stateValue,
         privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.nextElementSibling?.innerText.trim(),
