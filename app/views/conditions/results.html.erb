@@ -933,6 +933,20 @@
                 <option value="100" <%= 'selected' if params[:per_page] == '100' %>>100件</option>
               </select>
             </div>
+            <div class="sort-container">
+              <span class="sort-label">並べ替え:</span>
+              <select class="sort-select" id="mobileSortSelect">
+                <option value="">選択してください</option>
+                <option value="name-asc" <%= 'selected' if params[:sort] == 'name-asc' %>>大学名 (A→Z)</option>
+                <option value="name-desc" <%= 'selected' if params[:sort] == 'name-desc' %>>大学名 (Z→A)</option>
+                <option value="students-desc" <%= 'selected' if params[:sort] == 'students-desc' %>>学生数 (多い順)</option>
+                <option value="students-asc" <%= 'selected' if params[:sort] == 'students-asc' %>>学生数 (少ない順)</option>
+                <option value="tuition-asc" <%= 'selected' if params[:sort] == 'tuition-asc' %>>授業料 (安い順)</option>
+                <option value="tuition-desc" <%= 'selected' if params[:sort] == 'tuition-desc' %>>授業料 (高い順)</option>
+                <option value="graduation-desc" <%= 'selected' if params[:sort] == 'graduation-desc' %>>卒業率 (高い順)</option>
+                <option value="graduation-asc" <%= 'selected' if params[:sort] == 'graduation-asc' %>>卒業率 (低い順)</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -1433,6 +1447,20 @@
           currentUrl.searchParams.set('per_page', this.value);
           currentUrl.searchParams.set('page', 1); // ページをリセット
           window.location.href = currentUrl.toString();
+        });
+      }
+
+      // モバイル用ソート変更イベント
+      const mobileSortSelect = document.getElementById('mobileSortSelect');
+      if (mobileSortSelect) {
+        mobileSortSelect.addEventListener('change', function() {
+          const value = this.value;
+          if (value) {
+            const currentUrl = new URL(window.location);
+            currentUrl.searchParams.set('sort', value);
+            currentUrl.searchParams.set('page', 1); // ページをリセット
+            window.location.href = currentUrl.toString();
+          }
         });
       }
 
