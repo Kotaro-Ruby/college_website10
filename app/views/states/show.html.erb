@@ -42,10 +42,16 @@
     <!-- Header -->
     <header class="state-header">
       <div class="header-inner">
-        <span class="state-code"><%= @state_code.upcase %></span>
-        <h1><%= @state_data[:name] %></h1>
-        <p class="english-name"><%= @state_data[:english_name] %></p>
-        <p class="nickname"><%= @state_data[:nickname] %></p>
+        <div class="header-content">
+          <div class="header-text">
+            <span class="state-code"><%= @state_code.upcase %></span>
+            <h1><%= @state_data[:name] %></h1>
+            <p class="english-name"><%= @state_data[:english_name] %></p>
+            <p class="nickname"><%= @state_data[:nickname] %></p>
+          </div>
+          <div class="header-map" id="header-map" data-state="<%= @state_code.downcase %>">
+          </div>
+        </div>
       </div>
     </header>
 
@@ -512,4 +518,68 @@
     flex-wrap: wrap;
   }
 }
+
+/* Header Layout with Map */
+.header-content {
+  position: relative;
+}
+
+.header-text {
+  text-align: center;
+}
+
+.header-map {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 140px;
+  opacity: 0.9;
+}
+
+.header-map svg {
+  width: 100%;
+  height: 100%;
+}
+
+.header-map svg path {
+  fill: rgba(255, 255, 255, 0.25);
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 0.8;
+}
+
+.header-map svg path.highlighted {
+  fill: #f0b13d;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+@media (max-width: 900px) {
+  .header-map {
+    display: none;
+  }
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mapWrapper = document.getElementById('header-map');
+  const stateCode = mapWrapper.dataset.state;
+
+  fetch('/us-map.svg')
+    .then(response => response.text())
+    .then(svgContent => {
+      mapWrapper.innerHTML = svgContent;
+
+      // Highlight the current state
+      const statePath = mapWrapper.querySelector('#' + stateCode);
+      if (statePath) {
+        statePath.classList.add('highlighted');
+      }
+    })
+    .catch(error => {
+      console.error('Failed to load map:', error);
+    });
+});
+</script>
