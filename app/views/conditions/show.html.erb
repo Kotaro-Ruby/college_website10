@@ -768,52 +768,49 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.15);
+      padding: 12px 20px;
+      background: transparent;
       color: white;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       width: 100%;
       justify-content: center;
-      min-height: 48px;
+      min-height: 44px;
     }
 
     .favorite-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     .favorite-btn.favorited {
-      background: rgba(255, 107, 107, 0.9);
-      border-color: rgba(255, 107, 107, 1);
-      color: white;
+      background: rgb(240, 177, 61);
+      border-color: rgb(240, 177, 61);
+      color: #1a1a1a;
     }
 
     .favorite-btn.favorited:hover {
-      background: rgba(255, 107, 107, 0.7);
-      border-color: rgba(255, 107, 107, 0.8);
+      background: rgb(220, 160, 50);
+      border-color: rgb(220, 160, 50);
     }
 
     .favorite-btn i {
-      font-size: 16px;
-      transition: transform 0.3s ease;
+      font-size: 14px;
+      transition: none;
     }
 
     .favorite-btn:hover i {
-      transform: scale(1.1);
+      transform: none;
     }
 
     .favorite-btn.favorited i {
-      color: #ff6b6b;
-      filter: drop-shadow(0 0 8px rgba(255, 107, 107, 0.6));
+      color: #1a1a1a;
+      filter: none;
     }
 
     /* 比較ボタン */
@@ -821,52 +818,43 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.15);
+      padding: 12px 20px;
+      background: transparent;
       color: white;
-      border: 2px solid rgba(74, 158, 255, 0.6);
-      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       width: 100%;
       justify-content: center;
-      min-height: 48px;
+      min-height: 44px;
     }
 
     .compare-btn:hover {
-      background: rgba(74, 158, 255, 0.2);
-      border-color: rgba(74, 158, 255, 0.8);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(74, 158, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
     }
 
     .compare-btn.added {
-      background: rgba(74, 158, 255, 0.9);
-      border-color: rgba(74, 158, 255, 1);
-      color: white;
+      background: white;
+      border-color: white;
+      color: #1a1a1a;
     }
 
     .compare-btn.added:hover {
-      background: rgba(74, 158, 255, 0.7);
-      border-color: rgba(74, 158, 255, 0.8);
+      background: #f5f5f5;
+      border-color: #f5f5f5;
     }
 
     .compare-btn i {
-      font-size: 16px;
-      transition: transform 0.3s ease;
-    }
-
-    .compare-btn:hover i {
-      transform: scale(1.1);
+      font-size: 14px;
     }
 
     .compare-btn.added i {
-      color: white;
-      filter: drop-shadow(0 0 8px rgba(74, 158, 255, 0.6));
+      color: #1a1a1a;
     }
 
     /* ログインモーダル */
@@ -948,12 +936,6 @@
       text-align: center;
     }
 
-    .login-modal-icon {
-      font-size: 2.5rem;
-      color: rgb(240, 177, 61);
-      margin-bottom: 20px;
-    }
-
     .login-modal-text {
       font-size: 15px;
       color: #333;
@@ -974,7 +956,7 @@
       align-items: center;
       gap: 8px;
       padding: 12px 24px;
-      border-radius: 25px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
       font-size: 14px;
@@ -990,8 +972,7 @@
     }
 
     .login-btn-primary:hover {
-      background: rgb(240, 177, 61);
-      color: white;
+      background: #333;
       text-decoration: none;
     }
 
@@ -1002,8 +983,8 @@
     }
 
     .login-btn-secondary:hover {
-      border-color: #1a1a1a;
-      color: #1a1a1a;
+      background: #f5f5f5;
+      border-color: #ddd;
       text-decoration: none;
     }
 
@@ -2708,9 +2689,6 @@
         <button class="login-modal-close" onclick="hideLoginModal()">&times;</button>
       </div>
       <div class="login-modal-body">
-        <div class="login-modal-icon">
-          <i id="modalIcon" class="fas fa-heart"></i>
-        </div>
         <p id="modalMessage" class="login-modal-text">お気に入り機能を利用するには、ログインまたは新規登録が必要です。</p>
         <div class="login-modal-actions">
           <a href="/login" class="login-modal-btn login-btn-primary">
@@ -2897,17 +2875,14 @@
     // ログインモーダル表示
     function showLoginModal(type = 'favorite') {
       const modal = document.getElementById('loginModal');
-      const icon = document.getElementById('modalIcon');
       const message = document.getElementById('modalMessage');
-      
+
       if (type === 'compare') {
-        icon.className = 'fas fa-balance-scale';
         message.textContent = '比較機能を利用するには、ログインまたは新規登録が必要です。';
       } else {
-        icon.className = 'fas fa-heart';
         message.textContent = 'お気に入り機能を利用するには、ログインまたは新規登録が必要です。';
       }
-      
+
       modal.style.display = 'flex';
     }
     

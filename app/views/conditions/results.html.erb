@@ -451,6 +451,63 @@
     text-decoration: none;
   }
 
+  /* Action Buttons */
+  .action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+  }
+
+  .favorite-btn-small {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #e5e5e5;
+  }
+
+  .favorite-btn-small:hover {
+    background: #eee;
+    border-color: #ddd;
+  }
+
+  .favorite-btn-small.favorited {
+    background: rgb(240, 177, 61);
+    color: #1a1a1a;
+    border-color: rgb(240, 177, 61);
+  }
+
+  .favorite-btn-small.favorited:hover {
+    background: rgb(220, 160, 50);
+    border-color: rgb(220, 160, 50);
+  }
+
+  .compare-btn-small {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #e5e5e5;
+  }
+
+  .compare-btn-small:hover {
+    background: #eee;
+    border-color: #ddd;
+  }
+
+  .compare-btn-small.added {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+  }
+
+  .compare-btn-small.added:hover {
+    background: #333;
+    border-color: #333;
+  }
+
     /* Mobile Styles */
     @media (max-width: 768px) {
       .results-container {
@@ -567,49 +624,47 @@
       }
 
       .favorite-btn-small {
-        background: #ff6b6b !important;
-        color: white !important;
-        border: 2px solid #ff6b6b !important;
+        background: #f5f5f5 !important;
+        color: #666 !important;
+        border: 1px solid #e5e5e5 !important;
       }
 
       .favorite-btn-small:hover {
-        background: rgba(255, 107, 107, 0.2);
-        border-color: rgba(255, 107, 107, 0.5);
-        transform: scale(1.1);
+        background: #eee !important;
+        border-color: #ddd !important;
       }
 
       .favorite-btn-small.favorited {
-        background: #ff6b6b;
-        color: white;
-        border-color: #ff6b6b;
+        background: rgb(240, 177, 61) !important;
+        color: #1a1a1a !important;
+        border-color: rgb(240, 177, 61) !important;
       }
 
       .favorite-btn-small.favorited:hover {
-        background: #ff5252;
-        border-color: #ff5252;
+        background: rgb(220, 160, 50) !important;
+        border-color: rgb(220, 160, 50) !important;
       }
 
       .compare-btn-small {
-        background: #4a9eff !important;
-        color: white !important;
-        border: 2px solid #4a9eff !important;
+        background: #f5f5f5 !important;
+        color: #666 !important;
+        border: 1px solid #e5e5e5 !important;
       }
 
       .compare-btn-small:hover {
-        background: rgba(74, 158, 255, 0.2);
-        border-color: rgba(74, 158, 255, 0.5);
-        transform: scale(1.1);
+        background: #eee !important;
+        border-color: #ddd !important;
       }
 
       .compare-btn-small.added {
-        background: #4a9eff;
-        color: white;
-        border-color: #4a9eff;
+        background: #1a1a1a !important;
+        color: white !important;
+        border-color: #1a1a1a !important;
       }
 
       .compare-btn-small.added:hover {
-        background: #3b82f6;
-        border-color: #3b82f6;
+        background: #333 !important;
+        border-color: #333 !important;
       }
 
       /* Mobile Card Layout */
@@ -771,16 +826,16 @@
 
     .login-modal {
       background: white;
-      border-radius: 16px;
+      border-radius: 8px;
       width: 90%;
       max-width: 400px;
       overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       position: relative;
     }
 
     .login-modal-header {
-      background: linear-gradient(135deg, #f0b13d 0%, #ff8c42 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
       color: white;
       padding: 20px 24px;
       position: relative;
@@ -820,19 +875,6 @@
       text-align: center;
     }
 
-    .login-modal-icon {
-      width: 64px;
-      height: 64px;
-      background: #ff6b6b;
-      border-radius: 50%;
-      margin: 0 auto 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: white;
-    }
-
     .login-modal-message {
       font-size: 16px;
       color: #333;
@@ -863,25 +905,24 @@
     }
 
     .login-modal-btn-primary {
-      background: linear-gradient(135deg, #f0b13d 0%, #ff8c42 100%);
+      background: #1a1a1a;
       color: white;
     }
 
     .login-modal-btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(240, 177, 61, 0.4);
+      background: #333;
     }
 
     .login-modal-btn-secondary {
       background: white;
-      color: #f0b13d;
-      border: 2px solid #f0b13d;
+      color: #1a1a1a;
+      border: 1px solid #e5e5e5;
     }
 
-  .login-modal-btn-secondary:hover {
-    background: #f0b13d;
-    color: white;
-  }
+    .login-modal-btn-secondary:hover {
+      background: #f5f5f5;
+      border-color: #ddd;
+    }
 
   /* Responsive - Hero */
   @media (max-width: 768px) {
@@ -1118,28 +1159,25 @@
                   <div class="button-group" style="display: flex; gap: 6px; justify-content: center; align-items: center;">
                     <% if logged_in? %>
                       <% if current_user.favorite?(result) %>
-                        <button class="action-btn favorite-btn-small favorited" 
-                                data-condition-id="<%= result.id %>" 
+                        <button class="action-btn favorite-btn-small favorited"
+                                data-condition-id="<%= result.id %>"
                                 title="お気に入り済み"
-                                onclick="handleFavoriteClick(this, event)"
-                                style="width: 32px; height: 32px; border-radius: 50%; background: #ff6b6b; color: white; border: 2px solid #ff6b6b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                onclick="handleFavoriteClick(this, event)">
                           <i class="fas fa-heart"></i>
                         </button>
                       <% else %>
-                        <button class="action-btn favorite-btn-small" 
-                                data-condition-id="<%= result.id %>" 
+                        <button class="action-btn favorite-btn-small"
+                                data-condition-id="<%= result.id %>"
                                 title="お気に入りに追加"
-                                onclick="handleFavoriteClick(this, event)"
-                                style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 107, 107, 0.1); color: rgba(255, 107, 107, 0.6); border: 2px solid rgba(255, 107, 107, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                onclick="handleFavoriteClick(this, event)">
                           <i class="fas fa-heart"></i>
                         </button>
                       <% end %>
                     <% else %>
-                      <button class="action-btn favorite-btn-small" 
-                              data-condition-id="<%= result.id %>" 
+                      <button class="action-btn favorite-btn-small"
+                              data-condition-id="<%= result.id %>"
                               title="お気に入りに追加（ログインが必要）"
-                              onclick="handleFavoriteClick(this, event)"
-                              style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 107, 107, 0.1); color: rgba(255, 107, 107, 0.6); border: 2px solid rgba(255, 107, 107, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                              onclick="handleFavoriteClick(this, event)">
                         <i class="fas fa-heart"></i>
                       </button>
                     <% end %>
@@ -1147,28 +1185,25 @@
                     <% if logged_in? %>
                       <% comparison_list = current_user.comparison_list || [] %>
                       <% if comparison_list.include?(result.id) %>
-                        <button class="action-btn compare-btn-small added" 
-                                data-condition-id="<%= result.id %>" 
+                        <button class="action-btn compare-btn-small added"
+                                data-condition-id="<%= result.id %>"
                                 title="比較リストに追加済み"
-                                onclick="handleCompareClick(this, event)"
-                                style="width: 32px; height: 32px; border-radius: 50%; background: #4a9eff; color: white; border: 2px solid #4a9eff; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                onclick="handleCompareClick(this, event)">
                           <i class="fas fa-balance-scale"></i>
                         </button>
                       <% else %>
-                        <button class="action-btn compare-btn-small" 
-                                data-condition-id="<%= result.id %>" 
+                        <button class="action-btn compare-btn-small"
+                                data-condition-id="<%= result.id %>"
                                 title="比較リストに追加"
-                                onclick="handleCompareClick(this, event)"
-                                style="width: 32px; height: 32px; border-radius: 50%; background: rgba(74, 158, 255, 0.1); color: rgba(74, 158, 255, 0.6); border: 2px solid rgba(74, 158, 255, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                onclick="handleCompareClick(this, event)">
                           <i class="fas fa-balance-scale"></i>
                         </button>
                       <% end %>
                     <% else %>
-                      <button class="action-btn compare-btn-small" 
-                              data-condition-id="<%= result.id %>" 
+                      <button class="action-btn compare-btn-small"
+                              data-condition-id="<%= result.id %>"
                               title="比較リストに追加（ログインが必要）"
-                              onclick="handleCompareClick(this, event)"
-                              style="width: 32px; height: 32px; border-radius: 50%; background: rgba(74, 158, 255, 0.1); color: rgba(74, 158, 255, 0.6); border: 2px solid rgba(74, 158, 255, 0.2); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                              onclick="handleCompareClick(this, event)">
                         <i class="fas fa-balance-scale"></i>
                       </button>
                     <% end %>
@@ -1251,9 +1286,6 @@
         <button class="login-modal-close" onclick="closeLoginModal()">&times;</button>
       </div>
       <div class="login-modal-body">
-        <div class="login-modal-icon">
-          <i id="modalIcon" class="fas fa-heart"></i>
-        </div>
         <p id="modalMessage" class="login-modal-message">
           お気に入り機能を利用するには、ログインまたは新規登録が必要です。
         </p>
@@ -1275,17 +1307,14 @@
     // Modal functions
     function showLoginModal(type = 'favorite') {
       const modal = document.getElementById('loginModal');
-      const icon = document.getElementById('modalIcon');
       const message = document.getElementById('modalMessage');
-      
+
       if (type === 'compare') {
-        icon.className = 'fas fa-balance-scale';
         message.textContent = '比較機能を利用するには、ログインまたは新規登録が必要です。';
       } else {
-        icon.className = 'fas fa-heart';
         message.textContent = 'お気に入り機能を利用するには、ログインまたは新規登録が必要です。';
       }
-      
+
       modal.style.display = 'flex';
     }
     
@@ -1336,15 +1365,9 @@
           if (data.favorited) {
             button.classList.add('favorited');
             button.title = 'お気に入り済み';
-            button.style.background = '#ff6b6b';
-            button.style.color = 'white';
-            button.style.borderColor = '#ff6b6b';
           } else {
             button.classList.remove('favorited');
             button.title = 'お気に入りに追加';
-            button.style.background = 'rgba(255, 107, 107, 0.1)';
-            button.style.color = 'rgba(255, 107, 107, 0.6)';
-            button.style.borderColor = 'rgba(255, 107, 107, 0.2)';
           }
         }
       })
@@ -1391,15 +1414,9 @@
           if (method === 'POST') {
             button.classList.add('added');
             button.title = '比較リストに追加済み';
-            button.style.background = '#4a9eff';
-            button.style.color = 'white';
-            button.style.borderColor = '#4a9eff';
           } else {
             button.classList.remove('added');
             button.title = '比較リストに追加';
-            button.style.background = 'rgba(74, 158, 255, 0.1)';
-            button.style.color = 'rgba(74, 158, 255, 0.6)';
-            button.style.borderColor = 'rgba(74, 158, 255, 0.2)';
           }
         }
       })

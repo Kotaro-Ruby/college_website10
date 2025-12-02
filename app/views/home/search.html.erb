@@ -263,17 +263,19 @@
       </div>
     </section>
 
-    <!-- Search Button -->
-    <section class="section-wrapper search-button-section">
-      <div class="section-content">
-        <button class="main-search-button" id="search-button">
-          <i class="fas fa-search"></i>
-          条件で検索
-        </button>
-      </div>
-    </section>
+    <!-- Search Button (hidden, used by floating button) -->
+    <button class="main-search-button" id="search-button" style="display: none;"></button>
 
   </div>
+</div>
+
+<!-- Floating Search Button -->
+<div class="floating-search-button" id="floating-search-button">
+  <button id="floating-search-trigger">
+    <i class="fas fa-search"></i>
+    <span>検索</span>
+    <span class="filter-count" id="filter-count">0</span>
+  </button>
 </div>
 
 <style>
@@ -728,8 +730,12 @@
   }
 
   .help-tooltip:hover::after {
-    width: 220px;
-    right: -100px;
+    position: absolute;
+    top: 30px;
+    left: auto;
+    right: -10px;
+    width: calc(100vw - 50px);
+    max-width: 280px;
   }
 }
 
@@ -748,6 +754,78 @@
 
   .filter-card {
     padding: 20px;
+  }
+}
+
+/* Floating Search Button */
+.floating-search-button {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.floating-search-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.floating-search-button button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.floating-search-button button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.floating-search-button button i {
+  color: rgb(240, 177, 61);
+}
+
+.floating-search-button .filter-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  background: rgb(240, 177, 61);
+  color: #1a1a1a;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .floating-search-button {
+    bottom: 20px;
+    left: 50%;
+    width: calc(100% - 40px);
+    max-width: 400px;
+  }
+
+  .floating-search-button button {
+    width: 100%;
+    justify-content: center;
+    padding: 18px 28px;
   }
 }
 </style>
@@ -798,4 +876,90 @@ document.getElementById('search-button').addEventListener('click', function () {
     const queryString = new URLSearchParams(formData).toString();
     window.location.href = `/results?${queryString}`;
 });
+
+// Floating Search Button機能
+const floatingButton = document.getElementById('floating-search-button');
+const floatingTrigger = document.getElementById('floating-search-trigger');
+const filterCountEl = document.getElementById('filter-count');
+
+// フィルターの変更をカウントする関数
+function countActiveFilters() {
+  let count = 0;
+
+  // 州の選択
+  const stateSelect = document.getElementById('stateSelect');
+  if (stateSelect.value !== '指定しない') count++;
+
+  // 大学タイプ（デフォルトはoption1）
+  const typeRadio = document.querySelector('input[name="exampleRadios"]:checked');
+  if (typeRadio && typeRadio.value !== 'option1') count++;
+
+  // 年間授業料（デフォルトはoption1）
+  const tuitionRadio = document.querySelector('input[name="tuitionRadios"]:checked');
+  if (tuitionRadio && tuitionRadio.value !== 'option1') count++;
+
+  // 学生数（チェックボックス）
+  const studentChecks = document.querySelectorAll('.filter-card input[type="checkbox"][id^="groupCheck"]:checked');
+  count += studentChecks.length;
+
+  // SAT（デフォルトはoption1）
+  const satRadio = document.querySelector('input[name="satRadios"]:checked');
+  if (satRadio && satRadio.value !== 'option1') count++;
+
+  // ACT（デフォルトはoption1）
+  const actRadio = document.querySelector('input[name="actRadios"]:checked');
+  if (actRadio && actRadio.value !== 'option1') count++;
+
+  // 卒業率（デフォルトはoption1）
+  const gradRadio = document.querySelector('input[name="graduationRadios"]:checked');
+  if (gradRadio && gradRadio.value !== 'option1') count++;
+
+  // 立地（チェックボックス）
+  const urbanChecks = document.querySelectorAll('input[id^="urbanCheck"]:checked');
+  count += urbanChecks.length;
+
+  // 専攻（チェックボックス）
+  const majorChecks = document.querySelectorAll('input[name="major"]:checked');
+  count += majorChecks.length;
+
+  return count;
+}
+
+// フローティングボタンの表示/非表示を更新
+function updateFloatingButton() {
+  const count = countActiveFilters();
+  filterCountEl.textContent = count;
+
+  if (count > 0) {
+    floatingButton.classList.add('visible');
+  } else {
+    floatingButton.classList.remove('visible');
+  }
+}
+
+// 全てのフィルター要素にイベントリスナーを追加
+document.getElementById('stateSelect').addEventListener('change', updateFloatingButton);
+document.querySelectorAll('.filter-card input[type="radio"]').forEach(radio => {
+  radio.addEventListener('change', updateFloatingButton);
+});
+document.querySelectorAll('.filter-card input[type="checkbox"]').forEach(checkbox => {
+  checkbox.addEventListener('change', updateFloatingButton);
+});
+document.querySelectorAll('.major-options input[type="checkbox"]').forEach(checkbox => {
+  checkbox.addEventListener('change', updateFloatingButton);
+});
+
+// フローティングボタンクリックで検索実行
+floatingTrigger.addEventListener('click', function() {
+  document.getElementById('search-button').click();
+});
+
+// 初期状態をチェック
+updateFloatingButton();
+
+// ブラウザの戻るボタンで戻った時にもチェック（bfcache対応）
+window.addEventListener('pageshow', updateFloatingButton);
+
+// 念のため少し遅延してもチェック
+setTimeout(updateFloatingButton, 100);
 </script>
