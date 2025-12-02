@@ -93,9 +93,53 @@
           </div>
         </div>
       <% else %>
-        <div class="auth-buttons">
+        <!-- Desktop: 従来のボタン表示 -->
+        <div class="auth-buttons desktop-auth">
           <a href="/login" class="login-btn <%= 'active' if request.path == '/login' %>">ログイン</a>
           <a href="/register" class="register-btn <%= 'active' if request.path == '/register' %>">新規登録</a>
+        </div>
+        <!-- Mobile: 検索とログインをまとめたセクション -->
+        <div class="mobile-header-actions">
+          <!-- 検索ドロップダウン -->
+          <div class="mobile-search-dropdown">
+            <div class="mobile-search-trigger">
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="mobile-search-menu">
+              <a href="/search" class="mobile-search-item <%= 'active' if request.path == '/search' %>">
+                <span class="dropdown-flag">🇺🇸</span>
+                アメリカ
+              </a>
+              <a href="/au/universities/search" class="mobile-search-item <%= 'active' if request.path == '/au/universities/search' %>">
+                <span class="dropdown-flag">🇦🇺</span>
+                オーストラリア
+              </a>
+              <div class="mobile-search-item disabled">
+                <span class="dropdown-flag">🇨🇦</span>
+                カナダ（準備中）
+              </div>
+              <div class="mobile-search-item disabled">
+                <span class="dropdown-flag">🇳🇿</span>
+                ニュージーランド（準備中）
+              </div>
+            </div>
+          </div>
+          <!-- ログインドロップダウン -->
+          <div class="auth-dropdown">
+            <div class="auth-dropdown-trigger">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="auth-dropdown-menu">
+              <a href="/login" class="auth-dropdown-item <%= 'active' if request.path == '/login' %>">
+                <i class="fas fa-sign-in-alt"></i>
+                ログイン
+              </a>
+              <a href="/register" class="auth-dropdown-item <%= 'active' if request.path == '/register' %>">
+                <i class="fas fa-user-plus"></i>
+                新規登録
+              </a>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
@@ -118,10 +162,34 @@
           <i class="fas fa-graduation-cap"></i>
           College Sparkについて
         </a>
-        <a href="/search" class="sidebar-item <%= 'active' if is_search_section? %>">
-          <i class="fas fa-search"></i>
-          大学検索
-        </a>
+        <!-- 大学検索ドロップダウン -->
+        <div class="sidebar-dropdown" id="searchDropdown">
+          <div class="sidebar-dropdown-trigger <%= 'active' if is_search_section? %>">
+            <div class="sidebar-dropdown-left">
+              <i class="fas fa-search"></i>
+              大学検索
+            </div>
+            <i class="fas fa-chevron-down sidebar-dropdown-arrow"></i>
+          </div>
+          <div class="sidebar-dropdown-menu">
+            <a href="/search" class="sidebar-dropdown-item <%= 'active' if request.path == '/search' %>">
+              <span class="dropdown-flag">🇺🇸</span>
+              アメリカ
+            </a>
+            <a href="/au/universities/search" class="sidebar-dropdown-item <%= 'active' if request.path == '/au/universities/search' %>">
+              <span class="dropdown-flag">🇦🇺</span>
+              オーストラリア
+            </a>
+            <div class="sidebar-dropdown-item disabled">
+              <span class="dropdown-flag">🇨🇦</span>
+              カナダ（準備中）
+            </div>
+            <div class="sidebar-dropdown-item disabled">
+              <span class="dropdown-flag">🇳🇿</span>
+              ニュージーランド（準備中）
+            </div>
+          </div>
+        </div>
         <a href="/why_study_abroad" class="sidebar-item <%= 'active' if request.path == '/why_study_abroad' %>">
           <i class="fas fa-globe"></i>
           なぜ海外進学なのか？
@@ -676,6 +744,106 @@
     color: inherit !important;
   }
 
+  /* Sidebar Dropdown */
+  .sidebar-dropdown {
+    position: relative;
+  }
+
+  .sidebar-dropdown-trigger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: #e2e8f0 !important;
+    text-decoration: none !important;
+    padding: 12px 25px !important;
+    transition: all 0.3s ease !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    border-left: 3px solid transparent !important;
+    cursor: pointer !important;
+  }
+
+  .sidebar-dropdown-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sidebar-dropdown-left i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+  }
+
+  .sidebar-dropdown-trigger:hover {
+    background: rgba(251, 211, 141, 0.1) !important;
+    color: #fbd38d !important;
+    border-left-color: #fbd38d !important;
+  }
+
+  .sidebar-dropdown-trigger.active {
+    background: rgba(251, 211, 141, 0.15) !important;
+    color: #fbd38d !important;
+    border-left-color: #fbd38d !important;
+  }
+
+  .sidebar-dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-dropdown.open .sidebar-dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .sidebar-dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar-dropdown.open .sidebar-dropdown-menu {
+    max-height: 300px;
+  }
+
+  .sidebar-dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 25px 10px 57px !important;
+    color: #cbd5e0 !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .sidebar-dropdown-item:hover {
+    background: rgba(251, 211, 141, 0.1) !important;
+    color: #fbd38d !important;
+  }
+
+  .sidebar-dropdown-item.active {
+    background: rgba(251, 211, 141, 0.15) !important;
+    color: #fbd38d !important;
+    font-weight: 500 !important;
+  }
+
+  .sidebar-dropdown-item.disabled {
+    color: #718096 !important;
+    cursor: not-allowed !important;
+  }
+
+  .sidebar-dropdown-item.disabled:hover {
+    background: transparent !important;
+    color: #718096 !important;
+  }
+
+  .sidebar-dropdown-item .dropdown-flag {
+    font-size: 14px;
+  }
+
   /* New Sidebar Menu */
   .sidebar-menu {
     position: fixed;
@@ -795,6 +963,190 @@
     display: flex;
     gap: 8px;
     align-items: center;
+  }
+
+  /* Mobile Auth Dropdown */
+  .mobile-auth {
+    display: none;
+  }
+
+  .auth-dropdown {
+    position: relative;
+  }
+
+  .auth-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .auth-dropdown-trigger:hover {
+    background: #eee;
+    color: rgb(200, 140, 40);
+  }
+
+  .auth-dropdown.active .auth-dropdown-trigger {
+    background: rgb(240, 177, 61);
+    border-color: rgb(240, 177, 61);
+    color: #1a1a1a;
+  }
+
+  .auth-dropdown-arrow {
+    display: none;
+  }
+
+  .auth-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e5e5e5;
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .auth-dropdown.active .auth-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .auth-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .auth-dropdown-item:hover {
+    background: #f5f5f5;
+  }
+
+  .auth-dropdown-item.active {
+    background: rgba(240, 177, 61, 0.1);
+    color: rgb(200, 140, 40);
+  }
+
+  .auth-dropdown-item i {
+    width: 16px;
+    text-align: center;
+    color: rgb(200, 140, 40);
+  }
+
+  /* Mobile Header Actions Container */
+  .mobile-header-actions {
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Mobile Search Dropdown (Header) */
+  .mobile-search-dropdown {
+    position: relative;
+  }
+
+  .mobile-search-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .mobile-search-trigger:hover {
+    background: #eee;
+    color: rgb(200, 140, 40);
+  }
+
+  .mobile-search-dropdown.active .mobile-search-trigger {
+    background: rgb(240, 177, 61);
+    border-color: rgb(240, 177, 61);
+    color: #1a1a1a;
+  }
+
+  .mobile-search-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e5e5e5;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .mobile-search-dropdown.active .mobile-search-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-search-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-search-item:hover {
+    background: #f5f5f5;
+  }
+
+  .mobile-search-item.active {
+    background: rgba(240, 177, 61, 0.1);
+    color: rgb(200, 140, 40);
+  }
+
+  .mobile-search-item.disabled {
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  .mobile-search-item.disabled:hover {
+    background: transparent;
+  }
+
+  .mobile-search-item .dropdown-flag {
+    font-size: 16px;
   }
 
   .login-btn {
@@ -984,10 +1336,11 @@
 
     /* モバイルでロゴを中央に配置 */
     .header-center {
-      position: static;
-      transform: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       justify-content: center;
-      flex: 1;
+      flex: 0 0 auto;
     }
 
     .logo-text {
@@ -1026,19 +1379,14 @@
       display: none;
     }
 
-    .auth-buttons {
-      gap: 4px;
-      padding: 4px;
+    /* モバイルでデスクトップ用非表示、ドロップダウン表示 */
+    .desktop-auth {
+      display: none;
     }
 
-    .login-btn {
-      font-size: 12px;
-      padding: 8px 14px;
-    }
-
-    .register-btn {
-      font-size: 12px;
-      padding: 8px 16px;
+    /* モバイルでヘッダーアクションを表示 */
+    .mobile-header-actions {
+      display: flex;
     }
 
     /* ハンバーガーメニューの表示とスタイル調整 */
@@ -1225,10 +1573,75 @@
     
   }, 100);
 
+  // モバイルヘッダードロップダウン初期化（Turbo対応）
+  function initMobileHeaderDropdowns() {
+    // Auth Dropdown for mobile
+    const authDropdown = document.querySelector('.auth-dropdown');
+    const authTrigger = document.querySelector('.auth-dropdown-trigger');
+
+    if (authTrigger && authDropdown && !authTrigger.dataset.initialized) {
+      authTrigger.dataset.initialized = 'true';
+      authTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        authDropdown.classList.toggle('active');
+        const mobileSearchDropdown = document.querySelector('.mobile-search-dropdown');
+        if (mobileSearchDropdown) mobileSearchDropdown.classList.remove('active');
+      });
+    }
+
+    // Mobile Header Search Dropdown
+    const mobileSearchDropdown = document.querySelector('.mobile-search-dropdown');
+    const mobileSearchTrigger = mobileSearchDropdown ? mobileSearchDropdown.querySelector('.mobile-search-trigger') : null;
+
+    if (mobileSearchTrigger && mobileSearchDropdown && !mobileSearchTrigger.dataset.initialized) {
+      mobileSearchTrigger.dataset.initialized = 'true';
+      mobileSearchTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        mobileSearchDropdown.classList.toggle('active');
+        const authDropdown = document.querySelector('.auth-dropdown');
+        if (authDropdown) authDropdown.classList.remove('active');
+      });
+    }
+
+    // Sidebar Search Dropdown
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchTrigger = searchDropdown ? searchDropdown.querySelector('.sidebar-dropdown-trigger') : null;
+
+    if (searchTrigger && searchDropdown && !searchTrigger.dataset.initialized) {
+      searchTrigger.dataset.initialized = 'true';
+      searchTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        searchDropdown.classList.toggle('open');
+      });
+    }
+  }
+
+  // 外部クリックでドロップダウンを閉じる（一度だけ登録）
+  if (!window.mobileDropdownOutsideClickSet) {
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.auth-dropdown')) {
+        const authDropdown = document.querySelector('.auth-dropdown');
+        if (authDropdown) authDropdown.classList.remove('active');
+      }
+      if (!e.target.closest('.mobile-search-dropdown')) {
+        const mobileSearchDropdown = document.querySelector('.mobile-search-dropdown');
+        if (mobileSearchDropdown) mobileSearchDropdown.classList.remove('active');
+      }
+    });
+    window.mobileDropdownOutsideClickSet = true;
+  }
+
+  // 初期化イベント
+  document.addEventListener('DOMContentLoaded', initMobileHeaderDropdowns);
+  document.addEventListener('turbo:load', initMobileHeaderDropdowns);
+  document.addEventListener('turbolinks:load', initMobileHeaderDropdowns);
+
   document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
     const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
-
 
     // Dropdown functionality
     dropdownTriggers.forEach(trigger => {

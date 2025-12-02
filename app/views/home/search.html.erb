@@ -59,6 +59,7 @@
             <div class="filter-card-header">
               <i class="fas fa-map-marked-alt"></i>
               <h3>州</h3>
+              <a href="/states" class="filter-header-link">州別ガイド <i class="fas fa-external-link-alt"></i></a>
             </div>
             <select class="filter-select" id="stateSelect">
               <option value="指定しない" selected>指定しない</option>
@@ -495,6 +496,25 @@
   color: #1a1a1a;
   margin: 0;
   flex: 1;
+}
+
+.filter-header-link {
+  font-size: 12px;
+  color: #888;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.filter-header-link:hover {
+  color: rgb(200, 140, 40);
+}
+
+.filter-header-link i {
+  font-size: 10px;
+  color: inherit;
 }
 
 /* Help Tooltip */
