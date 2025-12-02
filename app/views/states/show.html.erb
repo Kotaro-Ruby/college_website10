@@ -28,626 +28,488 @@
 </script>
 <% end %>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="main">
+  <div class="state-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar">
+      <div class="breadcrumb-inner">
+        <%= link_to states_path, class: "breadcrumb-link" do %>
+          ← 州一覧に戻る
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="state-header">
+      <div class="header-inner">
+        <span class="state-code"><%= @state_code.upcase %></span>
+        <h1><%= @state_data[:name] %></h1>
+        <p class="english-name"><%= @state_data[:english_name] %></p>
+        <p class="nickname"><%= @state_data[:nickname] %></p>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="state-body">
+      <div class="state-body-inner">
+
+        <!-- Overview -->
+        <section class="overview-section">
+          <p class="overview-text"><%= @state_data[:description] %></p>
+        </section>
+
+        <!-- Quick Facts -->
+        <section class="facts-section">
+          <h2>基本データ</h2>
+          <div class="facts-table">
+            <div class="fact-row">
+              <span class="fact-label">州都</span>
+              <span class="fact-value"><%= @state_data[:capital] %></span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">最大都市</span>
+              <span class="fact-value"><%= @state_data[:largest_city] %></span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">人口</span>
+              <span class="fact-value"><%= @state_data[:population] %></span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">面積</span>
+              <span class="fact-value"><%= @state_data[:area] %></span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">気候</span>
+              <span class="fact-value"><%= @state_data[:climate] %>（年間平均: <%= @state_data[:average_temp] %>）</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">生活費</span>
+              <span class="fact-value"><%= @state_data[:cost_of_living] %></span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">主要産業</span>
+              <span class="fact-value"><%= @state_data[:economy] %></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section class="education-section">
+          <h2>教育環境</h2>
+          <div class="education-content">
+            <div class="education-item">
+              <h3>教育の特色</h3>
+              <p><%= @state_data[:education_highlights] %></p>
+            </div>
+            <div class="education-item">
+              <h3>留学生環境</h3>
+              <p><%= @state_data[:international_students] %></p>
+            </div>
+            <div class="education-item">
+              <h3>就職機会</h3>
+              <p><%= @state_data[:job_opportunities] %></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colleges -->
+        <section class="colleges-section">
+          <div class="colleges-header">
+            <h2><%= @state_data[:name] %>の大学（<%= @total_colleges %>校）</h2>
+            <%= link_to "/results?state=#{@state_data[:name]}(#{@state_code})", class: "search-link" do %>
+              全て見る →
+            <% end %>
+          </div>
+
+          <% if @top_colleges.any? %>
+            <div class="colleges-list">
+              <% @top_colleges.each_with_index do |college, index| %>
+                <div class="college-row">
+                  <div class="college-main">
+                    <span class="college-num"><%= index + 1 %></span>
+                    <div class="college-details">
+                      <h3><%= college.college %></h3>
+                      <span class="college-type-tag"><%= college.privateorpublic == "州立" ? "Public" : college.privateorpublic == "私立" ? "Private" : college.privateorpublic %></span>
+                    </div>
+                  </div>
+                  <div class="college-stats">
+                    <div class="stat">
+                      <span class="stat-val"><%= college.students ? number_with_delimiter(college.students) : "—" %></span>
+                      <span class="stat-lbl">学生数</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-val"><%= college.acceptance_rate ? "#{(college.acceptance_rate * 100).round}%" : "—" %></span>
+                      <span class="stat-lbl">合格率</span>
+                    </div>
+                    <div class="stat">
+                      <span class="stat-val"><%= college.tuition_in_state ? "$#{number_with_delimiter(college.tuition_in_state.to_i)}" : "—" %></span>
+                      <span class="stat-lbl">学費</span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="no-data">この州の大学データは現在準備中です。</p>
+          <% end %>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
-/* ヘッダースタイル */
-.state-detail-header {
-    background: linear-gradient(rgba(255, 245, 235, 0.85), rgba(255, 245, 235, 0.85)), 
-                asset-url('hero_background.jpg') center/cover no-repeat;
-    color: #2d3748;
-    padding: 80px 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+.state-page {
+  background: #fff;
+  min-height: 100vh;
 }
 
-.state-detail-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    animation: rotate 20s linear infinite;
+/* Breadcrumb */
+.breadcrumb-bar {
+  background: #f8f8f8;
+  border-bottom: 1px solid #eee;
 }
 
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.breadcrumb-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 20px;
 }
 
-.state-title {
-    font-size: clamp(2.8rem, 6vw, 3.5rem);
-    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
-    font-weight: 900;
-    color: #2d3748;
-    margin: 0 0 15px 0;
-    position: relative;
-    z-index: 2;
-    letter-spacing: 0.05em;
+.breadcrumb-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
 }
 
-.state-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    margin: 0 0 10px 0;
-    color: #4a5568;
-    position: relative;
-    z-index: 2;
-    font-weight: 500;
+.breadcrumb-link:hover {
+  color: #000;
 }
 
-.state-nickname {
-    font-size: 1rem;
-    color: #718096;
-    position: relative;
-    z-index: 2;
-    font-style: italic;
+/* Header */
+.state-header {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
 }
 
-/* ナビゲーション */
-.back-navigation {
-    background: white;
-    padding: 15px 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.back-link {
-    color: #4a5568;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    transition: color 0.3s ease;
+.state-code {
+  display: inline-block;
+  background: rgb(200, 140, 40);
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
 }
 
-.back-link:hover {
-    color: #f5b342;
-    text-decoration: none;
+.state-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
 }
 
-/* メインコンテンツ */
-.state-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+.english-name {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 12px;
+  font-weight: 400;
 }
 
-.content-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
-    margin-bottom: 50px;
+.nickname {
+  font-size: 14px;
+  color: rgb(200, 140, 40);
+  margin: 0;
 }
 
-/* 左側コンテンツ */
-.main-content {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Body */
+.state-body {
+  background: #fff;
 }
 
-.section {
-    margin-bottom: 40px;
+.state-body-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-.section:last-child {
-    margin-bottom: 0;
+/* Overview */
+.overview-section {
+  margin-bottom: 48px;
 }
 
-.section-title {
-    font-size: 1.5rem;
-    color: #2d3748;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.overview-text {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #333;
+  margin: 0;
 }
 
-.section-title i {
-    color: #f5b342;
+/* Facts */
+.facts-section {
+  margin-bottom: 48px;
 }
 
-.state-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #4a5568;
-    background: #f7fafc;
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 4px solid #f5b342;
+.facts-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1a1a1a;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.facts-table {
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.info-item {
-    background: #f7fafc;
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 4px solid #f5b342;
+.fact-row {
+  display: flex;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.info-label {
-    font-size: 0.9rem;
-    color: #718096;
-    margin-bottom: 8px;
-    font-weight: 500;
+.fact-row:last-child {
+  border-bottom: none;
 }
 
-.info-value {
-    font-size: 1.1rem;
-    color: #2d3748;
-    font-weight: 600;
+.fact-label {
+  width: 140px;
+  flex-shrink: 0;
+  background: #fafafa;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
 }
 
-/* 右側サイドバー */
-.sidebar {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    height: fit-content;
-    position: sticky;
-    top: 20px;
+.fact-value {
+  flex: 1;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #1a1a1a;
 }
 
-.sidebar-section {
-    margin-bottom: 30px;
+/* Education */
+.education-section {
+  margin-bottom: 48px;
 }
 
-.sidebar-section:last-child {
-    margin-bottom: 0;
+.education-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1a1a1a;
 }
 
-.sidebar-title {
-    font-size: 1.2rem;
-    color: #2d3748;
-    margin-bottom: 15px;
-    font-weight: 600;
+.education-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.stat-card {
-    background: linear-gradient(135deg, #f5b342, #e09c2a);
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(245, 179, 66, 0.2);
+.education-item h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px;
 }
 
-.stat-number {
-    font-size: 2rem;
-    font-weight: 700;
-    display: block;
+.education-item p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
 }
 
-.stat-label {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.highlight-list {
-    list-style: none;
-    padding: 0;
-}
-
-.highlight-list li {
-    padding: 8px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #4a5568;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.highlight-list li:last-child {
-    border-bottom: none;
-}
-
-.highlight-list li i {
-    color: #f5b342;
-    width: 16px;
-}
-
-/* 大学リストセクション */
+/* Colleges */
 .colleges-section {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .colleges-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1a1a1a;
 }
 
-.colleges-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 25px;
+.colleges-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
 }
 
-.college-card {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
+.search-link {
+  font-size: 14px;
+  color: rgb(200, 140, 40);
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.college-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #f5b342, #e09c2a);
+.search-link:hover {
+  text-decoration: underline;
 }
 
-.college-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+.colleges-list {
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.college-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.college-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background 0.15s;
 }
 
-.college-rank {
-    background: linear-gradient(135deg, #f5b342, #e09c2a);
-    color: white;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 700;
-    flex-shrink: 0;
+.college-row:last-child {
+  border-bottom: none;
 }
 
-.college-info {
-    flex-grow: 1;
-    margin-right: 15px;
+.college-row:hover {
+  background: #fafafa;
 }
 
-.college-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2d3748;
-    margin-bottom: 8px;
-    line-height: 1.3;
+.college-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.college-type {
-    font-size: 0.85rem;
-    color: #718096;
-    background: #f7fafc;
-    padding: 4px 8px;
-    border-radius: 12px;
-    display: inline-block;
-    margin-bottom: 15px;
+.college-num {
+  width: 28px;
+  height: 28px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.college-details h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.college-type-tag {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .college-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  display: flex;
+  gap: 32px;
 }
 
-.stat-box {
-    background: #f8fafc;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    border: 1px solid #e2e8f0;
+.stat {
+  text-align: right;
 }
 
-.stat-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #f5b342;
-    display: block;
+.stat-val {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
-.stat-label {
-    font-size: 0.75rem;
-    color: #718096;
-    margin-top: 2px;
+.stat-lbl {
+  font-size: 11px;
+  color: #999;
 }
 
-.view-all-btn {
-    background: linear-gradient(135deg, #f5b342, #e09c2a);
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(245, 179, 66, 0.2);
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #999;
 }
 
-.view-all-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(245, 179, 66, 0.4);
-    color: white;
-    text-decoration: none;
-    background: linear-gradient(135deg, #e09c2a, #d4881f);
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 968px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .sidebar {
-        position: static;
-    }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-    .state-detail-header {
-        padding: 60px 15px;
-    }
-    
-    .state-content {
-        padding: 30px 15px;
-    }
-    
-    .main-content,
-    .colleges-section {
-        padding: 25px;
-    }
-    
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .colleges-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .college-card {
-        padding: 20px;
-    }
-    
-    .college-stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-    
-    .stat-box {
-        padding: 8px;
-    }
-    
-    .college-name {
-        font-size: 1.1rem;
-    }
-    
-    .colleges-header {
-        flex-direction: column;
-        gap: 15px;
-        align-items: stretch;
-    }
+  .state-header {
+    padding: 40px 20px;
+  }
+
+  .state-header h1 {
+    font-size: 28px;
+  }
+
+  .state-body-inner {
+    padding: 30px 16px;
+  }
+
+  .fact-row {
+    flex-direction: column;
+  }
+
+  .fact-label {
+    width: 100%;
+    padding: 10px 14px;
+  }
+
+  .fact-value {
+    padding: 10px 14px;
+  }
+
+  .college-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .college-stats {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 44px;
+  }
+
+  .stat {
+    text-align: left;
+  }
+
+  .colleges-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .state-header h1 {
+    font-size: 24px;
+  }
+
+  .college-stats {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
 }
 </style>
-
-<div class="state-detail-header">
-    <h1 class="state-title"><%= @state_data[:name] %></h1>
-    <p class="state-subtitle"><%= @state_data[:english_name] %></p>
-    <p class="state-nickname">「<%= @state_data[:nickname] %>」</p>
-</div>
-
-<div class="back-navigation">
-    <%= link_to states_path, class: "back-link" do %>
-        <i class="fas fa-arrow-left"></i>
-        州一覧に戻る
-    <% end %>
-</div>
-
-<div class="state-content">
-    <div class="content-grid">
-        <!-- メインコンテンツ -->
-        <div class="main-content">
-            <!-- 州の概要 -->
-            <div class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-info-circle"></i>
-                    州の概要
-                </h2>
-                <div class="state-description">
-                    <%= @state_data[:description] %>
-                </div>
-            </div>
-
-            <!-- 基本情報 -->
-            <div class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-map"></i>
-                    基本情報
-                </h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">州都</div>
-                        <div class="info-value"><%= @state_data[:capital] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">最大都市</div>
-                        <div class="info-value"><%= @state_data[:largest_city] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">人口</div>
-                        <div class="info-value"><%= @state_data[:population] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">面積</div>
-                        <div class="info-value"><%= @state_data[:area] %></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 気候・生活環境 -->
-            <div class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-cloud-sun"></i>
-                    気候・生活環境
-                </h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">気候</div>
-                        <div class="info-value"><%= @state_data[:climate] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">平均気温</div>
-                        <div class="info-value"><%= @state_data[:average_temp] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">生活費水準</div>
-                        <div class="info-value"><%= @state_data[:cost_of_living] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">主要産業</div>
-                        <div class="info-value"><%= @state_data[:economy] %></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 教育・キャリア -->
-            <div class="section">
-                <h2 class="section-title">
-                    <i class="fas fa-graduation-cap"></i>
-                    教育・キャリア環境
-                </h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">教育の特色</div>
-                        <div class="info-value"><%= @state_data[:education_highlights] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">留学生環境</div>
-                        <div class="info-value"><%= @state_data[:international_students] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">就職機会</div>
-                        <div class="info-value"><%= @state_data[:job_opportunities] %></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">有名な観光地・文化</div>
-                        <div class="info-value"><%= @state_data[:famous_for] %></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- サイドバー -->
-        <div class="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">州内大学統計</h3>
-                <div class="stat-card">
-                    <span class="stat-number"><%= @total_colleges %></span>
-                    <span class="stat-label">総大学数</span>
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">州の特徴</h3>
-                <ul class="highlight-list">
-                    <li><i class="fas fa-thermometer-half"></i> <%= @state_data[:climate] %></li>
-                    <li><i class="fas fa-dollar-sign"></i> <%= @state_data[:cost_of_living] %></li>
-                    <li><i class="fas fa-briefcase"></i> <%= @state_data[:economy] %></li>
-                    <li><i class="fas fa-star"></i> <%= @state_data[:famous_for] %></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- 大学リストセクション -->
-    <div class="colleges-section">
-        <div class="colleges-header">
-            <h2 class="section-title">
-                <i class="fas fa-university"></i>
-                <%= @state_data[:name] %>の主要大学
-            </h2>
-            <%= link_to "/results?state=#{@state_data[:name]}(#{@state_code})", class: "view-all-btn" do %>
-                <i class="fas fa-search"></i>
-                全ての大学を検索
-            <% end %>
-        </div>
-
-        <% if @top_colleges.any? %>
-            <div class="colleges-grid">
-                <% @top_colleges.each_with_index do |college, index| %>
-                    <div class="college-card">
-                        <div class="college-header">
-                            <div class="college-info">
-                                <h3 class="college-name"><%= college.college %></h3>
-                                <span class="college-type">
-                                    <%= college.privateorpublic == "州立" ? "州立大学" : college.privateorpublic == "私立" ? "私立大学" : college.privateorpublic == "営利" ? "営利大学" : "大学" %>
-                                </span>
-                            </div>
-                            <div class="college-rank"><%= index + 1 %></div>
-                        </div>
-                        <div class="college-stats">
-                            <div class="stat-box">
-                                <span class="stat-value">
-                                    <%= college.students ? number_with_delimiter(college.students) : "N/A" %>
-                                </span>
-                                <span class="stat-label">学生数</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-value">
-                                    <%= college.graduation_rate ? "#{(college.graduation_rate * 100).round(1)}%" : "N/A" %>
-                                </span>
-                                <span class="stat-label">卒業率</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-value">
-                                    <%= college.acceptance_rate ? "#{(college.acceptance_rate * 100).round(1)}%" : "N/A" %>
-                                </span>
-                                <span class="stat-label">合格率</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-value">
-                                    <%= college.tuition_in_state ? "$#{number_with_delimiter(college.tuition_in_state)}" : "N/A" %>
-                                </span>
-                                <span class="stat-label">年間学費</span>
-                            </div>
-                        </div>
-                    </div>
-                <% end %>
-            </div>
-        <% else %>
-            <div style="text-align: center; padding: 40px; color: #718096;">
-                <i class="fas fa-university" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
-                <p style="font-size: 1.1rem;">この州の大学データは現在準備中です。</p>
-            </div>
-        <% end %>
-    </div>
-</div>
