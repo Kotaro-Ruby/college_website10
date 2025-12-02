@@ -6,13 +6,18 @@ class StatesController < ApplicationController
   end
 
   def show
-    @colleges = Condition.where(state: @state_code).limit(20)
-    @total_colleges = Condition.where(state: @state_code).count
-    @top_colleges = Condition.where(state: @state_code)
-                            .where.not(students: nil)
-                            .where("students > 0")
-                            .order(students: :desc)
-                            .limit(6)
+    # 4年制・非営利のみ対象
+    base_scope = Condition.where(state: @state_code)
+                          .where(privateorpublic: [ "私立", "州立" ])
+                          .where("carnegie_basic >= 15")
+
+    @colleges = base_scope.limit(20)
+    @total_colleges = base_scope.count
+    @top_colleges = base_scope
+                      .where.not(students: nil)
+                      .where("students > 0")
+                      .order(students: :desc)
+                      .limit(6)
   end
 
   private

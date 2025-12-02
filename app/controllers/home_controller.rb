@@ -229,8 +229,9 @@ class HomeController < ApplicationController
   private
 
   def get_db_rankings
-    # 4年制大学のみを対象（Carnegie分類15-23が4年制大学、学生数1000人以上）
-    base_scope = Condition.where("carnegie_basic >= 15 AND carnegie_basic <= 23")
+    # 4年制・非営利大学のみを対象（Carnegie分類15以上が4年制大学、学生数1000人以上）
+    base_scope = Condition.where("carnegie_basic >= 15")
+                          .where(privateorpublic: [ "私立", "州立" ])
                           .where("students >= 1000")
 
     {
@@ -387,35 +388,37 @@ class HomeController < ApplicationController
   public
 
   def rankings
+    # 4年制・非営利大学のみを対象
+    base_scope = Condition
+      .where(privateorpublic: [ "私立", "州立" ])
+      .where("carnegie_basic >= 15")
+      .includes(:university_translations)
+
     # 学費が安い大学TOP50
-    @cheap_tuition = Condition
+    @cheap_tuition = base_scope
       .where.not(tuition: nil)
       .where("tuition > 0")
-      .includes(:university_translations)
       .order(tuition: :asc)
       .limit(50)
 
     # 合格率が高い大学TOP50（入りやすい）
-    @high_acceptance = Condition
+    @high_acceptance = base_scope
       .where.not(acceptance_rate: nil)
       .where("acceptance_rate > 0")
-      .includes(:university_translations)
       .order(acceptance_rate: :desc)
       .limit(50)
 
     # 卒業率が高い大学TOP50
-    @high_graduation = Condition
+    @high_graduation = base_scope
       .where.not(graduation_rate: nil)
       .where("graduation_rate > 0")
-      .includes(:university_translations)
       .order(graduation_rate: :desc)
       .limit(50)
 
     # 卒業後の年収が高い大学TOP50
-    @high_earnings = Condition
+    @high_earnings = base_scope
       .where.not(earnings_10yr_median: nil)
       .where("earnings_10yr_median > 0")
-      .includes(:university_translations)
       .order(earnings_10yr_median: :desc)
       .limit(50)
   end

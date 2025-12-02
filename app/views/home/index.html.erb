@@ -143,8 +143,8 @@
                 <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                   <div class="simple-rank-number"><%= index + 1 %></div>
                   <div class="simple-ranking-info">
-                    <h3 class="college-name-ja"><%= college.college %></h3>
-                    <p class="college-name-en"><%= translate_state(college.state) %></p>
+                    <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                    <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %><%= translate_state(college.state) %></p>
                   </div>
                   <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                 </a>
@@ -207,8 +207,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en">$<%= number_with_delimiter(college.tuition_in_state) %>/年</p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %>$<%= number_with_delimiter(college.tuition_in_state) %>/年</p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -229,8 +229,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en"><%= (college.acceptance_rate * 100).round %>%</p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %><%= (college.acceptance_rate * 100).round %>%</p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -251,8 +251,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en"><%= (college.graduation_rate * 100).round %>%</p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %><%= (college.graduation_rate * 100).round %>%</p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -273,8 +273,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en"><%= number_with_delimiter(college.students) %>人</p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %><%= number_with_delimiter(college.students) %>人</p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -295,8 +295,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en">$<%= number_with_delimiter(college.earnings_10yr_median) %></p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %>$<%= number_with_delimiter(college.earnings_10yr_median) %></p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -317,8 +317,8 @@
                   <a href="<%= conditions_path(college.slug || college.id) %>" class="simple-ranking-item">
                     <div class="simple-rank-number"><%= index + 1 %></div>
                     <div class="simple-ranking-info">
-                      <h3 class="college-name-ja"><%= college.college %></h3>
-                      <p class="college-name-en"><%= college.sat_math_75 + college.sat_reading_75 %></p>
+                      <h3 class="college-name-ja"><%= college.name_ja.presence || college.college %></h3>
+                      <p class="college-name-en"><%= college.name_ja.present? ? college.college + " - " : "" %><%= college.sat_math_75 + college.sat_reading_75 %></p>
                     </div>
                     <i class="fas fa-chevron-right simple-ranking-arrow"></i>
                   </a>
@@ -358,8 +358,8 @@
                     <a href="<%= conditions_path(college.slug || college.id) %>" class="ranking-item">
                       <div class="rank-number"><%= rank + 1 %></div>
                       <div class="ranking-info">
-                        <h3><%= university_name %></h3>
-                        <p><i class="fas fa-map-marker-alt"></i> <%= translate_state(college.state) %></p>
+                        <h3><%= college.name_ja.presence || university_name %></h3>
+                        <p><i class="fas fa-map-marker-alt"></i> <%= college.name_ja.present? ? university_name + " - " : "" %><%= translate_state(college.state) %></p>
                       </div>
                       <i class="fas fa-arrow-right ranking-arrow"></i>
                     </a>

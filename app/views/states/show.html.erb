@@ -134,7 +134,10 @@
                   <div class="college-main">
                     <span class="college-num"><%= index + 1 %></span>
                     <div class="college-details">
-                      <h3><%= college.college %></h3>
+                      <h3><%= college.name_ja.presence || college.college %></h3>
+                      <% if college.name_ja.present? %>
+                        <span class="college-english-name"><%= college.college %></span>
+                      <% end %>
                       <span class="college-type-tag"><%= college.privateorpublic == "州立" ? "Public" : college.privateorpublic == "私立" ? "Private" : college.privateorpublic %></span>
                     </div>
                   </div>
@@ -421,6 +424,14 @@
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 4px;
+}
+
+.college-english-name {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 4px;
 }
 
 .college-type-tag {

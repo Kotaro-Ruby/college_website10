@@ -62,7 +62,7 @@ class ConditionsController < ApplicationController
           scope = scope.where("carnegie_basic >= 15").where(privateorpublic: "私立")
         when "4年制州立"
           scope = scope.where("carnegie_basic >= 15").where(privateorpublic: "州立")
-        when "2年制（コミカレ、ジュニアカレッジ等）"
+        when "2年制（コミカレ等）"
           # 2年制: Carnegie 1-14
           scope = scope.where("carnegie_basic BETWEEN 1 AND 14")
         when "営利"
@@ -295,10 +295,12 @@ class ConditionsController < ApplicationController
       # 閲覧履歴に追加
       add_to_recently_viewed(@college) rescue nil
 
-      # 関連大学を取得（同じ州で日本語名があるものを優先）
+      # 関連大学を取得（同じ州で4年制・非営利、日本語名があるものを優先）
       @related_colleges = Condition
         .where(state: @college.state)
         .where.not(id: @college.id)
+        .where(privateorpublic: [ "私立", "州立" ])
+        .where("carnegie_basic >= 15")
         .includes(:university_translations)
         .order(Arel.sql("CASE WHEN id IN (SELECT condition_id FROM university_translations WHERE locale = 'ja') THEN 0 ELSE 1 END"))
         .limit(6)

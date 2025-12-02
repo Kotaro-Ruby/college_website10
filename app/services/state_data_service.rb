@@ -19,7 +19,11 @@ class StateDataService
         state_data = get_state(state_code)
         next unless state_data
 
-        college_count = Condition.where(state: state_code).count
+        # 4年制・非営利大学のみカウント
+        college_count = Condition.where(state: state_code)
+                                 .where(privateorpublic: [ "私立", "州立" ])
+                                 .where("carnegie_basic >= 15")
+                                 .count
 
         state_data.merge(
           code: state_code,

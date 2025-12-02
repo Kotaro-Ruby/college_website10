@@ -82,10 +82,16 @@ class ApplicationController < ActionController::Base
 
   # 人気の大学を取得（全ユーザーの閲覧履歴から）
   def get_popular_colleges
-    # ViewHistoryテーブルからcondition_idごとの閲覧数をカウント
-    # default_scopeを無効化してGROUP BYクエリを実行
+    # 4年制・非営利大学のみを対象
+    four_year_nonprofit_scope = Condition
+      .where(privateorpublic: [ "私立", "州立" ])
+      .where("carnegie_basic >= 15")
+
+    # ViewHistoryテーブルからcondition_idごとの閲覧数をカウント（4年制・非営利のみ）
     view_counts = ViewHistory
       .unscoped
+      .joins(:condition)
+      .merge(four_year_nonprofit_scope)
       .group(:condition_id)
       .order("count_all DESC")
       .limit(6)
@@ -102,7 +108,8 @@ class ApplicationController < ActionController::Base
       end.compact
     else
       # まだ閲覧履歴がない場合は、デフォルトの人気大学を返す（閲覧数は0）
-      colleges = Condition.where.not(students: nil, acceptance_rate: nil)
+      colleges = four_year_nonprofit_scope
+               .where.not(students: nil, acceptance_rate: nil)
                .where("acceptance_rate > 0.1 AND acceptance_rate < 0.8")
                .order(students: :desc)
                .limit(6)

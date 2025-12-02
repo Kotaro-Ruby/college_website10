@@ -374,6 +374,12 @@
     color: rgb(240, 177, 61);
   }
 
+  .university-link .english-name {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+  }
+
   .tag {
     display: inline-block;
     padding: 4px 12px;
@@ -961,7 +967,12 @@
                   onclick="window.location.href='<%= conditions_path(result) %>'">
                 <td>
                   <span class="university-link">
-                    <%= result.college %>
+                    <% if result.name_ja.present? %>
+                      <%= result.name_ja %><br>
+                      <span class="english-name"><%= result.college %></span>
+                    <% else %>
+                      <%= result.college %>
+                    <% end %>
                   </span>
                 </td>
                 <td data-label="州"><%=
