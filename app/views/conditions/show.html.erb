@@ -70,6 +70,14 @@
       min-height: 100vh;
     }
 
+    /* モバイル/デスクトップ表示切り替え */
+    .mobile-text {
+      display: none;
+    }
+    .desktop-text {
+      display: inline;
+    }
+
     .page-container {
       min-height: 100vh;
       background: white;
@@ -287,105 +295,342 @@
       border-radius: 2px;
     }
 
+    /* Detail Info Section - Terms Style */
+    .detail-section-container {
+      margin: 40px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .detail-section-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .detail-section-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.02em;
+    }
+
+    .detail-section-header p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+
+    .detail-section-body {
+      background: #f9fafb;
+      padding: 32px 20px;
+    }
+
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .details-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 900px;
+    }
+
+    .details-grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1000px;
+    }
+
+    .details-grid-5 {
+      grid-template-columns: repeat(5, 1fr);
+      max-width: 1100px;
     }
 
     .detail-card {
       background: white;
-      padding: 24px;
+      padding: 24px 20px;
       border-radius: 8px;
-      transition: all 0.2s ease;
       border: 1px solid #e5e5e5;
-      border-left: 4px solid rgb(240, 177, 61);
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .detail-card::before {
-      display: none;
+      text-align: center;
+      transition: all 0.2s ease;
     }
 
     .detail-card:hover {
-      border-color: #1a1a1a;
-      border-left-color: rgb(240, 177, 61);
+      border-color: #f0b13d;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .detail-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #f0b13d 0%, #e09c2a 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: white;
       font-size: 1rem;
-      color: #f0b13d;
-      margin-bottom: 8px;
-      display: block;
     }
 
     .detail-title {
       font-size: 0.75rem;
       color: #78716c;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
     .detail-value {
-      font-size: 1.625rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: #1c1917;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+      line-height: 1.3;
     }
 
-    .major-info-section {
-      margin-bottom: 60px;
+    /* Major Section - Terms Style */
+    .major-section-container {
+      margin: 40px 0;
     }
 
-    .major-info-card {
+    .major-section-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 50px 20px;
+      text-align: center;
+      color: white;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .major-section-header h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .major-section-header p {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .major-header-divider {
+      width: 50px;
+      height: 3px;
+      background: rgb(240, 177, 61);
+      margin: 20px auto 0;
+    }
+
+    .major-card-wrapper {
+      padding: 30px 20px;
+    }
+
+    .major-card-bg {
+      background: #f5f5f5;
+    }
+
+    .major-card {
+      max-width: 800px;
+      margin: 0 auto;
       background: white;
-      padding: 40px;
-      border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      width: 100%;
-      max-width: none;
+      padding: 32px;
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
+      position: relative;
+      overflow: hidden;
     }
 
-    .info-card h3 {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: 1.5rem;
+    .major-card-number {
+      font-size: 60px;
+      font-weight: 700;
+      color: rgba(240, 177, 61, 0.1);
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      line-height: 1;
+    }
+
+    .major-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .major-card p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .major-card strong {
+      color: rgb(200, 140, 40);
       font-weight: 600;
-      color: #2d3748;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
     }
 
-    .info-card-icon {
-      width: 36px;
-      height: 36px;
-      background: #f0b13d;
-      border-radius: 10px;
+    /* Major Ranking List */
+    .major-ranking-list {
+      margin-top: 16px;
+    }
+
+    .major-ranking-row {
+      display: grid;
+      grid-template-columns: 30px 1fr 50px 80px;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .major-ranking-row:last-child {
+      border-bottom: none;
+    }
+
+    .major-rank {
+      width: 26px;
+      height: 26px;
+      background: rgb(240, 177, 61);
+      color: white;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1.1rem;
+      font-weight: 700;
+      font-size: 13px;
     }
 
+    .major-field-name {
+      font-weight: 500;
+      color: #1a1a1a;
+      font-size: 14px;
+    }
 
-    .major-content {
-      background: #fffbf7;
-      padding: 24px;
-      border-radius: 12px;
-      border: 1px solid #f9e5c5;
-      color: #78716c;
-      line-height: 1.7;
+    .major-field-percent {
+      font-weight: 600;
+      color: rgb(200, 140, 40);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .major-field-bar {
+      height: 6px;
+      background: #e5e5e5;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .major-field-bar-fill {
+      height: 100%;
+      background: rgb(240, 177, 61);
+      border-radius: 3px;
+    }
+
+    /* Major Tags Grid */
+    .major-tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .major-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #f5f5f5;
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* Major Note Card */
+    .major-note-card {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .major-note-card p {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .major-note-card i {
+      margin-right: 6px;
+      color: #aaa;
+    }
+
+    /* Major No Data */
+    .major-no-data {
+      text-align: center;
+      padding: 50px 30px;
+    }
+
+    .major-no-data i {
+      font-size: 48px;
+      color: rgb(240, 177, 61);
+      margin-bottom: 16px;
+    }
+
+    .major-no-data h3 {
+      margin-bottom: 8px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 480px) {
+      .major-section-header {
+        padding: 30px 15px;
+      }
+
+      .major-section-header h2 {
+        font-size: 24px;
+      }
+
+      .major-card-wrapper {
+        padding: 20px 15px;
+      }
+
+      .major-card {
+        padding: 20px;
+      }
+
+      .major-card-number {
+        font-size: 40px;
+      }
+
+      .major-card h3 {
+        font-size: 18px;
+      }
+
+      .major-ranking-row {
+        grid-template-columns: 26px 1fr 45px;
+        gap: 8px;
+      }
+
+      .major-field-bar {
+        display: none;
+      }
+
+      .major-field-name {
+        font-size: 13px;
+      }
+
+      .major-tag {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
     }
 
     .social-section {
@@ -1209,10 +1454,110 @@
     @media (max-width: 480px) {
       .quick-stats {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
       }
 
-      .details-grid {
-        grid-template-columns: 1fr;
+      .quick-stat {
+        padding: 16px 12px;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .detail-section-header {
+        padding: 30px 16px;
+      }
+
+      .detail-section-header h2 {
+        font-size: 1.25rem;
+      }
+
+      .detail-section-body {
+        padding: 20px 16px;
+      }
+
+      .details-grid,
+      .details-grid-3,
+      .details-grid-4,
+      .details-grid-5 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .detail-card {
+        padding: 16px 12px;
+      }
+
+      .detail-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.875rem;
+        margin-bottom: 8px;
+      }
+
+      .detail-title {
+        font-size: 10px;
+        margin-bottom: 4px;
+      }
+
+      .detail-value {
+        font-size: 0.95rem;
+      }
+
+      /* モバイル/デスクトップ表示切り替え */
+      .mobile-text {
+        display: inline;
+      }
+      .desktop-text {
+        display: none;
+      }
+
+      /* 専攻分野セクションのモバイル最適化 */
+      .major-summary {
+        padding: 14px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .major-rank-item {
+        padding: 10px 12px !important;
+        margin-bottom: 8px !important;
+        border-left-width: 3px !important;
+      }
+
+      .major-rank-number {
+        width: 24px !important;
+        height: 24px !important;
+        margin-right: 10px !important;
+        font-size: 0.75rem !important;
+      }
+
+      .major-name {
+        font-size: 0.85rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .major-note {
+        padding: 12px !important;
+        border-left-width: 3px !important;
+      }
+
+      .major-note > div:first-child {
+        display: none;
+      }
+
+      .no-major-data {
+        padding: 24px 16px !important;
+      }
+
+      .no-major-data i {
+        font-size: 2rem !important;
+      }
+
+      .no-major-data h4 {
+        font-size: 0.95rem !important;
       }
 
       .content-padding {
@@ -1626,283 +1971,191 @@
       <div class="main-content">
         <div class="content-padding">
           
-          <!-- Special Designations & Campus Info -->
-          <div class="section">
-            <h2 class="section-title">大学の特色・キャンパス情報</h2>
-            
-            <div class="campus-info-grid">
-              <%# Special Designations section removed per user request %>
-
-              <!-- Campus Location Details -->
-              <div class="campus-location">
-                <h3 class="subsection-title">
-                  <i class="fas fa-map-marker-alt"></i>
-                  キャンパス立地
-                </h3>
-                <div class="location-details">
-                  <div class="location-item">
-                    <i class="fas fa-city"></i>
-                    <div class="location-content">
-                      <strong>所在地</strong>
-                      <span><%= @college.city %>, <%=
-                        if @college.state
-                          case @college.state.gsub(/\s*\(.*?\)/, '')
-                          when 'AL' then 'アラバマ州'
-                          when 'AK' then 'アラスカ州'
-                          when 'AZ' then 'アリゾナ州'
-                          when 'AR' then 'アーカンソー州'
-                          when 'CA' then 'カリフォルニア州'
-                          when 'CO' then 'コロラド州'
-                          when 'CT' then 'コネチカット州'
-                          when 'DE' then 'デラウェア州'
-                          when 'FL' then 'フロリダ州'
-                          when 'GA' then 'ジョージア州'
-                          when 'HI' then 'ハワイ州'
-                          when 'ID' then 'アイダホ州'
-                          when 'IL' then 'イリノイ州'
-                          when 'IN' then 'インディアナ州'
-                          when 'IA' then 'アイオワ州'
-                          when 'KS' then 'カンザス州'
-                          when 'KY' then 'ケンタッキー州'
-                          when 'LA' then 'ルイジアナ州'
-                          when 'ME' then 'メイン州'
-                          when 'MD' then 'メリーランド州'
-                          when 'MA' then 'マサチューセッツ州'
-                          when 'MI' then 'ミシガン州'
-                          when 'MN' then 'ミネソタ州'
-                          when 'MS' then 'ミシシッピ州'
-                          when 'MO' then 'ミズーリ州'
-                          when 'MT' then 'モンタナ州'
-                          when 'NE' then 'ネブラスカ州'
-                          when 'NV' then 'ネバダ州'
-                          when 'NH' then 'ニューハンプシャー州'
-                          when 'NJ' then 'ニュージャージー州'
-                          when 'NM' then 'ニューメキシコ州'
-                          when 'NY' then 'ニューヨーク州'
-                          when 'NC' then 'ノースカロライナ州'
-                          when 'ND' then 'ノースダコタ州'
-                          when 'OH' then 'オハイオ州'
-                          when 'OK' then 'オクラホマ州'
-                          when 'OR' then 'オレゴン州'
-                          when 'PA' then 'ペンシルベニア州'
-                          when 'RI' then 'ロードアイランド州'
-                          when 'SC' then 'サウスカロライナ州'
-                          when 'SD' then 'サウスダコタ州'
-                          when 'TN' then 'テネシー州'
-                          when 'TX' then 'テキサス州'
-                          when 'UT' then 'ユタ州'
-                          when 'VT' then 'バーモント州'
-                          when 'VA' then 'バージニア州'
-                          when 'WA' then 'ワシントン州'
-                          when 'WV' then 'ウェストバージニア州'
-                          when 'WI' then 'ウィスコンシン州'
-                          when 'WY' then 'ワイオミング州'
-                          when 'DC' then 'ワシントンD.C.'
-                          when 'PR' then 'プエルトリコ'
-                          else @college.state
-                          end
-                        else
-                          'N/A'
-                        end
-                      %></span>
-                    </div>
+          <!-- Campus Location - Terms Style -->
+          <div class="detail-section-container">
+            <div class="detail-section-header">
+              <h2>キャンパス情報</h2>
+              <p>所在地と環境</p>
+            </div>
+            <div class="detail-section-body">
+              <div class="details-grid details-grid-3">
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                  <div class="detail-title">州</div>
+                  <div class="detail-value"><%=
+                    if @college.state
+                      case @college.state.gsub(/\s*\(.*?\)/, '')
+                      when 'AL' then 'アラバマ州'
+                      when 'AK' then 'アラスカ州'
+                      when 'AZ' then 'アリゾナ州'
+                      when 'AR' then 'アーカンソー州'
+                      when 'CA' then 'カリフォルニア州'
+                      when 'CO' then 'コロラド州'
+                      when 'CT' then 'コネチカット州'
+                      when 'DE' then 'デラウェア州'
+                      when 'FL' then 'フロリダ州'
+                      when 'GA' then 'ジョージア州'
+                      when 'HI' then 'ハワイ州'
+                      when 'ID' then 'アイダホ州'
+                      when 'IL' then 'イリノイ州'
+                      when 'IN' then 'インディアナ州'
+                      when 'IA' then 'アイオワ州'
+                      when 'KS' then 'カンザス州'
+                      when 'KY' then 'ケンタッキー州'
+                      when 'LA' then 'ルイジアナ州'
+                      when 'ME' then 'メイン州'
+                      when 'MD' then 'メリーランド州'
+                      when 'MA' then 'マサチューセッツ州'
+                      when 'MI' then 'ミシガン州'
+                      when 'MN' then 'ミネソタ州'
+                      when 'MS' then 'ミシシッピ州'
+                      when 'MO' then 'ミズーリ州'
+                      when 'MT' then 'モンタナ州'
+                      when 'NE' then 'ネブラスカ州'
+                      when 'NV' then 'ネバダ州'
+                      when 'NH' then 'ニューハンプシャー州'
+                      when 'NJ' then 'ニュージャージー州'
+                      when 'NM' then 'ニューメキシコ州'
+                      when 'NY' then 'ニューヨーク州'
+                      when 'NC' then 'ノースカロライナ州'
+                      when 'ND' then 'ノースダコタ州'
+                      when 'OH' then 'オハイオ州'
+                      when 'OK' then 'オクラホマ州'
+                      when 'OR' then 'オレゴン州'
+                      when 'PA' then 'ペンシルベニア州'
+                      when 'RI' then 'ロードアイランド州'
+                      when 'SC' then 'サウスカロライナ州'
+                      when 'SD' then 'サウスダコタ州'
+                      when 'TN' then 'テネシー州'
+                      when 'TX' then 'テキサス州'
+                      when 'UT' then 'ユタ州'
+                      when 'VT' then 'バーモント州'
+                      when 'VA' then 'バージニア州'
+                      when 'WA' then 'ワシントン州'
+                      when 'WV' then 'ウェストバージニア州'
+                      when 'WI' then 'ウィスコンシン州'
+                      when 'WY' then 'ワイオミング州'
+                      when 'DC' then 'ワシントンD.C.'
+                      when 'PR' then 'プエルトリコ'
+                      else @college.state
+                      end
+                    else
+                      'N/A'
+                    end
+                  %></div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-university"></i></div>
+                  <div class="detail-title">設立形態</div>
+                  <div class="detail-value">
+                    <% if @college.privateorpublic == "私立" || @college.privateorpublic == "Private" %>
+                      私立
+                    <% elsif @college.privateorpublic == "州立" || @college.privateorpublic == "Public" %>
+                      州立
+                    <% elsif @college.privateorpublic == "営利" %>
+                      営利
+                    <% else %>
+                      <%= @college.privateorpublic || "N/A" %>
+                    <% end %>
                   </div>
-                  
-                  <div class="location-item">
-                    <i class="fas fa-map"></i>
-                    <div class="location-content">
-                      <strong>環境</strong>
-                      <span><%=
-                        case @college.urbanicity&.to_i
-                        when 11
-                          "大都市（人口25万人以上の中心部）"
-                        when 12
-                          "中都市（人口10-25万人の中心部）"
-                        when 13
-                          "小都市（人口2.5-10万人の中心部）"
-                        when 21
-                          "大都市郊外（人口25万人以上の郊外）"
-                        when 22
-                          "中都市郊外（人口10-25万人の郊外）"
-                        when 23
-                          "小都市郊外（人口2.5-10万人の郊外）"
-                        when 31
-                          "近隣町（都市部から近い町）"
-                        when 32
-                          "遠方町（都市部から遠い町）"
-                        when 33
-                          "僻地町（都市部から非常に遠い町）"
-                        when 41
-                          "近隣地方（都市部から近い農村地域）"
-                        when 42
-                          "遠方地方（都市部から遠い農村地域）"
-                        when 43
-                          "僻地（都市部から非常に遠い農村地域）"
-                        else
-                          "詳細情報なし"
-                        end
-                      %></span>
-                    </div>
-                  </div>
-                  
-                  <%# Postal code removed per user request %>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-building"></i></div>
+                  <div class="detail-title">環境</div>
+                  <div class="detail-value"><%=
+                    case @college.urbanicity&.to_i
+                    when 11
+                      "大都市"
+                    when 12
+                      "中都市"
+                    when 13
+                      "小都市"
+                    when 21
+                      "大都市郊外"
+                    when 22
+                      "中都市郊外"
+                    when 23
+                      "小都市郊外"
+                    when 31
+                      "近隣町"
+                    when 32
+                      "遠方町"
+                    when 33
+                      "僻地町"
+                    when 41
+                      "近隣地方"
+                    when 42
+                      "遠方地方"
+                    when 43
+                      "僻地"
+                    else
+                      "N/A"
+                    end
+                  %></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- University Comment Section -->
+          <!-- University Comment Section (no title) -->
           <% if @college.comment.present? %>
-          <div class="section">
-            <h2 class="section-title">大学について</h2>
-            <div class="comment-section">
-              <div class="comment-icon">
-                <i class="fas fa-quote-left"></i>
-              </div>
-              <div class="comment-content">
-                <%= @college.comment %>
-              </div>
+          <div class="comment-section" style="margin: 40px 0;">
+            <div class="comment-icon">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <div class="comment-content">
+              <%= @college.comment %>
             </div>
           </div>
           <% end %>
 
-          <!-- Quick Stats -->
-          <div class="quick-stats">
-            <div class="stat-card">
-              <div class="stat-icon"><i class="fas fa-users"></i></div>
-              <div class="stat-value"><%= @college.students || "N/A" %></div>
-              <div class="stat-label">学生数</div>
+          <!-- Combined Stats Section - Terms Style -->
+          <div class="detail-section-container">
+            <div class="detail-section-header">
+              <h2>基本情報</h2>
+              <p>大学の主要データ</p>
             </div>
-            <div class="stat-card">
-              <div class="stat-icon"><i class="fas fa-percentage"></i></div>
-              <div class="stat-value"><%= @college.acceptance_rate ? "#{(@college.acceptance_rate * 100).round}%" : "N/A" %></div>
-              <div class="stat-label">合格率</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-              <div class="stat-value">
-                <%=
-                  if @college.privateorpublic == "州立" || @college.privateorpublic == "Public"
-                    # 州立大学の場合はout-of-state授業料を表示
-                    if @college.tuition_out_state.present?
-                      "$#{number_with_delimiter(@college.tuition_out_state)}"
-                    elsif @college.tuition.present?
-                      "$#{number_with_delimiter(@college.tuition)}"
-                    else
-                      "N/A"
-                    end
-                  else
-                    # 私立大学の場合は通常の授業料を表示
-                    @college.tuition ? "$#{number_with_delimiter(@college.tuition)}" : "N/A"
-                  end
-                %>
-              </div>
-              <div class="stat-label">年間授業料</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
-              <div class="stat-value"><%= @college.graduation_rate ? "#{(@college.graduation_rate * 100).round}%" : "N/A" %></div>
-              <div class="stat-label">卒業率</div>
-            </div>
-          </div>
-
-          <!-- Detailed Information -->
-          <div class="section">
-            <h2 class="section-title">詳細情報</h2>
-            <div class="details-grid">
-              <div class="detail-card">
-                <div class="detail-icon"><i class="fas fa-map-marked-alt"></i></div>
-                <div class="detail-title">州</div>
-                <div class="detail-value"><%=
-                  if @college.state
-                    case @college.state.gsub(/\s*\(.*?\)/, '')
-                    when 'AL' then 'アラバマ州'
-                    when 'AK' then 'アラスカ州'
-                    when 'AZ' then 'アリゾナ州'
-                    when 'AR' then 'アーカンソー州'
-                    when 'CA' then 'カリフォルニア州'
-                    when 'CO' then 'コロラド州'
-                    when 'CT' then 'コネチカット州'
-                    when 'DE' then 'デラウェア州'
-                    when 'FL' then 'フロリダ州'
-                    when 'GA' then 'ジョージア州'
-                    when 'HI' then 'ハワイ州'
-                    when 'ID' then 'アイダホ州'
-                    when 'IL' then 'イリノイ州'
-                    when 'IN' then 'インディアナ州'
-                    when 'IA' then 'アイオワ州'
-                    when 'KS' then 'カンザス州'
-                    when 'KY' then 'ケンタッキー州'
-                    when 'LA' then 'ルイジアナ州'
-                    when 'ME' then 'メイン州'
-                    when 'MD' then 'メリーランド州'
-                    when 'MA' then 'マサチューセッツ州'
-                    when 'MI' then 'ミシガン州'
-                    when 'MN' then 'ミネソタ州'
-                    when 'MS' then 'ミシシッピ州'
-                    when 'MO' then 'ミズーリ州'
-                    when 'MT' then 'モンタナ州'
-                    when 'NE' then 'ネブラスカ州'
-                    when 'NV' then 'ネバダ州'
-                    when 'NH' then 'ニューハンプシャー州'
-                    when 'NJ' then 'ニュージャージー州'
-                    when 'NM' then 'ニューメキシコ州'
-                    when 'NY' then 'ニューヨーク州'
-                    when 'NC' then 'ノースカロライナ州'
-                    when 'ND' then 'ノースダコタ州'
-                    when 'OH' then 'オハイオ州'
-                    when 'OK' then 'オクラホマ州'
-                    when 'OR' then 'オレゴン州'
-                    when 'PA' then 'ペンシルベニア州'
-                    when 'RI' then 'ロードアイランド州'
-                    when 'SC' then 'サウスカロライナ州'
-                    when 'SD' then 'サウスダコタ州'
-                    when 'TN' then 'テネシー州'
-                    when 'TX' then 'テキサス州'
-                    when 'UT' then 'ユタ州'
-                    when 'VT' then 'バーモント州'
-                    when 'VA' then 'バージニア州'
-                    when 'WA' then 'ワシントン州'
-                    when 'WV' then 'ウェストバージニア州'
-                    when 'WI' then 'ウィスコンシン州'
-                    when 'WY' then 'ワイオミング州'
-                    when 'DC' then 'ワシントンD.C.'
-                    when 'PR' then 'プエルトリコ'
-                    when 'VI' then 'バージン諸島'
-                    when 'GU' then 'グアム'
-                    when 'AS' then 'アメリカ領サモア'
-                    when 'MP' then '北マリアナ諸島'
-                    else @college.state.gsub(/\s*\(.*?\)/, '')
-                    end
-                  else
-                    "N/A"
-                  end
-                %></div>
-              </div>
-              <div class="detail-card">
-                <div class="detail-icon"><i class="fas fa-university"></i></div>
-                <div class="detail-title">設立形態</div>
-                <div class="detail-value">
-                  <% if @college.privateorpublic == "私立" || @college.privateorpublic == "Private" %>
-                    私立
-                  <% elsif @college.privateorpublic == "州立" || @college.privateorpublic == "Public" %>
-                    州立
-                  <% elsif @college.privateorpublic == "営利" %>
-                    営利
-                  <% else %>
-                    <%= @college.privateorpublic || "N/A" %>
-                  <% end %>
+            <div class="detail-section-body">
+              <div class="details-grid details-grid-5">
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-users"></i></div>
+                  <div class="detail-title">学生数</div>
+                  <div class="detail-value"><%= @college.students ? number_with_delimiter(@college.students) : "N/A" %></div>
                 </div>
-              </div>
-              <div class="detail-card">
-                <div class="detail-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="detail-title">平均GPA</div>
-                <div class="detail-value"><%= @college.GPA || "N/A" %></div>
-              </div>
-              <div class="detail-card">
-                <div class="detail-icon"><i class="fas fa-trophy"></i></div>
-                <div class="detail-title">NCAA Division</div>
-                <div class="detail-value"><%= @college.Division || "N/A" %></div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-percentage"></i></div>
+                  <div class="detail-title">合格率</div>
+                  <div class="detail-value"><%= @college.acceptance_rate ? "#{(@college.acceptance_rate * 100).round}%" : "N/A" %></div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                  <div class="detail-title">年間授業料</div>
+                  <div class="detail-value">
+                    <%=
+                      if @college.privateorpublic == "州立" || @college.privateorpublic == "Public"
+                        if @college.tuition_out_state.present?
+                          "$#{number_with_delimiter(@college.tuition_out_state)}"
+                        elsif @college.tuition.present?
+                          "$#{number_with_delimiter(@college.tuition)}"
+                        else
+                          "N/A"
+                        end
+                      else
+                        @college.tuition ? "$#{number_with_delimiter(@college.tuition)}" : "N/A"
+                      end
+                    %>
+                  </div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-graduation-cap"></i></div>
+                  <div class="detail-title">卒業率</div>
+                  <div class="detail-value"><%= @college.graduation_rate ? "#{(@college.graduation_rate * 100).round}%" : "N/A" %></div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-icon"><i class="fas fa-city"></i></div>
+                  <div class="detail-title">市</div>
+                  <div class="detail-value"><%= @college.city || "N/A" %></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1996,7 +2249,7 @@
                           <li><strong>読解セクション:</strong> 200-800点（読解力、文法、語彙）</li>
                           <li><strong>総合スコア:</strong> 400-1600点（数学+読解）</li>
                           <li><strong>全米平均:</strong> 数学 520点、読解 530点、総合 1050点</li>
-                          <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                          <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
                         </ul>
                       </div>
                     </div>
@@ -2030,7 +2283,7 @@
                           <li><strong>読解セクション:</strong> 1-36点（散文、人文科学、社会科学、自然科学）</li>
                           <li><strong>科学セクション:</strong> 1-36点（データ解釈、研究要約、対立する視点）</li>
                           <li><strong>全米平均:</strong> 約21点</li>
-                          <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                          <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
                         </ul>
                       </div>
                     </div>
@@ -2081,7 +2334,7 @@
                         <li><strong>10年後収入:</strong> 入学から10年後の年収中央値（多くの場合、卒業から6年後）</li>
                         <li><strong>データ元:</strong> 連邦政府の税務・学生ローンデータに基づく</li>
                         <li><strong>全米平均（学士号）:</strong> 6年後 約$35,000、10年後 約$45,000</li>
-                        <li><strong>チャート内の赤い棒:</strong> 全米平均を示す基準</li>
+                        <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
                       </ul>
                     </div>
                   </div>
@@ -2228,214 +2481,145 @@
             <% end %>
           </div>
 
-          <!-- Major Information Section -->
-          <div class="major-info-section">
-            <div class="major-info-card">
-              <h2 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 1.8rem; color: #1c1917; margin-bottom: 32px; display: flex; align-items: center; gap: 16px;">
-                <div style="width: 48px; height: 48px; background: #f0b13d; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;">
-                  <i class="fas fa-graduation-cap"></i>
-                </div>
-                専攻分野情報
-              </h2>
-              
-              <div class="major-content" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-                <% 
-                  majors = []
-                  # 農業・農学
-                  if @college.pcip_agriculture && @college.pcip_agriculture > 0
-                    majors << "農業・農学 (#{(@college.pcip_agriculture * 100).round(1)}%)"
-                  end
-                  # 天然資源・環境科学
-                  if @college.pcip_natural_resources && @college.pcip_natural_resources > 0
-                    majors << "天然資源・環境科学 (#{(@college.pcip_natural_resources * 100).round(1)}%)"
-                  end
-                  # コミュニケーション学
-                  if @college.pcip_communication && @college.pcip_communication > 0
-                    majors << "コミュニケーション学 (#{(@college.pcip_communication * 100).round(1)}%)"
-                  end
-                  # コンピューターサイエンス
-                  if @college.pcip_computer_science && @college.pcip_computer_science > 0
-                    majors << "コンピューターサイエンス (#{(@college.pcip_computer_science * 100).round(1)}%)"
-                  end
-                  # 教育学
-                  if @college.pcip_education && @college.pcip_education > 0
-                    majors << "教育学 (#{(@college.pcip_education * 100).round(1)}%)"
-                  end
-                  # 工学
-                  if @college.pcip_engineering && @college.pcip_engineering > 0
-                    majors << "工学 (#{(@college.pcip_engineering * 100).round(1)}%)"
-                  end
-                  # 外国語・文学
-                  if @college.pcip_foreign_languages && @college.pcip_foreign_languages > 0
-                    majors << "外国語・文学 (#{(@college.pcip_foreign_languages * 100).round(1)}%)"
-                  end
-                  # 英語・文学
-                  if @college.pcip_english && @college.pcip_english > 0
-                    majors << "英語・文学 (#{(@college.pcip_english * 100).round(1)}%)"
-                  end
-                  # 生物学
-                  if @college.pcip_biology && @college.pcip_biology > 0
-                    majors << "生物学 (#{(@college.pcip_biology * 100).round(1)}%)"
-                  end
-                  # 数学・統計学
-                  if @college.pcip_mathematics && @college.pcip_mathematics > 0
-                    majors << "数学・統計学 (#{(@college.pcip_mathematics * 100).round(1)}%)"
-                  end
-                  # 心理学
-                  if @college.pcip_psychology && @college.pcip_psychology > 0
-                    majors << "心理学 (#{(@college.pcip_psychology * 100).round(1)}%)"
-                  end
-                  # 社会学
-                  if @college.pcip_sociology && @college.pcip_sociology > 0
-                    majors << "社会学 (#{(@college.pcip_sociology * 100).round(1)}%)"
-                  end
-                  # 社会科学
-                  if @college.pcip_social_sciences && @college.pcip_social_sciences > 0
-                    majors << "社会科学 (#{(@college.pcip_social_sciences * 100).round(1)}%)"
-                  end
-                  # 視覚・舞台芸術
-                  if @college.pcip_visual_arts && @college.pcip_visual_arts > 0
-                    majors << "視覚・舞台芸術 (#{(@college.pcip_visual_arts * 100).round(1)}%)"
-                  end
-                  # 経営学
-                  if @college.pcip_business && @college.pcip_business > 0
-                    majors << "経営学 (#{(@college.pcip_business * 100).round(1)}%)"
-                  end
-                  # 健康・医療
-                  if @college.pcip_health_professions && @college.pcip_health_professions > 0
-                    majors << "健康・医療 (#{(@college.pcip_health_professions * 100).round(1)}%)"
-                  end
-                  # 歴史学
-                  if @college.pcip_history && @college.pcip_history > 0
-                    majors << "歴史学 (#{(@college.pcip_history * 100).round(1)}%)"
-                  end
-                  # 哲学・宗教学
-                  if @college.pcip_philosophy && @college.pcip_philosophy > 0
-                    majors << "哲学・宗教学 (#{(@college.pcip_philosophy * 100).round(1)}%)"
-                  end
-                  # 物理科学
-                  if @college.pcip_physical_sciences && @college.pcip_physical_sciences > 0
-                    majors << "物理科学 (#{(@college.pcip_physical_sciences * 100).round(1)}%)"
-                  end
-                  # 法学・刑事司法
-                  if @college.pcip_law && @college.pcip_law > 0
-                    majors << "法学・刑事司法 (#{(@college.pcip_law * 100).round(1)}%)"
-                  end
-                %>
-                
-                <% if majors.any? %>
-                  <!-- 専攻統計サマリー -->
-                  <div style="background: #fffbf7; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #f9e5c5;">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                      <i class="fas fa-chart-pie" style="color: #f0b13d; font-size: 1.2rem;"></i>
-                      <h4 style="margin: 0; color: #2d3748; font-weight: 600;">専攻分野の概要</h4>
-                    </div>
-                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">
-                      この大学では<strong><%= majors.length %>つの主要専攻分野</strong>で学位を授与しており、
-                      最も人気の分野は<strong><%= majors.first.split('(')[0].strip %></strong>です。
-                      学生の多様な学術的興味と将来のキャリア目標に対応した包括的な教育プログラムを提供しています。
-                    </p>
-                  </div>
+          <!-- Major Information Section - Terms Style -->
+          <div class="major-section-container">
+            <%
+              majors = []
+              if @college.pcip_agriculture && @college.pcip_agriculture > 0
+                majors << { name: "農業・農学", percentage: (@college.pcip_agriculture * 100).round(1) }
+              end
+              if @college.pcip_natural_resources && @college.pcip_natural_resources > 0
+                majors << { name: "天然資源・環境科学", percentage: (@college.pcip_natural_resources * 100).round(1) }
+              end
+              if @college.pcip_communication && @college.pcip_communication > 0
+                majors << { name: "コミュニケーション学", percentage: (@college.pcip_communication * 100).round(1) }
+              end
+              if @college.pcip_computer_science && @college.pcip_computer_science > 0
+                majors << { name: "コンピューターサイエンス", percentage: (@college.pcip_computer_science * 100).round(1) }
+              end
+              if @college.pcip_education && @college.pcip_education > 0
+                majors << { name: "教育学", percentage: (@college.pcip_education * 100).round(1) }
+              end
+              if @college.pcip_engineering && @college.pcip_engineering > 0
+                majors << { name: "工学", percentage: (@college.pcip_engineering * 100).round(1) }
+              end
+              if @college.pcip_foreign_languages && @college.pcip_foreign_languages > 0
+                majors << { name: "外国語・文学", percentage: (@college.pcip_foreign_languages * 100).round(1) }
+              end
+              if @college.pcip_english && @college.pcip_english > 0
+                majors << { name: "英語・文学", percentage: (@college.pcip_english * 100).round(1) }
+              end
+              if @college.pcip_biology && @college.pcip_biology > 0
+                majors << { name: "生物学", percentage: (@college.pcip_biology * 100).round(1) }
+              end
+              if @college.pcip_mathematics && @college.pcip_mathematics > 0
+                majors << { name: "数学・統計学", percentage: (@college.pcip_mathematics * 100).round(1) }
+              end
+              if @college.pcip_psychology && @college.pcip_psychology > 0
+                majors << { name: "心理学", percentage: (@college.pcip_psychology * 100).round(1) }
+              end
+              if @college.pcip_sociology && @college.pcip_sociology > 0
+                majors << { name: "社会学", percentage: (@college.pcip_sociology * 100).round(1) }
+              end
+              if @college.pcip_social_sciences && @college.pcip_social_sciences > 0
+                majors << { name: "社会科学", percentage: (@college.pcip_social_sciences * 100).round(1) }
+              end
+              if @college.pcip_visual_arts && @college.pcip_visual_arts > 0
+                majors << { name: "視覚・舞台芸術", percentage: (@college.pcip_visual_arts * 100).round(1) }
+              end
+              if @college.pcip_business && @college.pcip_business > 0
+                majors << { name: "経営学", percentage: (@college.pcip_business * 100).round(1) }
+              end
+              if @college.pcip_health_professions && @college.pcip_health_professions > 0
+                majors << { name: "健康・医療", percentage: (@college.pcip_health_professions * 100).round(1) }
+              end
+              if @college.pcip_history && @college.pcip_history > 0
+                majors << { name: "歴史学", percentage: (@college.pcip_history * 100).round(1) }
+              end
+              if @college.pcip_philosophy && @college.pcip_philosophy > 0
+                majors << { name: "哲学・宗教学", percentage: (@college.pcip_philosophy * 100).round(1) }
+              end
+              if @college.pcip_physical_sciences && @college.pcip_physical_sciences > 0
+                majors << { name: "物理科学", percentage: (@college.pcip_physical_sciences * 100).round(1) }
+              end
+              if @college.pcip_law && @college.pcip_law > 0
+                majors << { name: "法学・刑事司法", percentage: (@college.pcip_law * 100).round(1) }
+              end
+              majors = majors.sort_by { |m| -m[:percentage] }
+            %>
 
-                  <!-- 人気専攻分野ランキング -->
-                  <div style="margin-bottom: 24px;">
-                    <h4 style="color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                      <i class="fas fa-trophy" style="color: #f59e0b;"></i>
-                      人気専攻分野ランキング（上位<%= [majors.length, 5].min %>位）
-                    </h4>
-                    <% majors.sort_by { |m| -m.match(/\((\d+\.?\d*)%\)/)[1].to_f }.first(5).each_with_index do |major, index| %>
-                      <% percentage = major.match(/\((\d+\.?\d*)%\)/)[1].to_f %>
-                      <% major_name = major.split('(')[0].strip %>
-                      <div style="display: flex; align-items: center; margin-bottom: 12px; padding: 12px 16px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border-left: 4px solid <%= percentage >= 15 ? '#10b981' : percentage >= 10 ? '#f59e0b' : percentage >= 5 ? '#6366f1' : '#6b7280' %>;">
-                        <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: <%= percentage >= 15 ? '#dcfdf7' : percentage >= 10 ? '#fef3c7' : percentage >= 5 ? '#e0e7ff' : '#f3f4f6' %>; margin-right: 16px; font-weight: bold; color: <%= percentage >= 15 ? '#047857' : percentage >= 10 ? '#d97706' : percentage >= 5 ? '#4338ca' : '#4b5563' %>; font-size: 0.9rem;">
-                          <%= index + 1 %>
-                        </div>
-                        <div style="flex: 1;">
-                          <div style="font-weight: 600; color: #2d3748; margin-bottom: 2px;"><%= major_name %></div>
-                          <div style="font-size: 0.85rem; color: #6b7280;">学位授与者の<strong><%= percentage %>%</strong>がこの分野を専攻</div>
-                        </div>
-                        <div style="width: 60px; background: #f1f5f9; border-radius: 8px; height: 8px; margin-left: 16px;">
-                          <div style="width: <%= [percentage * 2, 100].min %>%; background: <%= percentage >= 15 ? '#10b981' : percentage >= 10 ? '#f59e0b' : percentage >= 5 ? '#6366f1' : '#6b7280' %>; height: 100%; border-radius: 8px;"></div>
+            <!-- Section Header -->
+            <div class="major-section-header">
+              <h2>専攻分野情報</h2>
+              <p>Programs of Study</p>
+              <div class="major-header-divider"></div>
+            </div>
+
+            <% if majors.any? %>
+              <!-- Overview Card -->
+              <div class="major-card-wrapper">
+                <div class="major-card">
+                  <div class="major-card-number">01</div>
+                  <h3>概要</h3>
+                  <p>
+                    この大学では<strong><%= majors.length %>つの専攻分野</strong>で学位を授与しています。
+                    最も人気の分野は<strong><%= majors.first[:name] %></strong>（<%= majors.first[:percentage] %>%）です。
+                  </p>
+                </div>
+              </div>
+
+              <!-- Ranking Card -->
+              <div class="major-card-wrapper major-card-bg">
+                <div class="major-card">
+                  <div class="major-card-number">02</div>
+                  <h3>人気専攻ランキング</h3>
+                  <div class="major-ranking-list">
+                    <% majors.first(5).each_with_index do |major, index| %>
+                      <div class="major-ranking-row">
+                        <span class="major-rank"><%= index + 1 %></span>
+                        <span class="major-field-name"><%= major[:name] %></span>
+                        <span class="major-field-percent"><%= major[:percentage] %>%</span>
+                        <div class="major-field-bar">
+                          <div class="major-field-bar-fill" style="width: <%= [major[:percentage] * 2, 100].min %>%;"></div>
                         </div>
                       </div>
                     <% end %>
                   </div>
-
-
-                  <!-- 専攻プログラム詳細リスト -->
-                  <div style="margin-bottom: 24px;">
-                    <h4 style="color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                      <i class="fas fa-list-ul" style="color: #8b5cf6;"></i>
-                      提供される専攻プログラム例
-                    </h4>
-                    <div class="major-programs-grid">
-                      <% 
-                        # 専攻分野ごとの具体的なプログラム例
-                        major_programs = {
-                          '経営学' => ['経営管理学', 'マーケティング', '会計学', '金融学', '国際ビジネス', '起業学', '人事管理', 'サプライチェーン管理'],
-                          '工学' => ['機械工学', '電気工学', '土木工学', '化学工学', 'コンピュータ工学', '航空宇宙工学', '環境工学', '材料工学'],
-                          'コンピューターサイエンス' => ['ソフトウェア工学', 'データサイエンス', '人工知能', 'サイバーセキュリティ', 'ゲーム開発', 'ウェブ開発', 'モバイルアプリ開発', '機械学習'],
-                          '健康・医療' => ['看護学', '理学療法', '作業療法', '公衆衛生学', '医療技術', '栄養学', '薬学', '歯科衛生学'],
-                          '教育学' => ['初等教育', '中等教育', '特別支援教育', '幼児教育', '体育教育', '音楽教育', '美術教育', '教育心理学'],
-                          '生物学' => ['分子生物学', '生態学', '海洋生物学', '遺伝学', '生化学', '微生物学', '神経科学', '植物学'],
-                          '心理学' => ['臨床心理学', '認知心理学', '発達心理学', '社会心理学', '実験心理学', 'カウンセリング心理学', '産業心理学', '神経心理学'],
-                          '社会科学' => ['政治学', '経済学', '国際関係学', '人類学', '地理学', '社会学', '犯罪学', '公共政策学'],
-                          '視覚・舞台芸術' => ['美術', '音楽', '演劇', 'ダンス', 'グラフィックデザイン', '映画制作', '写真', '建築学'],
-                          '歴史学' => ['アメリカ史', 'ヨーロッパ史', '世界史', '考古学', '美術史', '軍事史', '文化史', '宗教史'],
-                          '英語・文学' => ['英文学', 'アメリカ文学', '創作', 'ジャーナリズム', '言語学', '修辞学', '比較文学', '編集・出版'],
-                          '数学・統計学' => ['純粋数学', '応用数学', '統計学', 'アクチュアリー数学', '数学教育', '計算数学', '金融数学', '生物統計学'],
-                          '哲学・宗教学' => ['哲学', '宗教学', '神学', '倫理学', 'ロジック', '東洋哲学', '西洋哲学', '宗教間対話'],
-                          '法学・刑事司法' => ['法学', '刑事司法', '犯罪学', '法執行', '法医学', '矯正学', '裁判所管理', '法律事務'],
-                          '農業・農学' => ['農業科学', '動物科学', '植物学', '農業経済学', '獣医学', '食品科学', '農業工学', '持続可能農業'],
-                          '社会学' => ['社会理論', '社会問題', '都市社会学', '家族社会学', '労働社会学', '文化社会学', '社会調査法', '社会福祉学']
-                        }
-
-                        displayed_majors = majors.sort_by { |m| -m.match(/\((\d+\.?\d*)%\)/)[1].to_f }.first(8)
-                        displayed_majors.each do |major|
-                          major_name = major.split('(')[0].strip
-                          programs = major_programs[major_name] || []
-                          next if programs.empty?
-                      %>
-                        <div class="major-program-card">
-                          <div class="major-program-header">
-                            <div class="major-program-dot"></div>
-                            <h5 class="major-program-title"><%= major_name %></h5>
-                          </div>
-                          <div class="major-program-tags">
-                            <% programs.each do |program| %>
-                              <span class="major-program-tag"><%= program %></span>
-                            <% end %>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-
-                  <!-- 注釈情報 -->
-                  <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #94a3b8;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                      <i class="fas fa-info-circle" style="color: #64748b;"></i>
-                      <strong style="color: #475569;">データについて</strong>
-                    </div>
-                    <div style="font-size: 0.9rem; color: #64748b; line-height: 1.5;">
-                      • 上記の割合は、この大学で学位を取得した学生のうち、各専攻分野を修了した学生の比率を示しています<br>
-                      • 専攻プログラム例は各分野で一般的に提供される内容であり、大学により提供プログラムは異なります<br>
-                      • データは米国教育省College Scorecardより取得した最新の公式データです<br>
-                      • 専攻分野名は日本語で表示していますが、実際の授業は英語で行われます
-                    </div>
-                  </div>
-                <% else %>
-                  <div style="text-align: center; padding: 40px 20px; background: #fffbf7; border-radius: 12px; border: 2px dashed #f9e5c5;">
-                    <i class="fas fa-university" style="font-size: 3rem; color: #f0b13d; margin-bottom: 16px;"></i>
-                    <h4 style="color: #2d3748; margin-bottom: 12px;">専攻分野データ準備中</h4>
-                    <p style="color: #6b7280; margin: 0; line-height: 1.6;">
-                      この大学では多様な専攻分野を提供しており、学生一人ひとりの興味や将来の目標に合わせて選択できる<br>
-                      幅広いプログラムが用意されています。詳細な専攻分野データは近日中に追加予定です。
-                    </p>
-                  </div>
-                <% end %>
+                </div>
               </div>
-            </div>
+
+              <!-- All Majors Card -->
+              <div class="major-card-wrapper">
+                <div class="major-card">
+                  <div class="major-card-number">03</div>
+                  <h3>全専攻分野一覧</h3>
+                  <div class="major-tags-grid">
+                    <% majors.each do |major| %>
+                      <span class="major-tag"><%= major[:name] %> (<%= major[:percentage] %>%)</span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Note Card -->
+              <div class="major-card-wrapper major-card-bg">
+                <div class="major-card major-note-card">
+                  <p>
+                    <i class="fas fa-info-circle"></i>
+                    データは米国教育省 College Scorecard 提供。授業は英語で実施されます。
+                  </p>
+                </div>
+              </div>
+            <% else %>
+              <!-- No Data Card -->
+              <div class="major-card-wrapper">
+                <div class="major-card major-no-data">
+                  <i class="fas fa-graduation-cap"></i>
+                  <h3>専攻分野データ準備中</h3>
+                  <p>詳細な専攻分野データは近日追加予定です。</p>
+                </div>
+              </div>
+            <% end %>
           </div>
 
           <!-- Social Media Section -->
