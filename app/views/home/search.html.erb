@@ -32,6 +32,26 @@
       </div>
     </section>
 
+    <!-- Quick Links Bar -->
+    <div class="quick-links-bar">
+      <a href="/us/about" class="quick-link">
+        <i class="fas fa-book"></i>
+        <span>アメリカ留学について</span>
+      </a>
+      <a href="/ivy-league" class="quick-link">
+        <i class="fas fa-trophy"></i>
+        <span>Ivy League</span>
+      </a>
+      <a href="/states" class="quick-link">
+        <i class="fas fa-map-marked-alt"></i>
+        <span>州別ガイド</span>
+      </a>
+      <a href="/scholarships" class="quick-link">
+        <i class="fas fa-dollar-sign"></i>
+        <span>奨学金情報</span>
+      </a>
+    </div>
+
     <!-- Quick Search -->
     <section class="section-wrapper">
       <div class="section-content">
@@ -287,6 +307,62 @@
   margin: 0;
   padding: 0;
   background: #ffffff;
+}
+
+/* Quick Links Bar */
+.quick-links-bar {
+  background: #fafafa;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  transition: all 0.2s ease;
+}
+
+.quick-link:hover {
+  border-color: rgb(240, 177, 61);
+  color: rgb(200, 140, 40);
+}
+
+.quick-link i {
+  font-size: 14px;
+  color: rgb(200, 140, 40);
+}
+
+@media (max-width: 768px) {
+  .quick-links-bar {
+    padding: 12px 16px;
+    gap: 6px;
+  }
+
+  .quick-link {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .quick-link span {
+    display: none;
+  }
+
+  .quick-link i {
+    font-size: 16px;
+  }
 }
 
 /* Hero Section */
@@ -898,88 +974,104 @@ document.getElementById('search-button').addEventListener('click', function () {
 });
 
 // Floating Search Button機能
-const floatingButton = document.getElementById('floating-search-button');
-const floatingTrigger = document.getElementById('floating-search-trigger');
-const filterCountEl = document.getElementById('filter-count');
+function initFloatingSearchButton() {
+  const floatingButton = document.getElementById('floating-search-button');
+  const floatingTrigger = document.getElementById('floating-search-trigger');
+  const filterCountEl = document.getElementById('filter-count');
 
-// フィルターの変更をカウントする関数
-function countActiveFilters() {
-  let count = 0;
+  // 要素が存在しない場合は終了
+  if (!floatingButton || !floatingTrigger || !filterCountEl) return;
 
-  // 州の選択
-  const stateSelect = document.getElementById('stateSelect');
-  if (stateSelect.value !== '指定しない') count++;
+  // 既に初期化済みの場合はスキップ
+  if (floatingButton.dataset.initialized === 'true') return;
+  floatingButton.dataset.initialized = 'true';
 
-  // 大学タイプ（デフォルトはoption1）
-  const typeRadio = document.querySelector('input[name="exampleRadios"]:checked');
-  if (typeRadio && typeRadio.value !== 'option1') count++;
+  // フィルターの変更をカウントする関数
+  function countActiveFilters() {
+    let count = 0;
 
-  // 年間授業料（デフォルトはoption1）
-  const tuitionRadio = document.querySelector('input[name="tuitionRadios"]:checked');
-  if (tuitionRadio && tuitionRadio.value !== 'option1') count++;
+    // 州の選択
+    const stateEl = document.getElementById('stateSelect');
+    if (stateEl && stateEl.value !== '指定しない') count++;
 
-  // 学生数（チェックボックス）
-  const studentChecks = document.querySelectorAll('.filter-card input[type="checkbox"][id^="groupCheck"]:checked');
-  count += studentChecks.length;
+    // 大学タイプ（デフォルトはoption1）
+    const typeRadio = document.querySelector('input[name="exampleRadios"]:checked');
+    if (typeRadio && typeRadio.value !== 'option1') count++;
 
-  // SAT（デフォルトはoption1）
-  const satRadio = document.querySelector('input[name="satRadios"]:checked');
-  if (satRadio && satRadio.value !== 'option1') count++;
+    // 年間授業料（デフォルトはoption1）
+    const tuitionRadio = document.querySelector('input[name="tuitionRadios"]:checked');
+    if (tuitionRadio && tuitionRadio.value !== 'option1') count++;
 
-  // ACT（デフォルトはoption1）
-  const actRadio = document.querySelector('input[name="actRadios"]:checked');
-  if (actRadio && actRadio.value !== 'option1') count++;
+    // 学生数（チェックボックス）
+    const studentChecks = document.querySelectorAll('.filter-card input[type="checkbox"][id^="groupCheck"]:checked');
+    count += studentChecks.length;
 
-  // 卒業率（デフォルトはoption1）
-  const gradRadio = document.querySelector('input[name="graduationRadios"]:checked');
-  if (gradRadio && gradRadio.value !== 'option1') count++;
+    // SAT（デフォルトはoption1）
+    const satRadio = document.querySelector('input[name="satRadios"]:checked');
+    if (satRadio && satRadio.value !== 'option1') count++;
 
-  // 立地（チェックボックス）
-  const urbanChecks = document.querySelectorAll('input[id^="urbanCheck"]:checked');
-  count += urbanChecks.length;
+    // ACT（デフォルトはoption1）
+    const actRadio = document.querySelector('input[name="actRadios"]:checked');
+    if (actRadio && actRadio.value !== 'option1') count++;
 
-  // 専攻（チェックボックス）
-  const majorChecks = document.querySelectorAll('input[name="major"]:checked');
-  count += majorChecks.length;
+    // 卒業率（デフォルトはoption1）
+    const gradRadio = document.querySelector('input[name="graduationRadios"]:checked');
+    if (gradRadio && gradRadio.value !== 'option1') count++;
 
-  return count;
-}
+    // 立地（チェックボックス）
+    const urbanChecks = document.querySelectorAll('input[id^="urbanCheck"]:checked');
+    count += urbanChecks.length;
 
-// フローティングボタンの表示/非表示を更新
-function updateFloatingButton() {
-  const count = countActiveFilters();
-  filterCountEl.textContent = count;
+    // 専攻（チェックボックス）
+    const majorChecks = document.querySelectorAll('input[name="major"]:checked');
+    count += majorChecks.length;
 
-  if (count > 0) {
-    floatingButton.classList.add('visible');
-  } else {
-    floatingButton.classList.remove('visible');
+    return count;
   }
+
+  // フローティングボタンの表示/非表示を更新
+  function updateFloatingButton() {
+    const count = countActiveFilters();
+    filterCountEl.textContent = count;
+
+    if (count > 0) {
+      floatingButton.classList.add('visible');
+    } else {
+      floatingButton.classList.remove('visible');
+    }
+  }
+
+  // 全てのフィルター要素にイベントリスナーを追加
+  const stateSelectEl = document.getElementById('stateSelect');
+  if (stateSelectEl) stateSelectEl.addEventListener('change', updateFloatingButton);
+
+  document.querySelectorAll('.filter-card input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', updateFloatingButton);
+  });
+  document.querySelectorAll('.filter-card input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateFloatingButton);
+  });
+  document.querySelectorAll('.major-options input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateFloatingButton);
+  });
+
+  // フローティングボタンクリックで検索実行
+  floatingTrigger.addEventListener('click', function() {
+    document.getElementById('search-button').click();
+  });
+
+  // 初期状態をチェック
+  updateFloatingButton();
+
+  // ブラウザの戻るボタンで戻った時にもチェック（bfcache対応）
+  window.addEventListener('pageshow', updateFloatingButton);
+
+  // 念のため少し遅延してもチェック
+  setTimeout(updateFloatingButton, 100);
 }
 
-// 全てのフィルター要素にイベントリスナーを追加
-document.getElementById('stateSelect').addEventListener('change', updateFloatingButton);
-document.querySelectorAll('.filter-card input[type="radio"]').forEach(radio => {
-  radio.addEventListener('change', updateFloatingButton);
-});
-document.querySelectorAll('.filter-card input[type="checkbox"]').forEach(checkbox => {
-  checkbox.addEventListener('change', updateFloatingButton);
-});
-document.querySelectorAll('.major-options input[type="checkbox"]').forEach(checkbox => {
-  checkbox.addEventListener('change', updateFloatingButton);
-});
-
-// フローティングボタンクリックで検索実行
-floatingTrigger.addEventListener('click', function() {
-  document.getElementById('search-button').click();
-});
-
-// 初期状態をチェック
-updateFloatingButton();
-
-// ブラウザの戻るボタンで戻った時にもチェック（bfcache対応）
-window.addEventListener('pageshow', updateFloatingButton);
-
-// 念のため少し遅延してもチェック
-setTimeout(updateFloatingButton, 100);
+// DOMContentLoadedとturbo:loadの両方で初期化
+document.addEventListener('DOMContentLoaded', initFloatingSearchButton);
+document.addEventListener('turbo:load', initFloatingSearchButton);
+document.addEventListener('turbolinks:load', initFloatingSearchButton);
 </script>
