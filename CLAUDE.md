@@ -86,3 +86,52 @@ Condition.where(carnegie_basic: 15..23)
    - 「〇〇 State College」→「〇〇ステートカレッジ」または「〇〇州立カレッジ」
    - 例外：日本で別の呼び方が定着している場合はそれに従う
 3. **保存**: `UniversityTranslation.create(condition_id: id, locale: 'ja', name: "...")`
+
+## コメント・日本語訳の本番デプロイ手順
+
+ローカルで追加したコメント・日本語訳を本番環境（Render）に反映する手順。
+
+### 1. ローカルDBからJSONにエクスポート
+```ruby
+rails runner '
+require "json"
+
+# コメントデータをエクスポート
+comments = {}
+Condition.where.not(comment: [nil, ""]).each do |c|
+  comments[c.college] = c.comment
+end
+File.write("db/seeds/comments_data.json", JSON.pretty_generate(comments))
+puts "コメント: #{comments.count}件をエクスポート"
+
+# 翻訳データをエクスポート
+translations = []
+UniversityTranslation.where(locale: "ja").each do |t|
+  condition = Condition.find_by(id: t.condition_id)
+  next unless condition
+  translations << {
+    college: condition.college,
+    locale: t.locale,
+    name: t.name
+  }
+end
+File.write("db/seeds/translations_data.json", JSON.pretty_generate(translations))
+puts "翻訳: #{translations.count}件をエクスポート"
+'
+```
+
+### 2. GitにコミットしてRenderにプッシュ
+```bash
+git add db/seeds/comments_data.json db/seeds/translations_data.json
+git commit -m "data: コメント・日本語訳データ更新"
+git push
+```
+
+### 3. Renderのシェルでインポート実行
+1. Renderダッシュボード → サービス → Shellタブを開く
+2. デプロイ完了後、以下を実行：
+```bash
+bundle exec rails data:import_all
+```
+
+これでコメントと日本語訳が本番DBにインポートされる。

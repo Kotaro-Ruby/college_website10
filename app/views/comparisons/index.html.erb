@@ -1,603 +1,641 @@
-<div class="compare-container">
-  <div class="compare-header">
-    <h1 class="page-title">
-      <i class="fas fa-balance-scale"></i>
-      大学比較
-    </h1>
-    <p class="page-subtitle">選択した大学を並べて比較できます（最大4校まで）</p>
-    
-    <% if @colleges.any? %>
-      <div class="compare-actions">
-        <button id="clearAllBtn" class="clear-btn">
-          <i class="fas fa-times-circle"></i>
-          すべてクリア
-        </button>
-        <a href="/" class="add-more-btn">
-          <i class="fas fa-plus"></i>
-          大学を追加
-        </a>
+<div class="main">
+  <div class="professional-info-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">大学比較</h1>
+        <p class="hero-subtitle">Compare Universities</p>
+        <div class="hero-divider"></div>
       </div>
-    <% end %>
-  </div>
+    </section>
 
-  <% if @colleges.any? %>
-    <div class="comparison-table">
-      <div class="colleges-grid" style="grid-template-columns: repeat(<%= @colleges.length %>, 1fr);">
-        <% @colleges.each do |college| %>
-          <div class="college-column">
-            <!-- 大学名ヘッダー -->
-            <div class="college-header">
-              <h3 class="college-name">
-                <a href="<%= conditions_path(college) %>" class="college-link">
-                  <%= college.name_ja.presence || college.college %>
-                  <% if college.name_ja.present? %>
-                    <span class="college-english-name"><%= college.college %></span>
-                  <% end %>
-                </a>
-              </h3>
-              <button class="remove-college-btn" data-condition-id="<%= college.id %>">
-                <i class="fas fa-times"></i>
+    <% if @colleges.any? %>
+      <!-- Actions -->
+      <section class="section-wrapper">
+        <div class="section-content">
+          <div class="compare-actions">
+            <span class="compare-count"><%= @colleges.count %>校を比較中</span>
+            <div class="action-buttons">
+              <a href="/search" class="action-btn add-btn">
+                <i class="fas fa-plus"></i>
+                大学を追加
+              </a>
+              <button id="clearAllBtn" class="action-btn clear-btn">
+                <i class="fas fa-trash-alt"></i>
+                すべてクリア
               </button>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <!-- 基本情報 -->
-            <div class="compare-section">
-              <h4>基本情報</h4>
-              <div class="compare-item">
-                <span class="label">所在地</span>
-                <span class="value"><%= college.city %>, <%= college.state.gsub(/\s*\(.*?\)/, '') if college.state %></span>
-              </div>
-              <div class="compare-item">
-                <span class="label">設立形態</span>
-                <span class="value"><%= college.privateorpublic || "N/A" %></span>
-              </div>
-              <% if college.website.present? %>
-                <div class="compare-item">
-                  <span class="label">ウェブサイト</span>
-                  <span class="value">
+      <!-- Comparison Grid -->
+      <section class="section-wrapper comparison-section-bg">
+        <div class="section-content-wide">
+          <div class="comparison-grid colleges-<%= @colleges.count %>">
+            <% @colleges.each do |college| %>
+              <div class="college-card">
+                <!-- Header -->
+                <div class="college-header">
+                  <h3 class="college-name">
+                    <a href="<%= conditions_path(college) %>">
+                      <%= college.name_ja.presence || college.college %>
+                    </a>
+                  </h3>
+                  <% if college.name_ja.present? %>
+                    <p class="college-english"><%= college.college %></p>
+                  <% end %>
+                  <button class="remove-btn" data-condition-id="<%= college.id %>" title="削除">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+
+                <!-- Location -->
+                <div class="info-section">
+                  <div class="info-row">
+                    <span class="info-label"><i class="fas fa-map-marker-alt"></i> 所在地</span>
+                    <span class="info-value"><%= college.city %>, <%= college.state.gsub(/\s*\(.*?\)/, '') if college.state %></span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label"><i class="fas fa-building"></i> 設立形態</span>
+                    <span class="info-value"><%= college.privateorpublic || "N/A" %></span>
+                  </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="info-section">
+                  <h4 class="section-title">統計情報</h4>
+                  <div class="stats-grid">
+                    <div class="stat-item">
+                      <span class="stat-value"><%= college.students ? number_with_delimiter(college.students) : "N/A" %></span>
+                      <span class="stat-label">学生数</span>
+                    </div>
+                    <div class="stat-item">
+                      <span class="stat-value"><%= college.acceptance_rate ? "#{(college.acceptance_rate * 100).round}%" : "N/A" %></span>
+                      <span class="stat-label">合格率</span>
+                    </div>
+                    <div class="stat-item">
+                      <span class="stat-value"><%= college.graduation_rate ? "#{(college.graduation_rate * 100).round}%" : "N/A" %></span>
+                      <span class="stat-label">卒業率</span>
+                    </div>
+                    <div class="stat-item">
+                      <span class="stat-value"><%= college.tuition ? "$#{number_with_delimiter(college.tuition)}" : "N/A" %></span>
+                      <span class="stat-label">年間授業料</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="info-section">
+                  <div class="info-row">
+                    <span class="info-label">平均GPA</span>
+                    <span class="info-value"><%= college.GPA || "N/A" %></span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">NCAA Division</span>
+                    <span class="info-value"><%= college.Division || "N/A" %></span>
+                  </div>
+                </div>
+
+                <% if college.comment.present? %>
+                  <div class="info-section comment-section">
+                    <h4 class="section-title">特徴</h4>
+                    <p class="college-comment"><%= truncate(college.comment, length: 200) %></p>
+                  </div>
+                <% end %>
+
+                <!-- Footer -->
+                <div class="card-footer">
+                  <a href="<%= conditions_path(college) %>" class="detail-link">
+                    詳細を見る <i class="fas fa-arrow-right"></i>
+                  </a>
+                  <% if college.website.present? %>
                     <% url = college.website.gsub(/\/$/, '') %>
                     <% href_url = url.match?(/^https?:\/\//) ? url : "https://#{url}" %>
-                    <a href="<%= href_url %>" target="_blank" class="website-link">サイトを見る</a>
-                  </span>
-                </div>
-              <% end %>
-            </div>
-
-            <!-- 統計情報 -->
-            <div class="compare-section">
-              <h4>統計情報</h4>
-              <div class="compare-item">
-                <span class="label">学生数</span>
-                <span class="value number"><%= college.students ? number_with_delimiter(college.students) : "N/A" %></span>
-              </div>
-              <div class="compare-item">
-                <span class="label">合格率</span>
-                <span class="value number">
-                  <%= college.acceptance_rate ? "#{(college.acceptance_rate * 100).round}%" : "N/A" %>
-                </span>
-              </div>
-              <div class="compare-item">
-                <span class="label">卒業率</span>
-                <span class="value number">
-                  <%= college.graduation_rate ? "#{(college.graduation_rate * 100).round}%" : "N/A" %>
-                </span>
-              </div>
-              <div class="compare-item">
-                <span class="label">平均GPA</span>
-                <span class="value number"><%= college.GPA || "N/A" %></span>
-              </div>
-            </div>
-
-            <!-- 費用情報 -->
-            <div class="compare-section">
-              <h4>費用情報</h4>
-              <div class="compare-item">
-                <span class="label">年間授業料</span>
-                <span class="value number">
-                  <%= college.tuition ? "$#{number_with_delimiter(college.tuition)}" : "N/A" %>
-                </span>
-              </div>
-            </div>
-
-            <!-- その他 -->
-            <div class="compare-section">
-              <h4>その他</h4>
-              <div class="compare-item">
-                <span class="label">NCAA Division</span>
-                <span class="value"><%= college.Division || "N/A" %></span>
-              </div>
-            </div>
-
-            <!-- コメント -->
-            <% if college.comment.present? %>
-              <div class="compare-section">
-                <h4>特徴</h4>
-                <div class="college-comment">
-                  <%= truncate(college.comment, length: 150) %>
+                    <a href="<%= href_url %>" target="_blank" class="website-link">
+                      <i class="fas fa-external-link-alt"></i> 公式サイト
+                    </a>
+                  <% end %>
                 </div>
               </div>
             <% end %>
-
-            <!-- アクションボタン -->
-            <div class="college-actions">
-              <a href="<%= conditions_path(college) %>" class="detail-btn">
-                <i class="fas fa-info-circle"></i>
-                詳細を見る
-              </a>
-            </div>
           </div>
-        <% end %>
-      </div>
-    </div>
-  <% else %>
-    <div class="empty-state">
-      <div class="empty-icon">
-        <i class="fas fa-balance-scale"></i>
-      </div>
-      <h2>比較する大学がありません</h2>
-      <p>大学の詳細ページから「比較リストに追加」ボタンを押して、大学を比較リストに追加してください。</p>
-      <a href="/" class="search-btn">
-        <i class="fas fa-search"></i>
-        大学を探す
-      </a>
-    </div>
-  <% end %>
+        </div>
+      </section>
+
+    <% else %>
+      <!-- Empty State -->
+      <section class="section-wrapper">
+        <div class="section-content">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <h2>比較する大学がありません</h2>
+            <p>大学の詳細ページから「比較リストに追加」ボタンを押して、<br>大学を比較リストに追加してください。</p>
+            <a href="/search" class="search-btn">
+              <i class="fas fa-search"></i>
+              大学を探す
+            </a>
+          </div>
+        </div>
+      </section>
+    <% end %>
+  </div>
 </div>
 
 <style>
-  body {
-    background: linear-gradient(135deg, #fef3e2 0%, #fed7aa 30%, #fcd8a0 70%, #f3d0a0 100%);
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+  /* Container */
+  .professional-info-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
   }
 
-  .compare-container {
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: rgb(200, 140, 40);
+    margin: 25px auto 0;
+  }
+
+  /* Section Wrapper */
+  .section-wrapper {
+    padding: 30px 20px;
+  }
+
+  .section-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-content-wide {
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .comparison-section-bg {
+    background: #f5f5f5;
     padding: 40px 20px;
   }
 
-  .compare-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2d3748;
-    margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .page-title i {
-    color: #4a9eff;
-    margin-right: 12px;
-  }
-
-  .page-subtitle {
-    font-size: 1.1rem;
-    color: #6b7280;
-    margin: 0 0 30px 0;
-  }
-
+  /* Actions */
   .compare-actions {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 16px;
-    justify-content: center;
-    margin-bottom: 20px;
   }
 
-  .clear-btn, .add-more-btn {
+  .compare-count {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .action-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .add-btn {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .add-btn:hover {
+    background: #333;
+    color: white;
   }
 
   .clear-btn {
-    background: #ef4444;
-    color: white;
-    border: none;
-    cursor: pointer;
+    background: white;
+    color: #666;
+    border: 1px solid #ddd;
   }
 
   .clear-btn:hover {
-    background: #dc2626;
-    transform: translateY(-1px);
+    background: #fee;
+    color: #c00;
+    border-color: #fcc;
   }
 
-  .add-more-btn {
-    background: linear-gradient(135deg, #fdba74, #fb923c);
-    color: white;
-  }
-
-  .add-more-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
-    color: white;
-  }
-
-  .comparison-table {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 40px;
-  }
-
-  .colleges-grid {
+  /* Comparison Grid */
+  .comparison-grid {
     display: grid;
-    gap: 1px;
-    background: #e5e7eb;
+    gap: 24px;
   }
 
-  .college-column {
+  .colleges-1 { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .colleges-2 { grid-template-columns: repeat(2, 1fr); }
+  .colleges-3 { grid-template-columns: repeat(3, 1fr); }
+  .colleges-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* College Card */
+  .college-card {
     background: white;
-    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
 
   .college-header {
-    background: linear-gradient(135deg, #fdba74, #fb923c);
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
   }
 
   .college-name {
-    margin: 0;
-    font-size: 1.25rem;
+    font-size: 18px;
     font-weight: 600;
-    flex: 1;
-    margin-right: 12px;
-    line-height: 1.3;
+    margin: 0 0 4px 0;
+    padding-right: 40px;
+    line-height: 1.4;
   }
 
-  .college-name .college-english-name {
-    display: block;
-    font-size: 11px;
-    font-weight: 400;
-    opacity: 0.8;
-    margin-top: 4px;
-  }
-
-  .college-link {
-    color: white;
+  .college-name a {
+    color: #1a1a1a;
     text-decoration: none;
-    transition: opacity 0.3s ease;
+    transition: color 0.2s;
   }
 
-  .college-link:hover {
-    opacity: 0.8;
-    color: white;
+  .college-name a:hover {
+    color: rgb(200, 140, 40);
   }
 
-  .remove-college-btn {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+  .college-english {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+    padding-right: 40px;
+  }
+
+  .remove-btn {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
     border: none;
-    width: 32px;
-    height: 32px;
+    background: #f5f5f5;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+    color: #999;
+    transition: all 0.2s;
   }
 
-  .remove-college-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+  .remove-btn:hover {
+    background: #fee;
+    color: #c00;
   }
 
-  .compare-section {
-    padding: 24px 20px;
-    border-bottom: 1px solid #f3f4f6;
+  /* Info Section */
+  .info-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
   }
 
-  .compare-section:last-child {
+  .info-section:last-of-type {
     border-bottom: none;
   }
 
-  .compare-section h4 {
-    font-size: 1rem;
+  .section-title {
+    font-size: 13px;
     font-weight: 600;
-    color: #374151;
-    margin: 0 0 16px 0;
-    font-family: 'Poppins', sans-serif;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #fdba74;
-  }
-
-  .compare-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-
-  .compare-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .compare-item .label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #6b7280;
+    color: #888;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    margin: 0 0 12px 0;
   }
 
-  .compare-item .value {
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .info-label {
+    font-size: 13px;
+    color: #666;
+  }
+
+  .info-label i {
+    margin-right: 6px;
+    color: rgb(200, 140, 40);
+    width: 14px;
+  }
+
+  .info-value {
     font-size: 14px;
-    color: #374151;
     font-weight: 500;
+    color: #1a1a1a;
   }
 
-  .compare-item .value.number {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #fb923c;
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
-  .website-link {
-    color: #4a9eff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 12px;
+  .stat-item {
+    text-align: center;
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 6px;
   }
 
-  .website-link:hover {
-    color: #3b82f6;
+  .stat-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(200, 140, 40);
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* Comment */
+  .comment-section {
+    flex: 1;
   }
 
   .college-comment {
-    background: #fef7ed;
-    padding: 12px;
-    border-radius: 8px;
     font-size: 13px;
-    color: #9a3412;
-    line-height: 1.5;
-    border-left: 3px solid #fdba74;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
   }
 
-  .college-actions {
-    padding: 20px;
-    background: #f9fafb;
+  /* Card Footer */
+  .card-footer {
+    padding: 16px 20px;
+    background: #fafafa;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: auto;
   }
 
-  .detail-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: linear-gradient(135deg, #fdba74, #fb923c);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
+  .detail-link {
     font-size: 13px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    width: 100%;
-    justify-content: center;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .detail-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
-    color: white;
+  .detail-link:hover {
+    color: rgb(200, 140, 40);
   }
 
-  /* 空の状態 */
+  .detail-link i {
+    margin-left: 4px;
+    font-size: 11px;
+  }
+
+  .website-link {
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .website-link:hover {
+    color: rgb(200, 140, 40);
+  }
+
+  /* Empty State */
   .empty-state {
     text-align: center;
-    padding: 80px 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 80px 40px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
   }
 
   .empty-icon {
-    font-size: 4rem;
-    color: #d1d5db;
+    font-size: 48px;
+    color: #ddd;
     margin-bottom: 24px;
   }
 
   .empty-state h2 {
-    font-size: 1.5rem;
-    color: #2d3748;
-    margin-bottom: 12px;
-    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
   }
 
   .empty-state p {
-    color: #6b7280;
-    margin-bottom: 32px;
-    line-height: 1.6;
+    font-size: 15px;
+    color: #666;
+    line-height: 1.7;
+    margin: 0 0 32px 0;
   }
 
   .search-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #fdba74, #fb923c);
+    padding: 14px 28px;
+    background: #1a1a1a;
     color: white;
     text-decoration: none;
-    border-radius: 12px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
   }
 
   .search-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(251, 146, 60, 0.4);
+    background: #333;
     color: white;
   }
 
-  /* レスポンシブ */
+  /* Responsive */
   @media (max-width: 1200px) {
-    .colleges-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
+    .colleges-3,
+    .colleges-4 {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 768px) {
-    .compare-container {
-      padding: 20px 15px;
+    .hero-title {
+      font-size: 32px;
     }
 
-    .page-title {
-      font-size: 2rem;
+    .hero-section {
+      padding: 50px 20px;
     }
 
-    .colleges-grid {
+    .comparison-grid {
       grid-template-columns: 1fr !important;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .compare-actions {
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
+      text-align: center;
     }
 
-    .clear-btn, .add-more-btn {
-      width: 200px;
+    .action-buttons {
       justify-content: center;
     }
 
     .empty-state {
       padding: 60px 20px;
     }
+
+    .empty-state p br {
+      display: none;
+    }
   }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // 大学削除ボタンのイベントリスナー
-    document.querySelectorAll('.remove-college-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const conditionId = this.getAttribute('data-condition-id');
-        const collegeColumn = this.closest('.college-column');
-        
-        if (confirm('この大学を比較リストから削除しますか？')) {
-          fetch('/compare', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({
-              condition_id: conditionId
-            })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 'success') {
-              // カラムをフェードアウトして削除
-              collegeColumn.style.transition = 'all 0.3s ease';
-              collegeColumn.style.opacity = '0';
-              collegeColumn.style.transform = 'translateY(-20px)';
-              
-              setTimeout(() => {
-                location.reload(); // 簡易実装：ページをリロード
-              }, 300);
-              
-              // showNotification(data.message, 'success');
-            } else {
-              showNotification(data.message, 'error');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            showNotification('エラーが発生しました', 'error');
-          });
-        }
-      });
-    });
-    
-    // 全クリアボタンのイベントリスナー
-    const clearAllBtn = document.getElementById('clearAllBtn');
-    if (clearAllBtn) {
-      clearAllBtn.addEventListener('click', function() {
-        if (confirm('比較リストをすべてクリアしますか？')) {
-          fetch('/compare/clear', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 'success') {
-              location.reload();
-              // showNotification(data.message, 'success');
-            } else {
-              showNotification(data.message, 'error');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            showNotification('エラーが発生しました', 'error');
-          });
-        }
-      });
-    }
-    
-    // 通知メッセージ表示
-    function showNotification(message, type) {
-      const notification = document.createElement('div');
-      notification.className = `notification ${type}`;
-      notification.textContent = message;
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 12px 24px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 600;
-        z-index: 10000;
-        font-family: 'Inter', sans-serif;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-        ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
-      `;
-      
-      document.body.appendChild(notification);
-      
-      // フェードイン
-      setTimeout(() => {
-        notification.style.opacity = '1';
-        notification.style.transform = 'translateY(0)';
-      }, 100);
-      
-      // 3秒後に削除
-      setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateY(-20px)';
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove college
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const conditionId = this.getAttribute('data-condition-id');
+      const card = this.closest('.college-card');
+
+      if (confirm('この大学を比較リストから削除しますか？')) {
+        fetch('/compare', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ condition_id: conditionId })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            card.style.transition = 'all 0.2s';
+            setTimeout(() => location.reload(), 200);
           }
-        }, 300);
-      }, 3000);
-    }
+        })
+        .catch(error => console.error('Error:', error));
+      }
+    });
   });
+
+  // Clear all
+  const clearAllBtn = document.getElementById('clearAllBtn');
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', function() {
+      if (confirm('比較リストをすべてクリアしますか？')) {
+        fetch('/compare/clear', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            location.reload();
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      }
+    });
+  }
+});
+
+// Turbo対応
+document.addEventListener('turbo:load', function() {
+  // 同じイベントハンドラを再設定
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const conditionId = this.getAttribute('data-condition-id');
+      const card = this.closest('.college-card');
+
+      if (confirm('この大学を比較リストから削除しますか？')) {
+        fetch('/compare', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ condition_id: conditionId })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            card.style.transition = 'all 0.2s';
+            setTimeout(() => location.reload(), 200);
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      }
+    });
+  });
+});
 </script>

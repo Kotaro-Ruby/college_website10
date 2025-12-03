@@ -4,31 +4,47 @@ class ConditionsController < ApplicationController
     Rails.logger.debug("Results action called with params: #{params.inspect}")
     scope = Condition.all
 
-    # 大学名検索の処理
+    # 大学名検索の処理（英語名・日本語名・都市名対応）
     if params[:college_name].present?
-      college_name = params[:college_name].strip.downcase
+      query = params[:college_name].strip
+      query_lower = query.downcase
 
-      # 複数の検索パターンを試す
-      search_patterns = [
-        college_name,                           # 完全一致
-        college_name.gsub(/[^a-z0-9\s]/, ""),   # 特殊文字を削除
-        college_name.gsub(/\s+/, ""),           # スペースを削除
-        college_name.split.join("%")            # 単語間に%を挿入
-      ]
+      # 日本語かどうか判定
+      is_japanese = query.match?(/\p{Hiragana}|\p{Katakana}|\p{Han}/)
 
-      # 各パターンでOR検索
-      conditions = search_patterns.map do |pattern|
-        "LOWER(REPLACE(college, ' ', '')) LIKE ?"
-      end.join(" OR ")
+      if is_japanese
+        # 日本語名で検索
+        translation_ids = UniversityTranslation
+          .where(locale: "ja")
+          .where("LOWER(name) LIKE ?", "%#{query_lower}%")
+          .pluck(:condition_id)
 
-      search_values = search_patterns.map { |pattern| "%#{pattern.gsub(/\s+/, '')}%" }
+        if translation_ids.any?
+          scope = scope.where(id: translation_ids)
+        else
+          # 該当なしの場合は空の結果を返す
+          scope = scope.none
+        end
+      else
+        # 英語検索（大学名のみ）
+        search_patterns = [
+          query_lower,
+          query_lower.gsub(/[^a-z0-9\s]/, ""),
+          query_lower.gsub(/\s+/, ""),
+          query_lower.split.join("%")
+        ]
 
-      scope = scope.where(conditions, *search_values)
-      Rails.logger.debug("College name search: #{college_name}")
-      Rails.logger.debug("Search patterns: #{search_patterns}")
+        # 大学名での検索条件
+        college_conditions = search_patterns.map do |pattern|
+          "LOWER(REPLACE(college, ' ', '')) LIKE ?"
+        end.join(" OR ")
+        college_values = search_patterns.map { |pattern| "%#{pattern.gsub(/\s+/, '')}%" }
+
+        scope = scope.where(college_conditions, *college_values)
+      end
+
+      Rails.logger.debug("College name search: #{query} (Japanese: #{is_japanese})")
       Rails.logger.debug("Generated SQL Query: #{scope.to_sql}")
-
-      # 大学名検索でも最後のページネーション処理を通すため、returnを削除
     end
 
     # State の処理（大学名検索の場合はスキップ）
@@ -269,6 +285,61 @@ class ConditionsController < ApplicationController
     Rails.logger.debug("Generated SQL Query: #{@results.to_sql}")
 
     render "results"
+  end
+
+  def autocomplete
+    query = params[:q].to_s.strip.downcase
+    return render json: [] if query.length < 2
+
+    # 検索結果を格納
+    results = []
+
+    # 英語名で検索（部分一致）
+    english_matches = Condition
+      .where("LOWER(college) LIKE ?", "%#{query}%")
+      .includes(:university_translations)
+      .limit(10)
+
+    english_matches.each do |college|
+      ja_name = college.university_translations.find { |t| t.locale == "ja" }&.name
+      results << {
+        id: college.id,
+        slug: college.slug,
+        name: college.college,
+        ja_name: ja_name,
+        city: college.city,
+        state: college.state,
+        match_type: "english"
+      }
+    end
+
+    # 日本語名で検索
+    if query.match?(/\p{Hiragana}|\p{Katakana}|\p{Han}/)
+      ja_matches = UniversityTranslation
+        .where(locale: "ja")
+        .where("LOWER(name) LIKE ?", "%#{query}%")
+        .includes(:condition)
+        .limit(10)
+
+      ja_matches.each do |translation|
+        next unless translation.condition
+        # 既に英語名検索で見つかっていたらスキップ
+        next if results.any? { |r| r[:id] == translation.condition.id }
+
+        results << {
+          id: translation.condition.id,
+          slug: translation.condition.slug,
+          name: translation.condition.college,
+          ja_name: translation.name,
+          city: translation.condition.city,
+          state: translation.condition.state,
+          match_type: "japanese"
+        }
+      end
+    end
+
+    # 最大10件に制限
+    render json: results.first(10)
   end
 
   def show

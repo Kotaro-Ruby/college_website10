@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   delete "/compare/clear", to: "comparisons#clear"
 
   get "/results", to: "conditions#results"
+  get "/api/colleges/autocomplete", to: "conditions#autocomplete"
 
   # 州別ガイドページ
   get "/states", to: "states#index"
