@@ -52,3 +52,37 @@
 - サーバー起動: `bundle exec rails server`
 - マイグレーション: `bundle exec rails db:migrate`
 - コンソール: `bundle exec rails console`
+
+## 大学コメント・日本語名追加の手順
+
+### 対象大学の抽出
+```ruby
+# 4年制大学（carnegie_basic 15-23）、私立or州立、コメントなし
+Condition.where(carnegie_basic: 15..23)
+         .where(privateorpublic: ['私立', '州立'])
+         .where('comment IS NULL OR comment = ?', '')
+         .order(:students)
+```
+
+### コメント追加の手順
+1. **情報収集**: 1校あたり10程度の英語のWebサイトを参照する
+   - 大学公式サイト、US News、Niche、Princeton Review、Wikipedia(英語版)など
+   - 日本語サイトは参照しない
+2. **コメント作成**: 自分の言葉でまとめる（直接引用は避ける）
+   - 具体的な数字やランキングを盛り込む
+   - 特徴的なプログラム、強み、ユニークな点を記載
+   - 4~5行ほどが推奨だが、長くても構わない（情報量重視）
+   
+3. **保存**: `Condition.find(id).update(comment: "...")`
+
+### 日本語名追加の手順
+1. **一般的な呼称を採用**する
+   - 「サザンカリフォルニア大学」ではなく「南カリフォルニア大学」
+   - 「北オハイオ大学」ではなく「オハイオノーザン大学」
+   - 方角の訳し方は、日本での一般的な呼び方に従う
+2. **CollegeとUniversityの訳し分け**
+   - 「〇〇 College」→「〇〇カレッジ」（例：Boston College → ボストンカレッジ）
+   - 「〇〇 University」→「〇〇大学」（例：Boston University → ボストン大学）
+   - 「〇〇 State College」→「〇〇ステートカレッジ」または「〇〇州立カレッジ」
+   - 例外：日本で別の呼び方が定着している場合はそれに従う
+3. **保存**: `UniversityTranslation.create(condition_id: id, locale: 'ja', name: "...")`
