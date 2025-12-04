@@ -109,7 +109,7 @@ translations = []
 UniversityTranslation.where(locale: "ja").each do |t|
   condition = Condition.find_by(id: t.condition_id)
   next unless condition
-  translations << {
+  translations << {さk
     college: condition.college,
     locale: t.locale,
     name: t.name

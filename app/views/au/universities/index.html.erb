@@ -3,7 +3,7 @@
   <div class="au-hero-section">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-badge">🇦🇺 G'day Mate!</div>
+      <div class="hero-badge">Australian Universities</div>
       <h1 class="hero-title">オーストラリア大学検索</h1>
       <p class="hero-subtitle">世界トップクラスの教育と素晴らしい生活環境</p>
       <div class="hero-stats">
@@ -328,35 +328,24 @@
 
 <style>
   .au-universities-page {
-    background: #f8fafb;
+    background: #f5f5f5;
     min-height: 100vh;
   }
 
-  /* Hero Section */
+  /* Hero Section - Professional Dark Theme */
   .au-hero-section {
     position: relative;
-    background: linear-gradient(135deg, #0052cc 0%, #0747a6 50%, #ffcd00 100%);
-    padding: 80px 20px 60px;
+    background: #1a1a1a;
+    padding: 60px 20px 50px;
     overflow: hidden;
   }
 
   .au-hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    display: none;
   }
 
   .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+    display: none;
   }
 
   .hero-content {
@@ -369,39 +358,39 @@
 
   .hero-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    background: transparent;
+    color: #888;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: none;
   }
 
   .hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: none;
+    color: white;
   }
 
   .hero-subtitle {
-    font-size: 1.3rem;
-    opacity: 0.95;
-    margin-bottom: 40px;
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 30px;
+    display: none;
   }
 
   .hero-stats {
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 50px;
     flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid #333;
   }
 
   .hero-stat {
@@ -410,257 +399,261 @@
 
   .stat-number {
     display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #ffcd00;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(200, 140, 40);
+    text-shadow: none;
   }
 
   .stat-text {
     display: block;
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-top: 5px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 4px;
+    color: #999;
   }
 
-  /* Quick Links Bar */
+  /* Quick Links Bar - Minimal */
   .quick-links-bar {
     background: white;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
-    border-bottom: 3px solid #ffcd00;
+    border-bottom: none;
   }
 
   .quick-link {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #0052cc;
+    color: #1a1a1a;
     text-decoration: none;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
   }
 
   .quick-link:hover {
-    background: #f0f7ff;
-    transform: translateY(-2px);
+    background: #f5f5f5;
+    border-color: #ccc;
+    transform: none;
   }
 
   .quick-link i {
-    font-size: 18px;
+    font-size: 14px;
+    color: rgb(200, 140, 40);
   }
 
   /* Main Container */
   .main-container {
-    max-width: 1400px;
-    margin: 40px auto;
+    max-width: 1300px;
+    margin: 30px auto;
     padding: 0 20px;
   }
-  
+
   /* Two Column Layout */
   .two-column-layout {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: 30px;
     align-items: start;
     position: relative;
   }
-  
+
   .two-column-layout .search-section {
     grid-column: 1 / -1;
     margin-bottom: 20px;
   }
-  
+
   .two-column-layout .filters-section {
     position: sticky;
     position: -webkit-sticky;
-    top: 20px; /* ビューポート上部からの距離を増やす */
-    max-height: calc(100vh - 40px); /* 画面高さに応じて制限 */
-    overflow-y: auto; /* 必要に応じてスクロール */
-    overflow-x: hidden; /* 横スクロールを防ぐ */
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
     grid-column: 1;
-    z-index: 50; /* 適切なz-index */
-    align-self: start; /* グリッド内で上部に配置 */
+    z-index: 50;
+    align-self: start;
   }
-  
+
   /* スクロールバーのスタイリング */
   .two-column-layout .filters-section::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
-  
+
   .two-column-layout .filters-section::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 4px;
+    background: #f0f0f0;
+    border-radius: 3px;
   }
-  
+
   .two-column-layout .filters-section::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
+    background: #ccc;
+    border-radius: 3px;
   }
-  
+
   .two-column-layout .filters-section::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #aaa;
   }
-  
+
   .two-column-layout .results-section {
     grid-column: 2;
     min-height: 600px;
   }
 
-  /* Search Section */
+  /* Search Section - Clean Design */
   .search-section {
     background: white;
-    border-radius: 16px;
-    padding: 35px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
-    border: 2px solid #0052cc;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
   }
 
   .search-wrapper {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
   }
 
   .search-input-group {
     position: relative;
     display: flex;
-    gap: 15px;
+    gap: 12px;
   }
 
   .search-icon {
     position: absolute;
-    left: 20px;
+    left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: #0052cc;
-    font-size: 18px;
+    color: #888;
+    font-size: 16px;
   }
 
   .search-input {
     flex: 1;
-    padding: 15px 20px 15px 50px;
-    border: 2px solid #e6f2ff;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    padding: 12px 16px 12px 44px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.2s ease;
   }
 
   .search-input:focus {
     outline: none;
-    border-color: #0052cc;
-    box-shadow: 0 0 0 3px rgba(0,82,204,0.1);
+    border-color: #999;
+    box-shadow: none;
   }
 
   .search-button {
-    padding: 15px 40px;
-    background: linear-gradient(135deg, #0052cc 0%, #0747a6 100%);
+    padding: 12px 32px;
+    background: #1a1a1a;
     color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .search-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,82,204,0.3);
+    background: #333;
+    transform: none;
+    box-shadow: none;
   }
 
   .search-options {
-    margin-top: 20px;
+    margin-top: 16px;
     text-align: center;
   }
 
   .custom-checkbox {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     margin-right: 8px;
     vertical-align: middle;
   }
 
   .checkbox-label {
     font-weight: 500;
-    color: #4a5568;
+    color: #666;
   }
 
-  /* Filters Section */
+  /* Filters Section - Clean Design */
   .filters-section {
     background: white;
-    border-radius: 16px;
-    padding: 25px 20px 20px 20px;
-    box-shadow: 0 6px 30px rgba(0,82,204,0.12);
-    margin-bottom: 30px;
-    border: 1px solid rgba(0,82,204,0.08);
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+    transition: none;
     display: flex;
     flex-direction: column;
   }
-  
+
   .filters-section:hover {
-    box-shadow: 0 8px 40px rgba(0,82,204,0.15);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
-  
-  /* フィルターセクション内部のスクロール制御を削除 */
 
   .filters-header {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e6f2ff;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-shrink: 0; /* ヘッダーが縮まないようにする */
+    flex-shrink: 0;
   }
 
   .filters-header h3 {
-    color: #0052cc;
-    font-size: 1.1rem;
-    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 15px;
+    font-weight: 600;
     margin: 0;
     display: flex;
     align-items: center;
     gap: 8px;
-    white-space: nowrap; /* テキストの改行を防ぐ */
+    white-space: nowrap;
   }
-  
+
   .filters-header h3 i {
-    font-size: 16px;
-    color: #0747a6;
+    font-size: 14px;
+    color: rgb(200, 140, 40);
   }
-  
+
   .filters-toggle {
     background: none;
     border: none;
-    color: #0052cc;
-    font-size: 18px;
+    color: #666;
+    font-size: 16px;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    display: none; /* デスクトップでは非表示 */
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: none;
   }
-  
+
   .filters-toggle:hover {
-    background: #f0f7ff;
+    background: #f5f5f5;
   }
-  
+
   .filters-toggle i {
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
   }
-  
+
   .filters-section.collapsed .filters-toggle i {
     transform: rotate(-90deg);
   }
-  
+
   .filters-section.collapsed .filter-grid {
     display: none;
   }
@@ -668,57 +661,57 @@
   .filter-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    flex: 1; /* 残りのスペースを使用 */
-    min-height: 0; /* flexboxのオーバーフロー対策 */
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
   }
 
   .filter-item {
-    background: #f8fafb;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #e6f2ff;
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 6px;
+    border: 1px solid #f0f0f0;
     transition: all 0.2s ease;
   }
-  
+
   .filter-item:hover {
-    background: #f0f7ff;
-    border-color: #cbd5e1;
+    background: #f5f5f5;
+    border-color: #e5e5e5;
   }
 
   .filter-item label {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
-    color: #1a202c;
-    font-size: 14px;
+    color: #1a1a1a;
+    font-size: 13px;
   }
 
   .filter-item label i {
-    margin-right: 8px;
-    color: #0052cc;
-    font-size: 16px;
+    margin-right: 6px;
+    color: rgb(200, 140, 40);
+    font-size: 13px;
   }
 
   .filter-select,
   .filter-input-small {
     width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all 0.3s ease;
+    padding: 10px 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
     background: white;
     font-weight: 500;
-    color: #2d3748;
+    color: #1a1a1a;
   }
 
   .filter-select:focus,
   .filter-input-small:focus {
     outline: none;
-    border-color: #0052cc;
-    box-shadow: 0 0 0 4px rgba(0,82,204,0.1);
-    background: #fafbfc;
+    border-color: #999;
+    box-shadow: none;
+    background: white;
   }
 
   .filter-range {
@@ -748,12 +741,13 @@
   
   #tuition-range-display {
     font-weight: 700;
-    color: #0052cc;
-    background: linear-gradient(135deg, #e6f2ff, #f0f7ff);
+    color: #1a1a1a;
+    background: #f5f5f5;
     padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 6px;
+    font-size: 14px;
     display: inline-block;
+    border: 1px solid #e5e5e5;
   }
   
   .professional-slider-container {
@@ -781,12 +775,12 @@
   .slider-range {
     position: absolute;
     height: 6px;
-    background: linear-gradient(90deg, #0052cc, #0747a6);
+    background: rgb(200, 140, 40);
     border-radius: 3px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    box-shadow: 0 1px 3px rgba(0,82,204,0.3);
+    box-shadow: none;
   }
   
   .tuition-slider {
@@ -814,45 +808,45 @@
   .tuition-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ffffff, #f0f7ff);
-    border: 3px solid #0052cc;
+    background: white;
+    border: 2px solid #1a1a1a;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,82,204,0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     position: relative;
     z-index: 5;
     transition: all 0.2s ease;
     pointer-events: all;
-    margin-top: -9px; /* スライダーの線の中心に配置（微調整） */
+    margin-top: -9px;
   }
-  
+
   .tuition-slider::-webkit-slider-thumb:hover {
-    box-shadow: 0 4px 15px rgba(0,82,204,0.5);
-    transform: scale(1.15);
-    background: linear-gradient(135deg, #ffffff, #e6f2ff);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: scale(1.1);
+    background: white;
   }
-  
+
   .tuition-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ffffff, #f0f7ff);
-    border: 3px solid #0052cc;
+    background: white;
+    border: 2px solid #1a1a1a;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,82,204,0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     position: relative;
     z-index: 5;
     transition: all 0.2s ease;
     pointer-events: all;
-    margin-top: -9px; /* スライダーの線の中心に配置（微調整） */
+    margin-top: -9px;
   }
-  
+
   .tuition-slider::-moz-range-thumb:hover {
-    box-shadow: 0 4px 15px rgba(0,82,204,0.5);
-    transform: scale(1.15);
-    background: linear-gradient(135deg, #ffffff, #e6f2ff);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: scale(1.1);
+    background: white;
   }
   
   .tuition-slider::-webkit-slider-runnable-track {
@@ -925,34 +919,34 @@
   }
   
   .field-checkbox-label-sidebar:hover {
-    background: #f0f9ff;
-    border-color: #bfdbfe;
-    transform: translateX(2px);
+    background: #f5f5f5;
+    border-color: #ccc;
+    transform: none;
   }
-  
+
   .field-checkbox-label-sidebar:has(.field-checkbox-sidebar:checked) {
-    background: linear-gradient(to right, #f0f9ff, #ffffff);
-    border-color: #0052cc;
-    box-shadow: 0 2px 8px rgba(0,82,204,0.1);
+    background: #fafafa;
+    border-color: #1a1a1a;
+    box-shadow: none;
   }
-  
+
   .field-checkbox-sidebar {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-right: 10px;
     cursor: pointer;
-    accent-color: #0052cc;
+    accent-color: #1a1a1a;
   }
-  
+
   .field-text {
     flex: 1;
     color: #4a5568;
     font-weight: 500;
     transition: color 0.2s ease;
   }
-  
+
   .field-checkbox-sidebar:checked + .field-text {
-    color: #0052cc;
+    color: #1a1a1a;
     font-weight: 600;
   }
 
@@ -975,31 +969,31 @@
   }
 
   .results-count {
-    color: #0052cc;
+    color: rgb(200, 140, 40);
     font-weight: 800;
   }
-  
+
   .results-controls {
     display: flex;
     align-items: center;
     gap: 15px;
   }
-  
+
   .sort-select {
     padding: 8px 15px;
-    border: 2px solid #e6f2ff;
-    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
     font-size: 14px;
     background: white;
     color: #4a5568;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
-  
+
   .sort-select:focus {
     outline: none;
-    border-color: #0052cc;
-    box-shadow: 0 0 0 3px rgba(0,82,204,0.1);
+    border-color: #999;
+    box-shadow: none;
   }
 
   .view-options {
@@ -1022,7 +1016,7 @@
   }
 
   .view-option.active {
-    background: #0052cc;
+    background: #1a1a1a;
     color: white;
   }
 
@@ -1046,9 +1040,9 @@
   }
 
   .university-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-    border-color: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #ccc;
   }
 
   .card-image-slider {
@@ -1175,13 +1169,13 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: linear-gradient(135deg, #ffcd00 0%, #ffa000 100%);
-    color: #1a202c;
-    padding: 6px 12px;
-    border-radius: 6px;
+    background: rgb(200, 140, 40);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
     font-size: 11px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(255,205,0,0.3);
+    font-weight: 600;
+    box-shadow: none;
     z-index: 10;
   }
 
@@ -1204,7 +1198,7 @@
   }
 
   .university-name a:hover {
-    color: #0052cc;
+    color: rgb(200, 140, 40);
   }
 
   .university-location {
@@ -1233,15 +1227,15 @@
   }
 
   .stat-icon {
-    width: 40px;
-    height: 40px;
-    background: #f0f9ff;
-    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    background: #f5f5f5;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0052cc;
-    font-size: 16px;
+    color: #666;
+    font-size: 14px;
   }
 
   .stat-info {
@@ -1293,9 +1287,9 @@
   }
 
   .price-range {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    color: #0052cc;
+    color: #1a1a1a;
   }
 
   .no-data {
@@ -1381,13 +1375,13 @@
   }
 
   .action-btn.primary {
-    background: #0052cc;
+    background: #1a1a1a;
     color: white;
   }
 
   .action-btn.primary:hover {
-    background: #0747a6;
-    transform: translateY(-1px);
+    background: #333;
+    transform: none;
   }
 
   .action-btn.secondary {
