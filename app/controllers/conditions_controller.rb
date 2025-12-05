@@ -227,13 +227,15 @@ class ConditionsController < ApplicationController
         db_urbanicities = urbanicities.map do |urbanicity|
           case urbanicity
           when "大都市"
-            [ "11", "12", "13" ]  # 大都市関連のコード
-          when "都市部近郊"
-            [ "21", "22", "23" ]  # 都市部近郊関連のコード
-          when "小都市"
-            [ "31", "32", "33" ]  # 小都市関連のコード
+            [ "11" ]  # City: Large
+          when "中小都市"
+            [ "12", "13" ]  # City: Midsize/Small
+          when "郊外"
+            [ "21", "22", "23" ]  # Suburb
+          when "地方の町"
+            [ "31", "32", "33" ]  # Town
           when "田舎"
-            [ "41", "42", "43" ]  # 田舎関連のコード
+            [ "41", "42", "43" ]  # Rural
           else
             urbanicity
           end
