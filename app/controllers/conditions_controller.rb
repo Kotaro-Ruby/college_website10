@@ -278,6 +278,12 @@ class ConditionsController < ApplicationController
       Rails.logger.debug("Sorting by #{sort_column} #{sort_direction}")
     end
 
+    # 件数のみ返す場合（動的件数表示用）
+    if params[:count_only] == "true"
+      render json: { count: scope.count }
+      return
+    end
+
     # ページネーションの追加
     page = params[:page] || 1
     per_page = params[:per_page] || 20

@@ -298,7 +298,7 @@
 <div class="floating-search-button" id="floating-search-button">
   <button id="floating-search-trigger">
     <i class="fas fa-search"></i>
-    <span>検索</span>
+    <span class="result-count" id="result-count">検索</span>
     <span class="filter-count" id="filter-count">0</span>
   </button>
 </div>
@@ -1309,6 +1309,44 @@ function initFloatingSearchButton() {
     return count;
   }
 
+  // 件数取得用のデバウンスタイマー
+  let countFetchTimer = null;
+  const resultCountEl = document.getElementById('result-count');
+
+  // 現在の条件でサーバーから件数を取得
+  function fetchResultCount() {
+    const stateValue = document.getElementById('stateSelect').value;
+
+    const formData = {
+      state: stateValue,
+      privateorpublic: document.querySelector('input[name="exampleRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+      tuition: document.querySelector('input[name="tuitionRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+      students: Array.from(document.querySelectorAll('.filter-card input[type="checkbox"][id^="groupCheck"]:checked')).map(cb => cb.parentElement.querySelector('span')?.innerText.trim()).join(','),
+      sat_score: document.querySelector('input[name="satRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+      act_score: document.querySelector('input[name="actRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+      graduation_rate: document.querySelector('input[name="graduationRadios"]:checked')?.parentElement?.querySelector('span')?.innerText.trim(),
+      urbanicity: Array.from(document.querySelectorAll('input[id^="urbanCheck"]:checked')).map(cb => cb.value).join(','),
+      major: Array.from(document.querySelectorAll('input[name="major"]:checked')).map(cb => cb.value).filter(v => v !== "").join(','),
+      count_only: 'true'
+    };
+
+    const queryString = new URLSearchParams(formData).toString();
+
+    fetch(`/results?${queryString}`)
+      .then(response => response.json())
+      .then(data => {
+        if (resultCountEl) {
+          resultCountEl.textContent = `${data.count.toLocaleString()}校を検索`;
+        }
+      })
+      .catch(error => {
+        console.error('Count fetch error:', error);
+        if (resultCountEl) {
+          resultCountEl.textContent = '検索';
+        }
+      });
+  }
+
   // フローティングボタンの表示/非表示を更新
   function updateFloatingButton() {
     const count = countActiveFilters();
@@ -1316,8 +1354,14 @@ function initFloatingSearchButton() {
 
     if (count > 0) {
       floatingButton.classList.add('visible');
+      // デバウンス: 300ms後に件数取得
+      clearTimeout(countFetchTimer);
+      countFetchTimer = setTimeout(fetchResultCount, 300);
     } else {
       floatingButton.classList.remove('visible');
+      if (resultCountEl) {
+        resultCountEl.textContent = '検索';
+      }
     }
   }
 
