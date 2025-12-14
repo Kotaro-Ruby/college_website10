@@ -1035,35 +1035,106 @@
     .info-icon {
       margin-left: 8px;
       cursor: help;
-      color: #6b7280;
+      color: #999;
       transition: color 0.3s ease;
+      position: relative;
+      display: inline-block;
     }
 
     .info-icon:hover {
       color: #f0b13d;
     }
 
-    .chart-description {
-      margin-top: 12px;
-      padding: 12px 16px;
-      background: #f8f8f8;
+    .info-icon .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a1a;
+      color: white;
+      padding: 10px 14px;
       border-radius: 6px;
-      border-left: 3px solid rgb(240, 177, 61);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
+      width: 280px;
+      text-align: left;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: opacity 0.2s ease, visibility 0.2s ease;
     }
 
-    .chart-description p {
-      margin: 0;
-      font-size: 14px;
-      color: #666;
-      line-height: 1.5;
+    .info-icon .tooltip-text::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #1a1a1a transparent transparent transparent;
+    }
+
+    .info-icon:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .chart-description {
+      display: none;
     }
 
     .score-details {
       margin-top: 24px;
-      padding: 20px;
-      background: #f8f8f8;
       border-radius: 8px;
       border: 1px solid #e5e5e5;
+      overflow: hidden;
+    }
+
+    .score-details-toggle {
+      width: 100%;
+      padding: 14px 20px;
+      background: #f8f8f8;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      transition: all 0.2s ease;
+    }
+
+    .score-details-toggle:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+
+    .score-details-toggle i {
+      transition: transform 0.3s ease;
+      color: #999;
+    }
+
+    .score-details.open .score-details-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .score-details-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: white;
+    }
+
+    .score-details.open .score-details-content {
+      max-height: 500px;
+    }
+
+    .score-details-inner {
+      padding: 20px;
     }
 
     .score-explanation h4 {
@@ -1401,15 +1472,6 @@
         text-align: center;
       }
 
-      .chart-description {
-        margin-top: 16px;
-        padding: 16px;
-      }
-
-      .chart-description p {
-        font-size: 13px;
-        line-height: 1.6;
-      }
 
       .score-details {
         margin-top: 20px;
@@ -1608,16 +1670,6 @@
 
       .chart-title i {
         font-size: 1.1rem;
-      }
-
-      .chart-description {
-        margin-top: 12px;
-        padding: 12px;
-      }
-
-      .chart-description p {
-        font-size: 12px;
-        line-height: 1.5;
       }
 
       .score-details {
@@ -2211,27 +2263,34 @@
                       <h3 class="chart-title">
                         <i class="fas fa-chart-bar"></i>
                         SATスコア範囲（25th-75th percentile）
-                        <span class="info-icon" title="SATスコアの詳細情報">
+                        <span class="info-icon">
                           <i class="fas fa-info-circle"></i>
+                          <span class="tooltip-text">入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</span>
                         </span>
                       </h3>
-                      <div class="chart-description">
-                        <p>入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</p>
-                      </div>
                     </div>
                     <div class="chart-wrapper">
                       <canvas id="satChart"></canvas>
                     </div>
                     <div class="score-details">
-                      <div class="score-explanation">
-                        <h4>SATについて</h4>
-                        <ul>
-                          <li><strong>数学セクション:</strong> 200-800点（代数、幾何学、三角法、データ分析）</li>
-                          <li><strong>読解セクション:</strong> 200-800点（読解力、文法、語彙）</li>
-                          <li><strong>総合スコア:</strong> 400-1600点（数学+読解）</li>
-                          <li><strong>全米平均:</strong> 数学 520点、読解 530点、総合 1050点</li>
-                          <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
-                        </ul>
+                      <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                        <span>SATについて詳しく見る</span>
+                        <i class="fas fa-chevron-down"></i>
+                      </button>
+                      <div class="score-details-content">
+                        <div class="score-details-inner">
+                          <div class="score-explanation">
+                            <ul>
+                              <li><strong>数学セクション:</strong> 200-800点（代数、幾何学、三角法、データ分析）</li>
+                              <li><strong>読解セクション:</strong> 200-800点（読解力、文法、語彙）</li>
+                              <li><strong>総合スコア:</strong> 400-1600点（数学+読解）</li>
+                              <li><strong>全米平均:</strong> 数学 520点、読解 530点、総合 1050点</li>
+                              <li><strong>25th-75th percentile:</strong> 入学者の中央50%が取得したスコア範囲。25thは下位25%のライン、75thは上位25%のライン</li>
+                              <li><strong>目安:</strong> 75th percentile以上なら合格可能性が高い、25th percentile以下だと厳しい可能性</li>
+                              <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準線</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2243,29 +2302,36 @@
                       <h3 class="chart-title">
                         <i class="fas fa-chart-bar"></i>
                         ACTスコア範囲（25th-75th percentile）
-                        <span class="info-icon" title="ACTスコアの詳細情報">
+                        <span class="info-icon">
                           <i class="fas fa-info-circle"></i>
+                          <span class="tooltip-text">入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</span>
                         </span>
                       </h3>
-                      <div class="chart-description">
-                        <p>入学者の中央50%のスコア範囲。25th percentile：下位25%の学生のスコア、75th percentile：上位25%の学生のスコア</p>
-                      </div>
                     </div>
                     <div class="chart-wrapper">
                       <canvas id="actChart"></canvas>
                     </div>
                     <div class="score-details">
-                      <div class="score-explanation">
-                        <h4>ACTについて</h4>
-                        <ul>
-                          <li><strong>総合スコア:</strong> 1-36点（4つのセクションの平均）</li>
-                          <li><strong>英語セクション:</strong> 1-36点（文法、修辞技法）</li>
-                          <li><strong>数学セクション:</strong> 1-36点（代数、幾何学、三角法）</li>
-                          <li><strong>読解セクション:</strong> 1-36点（散文、人文科学、社会科学、自然科学）</li>
-                          <li><strong>科学セクション:</strong> 1-36点（データ解釈、研究要約、対立する視点）</li>
-                          <li><strong>全米平均:</strong> 約21点</li>
-                          <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
-                        </ul>
+                      <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                        <span>ACTについて詳しく見る</span>
+                        <i class="fas fa-chevron-down"></i>
+                      </button>
+                      <div class="score-details-content">
+                        <div class="score-details-inner">
+                          <div class="score-explanation">
+                            <ul>
+                              <li><strong>総合スコア:</strong> 1-36点（4つのセクションの平均値）</li>
+                              <li><strong>英語セクション:</strong> 1-36点（文法、修辞技法、文章構成）</li>
+                              <li><strong>数学セクション:</strong> 1-36点（代数、幾何学、三角法）</li>
+                              <li><strong>読解セクション:</strong> 1-36点（散文、人文科学、社会科学、自然科学の文章読解）</li>
+                              <li><strong>科学セクション:</strong> 1-36点（データ解釈、研究要約、対立する視点の分析）</li>
+                              <li><strong>全米平均:</strong> 約21点</li>
+                              <li><strong>25th-75th percentile:</strong> 入学者の中央50%が取得したスコア範囲</li>
+                              <li><strong>目安:</strong> 30点以上でトップ大学レベル、25点以上で上位校、20点前後が平均的</li>
+                              <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準線</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2296,27 +2362,34 @@
                     <h3 class="chart-title">
                       <i class="fas fa-dollar-sign"></i>
                       卒業後の年収推移
-                      <span class="info-icon" title="卒業後の収入データの詳細情報">
+                      <span class="info-icon">
                         <i class="fas fa-info-circle"></i>
+                        <span class="tooltip-text">この大学の卒業生の年収中央値。6年後は入学から6年経過時点、10年後は入学から10年経過時点の収入を示しています</span>
                       </span>
                     </h3>
-                    <div class="chart-description">
-                      <p>この大学の卒業生の年収中央値。6年後は入学から6年経過時点、10年後は入学から10年経過時点の収入を示しています</p>
-                    </div>
                   </div>
                   <div class="chart-wrapper">
                     <canvas id="earningsChart"></canvas>
                   </div>
                   <div class="score-details">
-                    <div class="score-explanation">
-                      <h4>収入データについて</h4>
-                      <ul>
-                        <li><strong>6年後収入:</strong> 入学から6年後の年収中央値（多くの場合、卒業から2年後）</li>
-                        <li><strong>10年後収入:</strong> 入学から10年後の年収中央値（多くの場合、卒業から6年後）</li>
-                        <li><strong>データ元:</strong> 連邦政府の税務・学生ローンデータに基づく</li>
-                        <li><strong>全米平均（学士号）:</strong> 6年後 約$35,000、10年後 約$45,000</li>
-                        <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準</li>
-                      </ul>
+                    <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                      <span>収入データについて詳しく見る</span>
+                      <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="score-details-content">
+                      <div class="score-details-inner">
+                        <div class="score-explanation">
+                          <ul>
+                            <li><strong>6年後収入:</strong> 入学から6年後の年収中央値（多くの場合、卒業から2年後の収入）</li>
+                            <li><strong>10年後収入:</strong> 入学から10年後の年収中央値（多くの場合、卒業から6年後の収入）</li>
+                            <li><strong>データ元:</strong> 米国教育省のCollege Scorecard、連邦政府の税務・学生ローンデータに基づく</li>
+                            <li><strong>全米平均（学士号）:</strong> 6年後 約$35,000、10年後 約$45,000</li>
+                            <li><strong>注意点:</strong> 専攻分野によって大きく異なる（工学・CS系は高め、芸術・教育系は低め）</li>
+                            <li><strong>中央値とは:</strong> 全卒業生を収入順に並べた時の真ん中の値。極端な高収入者に影響されにくい</li>
+                            <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準線</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2347,26 +2420,33 @@
                       <h3 class="chart-title">
                         <i class="fas fa-chart-pie"></i>
                         経済援助利用状況
-                        <span class="info-icon" title="経済援助の詳細情報">
+                        <span class="info-icon">
                           <i class="fas fa-info-circle"></i>
+                          <span class="tooltip-text">学生の経済援助利用率。Pell Grantは低所得世帯向け、Federal Loanは連邦学生ローンの利用率を示します</span>
                         </span>
                       </h3>
-                      <div class="chart-description">
-                        <p>学生の経済援助利用率。Pell Grantは低所得世帯向け、Federal Loanは連邦学生ローンの利用率を示します</p>
-                      </div>
                     </div>
                     <div class="chart-wrapper">
                       <canvas id="financialAidChart"></canvas>
                     </div>
                     <div class="score-details">
-                      <div class="score-explanation">
-                        <h4>経済援助について</h4>
-                        <ul>
-                          <li><strong>Pell Grant:</strong> 返済不要の連邦政府奨学金（年収約$50,000以下の世帯が対象）</li>
-                          <li><strong>Federal Loan:</strong> 連邦学生ローン（低金利で返済条件が良い）</li>
-                          <li><strong>全米平均:</strong> Pell Grant 約35%、Federal Loan 約50%</li>
-                          <li><strong>高い利用率:</strong> 経済的に多様な学生が在籍していることを示す</li>
-                        </ul>
+                      <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                        <span>経済援助について詳しく見る</span>
+                        <i class="fas fa-chevron-down"></i>
+                      </button>
+                      <div class="score-details-content">
+                        <div class="score-details-inner">
+                          <div class="score-explanation">
+                            <ul>
+                              <li><strong>Pell Grant:</strong> 返済不要の連邦政府奨学金。年収約$60,000以下の世帯が対象で、最大約$7,400/年</li>
+                              <li><strong>Federal Loan:</strong> 連邦学生ローン。民間ローンより低金利（約5-7%）で、返済条件も柔軟</li>
+                              <li><strong>全米平均:</strong> Pell Grant 約35%、Federal Loan 約50%</li>
+                              <li><strong>高いPell Grant率:</strong> 低所得層の学生が多く、経済的多様性が高い大学</li>
+                              <li><strong>低いFederal Loan率:</strong> 裕福な学生が多い、または大学独自の奨学金が充実している可能性</li>
+                              <li><strong>留学生への影響:</strong> これらは米国市民・永住者向け。留学生は大学独自の奨学金を確認</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2378,26 +2458,33 @@
                       <h3 class="chart-title">
                         <i class="fas fa-home"></i>
                         年間費用内訳
-                        <span class="info-icon" title="年間費用の詳細情報">
+                        <span class="info-icon">
                           <i class="fas fa-info-circle"></i>
+                          <span class="tooltip-text">年間の主要費用項目。授業料と寮費・食費を比較して総費用を把握できます</span>
                         </span>
                       </h3>
-                      <div class="chart-description">
-                        <p>年間の主要費用項目。授業料と寮費・食費を比較して総費用を把握できます</p>
-                      </div>
                     </div>
                     <div class="chart-wrapper">
                       <canvas id="costsChart"></canvas>
                     </div>
                     <div class="score-details">
-                      <div class="score-explanation">
-                        <h4>費用について</h4>
-                        <ul>
-                          <li><strong>授業料:</strong> 年間の学費（州立大学は州外学生向け料金を表示）</li>
-                          <li><strong>寮費・食費:</strong> キャンパス内居住の年間費用</li>
-                          <li><strong>総費用:</strong> 授業料 + 寮費・食費（教材費・雑費は含まず）</li>
-                          <li><strong>全米平均:</strong> 州立大学 約$25,000、私立大学 約$55,000</li>
-                        </ul>
+                      <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                        <span>費用について詳しく見る</span>
+                        <i class="fas fa-chevron-down"></i>
+                      </button>
+                      <div class="score-details-content">
+                        <div class="score-details-inner">
+                          <div class="score-explanation">
+                            <ul>
+                              <li><strong>授業料（Tuition）:</strong> 年間の学費。州立大学は州内/州外で大きく異なり、留学生は州外料金が適用</li>
+                              <li><strong>寮費・食費（Room & Board）:</strong> キャンパス内寮とミールプランの年間費用</li>
+                              <li><strong>総費用（COA）:</strong> 授業料 + 寮費・食費。実際には教材費、交通費、個人経費も加算</li>
+                              <li><strong>全米平均:</strong> 州立大学（州外） 約$25,000/年、私立大学 約$55,000/年</li>
+                              <li><strong>隠れた費用:</strong> 教材費 $1,000-2,000、健康保険 $2,000-3,000、その他 $2,000-4,000/年</li>
+                              <li><strong>留学生向け:</strong> 表示価格は「定価」。奨学金やNeed-based Aidで実質負担額は下がる場合あり</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2428,27 +2515,34 @@
                     <h3 class="chart-title">
                       <i class="fas fa-user-graduate"></i>
                       1年生継続率
-                      <span class="info-icon" title="継続率の詳細情報">
+                      <span class="info-icon">
                         <i class="fas fa-info-circle"></i>
+                        <span class="tooltip-text">1年生が2年生に進級する割合。学生サポートの質や満足度を示す重要な指標です</span>
                       </span>
                     </h3>
-                    <div class="chart-description">
-                      <p>1年生が2年生に進級する割合。学生サポートの質や満足度を示す重要な指標です</p>
-                    </div>
                   </div>
                   <div class="chart-wrapper">
                     <canvas id="retentionChart"></canvas>
                   </div>
                   <div class="score-details">
-                    <div class="score-explanation">
-                      <h4>継続率について</h4>
-                      <ul>
-                        <li><strong>継続率:</strong> 1年生が翌年も在籍している割合</li>
-                        <li><strong>全米平均:</strong> 約81%（4年制大学）</li>
-                        <li><strong>高い継続率:</strong> 充実した学生サポート、満足度の高さを示す</li>
-                        <li><strong>低い継続率:</strong> 経済的困難、学習サポート不足等が原因の可能性</li>
-                        <li><strong>判断基準:</strong> 80%以上は良好、70%未満は要注意</li>
-                      </ul>
+                    <button class="score-details-toggle" onclick="this.parentElement.classList.toggle('open')">
+                      <span>継続率について詳しく見る</span>
+                      <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="score-details-content">
+                      <div class="score-details-inner">
+                        <div class="score-explanation">
+                          <ul>
+                            <li><strong>継続率（Retention Rate）:</strong> 1年生が2年生に進級する割合。学生満足度の重要指標</li>
+                            <li><strong>全米平均:</strong> 4年制大学で約81%、研究大学では90%以上が一般的</li>
+                            <li><strong>高い継続率（85%以上）:</strong> 充実した学生サポート、高い満足度、強いコミュニティ</li>
+                            <li><strong>低い継続率（70%未満）:</strong> 経済的困難、学習支援の不足、ミスマッチの可能性</li>
+                            <li><strong>判断基準:</strong> 90%以上 = 優秀、80-90% = 良好、70-80% = 平均的、70%未満 = 要注意</li>
+                            <li><strong>留学生への示唆:</strong> 継続率が高い大学は留学生サポートも充実している傾向</li>
+                            <li><strong>チャート内の黄色い棒:</strong> 全米平均を示す基準線</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

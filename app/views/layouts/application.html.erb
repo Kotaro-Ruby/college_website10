@@ -325,13 +325,14 @@
       
       .floating-popup {
         background: white;
-        border-radius: 20px;
-        max-width: 400px;
+        border-radius: 12px;
+        max-width: 380px;
         width: 90%;
-        padding: 30px;
+        padding: 0;
         position: relative;
         animation: slideUp 0.4s ease;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
       }
       
       @keyframes slideUp {
@@ -349,7 +350,7 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        background: #f3f4f6;
+        background: rgba(255, 255, 255, 0.2);
         border: none;
         border-radius: 50%;
         width: 32px;
@@ -359,86 +360,115 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
+        color: white;
+        z-index: 10;
       }
-      
+
       .floating-popup-close:hover {
-        background: #e5e7eb;
-        transform: rotate(90deg);
+        background: rgba(255, 255, 255, 0.3);
       }
-      
+
+      .floating-popup-content {
+        padding: 0;
+      }
+
       .floating-popup-header {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         text-align: center;
-        margin-bottom: 25px;
+        padding: 35px 30px 30px;
+        position: relative;
       }
-      
+
+      .floating-popup-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: rgb(240, 177, 61);
+      }
+
       .floating-popup-header i {
-        font-size: 3rem;
-        color: #ff7a00;
+        font-size: 2.5rem;
+        color: rgb(240, 177, 61);
         margin-bottom: 15px;
         display: block;
       }
-      
+
       .floating-popup-header h3 {
-        font-size: 1.5rem;
-        color: #2d3748;
+        font-size: 1.4rem;
+        color: white;
         margin-bottom: 8px;
+        font-weight: 700;
       }
-      
+
       .floating-popup-header p {
-        color: #6b7280;
-        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin: 0;
       }
-      
+
       .floating-popup-features {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-bottom: 25px;
+        gap: 0;
+        padding: 20px 25px;
+        background: #f5f5f5;
       }
-      
+
       .floating-feature {
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 12px;
-        background: #f8f9fa;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        color: #4a5568;
+        gap: 12px;
+        padding: 14px 16px;
+        background: white;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        color: #333;
+        margin-bottom: 10px;
+        border: 1px solid #e5e5e5;
       }
       
       .floating-feature i {
-        color: #10b981;
-        font-size: 1rem;
+        color: rgb(200, 140, 40);
+        font-size: 0.9rem;
       }
-      
+
+      .floating-feature:last-child {
+        margin-bottom: 0;
+      }
+
       .floating-cta-link {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        width: 100%;
-        background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
+        width: calc(100% - 50px);
+        margin: 0 25px 25px;
+        background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(200, 140, 40) 100%);
         color: white;
         padding: 14px 24px;
-        border-radius: 50px;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: 600;
+        font-size: 0.95rem;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(255, 122, 0, 0.3);
+        box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
       }
-      
+
       .floating-cta-link:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(255, 122, 0, 0.4);
+        box-shadow: 0 6px 20px rgba(240, 177, 61, 0.4);
         color: white;
         text-decoration: none;
       }
-      
+
       .floating-cta-link i {
         transition: transform 0.3s ease;
       }
-      
+
       .floating-cta-link:hover i {
         transform: translateX(3px);
       }
@@ -461,7 +491,16 @@
         }
         
         .floating-popup {
-          padding: 25px 20px;
+          padding: 0;
+        }
+
+        .floating-popup-features {
+          padding: 15px 20px;
+        }
+
+        .floating-cta-link {
+          width: calc(100% - 40px);
+          margin: 0 20px 20px;
         }
       }
       
