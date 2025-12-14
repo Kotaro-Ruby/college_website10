@@ -190,15 +190,14 @@
     <div id="ratingWidget" class="rating-widget" style="display: none;">
       <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
       <div class="rating-content">
-        <p class="rating-text">✨ ご意見をお聞かせください！</p>
+        <p class="rating-text">ご意見をお聞かせください</p>
         <div class="star-rating">
-          <span class="star" onclick="setRating(1)">⭐</span>
-          <span class="star" onclick="setRating(2)">⭐</span>
-          <span class="star" onclick="setRating(3)">⭐</span>
-          <span class="star" onclick="setRating(4)">⭐</span>
-          <span class="star" onclick="setRating(5)">⭐</span>
+          <span class="star" onclick="setRating(1)"><i class="fas fa-star"></i></span>
+          <span class="star" onclick="setRating(2)"><i class="fas fa-star"></i></span>
+          <span class="star" onclick="setRating(3)"><i class="fas fa-star"></i></span>
+          <span class="star" onclick="setRating(4)"><i class="fas fa-star"></i></span>
+          <span class="star" onclick="setRating(5)"><i class="fas fa-star"></i></span>
         </div>
-        <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
       </div>
     </div>
     
@@ -483,18 +482,16 @@
         bottom: 20px;
         left: 20px;
         z-index: 1000;
-        background: linear-gradient(135deg, rgba(255, 146, 36, 0.7) 0%, rgba(255, 122, 0, 0.7) 100%);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 10px 30px rgba(255, 122, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.2);
-        max-width: 320px;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        border-radius: 12px;
+        padding: 24px 28px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        max-width: 300px;
         color: white;
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        display: none; /* 初期状態で非表示 */
+        border: 1px solid rgba(240, 177, 61, 0.2);
+        display: none;
       }
-      
+
       /* モバイル対応 */
       @media (max-width: 768px) {
         .rating-widget {
@@ -502,100 +499,69 @@
           left: 10px;
           right: 10px;
           max-width: none;
-          padding: 16px;
-          border-radius: 16px;
+          padding: 20px;
+          border-radius: 10px;
         }
       }
-      
+
       @media (max-width: 480px) {
         .rating-widget {
           bottom: 8px;
           left: 8px;
           right: 8px;
-          padding: 14px;
-          border-radius: 14px;
+          padding: 16px;
+          border-radius: 8px;
         }
       }
-      
+
       .rating-widget.show {
         display: block !important;
       }
-      
+
       .rating-widget.hidden {
         display: none !important;
       }
-      
-      @keyframes pulse {
-        0%, 100% {
-          transform: scale(1);
-          box-shadow: 0 10px 30px rgba(255, 122, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.2);
-        }
-        50% {
-          transform: scale(1.02);
-          box-shadow: 0 15px 40px rgba(255, 122, 0, 0.4), 0 0 0 4px rgba(255, 255, 255, 0.3);
-        }
-      }
-      
+
       .widget-close {
         position: absolute;
-        top: 8px;
-        right: 8px;
-        background: rgba(255, 255, 255, 0.2);
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.1);
         border: none;
-        color: white;
-        font-size: 24px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 18px;
         cursor: pointer;
-        width: 40px;
-        height: 40px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
         padding: 0;
       }
-      
+
       .widget-close:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: rotate(90deg) scale(1.1);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
       }
-      
+
       .rating-content {
         text-align: center;
         position: relative;
       }
-      
-      .emoji-icon {
-        font-size: 40px;
-        margin-bottom: 10px;
-        animation: bounce 1s ease-in-out infinite;
-      }
-      
-      @media (max-width: 480px) {
-        .emoji-icon {
-          font-size: 32px;
-          margin-bottom: 8px;
-        }
-      }
-      
-      @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-      }
-      
+
       .rating-subtext {
         margin-top: 12px;
-        font-size: 12px;
-        opacity: 0.9;
-        font-weight: 500;
-        animation: fadeIn 1s ease-out 0.5s both;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 400;
       }
-      
+
       @media (max-width: 480px) {
         .rating-subtext {
-          font-size: 11px;
-          margin-top: 8px;
+          font-size: 12px;
+          margin-top: 10px;
         }
       }
       
@@ -641,81 +607,49 @@
       
       .rating-text {
         margin: 0 0 16px 0;
-        font-size: 16px;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        letter-spacing: 0.5px;
-        animation: slideIn 0.6s ease-out;
+        font-size: 15px;
+        font-weight: 600;
+        color: white;
+        letter-spacing: 0.3px;
       }
-      
+
       @media (max-width: 480px) {
         .rating-text {
           font-size: 14px;
           margin: 0 0 12px 0;
         }
       }
-      
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      
+
       .star-rating {
         display: flex;
-        gap: 8px;
+        gap: 6px;
         justify-content: center;
       }
-      
+
       .star {
-        font-size: 28px;
+        font-size: 24px;
         cursor: pointer;
-        opacity: 0.7;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        animation: starBounce 0.5s ease-out;
-        animation-delay: calc(var(--star-index) * 0.1s);
+        color: rgba(240, 177, 61, 0.5);
+        transition: all 0.2s ease;
       }
-      
+
       @media (max-width: 480px) {
         .star {
-          font-size: 24px;
+          font-size: 22px;
         }
       }
-      
-      .star:nth-child(1) { --star-index: 0; }
-      .star:nth-child(2) { --star-index: 1; }
-      .star:nth-child(3) { --star-index: 2; }
-      .star:nth-child(4) { --star-index: 3; }
-      .star:nth-child(5) { --star-index: 4; }
-      
-      @keyframes starBounce {
-        0% {
-          transform: scale(0);
-          opacity: 0;
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(1);
-          opacity: 0.7;
-        }
-      }
-      
+
       .star:hover {
-        opacity: 1;
-        transform: scale(1.3) rotate(15deg);
-        filter: drop-shadow(0 4px 8px rgba(255, 255, 0, 0.5));
+        color: rgb(240, 177, 61);
+        transform: scale(1.15);
       }
-      
+
       .star:active {
-        transform: scale(1.5) rotate(30deg);
+        transform: scale(1.25);
+      }
+
+      .star.active {
+        color: rgb(240, 177, 61);
       }
       
       /* Detailed Survey Popup Styles */
@@ -974,53 +908,13 @@
       }
       
       @media (max-width: 768px) {
-        .rating-widget {
-          bottom: 15px;
-          right: 15px;
-          padding: 8px 12px;
-          max-width: 200px;
-        }
-        
-        .rating-text {
-          font-size: 12px;
-        }
-        
-        .star {
-          font-size: 20px;
-        }
-        
         .survey-popup {
           padding: 20px;
           margin: 20px;
         }
-        
-        .test-reset-button {
-          top: 10px;
-          right: 10px;
-        }
-        
-        .test-reset-button button {
-          padding: 8px 12px;
-          font-size: 12px;
-        }
       }
-      
+
       @media (max-width: 480px) {
-        .rating-widget {
-          bottom: 10px;
-          right: 10px;
-          padding: 6px 10px;
-          max-width: 180px;
-        }
-        
-        .rating-text {
-          font-size: 11px;
-        }
-        
-        .star {
-          font-size: 18px;
-        }
-        
         .survey-popup {
           padding: 15px;
         }
@@ -1034,11 +928,9 @@
         const stars = document.querySelectorAll('.star');
         stars.forEach((star, index) => {
           if (index < rating) {
-            star.style.color = '#FFD700';
-            star.style.transform = 'scale(1.5) rotate(360deg)';
-            setTimeout(() => {
-              star.style.transform = 'scale(1.2)';
-            }, 300);
+            star.style.color = 'rgb(240, 177, 61)';
+            star.style.transform = 'scale(1.2)';
+            star.classList.add('active');
           }
         });
         
@@ -1147,7 +1039,7 @@
       // 強制的にウィジェットを表示（デバッグ用）
       function forceShowWidget() {
         let widget = document.getElementById('ratingWidget');
-        
+
         if (!widget) {
           console.log('Widget not found, creating new one...');
           // ウィジェットが存在しない場合は作成
@@ -1155,16 +1047,14 @@
             <div id="ratingWidget" class="rating-widget" style="display: block;">
               <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
               <div class="rating-content">
-                <div class="emoji-icon">🎆</div>
-                <p class="rating-text">✨ ご意見をお聞かせください！</p>
+                <p class="rating-text">ご意見をお聞かせください</p>
                 <div class="star-rating">
-                  <span class="star" onclick="setRating(1)">⭐</span>
-                  <span class="star" onclick="setRating(2)">⭐</span>
-                  <span class="star" onclick="setRating(3)">⭐</span>
-                  <span class="star" onclick="setRating(4)">⭐</span>
-                  <span class="star" onclick="setRating(5)">⭐</span>
+                  <span class="star" onclick="setRating(1)"><i class="fas fa-star"></i></span>
+                  <span class="star" onclick="setRating(2)"><i class="fas fa-star"></i></span>
+                  <span class="star" onclick="setRating(3)"><i class="fas fa-star"></i></span>
+                  <span class="star" onclick="setRating(4)"><i class="fas fa-star"></i></span>
+                  <span class="star" onclick="setRating(5)"><i class="fas fa-star"></i></span>
                 </div>
-                <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
               </div>
             </div>
           `;
@@ -1175,12 +1065,12 @@
           widget.style.display = 'block';
           widget.classList.remove('hidden');
         }
-        
+
         // ホバーエフェクトを設定
         setupStarHoverEffects();
-        
-        showToast('👁️ アンケートを強制表示しました');
-        console.log('✅ Widget forced to show');
+
+        showToast('アンケートを強制表示しました');
+        console.log('Widget forced to show');
       }
       
       // 強制的にウィジェットを非表示（デバッグ用）
@@ -1280,23 +1170,25 @@
           star.addEventListener('mouseenter', function() {
             stars.forEach((s, i) => {
               if (i <= index) {
-                s.style.color = '#FFD700';
-                s.style.opacity = '1';
+                s.style.color = 'rgb(240, 177, 61)';
               } else {
                 s.style.color = '';
-                s.style.opacity = '0.7';
               }
             });
           });
         });
-        
+
         // マウスが離れたら元に戻す
-        document.querySelector('.star-rating').addEventListener('mouseleave', function() {
-          stars.forEach(star => {
-            star.style.color = '';
-            star.style.opacity = '0.7';
+        const starRating = document.querySelector('.star-rating');
+        if (starRating) {
+          starRating.addEventListener('mouseleave', function() {
+            stars.forEach(star => {
+              if (!star.classList.contains('active')) {
+                star.style.color = '';
+              }
+            });
           });
-        });
+        }
       }
       
       // 詳細アンケートフォームの処理を設定する関数
@@ -1420,19 +1312,17 @@
         
         // 新しいウィジェットを作成
         const widgetHTML = `
-          <div id="ratingWidget" class="rating-widget" style="display: none; background: linear-gradient(135deg, rgba(255, 146, 36, 0.7) 0%, rgba(255, 122, 0, 0.7) 100%);">
+          <div id="ratingWidget" class="rating-widget" style="display: none;">
             <button class="widget-close" onclick="closeSurveyWidget()">&times;</button>
             <div class="rating-content">
-              <div class="emoji-icon">🎆</div>
-              <p class="rating-text">✨ ご意見をお聞かせください！</p>
+              <p class="rating-text">ご意見をお聞かせください</p>
               <div class="star-rating">
-                <span class="star" onclick="setRating(1)">⭐</span>
-                <span class="star" onclick="setRating(2)">⭐</span>
-                <span class="star" onclick="setRating(3)">⭐</span>
-                <span class="star" onclick="setRating(4)">⭐</span>
-                <span class="star" onclick="setRating(5)">⭐</span>
+                <span class="star" onclick="setRating(1)"><i class="fas fa-star"></i></span>
+                <span class="star" onclick="setRating(2)"><i class="fas fa-star"></i></span>
+                <span class="star" onclick="setRating(3)"><i class="fas fa-star"></i></span>
+                <span class="star" onclick="setRating(4)"><i class="fas fa-star"></i></span>
+                <span class="star" onclick="setRating(5)"><i class="fas fa-star"></i></span>
               </div>
-              <p class="rating-subtext">サービス改善にご協力ください 🚀</p>
             </div>
           </div>
         `;

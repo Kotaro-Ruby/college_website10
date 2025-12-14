@@ -1,363 +1,404 @@
-<div class="consultation-form-container">
-  <!-- ページヘッダー -->
-  <div class="page-header">
-    <div class="header-content">
-      <div class="header-icon">
-        <i class="fas fa-graduation-cap"></i>
+<div class="main">
+  <div class="professional-info-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">無料留学相談</h1>
+        <p class="hero-subtitle">Free Consultation</p>
+        <div class="hero-divider"></div>
+        <p class="hero-description">専門アドバイザーがあなたの留学をサポートします</p>
       </div>
-      <h1>無料留学相談</h1>
-      <p>専門アドバイザーがあなたの留学をサポートします</p>
-    </div>
-  </div>
+    </section>
 
-  <div class="consultation-benefits">
-    <div class="benefit-item">
-      <i class="fas fa-user-graduate"></i>
-      <div>
-        <h3>経験豊富なアドバイザー</h3>
-        <p>アメリカ大学留学のエキスパートが直接対応</p>
-      </div>
-    </div>
-    <div class="benefit-item">
-      <i class="fas fa-clock"></i>
-      <div>
-        <h3>じっくり相談できる時間</h3>
-        <p>30分〜1時間、あなたのペースで相談可能</p>
-      </div>
-    </div>
-    <div class="benefit-item">
-      <i class="fas fa-laptop"></i>
-      <div>
-        <h3>オンライン対応</h3>
-        <p>ご自宅から気軽にご参加いただけます</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="consultation-form-wrapper" id="consultation-form">
-    <%= form_with model: @consultation, local: true, class: "consultation-form", data: { turbo: false } do |form| %>
-      <% if @consultation.errors.any? %>
-        <div class="alert alert-danger">
-          <h4><%= pluralize(@consultation.errors.count, "error") %> prohibited this consultation from being saved:</h4>
-          <ul>
-            <% @consultation.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="form-section">
-        <h2><i class="fas fa-user"></i> 基本情報</h2>
-        
-        <div class="form-group">
-          <%= form.label :name, "お名前*", class: "form-label" %>
-          <%= form.text_field :name, class: "form-control", placeholder: "山田 太郎" %>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group half-width">
-            <%= form.label :email, "メールアドレス*", class: "form-label" %>
-            <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
+    <!-- Benefits Section -->
+    <section class="section-wrapper benefits-section-bg">
+      <div class="section-content">
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>経験豊富なアドバイザー</h3>
+            <p>アメリカ大学留学のエキスパートが直接対応</p>
           </div>
-          <div class="form-group half-width">
-            <%= form.label :phone, "電話番号（任意）", class: "form-label" %>
-            <%= form.text_field :phone, class: "form-control", placeholder: "090-1234-5678（緊急連絡用）" %>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>じっくり相談できる時間</h3>
+            <p>30分〜1時間、あなたのペースで相談可能</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-laptop"></i>
+            </div>
+            <h3>オンライン対応</h3>
+            <p>ご自宅から気軽にご参加いただけます</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="form-section">
-        <h2><i class="fas fa-calendar"></i> 希望日時（複数候補選択可）</h2>
-        
-        <%= form.hidden_field :timezone, value: "JST" %>
-
-        <div class="datetime-options">
-          <p class="datetime-description">希望する日時を最大3つまで選択してください（優先順位順）</p>
-          <div class="time-restriction-notice">
-            <i class="fas fa-clock"></i>
-            <div>
-              <strong>相談可能時間（日本時間 JST）:</strong>
+    <!-- Form Section -->
+    <section class="section-wrapper">
+      <div class="section-content">
+        <%= form_with model: @consultation, local: true, class: "consultation-form", data: { turbo: false } do |form| %>
+          <% if @consultation.errors.any? %>
+            <div class="error-alert">
+              <h4><%= pluralize(@consultation.errors.count, "error") %> prohibited this consultation from being saved:</h4>
               <ul>
-                <li>平日: 20:00〜23:00</li>
-                <li>土日祝日: 9:00〜21:00</li>
+                <% @consultation.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
               </ul>
             </div>
-          </div>
-          
-          <div class="datetime-candidates" id="datetime-candidates">
-            <div class="datetime-candidate">
-              <div class="candidate-header">
-                <span class="candidate-priority">第1希望</span>
-                <span class="required-mark">*</span>
-              </div>
-              <div class="form-row">
-                <div class="form-group half-width">
-                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
-                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today, required: true %>
-                </div>
-                <div class="form-group half-width">
-                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
-                  <%= select_tag "consultation[preferred_times][]", options_for_select([
-                    ["時間を選択してください", ""]
-                  ]), { class: "form-control time-select", required: true } %>
-                </div>
-              </div>
+          <% end %>
+
+          <!-- Basic Info -->
+          <div class="form-card">
+            <div class="card-number">01</div>
+            <h2>基本情報</h2>
+
+            <div class="form-group">
+              <%= form.label :name, "お名前", class: "form-label" %>
+              <span class="required-badge">必須</span>
+              <%= form.text_field :name, class: "form-control", placeholder: "山田 太郎" %>
             </div>
 
-            <div class="datetime-candidate" style="display: none;">
-              <div class="candidate-header">
-                <span class="candidate-priority">第2希望</span>
-                <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">×</button>
+            <div class="form-row">
+              <div class="form-group">
+                <%= form.label :email, "メールアドレス", class: "form-label" %>
+                <span class="required-badge">必須</span>
+                <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
               </div>
-              <div class="form-row">
-                <div class="form-group half-width">
-                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
-                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
-                </div>
-                <div class="form-group half-width">
-                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
-                  <%= select_tag "consultation[preferred_times][]", options_for_select([
-                    ["時間を選択してください", ""]
-                  ]), { class: "form-control time-select" } %>
-                </div>
-              </div>
-            </div>
-
-            <div class="datetime-candidate" style="display: none;">
-              <div class="candidate-header">
-                <span class="candidate-priority">第3希望</span>
-                <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">×</button>
-              </div>
-              <div class="form-row">
-                <div class="form-group half-width">
-                  <%= form.label "preferred_dates[]", "希望日", class: "form-label" %>
-                  <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
-                </div>
-                <div class="form-group half-width">
-                  <%= form.label "preferred_times[]", "希望時間（日本時間）", class: "form-label" %>
-                  <%= select_tag "consultation[preferred_times][]", options_for_select([
-                    ["時間を選択してください", ""]
-                  ]), { class: "form-control time-select" } %>
-                </div>
+              <div class="form-group">
+                <%= form.label :phone, "電話番号", class: "form-label" %>
+                <span class="optional-badge">任意</span>
+                <%= form.text_field :phone, class: "form-control", placeholder: "090-1234-5678" %>
               </div>
             </div>
           </div>
 
-          <div class="add-candidate-section">
-            <button type="button" class="add-candidate-btn" onclick="addCandidate()">
-              <i class="fas fa-plus"></i> 希望候補を追加
-            </button>
+          <!-- DateTime Section -->
+          <div class="form-card">
+            <div class="card-number">02</div>
+            <h2>希望日時</h2>
+
+            <%= form.hidden_field :timezone, value: "JST" %>
+
+            <div class="time-notice">
+              <div class="notice-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="notice-content">
+                <strong>相談可能時間（日本時間 JST）</strong>
+                <ul>
+                  <li>平日: 20:00〜23:00</li>
+                  <li>土日祝日: 9:00〜21:00</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="datetime-description">希望する日時を最大3つまで選択してください（優先順位順）</p>
+
+            <div class="datetime-candidates" id="datetime-candidates">
+              <div class="datetime-candidate">
+                <div class="candidate-header">
+                  <span class="candidate-priority">第1希望</span>
+                  <span class="required-badge">必須</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <%= label_tag "preferred_dates[]", "希望日", class: "form-label" %>
+                    <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today, required: true %>
+                  </div>
+                  <div class="form-group">
+                    <%= label_tag "preferred_times[]", "希望時間", class: "form-label" %>
+                    <%= select_tag "consultation[preferred_times][]", options_for_select([
+                      ["時間を選択してください", ""]
+                    ]), { class: "form-control time-select", required: true } %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="datetime-candidate" style="display: none;">
+                <div class="candidate-header">
+                  <span class="candidate-priority">第2希望</span>
+                  <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <%= label_tag "preferred_dates[]", "希望日", class: "form-label" %>
+                    <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
+                  </div>
+                  <div class="form-group">
+                    <%= label_tag "preferred_times[]", "希望時間", class: "form-label" %>
+                    <%= select_tag "consultation[preferred_times][]", options_for_select([
+                      ["時間を選択してください", ""]
+                    ]), { class: "form-control time-select" } %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="datetime-candidate" style="display: none;">
+                <div class="candidate-header">
+                  <span class="candidate-priority">第3希望</span>
+                  <button type="button" class="remove-candidate-btn" onclick="removeCandidate(this)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <%= label_tag "preferred_dates[]", "希望日", class: "form-label" %>
+                    <%= date_field_tag "consultation[preferred_dates][]", nil, class: "form-control date-input", min: Date.today %>
+                  </div>
+                  <div class="form-group">
+                    <%= label_tag "preferred_times[]", "希望時間", class: "form-label" %>
+                    <%= select_tag "consultation[preferred_times][]", options_for_select([
+                      ["時間を選択してください", ""]
+                    ]), { class: "form-control time-select" } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="add-candidate-section">
+              <button type="button" class="add-candidate-btn" onclick="addCandidate()">
+                <i class="fas fa-plus"></i> 希望候補を追加
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="form-section">
-        <h2><i class="fas fa-comments"></i> 相談内容</h2>
-        
-        <div class="form-group">
-          <%= form.label :consultation_type, "相談タイプ*", class: "form-label" %>
-          <%= form.select :consultation_type, [
-            ["大学留学全般", "general"],
-            ["大学選び", "university_selection"],
-            ["出願サポート", "application_support"],
-            ["奨学金相談", "scholarship"],
-            ["ビザ相談", "visa"],
-            ["その他", "other"]
-          ], { prompt: "相談タイプを選択してください" }, { class: "form-control" } %>
-        </div>
+          <!-- Consultation Content -->
+          <div class="form-card">
+            <div class="card-number">03</div>
+            <h2>相談内容</h2>
 
-        <div class="form-group">
-          <%= form.label :message, "詳細・ご質問*", class: "form-label" %>
-          <%= form.text_area :message, class: "form-control", rows: 6, placeholder: "相談したい内容を詳しくお聞かせください。" %>
-        </div>
+            <div class="form-group">
+              <%= form.label :consultation_type, "相談タイプ", class: "form-label" %>
+              <span class="required-badge">必須</span>
+              <%= form.select :consultation_type, [
+                ["大学留学全般", "general"],
+                ["大学選び", "university_selection"],
+                ["出願サポート", "application_support"],
+                ["奨学金相談", "scholarship"],
+                ["ビザ相談", "visa"],
+                ["その他", "other"]
+              ], { prompt: "相談タイプを選択してください" }, { class: "form-control" } %>
+            </div>
 
-        <div class="consultation-notice">
-          <div class="notice-icon">
-            <i class="fas fa-info-circle"></i>
+            <div class="form-group">
+              <%= form.label :message, "詳細・ご質問", class: "form-label" %>
+              <span class="required-badge">必須</span>
+              <%= form.text_area :message, class: "form-control", rows: 6, placeholder: "相談したい内容を詳しくお聞かせください。" %>
+            </div>
+
+            <div class="important-notice">
+              <div class="notice-icon">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <div class="notice-content">
+                <strong>ご注意</strong>
+                <p>こちらの相談は留学全般に関するアドバイスのみとなります。特定の大学に関する詳細な質問や個別の大学に関する相談は承っておりません。</p>
+              </div>
+            </div>
           </div>
-          <div class="notice-content">
-            <p><strong>ご注意：</strong>こちらの相談は留学全般に関するアドバイスのみとなります。特定の大学に関する詳細な質問や個別の大学に関する相談は承っておりません。</p>
+
+          <!-- Submit -->
+          <div class="form-submit">
+            <%= form.submit "無料相談を予約する", class: "submit-btn", data: { disable_with: "送信中..." }, onclick: "this.form.submit(); this.disabled=true; return true;" %>
           </div>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section class="section-wrapper notes-section-bg">
+      <div class="section-content">
+        <div class="notes-card">
+          <div class="card-number">04</div>
+          <h2>ご予約について</h2>
+          <ul>
+            <li>予約確認後、24時間以内にメールでご連絡いたします</li>
+            <li>相談はZoom、Google Meetなどのオンラインツールで行います</li>
+            <li>相談は完全無料です。費用は一切かかりません</li>
+            <li>キャンセルの場合は、予約日の前日までにご連絡ください</li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <div class="form-submit">
-        <%= form.submit "無料相談を予約する", class: "submit-btn", data: { disable_with: "送信中..." }, onclick: "this.form.submit(); this.disabled=true; return true;" %>
+    <!-- Footer Note -->
+    <section class="section-wrapper final-note-bg">
+      <div class="section-content">
+        <div class="footer-note">
+          <p>
+            留学に関する疑問や不安を、経験豊富なアドバイザーに相談してみませんか？
+            お気軽にご予約ください。
+          </p>
+        </div>
       </div>
-    <% end %>
-  </div>
-
-  <div class="consultation-note">
-    <div class="note-content">
-      <i class="fas fa-info-circle"></i>
-      <div>
-        <h3>ご予約について</h3>
-        <ul>
-          <li>予約確認後、24時間以内にメールでご連絡いたします</li>
-          <li>相談はZoom、Google Meetなどのオンラインツールで行います</li>
-          <li>相談は完全無料です。費用は一切かかりません</li>
-          <li>キャンセルの場合は、予約日の前日までにご連絡ください</li>
-        </ul>
-      </div>
-    </div>
+    </section>
   </div>
 </div>
 
 <style>
-.consultation-form-container {
+/* Container */
+.professional-info-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
+.hero-content {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
 }
 
-/* ページヘッダー */
-.page-header {
-  text-align: center;
-  margin: 0 -20px 40px -20px;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  padding: 80px 30px;
-  position: relative;
-}
-
-.page-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: #f0b13d;
-}
-
-.header-content {
-  position: relative;
-  z-index: 1;
-}
-
-.header-icon {
-  display: none;
-}
-
-.page-header h1 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
+.hero-title {
+  font-size: 48px;
   font-weight: 700;
-  color: white;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
 }
 
-.page-header p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: white;
-  margin: 0;
+.hero-subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  opacity: 0.8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 3px;
+  background: rgb(240, 177, 61);
+  margin: 30px auto;
+}
+
+.hero-description {
+  font-size: 16px;
   opacity: 0.9;
-  max-width: 700px;
+  margin: 0;
+}
+
+/* Section Wrapper */
+.section-wrapper {
+  padding: 50px 20px;
+}
+
+.section-content {
+  max-width: 800px;
   margin: 0 auto;
 }
 
+/* Benefits Section */
+.benefits-section-bg {
+  background: #f5f5f5;
+}
 
-.consultation-benefits {
+.benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
-  margin-bottom: 50px;
 }
 
-.benefit-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 25px;
+.benefit-card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  padding: 30px 25px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  text-align: center;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.benefit-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
-}
-
-.benefit-item:hover {
+.benefit-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  border-color: rgba(255, 122, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.benefit-item i {
-  font-size: 2.2rem;
-  color: #ff7a00;
-  min-width: 50px;
-  background: rgba(255, 122, 0, 0.1);
+.benefit-icon {
   width: 60px;
   height: 60px;
+  background: rgba(240, 177, 61, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin: 0 auto 20px;
 }
 
-.benefit-item h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #2d3748;
-  line-height: 1.3;
+.benefit-icon i {
+  font-size: 24px;
+  color: rgb(200, 140, 40);
 }
 
-.benefit-item p {
+.benefit-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.benefit-card p {
+  font-size: 14px;
+  color: #666;
   margin: 0;
-  font-size: 0.95rem;
-  color: #4a5568;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-.consultation-form-wrapper {
+/* Form Card */
+.form-card, .notes-card {
   background: white;
-  border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  position: relative;
+  overflow: hidden;
   margin-bottom: 30px;
 }
 
-.form-section {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 30px;
+.form-card:last-of-type {
+  margin-bottom: 0;
 }
 
-.form-section:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.card-number {
+  font-size: 80px;
+  font-weight: 700;
+  color: rgba(240, 177, 61, 0.08);
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  line-height: 1;
 }
 
-.form-section h2 {
-  color: #2d3748;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.form-card h2, .notes-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
 }
 
-.form-section h2 i {
-  color: #ff7a00;
-}
-
+/* Form Elements */
 .form-group {
   margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .form-row {
@@ -366,37 +407,61 @@
   gap: 20px;
 }
 
-.half-width {
+.form-row .form-group {
   margin-bottom: 0;
 }
 
 .form-label {
-  display: block;
+  display: inline-block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #2d3748;
-  font-size: 0.9rem;
+  color: #333;
+  font-size: 14px;
+}
+
+.required-badge {
+  display: inline-block;
+  background: rgb(240, 177, 61);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.optional-badge {
+  display: inline-block;
+  background: #999;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
 .form-control {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 14px 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
   transition: all 0.3s ease;
-  background: #f7fafc;
+  background: #fafafa;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #ff7a00;
+  border-color: rgb(240, 177, 61);
   background: white;
-  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(240, 177, 61, 0.1);
 }
 
 .form-control::placeholder {
-  color: #a0aec0;
+  color: #aaa;
 }
 
 textarea.form-control {
@@ -404,237 +469,105 @@ textarea.form-control {
   min-height: 120px;
 }
 
-.form-submit {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.submit-btn {
-  background: linear-gradient(135deg, #ff9224 0%, #ff7a00 100%);
-  color: white;
-  border: none;
-  padding: 16px 40px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4);
-}
-
-.consultation-note {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 20px;
-  border-left: 4px solid #28a745;
-}
-
-.note-content {
-  display: flex;
-  gap: 15px;
-}
-
-.note-content i {
-  color: #28a745;
-  font-size: 1.5rem;
-  margin-top: 2px;
-}
-
-.note-content h3 {
-  margin: 0 0 10px 0;
-  color: #2d3748;
-}
-
-.note-content ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.note-content li {
-  margin-bottom: 5px;
-  color: #4a5568;
-}
-
-/* 相談注意事項 */
-.consultation-notice {
+/* Time Notice */
+.time-notice {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
+  gap: 15px;
+  background: rgba(240, 177, 61, 0.08);
+  border: 1px solid rgba(240, 177, 61, 0.2);
   border-radius: 8px;
-  padding: 16px;
-  margin-top: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
 }
 
-.notice-icon {
-  color: #856404;
-  font-size: 1.2rem;
+.time-notice .notice-icon {
+  color: rgb(200, 140, 40);
+  font-size: 20px;
   margin-top: 2px;
-  flex-shrink: 0;
 }
 
-.notice-content p {
-  margin: 0;
-  color: #856404;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.notice-content strong {
+.time-notice .notice-content strong {
+  display: block;
+  color: rgb(160, 110, 30);
   font-weight: 600;
-}
-
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-}
-
-.alert h4 {
-  margin-top: 0;
   margin-bottom: 10px;
 }
 
-.alert ul {
-  margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  .consultation-form-container {
-    padding: 15px;
-  }
-
-  .page-header {
-    padding: 30px 20px;
-    margin-bottom: 30px;
-  }
-
-  .page-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .page-header p {
-    font-size: 1rem;
-  }
-
-  .header-icon {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-  }
-
-  .header-icon i {
-    font-size: 1.8rem;
-  }
-
-  .consultation-benefits {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .benefit-item {
-    padding: 20px;
-    gap: 15px;
-  }
-
-  .benefit-item i {
-    width: 50px;
-    height: 50px;
-    font-size: 1.8rem;
-  }
-
-  .benefit-item h3 {
-    font-size: 1.1rem;
-  }
-
-  .consultation-form-wrapper {
-    padding: 25px 20px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .half-width {
-    margin-bottom: 20px;
-  }
-}
-
-.datetime-options {
-  margin-top: 20px;
-}
-
-.datetime-description {
-  color: #4a5568;
-  font-size: 0.9rem;
-  margin-bottom: 15px;
-  font-style: italic;
-}
-
-.time-restriction-notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: #e6f7ff;
-  border: 1px solid #91d5ff;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.time-restriction-notice i {
-  color: #1890ff;
-  font-size: 1.2rem;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.time-restriction-notice strong {
-  color: #1890ff;
-  font-weight: 600;
-}
-
-.time-restriction-notice ul {
-  margin: 8px 0 0 0;
+.time-notice .notice-content ul {
+  margin: 0;
   padding-left: 20px;
 }
 
-.time-restriction-notice li {
-  color: #595959;
-  font-size: 0.9rem;
+.time-notice .notice-content li {
+  color: #666;
+  font-size: 14px;
   margin-bottom: 4px;
+}
+
+/* Important Notice */
+.important-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: #fff9e6;
+  border: 1px solid #ffe066;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.important-notice .notice-icon {
+  color: #cc9900;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.important-notice .notice-content strong {
+  display: block;
+  color: #996600;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.important-notice .notice-content p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* DateTime Candidates */
+.datetime-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .datetime-candidates {
   margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .datetime-candidate {
-  background: #f8f9fa;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  background: #f8f8f8;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
   padding: 20px;
   margin-bottom: 15px;
   transition: all 0.3s ease;
 }
 
 .datetime-candidate:hover {
-  border-color: #ff7a00;
-  background: #fff9f5;
+  border-color: rgb(240, 177, 61);
+  background: #fffcf5;
 }
 
 .candidate-header {
@@ -642,29 +575,24 @@ textarea.form-control {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .candidate-priority {
   font-weight: 600;
-  color: #ff7a00;
-  font-size: 1rem;
-}
-
-.required-mark {
-  color: #e53e3e;
-  font-weight: bold;
+  color: rgb(200, 140, 40);
+  font-size: 15px;
 }
 
 .remove-candidate-btn {
-  background: #fed7d7;
+  background: #fee;
   color: #c53030;
   border: none;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 14px;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -673,68 +601,209 @@ textarea.form-control {
 }
 
 .remove-candidate-btn:hover {
-  background: #feb2b2;
+  background: #fcc;
   transform: scale(1.1);
 }
 
 .add-candidate-section {
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .add-candidate-btn {
-  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  background: #1a1a1a;
   color: white;
   border: none;
   padding: 12px 24px;
-  border-radius: 25px;
-  font-size: 0.9rem;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(72, 187, 120, 0.3);
 }
 
 .add-candidate-btn:hover {
+  background: #333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
 }
 
 .add-candidate-btn:disabled {
-  background: #a0aec0;
+  background: #ccc;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
 }
 
 .add-candidate-btn i {
   margin-right: 8px;
 }
 
-@media (max-width: 480px) {
-  .consultation-hero {
-    padding: 25px 15px;
+/* Submit Button */
+.form-submit {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, rgb(240, 177, 61) 0%, rgb(200, 140, 40) 100%);
+  color: white;
+  border: none;
+  padding: 18px 50px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(240, 177, 61, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(240, 177, 61, 0.4);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Notes Section */
+.notes-section-bg {
+  background: #f5f5f5;
+}
+
+.notes-card ul {
+  margin: 0;
+  padding-left: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.notes-card li {
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Error Alert */
+.error-alert {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #c53030;
+}
+
+.error-alert h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.error-alert ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-alert li {
+  margin-bottom: 5px;
+}
+
+/* Final Note */
+.final-note-bg {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: white;
+}
+
+.footer-note {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.footer-note p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 32px;
   }
 
-  .consultation-hero h1 {
-    font-size: 1.7rem;
+  .hero-section {
+    padding: 60px 20px;
   }
 
-  .consultation-form-wrapper {
-    padding: 20px 15px;
+  .section-wrapper {
+    padding: 40px 15px;
   }
 
-  .note-content {
-    flex-direction: column;
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .benefit-card {
+    padding: 25px 20px;
+  }
+
+  .form-card, .notes-card {
+    padding: 30px 20px;
+  }
+
+  .card-number {
+    font-size: 60px;
+    right: 15px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-row .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-row .form-group:last-child {
+    margin-bottom: 0;
   }
 
   .datetime-candidate {
     padding: 15px;
   }
 
-  .candidate-header {
+  .submit-btn {
+    width: 100%;
+    padding: 16px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .form-card h2, .notes-card h2 {
+    font-size: 20px;
+  }
+
+  .time-notice, .important-notice {
     flex-direction: column;
     gap: 10px;
-    text-align: center;
+  }
+
+  .candidate-header {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 }
 </style>
@@ -750,17 +819,16 @@ function addCandidate() {
 
   const candidates = document.querySelectorAll('.datetime-candidate');
   const nextCandidate = candidates[candidateCount];
-  
+
   if (nextCandidate) {
     nextCandidate.style.display = 'block';
     candidateCount++;
-    
-    // 新しく表示されたcandidate内の日付入力に時間制限を適用
+
     const dateInput = nextCandidate.querySelector('.date-input');
     if (dateInput && dateInput.value) {
       updateTimeOptions(dateInput);
     }
-    
+
     updateAddButton();
   }
 }
@@ -769,15 +837,15 @@ function removeCandidate(button) {
   const candidate = button.closest('.datetime-candidate');
   const candidates = document.querySelectorAll('.datetime-candidate');
   const candidateIndex = Array.from(candidates).indexOf(candidate);
-  
+
   if (candidateIndex > 0) {
     candidate.style.display = 'none';
-    
+
     const dateInput = candidate.querySelector('input[type="date"]');
     const timeSelect = candidate.querySelector('select');
     if (dateInput) dateInput.value = '';
     if (timeSelect) timeSelect.value = '';
-    
+
     candidateCount--;
     updateAddButton();
   }
@@ -796,52 +864,40 @@ function updateAddButton() {
   }
 }
 
-// Turboとの互換性のため、turbo:loadイベントも使用
 document.addEventListener('turbo:load', initializeConsultationForm);
 document.addEventListener('DOMContentLoaded', initializeConsultationForm);
 
 function initializeConsultationForm() {
-  console.log('Form initialization started - v3');
-  
-  // 既に初期化済みの場合はスキップ
   if (window.consultationFormInitialized) {
-    console.log('Already initialized, skipping');
     return;
   }
   window.consultationFormInitialized = true;
-  
+
   updateAddButton();
-  
-  // 初期表示時に時間オプションを設定
+
   const timeSelects = document.querySelectorAll('.time-select');
-  console.log('Found time selects:', timeSelects.length);
-  
-  timeSelects.forEach(function(timeSelect, index) {
-    console.log('Setting default options for select', index);
-    // 直接オプションを追加（関数呼び出しではなく）
+
+  timeSelects.forEach(function(timeSelect) {
     timeSelect.innerHTML = '';
-    
-    // デフォルトオプション
+
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
     defaultOption.textContent = '時間を選択してください';
     timeSelect.appendChild(defaultOption);
-    
-    // 平日の時間
+
     const weekdayTimes = [
       '20:00-21:00 (平日)',
-      '21:00-22:00 (平日)', 
+      '21:00-22:00 (平日)',
       '22:00-23:00 (平日)'
     ];
-    
+
     weekdayTimes.forEach(function(time) {
       const option = document.createElement('option');
       option.value = time.split(' ')[0];
       option.textContent = time;
       timeSelect.appendChild(option);
     });
-    
-    // 土日祝の時間
+
     const weekendTimes = [
       '9:00-10:00 (土日祝)',
       '10:00-11:00 (土日祝)',
@@ -856,124 +912,59 @@ function initializeConsultationForm() {
       '19:00-20:00 (土日祝)',
       '20:00-21:00 (土日祝)'
     ];
-    
+
     weekendTimes.forEach(function(time) {
       const option = document.createElement('option');
       option.value = time.split(' ')[0];
       option.textContent = time;
       timeSelect.appendChild(option);
     });
-    
-    console.log('Options added for select', index);
   });
-  
-  // 日付選択時の時間制限設定 - イベント委譲を使用（本番環境対応）
-  console.log('Setting up date input listeners...');
-  
-  // イベント委譲で確実にキャッチ
+
   document.body.addEventListener('change', function(e) {
-    console.log('Change event on:', e.target.tagName, e.target.type, e.target.className);
     if (e.target.type === 'date' || e.target.classList.contains('date-input')) {
-      console.log('Date input changed:', e.target.value);
       updateTimeOptions(e.target);
     }
   });
-  
+
   document.body.addEventListener('input', function(e) {
     if (e.target.type === 'date' || e.target.classList.contains('date-input')) {
-      console.log('Date input event:', e.target.value);
       updateTimeOptions(e.target);
     }
   });
-  
-  // 念のため個別にも登録
+
   setTimeout(function() {
     const dateInputs = document.querySelectorAll('input[type="date"], .date-input');
-    console.log('Found date inputs (delayed):', dateInputs.length);
-    
-    dateInputs.forEach(function(dateInput, index) {
-      console.log('Attaching direct listener to input', index);
+
+    dateInputs.forEach(function(dateInput) {
       dateInput.addEventListener('change', function(e) {
-        console.log('Direct: Date changed for input', index, ':', e.target.value);
         updateTimeOptions(e.target);
       });
     });
   }, 100);
 }
 
-// デフォルトの時間オプションを設定（日付が選択されていない場合）
-function setDefaultTimeOptions(timeSelect) {
-  // デフォルトで平日の時間を表示
-  timeSelect.innerHTML = '<option value="">時間を選択してください</option>';
-  
-  const defaultTimeOptions = [
-    ["20:00-21:00", "20:00-21:00"],
-    ["21:00-22:00", "21:00-22:00"],
-    ["22:00-23:00", "22:00-23:00"]
-  ];
-  
-  defaultTimeOptions.forEach(function(option) {
-    const optionElement = document.createElement('option');
-    optionElement.value = option[1];
-    optionElement.textContent = option[0] + ' (平日)';
-    timeSelect.appendChild(optionElement);
-  });
-  
-  // 週末の時間も表示（参考として）
-  const weekendTimeOptions = [
-    ["9:00-10:00", "9:00-10:00"],
-    ["10:00-11:00", "10:00-11:00"],
-    ["11:00-12:00", "11:00-12:00"],
-    ["12:00-13:00", "12:00-13:00"],
-    ["13:00-14:00", "13:00-14:00"],
-    ["14:00-15:00", "14:00-15:00"],
-    ["15:00-16:00", "15:00-16:00"],
-    ["16:00-17:00", "16:00-17:00"],
-    ["17:00-18:00", "17:00-18:00"],
-    ["18:00-19:00", "18:00-19:00"],
-    ["19:00-20:00", "19:00-20:00"],
-    ["20:00-21:00", "20:00-21:00"]
-  ];
-  
-  weekendTimeOptions.forEach(function(option) {
-    const optionElement = document.createElement('option');
-    optionElement.value = option[1];
-    optionElement.textContent = option[0] + ' (土日祝)';
-    timeSelect.appendChild(optionElement);
-  });
-}
-
-// 選択された日付に基づいて時間オプションを更新
 function updateTimeOptions(dateInput) {
-  console.log('updateTimeOptions called with:', dateInput.value);
   const selectedDate = new Date(dateInput.value);
   if (!selectedDate || isNaN(selectedDate)) {
-    console.log('Invalid date, returning');
     return;
   }
-  
-  const dayOfWeek = selectedDate.getDay(); // 0=日曜日, 1=月曜日, ..., 6=土曜日
-  const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6); // 日曜日または土曜日
-  console.log('Day of week:', dayOfWeek, 'Is weekend:', isWeekend);
-  
-  // 対応する時間選択要素を取得
+
+  const dayOfWeek = selectedDate.getDay();
+  const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
   const candidate = dateInput.closest('.datetime-candidate');
   const timeSelect = candidate.querySelector('.time-select');
-  
+
   if (!timeSelect) {
-    console.log('Time select not found');
     return;
   }
-  
-  console.log('Time select found, updating options');
-  
-  // 時間オプションをクリア
+
   timeSelect.innerHTML = '<option value="">時間を選択してください</option>';
-  
+
   let timeOptions = [];
-  
+
   if (isWeekend) {
-    // 土日祝日: 9:00-21:00
     timeOptions = [
       ["9:00-10:00", "9:00-10:00"],
       ["10:00-11:00", "10:00-11:00"],
@@ -989,22 +980,18 @@ function updateTimeOptions(dateInput) {
       ["20:00-21:00", "20:00-21:00"]
     ];
   } else {
-    // 平日: 20:00-23:00
     timeOptions = [
       ["20:00-21:00", "20:00-21:00"],
       ["21:00-22:00", "21:00-22:00"],
       ["22:00-23:00", "22:00-23:00"]
     ];
   }
-  
-  // 時間オプションを追加
+
   timeOptions.forEach(function(option) {
     const optionElement = document.createElement('option');
     optionElement.value = option[1];
     optionElement.textContent = option[0];
     timeSelect.appendChild(optionElement);
   });
-  
-  console.log('Added', timeOptions.length, 'time options');
 }
 </script>
