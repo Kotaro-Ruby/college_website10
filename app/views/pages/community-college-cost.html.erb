@@ -1,5 +1,44 @@
 <% content_for :title, "コミカレ留学の費用を徹底解説【年間100万円台も可能】 - College Spark" %>
 <% content_for :description, "コミュニティカレッジ留学にかかる費用を徹底解説。学費、生活費、保険など項目別の内訳と、費用を抑える5つの方法を紹介。年間100万円台での留学も可能です。" %>
+<% content_for :keywords, "コミカレ, 留学費用, 学費, 生活費, アメリカ留学, コミュニティカレッジ, 奨学金, 節約" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミカレ留学の費用を徹底解説【年間100万円台も可能】" %>
+<% content_for :og_description, "コミュニティカレッジ留学にかかる費用を徹底解説。学費、生活費、保険など項目別の内訳と、費用を抑える方法を紹介。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'community-college-cost') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミカレ留学の費用を徹底解説【年間100万円台も可能】" %>
+<% content_for :twitter_description, "コミカレ留学の学費、生活費、保険など項目別の内訳と節約術を紹介。年間100万円台での留学も可能。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミカレ留学の費用を徹底解説【年間100万円台も可能】",
+  "description": "コミュニティカレッジ留学にかかる費用を徹底解説。学費、生活費、保険など項目別の内訳と、費用を抑える5つの方法を紹介。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'community-college-cost') %>"
+  },
+  "keywords": ["コミカレ", "留学費用", "学費", "生活費", "アメリカ留学", "奨学金"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->

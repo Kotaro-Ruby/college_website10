@@ -1,5 +1,44 @@
 <% content_for :title, "コミカレ生活のリアル｜1日のスケジュールから友達作りまで【体験談】 - College Spark" %>
 <% content_for :description, "コミュニティカレッジでの生活を徹底解説。1日のスケジュール、授業の様子、友達の作り方、アルバイト事情まで、リアルなコミカレライフをお届けします。" %>
+<% content_for :keywords, "コミカレ, 留学生活, 体験談, 友達作り, アルバイト, スケジュール, コミュニティカレッジ" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミカレ生活のリアル｜1日のスケジュールから友達作りまで【体験談】" %>
+<% content_for :og_description, "コミュニティカレッジでの生活を徹底解説。1日のスケジュール、授業の様子、友達の作り方、アルバイト事情まで。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'community-college-life') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミカレ生活のリアル｜1日のスケジュールから友達作りまで" %>
+<% content_for :twitter_description, "コミカレでの生活を徹底解説。スケジュール、授業、友達作り、アルバイト事情までリアルな体験談。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミカレ生活のリアル｜1日のスケジュールから友達作りまで【体験談】",
+  "description": "コミュニティカレッジでの生活を徹底解説。1日のスケジュール、授業の様子、友達の作り方、アルバイト事情まで。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'community-college-life') %>"
+  },
+  "keywords": ["コミカレ", "留学生活", "体験談", "友達作り", "アルバイト"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->

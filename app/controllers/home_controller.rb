@@ -199,6 +199,9 @@ class HomeController < ApplicationController
   def terms
   end
 
+  def sources
+  end
+
   def why_study_abroad
   end
 

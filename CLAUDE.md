@@ -135,3 +135,39 @@ bundle exec rails data:import_all
 ```
 
 これでコメントと日本語訳が本番DBにインポートされる。
+
+## ニュース記事の取得・管理ルール
+
+### 使用するRSSフィード（無料・閲覧無料）
+- **ICEF Monitor**: `https://monitor.icef.com/feed/` - 留学業界専門
+- **The PIE News**: `https://thepienews.com/feed/` - 国際教育ニュース
+- **Study International**: `https://www.studyinternational.com/feed/` - 留学生向け
+
+### 許可するソース（大手・信頼性の高いメディアのみ）
+- **大手通信社**: Reuters, AP, AFP
+- **大手新聞**: The Guardian, The New York Times, Toronto Star, The Economic Times, The Times of India
+- **大手ニュース**: BBC, CNN, CBS News, NDTV, US News
+- **教育専門メディア**: Times Higher Education, The PIE News, ICEF Monitor, Study International
+- **政府・公的機関**: 各国政府発表
+
+### 除外するソース
+- 大学の広報・ニュースリリース（例: Georgia Tech News Center, University of Delaware）
+- 学生新聞（例: The Cornell Daily Sun, thecollegianur.com）
+- 法律事務所・弁護士ブログ（例: Reddy Neumann Brown PC）
+- 旅行系サイト（例: Focus on Travel News）
+- マイナーな個人サイト・ブログ
+- 二次情報のまとめサイト
+
+### ニュース更新の手順
+1. 上記RSSフィードから記事を取得
+2. ソースが許可リストに含まれているか確認
+3. タイトルと概要を日本語に翻訳
+4. Newsテーブルに保存（URLで重複チェック）
+
+### 対象国と割合
+- USA: 40%
+- Australia: 20%
+- Canada: 20%
+- New Zealand: 20%
+
+例：10件追加する場合 → USA 4件、Australia 2件、Canada 2件、New Zealand 2件

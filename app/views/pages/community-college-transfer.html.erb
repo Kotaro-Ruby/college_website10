@@ -1,5 +1,44 @@
 <% content_for :title, "コミカレから4年制大学へ編入する方法【2025年版】完全ガイド - College Spark" %>
 <% content_for :description, "コミュニティカレッジから4年制大学への編入方法を徹底解説。UCLAやUCバークレーなど名門大学への編入実績、必要なGPA、準備スケジュールまで完全網羅。" %>
+<% content_for :keywords, "コミカレ, 編入, 4年制大学, UCLA, UCバークレー, TAG, GPA, コミュニティカレッジ, 編入方法" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミカレから4年制大学へ編入する方法【2025年版】完全ガイド" %>
+<% content_for :og_description, "コミュニティカレッジから4年制大学への編入方法を徹底解説。UCLAやUCバークレーなど名門大学への編入実績、必要なGPA、準備スケジュールまで。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'community-college-transfer') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミカレから4年制大学へ編入する方法【2025年版】" %>
+<% content_for :twitter_description, "UCLAやUCバークレーへの編入方法を徹底解説。必要なGPA、TAG制度、準備スケジュールまで完全網羅。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミカレから4年制大学へ編入する方法【2025年版】完全ガイド",
+  "description": "コミュニティカレッジから4年制大学への編入方法を徹底解説。UCLAやUCバークレーなど名門大学への編入実績、必要なGPA、準備スケジュールまで完全網羅。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'community-college-transfer') %>"
+  },
+  "keywords": ["コミカレ", "編入", "4年制大学", "UCLA", "UCバークレー", "TAG"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->

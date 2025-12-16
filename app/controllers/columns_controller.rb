@@ -85,6 +85,20 @@ class ColumnsController < ApplicationController
         url: "/p/community-college-courses",
         featured: true,
         tags: [ "コミカレ", "授業", "編入", "GPA", "単位" ]
+      },
+      {
+        title: "カリフォルニア州立大学（CSU）完全ガイド",
+        subtitle: "全23校の特徴と入学要件【2025年版】",
+        author: "College Spark",
+        author_bio: "編集部",
+        category: "留学ガイド",
+        article_type: "コラム",
+        published_at: "2025年12月",
+        slug: "california-state-university",
+        excerpt: "カリフォルニア州立大学（CSU）システム全23キャンパスを徹底解説。UCとの違い、入学要件、学費、各キャンパスの特徴まで。留学を考える方必見の完全ガイド。",
+        url: "/p/california-state-university",
+        featured: true,
+        tags: [ "CSU", "カリフォルニア", "4年制大学", "編入", "学費" ]
       }
     ]
 

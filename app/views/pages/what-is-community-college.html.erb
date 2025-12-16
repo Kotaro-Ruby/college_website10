@@ -1,5 +1,44 @@
 <% content_for :title, "コミュニティカレッジとは？メリット・デメリットを徹底解説【2025年版】 - College Spark" %>
 <% content_for :description, "アメリカのコミュニティカレッジ（コミカレ）とは何か、4年制大学との違い、メリット・デメリット、編入制度まで徹底解説。留学費用を抑えたい方必見の完全ガイド。" %>
+<% content_for :keywords, "コミュニティカレッジ, コミカレ, アメリカ留学, 2年制大学, 編入, 留学費用, メリット, デメリット" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミュニティカレッジとは？メリット・デメリットを徹底解説【2025年版】" %>
+<% content_for :og_description, "アメリカのコミュニティカレッジ（コミカレ）とは何か、4年制大学との違い、メリット・デメリット、編入制度まで徹底解説。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'what-is-community-college') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミュニティカレッジとは？メリット・デメリットを徹底解説【2025年版】" %>
+<% content_for :twitter_description, "コミカレとは何か、4年制大学との違い、メリット・デメリット、編入制度まで徹底解説。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミュニティカレッジとは？メリット・デメリットを徹底解説【2025年版】",
+  "description": "アメリカのコミュニティカレッジ（コミカレ）とは何か、4年制大学との違い、メリット・デメリット、編入制度まで徹底解説。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'what-is-community-college') %>"
+  },
+  "keywords": ["コミュニティカレッジ", "コミカレ", "アメリカ留学", "2年制大学", "編入"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->
@@ -396,7 +435,7 @@
 
 /* Body */
 .article-body {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 60px 20px;
 }

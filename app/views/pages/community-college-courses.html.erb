@@ -1,5 +1,44 @@
 <% content_for :title, "コミカレで取るべき授業｜編入に有利な科目と避けるべき罠【2025年版】 - College Spark" %>
 <% content_for :description, "コミュニティカレッジで取るべき授業を徹底解説。編入に必要な一般教養、専攻別のおすすめ科目、GPA維持のコツ、避けるべき落とし穴まで完全ガイド。" %>
+<% content_for :keywords, "コミカレ, 授業, 編入, GPA, 単位, 一般教養, コミュニティカレッジ, 科目選び" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミカレで取るべき授業｜編入に有利な科目と避けるべき罠【2025年版】" %>
+<% content_for :og_description, "コミュニティカレッジで取るべき授業を徹底解説。編入に必要な一般教養、専攻別のおすすめ科目、GPA維持のコツまで。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'community-college-courses') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミカレで取るべき授業｜編入に有利な科目と避けるべき罠【2025年版】" %>
+<% content_for :twitter_description, "編入に必要な一般教養、専攻別のおすすめ科目、GPA維持のコツ、避けるべき落とし穴まで完全ガイド。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミカレで取るべき授業｜編入に有利な科目と避けるべき罠【2025年版】",
+  "description": "コミュニティカレッジで取るべき授業を徹底解説。編入に必要な一般教養、専攻別のおすすめ科目、GPA維持のコツ、避けるべき落とし穴まで完全ガイド。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'community-college-courses') %>"
+  },
+  "keywords": ["コミカレ", "授業", "編入", "GPA", "単位", "一般教養"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->

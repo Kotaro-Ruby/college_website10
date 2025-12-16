@@ -95,22 +95,18 @@
 
         <div class="challenges-grid">
           <div class="challenge-card">
-            <div class="challenge-icon">🔍</div>
             <h3>情報の分散と不透明性</h3>
             <p>大学の公式サイトは英語で複雑、学費情報は分かりにくく、比較検討が困難</p>
           </div>
           <div class="challenge-card">
-            <div class="challenge-icon">💰</div>
             <h3>学費の実態が見えない</h3>
             <p>表示される学費と実際の負担額が異なり、奨学金制度の詳細も不明確</p>
           </div>
           <div class="challenge-card">
-            <div class="challenge-icon">🗺️</div>
             <h3>大学選択の基準が不明</h3>
             <p>何を基準に大学を選べば良いか分からず、自分に合った大学を見つけられない</p>
           </div>
           <div class="challenge-card">
-            <div class="challenge-icon">⚡</div>
             <h3>情報収集の時間と労力</h3>
             <p>個別に大学を調べる必要があり、膨大な時間と労力が必要</p>
           </div>
@@ -207,26 +203,42 @@
           <p>College Sparkで提供される大学データは、各国の公的機関が提供する信頼性の高いデータソースを利用しています。</p>
         </div>
 
-        <div class="data-sources-grid">
+        <div class="data-sources-grid" style="grid-template-columns: repeat(4, 1fr);">
           <div class="data-source-card">
-            <div class="data-source-icon">🇺🇸</div>
+            <div class="data-source-icon"><img src="https://flagcdn.com/w40/us.png" alt="USA" style="width: 32px; height: auto;"></div>
             <h4>アメリカ</h4>
-            <p>College Scorecard（アメリカ教育省公式データ）</p>
+            <ul class="source-list">
+              <li>College Scorecard</li>
+              <li>IPEDS</li>
+              <li>US Department of Education</li>
+            </ul>
           </div>
           <div class="data-source-card">
-            <div class="data-source-icon">🇦🇺</div>
+            <div class="data-source-icon"><img src="https://flagcdn.com/w40/au.png" alt="Australia" style="width: 32px; height: auto;"></div>
             <h4>オーストラリア</h4>
-            <p>Australian Government Department of Education、data.gov.au、Universities Australia</p>
+            <ul class="source-list">
+              <li>CRICOS</li>
+              <li>data.gov.au</li>
+              <li>Universities Australia</li>
+            </ul>
           </div>
           <div class="data-source-card">
-            <div class="data-source-icon">🔄</div>
-            <h4>定期更新</h4>
-            <p>最新の学費・入学データを定期的に更新</p>
+            <div class="data-source-icon"><img src="https://flagcdn.com/w40/ca.png" alt="Canada" style="width: 32px; height: auto;"></div>
+            <h4>カナダ</h4>
+            <ul class="source-list">
+              <li>Universities Canada</li>
+              <li>Statistics Canada</li>
+              <li>各州教育省</li>
+            </ul>
           </div>
           <div class="data-source-card">
-            <div class="data-source-icon">✅</div>
-            <h4>品質管理</h4>
-            <p>データの正確性を継続的に監視・検証</p>
+            <div class="data-source-icon"><img src="https://flagcdn.com/w40/nz.png" alt="New Zealand" style="width: 32px; height: auto;"></div>
+            <h4>ニュージーランド</h4>
+            <ul class="source-list">
+              <li>Education New Zealand</li>
+              <li>NZQA</li>
+              <li>Universities New Zealand</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -380,8 +392,8 @@
 
   .countries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -736,6 +748,24 @@
     color: #666;
   }
 
+  .source-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+
+  .source-list li {
+    font-size: 13px;
+    color: #555;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .source-list li:last-child {
+    border-bottom: none;
+  }
+
   /* Final Message Section */
   .final-message {
     max-width: 800px;
@@ -778,7 +808,10 @@
       font-size: 28px;
     }
 
-    .countries-grid,
+    .countries-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .challenges-grid,
     .solutions-grid,
     .principles-grid,

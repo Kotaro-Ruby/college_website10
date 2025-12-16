@@ -1,414 +1,402 @@
+<div class="news-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">留学ニュース</h1>
+      <p class="hero-subtitle">Study Abroad News</p>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="filter-container">
+      <div class="filter-buttons">
+        <%= link_to news_index_path, class: "filter-btn #{params[:country].blank? ? 'active' : ''}" do %>
+          すべて <span class="filter-count">(<%= @total_count %>)</span>
+        <% end %>
+        <% @countries.each do |country| %>
+          <%= link_to news_index_path(country: country), class: "filter-btn #{params[:country] == country ? 'active' : ''}" do %>
+            <%= country %> <span class="filter-count">(<%= @country_counts[country] %>)</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Grid -->
+  <section class="news-section">
+    <div class="news-container">
+      <% if @news_items.any? %>
+        <div class="news-grid">
+          <% @news_items.each do |news| %>
+            <%= link_to news_detail_path(news), class: "news-card" do %>
+              <div class="news-card-header">
+                <span class="news-country"><%= news.country %></span>
+                <span class="news-date"><%= news.published_at&.strftime("%Y.%m.%d") %></span>
+              </div>
+              <h2 class="news-title"><%= news.title %></h2>
+              <p class="news-description"><%= truncate(news.description, length: 120) %></p>
+              <div class="news-footer">
+                <span class="news-source"><%= news.source %></span>
+                <span class="news-link">記事を読む</span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- Pagination -->
+        <% if @news_items.total_pages > 1 %>
+          <div class="pagination-wrapper">
+            <%= paginate @news_items %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="news-empty">
+          <p class="empty-title">ニュースがありません</p>
+          <p class="empty-text">現在、該当するニュースはありません。</p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- Footer Note -->
+  <section class="footer-note-section">
+    <div class="footer-note-container">
+      <p>ニュースは信頼性の高い教育専門メディアから収集しています。</p>
+      <p class="source-list">情報元: ICEF Monitor / The PIE News / Study International</p>
+    </div>
+  </section>
+</div>
+
 <style>
-  .news-index-container {
-    max-width: 1200px;
-    margin: 80px auto 50px;
-    padding: 0 20px;
+  .news-page {
+    background: #ffffff;
   }
 
-  .news-index-header {
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 80px 20px;
     text-align: center;
-    margin-bottom: 40px;
+    color: white;
   }
 
-  .news-index-title {
-    font-size: 36px;
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 48px;
     font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 15px;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
   }
 
-  .news-index-subtitle {
+  .hero-subtitle {
     font-size: 18px;
-    color: #64748b;
-    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
   }
 
-  .news-index-breadcrumb {
-    margin-bottom: 30px;
-  }
-
-  .news-index-breadcrumb a {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 14px;
-  }
-
-  .news-index-breadcrumb a:hover {
-    color: #fb923c;
-  }
-
-  .news-index-breadcrumb span {
-    color: #64748b;
-    margin: 0 8px;
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: rgb(240, 177, 61);
+    margin: 30px auto 0;
   }
 
   /* Filter Section */
-  .news-filter-section {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    border: 1px solid #e2e8f0;
+  .filter-section {
+    background: #f5f5f5;
+    padding: 30px 20px;
+    border-bottom: 1px solid #e5e5e5;
   }
 
-  .filter-label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .filter-label i {
-    color: #fb923c;
+  .filter-container {
+    max-width: 1000px;
+    margin: 0 auto;
   }
 
   .filter-buttons {
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 12px;
     flex-wrap: wrap;
   }
 
   .filter-btn {
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-    border: 2px solid #e2e8f0;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
     background: white;
-    color: #64748b;
-    cursor: pointer;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s;
   }
 
   .filter-btn:hover {
-    background: #fff5ed;
-    border-color: #fb923c;
-    color: #fb923c;
-    transform: translateY(-2px);
-  }
-
-  .filter-btn:hover .filter-count {
-    color: #fb923c;
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+    text-decoration: none;
   }
 
   .filter-btn.active {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    border-color: #fb923c;
+    background: #1a1a1a;
+    border-color: #1a1a1a;
     color: white;
-    box-shadow: 0 4px 12px rgba(251,146,60,0.3);
   }
 
   .filter-count {
+    margin-left: 6px;
     font-size: 12px;
-    font-weight: 500;
-    color: #94a3b8;
-    margin-left: 4px;
-    transition: color 0.3s;
+    opacity: 0.7;
   }
 
-  .filter-btn.active .filter-count {
-    color: rgba(255, 255, 255, 0.85);
+  /* News Section */
+  .news-section {
+    padding: 60px 20px;
   }
 
-  .news-index-grid {
+  .news-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
-  .news-index-card {
+  /* News Card */
+  .news-card {
     display: block;
     background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    transition: all 0.3s;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 28px;
     text-decoration: none;
     color: inherit;
-    border: 1px solid #e2e8f0;
+    transition: all 0.2s;
   }
 
-  .news-index-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(251,146,60,0.2);
-    border-color: #fb923c;
+  .news-card:hover {
+    border-color: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
   }
 
-  .news-index-card-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+  .news-card:hover .news-title {
+    color: rgb(200, 140, 40);
   }
 
-  .news-index-card-image-placeholder {
-    width: 100%;
-    height: 220px;
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  .news-card:hover .news-link {
+    color: rgb(200, 140, 40);
+  }
+
+  .news-card-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    margin-bottom: 16px;
   }
 
-  .news-index-card-image-placeholder i {
-    font-size: 60px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .news-index-card-content {
-    padding: 20px;
-  }
-
-  .news-index-card-meta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-
-  .news-index-card-country {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    color: white;
-    border-radius: 12px;
+  .news-country {
+    display: inline-block;
+    padding: 4px 12px;
+    background: transparent;
+    color: rgb(200, 140, 40);
+    border: 1px solid rgb(200, 140, 40);
+    border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
   }
 
-  .news-index-card-date {
-    display: inline-flex;
-    align-items: center;
-    color: #94a3b8;
+  .news-date {
     font-size: 13px;
+    color: #999;
   }
 
-  .news-index-card-source {
-    display: inline-flex;
-    align-items: center;
-    color: #94a3b8;
-    font-size: 13px;
-  }
-
-  .news-index-card-title {
-    font-size: 18px;
+  .news-title {
+    font-size: 17px;
     font-weight: 600;
-    color: #1e293b;
-    line-height: 1.4;
-    margin-bottom: 10px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: #1a1a1a;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    transition: color 0.2s;
   }
 
-  .news-index-card-description {
+  .news-description {
     font-size: 14px;
-    color: #64748b;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: #666;
+    line-height: 1.7;
+    margin: 0 0 20px;
   }
 
-  .news-index-empty {
+  .news-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .news-source {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .news-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    transition: color 0.2s;
+  }
+
+  .news-link::after {
+    content: ' →';
+  }
+
+  /* Empty State */
+  .news-empty {
     text-align: center;
-    padding: 60px 20px;
-    color: #64748b;
+    padding: 80px 20px;
   }
 
-  .news-index-empty i {
-    font-size: 80px;
-    color: #cbd5e1;
-    margin-bottom: 20px;
-  }
-
-  .news-index-empty-title {
-    font-size: 24px;
+  .empty-title {
+    font-size: 20px;
     font-weight: 600;
-    margin-bottom: 10px;
+    color: #1a1a1a;
+    margin: 0 0 10px;
   }
 
-  .news-index-empty-text {
-    font-size: 16px;
+  .empty-text {
+    font-size: 15px;
+    color: #999;
+    margin: 0;
   }
 
-  .news-index-pagination {
+  /* Pagination */
+  .pagination-wrapper {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
   }
 
-  /* Pagination Styling */
-  .news-index-pagination nav {
+  .pagination-wrapper nav {
     display: flex;
     gap: 8px;
     align-items: center;
   }
 
-  .news-index-pagination a,
-  .news-index-pagination span.current,
-  .news-index-pagination span.gap {
+  .pagination-wrapper a,
+  .pagination-wrapper span.current,
+  .pagination-wrapper span.gap {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 40px;
     height: 40px;
     padding: 0 12px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
-    transition: all 0.3s;
-    border: 2px solid #e2e8f0;
+    transition: all 0.2s;
+    border: 1px solid #e5e5e5;
     background: white;
-    color: #64748b;
+    color: #555;
   }
 
-  .news-index-pagination a:hover {
-    background: #fff5ed;
-    border-color: #fb923c;
-    color: #fb923c;
-    transform: translateY(-2px);
+  .pagination-wrapper a:hover {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
   }
 
-  .news-index-pagination span.current {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    border-color: #fb923c;
+  .pagination-wrapper span.current {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
     color: white;
-    box-shadow: 0 4px 12px rgba(251,146,60,0.3);
   }
 
-  .news-index-pagination span.gap {
+  .pagination-wrapper span.gap {
     border: none;
     background: transparent;
-    color: #cbd5e1;
-    cursor: default;
+    color: #ccc;
   }
 
-  .news-index-pagination a.first,
-  .news-index-pagination a.prev,
-  .news-index-pagination a.next,
-  .news-index-pagination a.last {
-    font-weight: 600;
-  }
-
-  .news-index-pagination a.first:hover,
-  .news-index-pagination a.prev:hover,
-  .news-index-pagination a.next:hover,
-  .news-index-pagination a.last:hover {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  /* Footer Note */
+  .footer-note-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 50px 20px;
+    text-align: center;
     color: white;
   }
 
+  .footer-note-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .footer-note-container p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 10px;
+  }
+
+  .source-list {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .news-index-container {
-      margin-top: 60px;
+    .hero-section {
+      padding: 60px 20px;
     }
 
-    .news-index-title {
-      font-size: 28px;
+    .hero-title {
+      font-size: 36px;
     }
 
-    .news-index-subtitle {
+    .filter-section {
+      padding: 20px 16px;
+    }
+
+    .filter-btn {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .news-section {
+      padding: 40px 16px;
+    }
+
+    .news-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .news-card {
+      padding: 20px;
+    }
+
+    .news-title {
       font-size: 16px;
     }
 
-    .news-index-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
+    .footer-note-section {
+      padding: 40px 20px;
     }
   }
 </style>
-
-<div class="news-index-container">
-  <!-- パンくずリスト -->
-  <div class="news-index-breadcrumb">
-    <%= link_to "ホーム", root_path %>
-    <span>/</span>
-    <span>留学ニュース</span>
-  </div>
-
-  <!-- ヘッダー -->
-  <div class="news-index-header">
-    <h1 class="news-index-title">
-      <i class="fas fa-newspaper"></i> 留学ニュース
-    </h1>
-    <p class="news-index-subtitle">
-      世界の留学に関する最新ニュースをお届けします
-    </p>
-  </div>
-
-  <!-- 国別フィルター -->
-  <div class="news-filter-section">
-    <div class="filter-label">
-      <i class="fas fa-filter"></i> 国で絞り込み:
-    </div>
-    <div class="filter-buttons">
-      <%= link_to news_index_path, class: "filter-btn #{params[:country].blank? ? 'active' : ''}" do %>
-        すべて <span class="filter-count">(<%= @total_count %>件)</span>
-      <% end %>
-      <% @countries.each do |country| %>
-        <%= link_to news_index_path(country: country), class: "filter-btn #{params[:country] == country ? 'active' : ''}" do %>
-          <%= country %> <span class="filter-count">(<%= @country_counts[country] %>件)</span>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <% if @news_items.any? %>
-    <!-- ニュース一覧 -->
-    <div class="news-index-grid">
-      <% @news_items.each do |news| %>
-        <%= link_to news_detail_path(news), class: "news-index-card" do %>
-          <% if news.image_url.present? %>
-            <img src="<%= news.image_url %>" alt="<%= news.japanese_title.presence || news.title %>" class="news-index-card-image">
-          <% else %>
-            <% random_image = random_news_image(news.country) %>
-            <% if random_image %>
-              <img src="<%= random_image %>" alt="<%= news.japanese_title.presence || news.title %>" class="news-index-card-image">
-            <% else %>
-              <div class="news-index-card-image-placeholder">
-                <i class="fas fa-globe-americas"></i>
-              </div>
-            <% end %>
-          <% end %>
-          <div class="news-index-card-content">
-            <div class="news-index-card-meta">
-              <span class="news-index-card-country"><%= news.country %></span>
-              <span class="news-index-card-date">
-                <i class="far fa-calendar-alt"></i>&nbsp;
-                <%= news.published_at&.strftime("%Y/%m/%d") %>
-              </span>
-            </div>
-            <h2 class="news-index-card-title">
-              <%= news.japanese_title.presence || news.title %>
-            </h2>
-            <p class="news-index-card-description">
-              <%= truncate(news.japanese_description.presence || news.description, length: 100) %>
-            </p>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- ページネーション -->
-    <div class="news-index-pagination">
-      <%= paginate @news_items %>
-    </div>
-  <% else %>
-    <!-- ニュースがない場合 -->
-    <div class="news-index-empty">
-      <i class="fas fa-newspaper"></i>
-      <h2 class="news-index-empty-title">ニュースがありません</h2>
-      <p class="news-index-empty-text">現在、公開されているニュースはありません。</p>
-    </div>
-  <% end %>
-</div>

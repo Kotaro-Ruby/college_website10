@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   end
 
   get "terms" => "home#terms"
+  get "sources" => "home#sources"
 
   # Authentication routes
   get "login" => "sessions#new"

@@ -1,5 +1,44 @@
 <% content_for :title, "コミュニティカレッジの選び方｜失敗しない5つのポイント【2025年版】 - College Spark" %>
 <% content_for :description, "コミュニティカレッジ選びで失敗しないための5つのポイントを解説。立地、編入実績、専攻、費用、サポート体制など、自分に合ったコミカレを見つける方法を徹底ガイド。" %>
+<% content_for :keywords, "コミュニティカレッジ, 選び方, コミカレ, 立地, 編入実績, 費用, 留学, アメリカ" %>
+
+<!-- OGP設定 -->
+<% content_for :og_title, "コミュニティカレッジの選び方｜失敗しない5つのポイント【2025年版】" %>
+<% content_for :og_description, "コミュニティカレッジ選びで失敗しないための5つのポイントを解説。立地、編入実績、専攻、費用、サポート体制など。" %>
+<% content_for :og_type, "article" %>
+<% content_for :og_url, page_url(page: 'how-to-choose-community-college') %>
+
+<!-- Twitter Card設定 -->
+<% content_for :twitter_title, "コミュニティカレッジの選び方｜失敗しない5つのポイント【2025年版】" %>
+<% content_for :twitter_description, "コミカレ選びで失敗しない5つのポイント。立地、編入実績、専攻、費用、サポート体制を徹底解説。" %>
+
+<!-- 構造化データ -->
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "コミュニティカレッジの選び方｜失敗しない5つのポイント【2025年版】",
+  "description": "コミュニティカレッジ選びで失敗しないための5つのポイントを解説。立地、編入実績、専攻、費用、サポート体制など。",
+  "author": {
+    "@type": "Organization",
+    "name": "College Spark"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "College Spark",
+    "url": "<%= request.base_url %>"
+  },
+  "datePublished": "2025-11-01",
+  "dateModified": "2025-11-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= page_url(page: 'how-to-choose-community-college') %>"
+  },
+  "keywords": ["コミュニティカレッジ", "選び方", "コミカレ", "編入実績", "留学"]
+}
+</script>
+<% end %>
 
 <article class="column-article">
   <!-- Article Header -->

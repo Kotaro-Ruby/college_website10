@@ -1,441 +1,376 @@
-<style>
-  .news-detail-container {
-    max-width: 900px;
-    margin: 80px auto 50px;
-    padding: 0 20px;
+<%
+  # 国ごとの画像フォルダと枚数（1.jpgは各国aboutページで使用のため除外）
+  news_image_config = {
+    'USA' => { folder: 'usa', count: 11, start: 2 },
+    'Australia' => { folder: 'australia', count: 6, start: 2 },
+    'Canada' => { folder: 'canada', count: 9, start: 2 },
+    'New Zealand' => { folder: 'newzealand', count: 4, start: 2 }
   }
 
-  .news-breadcrumb {
-    margin-bottom: 20px;
-  }
+  config = news_image_config[@news.country] || { folder: 'usa', count: 11, start: 2 }
+  random_image_num = rand(config[:start]..config[:count])
+  hero_image_path = "/images/news/#{config[:folder]}/#{random_image_num}.jpg"
+%>
 
-  .news-breadcrumb a {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 14px;
-  }
-
-  .news-breadcrumb a:hover {
-    color: #fb923c;
-  }
-
-  .news-breadcrumb span {
-    color: #64748b;
-    margin: 0 8px;
-  }
-
-  .news-detail-header {
-    margin-bottom: 30px;
-  }
-
-  .news-detail-meta {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
-
-  .news-detail-country {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    color: white;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .news-detail-date {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background: #f1f5f9;
-    color: #64748b;
-    border-radius: 20px;
-    font-size: 13px;
-  }
-
-  .news-detail-source {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background: #f1f5f9;
-    color: #64748b;
-    border-radius: 20px;
-    font-size: 13px;
-  }
-
-  .news-detail-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #1e293b;
-    line-height: 1.3;
-    margin-bottom: 15px;
-  }
-
-  .news-detail-original-title {
-    font-size: 18px;
-    color: #64748b;
-    font-weight: 400;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-
-  .news-detail-image {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  }
-
-  .news-detail-image-placeholder {
-    width: 100%;
-    height: 400px;
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  }
-
-  .news-detail-image-placeholder i {
-    font-size: 80px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .news-detail-content {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
-  }
-
-  .news-detail-section-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #fb923c;
-  }
-
-  .news-detail-description {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #334155;
-    margin-bottom: 30px;
-  }
-
-  .news-detail-original-description {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #64748b;
-    background: #f8fafc;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #cbd5e1;
-    margin-bottom: 30px;
-  }
-
-  .news-detail-actions {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  .news-detail-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-  }
-
-  .news-detail-button-primary {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    color: white;
-  }
-
-  .news-detail-button-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(251,146,60,0.3);
-    color: white;
-  }
-
-  .news-detail-button-secondary {
-    background: white;
-    color: #64748b;
-    border: 2px solid #e2e8f0;
-  }
-
-  .news-detail-button-secondary:hover {
-    border-color: #fb923c;
-    color: #fb923c;
-  }
-
-  .news-detail-related {
-    margin-top: 50px;
-  }
-
-  .news-detail-related-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 20px;
-  }
-
-  .news-detail-related-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-
-  .news-detail-related-card {
-    display: block;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    transition: all 0.3s;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid #e2e8f0;
-  }
-
-  .news-detail-related-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(251,146,60,0.2);
-    border-color: #fb923c;
-  }
-
-  .news-detail-related-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-  }
-
-  .news-detail-related-image-placeholder {
-    width: 100%;
-    height: 160px;
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .news-detail-related-image-placeholder i {
-    font-size: 40px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .news-detail-related-content {
-    padding: 15px;
-  }
-
-  .news-detail-related-meta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 12px;
-  }
-
-  .news-detail-related-country {
-    color: #fb923c;
-    font-weight: 600;
-  }
-
-  .news-detail-related-date {
-    color: #94a3b8;
-  }
-
-  .news-detail-related-title-text {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1e293b;
-    line-height: 1.4;
-    margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .news-detail-related-description {
-    font-size: 14px;
-    color: #64748b;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  @media (max-width: 768px) {
-    .news-detail-container {
-      margin-top: 60px;
-    }
-
-    .news-detail-title {
-      font-size: 24px;
-    }
-
-    .news-detail-original-title {
-      font-size: 16px;
-    }
-
-    .news-detail-image,
-    .news-detail-image-placeholder {
-      height: 250px;
-    }
-
-    .news-detail-content {
-      padding: 20px;
-    }
-
-    .news-detail-actions {
-      flex-direction: column;
-    }
-
-    .news-detail-button {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-</style>
-
-<div class="news-detail-container">
-  <!-- パンくずリスト -->
-  <div class="news-breadcrumb">
-    <%= link_to "ホーム", root_path %>
-    <span>/</span>
-    <span>留学ニュース</span>
-  </div>
-
-  <!-- ヘッダー -->
-  <div class="news-detail-header">
-    <div class="news-detail-meta">
-      <span class="news-detail-country"><%= @news.country %></span>
-      <span class="news-detail-date">
-        <i class="far fa-calendar-alt"></i>&nbsp;
-        <%= @news.published_at&.strftime("%Y年%m月%d日") %>
-      </span>
-      <span class="news-detail-source">
-        <i class="far fa-newspaper"></i>&nbsp;
-        <%= @news.source %>
-      </span>
+<div class="news-detail-page">
+  <!-- Hero Section -->
+  <section class="hero-section" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('<%= hero_image_path %>');">
+    <div class="hero-content">
+      <div class="news-meta">
+        <span class="news-country"><%= @news.country %></span>
+        <span class="news-date"><%= @news.published_at&.strftime("%Y.%m.%d") %></span>
+      </div>
+      <h1 class="hero-title"><%= @news.title %></h1>
+      <p class="news-source"><%= @news.source %></p>
+      <div class="hero-divider"></div>
     </div>
+  </section>
 
-    <h1 class="news-detail-title">
-      <%= @news.japanese_title.presence || @news.title %>
-    </h1>
-
-    <% if @news.japanese_title.present? %>
-      <p class="news-detail-original-title">
-        <%= @news.title %>
-      </p>
-    <% end %>
-  </div>
-
-  <!-- 画像 -->
-  <% if @news.image_url.present? %>
-    <img src="<%= @news.image_url %>" alt="<%= @news.japanese_title.presence || @news.title %>" class="news-detail-image">
-  <% else %>
-    <% random_image = random_news_image(@news.country) %>
-    <% if random_image %>
-      <img src="<%= random_image %>" alt="<%= @news.japanese_title.presence || @news.title %>" class="news-detail-image">
-    <% else %>
-      <div class="news-detail-image-placeholder">
-        <i class="fas fa-globe-americas"></i>
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="content-container">
+      <!-- Description -->
+      <div class="description-box">
+        <p><%= @news.description %></p>
       </div>
-    <% end %>
-  <% end %>
 
-  <!-- 本文 -->
-  <div class="news-detail-content">
-    <% if @news.japanese_description.present? %>
-      <h2 class="news-detail-section-title">
-        <i class="fas fa-file-alt"></i> 記事の解説
-      </h2>
-      <div class="news-detail-description">
-        <%= simple_format(@news.japanese_description) %>
+      <!-- Action -->
+      <div class="action-box">
+        <a href="<%= @news.url %>" target="_blank" rel="noopener noreferrer" class="read-article-btn">
+          元記事を読む
+          <span class="arrow">→</span>
+        </a>
+        <p class="source-note">この記事は <%= @news.source %> からの情報です</p>
       </div>
-    <% end %>
 
-    <% if @news.description.present? %>
-      <h2 class="news-detail-section-title">
-        <i class="fas fa-quote-left"></i> 記事
-      </h2>
-      <div class="news-detail-original-description">
-        <%= simple_format(@news.description) %>
-      </div>
-    <% end %>
-
-    <!-- アクションボタン -->
-    <div class="news-detail-actions">
-      <a href="<%= @news.url %>" target="_blank" class="news-detail-button news-detail-button-primary">
-        <i class="fas fa-external-link-alt"></i>
-        元記事を読む
-      </a>
-      <%= link_to root_path, class: "news-detail-button news-detail-button-secondary" do %>
-        <i class="fas fa-arrow-left"></i>
-        ホームに戻る
-      <% end %>
-    </div>
-  </div>
-
-  <!-- 関連ニュース -->
-  <%
-    related_news = News.published
-                       .where.not(id: @news.id)
-                       .where(country: @news.country)
-                       .recent
-                       .limit(3)
-  %>
-  <% if related_news.any? %>
-    <div class="news-detail-related">
-      <h2 class="news-detail-related-title">
-        <i class="fas fa-newspaper"></i> 関連ニュース
-      </h2>
-      <div class="news-detail-related-grid">
-        <% related_news.each do |news| %>
-          <%= link_to news_detail_path(news), class: "news-detail-related-card" do %>
-            <% if news.image_url.present? %>
-              <img src="<%= news.image_url %>" alt="<%= news.japanese_title.presence || news.title %>" class="news-detail-related-image">
-            <% else %>
-              <% related_random_image = random_news_image(news.country) %>
-              <% if related_random_image %>
-                <img src="<%= related_random_image %>" alt="<%= news.japanese_title.presence || news.title %>" class="news-detail-related-image">
-              <% else %>
-                <div class="news-detail-related-image-placeholder">
-                  <i class="fas fa-globe-americas"></i>
-                </div>
-              <% end %>
-            <% end %>
-            <div class="news-detail-related-content">
-              <div class="news-detail-related-meta">
-                <span class="news-detail-related-country"><%= news.country %></span>
-                <span class="news-detail-related-date"><%= news.published_at&.strftime("%Y/%m/%d") %></span>
-              </div>
-              <h3 class="news-detail-related-title-text">
-                <%= news.japanese_title.presence || news.title %>
-              </h3>
-              <p class="news-detail-related-description">
-                <%= truncate(news.japanese_description.presence || news.description, length: 80) %>
-              </p>
-            </div>
-          <% end %>
+      <!-- Back Link -->
+      <div class="back-link">
+        <%= link_to news_index_path do %>
+          ← ニュース一覧に戻る
         <% end %>
       </div>
     </div>
+  </section>
+
+  <!-- Related News -->
+  <%
+    related_news = News.where(status: 'published')
+                       .where.not(id: @news.id)
+                       .where(country: @news.country)
+                       .order(published_at: :desc)
+                       .limit(2)
+  %>
+  <% if related_news.any? %>
+    <section class="related-section">
+      <div class="related-container">
+        <h2 class="related-title">関連ニュース</h2>
+        <div class="related-grid">
+          <% related_news.each do |news| %>
+            <%= link_to news.url, class: "related-card", target: "_blank", rel: "noopener noreferrer" do %>
+              <div class="related-card-header">
+                <span class="related-country"><%= news.country %></span>
+                <span class="related-date"><%= news.published_at&.strftime("%Y.%m.%d") %></span>
+              </div>
+              <h3 class="related-card-title"><%= news.title %></h3>
+              <span class="related-source"><%= news.source %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
   <% end %>
+
+  <!-- Footer Note -->
+  <section class="footer-note-section">
+    <div class="footer-note-container">
+      <p>ニュースは信頼性の高い教育専門メディアから収集しています。</p>
+      <p class="source-list">情報元: ICEF Monitor / The PIE News / Study International</p>
+    </div>
+  </section>
 </div>
+
+<style>
+  .news-detail-page {
+    background: #ffffff;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .news-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .news-country {
+    display: inline-block;
+    padding: 4px 12px;
+    background: transparent;
+    color: rgb(240, 177, 61);
+    border: 1px solid rgb(240, 177, 61);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .news-date {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+  }
+
+  .news-source {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: rgb(240, 177, 61);
+    margin: 30px auto 0;
+  }
+
+  /* Content Section */
+  .content-section {
+    padding: 60px 20px;
+  }
+
+  .content-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .description-box {
+    background: #f8f8f8;
+    border-left: 3px solid #1a1a1a;
+    padding: 30px;
+    border-radius: 6px;
+    margin-bottom: 40px;
+  }
+
+  .description-box p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #444;
+    margin: 0;
+  }
+
+  /* Action Box */
+  .action-box {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .read-article-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 40px;
+    background: #1a1a1a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .read-article-btn:hover {
+    background: rgb(200, 140, 40);
+    color: white;
+    text-decoration: none;
+  }
+
+  .read-article-btn .arrow {
+    transition: transform 0.2s;
+  }
+
+  .read-article-btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  .source-note {
+    font-size: 13px;
+    color: #999;
+    margin: 16px 0 0;
+  }
+
+  /* Back Link */
+  .back-link {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .back-link a {
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .back-link a:hover {
+    color: #1a1a1a;
+  }
+
+  /* Related Section */
+  .related-section {
+    background: #f5f5f5;
+    padding: 60px 20px;
+  }
+
+  .related-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .related-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 24px;
+    text-align: center;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .related-card {
+    display: block;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .related-card:hover {
+    border-color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .related-card:hover .related-card-title {
+    color: rgb(200, 140, 40);
+  }
+
+  .related-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .related-country {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(200, 140, 40);
+  }
+
+  .related-date {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .related-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    transition: color 0.2s;
+  }
+
+  .related-source {
+    font-size: 12px;
+    color: #999;
+  }
+
+  /* Footer Note */
+  .footer-note-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .footer-note-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .footer-note-container p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 10px;
+  }
+
+  .source-list {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 60px 20px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+    }
+
+    .content-section {
+      padding: 40px 16px;
+    }
+
+    .description-box {
+      padding: 24px 20px;
+    }
+
+    .related-section {
+      padding: 40px 16px;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-card {
+      padding: 20px;
+    }
+
+    .footer-note-section {
+      padding: 40px 20px;
+    }
+  }
+</style>
