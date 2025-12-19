@@ -86,6 +86,36 @@ namespace :data do
     end
   end
 
+  desc "Import news data from JSON"
+  task import_news: :environment do
+    require 'json'
+
+    json_file = Rails.root.join('db/seeds/news_data.json')
+
+    unless File.exist?(json_file)
+      puts "Error: JSON file not found at #{json_file}"
+      exit 1
+    end
+
+    puts "Importing news from #{json_file}..."
+
+    news_data = JSON.parse(File.read(json_file))
+    updated_count = 0
+
+    news_data.each do |data|
+      news = News.find_by(title: data['title'])
+      if news
+        news.update(description: data['description'])
+        updated_count += 1
+        puts "Updated: #{data['title'][0..50]}..."
+      else
+        puts "Not found: #{data['title'][0..50]}..."
+      end
+    end
+
+    puts "Updated #{updated_count} news articles"
+  end
+
   desc "Import detailed programs from CSV"
   task import_programs: :environment do
     require 'csv'
