@@ -17,6 +17,10 @@ bundle exec rails db:migrate
 # Run seeds (日本語名データなど)
 bundle exec rails db:seed
 
+# Import all data (comments, translations, news)
+echo "=== Importing data ==="
+bundle exec rails data:import_all
+
 # Generate sitemap
 echo "=== Generating sitemap ==="
 bundle exec rails sitemap:refresh:no_ping

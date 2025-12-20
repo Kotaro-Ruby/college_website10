@@ -88,9 +88,10 @@ namespace :translations do
 end
 
 namespace :data do
-  desc "Import all data (comments and translations)"
+  desc "Import all data (comments, translations, and news)"
   task import_all: :environment do
     Rake::Task['comments:import'].invoke
     Rake::Task['translations:import'].invoke
+    Rake::Task['data:import_news'].invoke
   end
 end
