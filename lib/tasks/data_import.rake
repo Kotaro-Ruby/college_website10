@@ -103,13 +103,13 @@ namespace :data do
     updated_count = 0
 
     news_data.each do |data|
-      news = News.find_by(title: data['title'])
+      news = News.find_by(url: data['url'])
       if news
-        news.update(description: data['description'])
+        news.update(description: data['description'], title: data['title'])
         updated_count += 1
         puts "Updated: #{data['title'][0..50]}..."
       else
-        puts "Not found: #{data['title'][0..50]}..."
+        puts "Not found: #{data['url'][0..60]}..."
       end
     end
 
