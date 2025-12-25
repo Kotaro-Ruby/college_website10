@@ -153,8 +153,6 @@ Rails.application.routes.draw do
   # Dynamic pages (新しい記事はここ)
   get "/p/:page", to: "pages#show", as: :page
 
-  get "/import_conditions", to: "import#conditions"
-
   # USA routes
   namespace :us do
     get "/", to: "home#index", as: :home

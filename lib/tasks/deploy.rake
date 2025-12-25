@@ -1,7 +1,7 @@
 namespace :deploy do
   desc "Export all data for deployment"
   task export_all: :environment do
-    puts "📦 Exporting all data..."
+    puts "Exporting all data..."
     
     # Export all university data
     data = {
@@ -17,8 +17,8 @@ namespace :deploy do
     # Compress it
     system("gzip -9 db/full_backup.json")
     
-    puts "✅ Data exported to db/full_backup.json.gz"
-    puts "📊 Stats:"
+    puts "Data exported to db/full_backup.json.gz"
+    puts "Stats:"
     puts "  - Conditions: #{data[:conditions].count}"
     puts "  - AU Universities: #{data[:au_universities].count}"
     puts "  - Users: #{data[:users].count}"
@@ -29,11 +29,11 @@ namespace :deploy do
     file = 'db/full_backup.json.gz'
     
     unless File.exist?(file)
-      puts "❌ Backup file not found: #{file}"
+      puts "Error: Backup file not found: #{file}"
       exit 1
     end
     
-    puts "📥 Importing data from #{file}..."
+    puts "Importing data from #{file}..."
     
     # Decompress and load
     json_data = Zlib::GzipReader.open(file) { |gz| gz.read }
@@ -59,8 +59,8 @@ namespace :deploy do
       end
     end
     
-    puts "✅ Import completed!"
-    puts "📊 Current counts:"
+    puts "Import completed!"
+    puts "Current counts:"
     puts "  - Conditions: #{Condition.count}"
     puts "  - AU Universities: #{AuUniversity.count}"
   end
