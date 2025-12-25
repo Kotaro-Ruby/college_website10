@@ -319,29 +319,36 @@
 
   </div>
   
-  <div class="page-footer-note" style="max-width: 1200px; margin: 20px auto; padding: 16px 20px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
-    <p style="margin: 0; color: #92400e; font-size: 13px; line-height: 1.6;">
-      <strong>※画像について:</strong> 掲載されている画像は、Wikimedia Commons APIを使用して自動取得されたものです。大学名での検索結果を表示しているため、実際のキャンパスと異なる場合や関連性の低い画像が含まれている可能性があります。
+  <div class="page-footer-note" style="max-width: 1200px; margin: 20px auto; padding: 14px 20px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+    <p style="margin: 0; color: #64748b; font-size: 12px; line-height: 1.6;">
+      <strong style="color: #475569;">画像について:</strong> 掲載されている画像は、Wikimedia Commons APIを使用して自動取得されたものです。大学名での検索結果を表示しているため、実際のキャンパスと異なる場合や関連性の低い画像が含まれている可能性があります。
     </p>
   </div>
 </div>
 
 <style>
   .au-universities-page {
-    background: #f5f5f5;
+    background: #fafafa;
     min-height: 100vh;
   }
 
-  /* Hero Section - Professional Dark Theme */
+  /* Hero Section - Clean Minimal Design */
   .au-hero-section {
     position: relative;
-    background: #1a1a1a;
-    padding: 60px 20px 50px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+    padding: 50px 20px 40px;
     overflow: hidden;
   }
 
   .au-hero-section::before {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
   }
 
   .hero-overlay {
@@ -354,43 +361,47 @@
     margin: 0 auto;
     text-align: center;
     color: white;
+    z-index: 1;
   }
 
   .hero-badge {
     display: inline-block;
-    background: transparent;
-    color: #888;
-    padding: 0;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 2px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 12px;
-    animation: none;
+    margin-bottom: 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 8px;
     text-shadow: none;
     color: white;
+    letter-spacing: -0.5px;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
-    opacity: 0.7;
-    margin-bottom: 30px;
-    display: none;
+    font-size: 0.95rem;
+    opacity: 0.75;
+    margin-bottom: 28px;
+    display: block;
+    font-weight: 400;
   }
 
   .hero-stats {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     flex-wrap: wrap;
-    padding-top: 20px;
-    border-top: 1px solid #333;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
   }
 
   .hero-stat {
@@ -399,55 +410,62 @@
 
   .stat-number {
     display: block;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: #4a7fba;
+    color: white;
     text-shadow: none;
   }
 
   .stat-text {
     display: block;
-    font-size: 0.8rem;
-    opacity: 0.6;
+    font-size: 0.75rem;
+    opacity: 0.7;
     margin-top: 4px;
-    color: #999;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
   }
 
-  /* Quick Links Bar - Minimal */
+  /* Quick Links Bar - Refined */
   .quick-links-bar {
     background: white;
-    padding: 16px 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 14px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 12px;
     flex-wrap: wrap;
-    border-bottom: none;
+    border-bottom: 1px solid #eee;
   }
 
   .quick-link {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #1a1a1a;
+    color: #444;
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 6px;
-    border: 1px solid #e5e5e5;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
     transition: all 0.2s ease;
+    background: #fafafa;
   }
 
   .quick-link:hover {
-    background: #f5f5f5;
-    border-color: #ccc;
-    transform: none;
+    background: #2d5a87;
+    border-color: #2d5a87;
+    color: white;
+  }
+
+  .quick-link:hover i {
+    color: white;
   }
 
   .quick-link i {
-    font-size: 14px;
-    color: #4a7fba;
+    font-size: 12px;
+    color: #2d5a87;
+    transition: color 0.2s ease;
   }
 
   /* Main Container */
@@ -510,11 +528,11 @@
   /* Search Section - Clean Design */
   .search-section {
     background: white;
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     margin-bottom: 20px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #eee;
   }
 
   .search-wrapper {
@@ -533,41 +551,41 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
-    font-size: 16px;
+    color: #999;
+    font-size: 15px;
   }
 
   .search-input {
     flex: 1;
-    padding: 12px 16px 12px 44px;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    font-size: 15px;
+    padding: 14px 16px 14px 44px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
     transition: all 0.2s ease;
+    background: #fafafa;
   }
 
   .search-input:focus {
     outline: none;
-    border-color: #999;
-    box-shadow: none;
+    border-color: #2d5a87;
+    box-shadow: 0 0 0 3px rgba(45,90,135,0.1);
+    background: white;
   }
 
   .search-button {
-    padding: 12px 32px;
-    background: #1a1a1a;
+    padding: 14px 28px;
+    background: #2d5a87;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .search-button:hover {
-    background: #333;
-    transform: none;
-    box-shadow: none;
+    background: #1e3a5f;
   }
 
   .search-options {
@@ -590,18 +608,18 @@
   /* Filters Section - Clean Design */
   .filters-section {
     background: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     margin-bottom: 20px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #eee;
     transition: none;
     display: flex;
     flex-direction: column;
   }
 
   .filters-section:hover {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
 
   .filters-header {
@@ -616,7 +634,7 @@
 
   .filters-header h3 {
     color: #1a1a1a;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     margin: 0;
     display: flex;
@@ -626,8 +644,8 @@
   }
 
   .filters-header h3 i {
-    font-size: 14px;
-    color: #4a7fba;
+    font-size: 13px;
+    color: #2d5a87;
   }
 
   .filters-toggle {
@@ -689,7 +707,7 @@
 
   .filter-item label i {
     margin-right: 6px;
-    color: #4a7fba;
+    color: #2d5a87;
     font-size: 13px;
   }
 
@@ -775,7 +793,7 @@
   .slider-range {
     position: absolute;
     height: 6px;
-    background: #4a7fba;
+    background: #2d5a87;
     border-radius: 3px;
     top: 50%;
     transform: translateY(-50%);
@@ -969,8 +987,8 @@
   }
 
   .results-count {
-    color: #4a7fba;
-    font-weight: 800;
+    color: #2d5a87;
+    font-weight: 700;
   }
 
   .results-controls {
@@ -1024,7 +1042,7 @@
   .universities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 30px;
+    gap: 24px;
   }
 
   .university-card {
@@ -1032,17 +1050,17 @@
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.25s ease;
+    border: 1px solid #eee;
     display: flex;
     flex-direction: column;
   }
 
   .university-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(91,146,200,0.15);
-    border-color: #4a7fba;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(45,90,135,0.12);
+    border-color: #2d5a87;
   }
 
   .card-image-slider {
@@ -1167,15 +1185,15 @@
 
   .card-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #4a7fba;
+    top: 12px;
+    right: 12px;
+    background: #2d5a87;
     color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
     font-weight: 600;
-    box-shadow: none;
+    letter-spacing: 0.5px;
     z-index: 10;
   }
 
@@ -1198,7 +1216,7 @@
   }
 
   .university-name a:hover {
-    color: #4a7fba;
+    color: #2d5a87;
   }
 
   .university-location {
@@ -1229,12 +1247,12 @@
   .stat-icon {
     width: 36px;
     height: 36px;
-    background: #eef4fa;
-    border-radius: 6px;
+    background: #f0f5fa;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4a7fba;
+    color: #2d5a87;
     font-size: 14px;
   }
 
@@ -1269,7 +1287,7 @@
   }
 
   .tuition-label i {
-    color: #4a7fba;
+    color: #2d5a87;
     margin-right: 4px;
     font-size: 11px;
   }
@@ -1310,7 +1328,7 @@
   }
 
   .fields-label i {
-    color: #4a7fba;
+    color: #2d5a87;
     margin-right: 4px;
     font-size: 11px;
   }
@@ -1322,11 +1340,11 @@
   }
 
   .field-pill {
-    background: #eef4fa;
-    color: #4a7ba8;
+    background: #f0f5fa;
+    color: #2d5a87;
     padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 12px;
+    font-size: 11px;
     font-weight: 500;
   }
 
@@ -1375,13 +1393,12 @@
   }
 
   .action-btn.primary {
-    background: #1a1a1a;
+    background: #2d5a87;
     color: white;
   }
 
   .action-btn.primary:hover {
-    background: #333;
-    transform: none;
+    background: #1e3a5f;
   }
 
   .action-btn.secondary {
