@@ -1,0 +1,56 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+melbourne_cs_bachelor:
+  au_university: melbourne
+  cricos_course_code: "000001A"
+  course_name: "Bachelor of Computer Science"
+  course_level: "Bachelor Degree"
+  field_of_education_broad: "Information Technology"
+  duration_weeks: 156
+  tuition_fee: 135000
+  active: true
+  work_component: false
+
+melbourne_medicine:
+  au_university: melbourne
+  cricos_course_code: "000002B"
+  course_name: "Doctor of Medicine"
+  course_level: "Doctoral Degree"
+  field_of_education_broad: "Health"
+  duration_weeks: 208
+  tuition_fee: 320000
+  active: true
+  work_component: true
+
+sydney_law_bachelor:
+  au_university: sydney
+  cricos_course_code: "000003C"
+  course_name: "Bachelor of Laws"
+  course_level: "Bachelor Degree"
+  field_of_education_broad: "Society and Culture"
+  duration_weeks: 208
+  tuition_fee: 180000
+  active: true
+  work_component: false
+
+sydney_mba:
+  au_university: sydney
+  cricos_course_code: "000004D"
+  course_name: "Master of Business Administration"
+  course_level: "Masters Degree"
+  field_of_education_broad: "Management and Commerce"
+  duration_weeks: 78
+  tuition_fee: 90000
+  active: true
+  work_component: true
+
+monash_diploma:
+  au_university: monash
+  cricos_course_code: "000005E"
+  course_name: "Diploma of Engineering"
+  course_level: "Diploma"
+  field_of_education_broad: "Engineering and Related Technologies"
+  duration_weeks: 52
+  tuition_fee: 35000
+  active: true
+  work_component: false

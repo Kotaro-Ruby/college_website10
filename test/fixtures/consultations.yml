@@ -1,25 +1,47 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
-  phone: MyString
-  preferred_date: 2025-07-19
-  preferred_time: MyString
-  timezone: MyString
-  consultation_type: MyString
-  message: MyText
-  status: MyString
-  admin_notes: MyText
+pending_consultation:
+  name: "田中太郎"
+  email: "tanaka@example.com"
+  phone: "090-1234-5678"
+  preferred_date: <%= Date.tomorrow %>
+  preferred_time: "14:00"
+  timezone: "Asia/Tokyo"
+  consultation_type: "general"
+  message: "アメリカの大学留学について相談したいです。"
+  status: "pending"
 
-two:
-  name: MyString
-  email: MyString
-  phone: MyString
-  preferred_date: 2025-07-19
-  preferred_time: MyString
-  timezone: MyString
-  consultation_type: MyString
-  message: MyText
-  status: MyString
-  admin_notes: MyText
+confirmed_consultation:
+  name: "山田花子"
+  email: "yamada@example.com"
+  phone: "080-9876-5432"
+  preferred_date: <%= 3.days.from_now.to_date %>
+  preferred_time: "10:00"
+  timezone: "Asia/Tokyo"
+  consultation_type: "university_selection"
+  message: "大学選びについてアドバイスをいただきたいです。"
+  status: "confirmed"
+  admin_notes: "カリフォルニアの大学を希望"
+
+completed_consultation:
+  name: "鈴木一郎"
+  email: "suzuki@example.com"
+  phone: "070-1111-2222"
+  preferred_date: <%= 1.week.ago.to_date %>
+  preferred_time: "16:00"
+  timezone: "Asia/Tokyo"
+  consultation_type: "scholarship"
+  message: "奨学金について相談しました。"
+  status: "completed"
+  admin_notes: "フルブライト奨学金を紹介済み"
+
+cancelled_consultation:
+  name: "佐藤健"
+  email: "sato@example.com"
+  phone: "090-3333-4444"
+  preferred_date: <%= Date.yesterday %>
+  preferred_time: "11:00"
+  timezone: "Asia/Tokyo"
+  consultation_type: "visa"
+  message: "ビザ相談をキャンセルします。"
+  status: "cancelled"

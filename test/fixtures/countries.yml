@@ -1,27 +1,65 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  code: MyString
-  name: MyString
-  official_name: MyString
-  capital: MyString
-  currency_code: MyString
-  currency_name: MyString
-  currency_symbol: MyString
-  languages: MyText
-  population: 1
-  flag_emoji: MyString
-  timezones: MyText
+usa:
+  code: "US"
+  name: "United States"
+  official_name: "United States of America"
+  capital: "Washington, D.C."
+  currency_code: "USD"
+  currency_name: "United States dollar"
+  currency_symbol: "$"
+  languages: '{"eng": "English"}'
+  population: 331002651
+  flag_emoji: "🇺🇸"
+  timezones: '["UTC-12:00", "UTC-11:00", "UTC-10:00", "UTC-09:00", "UTC-08:00", "UTC-07:00", "UTC-06:00", "UTC-05:00", "UTC-04:00"]'
+  area: 9833520
+  region: "Americas"
+  subregion: "North America"
 
-two:
-  code: MyString
-  name: MyString
-  official_name: MyString
-  capital: MyString
-  currency_code: MyString
-  currency_name: MyString
-  currency_symbol: MyString
-  languages: MyText
-  population: 1
-  flag_emoji: MyString
-  timezones: MyText
+australia:
+  code: "AU"
+  name: "Australia"
+  official_name: "Commonwealth of Australia"
+  capital: "Canberra"
+  currency_code: "AUD"
+  currency_name: "Australian dollar"
+  currency_symbol: "$"
+  languages: '{"eng": "English"}'
+  population: 25687041
+  flag_emoji: "🇦🇺"
+  timezones: '["UTC+05:00", "UTC+06:30", "UTC+07:00", "UTC+08:00", "UTC+09:30", "UTC+10:00", "UTC+10:30", "UTC+11:00"]'
+  area: 7692024
+  region: "Oceania"
+  subregion: "Australia and New Zealand"
+
+japan:
+  code: "JP"
+  name: "Japan"
+  official_name: "Japan"
+  capital: "Tokyo"
+  currency_code: "JPY"
+  currency_name: "Japanese yen"
+  currency_symbol: "¥"
+  languages: '{"jpn": "Japanese"}'
+  population: 125836021
+  flag_emoji: "🇯🇵"
+  timezones: '["UTC+09:00"]'
+  area: 377930
+  region: "Asia"
+  subregion: "Eastern Asia"
+
+canada:
+  code: "CA"
+  name: "Canada"
+  official_name: "Canada"
+  capital: "Ottawa"
+  currency_code: "CAD"
+  currency_name: "Canadian dollar"
+  currency_symbol: "$"
+  languages: '{"eng": "English", "fra": "French"}'
+  population: 38005238
+  flag_emoji: "🇨🇦"
+  timezones: '["UTC-08:00", "UTC-07:00", "UTC-06:00", "UTC-05:00", "UTC-04:00", "UTC-03:30"]'
+  area: 9984670
+  region: "Americas"
+  subregion: "North America"

@@ -1,0 +1,54 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+melbourne:
+  name: "The University of Melbourne"
+  cricos_provider_code: "00116K"
+  trading_name: "Melbourne University"
+  state: "VIC"
+  city: "Melbourne"
+  website: "https://www.unimelb.edu.au"
+  world_ranking: 14
+  active: true
+  min_annual_tuition: 35000
+  max_annual_tuition: 50000
+  popular_fields: "Engineering, Medicine, Business"
+  bachelor_courses_count: 150
+  total_courses_count: 500
+  slug: "the-university-of-melbourne"
+
+sydney:
+  name: "The University of Sydney"
+  cricos_provider_code: "00026A"
+  trading_name: "Sydney Uni"
+  state: "NSW"
+  city: "Sydney"
+  website: "https://www.sydney.edu.au"
+  world_ranking: 19
+  active: true
+  min_annual_tuition: 38000
+  max_annual_tuition: 55000
+  popular_fields: "Law, Arts, Science"
+  bachelor_courses_count: 200
+  total_courses_count: 600
+  slug: "the-university-of-sydney"
+
+monash:
+  name: "Monash University"
+  cricos_provider_code: "00008C"
+  state: "VIC"
+  city: "Melbourne"
+  website: "www.monash.edu"
+  world_ranking: 42
+  active: true
+  min_annual_tuition: 32000
+  max_annual_tuition: 48000
+  bachelor_courses_count: 180
+  slug: "monash-university"
+
+inactive_uni:
+  name: "Test Inactive University"
+  cricos_provider_code: "99999X"
+  state: "QLD"
+  city: "Brisbane"
+  active: false
+  slug: "test-inactive-university"

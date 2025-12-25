@@ -1,25 +1,41 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  url: MyString
-  description: MyText
-  image_url: MyString
-  published_at: 2025-10-13 12:52:38
-  source: MyString
-  country: MyString
-  japanese_title: MyString
-  japanese_description: MyText
+published_us_news:
+  title: "US University Rankings 2025 Released"
+  url: "https://example.com/news/us-rankings-2025"
+  description: "The latest US university rankings have been released"
+  image_url: "https://example.com/images/rankings.jpg"
+  published_at: <%= 1.day.ago %>
+  source: "US News"
+  country: "USA"
+  japanese_title: "2025年アメリカ大学ランキング発表"
+  japanese_description: "最新のアメリカ大学ランキングが発表されました"
   status: 1
 
-two:
-  title: MyString
-  url: MyString
-  description: MyText
-  image_url: MyString
-  published_at: 2025-10-13 12:52:38
-  source: MyString
-  country: MyString
-  japanese_title: MyString
-  japanese_description: MyText
+draft_news:
+  title: "New Scholarship Program Announced"
+  url: "https://example.com/news/scholarship-2025"
+  description: "A new scholarship program for international students"
+  published_at: <%= Time.current %>
+  source: "ICEF Monitor"
+  country: "Australia"
+  status: 0
+
+archived_news:
+  title: "Old News Article"
+  url: "https://example.com/news/old-article"
+  description: "This is an archived news article"
+  published_at: <%= 1.year.ago %>
+  source: "The PIE News"
+  country: "Canada"
+  status: 2
+
+australian_news:
+  title: "Australian Universities Welcome More International Students"
+  url: "https://example.com/news/au-students"
+  description: "Australian universities see increase in international enrollment"
+  published_at: <%= 2.days.ago %>
+  source: "Study International"
+  country: "Australia"
+  japanese_title: "オーストラリアの大学、留学生受け入れ拡大"
   status: 1

@@ -1,19 +1,37 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: Test Blog Post One
-  content: This is the content of the first blog post
-  author: Author One
-  category: Category A
-  published_at: 2025-07-08 11:19:03
-  featured: false
-  slug: test-blog-post-one
+published_blog:
+  title: "My Study Abroad Experience in USA"
+  content: "This is a detailed blog post about studying abroad in the USA. It covers everything from application to daily life."
+  author: "Taro Yamada"
+  category: "留学体験記"
+  published_at: <%= 1.day.ago %>
+  featured: true
+  slug: "my-study-abroad-experience-usa"
 
-two:
-  title: Test Blog Post Two
-  content: This is the content of the second blog post
-  author: Author Two
-  category: Category B
-  published_at: 2025-07-08 11:19:03
+draft_blog:
+  title: "How to Apply for Student Visa"
+  content: "A comprehensive guide to applying for a student visa."
+  author: "Hanako Tanaka"
+  category: "ビザ・手続き"
+  published_at:
   featured: false
-  slug: test-blog-post-two
+  slug: "how-to-apply-student-visa"
+
+university_review:
+  title: "Harvard University Review"
+  content: "An in-depth review of Harvard University from a student perspective."
+  author: "John Smith"
+  category: "大学レビュー"
+  published_at: <%= 1.week.ago %>
+  featured: false
+  slug: "harvard-university-review"
+
+featured_blog:
+  title: "Top 10 Tips for International Students"
+  content: "Essential tips for international students starting their journey abroad."
+  author: "Admin"
+  category: "留学準備"
+  published_at: <%= 2.days.ago %>
+  featured: true
+  slug: "top-10-tips-international-students"
