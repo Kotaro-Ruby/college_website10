@@ -25,7 +25,7 @@ class ConsultationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get show" do
-    @consultation = consultations(:one)
+    @consultation = consultations(:pending_consultation)
     get consultation_url(@consultation)
     assert_response :success
   end

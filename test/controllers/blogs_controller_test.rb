@@ -7,7 +7,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get show" do
-    @blog = blogs(:one)
+    @blog = blogs(:published_blog)
     get blog_url(@blog.slug)
     assert_response :success
   end

@@ -2,7 +2,7 @@ require "test_helper"
 
 class Admin::ConsultationsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @consultation = consultations(:one)
+    @consultation = consultations(:pending_consultation)
   end
 
   test "should get index" do
