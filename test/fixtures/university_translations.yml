@@ -1,11 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Note: Harvard translation is created dynamically in tests, not as a fixture
 
-one:
-  condition: one
-  locale: MyString
-  name: MyString
-
-two:
-  condition: two
-  locale: MyString
-  name: MyString
+osu_ja:
+  condition: state_university
+  locale: ja
+  name: オハイオ州立大学

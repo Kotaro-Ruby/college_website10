@@ -1,11 +1,34 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: user1
-  email: user1@example.com
+  username: testuser1
+  email: testuser1@example.com
   password_digest: <%= BCrypt::Password.create('password123') %>
 
 two:
-  username: user2
-  email: user2@example.com
+  username: testuser2
+  email: testuser2@example.com
   password_digest: <%= BCrypt::Password.create('password456') %>
+
+oauth_user:
+  username: oauth_user
+  email: oauthuser@gmail.com
+  password_digest: <%= BCrypt::Password.create(SecureRandom.hex(16)) %>
+  provider: google_oauth2
+  uid: "123456789"
+  name: OAuth Test User
+  image: https://example.com/avatar.jpg
+
+user_with_reset_token:
+  username: resetuser
+  email: resetuser@example.com
+  password_digest: <%= BCrypt::Password.create('password789') %>
+  password_reset_token: abc123token
+  password_reset_sent_at: <%= Time.current %>
+
+user_with_expired_token:
+  username: expireduser
+  email: expireduser@example.com
+  password_digest: <%= BCrypt::Password.create('password000') %>
+  password_reset_token: expiredtoken
+  password_reset_sent_at: <%= 3.hours.ago %>

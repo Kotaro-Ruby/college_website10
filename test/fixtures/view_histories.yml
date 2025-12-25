@@ -2,10 +2,10 @@
 
 one:
   user: one
-  condition: one
+  condition: harvard
   viewed_at: 2025-08-03 15:31:34
 
 two:
   user: two
-  condition: two
+  condition: state_university
   viewed_at: 2025-08-03 15:31:34

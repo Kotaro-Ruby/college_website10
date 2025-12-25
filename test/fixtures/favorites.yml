@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+user_one_harvard:
   user: one
-  condition: one
+  condition: harvard
 
-two:
+user_one_osu:
+  user: one
+  condition: state_university
+
+user_two_harvard:
   user: two
-  condition: two
+  condition: harvard

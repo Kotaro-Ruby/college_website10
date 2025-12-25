@@ -1,7 +1,107 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  state: MyString
+harvard:
+  college: Harvard University
+  state: Massachusetts
+  city: Cambridge
+  privateorpublic: 私立
+  tuition: 54269
+  students: 7153
+  acceptance_rate: 0.032
+  graduation_rate: 0.98
+  GPA: 4.0
+  sat_math_25: 750
+  sat_math_75: 800
+  sat_reading_25: 740
+  sat_reading_75: 800
+  act_composite_25: 34
+  act_composite_75: 36
+  carnegie_basic: 15
+  urbanicity: City
+  website: https://www.harvard.edu
+  retention_rate: 0.97
+  earnings_10yr_median: 95000
+  hbcu: false
+  women_only: false
+  men_only: false
 
-two:
-  state: MyString
+state_university:
+  college: Ohio State University
+  state: Ohio
+  city: Columbus
+  privateorpublic: 州立
+  tuition: 11936
+  students: 46810
+  acceptance_rate: 0.53
+  graduation_rate: 0.85
+  GPA: 3.7
+  sat_math_25: 620
+  sat_math_75: 740
+  sat_reading_25: 610
+  sat_reading_75: 710
+  act_composite_25: 27
+  act_composite_75: 32
+  carnegie_basic: 15
+  urbanicity: City
+  website: https://www.osu.edu
+  retention_rate: 0.94
+  earnings_10yr_median: 58000
+  hbcu: false
+  women_only: false
+  men_only: false
+
+community_college:
+  college: Miami Dade College
+  state: Florida
+  city: Miami
+  privateorpublic: 州立
+  tuition: 3530
+  students: 58919
+  acceptance_rate: 1.0
+  graduation_rate: 0.25
+  carnegie_basic: 2
+  urbanicity: City
+  website: https://www.mdc.edu
+  hbcu: false
+  women_only: false
+  men_only: false
+
+hbcu_university:
+  college: Howard University
+  state: District of Columbia
+  city: Washington
+  privateorpublic: 私立
+  tuition: 28440
+  students: 9139
+  acceptance_rate: 0.36
+  graduation_rate: 0.65
+  carnegie_basic: 15
+  hbcu: true
+  women_only: false
+  men_only: false
+
+womens_college:
+  college: Wellesley College
+  state: Massachusetts
+  city: Wellesley
+  privateorpublic: 私立
+  tuition: 58448
+  students: 2400
+  acceptance_rate: 0.16
+  graduation_rate: 0.92
+  carnegie_basic: 21
+  hbcu: false
+  women_only: true
+  men_only: false
+
+no_sat_data:
+  college: Test College Without SAT
+  state: California
+  city: Los Angeles
+  privateorpublic: 私立
+  tuition: 30000
+  students: 1000
+  carnegie_basic: 18
+  hbcu: false
+  women_only: false
+  men_only: false
