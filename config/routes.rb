@@ -4,20 +4,14 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "conditions/index"
-  get "test1/test1"
   get "top" => "home#top"
   get "search" => "home#search"
   get "rankings" => "home#rankings"
 
   get "about" => "home#about"
-
-
   get "degreeseeking" => "home#degreeseeking"
-
   get "info" => "home#info"
-
   get "recruit" => "home#recruit"
-
   get "contact" => "home#contact"
   post "contact" => "home#send_contact"
 
@@ -120,13 +114,14 @@ Rails.application.routes.draw do
   get "visa_guide" => "home#visa_guide"
   get "english_tests" => "home#english_tests"
   get "majors_careers" => "home#majors_careers"
-  
-  # English Conversation Practice (一時停止中)
-  # get "english_conversation" => "english_conversations#index"
-  # post "english_conversation/speech" => "english_conversations#process_speech"
-  # post "english_conversation/tts" => "english_conversations#text_to_speech"
-  # post "english_conversation/clear" => "english_conversations#clear_history"
-  # post "english_conversation/initial" => "english_conversations#get_initial_message"
+
+  # English Conversation Practice
+  get "english_conversation" => "english_conversations#index"
+  post "english_conversation/speech" => "english_conversations#process_speech"
+  post "english_conversation/tts" => "english_conversations#text_to_speech"
+  post "english_conversation/clear" => "english_conversations#clear_history"
+  post "english_conversation/initial" => "english_conversations#get_initial_message"
+
   get "life_guide" => "home#life_guide"
   get "why_study_abroad" => "home#why_study_abroad"
   get "ivy-league" => "home#ivy_league"
@@ -200,37 +195,10 @@ Rails.application.routes.draw do
     end
   end
 
-
-  # どのルートにもマッチしない場合、fallback_page アクションを呼び出す
-
-
-  # 旧セットアップルート（削除済み）
-
+  # Fallback routes
   get "result/:id", to: "conditions#show", as: :conditions
   get "*unmatched_route", to: "conditions#fallback_page"
 
-
-
-
-
-
-
-
-
-
-  # Set 'college_about/:college_name', to: 'college_about#show', as: 'college_detail'
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
